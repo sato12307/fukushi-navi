@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>数字で見る障害年金：不支給率・等級・傷病別データと地域差｜フクシル</title>
+<meta name="description" content="障害年金を公的統計で見るとどう見える？障害基礎年金の不支給割合、かつて最大6倍あった都道府県の地域差とその是正、傷病別・等級別の受給者の傾向を、厚労省・日本年金機構のデータと出典つきで整理。『更新で級が下がる確率』がどこまで分かるかの限界も正直にまとめます。">
+<link rel="canonical" href="https://sato12307.github.io/fukushi-navi/articles/shogai-nenkin-toukei.html">
+<meta property="og:type" content="article">
+<meta property="og:title" content="数字で見る障害年金：不支給率・等級・傷病別データと地域差">
+<meta property="og:description" content="障害基礎年金の不支給割合、かつて最大6倍あった地域差と是正、傷病別・等級別の傾向を厚労省データと出典つきで。『更新で級が下がる確率』の限界も正直に。">
+<meta property="og:site_name" content="フクシル">
+<meta property="og:url" content="https://sato12307.github.io/fukushi-navi/articles/shogai-nenkin-toukei.html">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="stylesheet" href="../assets/style.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "数字で見る障害年金：不支給率・等級・傷病別データと地域差",
+  "description": "障害基礎年金の不支給割合、かつて最大6倍あった都道府県の地域差と是正、傷病別・等級別の受給者の傾向を厚労省・日本年金機構のデータと出典つきで整理した一般情報。",
+  "inLanguage": "ja",
+  "datePublished": "2026-06-30",
+  "dateModified": "2026-06-30",
+  "author": { "@type": "Organization", "name": "フクシル" },
+  "publisher": { "@type": "Organization", "name": "フクシル" }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "障害年金の不支給率はどのくらいですか？",
+      "acceptedAnswer": { "@type": "Answer", "text": "全国一律の単純な数字はありませんが、厚生労働省が2014年度の事例で行った調査では、障害基礎年金（精神・知的障害）の不支給割合に都道府県差があり、最も高い大分県で24.4%、最も低い栃木県で4.0%と、約6倍の開きがありました。2017年4月以降は全国の審査を東京の障害年金センターに集約し、この地域差を是正する方向で運用が変わっています。最新の傾向は厚労省・日本年金機構の統計でご確認ください。" }
+    },
+    {
+      "@type": "Question",
+      "name": "障害年金は精神の病気でももらえますか？データ上はどうですか？",
+      "acceptedAnswer": { "@type": "Answer", "text": "障害年金はうつ病・統合失調症・発達障害などの精神疾患や知的障害も対象です。厚労省の地域差調査では、新規に決定された障害基礎年金の事例のうち精神障害・知的障害が約3分の2（66.9%）を占めており、精神・知的は受給者全体でも大きな割合です。ただし支給の目安となる『日常生活能力の程度』の評価が結果を左右します。" }
+    },
+    {
+      "@type": "Question",
+      "name": "更新で等級が下がる・止まる確率は統計で分かりますか？",
+      "acceptedAnswer": { "@type": "Answer", "text": "傷病別に『更新で級が上がった・下がった・止まった割合』を示す公開統計は、現状とても限られています。公開されているのは主に、等級別・傷病別の受給者の分布や、新規裁定の不支給割合などです。そのため本記事でも更新時の級変動の確率は断定できません。ご自身の見通しは日本年金機構・年金事務所にご確認ください。" }
+    }
+  ]
+}
+</script>
+</head>
+<body>
+<a class="skip" href="#main">本文へスキップ</a>
+<header class="site-header">
+  <div class="inner">
+    <a class="brand" href="../index.html">フクシル <small>知らないと損する、街ごとの福祉</small></a>
+    <nav class="site-nav" aria-label="主要">
+      <a href="../index.html">トップ</a>
+      <a href="jichitai-transport-medical.html">自治体の福祉</a>
+      <a href="shinkansen-airplane-discount.html">交通割引</a>
+      <a href="shogai-nenkin-basics.html">障害年金</a>
+      <a href="shogaisha-kojo-tax.html">障害者控除</a>
+      <a href="shurou-ikou-koyou.html">就労・雇用</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+  <p class="breadcrumb"><a href="../index.html">トップ</a> ＞ 障害年金 ＞ 数字で見る障害年金（統計）</p>
+
+  <h1>数字で見る障害年金<br>【不支給率・等級・傷病別データと「地域差」の話】</h1>
+  <p class="updated">最終更新：2026-06-30 ／ 出典は厚生労働省・日本年金機構・e-Stat（記事末尾に一覧）</p>
+
+  <p class="lead">障害年金は「ずるい」「もらえない」と<strong>感情で語られがち</strong>ですが、公的な統計で全体像を見ると景色が変わります。この記事では、障害基礎年金の<strong>不支給割合</strong>、かつて最大<strong>約6倍</strong>もあった<strong>都道府県の地域差</strong>とその是正、<strong>傷病別・等級別</strong>の受給者の傾向を、出典つきで整理します。あわせて、「更新で級が下がる確率は？」という当事者の最大の関心について、<strong>公開データでどこまで分かるか（=分からないか）も正直に</strong>お伝えします。</p>
+
+  <div class="callout point">
+    <p><span class="tag">この記事の要点</span>① 障害基礎年金（精神・知的）の不支給割合は、2014年度の調査で<strong>都道府県により4.0%〜24.4%（約6倍差）</strong>。② <strong>2017年4月から審査を東京に一元化</strong>し地域差を是正する方向に。③ 新規決定の<strong>約3分の2（66.9%）が精神・知的障害</strong>。④ <strong>「更新での級変動の確率」を傷病別に示す公開統計は乏しい</strong>＝この記事でも断定しません。</p>
+  </div>
+
+  <h2>① 障害基礎年金の「不支給割合」と、かつての地域差</h2>
+  <p>障害年金の審査結果には、かつて<strong>住む地域による大きな差</strong>がありました。厚生労働省が2014年度（平成26年度）の事例をもとに行った「障害基礎年金の障害認定の地域差に関する調査」では、精神障害・知的障害にかかる不支給割合に、次のような都道府県差が確認されています。</p>
+
+  <div class="table-wrap">
+  <table>
+    <caption>障害基礎年金（精神・知的）の不支給割合の地域差（厚生労働省 2014年度事例の調査より）</caption>
+    <thead>
+      <tr><th>項目</th><th>数値</th></tr>
+    </thead>
+    <tbody>
+      <tr><th>最も不支給割合が高い県</th><td class="no">大分県 24.4%</td></tr>
+      <tr><th>最も不支給割合が低い県</th><td class="yes">栃木県 4.0%</td></tr>
+      <tr><th>地域差</th><td>最大で<strong>約6倍</strong>の開き</td></tr>
+      <tr><th>新規決定に占める精神・知的の割合</th><td>66.9%</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <p>調査では、不支給割合が低い県では「日常生活能力の程度」が<strong>（2）相当</strong>でも支給の目安となっていた一方、不支給割合が高い県では概ね<strong>（3）相当</strong>が目安となっていた、という運用のばらつきが指摘されました。同じ状態でも、審査する場所によって結果が変わりうる——当事者にとっては見過ごせない問題でした。</p>
+
+  <div class="callout note">
+    <p><span class="tag">その後の是正</span>この地域差を受けて、<strong>2017年4月から、全国の障害年金（障害基礎年金）の審査は東京の「障害年金センター」に集約</strong>され、認定の地域差を是正する方向に運用が変わりました。<strong>つまり「今も同じ6倍の地域差がある」わけではありません。</strong>ただし審査の厳格化や、年度ごとの認定状況の変化は引き続き注目されています（厚労省が毎年度の認定状況の調査報告書を公表しています）。</p>
+  </div>
+
+  <h2>② 傷病別・等級別の傾向（受給者のデータ）</h2>
+  <p>「どんな病気・障害の人が、どの等級でどれくらい受けているか」は、厚生労働省の<strong>「年金制度基礎調査（障害年金受給者実態調査）」</strong>で、<strong>制度別・障害等級別・傷病名別</strong>に受給者数と割合が公表されています（政府統計ポータル e-Stat で誰でも確認できます）。</p>
+  <ul>
+    <li>新規に決定された障害基礎年金の事例では、<strong>精神障害・知的障害が約3分の2（66.9%）</strong>を占めます（前述の地域差調査より）。精神・知的は、障害年金全体でも大きな比重を持つグループです。</li>
+    <li>等級別・傷病別の細かい受給者数・割合は、<strong>e-Statの該当表で最新の数値を確認</strong>できます（本記事では具体的な内訳の数字は、誤りを避けるため引用せず出典リンクを案内します）。</li>
+  </ul>
+
+  <div class="callout warn">
+    <p><span class="tag">要確認</span>等級別・傷病名別の具体的な受給者数・割合（◯%）は調査年により変わります。正確な内訳は、記事末尾の<strong>e-Stat「年金制度基礎調査（障害年金受給者実態調査）」</strong>の各表でご確認ください。本記事は数字の出どころを案内する位置づけです。</p>
+  </div>
+
+  <h2>③ いちばん知りたい「更新で級が下がる確率」は、どこまで分かる？</h2>
+  <p>受給中の方が最も気にするのは、<strong>「更新（障害状態確認届）で、自分の傷病だと級が下がる・止まる確率はどれくらいか」</strong>でしょう。ここは正直にお伝えします。</p>
+
+  <div class="callout warn">
+    <p><span class="tag">データの限界（正直に）</span><strong>「傷病別に、更新で級が上がった／下がった／止まった割合」を示す公開統計は、現状とても限られています。</strong>公的に手に入りやすいのは、(a) 等級別・傷病別の<strong>受給者の分布</strong>、(b) 新規裁定の<strong>不支給割合</strong>、(c) かつての<strong>地域差とその是正</strong>、までです。更新時の級変動の確率を傷病別に断定できるデータは、現時点で見当たりません。<strong>だからこの記事でも「あなたの傷病なら何%下がる」とは言えません。</strong>更新の見通しは、日本年金機構・年金事務所にご相談ください（更新の備え方は関連記事の「障害年金の基礎と更新」をどうぞ）。</p>
+  </div>
+
+  <p>逆に言えば、ここは<strong>当事者の実体験の共有が最も役立つ領域</strong>でもあります。統計が薄いぶん、「自分の傷病・等級で、更新がどうだったか」という一つひとつの体験が、これから更新を迎える人の見通しを助けます。よければページ下のコメントで共有してください。</p>
+
+  <div class="callout note">
+    <p><span class="tag">体験を募集中</span>「この傷病・この等級で、更新のときこうだった（変わらなかった／下がった／止まった）」という<strong>実体験</strong>は、薄い統計を補う貴重な情報です。アカウント不要・匿名で書けます（個人が特定される情報・診断名の断定は避けてください）。</p>
+  </div>
+
+  <h2>よくある質問（FAQ）</h2>
+  <h3>Q. 障害年金の不支給率はどのくらいですか？</h3>
+  <p>A. 全国一律の単純な数字はありませんが、厚労省が2014年度事例で行った調査では、障害基礎年金（精神・知的）の不支給割合は大分県24.4%〜栃木県4.0%と約6倍の地域差がありました。2017年4月以降は審査を東京に集約し是正の方向です。最新の傾向は厚労省・日本年金機構の統計をご確認ください。</p>
+  <h3>Q. 障害年金は精神の病気でももらえますか？データ上はどうですか？</h3>
+  <p>A. 精神疾患・知的障害も対象で、新規決定の約3分の2（66.9%）が精神・知的障害です。ただし「日常生活能力の程度」の評価が結果を左右します。</p>
+  <h3>Q. 更新で等級が下がる・止まる確率は統計で分かりますか？</h3>
+  <p>A. 傷病別に更新時の級変動を示す公開統計は現状とても限られており、本記事でも断定できません。公開されているのは主に等級別・傷病別の受給者分布や新規裁定の不支給割合です。見通しは年金事務所にご確認ください。</p>
+
+  <section class="related" aria-label="関連記事">
+    <h2 style="border:0">あわせて読みたい</h2>
+    <ul>
+      <li><a href="shogai-nenkin-basics.html">障害年金の基礎と更新（障害状態確認届）当事者ガイド</a></li>
+      <li><a href="shogaisha-kojo-tax.html">障害者控除で税金はいくら戻る？所得税・住民税・同居特別</a></li>
+      <li><a href="jichitai-transport-medical.html">障害者手帳で交通・医療費はどこまで無料？名古屋・東京・大阪【三大都市比較】</a></li>
+    </ul>
+  </section>
+
+  <section class="contribute">
+    <h2>あなたの更新の体験、教えてください</h2>
+    <p>このサイトは「同じ立場の人の助け合い」で育てています。統計が薄い「更新での級の変動」こそ、当事者一人ひとりの体験が頼りです。よければ下のコメント欄（アカウント不要・匿名でOK）からどうぞ。</p>
+    <!-- Cusdis：アカウント不要・匿名OKのコメント。READMEの手順で data-app-id を設定すると有効化されます。 -->
+    <div id="cusdis_thread"
+      data-host="https://cusdis.com"
+      data-app-id="REPLACE_CUSDIS_APP_ID"
+      data-page-id="shogai-nenkin-toukei"
+      data-page-url="https://sato12307.github.io/fukushi-navi/articles/shogai-nenkin-toukei.html"
+      data-page-title="数字で見る障害年金：不支給率・等級・傷病別データと地域差">
+    </div>
+    <script async defer src="https://cusdis.com/js/cusdis.es.js"></script>
+  </section>
+
+  <h2>出典（厚生労働省・日本年金機構・e-Stat）</h2>
+  <ul class="sources">
+    <li>厚生労働省「障害基礎年金の障害認定の地域差に関する調査結果」 https://www.mhlw.go.jp/stf/houdou/0000070967.html</li>
+    <li>同 調査結果PDF（不支給割合の地域差・表1ほか） https://www.mhlw.go.jp/file/04-Houdouhappyou-12512000-Nenkinkyoku-Jigyoukanrika/0000075359.pdf</li>
+    <li>厚生労働省「年金制度基礎調査（障害年金受給者実態調査）」e-Stat（制度別・等級別・傷病名別の受給者数/割合） https://www.e-stat.go.jp/stat-search/files?tstat=000001021991&toukei=00450411</li>
+    <li>厚生労働省年金局「令和6年度の障害年金の認定状況についての調査報告書」 https://www.mhlw.go.jp/content/12512000/001502249.pdf</li>
+    <li>障害年金の業務統計（社会保障審議会年金事業管理部会 資料） https://www.mhlw.go.jp/content/12508000/000669908.pdf</li>
+  </ul>
+
+  <div class="disclaimer">
+    <strong>ご注意：</strong>この記事は公開されている統計・調査をもとにした<strong>一般的な情報の整理</strong>です。数値は調査年・制度改正により変わり、地域差の状況も運用変更で変化しています。引用は出典元の最新版でご確認ください。当サイトは特定の申請の可否や等級を判定したり、医療・法律の個別助言を行うものではありません。
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="inner">
+    <p><strong>フクシル</strong>（仮）— 知らないと損する、街ごとの福祉制度を当事者目線でまとめる情報サイトです。</p>
+    <p><a href="../index.html">トップへ戻る</a> ／ <a href="../about.html">このサイトについて</a></p>
+    <p>© 2026 フクシル. 本サイトの情報は一般的な参考情報であり、正確性を保証するものではありません。</p>
+  </div>
+</footer>
+</body>
+</html>
