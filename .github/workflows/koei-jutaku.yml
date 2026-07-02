@@ -1,0 +1,36 @@
+name: 公営住宅倍率の再生成
+
+# 月1回（毎月1日 06:00 JST）＋手動実行。
+# data/koei-jutaku.json をもとに記事の倍率表を再描画し、差分があればコミットする器。
+# ※ 各自治体の募集結果PDF/HTMLは形式がバラバラなため、当面はJSONを手/半自動で更新→本ジョブで反映。
+#    機械可読ソースが増えたら tools/build_koei.py の collect() にスクレイパを追加する。
+
+on:
+  schedule:
+    - cron: "0 21 1 * *"   # 毎月1日 21:00 UTC = 翌 06:00 JST
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: 倍率表を再生成
+        run: python tools/build_koei.py
+      - name: 変更があればコミット
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add articles/koei-jutaku-bairitsu.html data/koei-jutaku.json
+          if git diff --cached --quiet; then
+            echo "変更なし"
+          else
+            git commit -m "chore: 公営住宅倍率を再生成 [skip ci]"
+            git push
+          fi

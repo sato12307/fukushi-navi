@@ -1,0 +1,96 @@
+{
+  "updated": "2026-07-03",
+  "note": "公営住宅の応募倍率（分かっている範囲・出典と時点つき）。各自治体の募集結果を順次反映。古い統計は年度を明記。",
+  "rows": [
+    {
+      "area": "全国",
+      "entity": "公営住宅（参考・全国平均）",
+      "segment": "全体",
+      "ratio": "約5.8倍",
+      "as_of": "平成26年度",
+      "source": "国土交通省 資料",
+      "url": "https://www.mlit.go.jp/"
+    },
+    {
+      "area": "東京都",
+      "entity": "都営住宅",
+      "segment": "単身者向け（人気区の例）",
+      "ratio": "数十〜約180倍",
+      "as_of": "2025年8月 定期募集",
+      "source": "JKK東京 抽せん結果（新宿179倍・江東60.9倍・墨田46.5倍 等）",
+      "url": "https://www.to-kousya.or.jp/kouei/toeibosyu/"
+    },
+    {
+      "area": "東京都",
+      "entity": "都営住宅",
+      "segment": "世帯向け（都心区は特に高い）",
+      "ratio": "目安 十数〜数十倍",
+      "as_of": "近年の定期募集",
+      "source": "JKK東京 定期募集結果",
+      "url": "https://www.to-kousya.or.jp/kouei/toeibosyu/"
+    },
+    {
+      "area": "神奈川県",
+      "entity": "県営住宅",
+      "segment": "一般世帯向け（新築）",
+      "ratio": "約6.5倍",
+      "as_of": "平成27年11月時点（参考）",
+      "source": "神奈川県",
+      "url": "https://www.pref.kanagawa.jp/"
+    },
+    {
+      "area": "神奈川県",
+      "entity": "県営住宅",
+      "segment": "改良住宅",
+      "ratio": "約1.7倍",
+      "as_of": "平成27年11月時点（参考）",
+      "source": "神奈川県",
+      "url": "https://www.pref.kanagawa.jp/"
+    },
+    {
+      "area": "大阪市",
+      "entity": "市営住宅",
+      "segment": "一般募集",
+      "ratio": "調査中",
+      "as_of": "—",
+      "source": "大阪市（募集結果を反映予定）",
+      "url": "https://www.city.osaka.lg.jp/kurashi/category/3005-2-3-3-0-0-0-0-0-0.html"
+    },
+    {
+      "area": "名古屋市",
+      "entity": "市営住宅",
+      "segment": "一般募集",
+      "ratio": "調査中",
+      "as_of": "—",
+      "source": "名古屋市（募集結果を反映予定）",
+      "url": "https://www.city.nagoya.jp/kurashi/category/15-14-4-1-4-1-1-0-0-0.html"
+    },
+    {
+      "area": "横浜市",
+      "entity": "市営住宅",
+      "segment": "一般募集",
+      "ratio": "調査中",
+      "as_of": "—",
+      "source": "横浜市（募集結果を反映予定）",
+      "url": "https://www.city.yokohama.lg.jp/"
+    },
+    {
+      "area": "神戸市",
+      "entity": "市営住宅",
+      "segment": "一般募集",
+      "ratio": "調査中",
+      "as_of": "—",
+      "source": "神戸住環境整備公社（募集結果を反映予定）",
+      "url": "https://www.kobe-rma.or.jp/individual/municipal/recruitment/"
+    },
+    {
+      "area": "福岡市",
+      "entity": "市営住宅",
+      "segment": "一般募集",
+      "ratio": "調査中",
+      "as_of": "—",
+      "source": "福岡市（募集結果を反映予定）",
+      "url": "https://www.city.fukuoka.lg.jp/"
+    }
+  ]
+}
