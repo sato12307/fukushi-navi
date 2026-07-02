@@ -59,6 +59,17 @@
 .ratio-table td.asof { font-size: .8rem; color: var(--sub); white-space: nowrap; }
 .ratio-table td.src { font-size: .8rem; color: var(--sub); line-height: 1.6; }
 .ratio-table td.src a { color: var(--sub); }
+/* 当選確率シミュレーター */
+.calc { border: 1px solid var(--line); border-radius: 10px; padding: 16px 18px; margin: 1.2em 0; background: var(--soft); }
+.calc h4 { margin: .1em 0 .6em; }
+.calc .row { display: flex; flex-wrap: wrap; gap: 8px 14px; align-items: center; margin: .55em 0; }
+.calc label { font-weight: 600; font-size: .9rem; }
+.calc input[type=number] { width: 7em; padding: 6px 8px; border: 1px solid var(--line); border-radius: 6px; font-size: 1rem; }
+.calc select { padding: 6px 8px; border: 1px solid var(--line); border-radius: 6px; font-size: 1rem; }
+.calc .out { margin-top: 12px; padding: 12px 14px; background: #fff; border: 1px solid var(--line); border-radius: 8px; }
+.calc .prob { font-size: 1.35rem; font-weight: 800; color: var(--brand-dark); }
+.calc .cmp { font-size: .9rem; color: var(--sub); margin-top: 4px; }
+.calc .bd { font-size: .86rem; color: var(--sub); margin-top: 6px; line-height: 1.7; }
 </style>
 </head>
 <body>
@@ -144,6 +155,55 @@
 
   <div class="callout note">
     <p><span class="tag">まず確認すること</span>お住まい（希望地）の自治体・住宅供給公社の募集案内で、<strong>「優遇」「ポイント」「優先」「特定目的」</strong>といった言葉を探してください。該当すれば、申込区分を一般ではなく<strong>優遇・ポイント区分</strong>にするだけで当選確率が変わります。手帳や世帯状況を証明する書類が必要なことが多いので、募集期間前に準備しておくとスムーズです。</p>
+  </div>
+
+  <h3>優遇でどれだけ当たりやすくなる？【当選確率シミュレーター】</h3>
+  <p>優遇抽選は、対象世帯が抽選で<strong>当せん番号（くじ）を複数持てる</strong>しくみです。たとえば東京都営住宅では、対象世帯に当せんのチャンスを<strong>5倍・7倍</strong>にする優遇があります（倍率・対象は自治体で異なります）。「くじを5枚・7枚引ける」イメージで、そのぶん当たりやすくなります。応募倍率と優遇倍率を入れると、当選確率の目安を計算します。</p>
+
+  <div class="calc" role="group" aria-label="公営住宅の当選確率シミュレーター">
+    <h4>当選確率シミュレーター（優遇なし → 優遇あり）</h4>
+    <div class="row">
+      <label for="koei-r">応募倍率</label>
+      <input type="number" id="koei-r" inputmode="decimal" min="1" step="0.1" placeholder="例: 20"> 倍
+      <span style="font-size:.82rem;color:var(--sub)">（②の表や募集結果の倍率）</span>
+    </div>
+    <div class="row">
+      <label for="koei-m">あなたの優遇</label>
+      <select id="koei-m">
+        <option value="1">一般（優遇なし・くじ1枚）</option>
+        <option value="5" selected>5倍優遇（くじ5枚）</option>
+        <option value="7">7倍優遇（くじ7枚）</option>
+        <option value="10">10倍優遇（くじ10枚）</option>
+        <option value="20">20倍優遇（くじ20枚）</option>
+      </select>
+      <span style="font-size:.82rem;color:var(--sub)">当せん番号が何倍になるか</span>
+    </div>
+    <div class="out" aria-live="polite">
+      <div>優遇適用後の当選確率（目安）：<span class="prob" id="koei-prob">—</span></div>
+      <div class="cmp" id="koei-cmp"></div>
+      <div class="bd" id="koei-bd">応募倍率を入力してください（1以上）。</div>
+    </div>
+  </div>
+  <script>
+  (function(){
+    var r=document.getElementById('koei-r'), m=document.getElementById('koei-m'),
+        prob=document.getElementById('koei-prob'), cmp=document.getElementById('koei-cmp'), bd=document.getElementById('koei-bd');
+    function pct(x){ return (x*100).toFixed(x<0.1?1:0)+'%'; }
+    function calc(){
+      var R=parseFloat(r.value), mm=parseInt(m.value,10)||1;
+      if(isNaN(R)||R<1){ prob.textContent='—'; cmp.textContent=''; bd.textContent='応募倍率を入力してください（1以上）。'; return; }
+      var p1=1/R;                        // 一般（くじ1枚）の当選確率 ≈ 1/倍率
+      var p=1-Math.pow(1-p1,mm);         // 優遇（くじmm枚）≈ 1-(1-1/倍率)^優遇倍率
+      prob.textContent=pct(p);
+      cmp.innerHTML='一般（優遇なし）なら約 <strong>'+pct(p1)+'</strong> ／ 実効倍率 約 <strong>'+(R/mm).toFixed(1)+'倍</strong> 相当（'+R+'倍 → '+(R/mm).toFixed(1)+'倍）';
+      bd.innerHTML='応募倍率 '+R+'倍 の住戸に '+(mm===1?'一般（くじ1枚）':(mm+'倍優遇（くじ'+mm+'枚）'))+' で申し込んだ場合の<strong>概算</strong>。くじを'+mm+'枚引くのに近く、当選確率はおおよそ '+pct(p)+' です。';
+    }
+    r.addEventListener('input',calc); m.addEventListener('change',calc); calc();
+  })();
+  </script>
+
+  <div class="callout warn">
+    <p><span class="tag">計算の前提・要確認</span>この確率は「応募倍率」と「優遇倍率（当せん番号の枚数）」からの<strong>概算</strong>です。実際の当選確率は、<strong>他の応募者にも優遇者がいること・自治体ごとの当せん方式（優遇抽選かポイント方式か）・複数戸を同時に抽選すること</strong>などで変わります。優遇の倍率（5倍・7倍など）や対象世帯は自治体で異なるため、必ず募集案内でご確認ください。ポイント方式の自治体は抽選ではなく<strong>点数の高い順</strong>で決まるため、この確率計算はあてはまりません。</p>
   </div>
 
   <h2>④ 倍率を下げる・当てにいく申込みのコツ</h2>
