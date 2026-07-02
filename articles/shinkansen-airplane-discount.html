@@ -21,7 +21,7 @@
   "description": "新幹線・JRと飛行機(ANA/JAL)の障害者割引を当事者目線で解説。手帳の第1種/第2種の違い、本人単独・介護者同伴での割引、買い方、2025年4月からの精神障害者保健福祉手帳のJR割引対象化まで。",
   "inLanguage": "ja",
   "datePublished": "2026-06-30",
-  "dateModified": "2026-06-30",
+  "dateModified": "2026-07-02",
   "author": { "@type": "Organization", "name": "フクシル" },
   "publisher": { "@type": "Organization", "name": "フクシル" }
 }
@@ -49,6 +49,24 @@
   ]
 }
 </script>
+<style>
+/* 運賃マトリックス＆計算機（この記事専用） */
+.fare-matrix { min-width: 660px; font-size: .82rem; }
+.fare-matrix th, .fare-matrix td { padding: 7px 6px; text-align: center; white-space: nowrap; }
+.fare-matrix tbody th[scope=row] { position: sticky; left: 0; z-index: 1; }
+.fare-matrix td.diag { background: var(--soft); color: #9aa6ac; }
+.fare-matrix td.na { color: #a23; font-weight: 600; }
+.fare-matrix td.na small, .fare-matrix small { font-weight: 400; color: var(--sub); }
+.calc { border: 1px solid var(--line); border-radius: 10px; padding: 16px 18px; margin: 1.2em 0; background: var(--soft); }
+.calc h4 { margin: .1em 0 .6em; }
+.calc .row { display: flex; flex-wrap: wrap; gap: 8px 16px; align-items: center; margin: .55em 0; }
+.calc label { font-weight: 600; font-size: .9rem; }
+.calc input[type=number] { width: 8em; padding: 6px 8px; border: 1px solid var(--line); border-radius: 6px; font-size: 1rem; }
+.calc .modes label { font-weight: 500; margin-right: 6px; }
+.calc .out { margin-top: 12px; padding: 12px 14px; background: #fff; border: 1px solid var(--line); border-radius: 8px; }
+.calc .total { font-size: 1.35rem; font-weight: 800; color: var(--brand-dark); }
+.calc .bd { font-size: .86rem; color: var(--sub); margin-top: 6px; line-height: 1.7; }
+</style>
 </head>
 <body>
 <a class="skip" href="#main">本文へスキップ</a>
@@ -70,7 +88,7 @@
   <p class="breadcrumb"><a href="../index.html">トップ</a> ＞ 交通割引 ＞ 新幹線・JR・飛行機の障害者割引</p>
 
   <h1>新幹線・JR・飛行機の障害者割引 完全ガイド<br>【2025年から精神手帳も鉄道割引の対象に】</h1>
-  <p class="updated">最終更新：2026-06-30 ／ 出典は各鉄道・航空会社の公式ページ（記事末尾に一覧）</p>
+  <p class="updated">最終更新：2026-07-02 ／ 出典は各鉄道・航空会社の公式ページ（記事末尾に一覧）</p>
 
   <p class="lead">遠出のときに大きいのが交通費です。障害者手帳を持っている方は、<strong>新幹線・JR</strong>や<strong>飛行機（ANA／JAL）</strong>で運賃の割引を受けられることがあります。ポイントは、手帳の「旅客鉄道会社用」の<strong>第1種／第2種</strong>のどちらかで扱いが変わること、そして<strong>本人だけで乗るか・介護者と一緒に乗るか</strong>で条件が違うこと。さらに2025年4月からは、<strong>精神障害者保健福祉手帳もJRなどの鉄道割引の対象</strong>になりました。この記事では仕組みと買い方を当事者目線でやさしく整理します。</p>
 
@@ -122,34 +140,86 @@
   <h3>介護者（付き添い）と一緒に乗るとき</h3>
   <p>手帳が<strong>第1種</strong>の方は、介護者1名と同一区間を一緒に利用する場合、<strong>距離に関係なく本人・介護者ともに乗車券が5割引き</strong>になります（普通急行券や定期乗車券などが割引対象になる場合もあります）。介護者の乗車券は本人と同じ区間に限られます。第2種は原則として介護者割引の対象外ですが、12歳未満の第2種の方が介護者と乗る場合に定期乗車券が割引になるなどの特例があります。</p>
 
-  <h3>割引するといくら？　東海道・山陽新幹線の運賃例</h3>
-  <p>「乗車券が5割引き・特急料金は割引なし」だと、実際いくらになるのか。代表的な区間で<strong>割引適用後の目安</strong>を出しました（割引後の総額を出しているサイトは意外と少ないです）。いずれも片道100kmを超えるので、本人が一人で乗っても乗車券が5割引きの対象です。</p>
+  <h3>割引するといくら？　主要区間のマトリックス＆計算機</h3>
+  <p>「乗車券が5割引き・特急料金は割引なし」だと、実際いくらになるのか。まず<strong>東海道・山陽新幹線の主要駅どうしの割引適用後の合計</strong>を一覧にしました（割引後の総額を出しているサイトは意外と少ないです）。さらにその下の<strong>計算機</strong>に乗車券と特急料金を入れれば、この7駅以外も含めて<strong>どの区間でも</strong>目安を出せます。</p>
+
   <div class="table-wrap">
-  <table>
-    <caption>障害者割引（乗車券5割引・特急料金は対象外）を適用した場合の運賃の目安（通常期・のぞみ普通車／2026年6月時点の通常運賃をもとに試算。端数・最新額・季節変動は要確認）</caption>
-    <thead>
-      <tr><th>区間（片道）</th><th>通常の乗車券</th><th>割引後の乗車券（約5割）</th><th>特急料金（のぞみ・割引なし）</th><th>割引適用後の合計（目安）</th></tr>
-    </thead>
+  <table class="fare-matrix">
+    <caption>障害者割引適用後の合計運賃マトリックス（本人単独・のぞみ普通車指定席・通常期／2026年時点の通常運賃をもとにした<strong>概算</strong>。乗車券5割引＋特急料金は割引なしで試算。端数・最新額・季節変動・列車は要確認）</caption>
+    <thead><tr><th scope="col">出発＼到着</th><th scope="col">東京</th><th scope="col">名古屋</th><th scope="col">京都</th><th scope="col">新大阪</th><th scope="col">岡山</th><th scope="col">広島</th><th scope="col">博多</th></tr></thead>
     <tbody>
-      <tr>
-        <th>東京〜新大阪<br>（東海道）</th>
-        <td>8,910円</td>
-        <td class="yes">約4,450円</td>
-        <td>指定 5,810円／自由 4,960円</td>
-        <td>指定 <strong>約10,260円</strong>／自由 約9,410円</td>
-      </tr>
-      <tr>
-        <th>新大阪〜博多<br>（山陽）</th>
-        <td>9,790円</td>
-        <td class="yes">約4,890円</td>
-        <td>指定 6,030円／自由 4,960円</td>
-        <td>指定 <strong>約10,920円</strong>／自由 約9,850円</td>
-      </tr>
+      <tr><th scope="row">東京</th><td class="diag">—</td><td class="yes">約8,100円</td><td class="yes">約10,000円</td><td class="yes">約10,300円</td><td class="yes">約12,600円</td><td class="yes">約14,300円</td><td class="yes">約16,200円</td></tr>
+      <tr><th scope="row">名古屋</th><td class="yes">約8,100円</td><td class="diag">—</td><td class="yes">約4,400円</td><td class="yes">約5,000円</td><td class="yes">約8,700円</td><td class="yes">約10,700円</td><td class="yes">約13,200円</td></tr>
+      <tr><th scope="row">京都</th><td class="yes">約10,000円</td><td class="yes">約4,400円</td><td class="diag">—</td><td class="na">対象外<br><small>100km以下</small></td><td class="yes">約6,100円</td><td class="yes">約8,700円</td><td class="yes">約11,100円</td></tr>
+      <tr><th scope="row">新大阪</th><td class="yes">約10,300円</td><td class="yes">約5,000円</td><td class="na">対象外<br><small>100km以下</small></td><td class="diag">—</td><td class="yes">約4,800円</td><td class="yes">約7,800円</td><td class="yes">約10,900円</td></tr>
+      <tr><th scope="row">岡山</th><td class="yes">約12,600円</td><td class="yes">約8,700円</td><td class="yes">約6,100円</td><td class="yes">約4,800円</td><td class="diag">—</td><td class="yes">約4,400円</td><td class="yes">約8,200円</td></tr>
+      <tr><th scope="row">広島</th><td class="yes">約14,300円</td><td class="yes">約10,700円</td><td class="yes">約8,700円</td><td class="yes">約7,800円</td><td class="yes">約4,400円</td><td class="diag">—</td><td class="yes">約6,900円</td></tr>
+      <tr><th scope="row">博多</th><td class="yes">約16,200円</td><td class="yes">約13,200円</td><td class="yes">約11,100円</td><td class="yes">約10,900円</td><td class="yes">約8,200円</td><td class="yes">約6,900円</td><td class="diag">—</td></tr>
     </tbody>
   </table>
   </div>
+  <p style="font-size:.88rem;color:var(--sub)">表は<strong>本人が単独</strong>で乗る場合（のぞみ普通車指定席・通常期）の割引後合計の<strong>概算</strong>です。単独割引は<strong>片道100kmを超える</strong>区間が対象のため、100km以下（例：京都〜新大阪）は「対象外」と表示しています。第1種＋介護者で乗る場合は距離に関係なく乗車券が5割引き（下の計算機の「第1種＋介護者」で計算できます）。</p>
+
+  <div class="calc" role="group" aria-label="障害者割引の運賃計算機">
+    <h4>あなたの区間で計算する（乗車券・特急料金を入力）</h4>
+    <p style="font-size:.86rem;color:var(--sub);margin:.2em 0 .8em">通常の<strong>乗車券</strong>と<strong>特急料金</strong>（駅の運賃表やJR各社サイトで確認できます）を入れると、障害者割引後の目安を計算します。特急料金は指定席・自由席どちらの額でも入力できます。</p>
+    <div class="row">
+      <label for="calc-fare">通常の乗車券</label>
+      <input type="number" id="calc-fare" inputmode="numeric" min="0" step="10" placeholder="例: 8910"> 円
+    </div>
+    <div class="row">
+      <label for="calc-ltd">特急料金（割引なし）</label>
+      <input type="number" id="calc-ltd" inputmode="numeric" min="0" step="10" placeholder="例: 5810"> 円
+    </div>
+    <div class="row modes">
+      <span style="font-weight:600">利用形態：</span>
+      <label><input type="radio" name="calc-mode" value="single" checked> 本人が単独</label>
+      <label><input type="radio" name="calc-mode" value="care"> 第1種＋介護者1名</label>
+    </div>
+    <div class="row" id="calc-dist-row">
+      <label style="font-weight:500"><input type="checkbox" id="calc-over100" checked> 片道100kmを超える（単独割引の条件）</label>
+    </div>
+    <div class="out" aria-live="polite">
+      <div>障害者割引適用後の合計（目安）：<span class="total" id="calc-total">—</span></div>
+      <div class="bd" id="calc-bd">乗車券と特急料金を入力してください。</div>
+    </div>
+  </div>
+  <script>
+  (function(){
+    var f=document.getElementById('calc-fare'), l=document.getElementById('calc-ltd'),
+        o=document.getElementById('calc-over100'), distRow=document.getElementById('calc-dist-row'),
+        tot=document.getElementById('calc-total'), bd=document.getElementById('calc-bd'),
+        modes=document.getElementsByName('calc-mode');
+    function mode(){ for(var i=0;i<modes.length;i++){ if(modes[i].checked) return modes[i].value; } return 'single'; }
+    function yen(n){ return n.toLocaleString('ja-JP')+'円'; }
+    function r10(n){ return Math.round(n/10)*10; }
+    function calc(){
+      var fare=parseInt(f.value,10), ltd=parseInt(l.value,10), m=mode();
+      distRow.style.display = (m==='single') ? '' : 'none';
+      if(isNaN(fare)||fare<0){ tot.textContent='—'; bd.textContent='乗車券と特急料金を入力してください。'; return; }
+      if(isNaN(ltd)||ltd<0) ltd=0;
+      var disc=r10(fare*0.5);
+      if(m==='single'){
+        if(o.checked){
+          tot.textContent=yen(disc+ltd);
+          bd.innerHTML='乗車券 '+yen(fare)+' → <strong>'+yen(disc)+'</strong>（5割引）＋ 特急料金 '+yen(ltd)+'（割引なし）。';
+        } else {
+          tot.textContent=yen(fare+ltd);
+          bd.innerHTML='<strong style="color:#a23">片道100km以下は本人単独の割引対象外</strong>です。乗車券は割引されず、乗車券 '+yen(fare)+' ＋ 特急料金 '+yen(ltd)+'。';
+        }
+      } else {
+        tot.textContent=yen(disc*2+ltd*2);
+        bd.innerHTML='本人・介護者ともに乗車券が5割引（'+yen(disc)+' ×2）＋ 特急料金は2人分そのまま（'+yen(ltd)+' ×2）。第1種＋介護者は<strong>距離の制限なし</strong>で乗車券が割引になります。';
+      }
+    }
+    [f,l,o].forEach(function(e){ e.addEventListener('input',calc); e.addEventListener('change',calc); });
+    for(var i=0;i<modes.length;i++){ modes[i].addEventListener('change',calc); }
+    calc();
+  })();
+  </script>
+
   <div class="callout warn">
-    <p><span class="tag">要確認・読み方</span>割引されるのは<strong>乗車券だけ</strong>で、<strong>特急料金はそのまま</strong>です（だから総額が「半額」になるわけではありません）。上の合計は通常期・のぞみ普通車の<strong>概算</strong>で、乗車券の端数処理・シーズン（繁忙期/閑散期）・列車により変わります。第1種で介護者と乗る場合は<strong>介護者の乗車券も5割引き</strong>（特急料金は別途）。最新・正確な額は必ず駅の窓口やJR各社の公式でご確認ください。</p>
+    <p><span class="tag">要確認・読み方</span>割引されるのは<strong>乗車券だけ</strong>で、<strong>特急料金はそのまま</strong>です（だから総額が「半額」になるわけではありません）。マトリックス・計算機の額は通常期・のぞみ普通車の<strong>概算</strong>で、乗車券の端数処理・シーズン（繁忙期/閑散期）・列車により変わります。最新・正確な額は必ず<strong>駅の窓口やJR各社の公式</strong>でご確認ください。</p>
   </div>
 
   <h2>② 2025年4月から、精神障害者保健福祉手帳もJR割引の対象に</h2>
