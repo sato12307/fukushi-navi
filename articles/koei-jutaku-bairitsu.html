@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>公営住宅の当選倍率まとめ｜主要都市の応募倍率と、障害者・ひとり親世帯の当選優遇｜フクシル</title>
-<meta name="description" content="都営・県営・市営など公営住宅の応募倍率を主要都市ぶん、出典と時点つきでまとめました（順次拡充）。なぜ倍率が高いのか、抽選とポイント方式の違い、そして障害者・高齢者・ひとり親世帯が『当選しやすくなる』優先入居・優遇抽選の仕組みを当事者目線で。">
+<meta name="description" content="都営・県営・市営など公営住宅の応募倍率を主要都市ぶん、出典と時点つきでまとめました。同じ市でも住戸で数十倍違う倍率を『単身向け・駅距離・築年・EV』の4因子で補正する計算機、障害者・ひとり親世帯の優遇抽選での当選確率シミュレーターつき。">
 <link rel="canonical" href="https://sato12307.github.io/fukushi-navi/articles/koei-jutaku-bairitsu.html">
 <meta property="og:type" content="article">
 <meta property="og:title" content="公営住宅の当選倍率まとめ｜主要都市の応募倍率と、障害者・ひとり親世帯の当選優遇">
@@ -40,6 +40,11 @@
       "@type": "Question",
       "name": "障害者や母子・父子世帯は当選しやすくなりますか？",
       "acceptedAnswer": { "@type": "Answer", "text": "多くの自治体で、障害者世帯・高齢者世帯・ひとり親（母子・父子）世帯・DV被害者などを対象に、当選確率を上げる優遇があります。方式は自治体で異なり、抽選で複数の票を持てる『優遇抽選（当選倍率の優遇）』、住宅に困っている度合いを点数化して高い順に決める『ポイント方式』、対象世帯だけが申し込める『優先枠・特定目的住宅』などがあります。詳しい対象・方式はお住まいの自治体の募集案内でご確認ください。" }
+    },
+    {
+      "@type": "Question",
+      "name": "同じ市でも団地や住戸によって倍率は違いますか？",
+      "acceptedAnswer": { "@type": "Answer", "text": "大きく違います。各市の公表データでは、倍率を左右する主な因子は『単身向けか世帯向けか』『駅までの距離』『築年』『エレベーターの有無×階数』の4つです。例えば札幌市は単身向け52.2倍に対し世帯向け10.1倍、神戸市は区別平均で灘区54.8倍に対し垂水区7.5倍、横浜市では同じ団地でもエレベーター有り側が無し側より2.3〜12.7倍高く、千葉市ではエレベーター無し団地の1階29倍に対し3階は応募ゼロという例があります。世帯向け・駅遠・築古・EVなし上層階を許容すれば、都市部でもほぼ無抽選の住戸が実在します。" }
     },
     {
       "@type": "Question",
@@ -151,7 +156,122 @@
   </div>
   <p style="font-size:.88rem;color:var(--sub)">数字は募集回・住戸・年度で大きく変わる<strong>参考値</strong>です。古い統計（平成年度）は目安として時点を明記しています。倍率は「その回にたまたま人気が集中したか」でも動くため、<strong>1回の高倍率だけで判断せず、複数回の傾向</strong>で見るのがおすすめです。空欄は順次、各自治体の募集結果から追記します。</p>
 
-  <h2>③ 障害者・ひとり親などは「当選しやすくなる」</h2>
+  <h2>③ 同じ市でも、住戸によって倍率は数十倍違う</h2>
+  <p>②の表は<strong>市全体の平均</strong>です。ところが実際の倍率は、同じ市の中でも住戸によってケタ違いに変わります。各市の公表データから、何が倍率を動かしているのかを見てみます。</p>
+
+  <div class="table-wrap">
+  <table>
+    <caption>倍率を左右する4つの因子（各市の公表データより・出典つき）</caption>
+    <thead><tr><th>因子</th><th>実際のデータ</th><th>ざっくりの効き方</th></tr></thead>
+    <tbody>
+      <tr>
+        <th>① 単身向けか<br>世帯向けか</th>
+        <td>札幌市：単身向け<strong>52.2倍</strong> vs 世帯向け<strong>10.1倍</strong>（令和5年度）。さいたま市：単身23.1倍 vs 一般5.7倍＝<strong>4.1倍差</strong>（市の計画に明記）。横浜市の100倍超はすべて単身可の枠</td>
+        <td class="yes">単身向けは市平均の<strong>約3倍</strong>、世帯向けは約0.6倍</td>
+      </tr>
+      <tr>
+        <th>② 立地<br>（駅徒歩かバス便か）</th>
+        <td>神戸市の公式計画：区別平均で<strong>灘区54.8倍・中央区47.3倍 vs 垂水区7.5倍</strong>（全市23倍）。札幌市：同じ北区内で駅近195.3倍とバス便2.2倍が併存。築8年・EV有りでもバス便なら1.2倍の例（東雁来）</td>
+        <td class="yes">駅近は市平均の<strong>2倍超</strong>、バス便・駅遠は<strong>0.3倍前後</strong>。「区」より「駅までの距離」</td>
+      </tr>
+      <tr>
+        <th>③ 築年</th>
+        <td>千葉市：平成15年以降築の住戸は<strong>5〜35倍</strong>、昭和築はほぼ<strong>0〜9倍</strong>（令和8年度第1期）。神戸市の倍率上位は平成7〜9年の震災復興住宅が大半。ただし駅徒歩3分なら昭和52年築でも49倍＝立地が上回る</td>
+        <td class="yes">築浅（築10年以内）は<strong>約1.8倍</strong>、築30年超は<strong>約0.5倍</strong></td>
+      </tr>
+      <tr>
+        <th>④ エレベーター<br>×階数</th>
+        <td>横浜市の応募状況表は同一団地でEV有無を直接比較できる形式：<strong>4組すべてでEV有り側が2.3〜12.7倍高い</strong>（例：上飯田14.0倍 vs 1.1倍）。千葉市・高浜第1（EV無し）は<strong>1階29倍・2階4倍・3階0</strong>。新潟市は<strong>EVなし4・5階を抽選に載せず常時先着順</strong>に制度上格下げ</td>
+        <td class="yes">EVなし×3階以上は<strong>0.3倍前後</strong>。1〜2階なら影響小</td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+
+  <div class="callout point">
+    <p><span class="tag">つまり</span>倍率の序列は <strong>「単身向けか」≧「駅までの距離」＞「築年」＞「EV×階数」</strong>。この構造は調べた5市（札幌・横浜・千葉・神戸・さいたま）で共通でした。裏を返せば、<strong>「世帯向け・駅から遠め・築古・EVなし上層階」を許容できるなら、都市部でも1倍前後＝ほぼ無抽選の住戸が実在</strong>します（千葉市・神戸市・札幌市の応募ゼロ住戸など）。なおトイレの和式/洋式は募集資料に載らないことが多いため、この記事では<strong>築年を設備の古さの代理</strong>として扱っています（築30年超はおおむね和式・浴槽なし等の可能性が高い）。</p>
+  </div>
+
+  <h3>あなたの狙う住戸の倍率を補正する【住戸タイプ補正計算機】</h3>
+  <p>②の市平均に、上の4因子の補正を掛けて<strong>「狙っている住戸タイプの倍率の目安」</strong>を出します。係数は上の表の実データから置いた概算です。</p>
+
+  <div class="calc" role="group" aria-label="住戸タイプ別の倍率補正計算機">
+    <h4>住戸タイプ補正計算機</h4>
+    <div class="row">
+      <label for="adj-base">市平均の倍率</label>
+      <input type="number" id="adj-base" inputmode="decimal" min="0.1" step="0.1" placeholder="例: 10"> 倍
+      <span style="font-size:.82rem;color:var(--sub)">（②の表の値を入れる）</span>
+    </div>
+    <div class="row">
+      <label for="adj-type">住戸の区分</label>
+      <select id="adj-type">
+        <option value="1">わからない（補正なし）</option>
+        <option value="2.8">単身向け（×2.8）</option>
+        <option value="0.6">世帯向け（×0.6）</option>
+      </select>
+    </div>
+    <div class="row">
+      <label for="adj-loc">立地</label>
+      <select id="adj-loc">
+        <option value="1">わからない（補正なし）</option>
+        <option value="2.5">駅徒歩5分以内・都心（×2.5）</option>
+        <option value="1.5">駅徒歩10分前後（×1.5）</option>
+        <option value="0.7">駅徒歩15分以上（×0.7）</option>
+        <option value="0.3">バス便・駅遠（×0.3）</option>
+      </select>
+    </div>
+    <div class="row">
+      <label for="adj-age">築年</label>
+      <select id="adj-age">
+        <option value="1">わからない（補正なし）</option>
+        <option value="1.8">築10年以内（×1.8）</option>
+        <option value="1">築11〜30年（×1.0）</option>
+        <option value="0.5">築30年超（×0.5）</option>
+      </select>
+    </div>
+    <div class="row">
+      <label for="adj-ev">エレベーター・階</label>
+      <select id="adj-ev">
+        <option value="1">わからない／EVあり／1〜2階（補正なし）</option>
+        <option value="0.3">EVなし×3階以上（×0.3）</option>
+      </select>
+    </div>
+    <div class="out" aria-live="polite">
+      <div>この住戸タイプの倍率の目安：<span class="prob" id="adj-out">—</span></div>
+      <div class="bd" id="adj-bd">市平均の倍率を入力してください。</div>
+      <div style="margin-top:8px"><button type="button" id="adj-apply" style="padding:7px 14px;border:1px solid var(--line);border-radius:6px;background:var(--soft);font-size:.9rem;cursor:pointer">この倍率で当選確率を計算する（下の優遇シミュレーターへ）</button></div>
+    </div>
+  </div>
+  <script>
+  (function(){
+    var b=document.getElementById('adj-base'), sels=['adj-type','adj-loc','adj-age','adj-ev'].map(function(i){return document.getElementById(i);}),
+        out=document.getElementById('adj-out'), bd=document.getElementById('adj-bd'), btn=document.getElementById('adj-apply');
+    var last=null;
+    function calc(){
+      var R=parseFloat(b.value);
+      if(isNaN(R)||R<=0){ out.textContent='—'; bd.textContent='市平均の倍率を入力してください。'; last=null; return; }
+      var f=1, parts=[];
+      sels.forEach(function(s){ var v=parseFloat(s.value); f*=v; if(v!==1){ parts.push('×'+v); } });
+      var est=Math.max(0.1, R*f);
+      last=Math.round(est*10)/10;
+      out.textContent='約'+last+'倍';
+      bd.innerHTML='市平均 '+R+'倍 '+(parts.length? parts.join(' ')+' の補正で':'（補正なし）')+'、この住戸タイプの<strong>概算</strong>です。係数は札幌・横浜・千葉・神戸・さいたまの公表データからの目安で、実際は団地ごとに大きく変わります。1倍未満は「ほぼ無抽選」の水準。';
+    }
+    [b].concat(sels).forEach(function(e){ e.addEventListener('input',calc); e.addEventListener('change',calc); });
+    btn.addEventListener('click',function(){
+      if(last===null){ bd.textContent='先に市平均の倍率を入力してください。'; return; }
+      var r=document.getElementById('koei-r');
+      if(r){ r.value=Math.max(1,last); r.dispatchEvent(new Event('input')); r.scrollIntoView({behavior:'smooth',block:'center'}); }
+    });
+    calc();
+  })();
+  </script>
+
+  <div class="callout warn">
+    <p><span class="tag">係数の読み方・要確認</span>補正係数は各市の公表データ（札幌の単身52.2倍/世帯10.1倍、神戸の区別54.8〜7.5倍、千葉の築年別・階数別、横浜のEV有無ペア等）から置いた<strong>ざっくりの目安</strong>で、市や団地により実際の差はもっと大きくも小さくもなります。因子は重なるほど誤差も掛け算で増えるため、<strong>2つ以上「わからない」以外を選んだ場合は特に幅をもって</strong>見てください。正確な倍率は、各自治体が公表する<strong>住戸別・団地別の募集結果</strong>（②の出典リンク先）で確認できます。</p>
+  </div>
+
+  <h2>④ 障害者・ひとり親などは「当選しやすくなる」</h2>
   <p>ここが公営住宅のいちばん大事なポイントです。<strong>倍率が高い＝あきらめる、ではありません。</strong>多くの自治体では、住宅に困っている度合いが高い世帯の当選確率を上げる仕組みがあります。</p>
 
   <div class="callout point">
@@ -172,7 +292,7 @@
     <div class="row">
       <label for="koei-r">応募倍率</label>
       <input type="number" id="koei-r" inputmode="decimal" min="1" step="0.1" placeholder="例: 20"> 倍
-      <span style="font-size:.82rem;color:var(--sub)">（②の表や募集結果の倍率）</span>
+      <span style="font-size:.82rem;color:var(--sub)">（②の表の市平均、または③の補正計算機の結果）</span>
     </div>
     <div class="row">
       <label for="koei-m">あなたの優遇</label>
@@ -213,14 +333,14 @@
     <p><span class="tag">計算の前提・要確認</span>この確率は「応募倍率」と「優遇倍率（当せん番号の枚数）」からの<strong>概算</strong>です。実際の当選確率は、<strong>他の応募者にも優遇者がいること・自治体ごとの当せん方式（優遇抽選かポイント方式か）・複数戸を同時に抽選すること</strong>などで変わります。優遇の倍率（5倍・7倍など）や対象世帯は自治体で異なるため、必ず募集案内でご確認ください。ポイント方式の自治体は抽選ではなく<strong>点数の高い順</strong>で決まるため、この確率計算はあてはまりません。</p>
   </div>
 
-  <h2>④ 倍率を下げる・当てにいく申込みのコツ</h2>
+  <h2>⑤ 倍率を下げる・当てにいく申込みのコツ</h2>
   <div class="table-wrap">
   <table>
     <caption>倍率を避けて当選確率を上げる工夫（一般的なコツ）</caption>
     <thead><tr><th>コツ</th><th>なぜ効くか</th></tr></thead>
     <tbody>
       <tr><th>人気の区・新築を外す</th><td>都心・新築は倍率が跳ね上がる。<strong>郊外・築古</strong>は同じ家賃帯でも倍率が低いことが多い</td></tr>
-      <tr><th>優遇・ポイント区分で申し込む</th><td class="yes">③の優遇に該当するなら、一般区分より当たりやすい。使わない手はない</td></tr>
+      <tr><th>優遇・ポイント区分で申し込む</th><td class="yes">④の優遇に該当するなら、一般区分より当たりやすい。使わない手はない</td></tr>
       <tr><th>追加募集・随時（先着）募集を狙う</th><td>定期募集で埋まらなかった住戸の<strong>追加・常時募集</strong>は倍率が低い。こまめにチェック</td></tr>
       <tr><th>単身向けにこだわりすぎない</th><td>単身向けは戸数が少なく激戦。入居資格を満たすなら世帯向けの検討も</td></tr>
       <tr><th>落選しても申し込み続ける</th><td>自治体によっては<strong>連続落選で当選確率が上がる</strong>（優遇ポイント加算）仕組みがある</td></tr>
@@ -241,6 +361,8 @@
   <p>A. 地域と住戸で大きく異なります。全国平均は数倍程度ですが、都市部は高く、東京都営住宅の単身者向けでは人気の区で数十倍〜100倍超になることもあります（2025年8月の定期募集で新宿区約179倍の例）。世帯向け・郊外・追加募集の住戸は比較的倍率が低い傾向です。正確な倍率は各自治体の募集結果でご確認ください。</p>
   <h3>Q. 障害者や母子・父子世帯は当選しやすくなりますか？</h3>
   <p>A. 多くの自治体で、障害者・高齢者・ひとり親（母子・父子）世帯・DV被害者などに当選確率を上げる優遇があります。抽選で複数票を持てる「優遇抽選」、困窮度を点数化する「ポイント方式」、対象世帯だけの「優先枠・特定目的住宅」などです。対象・方式は自治体で異なるため募集案内で確認してください。</p>
+  <h3>Q. 同じ市でも団地や住戸によって倍率は違いますか？</h3>
+  <p>A. 大きく違います。主な因子は「単身向けか世帯向けか」「駅までの距離」「築年」「EVの有無×階数」の4つ。札幌市は単身52.2倍vs世帯10.1倍、神戸市は区別で灘区54.8倍vs垂水区7.5倍、横浜市は同一団地でEV有り側が2.3〜12.7倍高い、千葉市はEV無し団地で1階29倍・3階応募ゼロ、という公表データがあります。詳しくは③の補正計算機をどうぞ。</p>
   <h3>Q. 単身でも公営住宅に申し込めますか？</h3>
   <p>A. 原則は同居親族のいる世帯向けですが、単身での申込みが認められる場合があります。特に高齢者・障害者は単身入居の資格が広く認められる傾向です。ただし単身者向け住戸は少なく人気が高いため倍率は総じて高くなります。可否・条件は自治体ごとに異なります。</p>
 
@@ -274,6 +396,12 @@
     <li>大阪市「市営住宅」 https://www.city.osaka.lg.jp/kurashi/category/3005-2-3-3-0-0-0-0-0-0.html</li>
     <li>名古屋市「市営住宅の入居者募集」 https://www.city.nagoya.jp/kurashi/category/15-14-4-1-4-1-1-0-0-0.html</li>
     <li>神戸住環境整備公社「市営住宅の募集」 https://www.kobe-rma.or.jp/individual/municipal/recruitment/</li>
+    <li>【③の因子データ】札幌市住まいの協議会 資料「令和4年度募集で倍率が高かった団地と低かった団地の比較」 https://www.city.sapporo.jp/toshi/jutaku/08osirase/koumoku/documents/daigokaikaigisiryo3.pdf</li>
+    <li>【同】神戸市「第2次市営住宅マネジメント計画」（区別応募倍率） https://www.city.kobe.lg.jp/documents/41824/publichouse_management_plan_2.pdf</li>
+    <li>【同】横浜市記者発表資料（住宅×区分別の応募状況・EV記号つき） https://www.city.yokohama.lg.jp/city-info/koho-kocho/press/kenchiku/2025/shieijutaku20260115.files/0004_20260115.pdf</li>
+    <li>【同】千葉市住宅供給公社「令和8年度第1期 定期募集住宅一覧表・抽選結果」 https://www.cjkk.or.jp/shiei/result/</li>
+    <li>【同】さいたま市「市営住宅等長寿命化計画」p.23-26（タイプ別・団地別応募倍率） https://www.city.saitama.lg.jp/001/154/007/007/p080749_d/fil/choujumyoukakeikaku.pdf</li>
+    <li>【同】新潟市「市営住宅常時募集・特別募集」（EVなし4・5階の常時先着順化） https://www.city.niigata.lg.jp/kurashi/jyutaku/jukankyo/01sieijutaku/jyouji-tokubetsu.html</li>
   </ul>
 
   <div class="disclaimer">
