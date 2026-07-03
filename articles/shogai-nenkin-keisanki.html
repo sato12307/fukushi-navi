@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>障害年金はいくら？計算機｜受給額・遡及請求・更新リスク・暮らしに回る実額｜フクシル</title>
+<meta name="description" content="障害年金の受給額（基礎1級・2級/厚生/子の加算）を入力3つで概算し、更新（再認定）で級が下がる確率、遡及請求（認定日請求）で最大いくら戻るか、さらに医療費助成・交通減免・公営住宅・税の控除まで合算した『暮らしに回る実額』を1ページで計算できます。">
+<link rel="canonical" href="https://sato12307.github.io/fukushi-navi/articles/shogai-nenkin-keisanki.html">
+<meta property="og:type" content="article">
+<meta property="og:title" content="障害年金はいくら？計算機｜受給額・遡及・更新リスク・暮らしに回る実額">
+<meta property="og:description" content="受給額の概算、更新で級が下がる確率（96.7%は維持）、遡及請求の最大額、医療費・交通・住宅・税まで合算した実質の暮らし力を計算。">
+<meta property="og:site_name" content="フクシル">
+<meta property="og:url" content="https://sato12307.github.io/fukushi-navi/articles/shogai-nenkin-keisanki.html">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="stylesheet" href="../assets/style.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "障害年金はいくら？計算機｜受給額・遡及請求・更新リスク・暮らしに回る実額",
+  "description": "障害年金の受給額の概算、更新（再認定）での級変動リスク、遡及請求（認定日請求）の概算、医療費助成・交通減免・公営住宅・税の控除まで合算した実質額を計算できる当事者向けページ。",
+  "inLanguage": "ja",
+  "datePublished": "2026-07-03",
+  "dateModified": "2026-07-03",
+  "author": { "@type": "Organization", "name": "フクシル" },
+  "publisher": { "@type": "Organization", "name": "フクシル" }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "障害年金は更新で打ち切られやすいのですか？",
+      "acceptedAnswer": { "@type": "Answer", "text": "データ上は逆です。厚生労働省の令和6年度調査では、更新（再認定）約30.4万件のうち96.7%が等級維持、増額1.4%、減額0.8%、支給停止1.1%でした。悪化（減額＋停止）は約1.9%にとどまります。手足の切断や完全失明など固定した障害は永久認定となり、更新自体がありません。" }
+    },
+    {
+      "@type": "Question",
+      "name": "障害年金の遡及請求は何年分までさかのぼれますか？",
+      "acceptedAnswer": { "@type": "Answer", "text": "年金の時効により最大5年分です。障害認定日（原則、初診日から1年6か月後）時点の診断書で当時の等級該当を証明できることが条件で、証明できない場合は事後重症請求となり、さかのぼりはありません（請求月の翌月分から支給）。" }
+    },
+    {
+      "@type": "Question",
+      "name": "障害年金に税金はかかりますか？",
+      "acceptedAnswer": { "@type": "Answer", "text": "かかりません。障害年金は所得税・住民税ともに非課税です。さらに本人が働いている場合は障害者控除（所得税27万円・特別障害者40万円など）で税が軽くなり、障害者は前年の合計所得135万円以下（給与収入約204万円未満）であれば住民税自体が非課税になります。" }
+    }
+  ]
+}
+</script>
+<style>
+.calc { border: 1px solid var(--line); border-radius: 10px; padding: 16px 18px; margin: 1.2em 0; background: var(--soft); }
+.calc h4 { margin: .1em 0 .6em; }
+.calc .row { display: flex; flex-wrap: wrap; gap: 8px 14px; align-items: center; margin: .55em 0; }
+.calc label { font-weight: 600; font-size: .9rem; }
+.calc input[type=number], .calc input[type=month] { width: 9em; padding: 6px 8px; border: 1px solid var(--line); border-radius: 6px; font-size: 1rem; }
+.calc select { padding: 6px 8px; border: 1px solid var(--line); border-radius: 6px; font-size: 1rem; max-width: 100%; }
+.calc .out { margin-top: 12px; padding: 12px 14px; background: #fff; border: 1px solid var(--line); border-radius: 8px; }
+.calc .total { font-size: 1.35rem; font-weight: 800; color: var(--brand-dark); }
+.calc .bd { font-size: .86rem; color: var(--sub); margin-top: 6px; line-height: 1.7; }
+.scenario td, .scenario th { text-align: center; }
+.scenario td.big { font-weight: 700; }
+.mini-note { font-size: .84rem; color: var(--sub); }
+</style>
+</head>
+<body>
+<a class="skip" href="#main">本文へスキップ</a>
+<header class="site-header">
+  <div class="inner">
+    <a class="brand" href="../index.html">フクシル <small>知らないと損する、街ごとの福祉</small></a>
+    <nav class="site-nav" aria-label="主要">
+      <a href="../index.html">トップ</a>
+      <a href="jichitai-transport-medical.html">自治体の福祉</a>
+      <a href="shinkansen-airplane-discount.html">交通割引</a>
+      <a href="koei-jutaku-bairitsu.html">公営住宅</a>
+      <a href="shogai-nenkin-basics.html">障害年金</a>
+      <a href="shogaisha-kojo-tax.html">障害者控除</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+  <p class="breadcrumb"><a href="../index.html">トップ</a> ＞ 障害年金 ＞ 障害年金の計算機</p>
+
+  <h1>障害年金はいくら？計算機<br>【受給額・遡及請求・更新リスク・暮らしに回る実額】</h1>
+  <p class="updated">最終更新：2026-07-03 ／ 金額は日本年金機構・厚生労働省の公表額（時点は各所に明記）。すべて<strong>概算</strong>です</p>
+
+  <p class="lead">障害年金の「いくらもらえるか」は調べれば出てきますが、当事者が本当に知りたいのはその先——<strong>①更新で減らされない？　②さかのぼって請求したらいくら？　③医療費や交通費の減免まで入れると、実際いくら浮くの？</strong>——ではないでしょうか。このページは受給額の概算に加えて、その3つを<strong>公的データにもとづいて</strong>計算できるようにしました。</p>
+
+  <div class="callout point">
+    <p><span class="tag">このページでできること</span><strong>①受給額</strong>（基礎/厚生・級・子の加算）→<strong>②更新リスク</strong>（96.7%は等級維持という最新データであなたの「10年安泰確率」を計算）→<strong>③遡及請求</strong>（最大5年分いくら戻るか）→<strong>④暮らしに回る実額</strong>（年金＋手当＋医療費・交通・家賃・税の「払わずに済む額」を合算）。</p>
+  </div>
+
+  <h2>① 受給額はいくら？（概算計算機）</h2>
+  <p>障害年金は<strong>障害基礎年金</strong>（初診日に国民年金）と<strong>障害厚生年金</strong>（初診日に厚生年金＝会社員・公務員）で構成が変わります。基礎は定額、厚生は「報酬比例」の上乗せ＋（1・2級なら）基礎年金も出ます。<strong>障害年金はまるごと非課税</strong>（所得税・住民税がかからない）なのも大きなポイントです。</p>
+
+  <div class="calc" role="group" aria-label="障害年金の受給額計算機">
+    <h4>受給額計算機</h4>
+    <div class="row">
+      <label for="p-kind">初診日の年金制度</label>
+      <select id="p-kind">
+        <option value="kiso">国民年金（障害基礎年金）</option>
+        <option value="kosei">厚生年金（障害厚生年金＋1・2級は基礎も）</option>
+      </select>
+    </div>
+    <div class="row">
+      <label for="p-grade">等級</label>
+      <select id="p-grade">
+        <option value="1">1級</option>
+        <option value="2" selected>2級</option>
+        <option value="3">3級（厚生のみ）</option>
+      </select>
+    </div>
+    <div class="row">
+      <label for="p-kids">18歳到達年度末までの子</label>
+      <select id="p-kids">
+        <option value="0" selected>いない</option>
+        <option value="1">1人</option>
+        <option value="2">2人</option>
+        <option value="3">3人</option>
+      </select>
+    </div>
+    <div class="row" id="p-hoshu-row" style="display:none">
+      <label for="p-hoshu">報酬比例部分（年額・円）</label>
+      <input type="number" id="p-hoshu" inputmode="numeric" min="0" step="1000" placeholder="不明なら空欄">
+      <span class="mini-note">ねんきん定期便等で確認。空欄なら3級の最低保障額で概算</span>
+    </div>
+    <div class="row" id="p-spouse-row" style="display:none">
+      <label for="p-spouse">生計を維持している65歳未満の配偶者</label>
+      <select id="p-spouse">
+        <option value="0" selected>いない</option>
+        <option value="1">いる（配偶者加給あり）</option>
+      </select>
+    </div>
+    <div class="out" aria-live="polite">
+      <div>受給額の目安：<span class="total" id="p-total">—</span><span style="font-weight:700">／年</span>　<span id="p-monthly" style="color:var(--sub)"></span></div>
+      <div class="bd" id="p-bd"></div>
+    </div>
+  </div>
+
+  <h2>② 更新で減らされない？【あなたの更新リスク】</h2>
+  <p>受給者の最大の不安は「更新（障害状態確認届）で級を下げられる・止められるのでは」だと思います。ここは<strong>最新の全国データで答えが出ています</strong>。厚労省の令和6年度調査では、更新（再認定）約30.4万件の結果は次のとおりでした。</p>
+
+  <div class="table-wrap">
+  <table class="scenario">
+    <caption>もし更新を迎えたら（令和6年度・全国の再認定結果）× あなたの受給額</caption>
+    <thead><tr><th>更新の結果</th><th>全国でその結果になった人</th><th>あなたの場合（年額）</th></tr></thead>
+    <tbody>
+      <tr><th>継続（今の級のまま）</th><td class="yes big">96.7%</td><td id="s-keep">—</td></tr>
+      <tr><th>増額（級が上がる）</th><td class="yes">1.4%</td><td>今より増える</td></tr>
+      <tr><th>減額（級が下がる）</th><td class="no">0.8%</td><td id="s-down">—</td></tr>
+      <tr><th>支給停止</th><td class="no">1.1%</td><td>0円</td></tr>
+    </tbody>
+  </table>
+  </div>
+  <p class="mini-note">①で計算すると「あなたの場合」欄に金額が入ります。減額欄は1級→2級、2級→3級（厚生）または支給外（基礎）を想定した概算です。</p>
+
+  <div class="calc" role="group" aria-label="更新の生存確率計算機">
+    <h4>「この先ずっと大丈夫？」を確率で見る</h4>
+    <div class="row">
+      <label for="r-interval">あなたの更新間隔</label>
+      <select id="r-interval">
+        <option value="1">1年ごと</option>
+        <option value="2">2年ごと</option>
+        <option value="3" selected>3年ごと</option>
+        <option value="5">5年ごと</option>
+        <option value="0">永久認定（更新なし）</option>
+      </select>
+      <span class="mini-note">診断書の提出サイクル（年金証書・通知で確認）</span>
+    </div>
+    <div class="row">
+      <label for="r-years">見通したい年数</label>
+      <select id="r-years">
+        <option value="5">5年</option>
+        <option value="10" selected>10年</option>
+        <option value="20">20年</option>
+      </select>
+    </div>
+    <div class="out" aria-live="polite">
+      <div>その間ずっと<strong>減額も停止もない</strong>確率：<span class="total" id="r-out">—</span></div>
+      <div class="bd" id="r-bd"></div>
+    </div>
+  </div>
+
+  <div class="callout note">
+    <p><span class="tag">地域差の心配について</span>かつては審査に大きな地域差があり、2014年度の調査では精神・知的の不支給割合が<strong>栃木4.0%〜大分24.4%と約6倍</strong>開いていました（愛知県は<strong>12.9%で、全国計12.5%とほぼ同水準</strong>。「愛知はゆるい」という体感は、この調査の数字では裏付けられません）。ただし<strong>2017年4月から審査は東京の障害年金センターに一元化</strong>され、この地域差は制度的に解消される方向になっています。「どこに住んでいるかで更新が不利になる」心配は、現在は基本的に不要です。詳しくは<a href="shogai-nenkin-toukei.html">統計記事</a>へ。</p>
+  </div>
+
+  <div class="callout warn">
+    <p><span class="tag">読み方</span>96.7%等は<strong>全傷病の平均</strong>で、傷病や診断書の内容により差があります。また手足の切断・完全失明など<strong>固定した障害は「永久認定」で更新自体がありません</strong>。確率は「安心材料」であって保証ではないため、更新時の診断書は日頃の状態が正しく伝わるよう準備を（<a href="shogai-nenkin-basics.html">更新の備え方</a>）。</p>
+  </div>
+
+  <h2>③ さかのぼって請求したら？【遡及請求の概算】</h2>
+  <p>障害年金を今から請求するとき、<strong>障害認定日（原則、初診日から1年6か月後）にさかのぼって受給できる場合</strong>があります（認定日請求・遡及請求）。ただし年金の時効は<strong>5年</strong>なので、戻るのは<strong>最大5年分</strong>。「知らずに何年も請求していなかった」人ほど大きな金額になります。</p>
+
+  <div class="calc" role="group" aria-label="遡及請求の概算計算機">
+    <h4>遡及請求でいくら戻る？</h4>
+    <div class="row">
+      <label for="b-date">障害認定日（初診日＋1年6か月）</label>
+      <input type="month" id="b-date">
+    </div>
+    <div class="row">
+      <label for="b-amount">認定日時点の想定年額（円）</label>
+      <input type="number" id="b-amount" inputmode="numeric" min="0" step="10000" placeholder="①の計算結果など">
+      <span class="mini-note">①の結果を使うなら空欄でOK（自動で流用）</span>
+    </div>
+    <div class="out" aria-live="polite">
+      <div>遡及で戻る額の目安：<span class="total" id="b-out">—</span></div>
+      <div class="bd" id="b-bd">認定日を入力してください。</div>
+    </div>
+  </div>
+
+  <div class="callout warn">
+    <p><span class="tag">重要な条件</span>遡及できるのは<strong>認定日時点の診断書</strong>（当時のカルテにもとづくもの）が取れて、その時点で等級に該当していた場合です。認定日時点の状態を証明できず<strong>「事後重症請求」になった場合、遡及はゼロ</strong>（請求月の翌月分から）。過去のカルテの有無が数百万円を分けることがあるため、通院歴が複雑な方は年金事務所や社会保険労務士への相談も選択肢です。金額は年度改定・加算の変動があるため概算です。</p>
+  </div>
+
+  <h2>④ 実際、暮らしにいくら回る？【"見えない収入"まで合算】</h2>
+  <p>障害のある人の家計は、<strong>もらうお金（年金・手当）</strong>だけでなく<strong>払わずに済むお金</strong>——医療費助成・交通の減免・公営住宅の家賃差・税の控除・NHK免除——で大きく変わります。ここを全部足した「実質の暮らし力」を月額で出します。<strong>単体の年金計算機では出ない、このサイトならではの合算</strong>です。</p>
+
+  <div class="calc" role="group" aria-label="暮らしに回る実額の計算機">
+    <h4>暮らしに回る実額（月額）</h4>
+    <div class="row">
+      <label for="n-pension">障害年金（月額・円）</label>
+      <input type="number" id="n-pension" inputmode="numeric" min="0" step="1000" placeholder="①から自動">
+      <span class="mini-note">①を計算済みなら自動で入ります</span>
+    </div>
+    <div class="row">
+      <label for="n-teate">手当</label>
+      <select id="n-teate">
+        <option value="0" selected>なし／わからない</option>
+        <option value="tokubetsu">特別障害者手当（在宅・最重度）</option>
+      </select>
+      <span class="mini-note">自治体独自の手当は別途加算されることも</span>
+    </div>
+    <div class="row">
+      <label for="n-med">医療費：助成がなければ払う自己負担（月・円）</label>
+      <input type="number" id="n-med" inputmode="numeric" min="0" step="500" placeholder="例: 6000">
+      <select id="n-med-rate">
+        <option value="1" selected>助成で無料（負担0）</option>
+        <option value="0.6667">3割→1割になる（自立支援医療など）</option>
+        <option value="0">助成なし</option>
+      </select>
+    </div>
+    <div class="row">
+      <label for="n-transport">交通費（月・円）</label>
+      <input type="number" id="n-transport" inputmode="numeric" min="0" step="500" placeholder="例: 5000">
+      <select id="n-trans-rate">
+        <option value="1">無料乗車券あり（名古屋の福祉特別乗車券など）</option>
+        <option value="0.5" selected>半額（手帳割引など）</option>
+        <option value="0">減免なし</option>
+      </select>
+    </div>
+    <div class="row">
+      <label for="n-rent-sav">住まい：公営住宅に入れた場合の差額（月・円）</label>
+      <input type="number" id="n-rent-sav" inputmode="numeric" min="0" step="1000" placeholder="例: 45000">
+      <span class="mini-note">民間相場−公営家賃。例：札幌市の資料では近隣民間7.9万円に対し市営2.7〜4.0万円＝差額4〜5万円。<a href="koei-jutaku-bairitsu.html">倍率と入り方はこちら</a></span>
+    </div>
+    <div class="row">
+      <label for="n-tax">税の障害者控除</label>
+      <select id="n-tax">
+        <option value="0" selected>働いていない・住民税非課税（節税効果なし）</option>
+        <option value="39500">働いている×障害者控除（目安 年約4万円）</option>
+        <option value="50000">働いている×特別障害者控除（目安 年約5万円）</option>
+        <option value="105500">家族の扶養×同居特別障害者（家族の税が 年約10万円減）</option>
+      </select>
+    </div>
+    <div class="row">
+      <label for="n-nhk">NHK受信料</label>
+      <select id="n-nhk">
+        <option value="0" selected>免除なし／契約なし</option>
+        <option value="chijo">全額免除（地上契約ぶん）</option>
+        <option value="eisei">全額免除（衛星契約ぶん）</option>
+      </select>
+      <span class="mini-note">手帳保持者がいる住民税非課税世帯は全額免除</span>
+    </div>
+    <div class="out" aria-live="polite">
+      <div>暮らしに回る実額：<span class="total" id="n-out">—</span><span style="font-weight:700">／月</span></div>
+      <div class="bd" id="n-bd"></div>
+    </div>
+  </div>
+
+  <div class="callout point">
+    <p><span class="tag">なぜ「合算」が大事か</span>たとえば障害基礎年金2級だけ見ると「月7万円弱では暮らせない」となりがちです。しかし<strong>医療費0円＋交通無料＋公営住宅で家賃差4万円＋NHK免除</strong>まで積むと、実質は月11〜12万円ぶんの暮らし力になることがあります。<strong>「もらう」より「払わない」の方が大きい</strong>ケースは珍しくありません。使える減免を取りこぼさないことが、そのまま生活水準になります。</p>
+  </div>
+
+  <div class="callout warn">
+    <p><span class="tag">要確認</span>手当・医療費助成・交通減免・公営住宅の優遇は<strong>自治体と手帳の種類・等級で対象が異なります</strong>（所得制限がある制度もあります）。金額は概算であり、正確な支給額・対象は年金事務所・自治体窓口・公式情報でご確認ください。このページは個別の受給可否を判定するものではありません。</p>
+  </div>
+
+  <h2>よくある質問（FAQ）</h2>
+  <h3>Q. 障害年金は更新で打ち切られやすいのですか？</h3>
+  <p>A. データ上は逆です。厚労省の令和6年度調査では、更新（再認定）の96.7%が等級維持、増額1.4%、減額0.8%、支給停止1.1%でした。悪化する人は約1.9%にとどまります。固定した障害（切断・失明など）は永久認定で更新自体がありません。</p>
+  <h3>Q. 遡及請求は何年分までさかのぼれますか？</h3>
+  <p>A. 年金の時効により最大5年分です。障害認定日（原則初診日から1年6か月後）時点の診断書で当時の該当が証明できることが条件で、証明できない場合は事後重症請求となり遡及はありません。</p>
+  <h3>Q. 障害年金に税金はかかりますか？</h3>
+  <p>A. かかりません。障害年金は所得税・住民税ともに非課税です。さらに本人が働いている場合は障害者控除で税が軽くなり、障害者は前年の合計所得135万円以下（給与収入約204万円未満）なら住民税自体が非課税になります。</p>
+
+  <section class="related" aria-label="関連記事">
+    <h2 style="border:0">あわせて読みたい</h2>
+    <ul>
+      <li><a href="shogai-nenkin-toukei.html">数字で見る障害年金：初回は厳しく更新はほぼ落ちない（継続96.7%）</a></li>
+      <li><a href="shogai-nenkin-basics.html">障害年金の基礎と更新（障害状態確認届）当事者ガイド</a></li>
+      <li><a href="koei-jutaku-bairitsu.html">公営住宅の当選倍率まとめ｜住戸タイプ補正計算機つき</a></li>
+      <li><a href="jichitai-transport-medical.html">障害者手帳で交通・医療費はどこまで無料？三大都市比較</a></li>
+    </ul>
+  </section>
+
+  <section class="contribute">
+    <h2>あなたの数字も教えてください</h2>
+    <p>「遡及請求でいくら戻った」「更新でこうだった」「うちの自治体はこの減免がある」——実体験の数字は、同じ立場の人の一番の道しるべです。下のコメント欄（アカウント不要・匿名OK）からどうぞ（個人が特定される情報は書かないでください）。</p>
+    <div id="cusdis_thread"
+      data-host="https://cusdis.com"
+      data-app-id="14dfe8f8-c660-42ee-9cd2-54ee31828ba9"
+      data-page-id="shogai-nenkin-keisanki"
+      data-page-url="https://sato12307.github.io/fukushi-navi/articles/shogai-nenkin-keisanki.html"
+      data-page-title="障害年金はいくら？計算機">
+    </div>
+    <script async defer src="https://cusdis.com/js/cusdis.es.js"></script>
+  </section>
+
+  <h2>出典（日本年金機構・厚生労働省ほか）</h2>
+  <ul class="sources" id="src-list">
+    <li>日本年金機構「障害基礎年金の受給要件・請求時期・年金額」 https://www.nenkin.go.jp/service/jukyu/shougainenkin/jukyu-yoken/20150401-01.html</li>
+    <li>日本年金機構「障害厚生年金の受給要件・請求時期・年金額」 https://www.nenkin.go.jp/service/jukyu/shougainenkin/jukyu-yoken/20150401-02.html</li>
+    <li>厚生労働省「特別障害者手当について」 https://www.mhlw.go.jp/bunya/shougaihoken/jidou/tokubetsu.html</li>
+    <li>厚生労働省「令和6年度の障害年金の認定状況についての調査報告書」（再認定の継続96.7%等） https://www.mhlw.go.jp/content/12512000/001502249.pdf</li>
+    <li>厚生労働省「障害基礎年金の障害認定の地域差に関する調査結果」（2014年度・県別不支給割合） https://www.mhlw.go.jp/file/04-Houdouhappyou-12512000-Nenkinkyoku-Jigyoukanrika/0000075359.pdf</li>
+    <li>NHK「放送受信料の免除について（全額免除・半額免除の基準）」 https://www.nhk-cs.jp/jushinryo/exemption_1.html</li>
+    <li>NHK「受信料額の一覧（2023年10月改定）」 https://www.nhk-cs.jp/about/ryokin/</li>
+  </ul>
+
+  <div class="disclaimer">
+    <strong>ご注意：</strong>このページの計算はすべて公開情報にもとづく<strong>概算</strong>です。年金額は毎年度改定され、生年月日・納付状況・加算の有無で変わります。手当・助成・減免は自治体と手帳種別・等級・所得により対象が異なります。実際の受給額・可否は、必ず年金事務所・自治体窓口・公式情報でご確認ください。当サイトは個別の受給可否や等級を判定したり、税務・法律の個別助言を行うものではありません。
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="inner">
+    <p><strong>フクシル</strong>（仮）— 知らないと損する、街ごとの福祉制度を当事者目線でまとめる情報サイトです。</p>
+    <p><a href="../index.html">トップへ戻る</a> ／ <a href="../about.html">このサイトについて</a></p>
+    <p>© 2026 フクシル. 本サイトの情報は一般的な参考情報であり、正確性を保証するものではありません。</p>
+  </div>
+</footer>
+
+<script>
+// ====== 公式額（出典・年度は本文と出典欄に記載。年度改定時はここを更新） ======
+var RATES = {
+  fy: "令和8年度",
+  kiso1: 1059125,      // 障害基礎年金1級 年額（昭和31年4月2日以後生まれ）
+  kiso2: 847300,       // 障害基礎年金2級 年額（同上）
+  child12: 243800,     // 子の加算 第1・2子（各）
+  child3: 81300,       // 子の加算 第3子以降（各）
+  kosei3min: 635500,   // 障害厚生年金3級の最低保障 年額
+  haigusha: 243800,    // 配偶者加給年金（厚生1・2級のみ）
+  tokubetsuTeate: 30450, // 特別障害者手当 月額（令和8年4月〜）
+  nhkChijo: 1100,      // NHK地上契約 月額（2023年10月改定・現行）
+  nhkEisei: 1950       // NHK衛星契約 月額（地上含む）
+};
+var BAD_RATE = 0.019; // 更新1回あたりの悪化（減額0.8%+停止1.1%）
+
+function yen(n){ return Math.round(n).toLocaleString('ja-JP') + '円'; }
+
+// ====== ① 受給額 ======
+var pensionYearly = 0, pensionGrade = 2, pensionKind = 'kiso';
+(function(){
+  var kind=document.getElementById('p-kind'), grade=document.getElementById('p-grade'),
+      kids=document.getElementById('p-kids'), hoshuRow=document.getElementById('p-hoshu-row'),
+      hoshu=document.getElementById('p-hoshu'), spouseRow=document.getElementById('p-spouse-row'),
+      spouse=document.getElementById('p-spouse'), total=document.getElementById('p-total'),
+      monthly=document.getElementById('p-monthly'), bd=document.getElementById('p-bd');
+  function childSum(n){ n=parseInt(n,10); var s=0; for(var i=1;i<=n;i++){ s += (i<=2? RATES.child12 : RATES.child3); } return s; }
+  function calc(){
+    pensionKind = kind.value; pensionGrade = parseInt(grade.value,10);
+    hoshuRow.style.display = (kind.value==='kosei') ? '' : 'none';
+    // 3級は厚生のみ
+    if(kind.value==='kiso' && pensionGrade===3){ grade.value='2'; pensionGrade=2; }
+    spouseRow.style.display = (kind.value==='kosei' && pensionGrade!==3) ? '' : 'none';
+    var parts=[], sum=0;
+    var hv = parseInt(hoshu.value,10); if(isNaN(hv)||hv<0) hv=0;
+    if(kind.value==='kiso'){
+      var base = (pensionGrade===1? RATES.kiso1 : RATES.kiso2);
+      sum = base + childSum(kids.value);
+      parts.push('基礎'+pensionGrade+'級 '+yen(base));
+    } else {
+      if(pensionGrade===3){
+        var h3 = Math.max(hv, RATES.kosei3min);
+        sum = h3;
+        parts.push('報酬比例 '+yen(h3)+(hv<RATES.kosei3min? '（3級の最低保障を適用）':''));
+      } else {
+        var base2 = (pensionGrade===1? RATES.kiso1 : RATES.kiso2);
+        var h = (pensionGrade===1? hv*1.25 : hv);
+        sum = base2 + h + childSum(kids.value);
+        parts.push('基礎'+pensionGrade+'級 '+yen(base2) + (hv>0? ' ＋ 報酬比例 '+yen(h)+(pensionGrade===1?'（1.25倍）':'') : '（報酬比例は未入力）'));
+        if(spouse.value==='1'){ sum += RATES.haigusha; parts.push('配偶者加給 '+yen(RATES.haigusha)); }
+      }
+    }
+    var cs = (pensionGrade!==3)? childSum(kids.value) : 0;
+    if(cs>0) parts.push('子の加算 '+yen(cs));
+    pensionYearly = sum;
+    total.textContent = '約'+yen(sum);
+    monthly.textContent = '（月あたり 約'+yen(sum/12)+'）';
+    bd.innerHTML = parts.join(' ／ ') + '<br>金額は'+RATES.fy+'の公表額（昭和31年4月2日以後生まれの額）。生年月日・納付状況で変わります。';
+    updateScenario(); syncNet();
+  }
+  [kind,grade,kids,hoshu,spouse].forEach(function(e){ e.addEventListener('change',calc); e.addEventListener('input',calc); });
+  calc();
+})();
+
+// ====== ② 更新シナリオ＆生存確率 ======
+function updateScenario(){
+  var keep=document.getElementById('s-keep'), down=document.getElementById('s-down');
+  if(!pensionYearly){ keep.textContent='—'; down.textContent='—'; return; }
+  keep.innerHTML = '<strong>'+ '約'+yen(pensionYearly) +'のまま</strong>';
+  var downTxt;
+  if(pensionKind==='kiso'){
+    downTxt = (pensionGrade===1)? '2級＝約'+yen(RATES.kiso2) : '基礎に3級はない→支給外（0円）';
+  } else {
+    downTxt = (pensionGrade===1)? 'おおよそ2級相当へ減' : (pensionGrade===2? '3級＝最低で約'+yen(RATES.kosei3min) : '一時金（障害手当金）または支給外');
+  }
+  down.textContent = downTxt;
+}
+(function(){
+  var iv=document.getElementById('r-interval'), ys=document.getElementById('r-years'),
+      out=document.getElementById('r-out'), bd=document.getElementById('r-bd');
+  function calc(){
+    var interval=parseInt(iv.value,10), years=parseInt(ys.value,10);
+    if(interval===0){ out.textContent='100%'; bd.textContent='永久認定は更新（診断書の提出）自体がありません。'; return; }
+    var n=Math.floor(years/interval);
+    var p=Math.pow(1-BAD_RATE, n);
+    out.textContent='約'+ (p*100).toFixed(0) +'%';
+    bd.innerHTML = years+'年間で更新は約'+n+'回。1回あたりの悪化（減額＋停止）は全国平均1.9%なので、'+n+'回すべて無事に通る確率は (1−0.019)<sup>'+n+'</sup>≈'+(p*100).toFixed(1)+'%。<strong>更新は「ほぼ通る」が実態</strong>です（全国平均・傷病により差あり）。';
+  }
+  [iv,ys].forEach(function(e){ e.addEventListener('change',calc); });
+  calc();
+})();
+
+// ====== ③ 遡及 ======
+(function(){
+  var d=document.getElementById('b-date'), a=document.getElementById('b-amount'),
+      out=document.getElementById('b-out'), bd=document.getElementById('b-bd');
+  function calc(){
+    if(!d.value){ out.textContent='—'; bd.textContent='認定日を入力してください。'; return; }
+    var parts=d.value.split('-'), y=parseInt(parts[0],10), m=parseInt(parts[1],10);
+    var now=new Date();
+    var months=(now.getFullYear()-y)*12 + (now.getMonth()+1-m);
+    if(months<=0){ out.textContent='0円'; bd.textContent='認定日がまだ到来していません。'; return; }
+    var capped=Math.min(months,60);
+    var amt=parseInt(a.value,10);
+    if(isNaN(amt)||amt<=0) amt=pensionYearly;
+    if(!amt){ out.textContent='—'; bd.textContent='年額を入力するか、①で受給額を計算してください。'; return; }
+    var total=amt/12*capped;
+    out.textContent='最大 約'+yen(total);
+    bd.innerHTML='認定日から'+months+'か月経過'+(months>60? '→時効により<strong>直近5年分（60か月）が上限</strong>':'')+'。年額約'+yen(amt)+' × '+capped+'か月分の概算です。<strong>認定日時点の診断書で当時の該当を証明できた場合</strong>に限ります（事後重症請求では遡及ゼロ）。';
+  }
+  [d,a].forEach(function(e){ e.addEventListener('input',calc); e.addEventListener('change',calc); });
+})();
+
+// ====== ④ 暮らしに回る実額 ======
+function syncNet(){
+  var p=document.getElementById('n-pension');
+  if(p && !p.dataset.touched && pensionYearly){ p.value=Math.round(pensionYearly/12); p.dispatchEvent(new Event('input')); }
+}
+(function(){
+  var pen=document.getElementById('n-pension'), teate=document.getElementById('n-teate'),
+      med=document.getElementById('n-med'), medRate=document.getElementById('n-med-rate'),
+      tra=document.getElementById('n-transport'), traRate=document.getElementById('n-trans-rate'),
+      rent=document.getElementById('n-rent-sav'), tax=document.getElementById('n-tax'),
+      nhk=document.getElementById('n-nhk'), out=document.getElementById('n-out'), bd=document.getElementById('n-bd');
+  pen.addEventListener('keydown', function(){ pen.dataset.touched='1'; });
+  function num(el){ var v=parseInt(el.value,10); return (isNaN(v)||v<0)?0:v; }
+  function calc(){
+    var cash = num(pen) + (teate.value==='tokubetsu'? RATES.tokubetsuTeate : 0);
+    var medSav = Math.round(num(med) * parseFloat(medRate.value));
+    var traSav = Math.round(num(tra) * parseFloat(traRate.value));
+    var rentSav = num(rent);
+    var taxSav = Math.round(parseInt(tax.value,10)/12);
+    var nhkSav = nhk.value==='chijo'? RATES.nhkChijo : (nhk.value==='eisei'? RATES.nhkEisei : 0);
+    var total = cash + medSav + traSav + rentSav + taxSav + nhkSav;
+    var save = medSav + traSav + rentSav + taxSav + nhkSav;
+    out.textContent = '約'+yen(total);
+    bd.innerHTML = 'もらうお金（年金＋手当）'+yen(cash)+' ＋ <strong>払わずに済むお金 '+yen(save)+'</strong>'
+      + '（医療'+yen(medSav)+'・交通'+yen(traSav)+'・家賃差'+yen(rentSav)+'・税'+yen(taxSav)+'・NHK'+yen(nhkSav)+'）。'
+      + '手当・助成は自治体と手帳等級・所得で対象が変わります（概算）。';
+  }
+  [pen,teate,med,medRate,tra,traRate,rent,tax,nhk].forEach(function(e){ e.addEventListener('input',calc); e.addEventListener('change',calc); });
+  calc();
+})();
+</script>
+</body>
+</html>
