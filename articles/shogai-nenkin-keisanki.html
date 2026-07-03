@@ -93,7 +93,7 @@
   </div>
 
   <h2>① 受給額はいくら？（概算計算機）</h2>
-  <p>障害年金は<strong>障害基礎年金</strong>（初診日に国民年金）と<strong>障害厚生年金</strong>（初診日に厚生年金＝会社員・公務員）で構成が変わります。基礎は定額、厚生は「報酬比例」の上乗せ＋（1・2級なら）基礎年金も出ます。<strong>障害年金はまるごと非課税</strong>（所得税・住民税がかからない）なのも大きなポイントです。</p>
+  <p>障害年金は<strong>障害基礎年金</strong>（初診日に国民年金）と<strong>障害厚生年金</strong>（初診日に厚生年金＝会社員・公務員）で構成が変わります。基礎は<strong>定額</strong>、厚生は<strong>「障害基礎年金（1・2級）＋報酬比例の上乗せ」</strong>なので、同じ2級でも会社員だった方（厚生）の方が基礎だけの方より多くなります。報酬比例額は普通わからないので、この計算機では<strong>年収と加入年数から概算</strong>します（障害厚生年金は加入が短くても<strong>300月（25年）を最低保障</strong>してくれます）。<strong>障害年金はまるごと非課税</strong>（所得税・住民税がかからない）なのも大きなポイントです。</p>
 
   <div class="calc" role="group" aria-label="障害年金の受給額計算機">
     <h4>受給額計算機</h4>
@@ -121,10 +121,20 @@
         <option value="3">3人</option>
       </select>
     </div>
-    <div class="row" id="p-hoshu-row" style="display:none">
-      <label for="p-hoshu">報酬比例部分（年額・円）</label>
-      <input type="number" id="p-hoshu" inputmode="numeric" min="0" step="1000" placeholder="不明なら空欄">
-      <span class="mini-note">ねんきん定期便等で確認。空欄なら3級の最低保障額で概算</span>
+    <div class="row p-kosei-only" style="display:none">
+      <label for="p-income">平均年収（賞与込・おおよそ）</label>
+      <input type="number" id="p-income" inputmode="numeric" min="0" step="10" placeholder="例: 400"> 万円
+      <span class="mini-note">初診日の前後、厚生年金に入っていた頃の平均</span>
+    </div>
+    <div class="row p-kosei-only" style="display:none">
+      <label for="p-years">厚生年金の加入年数</label>
+      <input type="number" id="p-years" inputmode="numeric" min="0" step="1" placeholder="例: 15"> 年
+      <span class="mini-note">25年（300月）未満でも300月として計算（最低保障）</span>
+    </div>
+    <div class="row p-kosei-only" style="display:none">
+      <label for="p-hoshu">報酬比例額が正確にわかる場合</label>
+      <input type="number" id="p-hoshu" inputmode="numeric" min="0" step="1000" placeholder="ねんきん定期便の額・任意"> 円/年
+      <span class="mini-note">入れると上の年収・年数より優先</span>
     </div>
     <div class="row" id="p-spouse-row" style="display:none">
       <label for="p-spouse">生計を維持している65歳未満の配偶者</label>
@@ -367,33 +377,48 @@ function yen(n){ return Math.round(n).toLocaleString('ja-JP') + '円'; }
 var pensionYearly = 0, pensionGrade = 2, pensionKind = 'kiso';
 (function(){
   var kind=document.getElementById('p-kind'), grade=document.getElementById('p-grade'),
-      kids=document.getElementById('p-kids'), hoshuRow=document.getElementById('p-hoshu-row'),
-      hoshu=document.getElementById('p-hoshu'), spouseRow=document.getElementById('p-spouse-row'),
-      spouse=document.getElementById('p-spouse'), total=document.getElementById('p-total'),
-      monthly=document.getElementById('p-monthly'), bd=document.getElementById('p-bd');
+      kids=document.getElementById('p-kids'), income=document.getElementById('p-income'),
+      years=document.getElementById('p-years'), hoshu=document.getElementById('p-hoshu'),
+      spouse=document.getElementById('p-spouse'), spouseRow=document.getElementById('p-spouse-row'),
+      koseiRows=document.querySelectorAll('.p-kosei-only'),
+      total=document.getElementById('p-total'), monthly=document.getElementById('p-monthly'),
+      bd=document.getElementById('p-bd');
   function childSum(n){ n=parseInt(n,10); var s=0; for(var i=1;i<=n;i++){ s += (i<=2? RATES.child12 : RATES.child3); } return s; }
+  // 障害厚生年金の報酬比例部分の概算: 平均標準報酬額(≒年収/12) × 5.481/1000 × 加入月数（300月最低保障）
+  function estHoshu(){
+    var ov=parseInt(hoshu.value,10);
+    if(!isNaN(ov)&&ov>0){ return {val:ov, mode:'override'}; }
+    var inc=parseFloat(income.value); if(isNaN(inc)||inc<0) inc=0;
+    var yr=parseFloat(years.value); if(isNaN(yr)||yr<0) yr=0;
+    if(inc<=0){ return {val:0, mode:'none'}; }
+    var months=Math.max(Math.round(yr*12), 300);
+    var h=(inc*10000/12) * 5.481/1000 * months;
+    return {val:Math.round(h), mode:'est', months:months};
+  }
   function calc(){
     pensionKind = kind.value; pensionGrade = parseInt(grade.value,10);
-    hoshuRow.style.display = (kind.value==='kosei') ? '' : 'none';
+    var isK = (kind.value==='kosei');
+    for(var i=0;i<koseiRows.length;i++){ koseiRows[i].style.display = isK? '' : 'none'; }
     // 3級は厚生のみ
     if(kind.value==='kiso' && pensionGrade===3){ grade.value='2'; pensionGrade=2; }
-    spouseRow.style.display = (kind.value==='kosei' && pensionGrade!==3) ? '' : 'none';
+    spouseRow.style.display = (isK && pensionGrade!==3) ? '' : 'none';
     var parts=[], sum=0;
-    var hv = parseInt(hoshu.value,10); if(isNaN(hv)||hv<0) hv=0;
-    if(kind.value==='kiso'){
+    if(!isK){
       var base = (pensionGrade===1? RATES.kiso1 : RATES.kiso2);
       sum = base + childSum(kids.value);
-      parts.push('基礎'+pensionGrade+'級 '+yen(base));
+      parts.push('障害基礎年金'+pensionGrade+'級 '+yen(base));
     } else {
+      var eh=estHoshu();
+      var h = (pensionGrade===1? eh.val*1.25 : eh.val);
+      var htag = (eh.mode==='override')? '' : (eh.mode==='est'? '（年収から概算'+(eh.months===300?'・300月最低保障':'')+'）' : '（年収を入れると反映）');
       if(pensionGrade===3){
-        var h3 = Math.max(hv, RATES.kosei3min);
-        sum = h3;
-        parts.push('報酬比例 '+yen(h3)+(hv<RATES.kosei3min? '（3級の最低保障を適用）':''));
+        sum = Math.max(h, RATES.kosei3min);
+        parts.push('障害厚生年金3級＝報酬比例 '+yen(h)+htag + (h<RATES.kosei3min? ' → 最低保障 '+yen(RATES.kosei3min)+'を適用':''));
       } else {
         var base2 = (pensionGrade===1? RATES.kiso1 : RATES.kiso2);
-        var h = (pensionGrade===1? hv*1.25 : hv);
         sum = base2 + h + childSum(kids.value);
-        parts.push('基礎'+pensionGrade+'級 '+yen(base2) + (hv>0? ' ＋ 報酬比例 '+yen(h)+(pensionGrade===1?'（1.25倍）':'') : '（報酬比例は未入力）'));
+        parts.push('障害基礎年金'+pensionGrade+'級 '+yen(base2));
+        parts.push('障害厚生年金＝報酬比例'+(pensionGrade===1?'×1.25':'')+' '+yen(h)+htag);
         if(spouse.value==='1'){ sum += RATES.haigusha; parts.push('配偶者加給 '+yen(RATES.haigusha)); }
       }
     }
@@ -402,10 +427,10 @@ var pensionYearly = 0, pensionGrade = 2, pensionKind = 'kiso';
     pensionYearly = sum;
     total.textContent = '約'+yen(sum);
     monthly.textContent = '（月あたり 約'+yen(sum/12)+'）';
-    bd.innerHTML = parts.join(' ／ ') + '<br>金額は'+RATES.fy+'の公表額（昭和31年4月2日以後生まれの額）。生年月日・納付状況で変わります。';
+    bd.innerHTML = parts.join('　＋　') + '<br>'+RATES.fy+'の額。厚生の報酬比例は年収からの<strong>概算</strong>で、正確な額はねんきん定期便でご確認を。';
     updateScenario(); syncNet();
   }
-  [kind,grade,kids,hoshu,spouse].forEach(function(e){ e.addEventListener('change',calc); e.addEventListener('input',calc); });
+  [kind,grade,kids,income,years,hoshu,spouse].forEach(function(e){ e.addEventListener('change',calc); e.addEventListener('input',calc); });
   calc();
 })();
 
@@ -416,9 +441,9 @@ function updateScenario(){
   keep.innerHTML = '<strong>'+ '約'+yen(pensionYearly) +'のまま</strong>';
   var downTxt;
   if(pensionKind==='kiso'){
-    downTxt = (pensionGrade===1)? '2級＝約'+yen(RATES.kiso2) : '基礎に3級はない→支給外（0円）';
+    downTxt = (pensionGrade===1)? '2級＝約'+yen(RATES.kiso2) : '基礎に3級はない → 支給外（0円）';
   } else {
-    downTxt = (pensionGrade===1)? 'おおよそ2級相当へ減' : (pensionGrade===2? '3級＝最低で約'+yen(RATES.kosei3min) : '一時金（障害手当金）または支給外');
+    downTxt = (pensionGrade===1)? '2級相当へ減（基礎'+yen(RATES.kiso2)+'＋報酬比例）' : (pensionGrade===2? '3級＝報酬比例のみ（最低保障 約'+yen(RATES.kosei3min)+'）' : '障害手当金（一時金）または支給外');
   }
   down.textContent = downTxt;
 }
