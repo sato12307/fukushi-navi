@@ -14,10 +14,11 @@ permissions:
   pages: write
   id-token: write
 
-# 同時に走らせない。走行中の古いデプロイはキャンセルして最新を通す＝詰まり防止。
+# 同時実行は1本に絞るが、走行中のデプロイは最後まで完走させる（途中キャンセルは
+# Pagesバックエンドをwedgeさせ "Deployment failed, try again later" を誘発するため false）。
 concurrency:
   group: "pages"
-  cancel-in-progress: true
+  cancel-in-progress: false
 
 jobs:
   deploy:
