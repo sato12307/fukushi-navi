@@ -1,0 +1,40 @@
+name: Deploy site to Pages
+
+# 旧式のブランチ配信(pages-build-deployment)が deployment_queued のまま
+# タイムアウトする不具合を回避するため、モダンな actions/deploy-pages で配信する。
+# 同時実行を1本に絞り(グループ pages)、確実に最新を publish する。
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch: {}
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# 同時に走らせない。走行中の古いデプロイはキャンセルして最新を通す＝詰まり防止。
+concurrency:
+  group: "pages"
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Configure Pages
+        uses: actions/configure-pages@v5
+      - name: Upload artifact (site root)
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: "."
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
+        timeout-minutes: 10
