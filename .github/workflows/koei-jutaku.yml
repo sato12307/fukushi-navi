@@ -23,11 +23,13 @@ jobs:
           python-version: "3.12"
       - name: 倍率表を再生成
         run: python tools/build_koei.py
+      - name: 都市別ページを再生成
+        run: python tools/build_koei_cities.py
       - name: 変更があればコミット
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add articles/koei-jutaku-bairitsu.html data/koei-jutaku.json
+          git add articles/koei-jutaku-bairitsu.html data/koei-jutaku.json articles/koei-sapporo.html articles/koei-yokohama.html articles/koei-chiba.html articles/koei-kobe.html articles/koei-saitama.html data/koei-cities.json
           if git diff --cached --quiet; then
             echo "変更なし"
           else
