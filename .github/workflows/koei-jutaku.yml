@@ -29,7 +29,7 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add articles/koei-jutaku-bairitsu.html data/koei-jutaku.json articles/koei-sapporo.html articles/koei-yokohama.html articles/koei-chiba.html articles/koei-kobe.html articles/koei-saitama.html data/koei-cities.json
+          git add articles/koei-jutaku-bairitsu.html data/koei-jutaku.json data/koei-cities.json articles/koei-sapporo.html articles/koei-yokohama.html articles/koei-chiba.html articles/koei-kobe.html articles/koei-saitama.html articles/koei-kyoto.html articles/koei-kawasaki.html articles/koei-sendai.html
           if git diff --cached --quiet; then
             echo "変更なし"
           else
