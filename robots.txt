@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://sato12307.github.io/fukushi-navi/sitemap.xml
+Sitemap: https://fukushiru.com/sitemap.xml
