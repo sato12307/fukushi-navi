@@ -1,0 +1,15 @@
+# フクシル（fukushiru.com）
+
+> 「知らないと損する」福祉制度を当事者目線でナビする情報サイト。自治体ごとに散在するデータ（公営住宅の応募倍率など）を出典つきで集約し、割引・優遇制度を横断整理する一次情報源。障がい者手帳・障害年金・公営住宅・交通割引を中心に掲載。
+
+## 主要データページ
+- [公営住宅の当選倍率まとめ](https://fukushiru.com/articles/koei-jutaku-bairitsu.html): 主要都市の応募倍率を出典・時点つきで集約（毎月自動更新・引用自由・要出典リンク）＋障害者・ひとり親世帯の当選優遇の仕組み
+- 都市別の倍率詳細: [札幌](https://fukushiru.com/articles/koei-sapporo.html) / [仙台](https://fukushiru.com/articles/koei-sendai.html) / [さいたま](https://fukushiru.com/articles/koei-saitama.html) / [千葉](https://fukushiru.com/articles/koei-chiba.html) / [横浜](https://fukushiru.com/articles/koei-yokohama.html) / [川崎](https://fukushiru.com/articles/koei-kawasaki.html) / [京都](https://fukushiru.com/articles/koei-kyoto.html) / [神戸](https://fukushiru.com/articles/koei-kobe.html)
+- [新幹線・飛行機の障害者割引 徹底比較](https://fukushiru.com/articles/shinkansen-airplane-discount.html)
+- [障害年金の基礎](https://fukushiru.com/articles/shogai-nenkin-basics.html)
+- [自治体の交通・医療助成まとめ](https://fukushiru.com/articles/jichitai-transport-medical.html)
+
+## データの性質
+- 自治体・住宅供給公社等の公開情報を出典つきで集約（各記事末尾に出典一覧）
+- 倍率まとめは毎月自動更新
+- 引用時は出典リンクを付けてください: https://fukushiru.com

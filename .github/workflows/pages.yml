@@ -39,3 +39,5 @@ jobs:
         id: deployment
         uses: actions/deploy-pages@v4
         timeout-minutes: 10
+      - name: IndexNow ping (Bing/Yandex 即時インデックス通知)
+        run: node scripts/indexnow.mjs || true
