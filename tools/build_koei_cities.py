@@ -150,11 +150,11 @@ PAGE = r"""<!DOCTYPE html>
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>@@NAME@@の市営住宅 当選倍率と入りやすい住戸｜@@PREF@@｜フクシル</title>
+<title>@@NAME@@の@@HW@@ 当選倍率と入りやすい住戸｜@@PREF@@｜フクシル</title>
 <meta name="description" content="@@DESC@@">
 <link rel="canonical" href="https://fukushiru.com/articles/@@SLUG@@.html">
 <meta property="og:type" content="article">
-<meta property="og:title" content="@@NAME@@の市営住宅 当選倍率と入りやすい住戸">
+<meta property="og:title" content="@@NAME@@の@@HW@@ 当選倍率と入りやすい住戸">
 <meta property="og:description" content="@@DESC@@">
 <meta property="og:site_name" content="フクシル">
 <meta property="og:url" content="https://fukushiru.com/articles/@@SLUG@@.html">
@@ -200,10 +200,10 @@ PAGE = r"""<!DOCTYPE html>
 <main id="main">
   <p class="breadcrumb"><a href="../index.html">トップ</a> ＞ <a href="koei-jutaku-bairitsu.html">公営住宅</a> ＞ @@NAME@@</p>
 
-  <h1>@@NAME@@の市営住宅 当選倍率<br>【住戸別の実データと、入りやすい住戸】</h1>
+  <h1>@@NAME@@の@@HW@@ 当選倍率<br>【住戸別の実データと、入りやすい住戸】</h1>
   <p class="updated">最終更新：@@UPDATED@@ ／ 出典は@@NAME@@・住宅供給公社の募集結果（各所・末尾に明記）。数字は<strong>概算・参考値</strong></p>
 
-  <p class="lead">@@NAME@@（@@PREF@@）の市営住宅の当選倍率を、公表データからまとめました。@@BASE_TEXT@@ 市全体の平均だけでは見えない<strong>「どの住戸なら入りやすいか」</strong>を、実際の倍率データと補正計算機で確かめられます。</p>
+  <p class="lead">@@NAME@@（@@PREF@@）の@@HW@@の当選倍率を、公表データからまとめました。@@BASE_TEXT@@ 市全体の平均だけでは見えない<strong>「どの住戸なら入りやすいか」</strong>を、実際の倍率データと補正計算機で確かめられます。</p>
 
   <div class="callout point">
     <p><span class="tag">この記事の要点</span>@@NAME@@でも住戸によって倍率は大きく違います。下の<strong>実例</strong>と<strong>補正計算機</strong>で狙う住戸タイプの倍率をつかみ、<strong>当選確率シミュレーター</strong>で優遇（障害者・ひとり親など）まで見込めます。</p>
@@ -225,7 +225,7 @@ PAGE = r"""<!DOCTYPE html>
   </div>
 
   <h2>よくある質問</h2>
-  <h3>Q. @@NAME@@の市営住宅で当たりやすい住戸は？</h3>
+  <h3>Q. @@NAME@@の@@HW@@で当たりやすい住戸は？</h3>
   <p>A. @@FAQ_A@@</p>
 
   <section class="related" aria-label="関連記事">
@@ -244,7 +244,7 @@ PAGE = r"""<!DOCTYPE html>
       data-app-id="14dfe8f8-c660-42ee-9cd2-54ee31828ba9"
       data-page-id="@@SLUG@@"
       data-page-url="https://fukushiru.com/articles/@@SLUG@@.html"
-      data-page-title="@@NAME@@の市営住宅 当選倍率">
+      data-page-title="@@NAME@@の@@HW@@ 当選倍率">
     </div>
     <script async defer src="https://cusdis.com/js/cusdis.es.js"></script>
   </section>
@@ -282,7 +282,7 @@ def main():
         # 品質ゲート: 実データ(top/bottom)が無い都市はスキップ
         if not c.get("top_units") or not c.get("bottom_units"):
             print("skip (thin):", c["slug"]); continue
-        desc = "{n}の市営住宅の当選倍率を住戸別の実データでまとめ、倍率を左右する要因（立地・築年・エレベーター・単身/世帯）を公式資料つきで解説。狙う住戸の倍率を補正する計算機と、障害者・ひとり親の優遇での当選確率シミュレーターつき。".format(n=c["name"])
+        desc = "{n}の{hw}の当選倍率を住戸別の実データでまとめ、倍率を左右する要因（立地・築年・エレベーター・単身/世帯）を公式資料つきで解説。狙う住戸の倍率を補正する計算機と、障害者・ひとり親の優遇での当選確率シミュレーターつき。".format(n=c["name"], hw=c.get("housing_word","市営住宅"))
         top = units_table("倍率が高い住戸の例（{}・出典つき）".format(esc(c["name"])), c["top_units"], "hi")
         bottom = units_table("倍率が低い・応募が付きにくい住戸の例".format(), c["bottom_units"], "lo")
         factors = "\n".join("    <li>{}</li>".format(x) for x in c["factors"])
@@ -293,7 +293,7 @@ def main():
         base = c.get("calc_base")
         calc = CALC_HTML.replace("__BASE__", "" if base is None else str(base)).replace("__NOTE__", esc(c.get("calc_note", "")))
         related = "\n".join(
-            '      <li><a href="koei-{s}.html">{n}の市営住宅 当選倍率</a></li>'.format(s=o["slug"], n=esc(o["name"]))
+            '      <li><a href="koei-{s}.html">{n}の{hw} 当選倍率</a></li>'.format(s=o["slug"], n=esc(o["name"]), hw=o.get("housing_word","市営住宅"))
             for o in cities if o["slug"] != c["slug"]
         )
         sources = "\n".join(
@@ -301,7 +301,7 @@ def main():
         )
         jsonld = json.dumps({
             "@context": "https://schema.org", "@type": "Article",
-            "headline": "{}の市営住宅 当選倍率と入りやすい住戸".format(c["name"]),
+            "headline": "{}の{} 当選倍率と入りやすい住戸".format(c["name"], c.get("housing_word","市営住宅")),
             "description": desc, "inLanguage": "ja",
             "datePublished": "2026-07-03", "dateModified": "2026-07-03",
             "author": {"@type": "Organization", "name": "フクシル"},
@@ -309,13 +309,13 @@ def main():
         }, ensure_ascii=False)
         faqld = json.dumps({
             "@context": "https://schema.org", "@type": "FAQPage",
-            "mainEntity": [{"@type": "Question", "name": "{}の市営住宅で当たりやすい住戸は？".format(c["name"]),
+            "mainEntity": [{"@type": "Question", "name": "{}の{}で当たりやすい住戸は？".format(c["name"], c.get("housing_word","市営住宅")),
                             "acceptedAnswer": {"@type": "Answer", "text": c["faq_a"]}}],
         }, ensure_ascii=False)
 
         page = PAGE
         for k, v in {
-            "@@NAME@@": esc(c["name"]), "@@PREF@@": esc(c["pref"]), "@@SLUG@@": "koei-" + c["slug"],
+            "@@NAME@@": esc(c["name"]), "@@HW@@": esc(c.get("housing_word","市営住宅")), "@@PREF@@": esc(c["pref"]), "@@SLUG@@": "koei-" + c["slug"],
             "@@DESC@@": esc(desc), "@@JSONLD@@": jsonld + "\n</script>\n<script type=\"application/ld+json\">\n" + faqld,
             "@@UPDATED@@": esc(updated), "@@BASE_TEXT@@": c["base_text"],
             "@@TOP@@": top, "@@BOTTOM@@": bottom, "@@FACTORS@@": factors, "@@QUOTES@@": quotes,
