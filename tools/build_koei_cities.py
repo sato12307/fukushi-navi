@@ -13,11 +13,11 @@ ARTDIR = os.path.join(HERE, "articles")
 # ---- 計算機（補正＋優遇）。__BASE__/__NOTE__ だけ差し込み、JSは静的 ----
 CALC_HTML = """
   <h2>③ 狙う住戸の倍率を補正する【住戸タイプ補正計算機】</h2>
-  <p>上の実例のとおり、同じ市でも住戸で倍率は大きく変わります。市平均に「単身向けか・立地・築年・エレベーター×階」の補正を掛けて、<strong>狙う住戸タイプの倍率の目安</strong>を出します。係数は<a href="koei-jutaku-bairitsu.html#hosei">5市の実データ</a>から置いた概算です。</p>
+  <p>上の実例のとおり、同じ地域でも住戸で倍率は大きく変わります。平均倍率に「単身向けか・立地・築年・エレベーター×階」の補正を掛けて、<strong>狙う住戸タイプの倍率の目安</strong>を出します。係数は<a href="koei-jutaku-bairitsu.html#hosei">5市の実データ</a>から置いた概算です。</p>
   <div class="calc" role="group" aria-label="住戸タイプ補正計算機">
     <h4>住戸タイプ補正計算機</h4>
     <div class="row">
-      <label for="adj-base">市平均の倍率</label>
+      <label for="adj-base">平均倍率</label>
       <input type="number" id="adj-base" inputmode="decimal" min="0.1" step="0.1" value="__BASE__" placeholder="例: 10"> 倍
       <span style="font-size:.82rem;color:var(--sub)">__NOTE__</span>
     </div>
@@ -57,13 +57,13 @@ CALC_HTML = """
     </div>
     <div class="out" aria-live="polite">
       <div>この住戸タイプの倍率の目安：<span class="prob" id="adj-out">—</span></div>
-      <div class="bd" id="adj-bd">市平均の倍率を入力してください。</div>
+      <div class="bd" id="adj-bd">平均倍率を入力してください。</div>
       <div style="margin-top:8px"><button type="button" id="adj-apply" style="padding:7px 14px;border:1px solid var(--line);border-radius:6px;background:var(--soft);font-size:.9rem;cursor:pointer">この倍率で当選確率を計算する（下の優遇シミュレーターへ）</button></div>
     </div>
   </div>
 
   <h2>④ 障害者・ひとり親なら当たりやすい【当選確率シミュレーター】</h2>
-  <p>倍率が高くても、<strong>障害者・高齢者・ひとり親などは優遇抽選（当せん番号を複数持てる）</strong>で当選確率を上げられます。補正後の倍率と優遇倍率から当選確率の目安を出します。対象・方式は<a href="koei-jutaku-bairitsu.html#yuugu">まとめ記事</a>と各市の募集案内で確認を。</p>
+  <p>倍率が高くても、<strong>障害者・高齢者・ひとり親などは優遇抽選（当せん番号を複数持てる）</strong>で当選確率を上げられます。補正後の倍率と優遇倍率から当選確率の目安を出します。対象・方式は<a href="koei-jutaku-bairitsu.html#yuugu">まとめ記事</a>と各自治体の募集案内で確認を。</p>
   <div class="calc" role="group" aria-label="当選確率シミュレーター">
     <h4>当選確率シミュレーター（優遇なし → 優遇あり）</h4>
     <div class="row">
@@ -97,15 +97,15 @@ CALC_JS = r"""
     var last=null;
     function calc(){
       var R=parseFloat(b.value);
-      if(isNaN(R)||R<=0){ out.textContent='—'; bd.textContent='市平均の倍率を入力してください。'; last=null; return; }
+      if(isNaN(R)||R<=0){ out.textContent='—'; bd.textContent='平均倍率を入力してください。'; last=null; return; }
       var f=1, parts=[];
       sels.forEach(function(s){ var v=parseFloat(s.value); f*=v; if(v!==1){ parts.push('×'+v); } });
       var est=Math.max(0.1, R*f); last=Math.round(est*10)/10;
       out.textContent='約'+last+'倍';
-      bd.innerHTML='市平均 '+R+'倍 '+(parts.length? parts.join(' ')+' の補正で':'（補正なし）')+'、この住戸タイプの<strong>概算</strong>です。実際は団地ごとに大きく変わります。1倍未満は「ほぼ無抽選」の水準。';
+      bd.innerHTML='平均 '+R+'倍 '+(parts.length? parts.join(' ')+' の補正で':'（補正なし）')+'、この住戸タイプの<strong>概算</strong>です。実際は団地ごとに大きく変わります。1倍未満は「ほぼ無抽選」の水準。';
     }
     [b].concat(sels).forEach(function(e){ e.addEventListener('input',calc); e.addEventListener('change',calc); });
-    btn.addEventListener('click',function(){ if(last===null){ bd.textContent='先に市平均の倍率を入力してください。'; return; } var r=document.getElementById('koei-r'); if(r){ r.value=Math.max(1,last); r.dispatchEvent(new Event('input')); r.scrollIntoView({behavior:'smooth',block:'center'}); } });
+    btn.addEventListener('click',function(){ if(last===null){ bd.textContent='先に平均倍率を入力してください。'; return; } var r=document.getElementById('koei-r'); if(r){ r.value=Math.max(1,last); r.dispatchEvent(new Event('input')); r.scrollIntoView({behavior:'smooth',block:'center'}); } });
     calc();
   })();
   (function(){
@@ -190,7 +190,7 @@ PAGE = r"""<!DOCTYPE html>
     <nav class="site-nav" aria-label="主要">
       <a href="../index.html">トップ</a>
       <a href="koei-jutaku-bairitsu.html">公営住宅</a>
-      <a href="shogai-nenkin-keisanki.html">障害年金</a>
+      <a href="shogai-nenkin-basics.html">障害年金</a>
       <a href="shinkansen-airplane-discount.html">交通割引</a>
       <a href="shogaisha-kojo-tax.html">障害者控除</a>
     </nav>
@@ -201,9 +201,9 @@ PAGE = r"""<!DOCTYPE html>
   <p class="breadcrumb"><a href="../index.html">トップ</a> ＞ <a href="koei-jutaku-bairitsu.html">公営住宅</a> ＞ @@NAME@@</p>
 
   <h1>@@NAME@@の@@HW@@ 当選倍率<br>【住戸別の実データと、入りやすい住戸】</h1>
-  <p class="updated">最終更新：@@UPDATED@@ ／ 出典は@@NAME@@・住宅供給公社の募集結果（各所・末尾に明記）。数字は<strong>概算・参考値</strong></p>
+  <p class="updated">最終更新：@@UPDATED@@ ／ 出典は@@NAME@@の公式資料・募集案内（各所・末尾に明記）。数字は<strong>概算・参考値</strong></p>
 
-  <p class="lead">@@NAME@@（@@PREF@@）の@@HW@@の当選倍率を、公表データからまとめました。@@BASE_TEXT@@ 市全体の平均だけでは見えない<strong>「どの住戸なら入りやすいか」</strong>を、実際の倍率データと補正計算機で確かめられます。</p>
+  <p class="lead">@@NAMEPREF@@の@@HW@@の当選倍率を、公表データからまとめました。@@BASE_TEXT@@ 全体の平均だけでは見えない<strong>「どの住戸なら入りやすいか」</strong>を、実際の倍率データと補正計算機で確かめられます。</p>
 
   <div class="callout point">
     <p><span class="tag">この記事の要点</span>@@NAME@@でも住戸によって倍率は大きく違います。下の<strong>実例</strong>と<strong>補正計算機</strong>で狙う住戸タイプの倍率をつかみ、<strong>当選確率シミュレーター</strong>で優遇（障害者・ひとり親など）まで見込めます。</p>
@@ -221,7 +221,7 @@ PAGE = r"""<!DOCTYPE html>
 @@QUOTES@@
 @@CALC@@
   <div class="callout warn">
-    <p><span class="tag">要確認</span>補正係数は5市の公表データから置いた<strong>ざっくりの目安</strong>で、団地により実際の差はもっと大きくも小さくもなります。優遇（当選倍率の優遇・ポイント方式・優先枠）の対象や単身入居の可否は自治体で異なります。正確な倍率・申込資格は、必ず@@NAME@@・住宅供給公社の募集案内でご確認ください。このページは個別の入居可否を判定するものではありません。</p>
+    <p><span class="tag">要確認</span>補正係数は5市の公表データから置いた<strong>ざっくりの目安</strong>で、団地により実際の差はもっと大きくも小さくもなります。優遇（当選倍率の優遇・ポイント方式・優先枠）の対象や単身入居の可否は自治体で異なります。正確な倍率・申込資格は、必ず@@NAME@@の公式の募集案内でご確認ください。このページは個別の入居可否を判定するものではありません。</p>
   </div>
 
   <h2>よくある質問</h2>
@@ -255,7 +255,7 @@ PAGE = r"""<!DOCTYPE html>
   </ul>
 
   <div class="disclaimer">
-    <strong>ご注意：</strong>このページは公開情報にもとづく<strong>一般的な情報の共有</strong>です。応募倍率は募集回・住戸・年度で変わり、掲載値は概算・参考です。優遇や単身入居の可否は自治体で異なります。実際の申込資格・倍率・可否は、必ず@@NAME@@・住宅供給公社の公式情報・窓口でご確認ください。
+    <strong>ご注意：</strong>このページは公開情報にもとづく<strong>一般的な情報の共有</strong>です。応募倍率は募集回・住戸・年度で変わり、掲載値は概算・参考です。優遇や単身入居の可否は自治体で異なります。実際の申込資格・倍率・可否は、必ず@@NAME@@の公式情報・窓口でご確認ください。
   </div>
 </main>
 
@@ -303,7 +303,7 @@ def main():
             "@context": "https://schema.org", "@type": "Article",
             "headline": "{}の{} 当選倍率と入りやすい住戸".format(c["name"], c.get("housing_word","市営住宅")),
             "description": desc, "inLanguage": "ja",
-            "datePublished": "2026-07-03", "dateModified": "2026-07-03",
+            "datePublished": "2026-07-03", "dateModified": updated,
             "author": {"@type": "Organization", "name": "フクシル"},
             "publisher": {"@type": "Organization", "name": "フクシル"},
         }, ensure_ascii=False)
@@ -315,6 +315,7 @@ def main():
 
         page = PAGE
         for k, v in {
+            "@@NAMEPREF@@": (esc(c["name"]) if c["name"] == c["pref"] else esc(c["name"]) + "（" + esc(c["pref"]) + "）"),
             "@@NAME@@": esc(c["name"]), "@@HW@@": esc(c.get("housing_word","市営住宅")), "@@PREF@@": esc(c["pref"]), "@@SLUG@@": "koei-" + c["slug"],
             "@@DESC@@": esc(desc), "@@JSONLD@@": jsonld + "\n</script>\n<script type=\"application/ld+json\">\n" + faqld,
             "@@UPDATED@@": esc(updated), "@@BASE_TEXT@@": c["base_text"],

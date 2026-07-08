@@ -1,5 +1,5 @@
 {
- "updated": "2026-07-07",
+ "updated": "2026-07-08",
  "note": "公営住宅の応募倍率（分かっている範囲・出典と時点つき）。各自治体の募集結果を順次反映。古い統計は年度を明記。平均を公表しない自治体は住戸別の実例レンジ、または調査中とする。",
  "rows": [
   {
@@ -42,7 +42,7 @@
    "area": "千葉市",
    "entity": "市営住宅",
    "segment": "一般募集（住戸別・平均は非公表）",
-   "ratio": "約1〜35倍（例:宮野木町第2団地35倍）",
+   "ratio": "約0〜35倍（例:宮野木町第2団地35倍）",
    "as_of": "令和8年度第1期（2026年4月）",
    "source": "千葉市住宅供給公社『市営住宅抽選結果一覧表』",
    "url": "https://www.cjkk.or.jp/shiei/result/"
@@ -59,11 +59,29 @@
   {
    "area": "東京都",
    "entity": "都営住宅",
-   "segment": "世帯向け（都心区は特に高い）",
-   "ratio": "目安 十数〜数十倍",
-   "as_of": "近年の定期募集",
-   "source": "JKK東京 定期募集結果",
-   "url": "https://www.to-kousya.or.jp/kouei/toeibosyu/"
+   "segment": "世帯向（一般募集住宅）",
+   "ratio": "5.6倍",
+   "as_of": "令和7年5月定期募集",
+   "source": "令和7年5月 都営住宅入居者募集にかかる抽せん結果について",
+   "url": "https://www.to-kousya.or.jp/content/000047891.pdf"
+  },
+  {
+   "area": "東京都",
+   "entity": "都営住宅",
+   "segment": "若年夫婦・子育て世帯向（定期使用住宅）",
+   "ratio": "3.0倍",
+   "as_of": "令和7年5月定期募集",
+   "source": "令和7年5月 都営住宅入居者募集にかかる抽せん結果について",
+   "url": "https://www.to-kousya.or.jp/content/000047891.pdf"
+  },
+  {
+   "area": "東京都",
+   "entity": "都営住宅",
+   "segment": "居室内で病死等があった住宅",
+   "ratio": "10.6倍",
+   "as_of": "令和7年5月定期募集",
+   "source": "令和7年5月 都営住宅入居者募集にかかる抽せん結果について",
+   "url": "https://www.to-kousya.or.jp/content/000047891.pdf"
   },
   {
    "area": "川崎市",
@@ -111,6 +129,15 @@
    "url": "https://www.city.nagoya.jp/houdou/pressr7/pressr7-06/3002107.html"
   },
   {
+   "area": "名古屋市",
+   "entity": "市営住宅",
+   "segment": "一般募集（全区分計・抽せん玉数ベース）",
+   "ratio": "6.3倍",
+   "as_of": "令和7年度第4回（令和8年2月募集）",
+   "source": "名古屋市報道発表（令和8年度第1回一般募集）",
+   "url": "https://www.city.nagoya.jp/houdou/3003942/3003944/3004503.html"
+  },
+  {
    "area": "京都市",
    "entity": "市営住宅",
    "segment": "一般選考（平均）",
@@ -118,69 +145,6 @@
    "as_of": "令和7年9月募集（2025年9月）",
    "source": "京都市『令和7年9月市営住宅入居者募集公開抽選結果』（54戸/902名）",
    "url": "https://www.city.kyoto.lg.jp/tokei/page/0000346626.html"
-  },
-  {
-   "area": "大阪市",
-   "entity": "市営住宅",
-   "segment": "定期募集（公営・改良の平均）",
-   "ratio": "約4.2倍（近年4〜5倍で推移）",
-   "as_of": "令和6年度（定期募集）",
-   "source": "大阪市『大阪市営住宅ストック総合活用計画（案）令和8年』P19",
-   "url": "https://www.city.osaka.lg.jp/templates/jorei_boshu/cmsfiles/contents/0000670/670716/honpen1.pdf"
-  },
-  {
-   "area": "神戸市",
-   "entity": "市営住宅",
-   "segment": "一般募集（住戸別・平均は非公表）",
-   "ratio": "約0〜144倍（例:新大和東144倍・神楽100倍）",
-   "as_of": "令和7年8月募集（2025年8月）",
-   "source": "神戸住環境整備公社『令和7年8月募集 当選・補欠抽選番号一覧』",
-   "url": "https://www.kobe-rma.or.jp/individual/municipal/recruitment/"
-  },
-  {
-   "area": "広島市",
-   "entity": "市営住宅",
-   "segment": "全体の平均応募倍率",
-   "ratio": "全体 約15倍前後（人気上位1割を除くと約8倍）",
-   "as_of": "令和8年3月時点",
-   "source": "広島市市営住宅マネジメント計画（第2期）",
-   "url": "https://www.city.hiroshima.lg.jp/living/sumai/1021352/1026345/1049206.html"
-  },
-  {
-   "area": "福岡市",
-   "entity": "市営住宅",
-   "segment": "一般募集",
-   "ratio": "調査中",
-   "as_of": "—",
-   "source": "福岡市住宅供給公社（抽選結果は住戸別のみ公表・平均は非公表）",
-   "url": "https://www.nicety.or.jp/shiei1-osagashi/"
-  },
-  {
-   "area": "東京都",
-   "entity": "都営住宅",
-   "segment": "世帯向（一般募集住宅）",
-   "ratio": "5.6倍",
-   "as_of": "令和7年5月定期募集",
-   "source": "令和7年5月 都営住宅入居者募集にかかる抽せん結果について",
-   "url": "https://www.to-kousya.or.jp/content/000047891.pdf"
-  },
-  {
-   "area": "東京都",
-   "entity": "都営住宅",
-   "segment": "若年夫婦・子育て世帯向（定期使用住宅）",
-   "ratio": "3.0倍",
-   "as_of": "令和7年5月定期募集",
-   "source": "令和7年5月 都営住宅入居者募集にかかる抽せん結果について",
-   "url": "https://www.to-kousya.or.jp/content/000047891.pdf"
-  },
-  {
-   "area": "東京都",
-   "entity": "都営住宅",
-   "segment": "居室内で病死等があった住宅",
-   "ratio": "10.6倍",
-   "as_of": "令和7年5月定期募集",
-   "source": "令和7年5月 都営住宅入居者募集にかかる抽せん結果について",
-   "url": "https://www.to-kousya.or.jp/content/000047891.pdf"
   },
   {
    "area": "大阪市",
@@ -201,31 +165,13 @@
    "url": "https://web.archive.org/web/20250905133419/https://www.city.osaka.lg.jp/toshiseibi/cmsfiles/contents/0000658/658723/0707oubojoukou.pdf"
   },
   {
-   "area": "名古屋市",
+   "area": "神戸市",
    "entity": "市営住宅",
-   "segment": "一般募集（全区分計・抽せん玉数ベース）",
-   "ratio": "6.3倍",
-   "as_of": "令和7年度第4回（令和8年2月募集）",
-   "source": "名古屋市報道発表（令和8年度第1回一般募集）",
-   "url": "https://www.city.nagoya.jp/houdou/3003942/3003944/3004503.html"
-  },
-  {
-   "area": "福岡市",
-   "entity": "市営住宅",
-   "segment": "定期募集（抽選方式）全住戸平均",
-   "ratio": "約14.4倍",
-   "as_of": "令和8年度5月募集案内書記載の前回実績",
-   "source": "福岡市住宅供給公社 募集案内書",
-   "url": "https://www.nicety.or.jp/shiei/%e7%8f%be%e5%9c%a8%e3%81%ae%e5%8b%9f%e9%9b%86%e7%8a%b6%e6%b3%81-2/"
-  },
-  {
-   "area": "福岡市",
-   "entity": "市営住宅",
-   "segment": "単身者向け平均",
-   "ratio": "約42.8倍",
-   "as_of": "同上",
-   "source": "福岡市住宅供給公社 募集案内書",
-   "url": "https://www.nicety.or.jp/shiei/%e7%8f%be%e5%9c%a8%e3%81%ae%e5%8b%9f%e9%9b%86%e7%8a%b6%e6%b3%81-2/"
+   "segment": "一般募集（住戸別・平均は非公表）",
+   "ratio": "約0〜144倍（例:新大和東144倍・神楽100倍）",
+   "as_of": "令和7年8月募集（2025年8月）",
+   "source": "神戸住環境整備公社『令和7年8月募集 当選・補欠抽選番号一覧』",
+   "url": "https://www.kobe-rma.or.jp/individual/municipal/recruitment/"
   },
   {
    "area": "広島市",
@@ -244,6 +190,24 @@
    "as_of": "令和6年度時点",
    "source": "広島市市営住宅マネジメント計画（第2期）",
    "url": "https://www.city.hiroshima.lg.jp/_res/projects/default_project/_page_/001/049/206/honpen.pdf"
+  },
+  {
+   "area": "福岡市",
+   "entity": "市営住宅",
+   "segment": "定期募集（抽選方式）全住戸平均",
+   "ratio": "約14.4倍",
+   "as_of": "令和8年度5月募集案内書記載の前回実績",
+   "source": "福岡市住宅供給公社 募集案内書",
+   "url": "https://www.nicety.or.jp/shiei/%e7%8f%be%e5%9c%a8%e3%81%ae%e5%8b%9f%e9%9b%86%e7%8a%b6%e6%b3%81-2/"
+  },
+  {
+   "area": "福岡市",
+   "entity": "市営住宅",
+   "segment": "単身者向け平均",
+   "ratio": "約42.8倍",
+   "as_of": "同上",
+   "source": "福岡市住宅供給公社 募集案内書",
+   "url": "https://www.nicety.or.jp/shiei/%e7%8f%be%e5%9c%a8%e3%81%ae%e5%8b%9f%e9%9b%86%e7%8a%b6%e6%b3%81-2/"
   }
  ]
 }

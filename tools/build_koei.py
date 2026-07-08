@@ -69,6 +69,12 @@ def main():
             r"\g<1>" + esc(upd) + r"\g<2>",
             new,
         )
+        # JSON-LD の dateModified も表示更新日に同期（datePublished は初出日のまま）
+        new = re.sub(
+            r'("dateModified":\s*")[0-9-]+(")',
+            r"\g<1>" + esc(upd) + r"\g<2>",
+            new,
+        )
     if new != page:
         with open(PAGE, "w", encoding="utf-8") as f:
             f.write(new)
