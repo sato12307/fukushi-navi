@@ -55,14 +55,23 @@
 }
 </script>
 <style>
-/* 倍率テーブル（この記事専用） */
-.ratio-table { min-width: 640px; font-size: .86rem; }
-.ratio-table th, .ratio-table td { padding: 8px 8px; text-align: left; vertical-align: top; }
-.ratio-table th[scope=row] { white-space: nowrap; }
-.ratio-table td.rt { font-weight: 700; white-space: nowrap; }
-.ratio-table td.tbd { color: var(--sub); white-space: nowrap; }
-.ratio-table td.asof { font-size: .8rem; color: var(--sub); white-space: nowrap; }
-.ratio-table td.src { font-size: .8rem; color: var(--sub); line-height: 1.6; }
+/* 倍率テーブル（この記事専用）。6列で本文760pxに収まりきらないので、広い画面では
+   本文幅の外へ広げて中央寄せ（最大1060px）。狭い画面は .table-wrap の overflow-x で横スクロール。 */
+.ratio-scroll { margin: 1.2em 0; }
+@media (min-width: 900px) {
+  .ratio-scroll { width: min(1060px, 94vw); margin-left: 50%; transform: translateX(-50%); }
+}
+.ratio-table { min-width: 720px; font-size: .86rem; }
+.ratio-table th, .ratio-table td { padding: 8px 9px; text-align: left; vertical-align: top; }
+/* nowrapは地域だけ。他列はmin-widthで最小幅を確保しつつ、長い値は折返し可にして
+   （神戸「約0〜144倍（例…）」等がnowrapで列を極端に広げるのを防ぐ）。 */
+.ratio-table th[scope=row] { white-space: nowrap; }        /* 地域 */
+.ratio-table td:nth-child(2) { min-width: 4.5em; }         /* 事業主体（市営住宅 等） */
+.ratio-table td:nth-child(3) { min-width: 10em; }          /* 区分 */
+.ratio-table td.rt { font-weight: 700; min-width: 6em; }   /* 応募倍率 */
+.ratio-table td.tbd { color: var(--sub); min-width: 6em; }
+.ratio-table td.asof { font-size: .8rem; color: var(--sub); min-width: 7em; }  /* 時点 */
+.ratio-table td.src { font-size: .8rem; color: var(--sub); line-height: 1.6; min-width: 14em; }
 .ratio-table td.src a { color: var(--sub); }
 /* 当選確率シミュレーター */
 .calc { border: 1px solid var(--line); border-radius: 10px; padding: 16px 18px; margin: 1.2em 0; background: var(--soft); }
@@ -127,7 +136,7 @@
   <h2>② 主要都市の応募倍率（分かっている範囲・順次拡充）</h2>
   <p>各自治体・住宅供給公社が公表した募集結果から、<strong>分かっている範囲</strong>でまとめました。倍率は<strong>募集回・住戸・年度で大きく変わります</strong>。空欄（調査中）は今後の募集結果を反映していきます。</p>
 
-  <div class="table-wrap">
+  <div class="table-wrap ratio-scroll">
   <table class="ratio-table">
     <caption>公営住宅の応募倍率（出典・時点つき／<strong>概算・参考値</strong>。募集回や住戸で変動するため、最新・正確な値は各自治体の募集結果でご確認ください）</caption>
     <thead><tr><th scope="col">地域</th><th scope="col">事業主体</th><th scope="col">区分</th><th scope="col">応募倍率</th><th scope="col">時点</th><th scope="col">出典</th></tr></thead>
