@@ -1,0 +1,33 @@
+// アフィリエイト点火スクリプト（ASP承認後にAFF.linksを設定すると点火）
+// 点火例:
+//   window.AFF = { links: { "hikkoshi": {
+//     url: "https://px.a8.net/svt/ejp?a8mat=XXXX+XXXX+XXXX+XXXX",
+//     imp: "https://www19.a8.net/0.gif?a8mat=XXXX+XXXX+XXXX+XXXX"
+//   } } };
+// 未設定の間は各CTAの素リンク（公式サイト直リンク）のまま何もしない。
+window.AFF = window.AFF || { links: {} };
+(function () {
+  var L = (window.AFF && window.AFF.links) || {};
+  if (!Object.keys(L).length) return;
+  document.querySelectorAll("[data-aff]").forEach(function (box) {
+    var p = L[box.getAttribute("data-aff")];
+    if (!p || !p.url) return;
+    box.querySelectorAll("a.cta-btn").forEach(function (a) {
+      a.href = p.url;
+      a.target = "_blank";
+      a.rel = "nofollow sponsored noopener";
+    });
+    // 景表法・ステマ規制: 点火と同時に広告表記を表示
+    var pr = box.querySelector(".aff-pr");
+    if (pr) pr.style.display = "";
+    // A8インプレッション計測ピクセル
+    if (p.imp) {
+      var img = new Image(1, 1);
+      img.src = p.imp;
+      img.alt = "";
+      img.width = 1;
+      img.height = 1;
+      box.appendChild(img);
+    }
+  });
+})();

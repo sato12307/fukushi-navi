@@ -224,6 +224,13 @@ PAGE = r"""<!DOCTYPE html>
     <p><span class="tag">要確認</span>補正係数は5市の公表データから置いた<strong>ざっくりの目安</strong>で、団地により実際の差はもっと大きくも小さくもなります。優遇（当選倍率の優遇・ポイント方式・優先枠）の対象や単身入居の可否は自治体で異なります。正確な倍率・申込資格は、必ず@@NAME@@の公式の募集案内でご確認ください。このページは個別の入居可否を判定するものではありません。</p>
   </div>
 
+  <div class="cta-box" data-aff="hikkoshi" style="border:1px solid var(--line,#d8ddda);border-radius:10px;padding:16px 18px;margin:1.4em 0;background:var(--soft,#f4f8f5);text-align:center">
+    <p style="margin:.2em 0 .5em;font-weight:700">当選したら次は引っ越し——業者の比較で費用は数万円変わります</p>
+    <p style="margin:0 0 .8em;font-size:.9rem;color:var(--sub,#666)">公営住宅は入居指定日までに引っ越しが必要です。1社に決める前に複数社の見積もりを取ると、同じ荷物量でも料金に大きな差が出ます（無料）。</p>
+    <a class="cta-btn" href="https://hikkoshizamurai.jp/" target="_blank" rel="nofollow noopener" style="display:inline-block;background:var(--brand-dark,#2e6e4e);color:#fff;font-weight:800;text-decoration:none;padding:12px 22px;border-radius:10px;font-size:.95rem">引越し侍で無料一括見積もり →</a>
+    <p class="aff-pr" style="display:none;font-size:.72rem;color:var(--sub,#666);margin:.6em 0 0">※ 本リンクは広告（アフィリエイト）を含みます</p>
+  </div>
+
   <h2>よくある質問</h2>
   <h3>Q. @@NAME@@の@@HW@@で当たりやすい住戸は？</h3>
   <p>A. @@FAQ_A@@</p>
@@ -267,6 +274,7 @@ PAGE = r"""<!DOCTYPE html>
   </div>
 </footer>
 @@CALCJS@@
+<script src="../assets/aff.js" defer></script>
 </body>
 </html>
 """
