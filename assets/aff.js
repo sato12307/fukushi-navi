@@ -1,11 +1,9 @@
-// アフィリエイト点火スクリプト（ASP承認後にAFF.linksを設定すると点火）
-// 点火例:
-//   window.AFF = { links: { "hikkoshi": {
-//     url: "https://px.a8.net/svt/ejp?a8mat=XXXX+XXXX+XXXX+XXXX",
-//     imp: "https://www19.a8.net/0.gif?a8mat=XXXX+XXXX+XXXX+XXXX"
-//   } } };
-// 未設定の間は各CTAの素リンク（公式サイト直リンク）のまま何もしない。
-window.AFF = window.AFF || { links: {} };
+// アフィリエイト点火スクリプト（点火済み: 引越し侍 A8 2026-07-14承認）
+// impはA8広告コードの1x1計測gif(https://wwwXX.a8.net/0.gif?a8mat=...)。未設定でも成果計測には影響なし。
+window.AFF = { links: { "hikkoshi": {
+  url: "https://px.a8.net/svt/ejp?a8mat=4B8097+5YC4VE+ZXM+I6SJ5",
+  imp: ""
+} } };
 (function () {
   var L = (window.AFF && window.AFF.links) || {};
   if (!Object.keys(L).length) return;
