@@ -320,12 +320,21 @@ def main():
             "mainEntity": [{"@type": "Question", "name": "{}の{}で当たりやすい住戸は？".format(c["name"], c.get("housing_word","市営住宅")),
                             "acceptedAnswer": {"@type": "Answer", "text": c["faq_a"]}}],
         }, ensure_ascii=False)
+        # 画面上のパンくず（トップ ＞ 公営住宅 ＞ 都市名）に一致する BreadcrumbList
+        breadld = json.dumps({
+            "@context": "https://schema.org", "@type": "BreadcrumbList",
+            "itemListElement": [
+                {"@type": "ListItem", "position": 1, "name": "トップ", "item": "https://fukushiru.com/"},
+                {"@type": "ListItem", "position": 2, "name": "公営住宅", "item": "https://fukushiru.com/articles/koei-jutaku-bairitsu.html"},
+                {"@type": "ListItem", "position": 3, "name": c["name"], "item": "https://fukushiru.com/articles/koei-{}.html".format(c["slug"])},
+            ],
+        }, ensure_ascii=False)
 
         page = PAGE
         for k, v in {
             "@@NAMEPREF@@": (esc(c["name"]) if c["name"] == c["pref"] else esc(c["name"]) + "（" + esc(c["pref"]) + "）"),
             "@@NAME@@": esc(c["name"]), "@@HW@@": esc(c.get("housing_word","市営住宅")), "@@PREF@@": esc(c["pref"]), "@@SLUG@@": "koei-" + c["slug"],
-            "@@DESC@@": esc(desc), "@@JSONLD@@": jsonld + "\n</script>\n<script type=\"application/ld+json\">\n" + faqld,
+            "@@DESC@@": esc(desc), "@@JSONLD@@": jsonld + "\n</script>\n<script type=\"application/ld+json\">\n" + faqld + "\n</script>\n<script type=\"application/ld+json\">\n" + breadld,
             "@@UPDATED@@": esc(updated), "@@BASE_TEXT@@": c["base_text"],
             "@@TOP@@": top, "@@BOTTOM@@": bottom, "@@FACTORS@@": factors, "@@QUOTES@@": quotes,
             "@@CALC@@": calc, "@@CALCJS@@": CALC_JS, "@@FAQ_A@@": esc(c["faq_a"]),
