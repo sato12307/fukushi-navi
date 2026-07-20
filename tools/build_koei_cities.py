@@ -239,6 +239,7 @@ PAGE = r"""<!DOCTYPE html>
     <h2 style="border:0">関連</h2>
     <ul>
       <li><a href="koei-jutaku-bairitsu.html">公営住宅の当選倍率まとめ（全国・仕組み・優遇の全体像）</a></li>
+      <li><a href="koei-hairiyasui.html">市営住宅に入りやすい人とは？（優遇・当たりやすい住戸の選び方）</a></li>
 @@RELATED@@
     </ul>
   </section>
