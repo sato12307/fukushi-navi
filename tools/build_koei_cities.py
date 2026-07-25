@@ -308,13 +308,17 @@ def main():
         sources = "\n".join(
             '    <li>{t} {u}</li>'.format(t=esc(s["t"]), u=esc(s["u"])) for s in c["sources"]
         )
+        canonurl = "https://fukushiru.com/articles/koei-{}.html".format(c["slug"])
         jsonld = json.dumps({
             "@context": "https://schema.org", "@type": "Article",
             "headline": "{}の{} 当選倍率と入りやすい住戸".format(c["name"], c.get("housing_word","市営住宅")),
             "description": desc, "inLanguage": "ja",
+            "url": canonurl,
+            "mainEntityOfPage": {"@type": "WebPage", "@id": canonurl},
             "datePublished": "2026-07-03", "dateModified": updated,
             "author": {"@type": "Organization", "name": "フクシル"},
             "publisher": {"@type": "Organization", "name": "フクシル"},
+            "isPartOf": {"@type": "WebSite", "name": "フクシル", "url": "https://fukushiru.com/"},
         }, ensure_ascii=False)
         faqld = json.dumps({
             "@context": "https://schema.org", "@type": "FAQPage",
