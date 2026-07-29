@@ -117,6 +117,11 @@ tbody tr:nth-child(even) td { background: #fafcfd; }
 
 .disclaimer { font-size: .8rem; color: var(--sub); border: 1px solid var(--line); border-radius: 8px; padding: 12px 16px; margin: 2em 0 0; background: #fff; }
 
+/* 計算機：長いoption名でセレクトが親パネルを超えるのを防ぐ（375px幅の横はみ出し対策） */
+.calc select,
+.calc input[type=number] { max-width: 100%; }
+.calc .row > * { min-width: 0; }
+
 /* スキップリンク（a11y） */
 .skip { position: absolute; left: -9999px; }
 .skip:focus { left: 8px; top: 8px; background: #fff; padding: 8px 12px; border: 2px solid var(--brand); z-index: 10; }
