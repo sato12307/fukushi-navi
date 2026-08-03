@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- 公開URLが決まったら fukushiru.com を実ドメインに一括置換してください -->
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://fukushiru.com/</loc><lastmod>2026-06-30</lastmod><priority>1.0</priority></url>
+  <url><loc>https://fukushiru.com/</loc><lastmod>2026-08-03</lastmod><priority>1.0</priority></url>
+  <url><loc>https://fukushiru.com/articles/seikatsuhogo-keisanki.html</loc><lastmod>2026-08-03</lastmod><priority>0.9</priority></url>
+  <url><loc>https://fukushiru.com/articles/juminzei-hikazei-check.html</loc><lastmod>2026-08-03</lastmod><priority>0.9</priority></url>
+  <url><loc>https://fukushiru.com/articles/kougaku-ryouyouhi-2026.html</loc><lastmod>2026-08-03</lastmod><priority>0.9</priority></url>
   <url><loc>https://fukushiru.com/about.html</loc><lastmod>2026-06-30</lastmod><priority>0.5</priority></url>
   <url><loc>https://fukushiru.com/articles/jichitai-transport-medical.html</loc><lastmod>2026-06-30</lastmod><priority>0.9</priority></url>
   <url><loc>https://fukushiru.com/articles/shinkansen-airplane-discount.html</loc><lastmod>2026-06-30</lastmod><priority>0.9</priority></url>

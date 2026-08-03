@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<title>住民税非課税世帯になる年収はいくら？判定シミュレーター【2026年度から単身110万円に】｜フクシル</title>
+<meta name="description" content="住民税非課税世帯の条件を年収・世帯構成・地域（級地）から自動判定。2025年の税制改正で2026年度から単身の給与収入ラインは100万円→110万円に。夫婦166万円・夫婦+子1人約205万円など世帯別の早見表、年金収入の場合（65歳以上155万円）、非課税世帯で受けられる12のメリットまで1ページで。">
+<link rel="canonical" href="https://fukushiru.com/articles/juminzei-hikazei-check.html">
+<meta property="og:type" content="article">
+<meta property="og:title" content="住民税非課税世帯になる年収はいくら？判定シミュレーター【2026年度から単身110万円に】">
+<meta property="og:description" content="年収・世帯構成・地域から自動判定。2026年度から単身110万円に引き上げ。世帯別早見表と非課税世帯の12のメリットも。">
+<meta property="og:site_name" content="フクシル">
+<meta property="og:url" content="https://fukushiru.com/articles/juminzei-hikazei-check.html">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="stylesheet" href="../assets/style.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "住民税非課税世帯になる年収はいくら？判定シミュレーター【2026年度から単身110万円に】",
+  "description": "住民税非課税世帯の判定基準（均等割・所得割の非課税限度額）を年収・世帯構成・級地から自動判定するシミュレーターと、非課税世帯で受けられる主なメリットのまとめ。",
+  "inLanguage": "ja",
+  "datePublished": "2026-08-03",
+  "dateModified": "2026-08-03",
+  "author": { "@type": "Organization", "name": "フクシル" },
+  "publisher": { "@type": "Organization", "name": "フクシル" },
+  "url": "https://fukushiru.com/articles/juminzei-hikazei-check.html",
+  "mainEntityOfPage": "https://fukushiru.com/articles/juminzei-hikazei-check.html",
+  "isPartOf": { "@type": "WebSite", "name": "フクシル", "url": "https://fukushiru.com/" }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "住民税非課税世帯になるのは年収いくらまでですか？",
+      "acceptedAnswer": { "@type": "Answer", "text": "大都市（1級地）の給与収入の場合、2026年度からは単身で110万円以下、夫婦（配偶者を扶養）で約166万円以下、夫婦+子1人で約205万円以下が目安です。2025年の税制改正で給与所得控除の最低額が55万円から65万円に上がったため、単身のラインは従来の100万円から110万円に引き上がりました。地方（2級地・3級地）ではラインが少し下がります。" }
+    },
+    {
+      "@type": "Question",
+      "name": "年金暮らしの場合、住民税非課税になるのは年金収入いくらまでですか？",
+      "acceptedAnswer": { "@type": "Answer", "text": "65歳以上・単身の場合、公的年金収入155万円以下（1級地）が目安です。公的年金等控除110万円を引いた所得が45万円以下になるためです。65歳未満の場合は年金収入105万円以下が目安になります（控除60万円）。配偶者を扶養していればラインはさらに上がります。" }
+    },
+    {
+      "@type": "Question",
+      "name": "住民税非課税世帯になると何が優遇されますか？",
+      "acceptedAnswer": { "@type": "Answer", "text": "主なものは、①政府の給付金の対象になりやすい ②高額療養費の自己負担上限が最低区分（月36,900円）になる ③入院中の食事代が1食510円→約240円に減額 ④介護保険料が最低段階になる ⑤大学無償化（高等教育の修学支援）の第1区分 ⑥国民健康保険料の均等割が減額されやすい ⑦障害者は NHK受信料全額免除 など。医療・介護・教育に幅広く効きます。" }
+    }
+  ]
+}
+</script>
+<style>
+.calc { border: 1px solid var(--line); border-radius: 10px; padding: 16px 18px; margin: 1.2em 0; background: var(--soft); }
+.calc h4 { margin: .1em 0 .6em; }
+.calc .row { display: flex; flex-wrap: wrap; gap: 8px 14px; align-items: center; margin: .55em 0; }
+.calc label { font-weight: 600; font-size: .9rem; }
+.calc input[type=number] { width: 9em; padding: 6px 8px; border: 1px solid var(--line); border-radius: 6px; font-size: 1rem; }
+.calc select { padding: 6px 8px; border: 1px solid var(--line); border-radius: 6px; font-size: 1rem; max-width: 100%; }
+.calc .out { margin-top: 12px; padding: 12px 14px; background: #fff; border: 1px solid var(--line); border-radius: 8px; }
+.calc .total { font-size: 1.3rem; font-weight: 800; color: var(--brand-dark); }
+.calc .bd { font-size: .86rem; color: var(--sub); margin-top: 6px; line-height: 1.7; }
+.mini-note { font-size: .84rem; color: var(--sub); }
+.line-table td, .line-table th { text-align: center; }
+.line-table td.big { font-weight: 700; }
+.merit-table td:first-child { font-weight: 600; white-space: nowrap; }
+.verdict-ok { color: #0a7a2f; }
+.verdict-mid { color: #9a6b00; }
+.verdict-no { color: #b00020; }
+</style>
+</head>
+<body>
+<a class="skip" href="#main">本文へスキップ</a>
+<header class="site-header">
+  <div class="inner">
+    <a class="brand" href="../index.html">フクシル <small>知らないと損する、くらしの福祉</small></a>
+    <nav class="site-nav" aria-label="主要">
+      <a href="../index.html">トップ</a>
+      <a href="seikatsuhogo-keisanki.html">生活保護</a>
+      <a href="kougaku-ryouyouhi-2026.html">高額療養費</a>
+      <a href="koei-jutaku-bairitsu.html">公営住宅</a>
+      <a href="shogai-nenkin-keisanki.html">障害年金</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+  <p class="breadcrumb"><a href="../index.html">トップ</a> ＞ 税と保険料 ＞ 住民税非課税の判定</p>
+
+  <h1>住民税非課税世帯になる年収は？<br>判定シミュレーター【2026年度対応】</h1>
+  <p class="updated">最終更新：2026-08-03 ／ 2025年（令和7年）税制改正を反映した2026年度（令和8年度）住民税の基準で判定します</p>
+
+  <p class="lead">「住民税非課税世帯」は、給付金の対象・医療費や入院食事代の減額・介護保険料・大学無償化まで、<strong>日本の福祉制度の多くで「優遇の入口」になっている境界線</strong>です。2025年の税制改正で給与所得控除が引き上げられ、<strong>2026年度からは単身の給与収入ラインが100万円→110万円に上がりました</strong>。このページでは、あなたの世帯が非課税になるかを<strong>収入・世帯構成・地域（級地）から自動判定</strong>し、非課税世帯で受けられるメリットをまとめます。</p>
+
+  <div class="callout point">
+    <p><span class="tag">2026年度の変更点</span>給与所得控除の最低額が55万円→<strong>65万円</strong>に引き上げられたため（令和7年分から）、給与収入だけの単身者は<strong>110万円以下</strong>で住民税非課税になります（1級地）。「100万円の壁」は「<strong>110万円の壁</strong>」に変わりました。</p>
+  </div>
+
+  <h2>① 早見表：非課税になる収入ライン【2026年度・1級地】</h2>
+  <div class="table-wrap">
+  <table class="line-table">
+    <caption>住民税（均等割も所得割も）非課税になる収入の目安（大都市＝1級地）</caption>
+    <thead><tr><th>世帯構成</th><th>給与収入なら</th><th>年金収入なら<br>（65歳以上）</th></tr></thead>
+    <tbody>
+      <tr><th>単身</th><td class="big">110万円以下</td><td class="big">155万円以下</td></tr>
+      <tr><th>夫婦（配偶者を扶養）</th><td class="big">約166万円以下</td><td class="big">約211万円以下</td></tr>
+      <tr><th>夫婦＋子1人</th><td class="big">約205万円以下</td><td>約246万円以下</td></tr>
+      <tr><th>夫婦＋子2人</th><td class="big">約255万円以下</td><td>約281万円以下</td></tr>
+      <tr><th>ひとり親＋子1人</th><td class="big">約204万円以下※</td><td>—</td></tr>
+    </tbody>
+  </table>
+  </div>
+  <p class="mini-note">※ひとり親はこれとは別に「前年の合計所得135万円以下（給与収入だと約204万円）なら非課税」という本人非課税の特例もあります（障害者・未成年者・寡婦も同じ135万円基準）。2級地では単身101.5万円・3級地では単身93万円が目安と、地方ほど少し下がります（給与収入ベース）。</p>
+
+  <h2>② あなたの世帯は？【自動判定】</h2>
+  <p>世帯の中で<strong>いちばん収入が多い人（＝生計を支えている人）</strong>について入れてください。住民税は一人ひとりにかかる税金なので、「世帯全員が非課税」＝「住民税非課税世帯」です。共働きなどで収入のある人が複数いる場合は、それぞれについて判定してください。</p>
+
+  <div class="calc" role="group" aria-label="住民税非課税の判定シミュレーター">
+    <h4>非課税判定シミュレーター（2026年度基準）</h4>
+    <div class="row">
+      <label for="h-type">収入の種類</label>
+      <select id="h-type">
+        <option value="salary" selected>給与（パート・アルバイト含む）</option>
+        <option value="pension65">公的年金（65歳以上）</option>
+        <option value="pension64">公的年金（65歳未満）</option>
+        <option value="shotoku">所得金額を直接入れる（自営業など）</option>
+      </select>
+    </div>
+    <div class="row">
+      <label for="h-income">年間収入（額面）</label>
+      <input type="number" id="h-income" inputmode="numeric" min="0" step="1" placeholder="例: 150"> 万円
+    </div>
+    <div class="row">
+      <label for="h-fuyo">扶養している家族の人数</label>
+      <select id="h-fuyo">
+        <option value="0" selected>0人（単身・共働きで扶養なし）</option>
+        <option value="1">1人（配偶者または子など）</option>
+        <option value="2">2人</option>
+        <option value="3">3人</option>
+        <option value="4">4人</option>
+      </select>
+      <span class="mini-note">税法上の扶養（同一生計配偶者＋扶養親族）の数</span>
+    </div>
+    <div class="row">
+      <label for="h-kyuchi">お住まいの地域</label>
+      <select id="h-kyuchi">
+        <option value="1" selected>1級地（東京23区・大阪・名古屋・札幌・福岡など大都市）</option>
+        <option value="2">2級地（県庁所在地クラスの市など）</option>
+        <option value="3">3級地（その他の市町村）</option>
+      </select>
+      <span class="mini-note">生活保護の級地区分に準拠。フクシルで扱う12大都市はすべて1級地です</span>
+    </div>
+    <div class="row">
+      <label for="h-special">本人がいずれかに該当</label>
+      <select id="h-special">
+        <option value="no" selected>該当しない</option>
+        <option value="yes">障害者・ひとり親・寡婦・未成年者</option>
+      </select>
+      <span class="mini-note">該当すると合計所得135万円以下（給与収入約204万円）まで非課税</span>
+    </div>
+    <div class="out" aria-live="polite">
+      <div>判定：<span class="total" id="h-out">—</span></div>
+      <div class="bd" id="h-bd"></div>
+    </div>
+  </div>
+
+  <h2>③ 非課税世帯になると受けられる主なメリット</h2>
+  <p>「住民税がかからない」こと自体より、<strong>非課税世帯であることを条件に発動する制度</strong>のほうが金額的に大きいことが多いです。</p>
+  <div class="table-wrap">
+  <table class="merit-table">
+    <thead><tr><th>制度</th><th>非課税世帯だとどうなる</th></tr></thead>
+    <tbody>
+      <tr><td>政府の給付金</td><td>物価高対策などの給付金は「住民税非課税世帯」を対象にすることが多い（例：2025年度は1世帯3万円）</td></tr>
+      <tr><td><a href="kougaku-ryouyouhi-2026.html">高額療養費</a></td><td>医療費の自己負担上限が最低区分（70歳未満：月36,900円）になる</td></tr>
+      <tr><td>入院時の食事代</td><td>1食510円→約240円に減額（91日目からさらに減額）</td></tr>
+      <tr><td>介護保険料</td><td>65歳以上の保険料が最低段階（基準額の3割前後）に</td></tr>
+      <tr><td>高額介護サービス費</td><td>自己負担上限が月24,600円（世帯）に軽減</td></tr>
+      <tr><td>大学無償化</td><td>高等教育の修学支援 第1区分＝授業料減免＋給付型奨学金が満額</td></tr>
+      <tr><td>国民健康保険料</td><td>均等割の7割・5割・2割減額の判定に有利（正確には所得基準で判定）</td></tr>
+      <tr><td>NHK受信料</td><td>世帯に障害者手帳保持者がいれば全額免除</td></tr>
+      <tr><td>予防接種・健診</td><td>自治体の予防接種・がん検診などが無料になる例が多い</td></tr>
+      <tr><td><a href="koei-jutaku-bairitsu.html">公営住宅</a></td><td>収入基準を満たしやすく、家賃も最低区分になりやすい</td></tr>
+      <tr><td>保育料・副食費</td><td>非課税世帯は0〜2歳児クラスの保育料無償・副食費免除</td></tr>
+      <tr><td>障害福祉サービス</td><td>利用者負担の月額上限が0円（生活保護・非課税世帯）</td></tr>
+    </tbody>
+  </table>
+  </div>
+  <p class="mini-note">制度ごとに「世帯全員非課税」か「本人非課税」かなど条件の細部が違います。金額・条件は各制度の公式情報でご確認ください。</p>
+
+  <h2>④ よくある質問</h2>
+  <ul>
+    <li><strong>「均等割だけ課税」って何？</strong>——住民税は定額の「均等割」（年5,000円前後）と所得に応じた「所得割」の2階建てです。所得が非課税限度額をわずかに超えると、まず均等割だけがかかる中間帯があります。「非課税世帯」の給付金などは原則、均等割もかからない世帯が対象です。</li>
+    <li><strong>いつの収入で判定される？</strong>——<strong>前年1〜12月の収入</strong>です。2026年度（2026年6月〜）の住民税は2025年中の収入で決まります。</li>
+    <li><strong>退職して収入が減ったら？</strong>——住民税は前年基準なので、退職の翌年度に非課税になるのが普通です。今年の負担が重い場合は減免制度がある自治体もあります。</li>
+    <li><strong>障害年金・遺族年金は？</strong>——非課税所得なので判定上の所得に<strong>含まれません</strong>。障害年金だけで暮らしている方は住民税非課税です（<a href="shogai-nenkin-keisanki.html">障害年金の計算機</a>）。</li>
+  </ul>
+
+  <div class="callout note">
+    <p><span class="tag">あわせて読みたい</span>収入がラインを大きく下回ってしまい生活が苦しい場合は<a href="seikatsuhogo-keisanki.html">生活保護の支給額シミュレーター</a>で最低生活費と比べてみてください。医療費の上限は<a href="kougaku-ryouyouhi-2026.html">高額療養費の計算機（2026年8月改正対応）</a>、家賃を下げるなら<a href="koei-jutaku-bairitsu.html">公営住宅の倍率データ</a>へ。</p>
+  </div>
+
+  <h2>コメント</h2>
+  <p class="mini-note">「この収入でどうなった」という体験の共有は、同じ立場の方の参考になります。個人が特定される情報はお書きにならないでください。</p>
+  <div id="cusdis_thread"
+    data-host="https://cusdis.com"
+    data-app-id="14dfe8f8-c660-42ee-9cd2-54ee31828ba9"
+    data-page-id="juminzei-hikazei-check"
+    data-page-url="https://fukushiru.com/articles/juminzei-hikazei-check.html"
+    data-page-title="住民税非課税 判定シミュレーター">
+  </div>
+  <script async defer src="https://cusdis.com/js/cusdis.es.js"></script>
+
+  <h2>出典（総務省・国税庁ほか）</h2>
+  <ul class="sources">
+    <li>総務省「個人住民税」（非課税限度額の仕組み） https://www.soumu.go.jp/main_sosiki/jichi_zeisei/czaisei/czaisei_seido/individual-inhabitant-tax.html</li>
+    <li>国税庁「令和7年度税制改正による所得税の基礎控除の見直し等について」（給与所得控除65万円への引き上げ） https://www.nta.go.jp/users/gensen/2025kiso/index.htm</li>
+    <li>各自治体の個人住民税非課税基準（例：東京23区は各区税務課の公表基準＝35万円×（本人＋扶養人数）＋10万円＋21万円加算）</li>
+    <li>厚生労働省「高額療養費制度」「入院時食事療養費」「介護保険の利用者負担」各制度ページ</li>
+  </ul>
+
+  <div class="disclaimer">
+    <strong>ご注意：</strong>このページの判定は公開情報にもとづく<strong>概算</strong>です。非課税限度額は自治体の級地区分により異なり、所得の種類（事業・不動産・雑など）や各種控除により結果が変わります。実際の課税・非課税は市区町村の税務担当課の決定によります。給付金・減免の対象要件は制度ごとに異なるため、必ず公式情報でご確認ください。
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="inner">
+    <p><strong>フクシル</strong>（仮）— 知らないと損する、くらしの福祉制度を当事者目線でまとめる情報サイトです。</p>
+    <p><a href="../index.html">トップへ戻る</a> ／ <a href="../about.html">このサイトについて</a></p>
+    <p>© 2026 フクシル. 本サイトの情報は一般的な参考情報であり、正確性を保証するものではありません。</p>
+  </div>
+</footer>
+
+<script>
+// ====== 2026年度（令和8年度）住民税 非課税判定 ======
+// 給与所得控除（令和7年分以後）: 最低65万円
+function salaryShotoku(man){ // 収入(万円)→給与所得(万円)
+  if (man <= 190) return Math.max(0, man - 65);
+  if (man <= 360) return man * 0.7 - 8;
+  if (man <= 660) return man * 0.8 - 44;
+  if (man <= 850) return man * 0.9 - 110;
+  return man - 195;
+}
+// 公的年金等控除（他の所得1,000万円以下の場合）
+function pensionShotoku(man, over65){
+  var ded;
+  if (over65) {
+    if (man <= 330) ded = 110;
+    else if (man <= 410) ded = man * 0.25 + 27.5;
+    else if (man <= 770) ded = man * 0.15 + 68.5;
+    else if (man <= 1000) ded = man * 0.05 + 145.5;
+    else ded = 195.5;
+  } else {
+    if (man <= 130) ded = 60;
+    else if (man <= 410) ded = man * 0.25 + 27.5;
+    else if (man <= 770) ded = man * 0.15 + 68.5;
+    else if (man <= 1000) ded = man * 0.05 + 145.5;
+    else ded = 195.5;
+  }
+  return Math.max(0, man - ded);
+}
+// 均等割非課税限度額(万円): 級地係数 1級地1.0 / 2級地0.9 / 3級地0.8
+// 扶養なし: 35×係数 + 10 ／ 扶養あり: 35×係数×(1+n) + 21×係数 + 10
+function genkai(kyuchi, fuyo){
+  var c = kyuchi === 1 ? 1.0 : (kyuchi === 2 ? 0.9 : 0.8);
+  if (fuyo === 0) return 35 * c + 10;
+  return 35 * c * (1 + fuyo) + 21 * c + 10;
+}
+// 所得割の非課税限度額: 扶養なし 45万 ／ 扶養あり 35×(1+n)+32+10（級地によらず全国一律）
+function genkaiShotokuwari(fuyo){
+  if (fuyo === 0) return 45;
+  return 35 * (1 + fuyo) + 32 + 10;
+}
+
+(function(){
+  var type = document.getElementById('h-type'), income = document.getElementById('h-income'),
+      fuyo = document.getElementById('h-fuyo'), kyuchi = document.getElementById('h-kyuchi'),
+      special = document.getElementById('h-special'),
+      out = document.getElementById('h-out'), bd = document.getElementById('h-bd');
+  function calc(){
+    var man = parseFloat(income.value);
+    if (isNaN(man) || man < 0) { out.textContent = '—'; bd.textContent = '収入を入力してください'; return; }
+    var n = parseInt(fuyo.value, 10), k = parseInt(kyuchi.value, 10);
+    var shotoku;
+    if (type.value === 'salary') shotoku = salaryShotoku(man);
+    else if (type.value === 'pension65') shotoku = pensionShotoku(man, true);
+    else if (type.value === 'pension64') shotoku = pensionShotoku(man, false);
+    else shotoku = man;
+    shotoku = Math.round(shotoku * 10) / 10;
+
+    var limitK = genkai(k, n);            // 均等割
+    var limitS = genkaiShotokuwari(n);    // 所得割
+    var specialOK = special.value === 'yes' && shotoku <= 135;
+
+    var msg, cls;
+    if (shotoku <= limitK || specialOK) {
+      msg = '非課税（均等割も所得割もかかりません）'; cls = 'verdict-ok';
+    } else if (shotoku <= limitS) {
+      msg = '均等割のみ課税（所得割は非課税）'; cls = 'verdict-mid';
+    } else {
+      msg = '課税（非課税世帯には該当しません）'; cls = 'verdict-no';
+    }
+    out.textContent = msg; out.className = 'total ' + cls;
+    bd.innerHTML = '所得金額に直すと <strong>約' + shotoku.toLocaleString('ja-JP') + '万円</strong>。'
+      + 'あなたの非課税限度額（均等割）は <strong>' + limitK.toFixed(1) + '万円</strong>'
+      + (n > 0 ? '（扶養' + n + '人）' : '（扶養なし）')
+      + (specialOK ? '。<strong>障害者・ひとり親等の特例（所得135万円以下）に該当するため非課税</strong>' : '')
+      + '。この判定は世帯の一人分です。<strong>世帯全員が非課税なら「住民税非課税世帯」</strong>になります。';
+  }
+  [type, income, fuyo, kyuchi, special].forEach(function(e){ e.addEventListener('input', calc); e.addEventListener('change', calc); });
+  calc();
+})();
+</script>
+</body>
+</html>

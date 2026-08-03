@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<title>生活保護はいくらもらえる？自動計算シミュレーター【2026年度・12都市対応】｜フクシル</title>
+<meta name="description" content="生活保護の支給額（最低生活費）を、厚生労働省の令和8年度基準の計算式そのままで自動計算。世帯全員の年齢×お住まいの級地から第1類・第2類・特例加算・経過的加算・障害者加算・母子加算まで積み上げ、東京・大阪・名古屋など12都市の家賃上限（住宅扶助）も反映。働いた収入がある場合の差額支給も概算できます。">
+<link rel="canonical" href="https://fukushiru.com/articles/seikatsuhogo-keisanki.html">
+<meta property="og:type" content="article">
+<meta property="og:title" content="生活保護はいくらもらえる？自動計算シミュレーター【2026年度・12都市対応】">
+<meta property="og:description" content="厚労省の令和8年度基準の計算式そのままで最低生活費を自動計算。12都市の家賃上限も反映、働いた収入がある場合の差額支給も概算。">
+<meta property="og:site_name" content="フクシル">
+<meta property="og:url" content="https://fukushiru.com/articles/seikatsuhogo-keisanki.html">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="stylesheet" href="../assets/style.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "生活保護はいくらもらえる？自動計算シミュレーター【2026年度・12都市対応】",
+  "description": "生活保護の最低生活費を厚生労働省の令和8年度基準（第1類・第2類・逓減率・特例加算・経過的加算・各種加算）どおりに自動計算し、12都市の住宅扶助上限と収入認定まで反映するシミュレーター。",
+  "inLanguage": "ja",
+  "datePublished": "2026-08-03",
+  "dateModified": "2026-08-03",
+  "author": { "@type": "Organization", "name": "フクシル" },
+  "publisher": { "@type": "Organization", "name": "フクシル" },
+  "url": "https://fukushiru.com/articles/seikatsuhogo-keisanki.html",
+  "mainEntityOfPage": "https://fukushiru.com/articles/seikatsuhogo-keisanki.html",
+  "isPartOf": { "@type": "WebSite", "name": "フクシル", "url": "https://fukushiru.com/" }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "生活保護は単身だと月いくらもらえますか？",
+      "acceptedAnswer": { "@type": "Answer", "text": "20〜40歳の単身の場合、生活費（生活扶助）は東京23区など1級地-1で月約76,000円、これに家賃の実費（上限あり・東京23区単身53,700円）が住宅扶助として加わります。合計の目安は東京23区で月約13.0万円、大阪市で約11.6万円、名古屋市で約11.3万円、札幌市・福岡市で約11.1万円です（令和8年度基準・冬季加算等は別）。" }
+    },
+    {
+      "@type": "Question",
+      "name": "働いて収入があっても生活保護は受けられますか？",
+      "acceptedAnswer": { "@type": "Answer", "text": "受けられます。収入が最低生活費を下回っていれば、その差額が支給されます。働いた収入には勤労控除（最低でも月15,200円）があり、その分は収入として数えられないため、働いたほうが手元に残るお金は必ず増える仕組みです。" }
+    },
+    {
+      "@type": "Question",
+      "name": "2026年10月から生活保護費は上がりますか？",
+      "acceptedAnswer": { "@type": "Answer", "text": "上がる方針です。生活扶助に上乗せされている特例加算（現在は1人あたり月1,500円）が、2026年10月から月2,500円に引き上げられる方針が示されています。このページの計算機は改定後に数値を更新します。" }
+    },
+    {
+      "@type": "Question",
+      "name": "貯金や持ち家があると生活保護は受けられませんか？",
+      "acceptedAnswer": { "@type": "Answer", "text": "資産の活用が先に求められます。おおむね最低生活費の半月〜1か月分を超える預貯金は先に生活費に充てる扱いです。ただし持ち家は住み続けながら受給できる場合があり（ローン残がある場合は原則不可）、自動車も障害や仕事で必要と認められれば保有できる例外があります。一律に「ゼロでないとダメ」ではありません。" }
+    }
+  ]
+}
+</script>
+<style>
+.calc { border: 1px solid var(--line); border-radius: 10px; padding: 16px 18px; margin: 1.2em 0; background: var(--soft); }
+.calc h4 { margin: .1em 0 .6em; }
+.calc .row { display: flex; flex-wrap: wrap; gap: 8px 14px; align-items: center; margin: .55em 0; }
+.calc label { font-weight: 600; font-size: .9rem; }
+.calc input[type=number] { width: 9em; padding: 6px 8px; border: 1px solid var(--line); border-radius: 6px; font-size: 1rem; }
+.calc select { padding: 6px 8px; border: 1px solid var(--line); border-radius: 6px; font-size: 1rem; max-width: 100%; }
+.calc .out { margin-top: 12px; padding: 12px 14px; background: #fff; border: 1px solid var(--line); border-radius: 8px; }
+.calc .total { font-size: 1.35rem; font-weight: 800; color: var(--brand-dark); }
+.calc .bd { font-size: .86rem; color: var(--sub); margin-top: 6px; line-height: 1.7; }
+.mini-note { font-size: .84rem; color: var(--sub); }
+.member-list { display: flex; flex-direction: column; gap: 6px; }
+.member-list .m-row { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+.member-list .m-row button { padding: 4px 10px; border: 1px solid var(--line); border-radius: 6px; background: #fff; cursor: pointer; }
+#m-add { padding: 6px 12px; border: 1px solid var(--line); border-radius: 6px; background: #fff; cursor: pointer; font-weight: 600; }
+.city-table td, .city-table th { text-align: center; }
+.city-table td.big { font-weight: 700; }
+.breakdown-table td:last-child { text-align: right; font-variant-numeric: tabular-nums; }
+</style>
+</head>
+<body>
+<a class="skip" href="#main">本文へスキップ</a>
+<header class="site-header">
+  <div class="inner">
+    <a class="brand" href="../index.html">フクシル <small>知らないと損する、くらしの福祉</small></a>
+    <nav class="site-nav" aria-label="主要">
+      <a href="../index.html">トップ</a>
+      <a href="juminzei-hikazei-check.html">住民税非課税</a>
+      <a href="kougaku-ryouyouhi-2026.html">高額療養費</a>
+      <a href="koei-jutaku-bairitsu.html">公営住宅</a>
+      <a href="shogai-nenkin-keisanki.html">障害年金</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+  <p class="breadcrumb"><a href="../index.html">トップ</a> ＞ 生活保護 ＞ 支給額シミュレーター</p>
+
+  <h1>生活保護はいくらもらえる？<br>自動計算シミュレーター【2026年度】</h1>
+  <p class="updated">最終更新：2026-08-03 ／ 厚生労働省「生活扶助基準額の算出方法（令和8年4月）」の計算式・基準額をそのまま実装。すべて<strong>概算</strong>です</p>
+
+  <p class="lead">生活保護の金額は「一律いくら」ではなく、<strong>世帯全員の年齢 × 世帯人数 × 住んでいる地域（級地）</strong>で1円単位まで決まる積み上げ式です。このページは厚生労働省が公表している<strong>令和8年度の基準額表と計算式をそのまま実装</strong>し、ネットの記事にありがちな「ざっくり目安」ではなく、<strong>福祉事務所と同じロジック</strong>で最低生活費を計算します。家賃（住宅扶助）は12都市の上限額に対応。働いた収入がある場合の<strong>差額支給</strong>も概算できます。</p>
+
+  <div class="callout point">
+    <p><span class="tag">2026年10月から増額へ</span>生活扶助に上乗せされている<strong>特例加算</strong>は現在1人あたり月1,500円ですが、<strong>2026年10月から月2,500円に引き上げられる方針</strong>が示されています（世帯人数×1,000円の増額）。このページは改定後に数値を更新します。</p>
+  </div>
+
+  <h2>① まず結論：単身なら月いくら？【12都市 早見表】</h2>
+  <p>20〜40歳・単身・家賃が上限額の場合の目安です。生活費（生活扶助）は全国6段階の<strong>級地</strong>で決まり、家賃の上限（住宅扶助）は市ごとに違います。<strong>同じ生活保護でも住む街で月2万円近く変わる</strong>のがわかります。</p>
+
+  <div class="table-wrap">
+  <table class="city-table">
+    <caption>単身（20〜40歳）の生活保護 月額目安（令和8年度基準・冬季加算を除く）</caption>
+    <thead><tr><th>都市</th><th>級地</th><th>生活扶助</th><th>家賃上限<br>(住宅扶助)</th><th>合計目安</th></tr></thead>
+    <tbody>
+      <tr><th>東京23区</th><td>1級地-1</td><td>76,420円</td><td>53,700円</td><td class="big">130,120円</td></tr>
+      <tr><th>川崎市</th><td>1級地-1</td><td>76,420円</td><td>53,700円</td><td class="big">130,120円</td></tr>
+      <tr><th>横浜市</th><td>1級地-1</td><td>76,420円</td><td>52,000円</td><td class="big">128,420円</td></tr>
+      <tr><th>さいたま市</th><td>1級地-1</td><td>76,420円</td><td>45,000円</td><td class="big">121,420円</td></tr>
+      <tr><th>千葉市</th><td>1級地-2</td><td>74,810円</td><td>46,000円</td><td class="big">120,810円</td></tr>
+      <tr><th>京都市</th><td>1級地-1</td><td>76,420円</td><td>40,000円</td><td class="big">116,420円</td></tr>
+      <tr><th>大阪市</th><td>1級地-1</td><td>76,420円</td><td>40,000円</td><td class="big">116,420円</td></tr>
+      <tr><th>神戸市</th><td>1級地-1</td><td>76,420円</td><td>40,000円</td><td class="big">116,420円</td></tr>
+      <tr><th>名古屋市</th><td>1級地-1</td><td>76,420円</td><td>37,000円</td><td class="big">113,420円</td></tr>
+      <tr><th>仙台市</th><td>1級地-2</td><td>74,810円</td><td>37,000円</td><td class="big">111,810円</td></tr>
+      <tr><th>札幌市</th><td>1級地-2</td><td>74,810円</td><td>36,000円</td><td class="big">110,810円</td></tr>
+      <tr><th>福岡市</th><td>1級地-2</td><td>74,810円</td><td>36,000円</td><td class="big">110,810円</td></tr>
+    </tbody>
+  </table>
+  </div>
+  <p class="mini-note">生活扶助＝第1類＋第2類＋特例加算1,500円＋経過的加算（該当分）。家賃上限は単身の基準額で、実際は<strong>払っている家賃の実費</strong>（上限まで）が支給されます。冬に暖房費として上乗せされる<strong>冬季加算</strong>（例：札幌市の単身 月2,630円〜・10月〜翌4月）は含みません。医療費（医療扶助）は<strong>別枠で自己負担ゼロ</strong>です。</p>
+
+  <h2>② あなたの世帯でいくら？【自動計算】</h2>
+  <p>世帯全員の年齢を入れてください。<strong>第1類（年齢別の食費・被服費）→ 逓減率 → 第2類（光熱費・家具など世帯共通費）→ 特例加算 → 経過的加算 → 各種加算</strong>の順に、厚労省の算出方法どおり積み上げます。</p>
+
+  <div class="calc" role="group" aria-label="生活保護の支給額計算機">
+    <h4>最低生活費 計算機（令和8年度基準）</h4>
+    <div class="row">
+      <label>お住まいの市（級地と家賃上限を自動設定）</label>
+      <select id="g-city">
+        <option value="tokyo">東京23区（1級地-1）</option>
+        <option value="kawasaki">川崎市（1級地-1）</option>
+        <option value="yokohama">横浜市（1級地-1）</option>
+        <option value="saitama">さいたま市（1級地-1）</option>
+        <option value="chiba">千葉市（1級地-2）</option>
+        <option value="kyoto">京都市（1級地-1）</option>
+        <option value="osaka" selected>大阪市（1級地-1）</option>
+        <option value="kobe">神戸市（1級地-1）</option>
+        <option value="nagoya">名古屋市（1級地-1）</option>
+        <option value="sendai">仙台市（1級地-2）</option>
+        <option value="sapporo">札幌市（1級地-2）</option>
+        <option value="fukuoka">福岡市（1級地-2）</option>
+        <option value="other">その他の市町村（級地を自分で選ぶ）</option>
+      </select>
+    </div>
+    <div class="row" id="g-kyuchi-row" style="display:none">
+      <label for="g-kyuchi">級地</label>
+      <select id="g-kyuchi">
+        <option value="0">1級地-1（大都市）</option>
+        <option value="1">1級地-2</option>
+        <option value="2">2級地-1</option>
+        <option value="3">2級地-2</option>
+        <option value="4">3級地-1</option>
+        <option value="5">3級地-2（町村部）</option>
+      </select>
+      <span class="mini-note">お住まいの市町村の級地は市役所サイトか福祉事務所で確認できます</span>
+    </div>
+    <div class="row" style="align-items:flex-start">
+      <label style="padding-top:6px">世帯全員の年齢</label>
+      <div>
+        <div class="member-list" id="m-list"></div>
+        <button type="button" id="m-add">＋ 世帯員を追加</button>
+      </div>
+    </div>
+    <div class="row">
+      <label for="g-rent">家賃（月額）</label>
+      <input type="number" id="g-rent" inputmode="numeric" min="0" step="1000" placeholder="例: 45000"> 円
+      <span class="mini-note">持ち家・家賃0円なら空欄でOK。上限額まで実費支給</span>
+    </div>
+    <div class="row">
+      <label for="g-shogai">障害者加算の対象者</label>
+      <select id="g-shogai">
+        <option value="none" selected>いない</option>
+        <option value="g12">身体障害者手帳1・2級／障害年金1級 の人がいる</option>
+        <option value="g3">身体障害者手帳3級／障害年金2級 の人がいる</option>
+      </select>
+    </div>
+    <div class="row">
+      <label for="g-single">ひとり親世帯（母子・父子）</label>
+      <select id="g-single">
+        <option value="no" selected>いいえ</option>
+        <option value="yes">はい（母子加算を計算）</option>
+      </select>
+    </div>
+    <div class="row">
+      <label for="g-school">通学中の子</label>
+      <select id="g-school-e">
+        <option value="0" selected>小学生 0人</option>
+        <option value="1">小学生 1人</option>
+        <option value="2">小学生 2人</option>
+        <option value="3">小学生 3人</option>
+      </select>
+      <select id="g-school-j">
+        <option value="0" selected>中学生 0人</option>
+        <option value="1">中学生 1人</option>
+        <option value="2">中学生 2人</option>
+        <option value="3">中学生 3人</option>
+      </select>
+      <select id="g-school-h">
+        <option value="0" selected>高校生 0人</option>
+        <option value="1">高校生 1人</option>
+        <option value="2">高校生 2人</option>
+        <option value="3">高校生 3人</option>
+      </select>
+    </div>
+    <div class="out" aria-live="polite">
+      <div>最低生活費の目安：<span class="total" id="g-total">—</span><span style="font-weight:700">／月</span></div>
+      <div class="bd" id="g-bd"></div>
+    </div>
+  </div>
+  <p class="mini-note">経過的加算は世帯人数5人まで・生活扶助本体分を実装しています（母子世帯等の経過的加算〜3,330円と、3歳未満の児童がいる場合等の児童養育の経過的加算4,330円は含みません＝その分だけ実際はやや多くなることがあります）。妊産婦加算・介護施設入所者等は対象外です。</p>
+
+  <h2>③ 働いた収入がある場合【差額支給の計算】</h2>
+  <p>「収入があったら打ち切り」ではありません。<strong>収入が最低生活費より少なければ差額が支給</strong>されます。しかも働いた収入は<strong>勤労控除</strong>（最低でも月15,200円）の分だけ「なかったこと」にして計算されるので、<strong>働いた分だけ手元に残るお金は必ず増えます</strong>。</p>
+
+  <div class="calc" role="group" aria-label="差額支給の計算機">
+    <h4>差額支給 計算機</h4>
+    <div class="row">
+      <label for="i-work">働いた収入（月・手取りでなく総支給）</label>
+      <input type="number" id="i-work" inputmode="numeric" min="0" step="1000" placeholder="例: 80000"> 円
+    </div>
+    <div class="row">
+      <label for="i-other">年金・手当など他の収入（月）</label>
+      <input type="number" id="i-other" inputmode="numeric" min="0" step="1000" placeholder="例: 65000"> 円
+      <span class="mini-note">障害年金・児童扶養手当・仕送りなど（控除なしで全額認定）</span>
+    </div>
+    <div class="out" aria-live="polite">
+      <div>保護費（支給額）の目安：<span class="total" id="i-total">—</span><span style="font-weight:700">／月</span></div>
+      <div class="bd" id="i-bd"></div>
+    </div>
+  </div>
+  <p class="mini-note">勤労控除はここでは基礎控除の概算（15,200円＋超過分の約10%）で計算しています。実際は収入額に応じた控除額表で決まり、未成年者控除・新規就労控除などが上乗せされる場合があります。</p>
+
+  <h2>④ よくある誤解と、申請前に知っておくこと</h2>
+  <ul>
+    <li><strong>貯金</strong>：おおむね最低生活費の半月〜1か月分を超える預貯金は先に使う扱いです。ただし「ゼロになるまで申請できない」わけではありません。</li>
+    <li><strong>持ち家</strong>：住み続けながら受給できる場合があります（住宅ローンが残っている場合は原則不可）。</li>
+    <li><strong>自動車</strong>：原則処分ですが、障害があり通院に必要・公共交通のない地域での通勤など、<strong>保有が認められる例外</strong>があります。</li>
+    <li><strong>扶養照会</strong>：親族への問い合わせは<strong>拒否の意向を伝えられます</strong>。DV・絶縁など事情がある場合は照会自体を省略できる運用になっています（2021年通知）。</li>
+    <li><strong>医療費</strong>：医療扶助として<strong>自己負担ゼロ</strong>。国民健康保険からは抜けます。</li>
+    <li><strong>申請は権利</strong>：福祉事務所の窓口で「申請します」と伝えれば、申請書を受け取らない対応（いわゆる水際作戦）は違法です。原則14日以内（最長30日）に可否が通知されます。</li>
+  </ul>
+
+  <div class="callout note">
+    <p><span class="tag">あわせて読みたい</span>家賃を下げて生活を安定させるなら<a href="koei-jutaku-bairitsu.html">公営住宅の倍率データ</a>と<a href="koei-hairiyasui.html">入りやすい人の条件</a>も参考に。生活保護までは必要ないけれど税負担を軽くしたい方は<a href="juminzei-hikazei-check.html">住民税非課税の判定シミュレーター</a>、医療費が心配な方は<a href="kougaku-ryouyouhi-2026.html">高額療養費の計算機（2026年8月改正対応）</a>へ。障害のある方は<a href="shogai-nenkin-keisanki.html">障害年金の計算機</a>もどうぞ。</p>
+  </div>
+
+  <h2>コメント（体験・自治体ごとの運用の情報交換）</h2>
+  <p class="mini-note">申請時の体験や、お住まいの自治体の運用について共有いただけると、同じ立場の方の助けになります。個人が特定される情報はお書きにならないでください。</p>
+  <div id="cusdis_thread"
+    data-host="https://cusdis.com"
+    data-app-id="14dfe8f8-c660-42ee-9cd2-54ee31828ba9"
+    data-page-id="seikatsuhogo-keisanki"
+    data-page-url="https://fukushiru.com/articles/seikatsuhogo-keisanki.html"
+    data-page-title="生活保護 支給額シミュレーター">
+  </div>
+  <script async defer src="https://cusdis.com/js/cusdis.es.js"></script>
+
+  <h2>出典（厚生労働省ほか）</h2>
+  <ul class="sources">
+    <li>厚生労働省「生活保護制度における生活扶助基準額の算出方法（令和8年4月）」（第1類・第2類・逓減率・特例加算・経過的加算・各種加算の基準額表） https://www.mhlw.go.jp/content/001152601.pdf</li>
+    <li>厚生労働省「生活保護制度」制度概要 https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/hukushi_kaigo/seikatsuhogo/seikatuhogo/index.html</li>
+    <li>各市の住宅扶助基準額（限度額）：各市公表資料（例：大阪市「生活保護費について」 https://www.city.osaka.lg.jp/fukushi/page/0000086902.html ）</li>
+    <li>級地区分：厚生労働省告示による市町村別区分（平成30年10月1日現在の区分に基づく）</li>
+  </ul>
+
+  <div class="disclaimer">
+    <strong>ご注意：</strong>このページの計算はすべて公開情報にもとづく<strong>概算</strong>です。実際の保護費は、冬季加算・一時扶助・収入認定の細目・世帯の個別事情により福祉事務所が決定します。住宅扶助の限度額は世帯人数・地域により変わり、改定されることがあります。受給の可否や金額は、必ずお住まいの福祉事務所でご確認ください。当サイトは個別の受給可否を判定するものではありません。
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="inner">
+    <p><strong>フクシル</strong>（仮）— 知らないと損する、くらしの福祉制度を当事者目線でまとめる情報サイトです。</p>
+    <p><a href="../index.html">トップへ戻る</a> ／ <a href="../about.html">このサイトについて</a></p>
+    <p>© 2026 フクシル. 本サイトの情報は一般的な参考情報であり、正確性を保証するものではありません。</p>
+  </div>
+</footer>
+
+<script>
+// ====== 令和8年4月 生活扶助基準額（厚労省 算出方法PDFより。年度改定時はここを更新） ======
+// 級地index: 0=1級地-1, 1=1級地-2, 2=2級地-1, 3=2級地-2, 4=3級地-1, 5=3級地-2
+var K1 = [ // 第1類（年齢別・級地別）
+  { max: 2,   v: [44580,43240,41460,39680,39230,37000] },
+  { max: 5,   v: [44580,43240,41460,39680,39230,37000] },
+  { max: 11,  v: [46460,45060,43200,41350,40880,38560] },
+  { max: 17,  v: [49270,47790,45820,43850,43360,40900] },
+  { max: 19,  v: [46930,45520,43640,41760,41290,38950] },
+  { max: 40,  v: [46930,45520,43640,41760,41290,38950] },
+  { max: 59,  v: [46930,45520,43640,41760,41290,38950] },
+  { max: 64,  v: [46930,45520,43640,41760,41290,38950] },
+  { max: 69,  v: [46460,45060,43200,41350,40880,38560] },
+  { max: 74,  v: [46460,45060,43200,41350,40880,38560] },
+  { max: 999, v: [39890,38690,37100,35500,35100,33110] }
+];
+var TEIGEN = [1.0, 0.87, 0.75, 0.66, 0.59, 0.58]; // 逓減率（1〜6人。7人以上は0.58で概算）
+var K2 = [27790, 38060, 44730, 48900, 49180];      // 第2類（1〜5人。6人以上は5人の額で概算）
+var TOKUREI = 1500; // 特例加算（1人あたり月額）※2026年10月から2,500円へ引き上げ方針→改定時に更新
+// 経過的加算（生活扶助本体分）: [世帯人数-1][年齢帯index][級地index] ※厚労省別表(1)
+var KEIKA = {
+  1: [[0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0],[830,0,0,410,0,0],[200,0,0,410,0,0],[1020,0,0,410,0,0],[660,0,0,410,0,0],[1130,0,0,0,0,0],[0,0,0,0,0,0],[2720,840,0,680,0,0]],
+  2: [[50,0,0,490,0,0],[50,0,0,490,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0],[390,0,0,880,0,0],[390,0,0,880,0,0],[390,0,0,880,0,0],[390,0,0,880,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0],[960,110,0,1210,0,0]],
+  3: [[0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0],[30,0,0,0,0,0],[1790,450,0,0,0,0],[170,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0]],
+  4: [[480,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0],[1730,550,0,0,0,0],[3270,2050,1130,220,0,0],[1740,590,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0]],
+  5: [[1840,1340,720,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0],[3310,2220,1410,620,0,0],[4690,3560,2700,1850,150,0],[3230,2180,1380,590,0,0],[1560,570,0,0,0,0],[460,0,0,0,0,0],[730,0,0,0,0,0],[0,0,0,0,0,0],[1130,310,0,0,0,0]]
+};
+// 障害者加算（級地グループ別: 1級地/2級地/3級地）
+var SHOGAI = { g12: [27460, 25540, 23620], g3: [18300, 17020, 15750] };
+// 母子加算（ひとり親）: 児童1人/2人/3人目以降加算
+var BOSHI = { c1: [18800, 17400, 16100], c2: [23600, 21800, 20200], c3p: [2900, 2700, 2500] };
+var JIDO_YOIKU = 10190; // 児童養育加算（児童1人につき）
+var KYOIKU = { e: 3400, j: 5300, h: 7300 }; // 教育扶助（小/中）・高等学校等就学費
+// 都市データ: 級地index / 住宅扶助上限（単身, 2人以上）※各市公表の基準額
+var CITIES = {
+  tokyo:    { k: 0, rent1: 53700, rent2: 64000, name: "東京23区" },
+  kawasaki: { k: 0, rent1: 53700, rent2: 64000, name: "川崎市" },
+  yokohama: { k: 0, rent1: 52000, rent2: 62000, name: "横浜市" },
+  saitama:  { k: 0, rent1: 45000, rent2: 54000, name: "さいたま市" },
+  chiba:    { k: 1, rent1: 46000, rent2: 55000, name: "千葉市" },
+  kyoto:    { k: 0, rent1: 40000, rent2: 48000, name: "京都市" },
+  osaka:    { k: 0, rent1: 40000, rent2: 48000, name: "大阪市" },
+  kobe:     { k: 0, rent1: 40000, rent2: 48000, name: "神戸市" },
+  nagoya:   { k: 0, rent1: 37000, rent2: 44000, name: "名古屋市" },
+  sendai:   { k: 1, rent1: 37000, rent2: 44000, name: "仙台市" },
+  sapporo:  { k: 1, rent1: 36000, rent2: 43000, name: "札幌市" },
+  fukuoka:  { k: 1, rent1: 36000, rent2: 43000, name: "福岡市" },
+  other:    { k: 0, rent1: 53700, rent2: 64000, name: "その他" }
+};
+
+function yen(n){ return Math.round(n).toLocaleString('ja-JP') + '円'; }
+function ageIdx(age){ for (var i=0;i<K1.length;i++){ if (age <= K1[i].max) return i; } return K1.length-1; }
+var seikatsuTotal = 0; // ③で使う
+
+(function(){
+  var list = document.getElementById('m-list');
+  var addBtn = document.getElementById('m-add');
+  var citySel = document.getElementById('g-city');
+  var kyuchiRow = document.getElementById('g-kyuchi-row');
+  var kyuchiSel = document.getElementById('g-kyuchi');
+  var rentIn = document.getElementById('g-rent');
+  var shogaiSel = document.getElementById('g-shogai');
+  var singleSel = document.getElementById('g-single');
+  var se = document.getElementById('g-school-e'), sj = document.getElementById('g-school-j'), sh = document.getElementById('g-school-h');
+  var out = document.getElementById('g-total'), bd = document.getElementById('g-bd');
+
+  function addMember(age){
+    var row = document.createElement('div');
+    row.className = 'm-row';
+    var sel = document.createElement('select');
+    for (var a=0; a<=100; a++){
+      var o = document.createElement('option');
+      o.value = a; o.textContent = a + '歳';
+      if (a === age) o.selected = true;
+      sel.appendChild(o);
+    }
+    var del = document.createElement('button');
+    del.type = 'button'; del.textContent = '削除';
+    del.addEventListener('click', function(){ if (list.children.length > 1){ list.removeChild(row); calc(); } });
+    sel.addEventListener('change', calc);
+    row.appendChild(sel); row.appendChild(del);
+    list.appendChild(row);
+  }
+  addBtn.addEventListener('click', function(){ if (list.children.length < 8) { addMember(30); calc(); } });
+  addMember(35); // 初期値: 35歳単身
+
+  function calc(){
+    var city = CITIES[citySel.value];
+    var k = citySel.value === 'other' ? parseInt(kyuchiSel.value, 10) : city.k;
+    kyuchiRow.style.display = citySel.value === 'other' ? '' : 'none';
+    var kg = k < 2 ? 0 : (k < 4 ? 1 : 2); // 級地グループ(1/2/3級地)
+
+    var ages = [].map.call(list.querySelectorAll('select'), function(s){ return parseInt(s.value, 10); });
+    var n = ages.length;
+    var nIdx = Math.min(n, 6) - 1;
+
+    // 第1類×逓減率＋第2類
+    var k1sum = 0;
+    ages.forEach(function(a){ k1sum += K1[ageIdx(a)].v[k]; });
+    var k1 = Math.round(k1sum * TEIGEN[nIdx]);
+    var k2 = K2[Math.min(n, 5) - 1];
+
+    // 経過的加算（〜5人世帯まで実装）
+    var keika = 0;
+    var kt = KEIKA[Math.min(n, 5)];
+    if (kt && n <= 5) ages.forEach(function(a){ keika += kt[ageIdx(a)][k]; });
+
+    var tokurei = TOKUREI * n;
+    var seikatsu = k1 + k2 + keika + tokurei;
+
+    // 加算
+    var kasan = 0, kasanParts = [];
+    if (shogaiSel.value === 'g12'){ kasan += SHOGAI.g12[kg]; kasanParts.push('障害者加算 ' + yen(SHOGAI.g12[kg])); }
+    if (shogaiSel.value === 'g3'){ kasan += SHOGAI.g3[kg]; kasanParts.push('障害者加算 ' + yen(SHOGAI.g3[kg])); }
+    var children = ages.filter(function(a){ return a <= 18; }).length;
+    if (singleSel.value === 'yes' && children > 0){
+      var b = children === 1 ? BOSHI.c1[kg] : BOSHI.c2[kg] + Math.max(0, children - 2) * BOSHI.c3p[kg];
+      kasan += b; kasanParts.push('母子加算 ' + yen(b));
+    }
+    if (children > 0){ var jy = JIDO_YOIKU * children; kasan += jy; kasanParts.push('児童養育加算 ' + yen(jy)); }
+
+    // 教育扶助
+    var kyoiku = parseInt(se.value,10)*KYOIKU.e + parseInt(sj.value,10)*KYOIKU.j + parseInt(sh.value,10)*KYOIKU.h;
+
+    // 住宅扶助
+    var rentCap = n === 1 ? city.rent1 : city.rent2;
+    var rent = parseInt(rentIn.value, 10);
+    var jutaku = (isNaN(rent) || rent <= 0) ? 0 : Math.min(rent, rentCap);
+
+    var total = seikatsu + kasan + kyoiku + jutaku;
+    seikatsuTotal = total;
+    out.textContent = '約' + yen(total);
+    bd.innerHTML = '生活扶助 ' + yen(seikatsu)
+      + '（第1類' + yen(k1) + '＋第2類' + yen(k2)
+      + (keika ? '＋経過的加算' + yen(keika) : '')
+      + '＋特例加算' + yen(tokurei) + '）'
+      + (kasanParts.length ? '＋' + kasanParts.join('＋') : '')
+      + (kyoiku ? '＋教育扶助等' + yen(kyoiku) : '')
+      + (jutaku ? '＋住宅扶助' + yen(jutaku) + '（' + city.name + 'の上限' + yen(rentCap) + '）' : '＋住宅扶助0円（家賃未入力）')
+      + '。冬季加算・一時扶助は別途。医療費は医療扶助で自己負担ゼロ。';
+    document.dispatchEvent(new Event('seikatsu-updated'));
+  }
+
+  [citySel, kyuchiSel, rentIn, shogaiSel, singleSel, se, sj, sh].forEach(function(e){
+    e.addEventListener('input', calc); e.addEventListener('change', calc);
+  });
+  calc();
+})();
+
+// ====== ③ 差額支給 ======
+(function(){
+  var work = document.getElementById('i-work'), other = document.getElementById('i-other');
+  var out = document.getElementById('i-total'), bd = document.getElementById('i-bd');
+  function num(el){ var v = parseInt(el.value, 10); return (isNaN(v) || v < 0) ? 0 : v; }
+  function calc(){
+    var w = num(work), o = num(other);
+    // 基礎控除の概算: 15,200円まで全額＋超過分の約10%
+    var kojo = w > 0 ? Math.min(w, 15200) + Math.max(0, w - 15200) * 0.1 : 0;
+    var nintei = Math.max(0, w - kojo) + o;
+    var pay = Math.max(0, seikatsuTotal - nintei);
+    out.textContent = '約' + yen(pay);
+    bd.innerHTML = '最低生活費 ' + yen(seikatsuTotal) + ' − 収入認定額 ' + yen(nintei)
+      + '（働いた収入' + yen(w) + 'のうち勤労控除' + yen(kojo) + 'は収入に数えない）'
+      + (pay > 0 ? '。<strong>手元に残る合計は約' + yen(pay + w + o) + '</strong>（保護費＋収入）' : '。収入が最低生活費を上回っているため、この条件では対象外の見込みです');
+  }
+  [work, other].forEach(function(e){ e.addEventListener('input', calc); });
+  document.addEventListener('seikatsu-updated', calc);
+  calc();
+})();
+</script>
+</body>
+</html>
