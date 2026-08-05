@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<title>公営住宅の収入基準は年収いくらまで？政令月収の自動判定【単身296万円・障害者手帳ありなら422万円】｜フクシル</title>
+<meta name="description" content="市営住宅・都営住宅の収入基準（政令月収158,000円／裁量階層214,000円）を年収・世帯構成・障害者手帳の有無から自動判定。公営住宅法施行令の控除（同居親族38万円・特定扶養25万円・障害者27万円・特別障害者40万円・ひとり親35万円など）をそのまま計算式に入れているので、「同じ年収でも障害のある世帯は基準を満たしやすい」理由まで数字で分かります。世帯別の年収ライン早見表つき。">
+<link rel="canonical" href="https://fukushiru.com/articles/koei-shunyu-kijun.html">
+<meta property="og:type" content="article">
+<meta property="og:title" content="公営住宅の収入基準は年収いくらまで？政令月収の自動判定">
+<meta property="og:description" content="政令月収158,000円／裁量階層214,000円のラインを、年収・世帯構成・障害者手帳から自動判定。世帯別の年収ライン早見表つき。">
+<meta property="og:site_name" content="フクシル">
+<meta property="og:url" content="https://fukushiru.com/articles/koei-shunyu-kijun.html">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="stylesheet" href="../assets/style.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "公営住宅の収入基準は年収いくらまで？政令月収の自動判定",
+  "description": "公営住宅（市営・都営・県営）の入居収入基準である政令月収を、年収・世帯構成・障害者手帳の有無から自動計算し、本来階層（158,000円）・裁量階層（214,000円）のどちらに収まるかを判定するシミュレーター。公営住宅法施行令第1条第3号の控除一覧と、世帯別の年収ライン早見表つき。",
+  "inLanguage": "ja",
+  "datePublished": "2026-08-05",
+  "dateModified": "2026-08-05",
+  "author": { "@type": "Organization", "name": "フクシル" },
+  "publisher": { "@type": "Organization", "name": "フクシル" },
+  "url": "https://fukushiru.com/articles/koei-shunyu-kijun.html",
+  "mainEntityOfPage": "https://fukushiru.com/articles/koei-shunyu-kijun.html",
+  "isPartOf": { "@type": "WebSite", "name": "フクシル", "url": "https://fukushiru.com/" }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "公営住宅（市営住宅・都営住宅）に入れるのは年収いくらまでですか？",
+      "acceptedAnswer": { "@type": "Answer", "text": "国の原則では、世帯の政令月収が158,000円以下であることが条件です（本来階層）。給与収入だけの単身者なら年収およそ296万円、夫婦（配偶者に収入なし）でおよそ350万円、夫婦＋子1人でおよそ399万円が目安になります。高齢者・障害者・小学校就学前の子がいる世帯などは裁量階層として214,000円まで緩和されることが多く、単身＋障害者手帳（一般）ならおよそ422万円まで上がります。ただし基準額は自治体の条例で下げられている場合があるため、最終的には募集案内での確認が必要です。" }
+    },
+    {
+      "@type": "Question",
+      "name": "政令月収とはどう計算するのですか？額面の月給とは違いますか？",
+      "acceptedAnswer": { "@type": "Answer", "text": "額面の月給とはまったく違います。政令月収は「世帯全員の年間所得の合計 −（公営住宅法施行令の控除の合計）÷ 12」で求めます。給与収入の場合はまず給与所得控除を引いて所得に直し、そのうえで同居親族1人38万円、特定扶養親族（16〜22歳）25万円、老人扶養親族・老人控除対象配偶者10万円、障害者27万円、特別障害者40万円、寡婦27万円・ひとり親35万円、給与所得等がある人1人あたり10万円といった控除を差し引きます。額面の年収がそのまま基準と比べられるわけではありません。" }
+    },
+    {
+      "@type": "Question",
+      "name": "障害者手帳があると公営住宅の収入基準は有利になりますか？",
+      "acceptedAnswer": { "@type": "Answer", "text": "二重に有利になります。第一に、政令月収の計算で障害者控除27万円（特別障害者は40万円）が引かれるため、同じ年収でも政令月収が低く計算されます。たとえば給与年収300万円の単身者は、手帳がなければ政令月収160,000円で基準（158,000円）をわずかに超えますが、障害者控除が入ると137,500円まで下がって基準内に収まります。第二に、障害者のいる世帯は多くの自治体で裁量階層として基準そのものが214,000円まで緩和されます。" }
+    },
+    {
+      "@type": "Question",
+      "name": "障害年金や遺族年金も収入に含めて計算しますか？",
+      "acceptedAnswer": { "@type": "Answer", "text": "障害年金・遺族年金は非課税所得なので、原則として政令月収の計算に含めません。含めるのは老齢年金などの課税対象になる収入です。障害年金だけで生活している世帯は所得ゼロとして扱われるため、収入基準は問題なく満たします。取り扱いの細部は自治体の募集案内で確認してください。" }
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"トップ","item":"https://fukushiru.com/"},{"@type":"ListItem","position":2,"name":"公営住宅","item":"https://fukushiru.com/articles/koei-jutaku-bairitsu.html"},{"@type":"ListItem","position":3,"name":"収入基準（政令月収）","item":"https://fukushiru.com/articles/koei-shunyu-kijun.html"}]}
+</script>
+<style>
+.calc { border: 1px solid var(--line); border-radius: 10px; padding: 16px 18px; margin: 1.2em 0; background: var(--soft); }
+.calc h4 { margin: .1em 0 .6em; }
+.calc .row { display: flex; flex-wrap: wrap; gap: 8px 14px; align-items: center; margin: .55em 0; }
+.calc label { font-weight: 600; font-size: .9rem; }
+.calc input[type=number] { width: 8em; padding: 6px 8px; border: 1px solid var(--line); border-radius: 6px; font-size: 1rem; }
+.calc select { padding: 6px 8px; border: 1px solid var(--line); border-radius: 6px; font-size: 1rem; max-width: 100%; }
+.calc .out { margin-top: 12px; padding: 12px 14px; background: #fff; border: 1px solid var(--line); border-radius: 8px; }
+.calc .total { font-size: 1.35rem; font-weight: 800; color: var(--brand-dark); }
+.calc .cmp { font-size: .92rem; margin-top: 4px; font-weight: 700; }
+.calc .bd { font-size: .86rem; color: var(--sub); margin-top: 6px; line-height: 1.7; }
+.calc .sub { font-size: .8rem; color: var(--sub); font-weight: 400; }
+/* fieldset は既定で min-width:min-content のため、長いoptionがあると375px幅で横はみ出しする */
+.calc fieldset { border: 1px dashed var(--line); border-radius: 8px; margin: .8em 0; padding: 6px 12px 10px; min-width: 0; }
+.calc fieldset .row > * { min-width: 0; }
+.calc legend { font-size: .82rem; font-weight: 700; color: var(--brand-dark); padding: 0 6px; }
+.mini-note { font-size: .84rem; color: var(--sub); }
+.line-table td { text-align: center; }
+.line-table td.big { font-weight: 700; white-space: nowrap; color: var(--brand-dark); }
+.ded-table td:last-child { white-space: nowrap; font-weight: 700; text-align: right; }
+.verdict-ok { color: #0a7a2f; }
+.verdict-mid { color: #9a6b00; }
+.verdict-no { color: #b00020; }
+#k-detail { margin-top: 8px; font-size: .84rem; color: var(--sub); }
+#k-detail table { min-width: 0; font-size: .84rem; }
+#k-detail th, #k-detail td { padding: 4px 8px; }
+#k-detail td:last-child { text-align: right; white-space: nowrap; }
+</style>
+</head>
+<body>
+<a class="skip" href="#main">本文へスキップ</a>
+<header class="site-header">
+  <div class="inner">
+    <a class="brand" href="../index.html">フクシル <small>知らないと損する、くらしの福祉</small></a>
+    <nav class="site-nav" aria-label="主要">
+      <a href="../index.html">トップ</a>
+      <a href="koei-jutaku-bairitsu.html">公営住宅</a>
+      <a href="seikatsuhogo-keisanki.html">生活保護</a>
+      <a href="juminzei-hikazei-check.html">住民税非課税</a>
+      <a href="shogai-nenkin-keisanki.html">障害年金</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+  <p class="breadcrumb"><a href="../index.html">トップ</a> ＞ <a href="koei-jutaku-bairitsu.html">公営住宅</a> ＞ 収入基準（政令月収）</p>
+
+  <h1>公営住宅の収入基準は年収いくらまで？<br>政令月収の自動判定【2026年対応】</h1>
+  <p class="updated">最終更新：2026-08-05 ／ 控除の額は公営住宅法施行令第1条第3号にもとづく。給与所得控除は令和7年分以後（最低65万円）の額で計算</p>
+
+  <p class="lead">市営住宅・都営住宅に申し込むとき、<strong>倍率より先に来る関門が「収入基準」</strong>です。基準は額面の年収ではなく<strong>「政令月収」</strong>という独自の計算値で判定され、ここには<strong>障害者控除・扶養控除・ひとり親控除</strong>などが効きます。つまり<strong>同じ年収でも、世帯の事情によって通る・通らないが変わります</strong>。このページでは、年収と世帯構成を入れるだけで政令月収を計算し、<strong>本来階層（158,000円）・裁量階層（214,000円）のどちらに収まるか</strong>を判定します。</p>
+
+  <div class="callout point">
+    <p><span class="tag">この記事の要点</span>収入基準は<strong>政令月収158,000円以下</strong>が原則。給与収入だけの単身なら<strong>年収およそ296万円</strong>が目安です。高齢者・障害者・小さな子どもがいる世帯は<strong>裁量階層で214,000円まで緩和</strong>され、単身＋障害者手帳なら<strong>およそ422万円</strong>まで上がります。まず<a href="#keisanki">下の判定計算機</a>で自分の位置を確かめ、通りそうなら<a href="koei-jutaku-bairitsu.html">倍率</a>と<a href="koei-hairiyasui.html">入りやすい住戸</a>の話に進んでください。</p>
+  </div>
+
+  <h2>① 早見表：収入基準に収まる年収の目安</h2>
+  <p>給与収入だけの世帯について、<strong>政令月収が基準ちょうどになる年収</strong>を逆算したものです（下の計算機と同じ式で算出）。これ以下なら基準内、という意味の<strong>目安</strong>です。</p>
+  <div class="table-wrap">
+  <table class="line-table">
+    <caption>収入基準に収まる給与年収（額面）の目安。国の原則額で計算</caption>
+    <thead><tr><th scope="col">世帯のかたち</th><th scope="col">本来階層<br>（政令月収158,000円）</th><th scope="col">裁量階層<br>（政令月収214,000円）</th></tr></thead>
+    <tbody>
+      <tr><th scope="row">単身</th><td class="big">約296万円</td><td>—</td></tr>
+      <tr><th scope="row">単身＋障害者手帳（一般）</th><td>約335万円</td><td class="big">約422万円</td></tr>
+      <tr><th scope="row">単身＋障害者手帳（重度）</th><td>約353万円</td><td class="big">約438万円</td></tr>
+      <tr><th scope="row">夫婦（配偶者に収入なし）</th><td class="big">約350万円</td><td>約436万円</td></tr>
+      <tr><th scope="row">夫婦＋子1人（16歳未満）</th><td class="big">約399万円</td><td>約483万円</td></tr>
+      <tr><th scope="row">夫婦＋子2人（16歳未満）</th><td class="big">約447万円</td><td>約531万円</td></tr>
+      <tr><th scope="row">ひとり親＋子1人</th><td>約395万円</td><td class="big">約479万円</td></tr>
+      <tr><th scope="row">高齢者の単身（65歳以上・年金収入）</th><td>約309万円</td><td class="big">約392万円</td></tr>
+      <tr><th scope="row">高齢者夫婦（65歳以上・年金収入）</th><td>約353万円</td><td class="big">約439万円</td></tr>
+    </tbody>
+  </table>
+  </div>
+  <p class="mini-note">裁量階層の欄は、その世帯が裁量階層の対象になる場合のラインです（対象は<a href="#sairyo">⑤</a>）。世帯に収入のある人が複数いる場合や、給与以外の所得がある場合はズレます。正確には計算機で。</p>
+
+  <h2 id="keisanki">② あなたの世帯は基準内？【自動判定】</h2>
+  <p>世帯全員ぶんを入れてください。<strong>障害年金・遺族年金などの非課税収入は入れません</strong>（計算に含めないのが原則です）。</p>
+
+  <div class="calc" role="group" aria-label="公営住宅の収入基準 判定計算機">
+    <h4>政令月収 判定計算機</h4>
+
+    <fieldset>
+      <legend>収入</legend>
+      <div class="row">
+        <label for="k-type">申込む本人の収入の種類</label>
+        <select id="k-type">
+          <option value="salary" selected>給与（パート・アルバイト含む）</option>
+          <option value="pension65">公的年金（65歳以上・老齢年金など）</option>
+          <option value="pension64">公的年金（65歳未満・老齢年金など）</option>
+          <option value="shotoku">所得金額を直接入れる（自営業など）</option>
+        </select>
+      </div>
+      <div class="row">
+        <label for="k-income">本人の年間収入（額面）</label>
+        <input type="number" id="k-income" inputmode="numeric" min="0" step="1" placeholder="例: 300"> 万円
+      </div>
+      <div class="row">
+        <label for="k-othern">ほかに収入のある同居家族</label>
+        <select id="k-othern">
+          <option value="0" selected>いない</option>
+          <option value="1">1人</option>
+          <option value="2">2人</option>
+        </select>
+        <input type="number" id="k-otherman" inputmode="numeric" min="0" step="1" placeholder="合計年収"> 万円
+        <span class="mini-note">給与収入として概算します</span>
+      </div>
+    </fieldset>
+
+    <fieldset>
+      <legend>世帯の構成（控除の対象）</legend>
+      <div class="row">
+        <label for="k-doukyo">同居する家族の人数<span class="sub">（本人を除く）</span></label>
+        <select id="k-doukyo">
+          <option value="0" selected>0人（単身）</option>
+          <option value="1">1人</option><option value="2">2人</option><option value="3">3人</option>
+          <option value="4">4人</option><option value="5">5人</option><option value="6">6人</option>
+        </select>
+        <span class="mini-note">1人につき38万円の控除</span>
+      </div>
+      <div class="row">
+        <label for="k-1623">うち16〜22歳</label>
+        <select id="k-1623">
+          <option value="0" selected>0人</option><option value="1">1人</option><option value="2">2人</option><option value="3">3人</option>
+        </select>
+        <label for="k-70">うち70歳以上</label>
+        <select id="k-70">
+          <option value="0" selected>0人</option><option value="1">1人</option><option value="2">2人</option><option value="3">3人</option>
+        </select>
+      </div>
+      <div class="row">
+        <label for="k-shogai">障害者手帳（一般）</label>
+        <select id="k-shogai">
+          <option value="0" selected>0人</option><option value="1">1人</option><option value="2">2人</option><option value="3">3人</option>
+        </select>
+        <label for="k-toku">重度（特別障害者）</label>
+        <select id="k-toku">
+          <option value="0" selected>0人</option><option value="1">1人</option><option value="2">2人</option><option value="3">3人</option>
+        </select>
+      </div>
+      <p class="mini-note" style="margin:.2em 0 .6em">「重度（特別障害者）」は身体1・2級、精神1級、療育A などが目安です（27万円→40万円の控除になります）。世帯の中の人数を、本人ぶんも含めて入れてください。</p>
+      <div class="row">
+        <label for="k-status">ひとり親・寡婦</label>
+        <select id="k-status">
+          <option value="none" selected>該当しない</option>
+          <option value="hitorioya">ひとり親（35万円）</option>
+          <option value="kafu">寡婦（27万円）</option>
+        </select>
+      </div>
+    </fieldset>
+
+    <fieldset>
+      <legend>裁量階層（基準が214,000円に緩和される世帯か）</legend>
+      <div class="row">
+        <label for="k-sairyo">次のどれかに当てはまる</label>
+        <select id="k-sairyo">
+          <option value="auto" selected>自動判定（障害者手帳の入力から判断）</option>
+          <option value="yes">当てはまる（高齢者世帯・小学校就学前の子がいる等）</option>
+          <option value="no">当てはまらない</option>
+        </select>
+      </div>
+    </fieldset>
+
+    <div class="out" aria-live="polite">
+      <div>あなたの世帯の政令月収（概算）：<span class="total" id="k-out">—</span></div>
+      <div class="cmp" id="k-verdict"></div>
+      <div class="bd" id="k-bd">収入を入力してください。</div>
+      <div id="k-detail"></div>
+    </div>
+  </div>
+
+  <div class="callout warn">
+    <p><span class="tag">要確認</span>この判定は公開情報にもとづく<strong>概算</strong>です。<strong>基準額そのものを条例で下げている自治体があり</strong>（⑤参照）、控除の細かい適用（別居の扶養親族、所得の種類、非課税収入の扱い）も自治体の運用で差が出ます。申込みの可否は<strong>必ずお住まいの自治体の募集案内</strong>でご確認ください。</p>
+  </div>
+
+  <h2>③ 政令月収の計算式と、引ける控除の一覧</h2>
+  <p>政令月収は、公営住宅法施行令第1条第3号で次のように決められています。<strong>額面の月給とはまったく別物</strong>です。</p>
+  <div class="callout note">
+    <p><strong>政令月収 ＝（世帯全員の年間所得の合計 − 控除の合計）÷ 12</strong></p>
+  </div>
+  <p>給与収入の人は、まず<strong>給与所得控除</strong>を引いて「所得」に直します（2025年の税制改正で最低額が55万円→<strong>65万円</strong>に上がりました）。そのうえで、次の控除を引きます。</p>
+  <div class="table-wrap">
+  <table class="ded-table">
+    <caption>公営住宅の収入計算で引ける控除（公営住宅法施行令第1条第3号）</caption>
+    <thead><tr><th scope="col">控除の種類</th><th scope="col">1人あたりの額</th></tr></thead>
+    <tbody>
+      <tr><th scope="row">同居親族・別居の扶養親族</th><td>38万円</td></tr>
+      <tr><th scope="row">特定扶養親族（16歳以上23歳未満）</th><td>25万円</td></tr>
+      <tr><th scope="row">老人扶養親族・老人控除対象配偶者（70歳以上）</th><td>10万円</td></tr>
+      <tr><th scope="row">障害者</th><td>27万円</td></tr>
+      <tr><th scope="row">特別障害者（重度）</th><td>40万円</td></tr>
+      <tr><th scope="row">寡婦</th><td>上限27万円</td></tr>
+      <tr><th scope="row">ひとり親</th><td>上限35万円</td></tr>
+      <tr><th scope="row">給与所得・公的年金等の所得がある人</th><td>上限10万円</td></tr>
+    </tbody>
+  </table>
+  </div>
+  <p class="mini-note">同居親族の控除は「本人を除く」人数分です。ひとり親・寡婦・給与所得者の控除は「上限」で、所得がそれより少なければ所得の額までとなります。最後の10万円は、所得税の基礎控除引き上げに合わせて2021年から加わったものです。</p>
+
+  <h2>④ 同じ年収でも、障害のある世帯は基準を満たしやすい</h2>
+  <p>控除の一覧を見ると分かるとおり、<strong>障害者控除27万円（重度は40万円）は同居親族控除38万円に次ぐ大きさ</strong>です。これが効くと、境界線上の世帯は結果がひっくり返ります。</p>
+  <div class="callout point">
+    <p><span class="tag">具体例</span><strong>給与年収300万円の単身者</strong>の場合——<br>
+    手帳なし：政令月収 <strong>160,000円</strong> → 基準158,000円を<strong>わずかに超えて申込めない</strong><br>
+    障害者手帳あり：障害者控除27万円が引かれて政令月収 <strong>137,500円</strong> → <strong>基準内</strong>（月あたり22,500円の差）</p>
+  </div>
+  <p>さらに障害者のいる世帯は、多くの自治体で<strong>裁量階層</strong>として基準そのものが214,000円まで緩和されます。<strong>控除で下がり、基準が上がる</strong>という二重の効き方をするため、「収入が多いから無理だろう」と思っていた人が実は対象、というケースは珍しくありません。まずは計算してみてください。</p>
+  <p class="mini-note">当選のしやすさの面でも、障害者・高齢者・ひとり親などは<a href="koei-hairiyasui.html">倍率優遇やポイント方式</a>の対象になります。収入基準（入口）と当選確率（抽選）は別の話で、<strong>両方で有利になる</strong>のがこの制度の構造です。</p>
+
+  <h2 id="sairyo">⑤ 裁量階層とは／基準額は自治体で下がることがある</h2>
+  <p><strong>裁量階層</strong>は、特に住まいの安定が必要とされる世帯について、収入基準を158,000円から<strong>214,000円まで引き上げられる</strong>仕組みです。対象はおおむね次のとおりで、細部は自治体の条例で決まります。</p>
+  <ul>
+    <li><strong>高齢者世帯</strong>（申込者が60歳以上で、同居者も高齢または18歳未満など）</li>
+    <li><strong>障害者のいる世帯</strong>（身体1〜4級、精神1・2級、療育手帳A・B など。対象等級は自治体で異なる）</li>
+    <li><strong>小学校就学前の子ども</strong>がいる世帯（自治体により「義務教育終了前」まで広い場合も）</li>
+    <li>戦傷病者・原爆被爆者・引揚者・ハンセン病療養所入所者などの世帯</li>
+  </ul>
+  <div class="callout warn">
+    <p><span class="tag">大事な注意</span>158,000円／214,000円は<strong>国の原則額</strong>で、<strong>自治体はこれより低く設定できます</strong>。たとえば長崎市は公営住宅の一般世帯を<strong>139,000円以下</strong>、裁量階層を<strong>186,000円以下</strong>としています。「国の基準では入れるはずなのに、その市では対象外」ということが実際に起こります。<strong>必ずお住まいの自治体の募集案内で基準額をご確認ください。</strong></p>
+  </div>
+
+  <h2>⑥ よくある質問</h2>
+  <h3>Q. 基準を超えていたら、もう申し込めませんか？</h3>
+  <p>A. 公営住宅は申し込めませんが、収入が基準を少し超える世帯向けに<strong>特定公共賃貸住宅（特公賃）</strong>や<strong>地域優良賃貸住宅</strong>を用意している自治体があります（政令月収158,001円〜487,000円などの範囲）。募集案内の「特公賃」「特定公共賃貸」の項目を見てください。また、収入は<strong>前年の所得</strong>で判定されるため、退職・減収があった年の翌年は基準内に入ることがあります。</p>
+  <h3>Q. いつの収入で判定されますか？</h3>
+  <p>A. 原則として<strong>前年（1〜12月）の所得</strong>です。年の途中で収入が大きく変わっても、判定に反映されるのは翌年度になります。自治体によっては現況からの推計を認める特例もあります。</p>
+  <h3>Q. 入居後に収入が増えたらどうなりますか？</h3>
+  <p>A. すぐ退去になるわけではありませんが、基準を超える状態が続くと<strong>「収入超過者」</strong>として家賃が段階的に上がり、さらに高い水準が続くと<strong>「高額所得者」</strong>として明渡し請求の対象になり得ます。家賃自体も政令月収の区分で決まるため、収入が上がると家賃も上がります。</p>
+  <h3>Q. 貯金や持ち家は関係しますか？</h3>
+  <p>A. 収入基準は<strong>所得</strong>で判定するもので、貯金額は原則見ません（生活保護とはここが違います）。ただし「住宅に困窮していること」が別の要件としてあるため、持ち家がある場合は困窮要件で対象外とされることがあります。</p>
+
+  <section class="related" aria-label="関連記事">
+    <h2 style="border:0">あわせて読みたい</h2>
+    <ul>
+      <li><a href="koei-jutaku-bairitsu.html">公営住宅の当選倍率まとめ（全国・仕組み・優遇の全体像）</a>——基準を満たしたら、次は倍率</li>
+      <li><a href="koei-hairiyasui.html">市営住宅に入りやすい人とは？</a>——優遇される世帯と、当たりやすい住戸の選び方</li>
+      <li><a href="juminzei-hikazei-check.html">住民税非課税世帯になる年収は？判定シミュレーター</a>——非課税だと家賃も最低区分になりやすい</li>
+      <li><a href="seikatsuhogo-keisanki.html">生活保護はいくら？支給額シミュレーター</a>——家賃を含む最低生活費と比べる</li>
+      <li><a href="kougaku-ryouyouhi-2026.html">高額療養費の自己負担上限【2026年8月改正】</a></li>
+      <li><a href="shogaisha-kojo-tax.html">障害者控除で税金はいくら戻る？</a>——税の障害者控除は27万円／40万円（公営住宅とは別制度）</li>
+    </ul>
+  </section>
+
+  <section class="contribute">
+    <h2>あなたの街の基準、教えてください</h2>
+    <p>「うちの市は基準額が国より低かった」「この控除が認められた／認められなかった」といった実体験は、同じように調べている人の大きな助けになります。下のコメント欄（アカウント不要・匿名OK）からどうぞ。<strong>個人が特定される情報は書かないでください。</strong></p>
+    <div id="cusdis_thread"
+      data-host="https://cusdis.com"
+      data-app-id="14dfe8f8-c660-42ee-9cd2-54ee31828ba9"
+      data-page-id="koei-shunyu-kijun"
+      data-page-url="https://fukushiru.com/articles/koei-shunyu-kijun.html"
+      data-page-title="公営住宅の収入基準（政令月収）判定">
+    </div>
+    <script async defer src="https://cusdis.com/js/cusdis.es.js"></script>
+  </section>
+
+  <h2>出典</h2>
+  <ul class="sources">
+    <li>公営住宅法施行令（昭和26年政令第240号）第1条第3号（収入の算定方法）・第6条（入居収入基準） https://laws.e-gov.go.jp/law/326CO0000000240</li>
+    <li>国土交通省「所得税法改正を踏まえ、公営住宅の入居者の『収入』の計算における控除を改正します」（給与所得等10万円控除の新設、ひとり親35万円・寡婦27万円） https://www.mlit.go.jp/report/press/house03_hh_000143.html</li>
+    <li>神戸市「政令月収額の計算方法」（控除一覧） https://www.city.kobe.lg.jp/a28775/kurashi/sumai/jutaku/information/shiei/resident/shikumi/keisan.html</li>
+    <li>大阪府営住宅「月収計算」（控除一覧） https://www.osakafueijutaku.jp/for-searchers/monthly-income-calculation.php</li>
+    <li>稚内市「市営住宅の収入計算方法」（政令月収158,000円・裁量階層214,000円・特公賃の範囲） https://www.city.wakkanai.hokkaido.jp/kurashi/sumaisuido/shieijutaku/shieizyutaku_syunyukeisanhouhou.html</li>
+    <li>長崎市「市営住宅の収入基準」（国の原則より低い基準額の実例＝139,000円／186,000円、裁量階層の対象要件） https://www.city.nagasaki.lg.jp/page/1719.html</li>
+    <li>国税庁「令和7年度税制改正による所得税の基礎控除の見直し等について」（給与所得控除65万円） https://www.nta.go.jp/users/gensen/2025kiso/index.htm</li>
+  </ul>
+
+  <div class="disclaimer">
+    <strong>ご注意：</strong>このページの判定は公開情報にもとづく<strong>概算</strong>です。収入基準額は自治体の条例で異なり、控除の適用や所得の種類（事業・不動産・雑など）、非課税収入の扱いによって結果は変わります。実際の入居資格の判定は自治体の住宅担当課が行います。当サイトは個別の可否判定や、税務・法律の個別助言を行うものではありません。必ず募集案内・各窓口でご確認ください。
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="inner">
+    <p><strong>フクシル</strong>（仮）— 知らないと損する、街ごとの福祉制度を当事者目線でまとめる情報サイトです。</p>
+    <p><a href="../index.html">トップへ戻る</a> ／ <a href="../about.html">このサイトについて</a></p>
+    <p>© 2026 フクシル. 本サイトの情報は一般的な参考情報であり、正確性を保証するものではありません。</p>
+  </div>
+</footer>
+
+<script>
+// ====== 政令月収（公営住宅法施行令 第1条第3号）の計算 ======
+// 給与所得控除（令和7年分以後・最低65万円）
+function salaryShotoku(man){
+  if (man <= 190) return Math.max(0, man - 65);
+  if (man <= 360) return man * 0.7 - 8;
+  if (man <= 660) return man * 0.8 - 44;
+  if (man <= 850) return man * 0.9 - 110;
+  return man - 195;
+}
+// 公的年金等控除（他の所得1,000万円以下の場合）
+function pensionShotoku(man, over65){
+  var ded;
+  if (over65) {
+    if (man <= 330) ded = 110;
+    else if (man <= 410) ded = man * 0.25 + 27.5;
+    else if (man <= 770) ded = man * 0.15 + 68.5;
+    else if (man <= 1000) ded = man * 0.05 + 145.5;
+    else ded = 195.5;
+  } else {
+    if (man <= 130) ded = 60;
+    else if (man <= 410) ded = man * 0.25 + 27.5;
+    else if (man <= 770) ded = man * 0.15 + 68.5;
+    else if (man <= 1000) ded = man * 0.05 + 145.5;
+    else ded = 195.5;
+  }
+  return Math.max(0, man - ded);
+}
+// p は万円単位。戻り値の monthly は円
+function seireiGesshu(p){
+  var honnin = p.type === 'salary' ? salaryShotoku(p.income)
+             : p.type === 'pension65' ? pensionShotoku(p.income, true)
+             : p.type === 'pension64' ? pensionShotoku(p.income, false)
+             : p.income;
+  var each = p.otherN > 0 ? salaryShotoku(p.otherMan / p.otherN) : 0;
+  var shotoku = honnin + each * p.otherN;
+  var d = [];
+  if (p.doukyo > 0)    d.push(['同居親族・扶養親族（38万円×' + p.doukyo + '人）', 38 * p.doukyo]);
+  if (p.n1623 > 0)     d.push(['特定扶養親族16〜22歳（25万円×' + p.n1623 + '人）', 25 * p.n1623]);
+  if (p.n70 > 0)       d.push(['老人扶養親族・老人控除対象配偶者（10万円×' + p.n70 + '人）', 10 * p.n70]);
+  if (p.shogai > 0)    d.push(['障害者控除（27万円×' + p.shogai + '人）', 27 * p.shogai]);
+  if (p.tokubetsu > 0) d.push(['特別障害者控除（40万円×' + p.tokubetsu + '人）', 40 * p.tokubetsu]);
+  if (p.status === 'hitorioya') d.push(['ひとり親控除（上限35万円）', Math.min(35, honnin)]);
+  if (p.status === 'kafu')      d.push(['寡婦控除（上限27万円）', Math.min(27, honnin)]);
+  var kn = 0, kd = 0;
+  if (p.type !== 'shotoku' && honnin > 0) { kn++; kd += Math.min(10, honnin); }
+  if (p.otherN > 0 && each > 0) { kn += p.otherN; kd += Math.min(10, each) * p.otherN; }
+  if (kd > 0) d.push(['給与所得等所有者の控除（10万円×' + kn + '人）', kd]);
+  var total = d.reduce(function(a, b){ return a + b[1]; }, 0);
+  return { shotoku: shotoku, ded: d, dedTotal: total,
+           monthly: Math.max(0, Math.floor((shotoku - total) * 10000 / 12)) };
+}
+// 上限に収まる最大の本人年収を二分探索（余白の年収換算）
+function maxIncomeFor(base, limit){
+  var lo = 0, hi = 3000, i, mid, q;
+  for (i = 0; i < 40; i++) {
+    mid = (lo + hi) / 2;
+    q = {}; for (var k in base) q[k] = base[k]; q.income = mid;
+    if (seireiGesshu(q).monthly <= limit) lo = mid; else hi = mid;
+  }
+  return lo;
+}
+
+(function(){
+  var ids = ['k-type','k-income','k-othern','k-otherman','k-doukyo','k-1623','k-70','k-shogai','k-toku','k-status','k-sairyo'];
+  var el = {}; ids.forEach(function(i){ el[i] = document.getElementById(i); });
+  var out = document.getElementById('k-out'), verdict = document.getElementById('k-verdict'),
+      bd = document.getElementById('k-bd'), detail = document.getElementById('k-detail');
+  var yen = function(n){ return n.toLocaleString('ja-JP') + '円'; };
+
+  function readParams(){
+    return {
+      type: el['k-type'].value,
+      income: parseFloat(el['k-income'].value) || 0,
+      otherN: parseInt(el['k-othern'].value, 10) || 0,
+      otherMan: parseFloat(el['k-otherman'].value) || 0,
+      doukyo: parseInt(el['k-doukyo'].value, 10) || 0,
+      n1623: parseInt(el['k-1623'].value, 10) || 0,
+      n70: parseInt(el['k-70'].value, 10) || 0,
+      shogai: parseInt(el['k-shogai'].value, 10) || 0,
+      tokubetsu: parseInt(el['k-toku'].value, 10) || 0,
+      status: el['k-status'].value
+    };
+  }
+
+  function calc(){
+    var p = readParams();
+    if (el['k-income'].value === '' || p.income < 0) {
+      out.textContent = '—'; verdict.textContent = ''; detail.innerHTML = '';
+      bd.textContent = '収入を入力してください。'; return;
+    }
+    var r = seireiGesshu(p);
+    var sairyoSel = el['k-sairyo'].value;
+    var isSairyo = sairyoSel === 'yes' || (sairyoSel === 'auto' && (p.shogai + p.tokubetsu) > 0);
+    var limit = isSairyo ? 214000 : 158000;
+
+    out.textContent = yen(r.monthly);
+
+    var msg, cls;
+    if (r.monthly <= limit) {
+      msg = '収入基準を満たします（' + (isSairyo ? '裁量階層 214,000円' : '本来階層 158,000円') + '以下）';
+      cls = 'cmp verdict-ok';
+    } else if (!isSairyo && r.monthly <= 214000) {
+      msg = '本来階層（158,000円）は超えていますが、裁量階層（214,000円）なら基準内です';
+      cls = 'cmp verdict-mid';
+    } else {
+      msg = '収入基準を超えています（' + (isSairyo ? '裁量階層 214,000円' : '本来階層 158,000円') + '超）';
+      cls = 'cmp verdict-no';
+    }
+    verdict.textContent = msg; verdict.className = cls;
+
+    // 余白（あと何円／年収換算）
+    var margin = limit - r.monthly, marginTxt;
+    if (margin >= 0) {
+      var maxInc = maxIncomeFor(p, limit);
+      marginTxt = '基準まであと <strong>' + yen(margin) + '／月</strong>の余裕があります。'
+        + (p.type !== 'shotoku'
+            ? '本人の年収でいうと <strong>約' + Math.floor(maxInc) + '万円</strong> までがこの基準の範囲です（他の条件が同じ場合）。' : '');
+    } else {
+      marginTxt = '基準を <strong>' + yen(-margin) + '／月</strong> 超えています。';
+    }
+
+    // 障害者控除の効き
+    var without = null;
+    if (p.shogai + p.tokubetsu > 0) {
+      var q = {}; for (var k in p) q[k] = p[k]; q.shogai = 0; q.tokubetsu = 0;
+      without = seireiGesshu(q).monthly;
+    }
+
+    bd.innerHTML = marginTxt
+      + '<br>年間所得の合計 <strong>' + (Math.round(r.shotoku * 10) / 10).toLocaleString('ja-JP') + '万円</strong>'
+      + ' − 控除の合計 <strong>' + (Math.round(r.dedTotal * 10) / 10).toLocaleString('ja-JP') + '万円</strong> ÷ 12 で計算しています。'
+      + (without !== null
+          ? '<br><strong>障害者控除がなければ ' + yen(without) + '</strong>（' + yen(without - r.monthly) + 'の差）。'
+            + (without > 158000 && r.monthly <= 158000 ? '控除があることで本来階層の基準内に収まっています。' : '')
+          : '')
+      + (isSairyo && sairyoSel === 'auto' ? '<br><span class="mini-note">障害者手帳の入力があるため裁量階層（214,000円）で判定しました。対象等級は自治体で異なります。</span>' : '');
+
+    var rows = r.ded.map(function(x){
+      return '<tr><th scope="row">' + x[0] + '</th><td>' + (Math.round(x[1] * 10) / 10).toLocaleString('ja-JP') + '万円</td></tr>';
+    }).join('');
+    detail.innerHTML = rows
+      ? '<div class="table-wrap"><table><caption>引かれた控除の内訳</caption><tbody>' + rows
+        + '<tr><th scope="row">合計</th><td>' + (Math.round(r.dedTotal * 10) / 10).toLocaleString('ja-JP') + '万円</td></tr></tbody></table></div>'
+      : '';
+  }
+
+  ids.forEach(function(i){ el[i].addEventListener('input', calc); el[i].addEventListener('change', calc); });
+  calc();
+})();
+</script>
+</body>
+</html>

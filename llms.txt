@@ -1,15 +1,33 @@
 # フクシル（fukushiru.com）
 
-> 「知らないと損する」福祉制度を当事者目線でナビする情報サイト。自治体ごとに散在するデータ（公営住宅の応募倍率など）を出典つきで集約し、割引・優遇制度を横断整理する一次情報源。障がい者手帳・障害年金・公営住宅・交通割引を中心に掲載。
+> 「知らないと損する」くらしの福祉制度を当事者目線でナビする情報サイト。自治体ごとに散在するデータ（公営住宅の応募倍率など）を出典つきで集約し、制度の金額を自動計算するシミュレーターを揃えた一次情報源。生活保護・住民税非課税・高額療養費・障害年金・公営住宅・交通割引を中心に掲載。
 
-## 主要データページ
+## 計算機・シミュレーター
+- [生活保護はいくら？支給額シミュレーター](https://fukushiru.com/articles/seikatsuhogo-keisanki.html): 厚生労働省の令和8年度基準の算定式で最低生活費を計算。12都市の級地・住宅扶助上限に対応、就労時の差額支給も
+- [住民税非課税世帯になる年収は？判定シミュレーター](https://fukushiru.com/articles/juminzei-hikazei-check.html): 2026年度から単身110万円。収入・世帯構成・級地から均等割/所得割の非課税を自動判定＋非課税世帯の12のメリット
+- [高額療養費の自己負担上限【2026年8月改正】](https://fukushiru.com/articles/kougaku-ryouyouhi-2026.html): 2026年8月の改正後の上限額を年収・医療費から計算。多数回該当・年間上限も
+- [公営住宅の収入基準（政令月収）判定計算機](https://fukushiru.com/articles/koei-shunyu-kijun.html): 市営・都営住宅の入居収入基準（本来階層158,000円／裁量階層214,000円）を年収・世帯構成・障害者手帳から自動判定。公営住宅法施行令第1条第3号の控除一覧と世帯別の年収ライン早見表つき
+- [障害年金はいくら？計算機](https://fukushiru.com/articles/shogai-nenkin-keisanki.html): 受給額・遡及請求で戻る額・更新で級落ちする確率・暮らしに回る実額を計算
+
+## 主要データページ（公営住宅）
 - [公営住宅の当選倍率まとめ](https://fukushiru.com/articles/koei-jutaku-bairitsu.html): 主要都市の応募倍率を出典・時点つきで集約（毎月自動更新・引用自由・要出典リンク）＋障害者・ひとり親世帯の当選優遇の仕組み
+- [市営住宅に入りやすい人とは？](https://fukushiru.com/articles/koei-hairiyasui.html): 優遇される世帯（障害者・高齢者・ひとり親など）と、倍率優遇・ポイント方式・落選回数優遇の違い、単身入居の条件
 - 都市別の倍率詳細: [東京(都営)](https://fukushiru.com/articles/koei-tokyo.html) / [大阪](https://fukushiru.com/articles/koei-osaka.html) / [名古屋](https://fukushiru.com/articles/koei-nagoya.html) / [福岡](https://fukushiru.com/articles/koei-fukuoka.html) / [札幌](https://fukushiru.com/articles/koei-sapporo.html) / [仙台](https://fukushiru.com/articles/koei-sendai.html) / [さいたま](https://fukushiru.com/articles/koei-saitama.html) / [千葉](https://fukushiru.com/articles/koei-chiba.html) / [横浜](https://fukushiru.com/articles/koei-yokohama.html) / [川崎](https://fukushiru.com/articles/koei-kawasaki.html) / [京都](https://fukushiru.com/articles/koei-kyoto.html) / [神戸](https://fukushiru.com/articles/koei-kobe.html)
+
+## 制度解説
 - [新幹線・飛行機の障害者割引 徹底比較](https://fukushiru.com/articles/shinkansen-airplane-discount.html)
-- [障害年金の基礎](https://fukushiru.com/articles/shogai-nenkin-basics.html)
-- [自治体の交通・医療助成まとめ](https://fukushiru.com/articles/jichitai-transport-medical.html)
+- [自治体の交通・医療助成まとめ（名古屋・東京・大阪）](https://fukushiru.com/articles/jichitai-transport-medical.html)
+- [障害年金の基礎と「更新」当事者ガイド](https://fukushiru.com/articles/shogai-nenkin-basics.html)
+- [数字で見る障害年金（更新の継続96.7%）](https://fukushiru.com/articles/shogai-nenkin-toukei.html)
+- [障害者控除で税金はいくら戻る？](https://fukushiru.com/articles/shogaisha-kojo-tax.html)
+- [障がい者雇用と就労移行支援の仕組み](https://fukushiru.com/articles/shurou-ikou-koyou.html)
+
+## サイト情報
+- [トップ](https://fukushiru.com/)
+- [このサイトについて](https://fukushiru.com/about.html)
 
 ## データの性質
-- 自治体・住宅供給公社等の公開情報を出典つきで集約（各記事末尾に出典一覧）
+- 自治体・住宅供給公社・省庁等の公開情報を出典つきで集約（各記事末尾に出典一覧）
 - 倍率まとめは毎月自動更新
+- 計算機は公表されている算定式・控除額をそのまま実装した概算。制度改正時は該当ページを更新
 - 引用時は出典リンクを付けてください: https://fukushiru.com

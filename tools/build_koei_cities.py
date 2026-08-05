@@ -150,7 +150,7 @@ PAGE = r"""<!DOCTYPE html>
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>@@NAME@@の@@HW@@ 当選倍率と入りやすい住戸｜@@PREF@@｜フクシル</title>
+<title>@@NAME@@の@@HW@@ 当選倍率と入りやすい住戸@@TITLE_EXTRA@@｜@@PREF@@｜フクシル</title>
 <meta name="description" content="@@DESC@@">
 <link rel="canonical" href="https://fukushiru.com/articles/@@SLUG@@.html">
 <meta property="og:type" content="article">
@@ -207,6 +207,7 @@ PAGE = r"""<!DOCTYPE html>
 
   <div class="callout point">
     <p><span class="tag">この記事の要点</span>@@NAME@@でも住戸によって倍率は大きく違います。下の<strong>実例</strong>と<strong>補正計算機</strong>で狙う住戸タイプの倍率をつかみ、<strong>当選確率シミュレーター</strong>で優遇（障害者・ひとり親など）まで見込めます。</p>
+    <p>申込みの前提になる<strong>収入基準</strong>は<a href="koei-shunyu-kijun.html">政令月収の判定計算機</a>で先に確かめられます（単身なら年収およそ296万円、障害者手帳があれば422万円まで）。</p>
   </div>
 
   <h2>① 倍率が高い住戸・低い住戸（実例）</h2>
@@ -220,6 +221,7 @@ PAGE = r"""<!DOCTYPE html>
   </ul>
 @@QUOTES@@
 @@CALC@@
+@@EXTRA@@
   <div class="callout warn">
     <p><span class="tag">要確認</span>補正係数は5市の公表データから置いた<strong>ざっくりの目安</strong>で、団地により実際の差はもっと大きくも小さくもなります。優遇（当選倍率の優遇・ポイント方式・優先枠）の対象や単身入居の可否は自治体で異なります。正確な倍率・申込資格は、必ず@@NAME@@の公式の募集案内でご確認ください。このページは個別の入居可否を判定するものではありません。</p>
   </div>
@@ -240,6 +242,10 @@ PAGE = r"""<!DOCTYPE html>
     <ul>
       <li><a href="koei-jutaku-bairitsu.html">公営住宅の当選倍率まとめ（全国・仕組み・優遇の全体像）</a></li>
       <li><a href="koei-hairiyasui.html">市営住宅に入りやすい人とは？（優遇・当たりやすい住戸の選び方）</a></li>
+      <li><a href="koei-shunyu-kijun.html">公営住宅の収入基準は年収いくらまで？（政令月収の自動判定）</a></li>
+      <li><a href="juminzei-hikazei-check.html">住民税非課税世帯になる年収は？（非課税なら家賃も最低区分になりやすい）</a></li>
+      <li><a href="seikatsuhogo-keisanki.html">生活保護はいくら？支給額シミュレーター（家賃を含む最低生活費）</a></li>
+      <li><a href="kougaku-ryouyouhi-2026.html">高額療養費の自己負担上限【2026年8月改正】</a></li>
 @@RELATED@@
     </ul>
   </section>
@@ -292,6 +298,11 @@ def main():
         if not c.get("top_units") or not c.get("bottom_units"):
             print("skip (thin):", c["slug"]); continue
         desc = "{n}の{hw}の当選倍率を住戸別の実データでまとめ、倍率を左右する要因（立地・築年・エレベーター・単身/世帯）を公式資料つきで解説。狙う住戸の倍率を補正する計算機と、障害者・ひとり親の優遇での当選確率シミュレーターつき。".format(n=c["name"], hw=c.get("housing_word","市営住宅"))
+        # 任意の都市固有フィールド。未設定の都市は出力が従来と完全一致する。
+        # title_extra: <title>の末尾（都市名｜の手前）に足す語 / desc_extra: descriptionの末尾に足す文
+        # extra_html: 計算機の下に差し込む都市固有セクション（HTMLの配列）
+        desc = desc + c.get("desc_extra", "")
+        extra = "\n".join(c.get("extra_html", []))
         top = units_table("倍率が高い住戸の例（{}・出典つき）".format(esc(c["name"])), c["top_units"], "hi")
         bottom = units_table("倍率が低い・応募が付きにくい住戸の例".format(), c["bottom_units"], "lo")
         factors = "\n".join("    <li>{}</li>".format(x) for x in c["factors"])
@@ -342,7 +353,8 @@ def main():
             "@@DESC@@": esc(desc), "@@JSONLD@@": jsonld + "\n</script>\n<script type=\"application/ld+json\">\n" + faqld + "\n</script>\n<script type=\"application/ld+json\">\n" + breadld,
             "@@UPDATED@@": esc(updated), "@@BASE_TEXT@@": c["base_text"],
             "@@TOP@@": top, "@@BOTTOM@@": bottom, "@@FACTORS@@": factors, "@@QUOTES@@": quotes,
-            "@@CALC@@": calc, "@@CALCJS@@": CALC_JS, "@@FAQ_A@@": esc(c["faq_a"]),
+            "@@CALC@@": calc, "@@EXTRA@@": extra, "@@CALCJS@@": CALC_JS, "@@FAQ_A@@": esc(c["faq_a"]),
+            "@@TITLE_EXTRA@@": esc(c.get("title_extra", "")),
             "@@RELATED@@": related, "@@SOURCES@@": sources,
         }.items():
             page = page.replace(k, v)
