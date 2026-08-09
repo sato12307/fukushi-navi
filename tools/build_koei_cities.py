@@ -235,7 +235,7 @@ PAGE = r"""<!DOCTYPE html>
 
   <h2>よくある質問</h2>
   <h3>Q. @@NAME@@の@@HW@@で当たりやすい住戸は？</h3>
-  <p>A. @@FAQ_A@@</p>
+  <p>A. @@FAQ_A@@</p>@@FAQ_EXTRA@@
 
   <section class="related" aria-label="関連記事">
     <h2 style="border:0">関連</h2>
@@ -331,10 +331,21 @@ def main():
             "publisher": {"@type": "Organization", "name": "フクシル"},
             "isPartOf": {"@type": "WebSite", "name": "フクシル", "url": "https://fukushiru.com/"},
         }, ensure_ascii=False)
+        # 任意フィールド faq_extra: [{"q": 質問, "a": 回答}] を本文Q&AとFAQPageの両方に追記する。
+        # 未設定の都市は出力が従来と完全一致（プレースホルダは空文字に置換）。
+        faq_extra_items = c.get("faq_extra", [])
+        faq_extra_html = "".join(
+            "\n  <h3>Q. {q}</h3>\n  <p>A. {a}</p>".format(q=esc(x["q"]), a=esc(x["a"]))
+            for x in faq_extra_items
+        )
+        faq_entities = [{"@type": "Question", "name": "{}の{}で当たりやすい住戸は？".format(c["name"], c.get("housing_word","市営住宅")),
+                         "acceptedAnswer": {"@type": "Answer", "text": c["faq_a"]}}]
+        for x in faq_extra_items:
+            faq_entities.append({"@type": "Question", "name": x["q"],
+                                 "acceptedAnswer": {"@type": "Answer", "text": x["a"]}})
         faqld = json.dumps({
             "@context": "https://schema.org", "@type": "FAQPage",
-            "mainEntity": [{"@type": "Question", "name": "{}の{}で当たりやすい住戸は？".format(c["name"], c.get("housing_word","市営住宅")),
-                            "acceptedAnswer": {"@type": "Answer", "text": c["faq_a"]}}],
+            "mainEntity": faq_entities,
         }, ensure_ascii=False)
         # 画面上のパンくず（トップ ＞ 公営住宅 ＞ 都市名）に一致する BreadcrumbList
         breadld = json.dumps({
@@ -354,6 +365,7 @@ def main():
             "@@UPDATED@@": esc(updated), "@@BASE_TEXT@@": c["base_text"],
             "@@TOP@@": top, "@@BOTTOM@@": bottom, "@@FACTORS@@": factors, "@@QUOTES@@": quotes,
             "@@CALC@@": calc, "@@EXTRA@@": extra, "@@CALCJS@@": CALC_JS, "@@FAQ_A@@": esc(c["faq_a"]),
+            "@@FAQ_EXTRA@@": faq_extra_html,
             "@@TITLE_EXTRA@@": esc(c.get("title_extra", "")),
             "@@RELATED@@": related, "@@SOURCES@@": sources,
         }.items():
