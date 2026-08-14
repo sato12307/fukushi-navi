@@ -7,10 +7,11 @@
 - [住民税非課税世帯になる年収は？判定シミュレーター](https://fukushiru.com/articles/juminzei-hikazei-check.html): 2026年度から単身110万円。収入・世帯構成・級地から均等割/所得割の非課税を自動判定＋非課税世帯の12のメリット
 - [高額療養費の自己負担上限【2026年8月改正】](https://fukushiru.com/articles/kougaku-ryouyouhi-2026.html): 2026年8月の改正後の上限額を年収・医療費から計算。多数回該当・年間上限も
 - [公営住宅の収入基準（政令月収）判定計算機](https://fukushiru.com/articles/koei-shunyu-kijun.html): 市営・都営住宅の入居収入基準（本来階層158,000円／裁量階層214,000円）を年収・世帯構成・障害者手帳から自動判定。公営住宅法施行令第1条第3号の控除一覧と世帯別の年収ライン早見表つき
+- [市営住宅・公営住宅の家賃はいくら？自動計算](https://fukushiru.com/articles/koei-yachin-keisan.html): 応能応益家賃の式（家賃算定基礎額×市町村立地係数×規模係数×経過年数係数×利便性係数）と、家賃算定基礎額の全8区分（34,400円〜91,100円）を掲載。政令月収・床面積・築年数・構造から本来家賃を概算し、8区分すべての家賃を並べて比較できる
 - [障害年金はいくら？計算機](https://fukushiru.com/articles/shogai-nenkin-keisanki.html): 受給額・遡及請求で戻る額・更新で級落ちする確率・暮らしに回る実額を計算
 
 ## 主要データページ（公営住宅）
-- [公営住宅の当選倍率まとめ](https://fukushiru.com/articles/koei-jutaku-bairitsu.html): 主要都市の応募倍率を出典・時点つきで集約（毎月自動更新・引用自由・要出典リンク）＋障害者・ひとり親世帯の当選優遇の仕組み
+- [公営住宅の当選倍率まとめ](https://fukushiru.com/articles/koei-jutaku-bairitsu.html): 主要都市の応募倍率を出典・時点つきで集約（毎月自動更新・出典を明記すれば引用/転載自由・リンクの有無は問わない）＋障害者・ひとり親世帯の当選優遇の仕組み
 - [市営住宅に入りやすい人とは？](https://fukushiru.com/articles/koei-hairiyasui.html): 優遇される世帯（障害者・高齢者・ひとり親など）と、倍率優遇・ポイント方式・落選回数優遇の違い、単身入居の条件
 - 都市別の倍率詳細: [東京(都営)](https://fukushiru.com/articles/koei-tokyo.html) / [大阪](https://fukushiru.com/articles/koei-osaka.html) / [名古屋](https://fukushiru.com/articles/koei-nagoya.html) / [福岡](https://fukushiru.com/articles/koei-fukuoka.html) / [札幌](https://fukushiru.com/articles/koei-sapporo.html) / [仙台](https://fukushiru.com/articles/koei-sendai.html) / [さいたま](https://fukushiru.com/articles/koei-saitama.html) / [千葉](https://fukushiru.com/articles/koei-chiba.html) / [横浜](https://fukushiru.com/articles/koei-yokohama.html) / [川崎](https://fukushiru.com/articles/koei-kawasaki.html) / [京都](https://fukushiru.com/articles/koei-kyoto.html) / [神戸](https://fukushiru.com/articles/koei-kobe.html)
 
