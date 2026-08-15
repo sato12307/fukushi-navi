@@ -9,6 +9,7 @@
 - [公営住宅の収入基準（政令月収）判定計算機](https://fukushiru.com/articles/koei-shunyu-kijun.html): 市営・都営住宅の入居収入基準（本来階層158,000円／裁量階層214,000円）を年収・世帯構成・障害者手帳から自動判定。公営住宅法施行令第1条第3号の控除一覧と世帯別の年収ライン早見表つき
 - [市営住宅・公営住宅の家賃はいくら？自動計算](https://fukushiru.com/articles/koei-yachin-keisan.html): 応能応益家賃の式（家賃算定基礎額×市町村立地係数×規模係数×経過年数係数×利便性係数）と、家賃算定基礎額の全8区分（34,400円〜91,100円）を掲載。政令月収・床面積・築年数・構造から本来家賃を概算し、8区分すべての家賃を並べて比較できる
 - [障害年金はいくら？計算機](https://fukushiru.com/articles/shogai-nenkin-keisanki.html): 受給額・遡及請求で戻る額・更新で級落ちする確率・暮らしに回る実額を計算
+- [障害福祉サービスの利用料はいくら？負担上限月額の自動判定](https://fukushiru.com/articles/shogai-service-futan.html): 就労移行支援・就労継続支援A型/B型・グループホーム・ホームヘルプ・放課後等デイの自己負担は「1割かつ月の上限まで」。生活保護と市町村民税非課税は0円、一般1は9,300円（障害児の通所は4,600円）、一般2は37,200円。18歳以上は判定する世帯が本人と配偶者だけで親の所得は含めない点、実費（食費・家賃・補足給付）、高額障害福祉サービス等給付費、65歳での介護保険優先と新高額障害福祉サービス等給付費まで収録
 
 ## 主要データページ（公営住宅）
 - [公営住宅の当選倍率まとめ](https://fukushiru.com/articles/koei-jutaku-bairitsu.html): 主要都市の応募倍率を出典・時点つきで集約（毎月自動更新・出典を明記すれば引用/転載自由・リンクの有無は問わない）＋障害者・ひとり親世帯の当選優遇の仕組み
@@ -16,6 +17,7 @@
 - 都市別の倍率詳細: [東京(都営)](https://fukushiru.com/articles/koei-tokyo.html) / [大阪](https://fukushiru.com/articles/koei-osaka.html) / [名古屋](https://fukushiru.com/articles/koei-nagoya.html) / [福岡](https://fukushiru.com/articles/koei-fukuoka.html) / [札幌](https://fukushiru.com/articles/koei-sapporo.html) / [仙台](https://fukushiru.com/articles/koei-sendai.html) / [さいたま](https://fukushiru.com/articles/koei-saitama.html) / [千葉](https://fukushiru.com/articles/koei-chiba.html) / [横浜](https://fukushiru.com/articles/koei-yokohama.html) / [川崎](https://fukushiru.com/articles/koei-kawasaki.html) / [京都](https://fukushiru.com/articles/koei-kyoto.html) / [神戸](https://fukushiru.com/articles/koei-kobe.html)
 
 ## 制度解説
+- [介護事業所はどれだけ消えたか（都道府県別・サービス種別）](https://fukushiru.com/articles/kaigo-jigyosho-genshou.html): 厚労省オープンデータ2断面の突合。5年で165,442事業所のうち36,535件（22.1%）が一覧から消失（事業所名は非掲載）
 - [新幹線・飛行機の障害者割引 徹底比較](https://fukushiru.com/articles/shinkansen-airplane-discount.html)
 - [自治体の交通・医療助成まとめ（名古屋・東京・大阪）](https://fukushiru.com/articles/jichitai-transport-medical.html)
 - [障害年金の基礎と「更新」当事者ガイド](https://fukushiru.com/articles/shogai-nenkin-basics.html)
