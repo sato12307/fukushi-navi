@@ -13,6 +13,7 @@
 
 ## 主要データページ（公営住宅）
 - [公営住宅の当選倍率まとめ](https://fukushiru.com/articles/koei-jutaku-bairitsu.html): 主要都市の応募倍率を出典・時点つきで集約（毎月自動更新・出典を明記すれば引用/転載自由・リンクの有無は問わない）＋障害者・ひとり親世帯の当選優遇の仕組み
+- [団地別 応募倍率ランキング（12市82住戸を横断）](https://fukushiru.com/articles/koei-danchi-ranking.html): 12市が公表した団地・住戸別の応募倍率82件を1枚に集約し高い順に一覧（最高＝仙台市あすと長町第二 約292倍、応募が定員に届かなかった1倍未満の住戸34件）。各住戸が自分の市の平均の何倍かを併記し、市平均が非公表の千葉市・神戸市は推定せず「—」。両端の抜粋のため82件の平均・中央値は母集団の代表値ではない旨を明記。CSV配布・毎月1日に再集計・出典を明記すれば引用/転載自由（リンクの有無は問わない）
 - [市営住宅に入りやすい人とは？](https://fukushiru.com/articles/koei-hairiyasui.html): 優遇される世帯（障害者・高齢者・ひとり親など）と、倍率優遇・ポイント方式・落選回数優遇の違い、単身入居の条件
 - 都市別の倍率詳細: [東京(都営)](https://fukushiru.com/articles/koei-tokyo.html) / [大阪](https://fukushiru.com/articles/koei-osaka.html) / [名古屋](https://fukushiru.com/articles/koei-nagoya.html) / [福岡](https://fukushiru.com/articles/koei-fukuoka.html) / [札幌](https://fukushiru.com/articles/koei-sapporo.html) / [仙台](https://fukushiru.com/articles/koei-sendai.html) / [さいたま](https://fukushiru.com/articles/koei-saitama.html) / [千葉](https://fukushiru.com/articles/koei-chiba.html) / [横浜](https://fukushiru.com/articles/koei-yokohama.html) / [川崎](https://fukushiru.com/articles/koei-kawasaki.html) / [京都](https://fukushiru.com/articles/koei-kyoto.html) / [神戸](https://fukushiru.com/articles/koei-kobe.html)
 
