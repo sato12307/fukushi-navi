@@ -3,3 +3,8 @@ CONTENT-REVIEW.md
 
 # 厚労省オープンデータの生ファイル置き場（数百MB・再取得できるので追跡しない）
 .cache/
+
+# JKK東京の倍率表PDF(16回分)を読み取った生の中間ファイル(4.3MB)。
+# PDFから再生成できるうえ、読み取りに未修理の取りこぼしがあるため公開しない。
+# 公開するのは tools/build_toei.py が検算ゲートを通して出す data/toei-boshuware.csv のみ。
+data/toei-bairitsu.json
