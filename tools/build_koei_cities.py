@@ -87,6 +87,33 @@ CALC_HTML = """
       <div class="bd" id="koei-bd">応募倍率を入力してください（1以上）。</div>
     </div>
   </div>
+
+  <h2 id="kaisu">⑤ 何回申し込めば当たる？【応募回数シミュレーター】</h2>
+  <p>公営住宅でいちばん多い悩みが「毎回応募しているのに、なかなか当たらない」です。1回あたりの当選確率は④で出ますが、知りたいのはたいてい<strong>「このまま申し込み続けたら、何回目で当たる見込みなのか」</strong>のほうです。④で入れた応募倍率と優遇をそのまま使って、通算の当選確率を計算します。</p>
+  <div class="calc" role="group" aria-label="応募回数シミュレーター">
+    <h4>申し込みを続けたときの、通算の当選確率</h4>
+    <div class="row">
+      <label for="koei-y">1年に応募する回数</label>
+      <select id="koei-y">
+        <option value="0" selected>年数は計算しない</option>
+        <option value="1">年1回</option>
+        <option value="2">年2回</option>
+        <option value="3">年3回</option>
+        <option value="4">年4回</option>
+        <option value="6">年6回</option>
+        <option value="12">毎月（常時募集・随時募集など）</option>
+      </select>
+      <span style="font-size:.82rem;color:var(--sub)">定期募集の回数は自治体で異なります（募集案内で確認を）</span>
+    </div>
+    <div class="out" aria-live="polite">
+      <div>5回続けて：<span class="prob" id="koei-n5">—</span> ／ 10回：<span class="prob" id="koei-n10">—</span> ／ 20回：<span class="prob" id="koei-n20">—</span></div>
+      <div class="cmp" id="koei-half"></div>
+      <div class="bd" id="koei-kbd">④に応募倍率を入力すると計算します。</div>
+    </div>
+  </div>
+  <div class="callout warn">
+    <p><span class="tag">この数字の読み方</span>「毎回おなじ倍率の住戸に申し込み続けた場合」の理論値です。実際には募集回ごとに倍率が動き、ほかの応募者にも優遇のある人がいます。<strong>ポイント方式（抽選ではなく困窮度の点数順で決める）の自治体には当てはまりません。</strong>また<a href="koei-hairiyasui.html">落選回数の優遇</a>がある自治体では、回を重ねるほど実際の確率はこの理論値より上がります。裏返すと、<strong>落選の記録そのものが次回の武器になる</strong>ということです。</p>
+  </div>
 """
 
 CALC_JS = r"""
@@ -121,6 +148,26 @@ CALC_JS = r"""
       bd.innerHTML='応募倍率 '+R+'倍 に '+(mm===1?'一般（くじ1枚）':(mm+'倍優遇（くじ'+mm+'枚）'))+' で申し込んだ場合の<strong>概算</strong>。くじを'+mm+'枚引くのに近く、当選確率はおおよそ '+pct(p)+' です。';
     }
     r.addEventListener('input',calc); m.addEventListener('change',calc); calc();
+  })();
+  (function(){
+    var r=document.getElementById('koei-r'), m=document.getElementById('koei-m'), y=document.getElementById('koei-y');
+    if(!r||!y) return;
+    var n5=document.getElementById('koei-n5'), n10=document.getElementById('koei-n10'), n20=document.getElementById('koei-n20'),
+        half=document.getElementById('koei-half'), bd=document.getElementById('koei-kbd');
+    function pct(x){ return (x*100).toFixed(x<0.1?1:0)+'%'; }
+    function need(p,t){ if(p<=0) return null; if(p>=1) return 1; return Math.ceil(Math.log(1-t)/Math.log(1-p)); }
+    function yrs(n){ var per=parseInt(y.value,10)||0; if(!per||n===null) return ''; var v=Math.round((n/per)*10)/10; return '（年'+per+'回なら約'+v+'年）'; }
+    function calc(){
+      var R=parseFloat(r.value), mm=parseInt(m.value,10)||1;
+      if(isNaN(R)||R<1){ n5.textContent='—'; n10.textContent='—'; n20.textContent='—'; half.textContent=''; bd.textContent='④に応募倍率を入力すると計算します。'; return; }
+      var p=1-Math.pow(1-1/R,mm);
+      function cum(n){ return 1-Math.pow(1-p,n); }
+      n5.textContent=pct(cum(5)); n10.textContent=pct(cum(10)); n20.textContent=pct(cum(20));
+      var h=need(p,0.5), e=need(p,0.8);
+      half.innerHTML='通算の当選確率が<strong>50%を超えるのは'+h+'回目</strong>'+yrs(h)+' ／ <strong>80%を超えるのは'+e+'回目</strong>'+yrs(e);
+      bd.innerHTML='1回あたりの当選確率 '+pct(p)+'（応募倍率'+R+'倍'+(mm===1?'・優遇なし':'・'+mm+'倍優遇')+'）で申し込み続けた場合の<strong>概算</strong>です。';
+    }
+    r.addEventListener('input',calc); m.addEventListener('change',calc); y.addEventListener('change',calc); calc();
   })();
   </script>
 """
@@ -206,7 +253,7 @@ PAGE = r"""<!DOCTYPE html>
   <p class="lead">@@NAMEPREF@@の@@HW@@の当選倍率を、公表データからまとめました。@@BASE_TEXT@@ 全体の平均だけでは見えない<strong>「どの住戸なら入りやすいか」</strong>を、実際の倍率データと補正計算機で確かめられます。</p>
 
   <div class="callout point">
-    <p><span class="tag">この記事の要点</span>@@NAME@@でも住戸によって倍率は大きく違います。下の<strong>実例</strong>と<strong>補正計算機</strong>で狙う住戸タイプの倍率をつかみ、<strong>当選確率シミュレーター</strong>で優遇（障害者・ひとり親など）まで見込めます。</p>
+    <p><span class="tag">この記事の要点</span>@@NAME@@でも住戸によって倍率は大きく違います。下の<strong>実例</strong>と<strong>補正計算機</strong>で狙う住戸タイプの倍率をつかみ、<strong>当選確率シミュレーター</strong>で優遇（障害者・ひとり親など）まで見込めます。<a href="#kaisu">何回申し込めば当たるのか</a>も回数で出せます。</p>
     <p>申込みの前提になる<strong>収入基準</strong>は<a href="koei-shunyu-kijun.html">政令月収の判定計算機</a>で先に確かめられます（単身なら年収およそ296万円、障害者手帳があれば422万円まで）。</p>
   </div>
 
