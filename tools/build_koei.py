@@ -18,10 +18,13 @@ CITIES = os.path.join(HERE, "data", "koei-cities.json")
 PAGE = os.path.join(HERE, "articles", "koei-jutaku-bairitsu.html")
 CSV_AREA = os.path.join(HERE, "data", "koei-bairitsu.csv")
 CSV_DANCHI = os.path.join(HERE, "data", "koei-danchi.csv")
+CSV_TOEI = os.path.join(HERE, "data", "toei-boshuware.csv")
 START = "<!-- KOEI:ROWS:START -->"
 END = "<!-- KOEI:ROWS:END -->"
 F_START = "<!-- KOEI:FACTORS:START -->"
 F_END = "<!-- KOEI:FACTORS:END -->"
+B_START = "<!-- KOEI:BOSHUWARE:START -->"
+B_END = "<!-- KOEI:BOSHUWARE:END -->"
 
 # 団地・住戸別の実例（配布CSVと同じ82件）を機械的に数え直すときの判定語。
 # 資料の表記に含まれる語だけで機械判定し、どちらも無いものは「区分不明」として除外する。
@@ -161,6 +164,92 @@ def pct(n, d):
     return "0" if not d else "{:.0f}".format(100.0 * n / d)
 
 
+def pct1(n, d):
+    return "0" if not d else "{:.1f}".format(100.0 * n / d)
+
+
+def render_boshuware():
+    """都営住宅の「申込者ゼロ（募集割れ）」台帳(data/toei-boshuware.csv)を数え直して、
+    そのまま引用できる一文完結の数値を生成する。推定・補完はしない。
+    koei-tokyo.html 側は区市町別・住宅別の一覧なので、ここは比率の要約だけを置く。"""
+    if not os.path.exists(CSV_TOEI):
+        return ""
+    with open(CSV_TOEI, encoding="utf-8-sig", newline="") as f:
+        rows = list(csv.DictReader(f))
+    if len(rows) < 100:
+        return ""
+    n = len(rows)
+    units = 0
+    for r in rows:
+        try:
+            units += int(r.get("募集戸数") or 0)
+        except ValueError:
+            pass
+    houses = {}
+    for r in rows:
+        key = (r.get("区市町", ""), r.get("住宅名", ""))
+        houses[key] = houses.get(key, 0) + 1
+    towns = sorted(set(r.get("区市町", "") for r in rows if r.get("区市町")))
+    # 募集回ごとの件数（CSVの出現順＝時系列順を保つ）
+    kai = []
+    kai_n = {}
+    for r in rows:
+        k = r.get("募集回", "")
+        if k not in kai_n:
+            kai.append(k)
+            kai_n[k] = 0
+        kai_n[k] += 1
+    kmax = max(kai, key=lambda k: kai_n[k])
+    kmin = min(kai, key=lambda k: kai_n[k])
+    # 入居人数：最少人数が1人（単身で申し込める）かどうかだけを表記から機械判定する
+    single = [r for r in rows if (r.get("入居人数") or "").startswith("１") or "単身" in (r.get("入居人数") or "")]
+    fam = {}
+    for r in rows:
+        v = (r.get("入居人数") or "").strip()
+        if v and not v.startswith("１") and "単身" not in v:
+            fam[v] = fam.get(v, 0) + 1
+    fam_top = sorted(fam.items(), key=lambda kv: -kv[1])[:3]
+    fam_txt = "・".join("{}{}件".format(esc(k), v) for k, v in fam_top)
+    rep2 = len([1 for v in houses.values() if v >= 2])
+    rep3 = len([1 for v in houses.values() if v >= 3])
+    ku = [r for r in rows if r.get("区市町", "").endswith("区")]
+    shi = n - len(ku)
+    span = "{}〜{}".format(esc(kai[0]), esc(kai[-1])) if kai else ""
+    li = []
+    li.append(
+        "    <li><strong>都営住宅で申込者ゼロだった住戸募集は、定期募集{r}回のすべての回で発生している。</strong>"
+        "{span}の倍率表を読み取ったところ、申込者数・倍率がともに0と読めた住戸募集は{n:,}件（のべ{u:,}戸・{h}住宅・{t}区市町）。"
+        "1回あたりは{kmin_n}件（{kmin}）〜{kmax_n}件（{kmax}）で、募集割れが1件も無かった回はない"
+        "（N={r}回・JKK東京の募集回ごとの倍率表より）。</li>".format(
+            r=len(kai), span=span, n=n, u=units, h=len(houses), t=len(towns),
+            kmin_n=kai_n[kmin], kmin=esc(kmin), kmax_n=kai_n[kmax], kmax=esc(kmax),
+        )
+    )
+    li.append(
+        "    <li><strong>申込者ゼロだった{n:,}件のうち、単身で申し込める住戸は{s}件（{sp}%）しかない。</strong>"
+        "残りは入居人数が2人以上と指定された世帯向けの住戸で、内訳は{fam}（N={n:,}件・{span}）。</li>".format(
+            n=n, s=len(single), sp=pct1(len(single), n), fam=fam_txt or "—", span=span,
+        )
+    )
+    li.append(
+        "    <li><strong>募集割れは同じ住宅で繰り返されている。</strong>"
+        "申込者ゼロが確認できた{h}住宅のうち{r2}住宅（{r2p}%）は2回以上、{r3}住宅（{r3p}%）は3回以上の回で確認できた"
+        "（N={h}住宅・{span}の通算）。</li>".format(
+            h=len(houses), r2=rep2, r2p=pct(rep2, len(houses)),
+            r3=rep3, r3p=pct(rep3, len(houses)), span=span,
+        )
+    )
+    li.append(
+        "    <li><strong>申込者ゼロの{n:,}件のうち{s}件（{sp}%）は市部・町村で起きており、区部は{k}件（{kp}%）だった。</strong>"
+        "都営住宅の平均倍率が区部7.2倍・市部2.7倍（上の⑥）であることと向きは一致するが、"
+        "区部・市部それぞれの募集戸数の内訳は公表されていないため、これは件数の分布であって"
+        "「市部のほうが割れやすい」ことの証明ではない（N={n:,}件）。</li>".format(
+            n=n, s=shi, sp=pct(shi, n), k=len(ku), kp=pct(len(ku), n),
+        )
+    )
+    return "\n".join(li)
+
+
 def render_factors(cdata):
     """配布CSVの82件を機械的に数え直した「そのまま引用できる数字」を生成する。
     推定・補完はしない。母集団は各市が公表した両端の抜粋なので、その旨を文中に明記する。"""
@@ -258,6 +347,11 @@ def main():
         factors_html = render_factors(cdata)
         if factors_html:
             new = inject(new, F_START, F_END, factors_html)
+
+    # 都営の募集割れ台帳(1,360件規模)の数え直しをマーカー間に差し込む
+    boshuware_html = render_boshuware()
+    if boshuware_html:
+        new = inject(new, B_START, B_END, boshuware_html)
 
     # 更新日も差し替え（<span id="koei-updated">...</span>）
     upd = data.get("updated", "")
