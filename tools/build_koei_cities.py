@@ -5,6 +5,7 @@
 import json
 import os
 import html
+import re
 
 HERE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 DATA = os.path.join(HERE, "data", "koei-cities.json")
@@ -177,6 +178,11 @@ def esc(s):
     return html.escape(str(s), quote=True)
 
 
+def plain(s):
+    """データ中の <strong> 等を落として、meta description に入れられる素の文字列にする。"""
+    return re.sub(r"<[^>]+>", "", str(s or "")).strip()
+
+
 def units_table(cap, rows, cls):
     tr = "\n".join(
         '      <tr><th scope="row">{n}</th><td class="{c}">{r}</td><td>{a}</td></tr>'.format(
@@ -345,11 +351,23 @@ def main():
         # 品質ゲート: 実データ(top/bottom)が無い都市はスキップ
         if not c.get("top_units") or not c.get("bottom_units"):
             print("skip (thin):", c["slug"]); continue
-        desc = "{n}の{hw}の当選倍率を住戸別の実データでまとめ、倍率を左右する要因（立地・築年・エレベーター・単身/世帯）を公式資料つきで解説。狙う住戸の倍率を補正する計算機と、障害者・ひとり親の優遇での当選確率シミュレーターつき。".format(n=c["name"], hw=c.get("housing_word","市営住宅"))
         # 任意の都市固有フィールド。未設定の都市は出力が従来と完全一致する。
         # title_extra: <title>の末尾（都市名｜の手前）に足す語 / desc_extra: descriptionの末尾に足す文
         # extra_html: 計算機の下に差し込む都市固有セクション（HTMLの配列）
-        desc = desc + c.get("desc_extra", "")
+        desc_extra = c.get("desc_extra", "")
+        if desc_extra:
+            # 都市固有の説明文を持つ市（東京都）は従来どおり。二重に数字を並べない。
+            desc = "{n}の{hw}の当選倍率を住戸別の実データでまとめ、倍率を左右する要因（立地・築年・エレベーター・単身/世帯）を公式資料つきで解説。狙う住戸の倍率を補正する計算機と、障害者・ひとり親の優遇での当選確率シミュレーターつき。".format(n=c["name"], hw=c.get("housing_word","市営住宅")) + desc_extra
+        else:
+            # 12市が同じ定型文だとスニペットで差が出ないので、その市の実数（最高／最低の住戸）を先頭に出す。
+            _t = c["top_units"][0]
+            _b = c["bottom_units"][0]
+            desc = ("{n}の{hw}の当選倍率を住戸別の実データでまとめました。公表資料でみると最高は{tn}{tr}、"
+                    "応募が付きにくいのは{bn}{br}と、同じ市でも住戸で大きく違います。"
+                    "倍率を補正する計算機と、障害者・ひとり親の優遇での当選確率シミュレーターつき。").format(
+                        n=c["name"], hw=c.get("housing_word", "市営住宅"),
+                        tn=plain(_t["name"]), tr=plain(_t["ratio"]),
+                        bn=plain(_b["name"]), br=plain(_b["ratio"]))
         extra = "\n".join(c.get("extra_html", []))
         top = units_table("倍率が高い住戸の例（{}・出典つき）".format(esc(c["name"])), c["top_units"], "hi")
         bottom = units_table("倍率が低い・応募が付きにくい住戸の例".format(), c["bottom_units"], "lo")
@@ -381,7 +399,19 @@ def main():
         }, ensure_ascii=False)
         # 任意フィールド faq_extra: [{"q": 質問, "a": 回答}] を本文Q&AとFAQPageの両方に追記する。
         # 未設定の都市は出力が従来と完全一致（プレースホルダは空文字に置換）。
-        faq_extra_items = c.get("faq_extra", [])
+        faq_extra_items = list(c.get("faq_extra", []))
+        # 「◯◯市営住宅 空き状況」で着地する検索に、当サイトはこれまで一言も答えていなかった。
+        # 公営住宅は空室が常時公開される仕組みではない、という前提の説明を全市に置く（答えを持つのは市の窓口なので名指しする）。
+        faq_extra_items.append({
+            "q": "{n}の{hw}の空き状況はどこで見られますか？".format(n=c["name"], hw=c.get("housing_word", "市営住宅")),
+            "a": ("公営住宅は、賃貸情報サイトのように空き室が常時公開される仕組みではありません。"
+                  "{n}の{hw}では募集回ごとに「募集住宅一覧」が公表され、そこに載った住戸だけが申込み・抽選の対象になります"
+                  "（このページの倍率も、その一覧と抽選結果から集計したものです）。"
+                  "したがって見るべきは「いま空いている部屋」ではなく「次の募集にどの住戸が出るか」です。"
+                  "募集の有無・時期・申込方法は、{n}（または募集事務を行う住宅供給公社）の公式ページで必ず確認してください。"
+                  "なお、応募が集まらなかった住戸は、自治体によっては次の定期募集を待たずに随時募集（先着順）へ回ることがあります。"
+                  ).format(n=c["name"], hw=c.get("housing_word", "市営住宅")),
+        })
         faq_extra_html = "".join(
             "\n  <h3>Q. {q}</h3>\n  <p>A. {a}</p>".format(q=esc(x["q"]), a=esc(x["a"]))
             for x in faq_extra_items
