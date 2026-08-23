@@ -8,3 +8,6 @@ CONTENT-REVIEW.md
 # PDFから再生成できるうえ、読み取りに未修理の取りこぼしがあるため公開しない。
 # 公開するのは tools/build_toei.py が検算ゲートを通して出す data/toei-boshuware.csv のみ。
 data/toei-bairitsu.json
+
+# Python のバイトコードキャッシュ
+tools/__pycache__/

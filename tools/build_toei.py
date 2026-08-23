@@ -114,13 +114,26 @@ def main():
     dan_by_city = {}
     for x in z:
         dan_by_city.setdefault(x["city"], set()).add(x["name"])
+    # 区市町ごとの明細ページ(tools/build_toei_ku.py が出力)がある区市町は、そこへリンクする。
+    # 「◯◯区 都営住宅 倍率」で引く人が、都全体の平均ではなく自分の区の住宅名にたどり着けるように。
+    try:
+        from build_toei_ku import SLUGS as KU_SLUGS, MIN_ROWS as KU_MIN, MIN_DANCHI as KU_MIND
+    except Exception:
+        KU_SLUGS, KU_MIN, KU_MIND = {}, 10 ** 9, 10 ** 9
     for city, cnt in by_city.most_common():
         cls = ' class="lo"' if cnt >= 50 else ""
+        label = city
+        if city in KU_SLUGS and cnt >= KU_MIN and len(dan_by_city[city]) >= KU_MIND:
+            label = ('<a href="toei-%s.html">%sの住宅一覧</a>'
+                     % (KU_SLUGS[city], city))
         a('      <tr><th scope="row">%s</th><td%s>%d件</td><td>%d住宅</td></tr>'
-          % (city, cls, cnt, len(dan_by_city[city])))
+          % (label, cls, cnt, len(dan_by_city[city])))
     a('    </tbody>')
     a('  </table>')
     a('  </div>')
+    a('  <p style="font-size:.88rem;color:var(--sub)">件数の多い区市町は、'
+      '<strong>どの住宅が何回あまったか（住宅名・建築年度・エレベーター・募集回）</strong>まで一覧にした'
+      'ページを分けています。表の区市町名のリンクからどうぞ。</p>')
     a('  <p style="font-size:.88rem;color:var(--sub)">表に無い区市町（千代田区・中央区・港区・文京区・台東区など）は、'
       'この読み取りの範囲では募集割れが<strong>1件も確認できなかった</strong>区市町です。'
       '同じ期間、都心区には数十〜100倍超の倍率が並びます。</p>')
