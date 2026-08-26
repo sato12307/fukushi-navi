@@ -156,6 +156,44 @@ def zero_rows(ranked):
     ), zs
 
 
+def ev_class(name, attr):
+    """資料が『エレベーターなし／あり』に触れているかを判定する。
+    住戸名の但し書き（例:『明石穂（EVなし・単身者向け）』）が最も確かなので名前を先に見る。
+    触れていない住戸は '?'（不明）とし、無いものとして数えない（推定しない）。"""
+    for t in (strip_tags(name), strip_tags(attr)):
+        if ("EVなし" in t) or ("EV無" in t) or ("エレベーターなし" in t):
+            return "no"
+        if ("EV有" in t) or ("EV付" in t) or ("EVあり" in t) or ("エレベーター有" in t) or ("エレベーター付" in t):
+            return "yes"
+    return "?"
+
+
+def ev_rows(units):
+    """エレベーターの有無が資料に明記されている住戸だけを倍率の高い順に並べる。"""
+    pool = [u for u in units if u["val"] is not None and ev_class(u["name"], u["attr"]) != "?"]
+    pool.sort(key=lambda u: (-u["val"], u["city"], u["name"]))
+    label = {"no": "なし", "yes": "あり"}
+    rows = "\n".join(
+        '      <tr><th scope="row">{n}</th><td class="cty">{c}</td>'
+        '<td class="{cls}">{r}</td><td class="cty">{e}</td><td>{a}</td></tr>'.format(
+            n=esc(u["name"]), c=esc(u["city"]), r=esc(u["ratio_text"]),
+            e=label[ev_class(u["name"], u["attr"])], a=u["attr"],
+            cls=("hi" if u["val"] >= 1 else "lo"),
+        )
+        for u in pool
+    )
+    no = [u for u in pool if ev_class(u["name"], u["attr"]) == "no"]
+    yes = [u for u in pool if ev_class(u["name"], u["attr"]) == "yes"]
+    stat = {
+        "n": len(pool),
+        "no": len(no), "no_lo": len([u for u in no if u["val"] < 1]),
+        "no_hi": [u for u in no if u["val"] >= 1],
+        "yes": len(yes), "yes_hi": len([u for u in yes if u["val"] >= 1]),
+        "yes_lo": [u for u in yes if u["val"] < 1],
+    }
+    return rows, stat
+
+
 def source_rows(data):
     seen = set()
     out = []
@@ -263,7 +301,7 @@ PAGE = r"""<!DOCTYPE html>
   </div>
 
   <h2 id="zero">③ 応募が定員に届かなかった住戸（1倍未満・@@NZERO@@件）</h2>
-  <p>倍率1倍未満は、<strong>その募集回では申し込めばほぼ入れた</strong>住戸です（0倍は応募ゼロ）。都市部でもこの枠は実在します。条件（バス便・築古・エレベーターなし上層階など）を許容できるかどうかが分かれ目になります。</p>
+  <p>倍率1倍未満は、<strong>その募集回では申し込めばほぼ入れた</strong>住戸です（0倍は応募ゼロ）。都市部でもこの枠は実在します。条件（バス便・築古・<a href="#ev">エレベーターなし上層階</a>など）を許容できるかどうかが分かれ目になります。</p>
   <div class="table-wrap">
   <table class="ratio-table">
     <caption>応募倍率1倍未満の住戸（@@NZERO@@件・低い順）</caption>
@@ -274,6 +312,25 @@ PAGE = r"""<!DOCTYPE html>
   </table>
   </div>
   <p style="font-size:.88rem;color:var(--sub)">同じ住戸が次の募集でも1倍未満とは限りません。募集の号数・住戸の階数まで含めて、必ず各市の最新の募集案内でご確認ください。</p>
+
+  <h2 id="ev">④ 応募ゼロの理由として資料がいちばん多く挙げているのは「エレベーターなし」</h2>
+  <p>各市の資料は、なぜその住戸に応募が来ないのかを<strong>注記の形でしか書きません</strong>（「5階は募集割れ」「EV有無が応募ゼロの直接要因」など）。市ごとに読むと通りすぎてしまいますが、@@NCITY@@市ぶんを横に並べると同じ注記が繰り返し出てきます。ここでは@@NUNIT@@件のうち、<strong>資料がエレベーターの有無に触れている@@NEV@@件</strong>だけを取り出して数え直しました（触れていない住戸は「無い」とはみなさず、数から除いています）。</p>
+
+  <div class="callout point">
+    <p><span class="tag">数え直した結果</span>@@EVFACT1@@</p>
+    <p>@@EVFACT2@@</p>
+  </div>
+
+  <div class="table-wrap">
+  <table class="ratio-table">
+    <caption>エレベーターの有無が資料に明記されている住戸（@@NEV@@件・倍率の高い順）</caption>
+    <thead><tr><th scope="col">団地・住戸</th><th scope="col">市</th><th scope="col">応募倍率</th><th scope="col">エレベーター</th><th scope="col">資料の注記</th></tr></thead>
+    <tbody>
+@@EVROWS@@
+    </tbody>
+  </table>
+  </div>
+  <p style="font-size:.88rem;color:var(--sub)">この@@NEV@@件は「エレベーターに触れている資料があった住戸」であって、無作為抽出ではありません。したがってここから<strong>公営住宅全体でエレベーターなしの住戸が何％空いているかは分かりません</strong>。分かるのは、<strong>各市が応募割れの理由として挙げた条件が市をまたいで一致している</strong>という事実です。なお当選後は毎日その階段を使うことになります。高齢の方・足に不安のある方・小さなお子さんのいる世帯では、当たりやすさと入居後の暮らしやすさが正面からぶつかる点だけは、申し込む前に見ておいてください。</p>
 
   <div class="callout note">
     <p><span class="tag">次に見るもの</span>狙う住戸の倍率の目安は<a href="koei-jutaku-bairitsu.html#hosei">住戸タイプ補正計算機</a>で、障害者・ひとり親などの<strong>優遇でどれだけ当たりやすくなるか</strong>は<a href="koei-hairiyasui.html">入りやすい人の条件</a>で確かめられます。申込みの前提になる収入基準は<a href="koei-shunyu-kijun.html">政令月収の判定計算機</a>、当選後の家賃は<a href="koei-yachin-keisan.html">家賃の自動計算</a>にあります。</p>
@@ -296,6 +353,8 @@ PAGE = r"""<!DOCTYPE html>
   <p>A. 違います。@@GAPTOP@@。倍率を動かしているのは主に「単身向けか世帯向けか」「駅までの距離」「築年」「エレベーターと階数」の4つで、この序列は調べた市で共通していました（この@@NUNIT@@件を因子別に数え直した内訳は<a href="koei-jutaku-bairitsu.html#factors">単身向けと世帯向けの応募倍率の実データ</a>にあります）。</p>
   <h3>Q. 単身向けと世帯向けでは、どちらが入りやすいですか？</h3>
   <p>A. 世帯向けです。この一覧を区分ごとに数え直すと、<strong>倍率が高かった側は単身者が申し込める住戸に大きく偏り、応募が定員に届かなかった住戸は世帯向けが最も多い</strong>という内訳でした（件数・割合は<a href="koei-jutaku-bairitsu.html#factors">まとめページの⑨〜⑫</a>）。単身向けは戸数そのものが少ないため、同じ団地でも単身区分だけ倍率が跳ね上がることがあります。</p>
+  <h3>Q. エレベーターのない上の階は、ねらい目ですか？</h3>
+  <p>A. この一覧の中では、<strong>いちばん応募が薄い条件</strong>でした。資料が「エレベーターなし」と明記した@@EVNO@@件のうち@@EVNOLO@@件が応募割れ（1倍未満）です（内訳は<a href="#ev">④</a>）。ただし2点だけ注意してください。ひとつは、<strong>エレベーター付きでも応募が割れた住戸が@@EVYESLO@@件ある</strong>ことで、郊外の世帯向けはエレベーターがあっても申込ゼロになります——つまり効く順番は「立地・募集区分 → エレベーターと階数」です。もうひとつは、当選後の生活です。入居は数年〜数十年続くので、いま階段が平気でも先々を含めて判断してください。</p>
   <h3>Q. 応募ゼロの住戸は、申し込めば必ず入れますか？</h3>
   <p>A. 必ずとは言えません。0倍はあくまで<strong>その募集回で応募が定員に届かなかった</strong>という記録で、次回も同じとは限りません。また収入基準や単身入居の可否といった申込資格は別に判定されます。実際の可否は各市の募集案内と窓口でご確認ください。</p>
 
@@ -355,6 +414,7 @@ def main():
     gap_html, gaps = gap_rows(units)
     zero_html, zeros = zero_rows(ranked)
     src_html, nsrc = source_rows(data)
+    evrows_html, ev = ev_rows(units)
 
     ncity = len(set(u["city"] for u in units))
     nunit = len(units)
@@ -385,6 +445,24 @@ def main():
     fact3 = ("応募が定員に届かなかった住戸（1倍未満）は<strong>{nz}件</strong>あり、"
              "最低が0倍だった市は{nc0}市ありました。高倍率と応募ゼロが同じ市で同時に起きるのが公営住宅の常態です。").format(
         nz=nzero, nc0=n_zero_city)
+
+    ex = ev["no_hi"]
+    if ex:
+        ex_text = ("1倍以上だった例外は{n}（{c}・{r}）だけで、その資料も「{a}」と書き添えています。"
+                   .format(n=esc(ex[0]["name"]), c=esc(ex[0]["city"]), r=esc(ex[0]["ratio_text"]),
+                           a=esc(strip_tags(ex[0]["attr"]))))
+    else:
+        ex_text = "1倍以上だった住戸はありませんでした。"
+    evfact1 = ("資料に<strong>「エレベーターなし」と明記された住戸は{n}件</strong>あり、そのうち"
+               "<strong>{lo}件が応募割れ（1倍未満）</strong>でした。{ex}").format(
+        n=ev["no"], lo=ev["no_lo"], ex=ex_text)
+    yl = ev["yes_lo"]
+    yl_text = ("（{}）".format(esc("／".join(u["city"] + "・" + u["name"] for u in yl))) if yl else "")
+    evfact2 = ("一方で「エレベーター有」と明記された住戸は{n}件、うち{hi}件が1倍以上でした。"
+               "ただし<strong>エレベーター付きでも応募が割れた住戸が{lo}件</strong>あります{names}。"
+               "<strong>エレベーターがあるから人気になるのではなく、立地と募集区分が先に効き、その次にエレベーターと階数が効く</strong>"
+               "——という順序で読むのが実データに合っています。").format(
+        n=ev["yes"], hi=ev["yes_hi"], lo=len(yl), names=yl_text)
 
     if gap_top is not None:
         gaptop_text = ("たとえば{c}は市全体の平均が{b}倍ですが、同じ市の中に{hn}の{hr}（市平均の{m}）と、"
@@ -435,6 +513,10 @@ def main():
         "@@NSRC@@": str(nsrc), "@@DESC@@": esc(desc),
         "@@FACT1@@": fact1, "@@FACT2@@": fact2, "@@FACT3@@": fact3,
         "@@GAP@@": gap_html, "@@RANK@@": rank_html, "@@ZERO@@": zero_html,
+        "@@EVROWS@@": evrows_html, "@@NEV@@": str(ev["n"]),
+        "@@EVFACT1@@": evfact1, "@@EVFACT2@@": evfact2,
+        "@@EVNO@@": str(ev["no"]), "@@EVNOLO@@": str(ev["no_lo"]),
+        "@@EVYESLO@@": str(len(ev["yes_lo"])),
         "@@SOURCES@@": src_html, "@@CITYLINKS@@": citylinks,
         "@@TOPNAME@@": esc(top["name"]), "@@TOPCITY@@": esc(top["city"]),
         "@@TOPRATIO@@": esc(top["ratio_text"]), "@@GAPTOP@@": gaptop_text,
