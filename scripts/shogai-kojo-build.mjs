@@ -244,6 +244,13 @@ ${prefBlocks}
   <p class="disclaimer">当サイトは各自治体とは関係のない個人が運営しています。制度の適用可否は必ずお住まいの市区町村の窓口でご確認ください。誤りのご指摘は歓迎します。</p>
   </div>
 
+  <div class="callout point"><p><span class="tag">手続きまで進めるなら</span>
+  この一覧で分かるのは「基準」までです。実際に認定書をもらって過去5年分をさかのぼるには、
+  親御さんの自立度ランクが書かれた書類を取り寄せ、還付額を試算し、更正の請求か還付申告を出す必要があります。
+  その手順をお住まいの市区町村の基準に合わせてまとめた手引きを用意しています（500円）。
+  <strong>買わなくても手続きはできます。</strong>
+  → <a href="../pack/">還付申請パックについて</a></p></div>
+
   <p class="related"><a href="../articles/shogaisha-kojo-tax.html">→ 障害者控除で税金はいくら安くなるのか</a></p>
 `
 fs.writeFileSync(path.join(OUT, 'index.html'), page({

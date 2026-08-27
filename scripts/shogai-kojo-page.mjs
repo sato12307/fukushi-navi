@@ -55,6 +55,7 @@ ${body}
 <footer class="site-footer">
   <div class="inner">
     <p>フクシル ／ 出典は各ページ末尾に明記しています。制度の適用可否は必ず各自治体の窓口でご確認ください。</p>
+    <p><a href="${up}about.html">このサイトについて</a> ／ <a href="${up}tokushoho/">特定商取引法に基づく表記</a> ／ <a href="${up}kiyaku/">利用規約</a></p>
   </div>
 </footer>
 </body>
