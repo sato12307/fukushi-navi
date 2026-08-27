@@ -1,0 +1,360 @@
+{
+ "parsedAt": "2026-08-27T12:24:04.394Z",
+ "tally": {
+  "判定ランクを公表していない": 19,
+  "基準が読み取れない": 6,
+  "読めた(表)": 4,
+  "読めた(文章)": 3
+ },
+ "records": [
+  {
+   "code": "141003",
+   "pref": "神奈川県",
+   "city": "横浜市",
+   "kind": "政令市",
+   "url": "https://www.city.yokohama.lg.jp/kenko-iryo-fukushi/fukushi-kaigo/koreisha-kaigo/kaigohoken-igai-service/koukyou-zei/shougaisha-koujo.html",
+   "status": "判定ランクを公表していない",
+   "shogai": null,
+   "tokubetsu": null
+  },
+  {
+   "code": "141305",
+   "pref": "神奈川県",
+   "city": "川崎市",
+   "kind": "政令市",
+   "url": "https://www.city.kawasaki.jp/templates/outline/350/0000071709.html",
+   "status": "判定ランクを公表していない",
+   "shogai": null,
+   "tokubetsu": null
+  },
+  {
+   "code": "231002",
+   "pref": "愛知県",
+   "city": "名古屋市",
+   "kind": "政令市",
+   "url": "https://www.city.nagoya.jp/kenkofukushi/page/0000167338.html",
+   "status": "基準が読み取れない",
+   "shogai": null,
+   "tokubetsu": null
+  },
+  {
+   "code": "271004",
+   "pref": "大阪府",
+   "city": "大阪市",
+   "kind": "政令市",
+   "url": "https://www.city.osaka.lg.jp/fukushi/page/0000058487.html",
+   "status": "基準が読み取れない",
+   "shogai": null,
+   "tokubetsu": null
+  },
+  {
+   "code": "281000",
+   "pref": "兵庫県",
+   "city": "神戸市",
+   "kind": "政令市",
+   "url": "https://www.city.kobe.lg.jp/a39067/kenko/fukushi/koreshafukushi/am06/nenkin/kaigozeikoujyo.html",
+   "status": "判定ランクを公表していない",
+   "shogai": null,
+   "tokubetsu": null
+  },
+  {
+   "code": "261009",
+   "pref": "京都府",
+   "city": "京都市",
+   "kind": "政令市",
+   "url": "https://www.city.kyoto.lg.jp/hokenfukushi/page/0000317370.html",
+   "status": "読めた(表)",
+   "shogai": {
+    "ninchi": "Ⅱa"
+   },
+   "tokubetsu": {
+    "ninchi": "Ⅲa",
+    "netakiri": "B1"
+   }
+  },
+  {
+   "code": "041009",
+   "pref": "宮城県",
+   "city": "仙台市",
+   "kind": "政令市",
+   "url": "https://www.city.sendai.jp/hokatsushien/download/bunyabetsu/kore/kore/shogaisha.html",
+   "status": "判定ランクを公表していない",
+   "shogai": null,
+   "tokubetsu": null
+  },
+  {
+   "code": "111007",
+   "pref": "埼玉県",
+   "city": "さいたま市",
+   "kind": "政令市",
+   "url": "https://www.city.saitama.lg.jp/007/007/007/p002688.html",
+   "status": "判定ランクを公表していない",
+   "shogai": null,
+   "tokubetsu": null
+  },
+  {
+   "code": "401307",
+   "pref": "福岡県",
+   "city": "福岡市",
+   "kind": "政令市",
+   "url": "https://www.city.fukuoka.lg.jp/fukushi/oldage-welfare/health/4-010103-2.html",
+   "status": "基準が読み取れない",
+   "shogai": null,
+   "tokubetsu": null
+  },
+  {
+   "code": "341002",
+   "pref": "広島県",
+   "city": "広島市",
+   "kind": "政令市",
+   "url": "https://www.city.hiroshima.lg.jp/site/koureisha/5934.html",
+   "status": "判定ランクを公表していない",
+   "shogai": null,
+   "tokubetsu": null
+  },
+  {
+   "code": "121002",
+   "pref": "千葉県",
+   "city": "千葉市",
+   "kind": "政令市",
+   "url": "https://www.city.chiba.jp/hokenfukushi/koreishogai/korei/shougaishanintei.html",
+   "status": "判定ランクを公表していない",
+   "shogai": null,
+   "tokubetsu": null
+  },
+  {
+   "code": "221007",
+   "pref": "静岡県",
+   "city": "静岡市",
+   "kind": "政令市",
+   "url": "https://www.city.shizuoka.lg.jp/s2837/s002787.html",
+   "status": "判定ランクを公表していない",
+   "shogai": null,
+   "tokubetsu": null
+  },
+  {
+   "code": "331007",
+   "pref": "岡山県",
+   "city": "岡山市",
+   "kind": "政令市",
+   "url": "https://www.city.okayama.jp/kurashi/0000007341.html",
+   "status": "判定ランクを公表していない",
+   "shogai": null,
+   "tokubetsu": null
+  },
+  {
+   "code": "431001",
+   "pref": "熊本県",
+   "city": "熊本市",
+   "kind": "政令市",
+   "url": "https://www.city.kumamoto.jp/kiji0031779/index.html",
+   "status": "判定ランクを公表していない",
+   "shogai": null,
+   "tokubetsu": null
+  },
+  {
+   "code": "131118",
+   "pref": "東京都",
+   "city": "大田区",
+   "kind": "特別区",
+   "url": "https://www.city.ota.tokyo.jp/seikatsu/fukushi/kourei/nenkin_zei/youkaigoninteishatounokoujyo.html",
+   "status": "読めた(文章)",
+   "shogai": {
+    "ninchi": "Ⅱa",
+    "netakiri": "A1"
+   },
+   "tokubetsu": {
+    "ninchi": "Ⅲa",
+    "netakiri": "B1"
+   }
+  },
+  {
+   "code": "131229",
+   "pref": "東京都",
+   "city": "葛飾区",
+   "kind": "特別区",
+   "url": "https://www.city.katsushika.lg.jp/kenkou/1000051/1002106/1030310/1018285.html",
+   "status": "基準が読み取れない",
+   "shogai": null,
+   "tokubetsu": null
+  },
+  {
+   "code": "131024",
+   "pref": "東京都",
+   "city": "中央区",
+   "kind": "特別区",
+   "url": "https://www.city.chuo.lg.jp/a0029/20241227syogai.html",
+   "status": "判定ランクを公表していない",
+   "shogai": null,
+   "tokubetsu": null
+  },
+  {
+   "code": "131121",
+   "pref": "東京都",
+   "city": "世田谷区",
+   "kind": "特別区",
+   "url": "https://www.city.setagaya.lg.jp/02061/221.html",
+   "status": "読めた(表)",
+   "shogai": {
+    "ninchi": "Ⅱa",
+    "kaigo": "要介護3",
+    "netakiri": "A1"
+   },
+   "tokubetsu": {
+    "netakiri": "B1",
+    "kaigo": "要介護3"
+   }
+  },
+  {
+   "code": "132012",
+   "pref": "東京都",
+   "city": "八王子市",
+   "kind": "中核市",
+   "url": "https://www.city.hachioji.tokyo.jp/kurashi/welfare/004/004/001/p003860.html",
+   "status": "判定ランクを公表していない",
+   "shogai": null,
+   "tokubetsu": null
+  },
+  {
+   "code": "122041",
+   "pref": "千葉県",
+   "city": "船橋市",
+   "kind": "中核市",
+   "url": "https://www.city.funabashi.lg.jp/kenkou/koureisha/002/p001788.html",
+   "status": "判定ランクを公表していない",
+   "shogai": null,
+   "tokubetsu": null
+  },
+  {
+   "code": "122270",
+   "pref": "千葉県",
+   "city": "浦安市",
+   "kind": "市",
+   "url": "https://www.city.urayasu.lg.jp/fukushi/koureisha/hoken/1040862.html",
+   "status": "読めた(表)",
+   "shogai": {
+    "netakiri": "A1"
+   },
+   "tokubetsu": {
+    "netakiri": "B1"
+   }
+  },
+  {
+   "code": "222038",
+   "pref": "静岡県",
+   "city": "沼津市",
+   "kind": "市",
+   "url": "https://www.city.numazu.shizuoka.jp/kurashi/fukushi/kaigo/shimin/shogaikojyo.htm",
+   "status": "読めた(表)",
+   "shogai": {
+    "kaigo": "要介護3",
+    "netakiri": "B1"
+   },
+   "tokubetsu": null
+  },
+  {
+   "code": "272272",
+   "pref": "大阪府",
+   "city": "東大阪市",
+   "kind": "中核市",
+   "url": "https://www.city.higashiosaka.lg.jp/0000004368.html",
+   "status": "判定ランクを公表していない",
+   "shogai": null,
+   "tokubetsu": null
+  },
+  {
+   "code": "272124",
+   "pref": "大阪府",
+   "city": "八尾市",
+   "kind": "中核市",
+   "url": "https://www.city.yao.osaka.jp/kenkou_fukushi/koureisha_hukushi/1007856/1007861.html",
+   "status": "判定ランクを公表していない",
+   "shogai": null,
+   "tokubetsu": null
+  },
+  {
+   "code": "282197",
+   "pref": "兵庫県",
+   "city": "三田市",
+   "kind": "市",
+   "url": "https://www.city.sanda.lg.jp/soshiki/30/gyomu/kourei_fukushi_kaigo/107/81/27665.html",
+   "status": "読めた(文章)",
+   "shogai": {
+    "kaigo": "要支援1"
+   },
+   "tokubetsu": null
+  },
+  {
+   "code": "012041",
+   "pref": "北海道",
+   "city": "旭川市",
+   "kind": "中核市",
+   "url": "https://www.city.asahikawa.hokkaido.jp/kurashi/101/1051/03/d055977.html",
+   "status": "判定ランクを公表していない",
+   "shogai": null,
+   "tokubetsu": null
+  },
+  {
+   "code": "151009",
+   "pref": "新潟県",
+   "city": "新潟市",
+   "kind": "政令市",
+   "url": "https://www.city.niigata.lg.jp/iryo/kaigo/kaigoindex/zeikojyo.html",
+   "status": "読めた(文章)",
+   "shogai": {
+    "netakiri": "B1"
+   },
+   "tokubetsu": null
+  },
+  {
+   "code": "221309",
+   "pref": "静岡県",
+   "city": "浜松市",
+   "kind": "政令市",
+   "url": "https://www.city.hamamatsu.shizuoka.jp/kourei/welfare/elderly/zaitaku/yuuguu.html",
+   "status": "判定ランクを公表していない",
+   "shogai": null,
+   "tokubetsu": null
+  },
+  {
+   "code": "401005",
+   "pref": "福岡県",
+   "city": "北九州市",
+   "kind": "政令市",
+   "url": "https://www.city.kitakyushu.lg.jp/contents/924_10966.html",
+   "status": "基準が読み取れない",
+   "shogai": null,
+   "tokubetsu": null
+  },
+  {
+   "code": "271403",
+   "pref": "大阪府",
+   "city": "堺市",
+   "kind": "政令市",
+   "url": "https://www.city.sakai.lg.jp/kenko/fukushikaigo/shogaifukushi/shiori/shiori/zei-keigen.html",
+   "status": "判定ランクを公表していない",
+   "shogai": null,
+   "tokubetsu": null
+  },
+  {
+   "code": "131202",
+   "pref": "東京都",
+   "city": "練馬区",
+   "kind": "特別区",
+   "url": "https://www.city.nerima.tokyo.jp/hokenfukushi/shogai/genmen/zei_shogaishakojo.html",
+   "status": "基準が読み取れない",
+   "shogai": null,
+   "tokubetsu": null
+  },
+  {
+   "code": "131211",
+   "pref": "東京都",
+   "city": "足立区",
+   "kind": "特別区",
+   "url": "https://www.city.adachi.tokyo.jp/s-engo/shougaishakoujo.html",
+   "status": "判定ランクを公表していない",
+   "shogai": null,
+   "tokubetsu": null
+  }
+ ]
+}

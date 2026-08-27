@@ -1,0 +1,25 @@
+本文から基準を読めていない 716件の内訳
+
+  ランク記号がある(=読み取りに失敗): 113
+  自立度の語はあるが、ランクは別表にあって本文に無い: 7
+  要介護度だけ書いてある: 13
+  ランクを一切書いていない: 583
+  本文が取れていない: 0
+
+-- 見本 --
+== ランク記号がある(=読み取りに失敗)
+   滋賀県米原市 https://www.city.maibara.lg.jp/reiki/reiki_honbun/r108RG00000625.html
+   熊本県錦町 https://www.town.kumamoto-nishiki.lg.jp/reiki_menu/reiki_honbun/q470RG00000558.html
+   北海道標茶町 http://houmu.h-chosonkai.gr.jp/~reikidb/data/86/58/H419902200042/H419902200042_j.html
+== 要介護度だけ書いてある
+   東京都練馬区 https://www1.g-reiki.net/nerima/reiki_honbun/a100RG00003087.html
+   長崎県時津町 https://www1.g-reiki.net/town.togitsu/reiki_honbun/q317RG00000677.html
+   長野県木島平村 https://www.vill.kijimadaira.lg.jp/d1w_reiki/H414902200011/H414902200011_j.html
+== ランクを一切書いていない
+   茨城県阿見町 https://www1.g-reiki.net/town.ami/reiki_honbun/e058RG00000375.html
+   沖縄県恩納村 https://www.vill.onna.okinawa.jp/reiki_int/reiki_honbun/q917RG00000562.html
+   熊本県上天草市 https://en3-jg.d1-law.com/kamiamakusa/d1w_reiki/H419902500020/H419902500020_j.html
+== 自立度の語はあるが、ランクは別表にあって本文に無い
+   北海道浦幌町 http://houmu.h-chosonkai.gr.jp/~reikidb/data/25/57/H421902300004/H421902300004_j.html
+   宮崎県日向市 https://www.hyugacity.jp/reiki_new/reiki_honbun/q607RG00000838.html
+   茨城県坂東市 https://www.city.bando.lg.jp/data/reiki/reiki_honbun/r155RG00000172.html
