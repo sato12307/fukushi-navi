@@ -103,6 +103,7 @@ write('pack/index.html', page({
   var sel=document.getElementById('mun'), btn=document.getElementById('buy'), msg=document.getElementById('msg');
   btn.addEventListener('click', function(){
     if(!sel.value){ msg.textContent='市区町村を選んでください'; return; }
+    if(window.__ev) window.__ev('buy_click');
     btn.disabled=true; msg.textContent='決済ページへ移動します…';
     fetch('/api/checkout',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({code:sel.value})})
       .then(function(r){return r.json()})
