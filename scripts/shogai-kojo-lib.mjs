@@ -36,7 +36,20 @@ const lowest = (cell, list, re, norm) => {
   if (!found.length) return null
   return found.reduce((a, b) => (rank(list, b) < rank(list, a) ? b : a))
 }
-export const readNinchi = (cell) => lowest(cell, NINCHI, /(Ⅰ|Ⅱ|Ⅲ|Ⅳ|M|Ｍ)\s*([ab])?/g, (m) => {
+// ★ローマ数字の書き方が3通りある。読む前に glyph へ寄せる。
+//   (1) 全角の Ⅰ Ⅱ Ⅲ Ⅳ            … そのまま
+//   (2) ラテン文字の I II III IV     … 奄美市「認知症度がIV又はMの者」など。実在する
+//   (3) 「ローマ数字の3」という日本語 … 大田区。これも実在する
+//   ここを吸収しないと、その自治体だけ静かに「基準なし」になる。長い順に置換すること
+//   （IV より先に I を置換すると壊れる）。
+export const romanize = (s) => String(s ?? '')
+  .replace(/ローマ数字の?\s*([1-4])/g, (_, n) => ['', 'Ⅰ', 'Ⅱ', 'Ⅲ', 'Ⅳ'][Number(n)])
+  .replace(/(?<![A-Za-z])IV(?![A-Za-z])/g, 'Ⅳ')
+  .replace(/(?<![A-Za-z])III(?![A-Za-z])/g, 'Ⅲ')
+  .replace(/(?<![A-Za-z])II(?![A-Za-z])/g, 'Ⅱ')
+  .replace(/(?<![A-Za-z])I(?![A-Za-zVX])/g, 'Ⅰ')
+
+export const readNinchi = (raw) => lowest(romanize(raw), NINCHI, /(Ⅰ|Ⅱ|Ⅲ|Ⅳ|M|Ｍ)\s*([ab])?/g, (m) => {
   const v = m[1] === 'Ｍ' ? 'M' : m[1]
   if (v === 'M' || v === 'Ⅰ' || v === 'Ⅳ') return v
   return v + (m[2] || 'a')      // Ⅱ・Ⅲ を単独で書く例規は a と同じ扱い（軽いほう）
@@ -54,11 +67,17 @@ export const readKaigo = (cell) => {
 
 // ★見出しは1行目とは限らない。g-reiki は表の先頭に列幅指定だけの空行（fixed-colspec）を
 //   置くので、rows[0] を見出しとみなすと必ず外れる。実測ではこれが最大の取りこぼしだった。
+// ★語の中に空白を入れる例規がある（「区 分」「障 害 者」「認 定」）。
+//   見出し語も区分名も、比較の前に空白を全部落とす。これを忘れると
+//   その自治体だけ丸ごと読めない。実測で16件がこれだけの理由で落ちていた。
+export const tight = (s) => String(s ?? '').replace(/[\s　]/g, '')
+
 export const headIndex = (rows) => {
   for (let i = 0; i < Math.min(5, rows.length); i++) {
-    const h = (rows[i] || []).join(' ')
-    if (!h.trim()) continue
-    if (/認定区分|区分|認定内容|判定基準|認定の基準/.test(h) && /基準|自立度|状態|程度|要介護/.test(h)) return i
+    const h = tight((rows[i] || []).join(' '))
+    if (!h) continue
+    if (/認定区分|区分|認定内容|判定基準|判断基準|認定の基準|認定種別/.test(h) &&
+      /基準|自立度|状態|程度|要介護|定義/.test(h)) return i
   }
   return -1
 }
@@ -71,13 +90,25 @@ export function criteriaFromRows(rows, headAt) {
   let cur = null
   for (const r of rows.slice(headAt + 1)) {
     if (!r || !r.length) continue
-    const head = r[0] || ''
-    if (/特別障害者/.test(head)) cur = 'tokubetsu'
-    else if (/障害者/.test(head)) cur = 'shogai'
+    const head = tight(r[0] || '')
+    // ★条番号で区分を書く例規が多い。所得税法施行令第10条の
+    //   **第1項が障害者・第2項が特別障害者**の範囲を定めている（法の建て付け）。
+    //   「障害者」「特別障害者」という語を一度も使わずに条番号だけで書く要綱があり、
+    //   これを読めないと鹿児島・熊本あたりがごっそり落ちる。
+    if (/特別障害者/.test(head) || /所得税法施行令第10条第2項/.test(head)) cur = 'tokubetsu'
+    else if (/障害者/.test(head) || /所得税法施行令第10条第1項/.test(head)) cur = 'shogai'
     if (!cur) continue
     const cell = r.slice(1).join(' ')
     const t = res[cur]
-    const n = readNinchi(cell), k = readNetakiri(cell), g = readKaigo(cell)
+    // ★どの物差しの話なのかを確かめてから読む。
+    //   寝たきり度は J/A/B/C の1文字なので、無関係な英字を拾いやすい。実測で
+    //   ニセコ町・倶知安町・蘭越町・喜茂別町が「特別障害者＝J1」という
+    //   ありえない値になっていた（凡例のJが混じっていた）。
+    //   文脈語は行全体で見る（見出し列に物差し名、値の列にランクだけ、という表がある）。
+    const ctx = r.join(' ')
+    const n = /認知症|痴呆/.test(ctx) ? readNinchi(cell) : null
+    const k = /障害高齢者|寝たきり|ねたきり|臥床/.test(ctx) ? readNetakiri(cell) : null
+    const g = readKaigo(cell)
     if (n && (!t.ninchi || rank(NINCHI, n) < rank(NINCHI, t.ninchi))) t.ninchi = n
     if (k && (!t.netakiri || rank(NETAKIRI, k) < rank(NETAKIRI, t.netakiri))) t.netakiri = k
     if (g && (!t.kaigo || rank(KAIGO, g) < rank(KAIGO, t.kaigo))) t.kaigo = g
@@ -103,11 +134,7 @@ export const hasAny = (o) => !!o && Object.keys(o).length > 0
 // 例規は表で書くが、大都市のふつうのWebページは文章で書いていることが多い。
 //   例（大田区）「〇特別障害者に準ずる者 …『認知症高齢者の日常生活自立度』の
 //                ランクが、ローマ数字の3から5とみなされる者」
-// ★「ローマ数字の3」のような書き方が実在する。glyph に直してから読む。
-//   ここを飛ばすと大田区のような自治体が丸ごと「基準なし」になる。
-const romanize = (s) => s
-  .replace(/ローマ数字の?\s*([1-5])/g, (_, n) => ['', 'Ⅰ', 'Ⅱ', 'Ⅲ', 'Ⅳ', 'Ⅳ'][Number(n)])
-  .replace(/ランク\s*([ⅠⅡⅢⅣM])/g, 'ランク$1')
+// ローマ数字の寄せ方は上の romanize に1つだけ置いてある（表からも文章からも同じものを使う）。
 
 export function criteriaFromText(rawText) {
   const t = romanize(clean(rawText))
@@ -119,6 +146,25 @@ export function criteriaFromText(rawText) {
   const marks = []
   for (const m of t.matchAll(/特別障害者(?:に準ずる|と同様|に該当)/g)) if (!isExclusion(m.index, m[0].length)) marks.push([m.index, 'tokubetsu'])
   for (const m of t.matchAll(/(?<!特別)障害者(?:に準ずる|と同様|に該当)/g)) if (!isExclusion(m.index, m[0].length)) marks.push([m.index, 'shogai'])
+  // 「特別障害者の認定基準」「障害者の認定基準」という素直な見出しも拾う。
+  for (const m of t.matchAll(/特別障害者の(?:認定)?基準/g)) marks.push([m.index, 'tokubetsu'])
+  for (const m of t.matchAll(/(?<!特別)障害者の(?:認定)?基準/g)) marks.push([m.index, 'shogai'])
+
+  // ★条番号で区分を指す型。所得税法施行令第10条は
+  //   **第1項が障害者・第2項が特別障害者**の範囲を定めている（法の建て付け）。
+  //   「(1) 所得税法施行令第10条第2項第3号…に該当するものは、寝たきり度がB1…の者とする。」
+  //   のように、区分名を一度も書かずに条番号で指す要綱が全国にかなりある。
+  //
+  //   ★ただし**条番号を文末に置く型がある**。
+  //     「(2) 特別障害者の認定基準 …ランクB以上… 所得税法施行令第10条第2項…に掲げる者」
+  //     この型で条番号を見出しとして使うと、**次の区分の基準を拾って前後が入れ替わる**。
+  //     実測でニセコ町・倶知安町・蘭越町・喜茂別町が丸ごと逆転した。
+  //   ∴ **条番号は、素直な見出しが1つも無いときだけの最後の手段**にする。
+  if (!marks.length) {
+    for (const m of t.matchAll(/所得税法施行令第10条第([12])項/g)) {
+      marks.push([m.index, m[1] === '2' ? 'tokubetsu' : 'shogai'])
+    }
+  }
   marks.sort((a, b) => a[0] - b[0])
   if (!marks.length) return { shogai: {}, tokubetsu: {} }
   const res = { shogai: {}, tokubetsu: {} }

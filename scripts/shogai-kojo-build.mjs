@@ -306,7 +306,20 @@ fs.writeFileSync(path.join(OUT, 'index.html'), page({
     inLanguage: 'ja', dateModified: TODAY, creator: { '@type': 'Organization', name: 'フクシル' },
   },
 }))
-// ── ③ sitemap.xml を更新する ───────────────────────────────────────────────
+// ── ③ 取り残しを消す ────────────────────────────────────────────────────────
+// ★上書きだけでは、条件から外れた自治体のページが本番に残り続ける。
+//   パーサを直すと「前は読めたが今回は弾いた」自治体が出るので、毎回起きる。
+//   実際に1回目→2回目で8ページが取り残された（sitemapからは消えるので、
+//   誰にも見つからないまま古い数字を出し続ける面になる）。[[build-must-prune-stale-pages]]
+const keep = new Set(['index.html', ...[...ok, ...notPublished].map((r) => `${r.code}.html`)])
+let pruned = 0
+for (const f of fs.readdirSync(OUT)) {
+  if (keep.has(f)) continue
+  fs.unlinkSync(path.join(OUT, f))
+  pruned++
+}
+
+// ── ④ sitemap.xml を更新する ───────────────────────────────────────────────
 // ★この艦の sitemap は手書きで育ててきたもの。作り直さない。
 //   /shogai-kojo/ のぶんだけ入れ替える（毎回消してから足すので何度回しても増えない）。
 //   [[stale-production-build-drift]] 生成したのに sitemap に載っていない面は、
@@ -321,5 +334,5 @@ sm = sm.replace('</urlset>', urls.join('\n') + '\n</urlset>')
 fs.writeFileSync(smPath, sm)
 const total = (sm.match(/<url>/g) || []).length
 
-console.log(`自治体別 ${made}ページ ＋ 比較表1ページ → shogai-kojo/`)
+console.log(`自治体別 ${made}ページ ＋ 比較表1ページ → shogai-kojo/（取り残し ${pruned}件を削除）`)
 console.log(`sitemap.xml: 全${total}件（うち今回のぶん ${urls.length}）`)
