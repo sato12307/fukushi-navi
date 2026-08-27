@@ -190,6 +190,82 @@ const headline = ['Ⅱa', 'Ⅲa', 'Ⅳ'].map((lv) => {
   return `<tr><th>${lv}</th><td class="yes">${c.tokubetsu}</td><td>${c.shogai}</td><td class="no">${c.none}</td></tr>`
 }).join('')
 
+// ── ②-0 そのまま引用できる数値と、CSVの配布 ────────────────────────────────
+// ★S1(引用される統計ページ)の必須要素をこのハブに持たせる。
+//   数字は上の集計関数からしか作らない。推定・レンジ補完はしない（間違った数字を
+//   引用されたら信用は戻らない）。データが支えない項目はその項目ごと作らない。
+const pct = (a, b) => (b ? Math.round((a / b) * 100) : 0)
+
+// 下限値の分布（読み取れた自治体のうち、その物差しを使っているものだけ）
+const distOf = (key, which, list) => {
+  const m = new Map()
+  for (const r of ok) {
+    const v = r[which]?.[key]
+    if (!v) continue
+    m.set(v, (m.get(v) || 0) + 1)
+  }
+  return [...m.entries()].sort((a, b) => list.indexOf(a[0]) - list.indexOf(b[0]))
+}
+const distText = (d) => d.map(([v, n]) => `${v} ${n}`).join(' ／ ') || 'なし'
+
+const cN3 = countAt('Ⅲa', NINCHI, 'ninchi')
+const cN4 = countAt('Ⅳ', NINCHI, 'ninchi')
+const cK1 = countAt('要介護1', KAIGO, 'kaigo')
+const cK3 = countAt('要介護3', KAIGO, 'kaigo')
+const cK5 = countAt('要介護5', KAIGO, 'kaigo')
+const uK = usersOf('kaigo').length, uN = usersOf('ninchi').length, uT = usersOf('netakiri').length
+
+const facts = [
+  `${TODAY}時点、全国${all.length}市区町村の障害者控除対象者認定を収録し、うち<strong>${ok.length}自治体</strong>で判定ランク（要介護度・日常生活自立度）の下限を公表資料から読み取れた（フクシル調べ・N=${all.length}）。`,
+  `認知症高齢者の日常生活自立度が<strong>Ⅲa</strong>の人は、この物差しを使う${uN}自治体のうち<strong>${cN3.tokubetsu}自治体で特別障害者（所得税40万円）・${cN3.shogai}自治体で障害者（27万円）・${cN3.none}自治体で対象外</strong>に分かれる（N=${uN}・${TODAY}時点）。`,
+  `同じ物差しで<strong>Ⅳ</strong>（最重度に近い区分）まで進むと、<strong>${cN4.tokubetsu}自治体が特別障害者・${cN4.shogai}自治体が障害者</strong>となり、対象外は${uN}自治体中${cN4.none}自治体まで減る（N=${uN}・${TODAY}時点）。`,
+  `<strong>要介護3</strong>の人は、要介護度を判定に使う${uK}自治体のうち<strong>${cK3.tokubetsu}自治体で特別障害者・${cK3.shogai}自治体で障害者・${cK3.none}自治体で対象外</strong>（N=${uK}・${TODAY}時点）。`,
+  `要介護度で判定する${uK}自治体のうち、<strong>要介護1では${cK1.none}自治体（${pct(cK1.none, uK)}%）が対象外</strong>だが、<strong>要介護5では対象外が${cK5.none}自治体</strong>になる（N=${uK}・${TODAY}時点）。`,
+  `判定に使う物差しは自治体によって違い、読み取れた${ok.length}自治体のうち<strong>要介護度を使うのが${uK}・認知症高齢者の日常生活自立度が${uN}・障害高齢者の日常生活自立度（寝たきり度）が${uT}</strong>（重複あり・N=${ok.length}・${TODAY}時点）。`,
+  `「障害者（27万円）」の下限を要介護度で定めている自治体の内訳は <strong>${distText(distOf('kaigo', 'shogai', KAIGO))}</strong>（自治体数・${TODAY}時点）。`,
+  `「特別障害者（40万円）」の下限を認知症高齢者の日常生活自立度で定めている自治体の内訳は <strong>${distText(distOf('ninchi', 'tokubetsu', NINCHI))}</strong>（自治体数・${TODAY}時点）。`,
+  `判定ランクを<strong>公表していない</strong>と1件ずつ確認できたのは${notPublished.length}自治体、当サイトがまだ読み取れていないものが${unread.length}自治体（N=${all.length}・${TODAY}時点）。`,
+]
+
+// CSV は data/ に置く（この艦の配布物の置き場に合わせる）。
+// ファイル名は ASCII。日本語名にすると本番で全数404になる事故が艦隊で起きている。
+// [[encoded-filename-csv-404]]
+const csvCell = (v) => {
+  const t = String(v ?? '')
+  return /[",\n]/.test(t) ? '"' + t.replace(/"/g, '""') + '"' : t
+}
+const csvRows = [['全国地方公共団体コード', '都道府県', '市区町村', '収録状況',
+  '障害者_要介護度の下限', '障害者_認知症度の下限', '障害者_寝たきり度の下限',
+  '特別障害者_要介護度の下限', '特別障害者_認知症度の下限', '特別障害者_寝たきり度の下限',
+  '根拠（例規名など）', '公布日', '最終改正日', '出典URL', 'データ読み取り日'].join(',')]
+for (const r of all) {
+  csvRows.push([r.code, r.pref, r.city, r.status,
+    r.shogai?.kaigo, r.shogai?.ninchi, r.shogai?.netakiri,
+    r.tokubetsu?.kaigo, r.tokubetsu?.ninchi, r.tokubetsu?.netakiri,
+    r.reikiTitle, r.announced, r.updated, r.sourceUrl || r.url, TODAY].map(csvCell).join(','))
+}
+fs.writeFileSync(path.join(ROOT, 'data', 'shogai-kojo-kijun.csv'), '\ufeff' + csvRows.join('\n') + '\n')
+
+const citeBlock = `  <h2 id="toukei">そのまま引用できる数値（${ok.length}自治体の実測・CSV配布）</h2>
+  <p>障害者控除対象者認定の基準は自治体ごとにバラバラに公表されていて、全国を横断して数えた統計は
+  当サイトが探した範囲では国の統計にも見当たりません。以下は当サイトが各自治体の例規・公開ページを読み取って数えた結果を、
+  <strong>一文で意味が通る形</strong>に並べたものです。すべて上の表と同じ出典から出しており、推定・補完はしていません。</p>
+  <ul class="facts">
+${facts.map((f) => `  <li>${f}</li>`).join('\n')}
+  </ul>
+  <p class="note"><strong>集計の範囲（N）：</strong>全国${all.length}市区町村（うち判定ランクを読み取れたもの ${ok.length}／公表なしと確認できたもの ${notPublished.length}／未読取 ${unread.length}）。
+  <strong>データ読み取り日：</strong>${TODAY}。<strong>更新頻度：</strong>例規データの再取得に合わせて自動で数え直しています。
+  ／ <strong><a href="../data/shogai-kojo-kijun.csv" download>全${all.length}自治体のCSVをダウンロード</a></strong>（UTF-8・${csvRows.length - 1}行）</p>
+
+  <h2>このデータについて（引用・転載）</h2>
+  <p>この一覧は、自治体ごとにバラバラに公表されている障害者控除対象者認定の基準を、当サイトが横断して整理した一次まとめです。
+  <strong>出典を明記していただければ、数字・表・CSVの引用と転載は自由です</strong>（リンクの有無は問いません）。
+  推奨する記載例：<strong>「出典: フクシル（障害者控除対象者認定の基準・自治体別） https://fukushiru.com/shogai-kojo/」</strong>。
+  基準は自治体の改正で変わるため、<strong>読み取り日（${TODAY}）も併せて記載</strong>いただけると読者に親切です。
+  記事・書籍・研修資料・ケアマネジャーや税理士の実務でご自由にお使いください。
+  数字の誤り・古くなった値を見つけられた場合はご連絡ください。確認して直します。</p>
+`
+
 const prefBlocks = [...byPref.entries()].map(([pref, list]) => {
   const rows = list.map((r) => {
     const has = /読めた/.test(r.status)
@@ -228,7 +304,7 @@ const hubBody = `  <p class="breadcrumb"><a href="../index.html">トップ</a> �
   多くの大都市は「知的障害者（軽度・中度）に準ずる方」といった区分までは示しますが、どのランクから対象かは書いていません。
   人口の多い街ほど、事前に自分が対象か調べにくい状態です。</p>
 
-  <h2>自治体別の一覧</h2>
+${citeBlock}  <h2>自治体別の一覧</h2>
   <p class="note">「下限」は、その値<strong>以上</strong>であれば対象になり得るという意味です。表に無い自治体は、例規を公表していないか、当サイトがまだ収録できていません。</p>
 ${prefBlocks}
 
