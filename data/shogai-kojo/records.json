@@ -1,12 +1,12 @@
 {
- "parsedAt": "2026-08-27T15:47:48.186Z",
+ "parsedAt": "2026-08-27T15:51:18.404Z",
  "count": 1124,
  "tally": {
-  "読めた": 284,
-  "基準表が本文に無い": 673,
-  "読めた(本文の文章から)": 107,
+  "読めた": 283,
+  "基準表が本文に無い": 672,
+  "読めた(本文の文章から)": 108,
   "読めた(別表から)": 32,
-  "要確認(順序が逆転)": 6,
+  "要確認(順序が逆転)": 7,
   "表が読めない": 22
  },
  "records": [
@@ -233,7 +233,8 @@
    "sourceUrl": "https://www1.g-reiki.net/townhamanaka/reiki_honbun/a205RG00000208.html",
    "status": "読めた(本文の文章から)",
    "shogai": {
-    "ninchi": "Ⅱa"
+    "ninchi": "Ⅱa",
+    "netakiri": "A1"
    },
    "tokubetsu": null
   },
@@ -505,6 +506,7 @@
    "sourceUrl": "https://www1.g-reiki.net/city.amami/reiki_honbun/r411RG00000404.html",
    "status": "読めた(本文の文章から)",
    "shogai": {
+    "netakiri": "A1",
     "ninchi": "Ⅱa"
    },
    "tokubetsu": {
@@ -545,7 +547,8 @@
    "sourceUrl": "http://www.town.kinko.lg.jp/d1w_reiki/H427902500054/H427902500054_j.html",
    "status": "読めた(本文の文章から)",
    "shogai": {
-    "netakiri": "A1"
+    "netakiri": "A1",
+    "ninchi": "Ⅱa"
    },
    "tokubetsu": {
     "netakiri": "B1",
@@ -564,8 +567,12 @@
    "amendments": 5,
    "sourceUrl": "https://www1.g-reiki.net/city-kirishima/reiki_honbun/r301RG00000604.html",
    "status": "読めた(本文の文章から)",
-   "shogai": null,
+   "shogai": {
+    "netakiri": "A1",
+    "ninchi": "Ⅱa"
+   },
    "tokubetsu": {
+    "netakiri": "B1",
     "ninchi": "Ⅳ"
    }
   },
@@ -600,6 +607,7 @@
    "sourceUrl": "https://www.town.setouchi.lg.jp/reiki/reiki_honbun/q787RG00000605.html",
    "status": "読めた(本文の文章から)",
    "shogai": {
+    "netakiri": "A1",
     "ninchi": "Ⅱa"
    },
    "tokubetsu": {
@@ -619,7 +627,10 @@
    "amendments": 3,
    "sourceUrl": "https://www1.g-reiki.net/city.tarumizu/reiki_honbun/q715RG00000475.html",
    "status": "読めた(本文の文章から)",
-   "shogai": null,
+   "shogai": {
+    "netakiri": "A1",
+    "ninchi": "Ⅱa"
+   },
    "tokubetsu": {
     "netakiri": "B1",
     "ninchi": "Ⅳ"
@@ -881,9 +892,11 @@
    "sourceUrl": "https://en3-jg.d1-law.com/minamitane/d1w_reiki/H414902500114/H414902500114_j.html",
    "status": "読めた(本文の文章から)",
    "shogai": {
+    "netakiri": "A1",
     "ninchi": "Ⅱa"
    },
    "tokubetsu": {
+    "netakiri": "B1",
     "ninchi": "Ⅳ"
    }
   },
@@ -901,6 +914,7 @@
    "status": "読めた(本文の文章から)",
    "shogai": {
     "ninchi": "Ⅱa",
+    "netakiri": "A1",
     "kaigo": "要介護1"
    },
    "tokubetsu": {
@@ -982,7 +996,10 @@
    "amendments": 0,
    "sourceUrl": "https://en3-jg.d1-law.com/minamiosumi/d1w_reiki/H419902500003/H419902500003_j.html",
    "status": "読めた(本文の文章から)",
-   "shogai": null,
+   "shogai": {
+    "netakiri": "A1",
+    "ninchi": "Ⅱa"
+   },
    "tokubetsu": {
     "netakiri": "B1",
     "ninchi": "Ⅳ"
@@ -1154,9 +1171,11 @@
    "sourceUrl": "https://www1.g-reiki.net/town.yakushima.kagoshima/reiki_honbun/r413RG00000490.html",
    "status": "読めた(本文の文章から)",
    "shogai": {
+    "netakiri": "A1",
     "ninchi": "Ⅱa"
    },
    "tokubetsu": {
+    "netakiri": "B1",
     "ninchi": "Ⅳ"
    }
   },
@@ -1173,9 +1192,11 @@
    "sourceUrl": "http://town.nakatane.kagoshima.jp/naka-reiki/reiki_honbun/q781RG00000454.html",
    "status": "読めた(本文の文章から)",
    "shogai": {
+    "netakiri": "A1",
     "ninchi": "Ⅱa"
    },
    "tokubetsu": {
+    "netakiri": "B1",
     "ninchi": "Ⅳ"
    }
   },
@@ -1192,9 +1213,11 @@
    "sourceUrl": "https://www1.g-reiki.net/city.nishinoomote/reiki_honbun/q714RG00000591.html",
    "status": "読めた(本文の文章から)",
    "shogai": {
+    "netakiri": "A1",
     "ninchi": "Ⅱa"
    },
    "tokubetsu": {
+    "netakiri": "B1",
     "ninchi": "Ⅳ"
    }
   },
@@ -1426,10 +1449,12 @@
    "sourceUrl": "https://www1.g-reiki.net/uruma/reiki_honbun/r170RG00000584.html",
    "status": "読めた(本文の文章から)",
    "shogai": {
-    "ninchi": "Ⅱa"
+    "ninchi": "Ⅱa",
+    "netakiri": "A1"
    },
    "tokubetsu": {
-    "ninchi": "Ⅲa"
+    "ninchi": "Ⅲa",
+    "netakiri": "B1"
    }
   },
   {
@@ -1506,9 +1531,13 @@
    "updated": "2022-03-29",
    "amendments": 0,
    "sourceUrl": "http://www.city.ichikikushikino.lg.jp/reiki/H417902500049/H417902500049_j.html",
-   "status": "基準表が本文に無い",
-   "shogai": null,
-   "tokubetsu": null
+   "status": "読めた(本文の文章から)",
+   "shogai": {
+    "netakiri": "A1"
+   },
+   "tokubetsu": {
+    "netakiri": "B1"
+   }
   },
   {
    "code": "044458",
@@ -1592,13 +1621,14 @@
    "updated": "2021-03-30",
    "amendments": 3,
    "sourceUrl": "https://www.city.ibusuki.lg.jp/reiki_int/reiki_honbun/q711RG00000668.html",
-   "status": "読めた",
+   "status": "読めた(本文の文章から)",
    "shogai": {
     "ninchi": "Ⅱa",
     "netakiri": "A1"
    },
    "tokubetsu": {
-    "ninchi": "Ⅳ"
+    "ninchi": "Ⅳ",
+    "netakiri": "B1"
    }
   },
   {
@@ -1649,10 +1679,12 @@
    "status": "読めた(本文の文章から)",
    "shogai": {
     "ninchi": "Ⅱa",
+    "netakiri": "A1",
     "kaigo": "要介護1"
    },
    "tokubetsu": {
     "ninchi": "Ⅳ",
+    "netakiri": "A1",
     "kaigo": "要介護4"
    }
   },
@@ -1749,6 +1781,7 @@
    "status": "読めた(本文の文章から)",
    "shogai": {
     "ninchi": "Ⅱa",
+    "netakiri": "A1",
     "kaigo": "要介護1"
    },
    "tokubetsu": {
@@ -4144,10 +4177,12 @@
    "status": "読めた(本文の文章から)",
    "shogai": {
     "ninchi": "Ⅱa",
+    "netakiri": "A1",
     "kaigo": "要介護1"
    },
    "tokubetsu": {
     "ninchi": "Ⅳ",
+    "netakiri": "A1",
     "kaigo": "要介護4"
    }
   },
@@ -5377,7 +5412,8 @@
    "status": "読めた(別表から)",
    "shogai": null,
    "tokubetsu": {
-    "ninchi": "Ⅱa"
+    "ninchi": "Ⅱa",
+    "netakiri": "B1"
    },
    "bessiUrl": "https://www2.city.higashiomi.shiga.jp/reiki_int/reiki_honbun/word/r151FG00013121.rtf"
   },
@@ -5931,6 +5967,7 @@
    "status": "読めた(別表から)",
    "shogai": {
     "kaigo": "要介護1",
+    "netakiri": "J1",
     "ninchi": "Ⅰ"
    },
    "tokubetsu": null,
@@ -6407,8 +6444,12 @@
    "amendments": 5,
    "sourceUrl": "https://www1.g-reiki.net/city.minamikyushu/reiki_honbun/r378RG00000326.html",
    "status": "読めた(本文の文章から)",
-   "shogai": null,
+   "shogai": {
+    "netakiri": "A1",
+    "ninchi": "Ⅱa"
+   },
    "tokubetsu": {
+    "netakiri": "B1",
     "ninchi": "Ⅳ"
    }
   },
@@ -6752,7 +6793,8 @@
    "sourceUrl": "http://houmu.h-chosonkai.gr.jp/~reikidb/data/122/48/H415902200004/H415902200004_j.html",
    "status": "読めた(本文の文章から)",
    "shogai": {
-    "ninchi": "Ⅱa"
+    "ninchi": "Ⅱa",
+    "netakiri": "A1"
    },
    "tokubetsu": null
   },
@@ -7927,9 +7969,10 @@
    "updated": "2003-02-12",
    "amendments": 0,
    "sourceUrl": "https://en3-jg.d1-law.com/niseko/d1w_reiki/H415902200001/H415902200001_j.html",
-   "status": "読めた(本文の文章から)",
+   "status": "要確認(順序が逆転)",
    "shogai": {
-    "ninchi": "Ⅱa"
+    "ninchi": "Ⅱa",
+    "netakiri": "A1"
    },
    "tokubetsu": {
     "ninchi": "Ⅳ",
@@ -7964,7 +8007,8 @@
    "sourceUrl": "https://en3-jg.d1-law.com/kanan/d1w_reiki/H418902500077/H418902500077_j.html",
    "status": "読めた(本文の文章から)",
    "shogai": {
-    "ninchi": "Ⅰ"
+    "ninchi": "Ⅰ",
+    "netakiri": "J1"
    },
    "tokubetsu": null
   },
@@ -8452,7 +8496,8 @@
    "sourceUrl": "https://www1.g-reiki.net/rankoshi/reiki_honbun/a069RG00000541.html",
    "status": "読めた(本文の文章から)",
    "shogai": {
-    "ninchi": "Ⅱa"
+    "ninchi": "Ⅱa",
+    "netakiri": "A1"
    },
    "tokubetsu": {
     "ninchi": "Ⅳ",
@@ -8704,7 +8749,8 @@
     "ninchi": "Ⅱa"
    },
    "tokubetsu": {
-    "ninchi": "Ⅲa"
+    "ninchi": "Ⅲa",
+    "netakiri": "B1"
    }
   },
   {
@@ -18888,5 +18934,5 @@
    "tokubetsu": null
   }
  ],
- "bessiAt": "2026-08-27T15:48:41.183Z"
+ "bessiAt": "2026-08-27T15:51:32.598Z"
 }

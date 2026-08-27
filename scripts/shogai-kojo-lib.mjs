@@ -70,6 +70,10 @@ export const readKaigo = (cell) => {
 // ★語の中に空白を入れる例規がある（「区 分」「障 害 者」「認 定」）。
 //   見出し語も区分名も、比較の前に空白を全部落とす。これを忘れると
 //   その自治体だけ丸ごと読めない。実測で16件がこれだけの理由で落ちていた。
+// 物差しの文脈語。例規は冒頭で略語を定義して以降それで書くので、正式名だけでは足りない。
+export const NINCHI_CTX = /認知症|痴呆|認知度|認知障害/
+export const NETAKIRI_CTX = /障害高齢者|障害老人|寝たきり|ねたきり|臥床/
+
 export const tight = (s) => String(s ?? '').replace(/[\s　]/g, '')
 
 export const headIndex = (rows) => {
@@ -106,8 +110,8 @@ export function criteriaFromRows(rows, headAt) {
     //   ありえない値になっていた（凡例のJが混じっていた）。
     //   文脈語は行全体で見る（見出し列に物差し名、値の列にランクだけ、という表がある）。
     const ctx = r.join(' ')
-    const n = /認知症|痴呆/.test(ctx) ? readNinchi(cell) : null
-    const k = /障害高齢者|寝たきり|ねたきり|臥床/.test(ctx) ? readNetakiri(cell) : null
+    const n = NINCHI_CTX.test(ctx) ? readNinchi(cell) : null
+    const k = NETAKIRI_CTX.test(ctx) ? readNetakiri(cell) : null
     const g = readKaigo(cell)
     if (n && (!t.ninchi || rank(NINCHI, n) < rank(NINCHI, t.ninchi))) t.ninchi = n
     if (k && (!t.netakiri || rank(NETAKIRI, k) < rank(NETAKIRI, t.netakiri))) t.netakiri = k
@@ -174,7 +178,12 @@ export function criteriaFromText(rawText) {
     const end = i + 1 < marks.length ? marks[i + 1][0] : Math.min(t.length, at + 600)
     const seg = t.slice(at, end)
     const target = res[who]
-    const n = readNinchi(/認知症|痴呆/.test(seg) ? seg : ''), k = readNetakiri(/障害高齢者|寝たきり/.test(seg) ? seg : ''), g = readKaigo(seg)
+    // ★例規は本文の冒頭で略語を定義して、以降はそれで書く。
+    //   「（以下「認知度」という。）」「（以下「ねたきり度」という。）」が典型で、
+    //   正式名だけを文脈語にすると、その自治体の半分の条項を読み落とす（錦江町で実測）。
+    const n = readNinchi(NINCHI_CTX.test(seg) ? seg : '')
+    const k = readNetakiri(NETAKIRI_CTX.test(seg) ? seg : '')
+    const g = readKaigo(seg)
     if (n && (!target.ninchi || rank(NINCHI, n) < rank(NINCHI, target.ninchi))) target.ninchi = n
     if (k && (!target.netakiri || rank(NETAKIRI, k) < rank(NETAKIRI, target.netakiri))) target.netakiri = k
     if (g && (!target.kaigo || rank(KAIGO, g) < rank(KAIGO, target.kaigo))) target.kaigo = g
