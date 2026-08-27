@@ -23,15 +23,14 @@ import fs from 'node:fs'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { NINCHI, NETAKIRI, KAIGO, rank } from './shogai-kojo-lib.mjs'
+import { page, esc, SITE } from './shogai-kojo-page.mjs'
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..')
 const DATA = path.join(ROOT, 'data', 'shogai-kojo')
 const OUT = path.join(ROOT, 'shogai-kojo')
-const SITE = 'https://fukushiru.com'
 const TODAY = new Date().toISOString().slice(0, 10)
 fs.mkdirSync(OUT, { recursive: true })
 
-const esc = (s) => String(s ?? '').replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]))
 
 // ── データを1自治体1件に畳む（読めたものを優先）──────────────────────────────
 const reiki = JSON.parse(fs.readFileSync(path.join(DATA, 'records.json'), 'utf8')).records
@@ -64,60 +63,6 @@ const countAt = (level, list, key) => {
 
 const LABEL = { tokubetsu: '特別障害者（所得税40万円）', shogai: '障害者（所得税27万円）', none: '対象外' }
 const CLS = { tokubetsu: 'yes', shogai: '', none: 'no' }
-
-// ── 共通の枠 ────────────────────────────────────────────────────────────────
-const page = ({ title, desc, canonical, depth, body, jsonld }) => {
-  const up = depth === 0 ? './' : '../'
-  return `<!DOCTYPE html>
-<html lang="ja">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="icon" href="/favicon.ico" sizes="any">
-<link rel="icon" type="image/svg+xml" href="/favicon.svg">
-<link rel="apple-touch-icon" href="/apple-touch-icon.png">
-<title>${esc(title)}</title>
-<meta name="description" content="${esc(desc)}">
-<link rel="canonical" href="${SITE}${canonical}">
-<meta property="og:type" content="article">
-<meta property="og:title" content="${esc(title)}">
-<meta property="og:description" content="${esc(desc)}">
-<meta property="og:site_name" content="フクシル">
-<meta property="og:url" content="${SITE}${canonical}">
-<meta name="twitter:card" content="summary_large_image">
-<link rel="stylesheet" href="${up}assets/style.css">
-${jsonld ? `<script type="application/ld+json">\n${JSON.stringify(jsonld, null, 2)}\n</script>` : ''}
-</head>
-<body>
-<a class="skip" href="#main">本文へスキップ</a>
-<header class="site-header">
-  <div class="inner">
-    <a class="brand" href="${up}index.html">フクシル <small>知らないと損する、街ごとの福祉</small></a>
-    <nav class="site-nav" aria-label="主要">
-      <a href="${up}index.html">トップ</a>
-      <a href="${up}articles/koei-jutaku-bairitsu.html">公営住宅</a>
-      <a href="${up}articles/shogai-nenkin-basics.html">障害年金</a>
-      <a href="${up}articles/shinkansen-airplane-discount.html">交通割引</a>
-      <a href="${up}articles/shogaisha-kojo-tax.html">障害者控除</a>
-    </nav>
-  </div>
-</header>
-
-<main id="main">
-  <div class="inner">
-${body}
-  </div>
-</main>
-
-<footer class="site-footer">
-  <div class="inner">
-    <p>フクシル ／ 出典は各ページ末尾に明記しています。制度の適用可否は必ず各自治体の窓口でご確認ください。</p>
-  </div>
-</footer>
-</body>
-</html>
-`
-}
 
 // ── 基準を1つの表にする ─────────────────────────────────────────────────────
 const critTable = (r) => {
@@ -208,6 +153,12 @@ ${verdicts}` : `  <div class="callout warn"><p><span class="tag">確認できま
   <p class="disclaimer">当サイトは${esc(name)}とは関係のない個人が運営しています。掲載内容は上記の公表資料を${TODAY}時点で読み取ったもので、
   制度の適用可否を保証するものではありません。誤りを見つけられた場合はご連絡ください。訂正します。</p>
   </div>
+
+  <div class="callout point"><p><span class="tag">手続きまで進めるなら</span>
+  ここまでが無料で読めるところです。実際に認定書をもらって<strong>過去5年分をさかのぼる</strong>には、
+  親御さんの自立度ランクが書かれた書類を取り寄せ、還付額を試算し、更正の請求か還付申告を出す必要があります。
+  その手順を${esc(name)}の基準に合わせてまとめた資料を用意しています（500円）。
+  → <a href="../pack/">還付申請パックについて</a></p></div>
 
   <p class="related"><a href="./index.html">→ 全国${ok.length}自治体の認定基準を比べる</a></p>
 `

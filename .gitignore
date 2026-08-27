@@ -11,3 +11,6 @@ data/toei-bairitsu.json
 
 # Python のバイトコードキャッシュ
 tools/__pycache__/
+
+# 有料パックの生成物。ここが公開されると売り物がそのまま無料配布になる。
+.dist/
