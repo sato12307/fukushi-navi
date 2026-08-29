@@ -1,0 +1,1443 @@
+{
+ "code": "121002",
+ "pref": "千葉県",
+ "city": "千葉市",
+ "muni": "千葉市",
+ "grain": "町名",
+ "centers": [
+  {
+   "name": "千葉市あんしんケアセンター弁天",
+   "areaRaw": "院内、春日、要町、汐見丘町、新千葉、椿森、道場北町、道場北、登戸、東千葉、弁天、松波、祐光",
+   "areas": [
+    {
+     "town": "院内",
+     "chome": null,
+     "note": ""
+    },
+    {
+     "town": "春日",
+     "chome": null,
+     "note": ""
+    },
+    {
+     "town": "要町",
+     "chome": null,
+     "note": ""
+    },
+    {
+     "town": "汐見丘町",
+     "chome": null,
+     "note": ""
+    },
+    {
+     "town": "新千葉",
+     "chome": null,
+     "note": ""
+    },
+    {
+     "town": "椿森",
+     "chome": null,
+     "note": ""
+    },
+    {
+     "town": "道場北町",
+     "chome": null,
+     "note": ""
+    },
+    {
+     "town": "道場北",
+     "chome": null,
+     "note": ""
+    },
+    {
+     "town": "登戸",
+     "chome": null,
+     "note": ""
+    },
+    {
+     "town": "東千葉",
+     "chome": null,
+     "note": ""
+    },
+    {
+     "town": "弁天",
+     "chome": null,
+     "note": ""
+    },
+    {
+     "town": "松波",
+     "chome": null,
+     "note": ""
+    },
+    {
+     "town": "祐光",
+     "chome": null,
+     "note": ""
+    }
+   ],
+   "published": null
+  },
+  {
+   "name": "千葉市あんしんケアセンター中央",
+   "areaRaw": "旭町、亀井町、亀岡町、栄町、新宿、新田町、新町、神明町、千葉港、中央、中央港、鶴沢町、出洲港、道場南、問屋町、東本町、富士見、本千葉町、本町、都町",
+   "areas": [
+    {
+     "town": "旭町",
+     "chome": null,
+     "note": ""
+    },
+    {
+     "town": "亀井町",
+     "chome": null,
+     "note": ""
+    },
+    {
+     "town": "亀岡町",
+     "chome": null,
+     "note": ""
+    },
+    {
+     "town": "栄町",
+     "chome": null,
+     "note": ""
+    },
+    {
+     "town": "新宿",
+     "chome": null,
+     "note": ""
+    },
+    {
+     "town": "新田町",
+     "chome": null,
+     "note": ""
+    },
+    {
+     "town": "新町",
+     "chome": null,
+     "note": ""
+    },
+    {
+     "town": "神明町",
+     "chome": null,
+     "note": ""
+    },
+    {
+     "town": "千葉港",
+     "chome": null,
+     "note": ""
+    },
+    {
+     "town": "中央",
+     "chome": null,
+     "note": ""
+    },
+    {
+     "town": "中央港",
+     "chome": null,
+     "note": ""
+    },
+    {
+     "town": "鶴沢町",
+     "chome": null,
+     "note": ""
+    },
+    {
+     "town": "出洲港",
+     "chome": null,
+     "note": ""
+    },
+    {
+     "town": "道場南",
+     "chome": null,
+     "note": ""
+    },
+    {
+     "town": "問屋町",
+     "chome": null,
+     "note": ""
+    },
+    {
+     "town": "東本町",
+     "chome": null,
+     "note": ""
+    },
+    {
+     "town": "富士見",
+     "chome": null,
+     "note": ""
+    },
+    {
+     "town": "本千葉町",
+     "chome": null,
+     "note": ""
+    },
+    {
+     "town": "本町",
+     "chome": null,
+     "note": ""
+    },
+    {
+     "town": "都町",
+     "chome": null,
+     "note": ""
+    }
+   ],
+   "published": null
+  },
+  {
+   "name": "千葉市あんしんケアセンター千葉寺",
+   "areaRaw": "青葉町、市場町、稲荷町、亥鼻、葛城、寒川町、末広、千葉寺町、長洲、港町、矢作町",
+   "areas": [
+    {
+     "town": "青葉町",
+     "chome": null,
+     "note": ""
+    },
+    {
+     "town": "市場町",
+     "chome": null,
+     "note": ""
+    },
+    {
+     "town": "稲荷町",
+     "chome": null,
+     "note": ""
+    },
+    {
+     "town": "亥鼻",
+     "chome": null,
+     "note": ""
+    },
+    {
+     "town": "葛城",
+     "chome": null,
+     "note": ""
+    },
+    {
+     "town": "寒川町",
+     "chome": null,
+     "note": ""
+    },
+    {
+     "town": "末広",
+     "chome": null,
+     "note": ""
+    },
+    {
+     "town": "千葉寺町",
+     "chome": null,
+     "note": ""
+    },
+    {
+     "town": "長洲",
+     "chome": null,
+     "note": ""
+    },
+    {
+     "town": "港町",
+     "chome": null,
+     "note": ""
+    },
+    {
+     "town": "矢作町",
+     "chome": null,
+     "note": ""
+    }
+   ],
+   "published": null
+  },
+  {
+   "name": "千葉市あんしんケアセンター松ケ丘",
+   "areaRaw": "赤井町、今井町、今井、鵜の森町、大森町、川崎町、白旗、蘇我町、蘇我、大巌寺町、川戸町、仁戸名町、花輪町、星久喜町、松ケ丘町、南町、宮崎、宮崎町、若草",
+   "areas": [
+    {
+     "town": "赤井町",
+     "chome": null,
+     "note": ""
+    },
+    {
+     "town": "今井町",
+     "chome": null,
+     "note": ""
+    },
+    {
+     "town": "今井",
+     "chome": null,
+     "note": ""
+    },
+    {
+     "town": "鵜の森町",
+     "chome": null,
+     "note": ""
+    },
+    {
+     "town": "大森町",
+     "chome": null,
+     "note": ""
+    },
+    {
+     "town": "川崎町",
+     "chome": null,
+     "note": ""
+    },
+    {
+     "town": "白旗",
+     "chome": null,
+     "note": ""
+    },
+    {
+     "town": "蘇我町",
+     "chome": null,
+     "note": ""
+    },
+    {
+     "town": "蘇我",
+     "chome": null,
+     "note": ""
+    },
+    {
+     "town": "大巌寺町",
+     "chome": null,
+     "note": ""
+    },
+    {
+     "town": "川戸町",
+     "chome": null,
+     "note": ""
+    },
+    {
+     "town": "仁戸名町",
+     "chome": null,
+     "note": ""
+    },
+    {
+     "town": "花輪町",
+     "chome": null,
+     "note": ""
+    },
+    {
+     "town": "星久喜町",
+     "chome": null,
+     "note": ""
+    },
+    {
+     "town": "松ケ丘町",
+     "chome": null,
+     "note": ""
+    },
+    {
+     "town": "南町",
+     "chome": null,
+     "note": ""
+    },
+    {
+     "town": "宮崎",
+     "chome": null,
+     "note": ""
+    },
+    {
+     "town": "宮崎町",
+     "chome": null,
+     "note": ""
+    },
+    {
+     "town": "若草",
+     "chome": null,
+     "note": ""
+    }
+   ],
+   "published": null
+  },
+  {
+   "name": "千葉市あんしんケアセンター浜野",
+   "areaRaw": "生実町、塩田町、新浜町、浜野町、南生実町、村田町",
+   "areas": [
+    {
+     "town": "生実町",
+     "chome": null,
+     "note": ""
+    },
+    {
+     "town": "塩田町",
+     "chome": null,
+     "note": ""
+    },
+    {
+     "town": "新浜町",
+     "chome": null,
+     "note": ""
+    },
+    {
+     "town": "浜野町",
+     "chome": null,
+     "note": ""
+    },
+    {
+     "town": "南生実町",
+     "chome": null,
+     "note": ""
+    },
+    {
+     "town": "村田町",
+     "chome": null,
+     "note": ""
+    }
+   ],
+   "published": null
+  },
+  {
+   "name": "千葉市あんしんケアセンターこてはし台",
+   "areaRaw": "内山町、宇那谷町、柏井町、柏井4丁目、こてはし台、大日町、み春野、横戸町、横戸台",
+   "areas": [
+    {
+     "town": "内山町",
+     "chome": null,
+     "note": ""
+    },
+    {
+     "town": "宇那谷町",
+     "chome": null,
+     "note": ""
+    },
+    {
+     "town": "柏井町",
+     "chome": null,
+     "note": ""
+    },
+    {
+     "town": "柏井",
+     "chome": 4,
+     "note": ""
+    },
+    {
+     "town": "こてはし台",
+     "chome": null,
+     "note": ""
+    },
+    {
+     "town": "大日町",
+     "chome": null,
+     "note": ""
+    },
+    {
+     "town": "み春野",
+     "chome": null,
+     "note": ""
+    },
+    {
+     "town": "横戸町",
+     "chome": null,
+     "note": ""
+    },
+    {
+     "town": "横戸台",
+     "chome": null,
+     "note": ""
+    }
+   ],
+   "published": null
+  },
+  {
+   "name": "千葉市あんしんケアセンター花見川",
+   "areaRaw": "天戸町、柏井1丁目、作新台、長作町、長作台、花島町、花見川",
+   "areas": [
+    {
+     "town": "天戸町",
+     "chome": null,
+     "note": ""
+    },
+    {
+     "town": "柏井",
+     "chome": 1,
+     "note": ""
+    },
+    {
+     "town": "作新台",
+     "chome": null,
+     "note": ""
+    },
+    {
+     "town": "長作町",
+     "chome": null,
+     "note": ""
+    },
+    {
+     "town": "長作台",
+     "chome": null,
+     "note": ""
+    },
+    {
+     "town": "花島町",
+     "chome": null,
+     "note": ""
+    },
+    {
+     "town": "花見川",
+     "chome": null,
+     "note": ""
+    }
+   ],
+   "published": null
+  },
+  {
+   "name": "千葉市あんしんケアセンターさつきが丘",
+   "areaRaw": "犢橋町、さつきが丘、三角町、千種町、宮野木台2丁目～4丁目",
+   "areas": [
+    {
+     "town": "犢橋町",
+     "chome": null,
+     "note": ""
+    },
+    {
+     "town": "さつきが丘",
+     "chome": null,
+     "note": ""
+    },
+    {
+     "town": "三角町",
+     "chome": null,
+     "note": ""
+    },
+    {
+     "town": "千種町",
+     "chome": null,
+     "note": ""
+    },
+    {
+     "town": "宮野木台",
+     "chome": 2,
+     "note": "～4丁目"
+    }
+   ],
+   "published": null
+  },
+  {
+   "name": "千葉市あんしんケアセンターにれの木台",
+   "areaRaw": "朝日ヶ丘1～3丁目・5丁目、西小中台、畑町、宮野木台1丁目",
+   "areas": [
+    {
+     "town": "朝日ヶ丘",
+     "chome": 1,
+     "note": ""
+    },
+    {
+     "town": "朝日ヶ丘",
+     "chome": 2,
+     "note": ""
+    },
+    {
+     "town": "朝日ヶ丘",
+     "chome": 3,
+     "note": ""
+    },
+    {
+     "town": "西小中台",
+     "chome": null,
+     "note": ""
+    },
+    {
+     "town": "畑町",
+     "chome": null,
+     "note": ""
+    },
+    {
+     "town": "宮野木台",
+     "chome": 1,
+     "note": ""
+    }
+   ],
+   "published": null
+  },
+  {
+   "name": "千葉市あんしんケアセンター花園",
+   "areaRaw": "朝日ヶ丘町、朝日ヶ丘4丁目、検見川町、浪花町、花園町、花園、南花園、瑞穂",
+   "areas": [
+    {
+     "town": "朝日ヶ丘町",
+     "chome": null,
+     "note": ""
+    },
+    {
+     "town": "朝日ヶ丘",
+     "chome": 4,
+     "note": ""
+    },
+    {
+     "town": "検見川町",
+     "chome": null,
+     "note": ""
+    },
+    {
+     "town": "浪花町",
+     "chome": null,
+     "note": ""
+    },
+    {
+     "town": "花園町",
+     "chome": null,
+     "note": ""
+    },
+    {
+     "town": "花園",
+     "chome": null,
+     "note": ""
+    },
+    {
+     "town": "南花園",
+     "chome": null,
+     "note": ""
+    },
+    {
+     "town": "瑞穂",
+     "chome": null,
+     "note": ""
+    }
+   ],
+   "published": null
+  },
+  {
+   "name": "千葉市あんしんケアセンター幕張",
+   "areaRaw": "武石町、幕張町、幕張本郷",
+   "areas": [
+    {
+     "town": "武石町",
+     "chome": null,
+     "note": ""
+    },
+    {
+     "town": "幕張町",
+     "chome": null,
+     "note": ""
+    },
+    {
+     "town": "幕張本郷",
+     "chome": null,
+     "note": ""
+    }
+   ],
+   "published": null
+  },
+  {
+   "name": "千葉市あんしんケアセンター山王",
+   "areaRaw": "柏台、小中台町、小深町、山王町、長沼町、長沼原町、六方町、宮野木町",
+   "areas": [
+    {
+     "town": "柏台",
+     "chome": null,
+     "note": ""
+    },
+    {
+     "town": "小中台町",
+     "chome": null,
+     "note": ""
+    },
+    {
+     "town": "小深町",
+     "chome": null,
+     "note": ""
+    },
+    {
+     "town": "山王町",
+     "chome": null,
+     "note": ""
+    },
+    {
+     "town": "長沼町",
+     "chome": null,
+     "note": ""
+    },
+    {
+     "town": "長沼原町",
+     "chome": null,
+     "note": ""
+    },
+    {
+     "town": "六方町",
+     "chome": null,
+     "note": ""
+    },
+    {
+     "town": "宮野木町",
+     "chome": null,
+     "note": ""
+    }
+   ],
+   "published": null
+  },
+  {
+   "name": "千葉市あんしんケアセンター園生",
+   "areaRaw": "あやめ台、園生町",
+   "areas": [
+    {
+     "town": "あやめ台",
+     "chome": null,
+     "note": ""
+    },
+    {
+     "town": "園生町",
+     "chome": null,
+     "note": ""
+    }
+   ],
+   "published": null
+  },
+  {
+   "name": "千葉市あんしんケアセンター天台",
+   "areaRaw": "作草部町、作草部、千草台、天台町、天台、萩台町",
+   "areas": [
+    {
+     "town": "作草部町",
+     "chome": null,
+     "note": ""
+    },
+    {
+     "town": "作草部",
+     "chome": null,
+     "note": ""
+    },
+    {
+     "town": "千草台",
+     "chome": null,
+     "note": ""
+    },
+    {
+     "town": "天台町",
+     "chome": null,
+     "note": ""
+    },
+    {
+     "town": "天台",
+     "chome": null,
+     "note": ""
+    },
+    {
+     "town": "萩台町",
+     "chome": null,
+     "note": ""
+    }
+   ],
+   "published": null
+  },
+  {
+   "name": "千葉市あんしんケアセンター小仲台",
+   "areaRaw": "穴川町、穴川、小仲台、轟町、弥生町",
+   "areas": [
+    {
+     "town": "穴川町",
+     "chome": null,
+     "note": ""
+    },
+    {
+     "town": "穴川",
+     "chome": null,
+     "note": ""
+    },
+    {
+     "town": "小仲台",
+     "chome": null,
+     "note": ""
+    },
+    {
+     "town": "轟町",
+     "chome": null,
+     "note": ""
+    },
+    {
+     "town": "弥生町",
+     "chome": null,
+     "note": ""
+    }
+   ],
+   "published": null
+  },
+  {
+   "name": "千葉市あんしんケアセンター稲毛",
+   "areaRaw": "稲丘町、稲毛、稲毛台町、稲毛町、稲毛東、黒砂、黒砂台、緑町",
+   "areas": [
+    {
+     "town": "稲丘町",
+     "chome": null,
+     "note": ""
+    },
+    {
+     "town": "稲毛",
+     "chome": null,
+     "note": ""
+    },
+    {
+     "town": "稲毛台町",
+     "chome": null,
+     "note": ""
+    },
+    {
+     "town": "稲毛町",
+     "chome": null,
+     "note": ""
+    },
+    {
+     "town": "稲毛東",
+     "chome": null,
+     "note": ""
+    },
+    {
+     "town": "黒砂",
+     "chome": null,
+     "note": ""
+    },
+    {
+     "town": "黒砂台",
+     "chome": null,
+     "note": ""
+    },
+    {
+     "town": "緑町",
+     "chome": null,
+     "note": ""
+    }
+   ],
+   "published": null
+  },
+  {
+   "name": "千葉市あんしんケアセンターみつわ台",
+   "areaRaw": "愛生町、高品町、殿台町、原町、東寺山町、みつわ台、源町",
+   "areas": [
+    {
+     "town": "愛生町",
+     "chome": null,
+     "note": ""
+    },
+    {
+     "town": "高品町",
+     "chome": null,
+     "note": ""
+    },
+    {
+     "town": "殿台町",
+     "chome": null,
+     "note": ""
+    },
+    {
+     "town": "原町",
+     "chome": null,
+     "note": ""
+    },
+    {
+     "town": "東寺山町",
+     "chome": null,
+     "note": ""
+    },
+    {
+     "town": "みつわ台",
+     "chome": null,
+     "note": ""
+    },
+    {
+     "town": "源町",
+     "chome": null,
+     "note": ""
+    }
+   ],
+   "published": null
+  },
+  {
+   "name": "千葉市あんしんケアセンター都賀",
+   "areaRaw": "都賀、都賀の台、西都賀、若松町、若松台",
+   "areas": [
+    {
+     "town": "都賀",
+     "chome": null,
+     "note": ""
+    },
+    {
+     "town": "都賀の台",
+     "chome": null,
+     "note": ""
+    },
+    {
+     "town": "西都賀",
+     "chome": null,
+     "note": ""
+    },
+    {
+     "town": "若松町",
+     "chome": null,
+     "note": ""
+    },
+    {
+     "town": "若松台",
+     "chome": null,
+     "note": ""
+    }
+   ],
+   "published": null
+  },
+  {
+   "name": "千葉市あんしんケアセンター桜木",
+   "areaRaw": "貝塚町、貝塚、加曽利町、桜木、桜木北",
+   "areas": [
+    {
+     "town": "貝塚町",
+     "chome": null,
+     "note": ""
+    },
+    {
+     "town": "貝塚",
+     "chome": null,
+     "note": ""
+    },
+    {
+     "town": "加曽利町",
+     "chome": null,
+     "note": ""
+    },
+    {
+     "town": "桜木",
+     "chome": null,
+     "note": ""
+    },
+    {
+     "town": "桜木北",
+     "chome": null,
+     "note": ""
+    }
+   ],
+   "published": null
+  },
+  {
+   "name": "千葉市あんしんケアセンター千城台",
+   "areaRaw": "大井戸町、大草町、太田町、小倉町、小倉台、御成台、小間子町、金親町、上泉町、御殿町、坂月町、更科町、下泉町、下田町、旦谷町、千城台北、千城台西、千城台東、千城台南、富田町、谷当町",
+   "areas": [
+    {
+     "town": "大井戸町",
+     "chome": null,
+     "note": ""
+    },
+    {
+     "town": "大草町",
+     "chome": null,
+     "note": ""
+    },
+    {
+     "town": "太田町",
+     "chome": null,
+     "note": ""
+    },
+    {
+     "town": "小倉町",
+     "chome": null,
+     "note": ""
+    },
+    {
+     "town": "小倉台",
+     "chome": null,
+     "note": ""
+    },
+    {
+     "town": "御成台",
+     "chome": null,
+     "note": ""
+    },
+    {
+     "town": "小間子町",
+     "chome": null,
+     "note": ""
+    },
+    {
+     "town": "金親町",
+     "chome": null,
+     "note": ""
+    },
+    {
+     "town": "上泉町",
+     "chome": null,
+     "note": ""
+    },
+    {
+     "town": "御殿町",
+     "chome": null,
+     "note": ""
+    },
+    {
+     "town": "坂月町",
+     "chome": null,
+     "note": ""
+    },
+    {
+     "town": "更科町",
+     "chome": null,
+     "note": ""
+    },
+    {
+     "town": "下泉町",
+     "chome": null,
+     "note": ""
+    },
+    {
+     "town": "下田町",
+     "chome": null,
+     "note": ""
+    },
+    {
+     "town": "旦谷町",
+     "chome": null,
+     "note": ""
+    },
+    {
+     "town": "千城台北",
+     "chome": null,
+     "note": ""
+    },
+    {
+     "town": "千城台西",
+     "chome": null,
+     "note": ""
+    },
+    {
+     "town": "千城台東",
+     "chome": null,
+     "note": ""
+    },
+    {
+     "town": "千城台南",
+     "chome": null,
+     "note": ""
+    },
+    {
+     "town": "富田町",
+     "chome": null,
+     "note": ""
+    },
+    {
+     "town": "谷当町",
+     "chome": null,
+     "note": ""
+    }
+   ],
+   "published": null
+  },
+  {
+   "name": "千葉市あんしんケアセンター大宮台",
+   "areaRaw": "五十土町、和泉町、大広町、大宮町、大宮台、川井町、北大宮台、北谷津町、古泉町、佐和町、高根町、多部田町、中田町、中野町、野呂町",
+   "areas": [
+    {
+     "town": "五十土町",
+     "chome": null,
+     "note": ""
+    },
+    {
+     "town": "和泉町",
+     "chome": null,
+     "note": ""
+    },
+    {
+     "town": "大広町",
+     "chome": null,
+     "note": ""
+    },
+    {
+     "town": "大宮町",
+     "chome": null,
+     "note": ""
+    },
+    {
+     "town": "大宮台",
+     "chome": null,
+     "note": ""
+    },
+    {
+     "town": "川井町",
+     "chome": null,
+     "note": ""
+    },
+    {
+     "town": "北大宮台",
+     "chome": null,
+     "note": ""
+    },
+    {
+     "town": "北谷津町",
+     "chome": null,
+     "note": ""
+    },
+    {
+     "town": "古泉町",
+     "chome": null,
+     "note": ""
+    },
+    {
+     "town": "佐和町",
+     "chome": null,
+     "note": ""
+    },
+    {
+     "town": "高根町",
+     "chome": null,
+     "note": ""
+    },
+    {
+     "town": "多部田町",
+     "chome": null,
+     "note": ""
+    },
+    {
+     "town": "中田町",
+     "chome": null,
+     "note": ""
+    },
+    {
+     "town": "中野町",
+     "chome": null,
+     "note": ""
+    },
+    {
+     "town": "野呂町",
+     "chome": null,
+     "note": ""
+    }
+   ],
+   "published": null
+  },
+  {
+   "name": "千葉市あんしんケアセンター鎌取",
+   "areaRaw": "大金沢町、落井町、おゆみ野、おゆみ野有吉、おゆみ野中央、おゆみ野南、鎌取町、刈田子町、小金沢町、椎名崎町、富岡町、中西町、東山科町、平山町、古市場町、辺田町、茂呂町",
+   "areas": [
+    {
+     "town": "大金沢町",
+     "chome": null,
+     "note": ""
+    },
+    {
+     "town": "落井町",
+     "chome": null,
+     "note": ""
+    },
+    {
+     "town": "おゆみ野",
+     "chome": null,
+     "note": ""
+    },
+    {
+     "town": "おゆみ野有吉",
+     "chome": null,
+     "note": ""
+    },
+    {
+     "town": "おゆみ野中央",
+     "chome": null,
+     "note": ""
+    },
+    {
+     "town": "おゆみ野南",
+     "chome": null,
+     "note": ""
+    },
+    {
+     "town": "鎌取町",
+     "chome": null,
+     "note": ""
+    },
+    {
+     "town": "刈田子町",
+     "chome": null,
+     "note": ""
+    },
+    {
+     "town": "小金沢町",
+     "chome": null,
+     "note": ""
+    },
+    {
+     "town": "椎名崎町",
+     "chome": null,
+     "note": ""
+    },
+    {
+     "town": "富岡町",
+     "chome": null,
+     "note": ""
+    },
+    {
+     "town": "中西町",
+     "chome": null,
+     "note": ""
+    },
+    {
+     "town": "東山科町",
+     "chome": null,
+     "note": ""
+    },
+    {
+     "town": "平山町",
+     "chome": null,
+     "note": ""
+    },
+    {
+     "town": "古市場町",
+     "chome": null,
+     "note": ""
+    },
+    {
+     "town": "辺田町",
+     "chome": null,
+     "note": ""
+    },
+    {
+     "town": "茂呂町",
+     "chome": null,
+     "note": ""
+    }
+   ],
+   "published": null
+  },
+  {
+   "name": "千葉市あんしんケアセンター誉田",
+   "areaRaw": "大膳野町、高田町、平川町、誉田町",
+   "areas": [
+    {
+     "town": "大膳野町",
+     "chome": null,
+     "note": ""
+    },
+    {
+     "town": "高田町",
+     "chome": null,
+     "note": ""
+    },
+    {
+     "town": "平川町",
+     "chome": null,
+     "note": ""
+    },
+    {
+     "town": "誉田町",
+     "chome": null,
+     "note": ""
+    }
+   ],
+   "published": null
+  },
+  {
+   "name": "千葉市あんしんケアセンター土気",
+   "areaRaw": "あすみが丘、あすみが丘東、板倉町、大木戸町、大椎町、大高町、大野台、越智町、小山町、上大和田町、下大和田町、高津戸町、土気町、小食土町",
+   "areas": [
+    {
+     "town": "あすみが丘",
+     "chome": null,
+     "note": ""
+    },
+    {
+     "town": "あすみが丘東",
+     "chome": null,
+     "note": ""
+    },
+    {
+     "town": "板倉町",
+     "chome": null,
+     "note": ""
+    },
+    {
+     "town": "大木戸町",
+     "chome": null,
+     "note": ""
+    },
+    {
+     "town": "大椎町",
+     "chome": null,
+     "note": ""
+    },
+    {
+     "town": "大高町",
+     "chome": null,
+     "note": ""
+    },
+    {
+     "town": "大野台",
+     "chome": null,
+     "note": ""
+    },
+    {
+     "town": "越智町",
+     "chome": null,
+     "note": ""
+    },
+    {
+     "town": "小山町",
+     "chome": null,
+     "note": ""
+    },
+    {
+     "town": "上大和田町",
+     "chome": null,
+     "note": ""
+    },
+    {
+     "town": "下大和田町",
+     "chome": null,
+     "note": ""
+    },
+    {
+     "town": "高津戸町",
+     "chome": null,
+     "note": ""
+    },
+    {
+     "town": "土気町",
+     "chome": null,
+     "note": ""
+    },
+    {
+     "town": "小食土町",
+     "chome": null,
+     "note": ""
+    }
+   ],
+   "published": null
+  },
+  {
+   "name": "千葉市あんしんケアセンター真砂",
+   "areaRaw": "中瀬1丁目、ひび野1丁目、真砂、若葉",
+   "areas": [
+    {
+     "town": "中瀬",
+     "chome": 1,
+     "note": ""
+    },
+    {
+     "town": "ひび野",
+     "chome": 1,
+     "note": ""
+    },
+    {
+     "town": "真砂",
+     "chome": null,
+     "note": ""
+    },
+    {
+     "town": "若葉",
+     "chome": null,
+     "note": ""
+    }
+   ],
+   "published": null
+  },
+  {
+   "name": "千葉市あんしんケアセンター磯辺",
+   "areaRaw": "磯辺、打瀬、高浜5～6丁目、豊砂、中瀬2丁目、浜田、ひび野2丁目、幕張西、美浜",
+   "areas": [
+    {
+     "town": "磯辺",
+     "chome": null,
+     "note": ""
+    },
+    {
+     "town": "打瀬",
+     "chome": null,
+     "note": ""
+    },
+    {
+     "town": "高浜",
+     "chome": 5,
+     "note": ""
+    },
+    {
+     "town": "高浜",
+     "chome": 6,
+     "note": ""
+    },
+    {
+     "town": "豊砂",
+     "chome": null,
+     "note": ""
+    },
+    {
+     "town": "中瀬",
+     "chome": 2,
+     "note": ""
+    },
+    {
+     "town": "浜田",
+     "chome": null,
+     "note": ""
+    },
+    {
+     "town": "ひび野",
+     "chome": 2,
+     "note": ""
+    },
+    {
+     "town": "幕張西",
+     "chome": null,
+     "note": ""
+    },
+    {
+     "town": "美浜",
+     "chome": null,
+     "note": ""
+    }
+   ],
+   "published": null
+  },
+  {
+   "name": "千葉市あんしんケアセンター高洲",
+   "areaRaw": "稲毛海岸、高洲、高浜1～4丁目・7丁目",
+   "areas": [
+    {
+     "town": "稲毛海岸",
+     "chome": null,
+     "note": ""
+    },
+    {
+     "town": "高洲",
+     "chome": null,
+     "note": ""
+    },
+    {
+     "town": "高浜",
+     "chome": 1,
+     "note": ""
+    },
+    {
+     "town": "高浜",
+     "chome": 2,
+     "note": ""
+    },
+    {
+     "town": "高浜",
+     "chome": 3,
+     "note": ""
+    },
+    {
+     "town": "高浜",
+     "chome": 4,
+     "note": ""
+    }
+   ],
+   "published": null
+  },
+  {
+   "name": "千葉市あんしんケアセンター幸町",
+   "areaRaw": "幸町、新港",
+   "areas": [
+    {
+     "town": "幸町",
+     "chome": null,
+     "note": ""
+    },
+    {
+     "town": "新港",
+     "chome": null,
+     "note": ""
+    }
+   ],
+   "published": null
+  }
+ ],
+ "sources": [
+  {
+   "url": "https://www.city.chiba.jp/hokenfukushi/kenkofukushi/hokatsucare/anshincarecenter.html",
+   "label": "千葉市あんしんケアセンター（地域包括支援センター）",
+   "published": null
+  }
+ ],
+ "fetchedAt": "2026-08-29"
+}

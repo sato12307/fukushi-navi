@@ -125,3 +125,19 @@ tbody tr:nth-child(even) td { background: #fafcfd; }
 /* スキップリンク（a11y） */
 .skip { position: absolute; left: -9999px; }
 .skip:focus { left: 8px; top: 8px; background: #fff; padding: 8px 12px; border: 2px solid var(--brand); z-index: 10; }
+
+
+/* ── 地域包括支援センターの逆引き（/houkatsu/） ───────────────────────────── */
+.filter { display: block; margin: 1.1em 0 .4em; }
+.filter span { display: block; font-weight: 600; font-size: .95rem; margin-bottom: .3em; }
+.filter input { width: 100%; max-width: 22em; padding: 9px 11px; font-size: 1rem;
+  border: 1px solid var(--line); border-radius: 4px; }
+.hit { margin: .2em 0 .6em; font-size: .9rem; color: var(--muted, #566); }
+tbody tr.multi th { background: #fff6e5; }
+tbody tr.multi td { background: #fffaf0; }
+.ctr { font-weight: 600; }
+td .note { font-weight: 400; font-size: .9rem; color: var(--muted, #566); }
+small.warn { display: block; margin-top: .3em; font-size: .85rem; }
+.center-list { columns: 2; column-gap: 1.6em; }
+.center-list li { break-inside: avoid; }
+@media (max-width: 620px) { .center-list { columns: 1; } }
