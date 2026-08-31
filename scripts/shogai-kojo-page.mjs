@@ -2,7 +2,15 @@
 // 生成側が2つ（自治体ページと販売ページ）あるので、枠は1か所に置く。
 // ヘッダ・フッタ・nav を2回書くと必ずずれる。[[same-question-two-implementations]]
 
+import fs from 'node:fs'
+import path from 'node:path'
+import { fileURLToPath } from 'node:url'
+
 export const SITE = 'https://fukushiru.com'
+
+// 段の計測は assets/ev.js が正典。ここで読んで埋め込む（同じ判定を2か所に書かない）。
+const EV = fs.readFileSync(
+  path.join(path.dirname(fileURLToPath(import.meta.url)), '..', 'assets', 'ev.js'), 'utf8').trim()
 export const esc = (s) => String(s ?? '').replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]))
 
 // ── 共通の枠 ────────────────────────────────────────────────────────────────
@@ -59,27 +67,7 @@ ${body}
   </div>
 </footer>
 <script>
-/* 購入までの段を数える。どこで人が落ちているかが分からないと、
-   「売れない＝価格が高い」と決めつけて打つ手を全部間違える。
-   数えるのは押された回数だけで、誰が押したかは記録しない。
-   ★リンクの計測は sendBeacon を使う。fetch だと遷移で中断されて落ちる。 */
-(function () {
-  function ev(n) {
-    try {
-      var b = JSON.stringify({ n: n })
-      if (navigator.sendBeacon) { navigator.sendBeacon('/api/ev', new Blob([b], { type: 'application/json' })); return }
-      fetch('/api/ev', { method: 'POST', headers: { 'content-type': 'application/json' }, body: b, keepalive: true })
-    } catch (e) { /* 計測の失敗でページを壊さない */ }
-  }
-  window.__ev = ev
-  if (location.pathname.indexOf('/pack/') === 0 && location.pathname.indexOf('kanryo') < 0) ev('pack_view')
-  document.addEventListener('click', function (e) {
-    var a = e.target && e.target.closest ? e.target.closest('a[href]') : null
-    if (!a) return
-    var h = a.getAttribute('href') || ''
-    if (h.indexOf('/pack/') >= 0 && h.indexOf('kanryo') < 0) ev('to_pack')
-  }, true)
-})();
+${EV}
 </script>
 </body>
 </html>
