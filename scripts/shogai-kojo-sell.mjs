@@ -154,7 +154,12 @@ write('tokushoho/index.html', page({
   canonical: '/tokushoho/', depth: 1,
   body: `  <p class="breadcrumb"><a href="../index.html">トップ</a> ＞ 特定商取引法に基づく表記</p>
   <h1>特定商取引法に基づく表記</h1>
-  <p class="note">通信販売に関する表示です。<strong>無料で提供している部分（制度の解説・自治体別の認定基準・各種計算機）については、購入の必要はありません。</strong></p>
+  <p class="note">通信販売に関する表示です。<strong>無料で提供している部分（制度の解説・自治体別の認定基準・都営住宅の区市町別の相場・各種計算機）については、購入の必要はありません。</strong></p>
+  <p class="note">販売している商品は次の2つです。どちらもHTMLファイルのダウンロード販売で、価格・引渡し・返品の条件は下表のとおり共通です。</p>
+  <ul class="note">
+  <li><a href="../pack/">親の障害者控除 還付申請パック</a>（市区町村ごと・${PRICE}円）</li>
+  <li><a href="../toei/">都営住宅 申込先えらび</a>（${PRICE}円）</li>
+  </ul>
   <div class="table-wrap"><table><tbody>
   <tr><th>販売業者</th><td>${esc(SELLER.name)}</td></tr>
   <tr><th>運営責任者</th><td>${esc(SELLER.name)}</td></tr>
