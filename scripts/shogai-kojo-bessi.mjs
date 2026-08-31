@@ -21,6 +21,7 @@ import fs from 'node:fs'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { criteriaFromRows, headIndex, flipped, hasAny, rtfToRows, docxToRows } from './shogai-kojo-lib.mjs'
+import { readDateLedger } from './shogai-kojo-readdate.mjs'
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..')
 const CACHE = path.join(ROOT, '.cache', 'shogai-kojo')
@@ -29,6 +30,11 @@ const OUT = path.join(ROOT, 'data', 'shogai-kojo')
 const UA = 'Mozilla/5.0 (compatible; fukushiru-bot/1.0; +https://fukushiru.com/about.html)'
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms))
 fs.mkdirSync(BCACHE, { recursive: true })
+
+// ★別表から読んだ基準の「読み取り日」は本文HTMLの取得日ではなく、**添付を取った日**。
+//   本文だけ取り直して別表は据え置き、ということが普通に起きる（実測で別表31件だけ
+//   1日ずれていた）。ページに出す日付は build 側で古いほうを採る。[[crawl-date-flattening]]
+const bled = readDateLedger(BCACHE)
 
 // ── 添付のURLを本文HTMLから拾う ─────────────────────────────────────────────
 const attachments = (html, pageUrl) => {
@@ -62,12 +68,12 @@ for (const r of todo) {
 
   for (const au of atts.slice(0, 4)) {          // 別表が複数に割れている例規がある
     const bp = path.join(BCACHE, `${r.code}-${au.replace(/\W+/g, '').slice(-44)}`)
-    let buf = null
-    if (fs.existsSync(bp)) { buf = fs.readFileSync(bp); hit++ }
+    let buf = null, bAt = null
+    if (fs.existsSync(bp)) { buf = fs.readFileSync(bp); bAt = bled.of(path.basename(bp), bp); hit++ }
     else {
       try {
         const resp = await fetch(au, { headers: { 'user-agent': UA, referer: r.sourceUrl }, redirect: 'follow' })
-        if (resp.ok) { buf = Buffer.from(await resp.arrayBuffer()); fs.writeFileSync(bp, buf); fetched++ }
+        if (resp.ok) { buf = Buffer.from(await resp.arrayBuffer()); fs.writeFileSync(bp, buf); bAt = bled.stamp(path.basename(bp)); fetched++ }
         else failed++
       } catch { failed++ }
       await sleep(1100)
@@ -92,7 +98,7 @@ for (const r of todo) {
       shogai: hasAny(res.shogai) ? res.shogai : null,
       tokubetsu: hasAny(res.tokubetsu) ? res.tokubetsu : null,
       status: bad.length ? '要確認(順序が逆転)' : '読めた(別表から)',
-      bessiUrl: au,
+      bessiUrl: au, bessiFetchedAt: bAt,
     })
     break
   }
@@ -106,11 +112,13 @@ for (const r of rec.records) {
   const f = fixes.get(r.code + r.sourceUrl)
   if (!f) continue
   r.shogai = f.shogai; r.tokubetsu = f.tokubetsu; r.status = f.status; r.bessiUrl = f.bessiUrl
+  r.bessiFetchedAt = f.bessiFetchedAt
 }
 const tally = {}
 for (const r of rec.records) tally[r.status] = (tally[r.status] || 0) + 1
 rec.tally = tally
-rec.bessiAt = new Date().toISOString()
+bled.save()
+rec.bessiAt = new Date().toISOString()   // このスクリプトを最後に流した時刻（読み取り日ではない）
 fs.writeFileSync(path.join(OUT, 'records.json'), JSON.stringify(rec, null, 1))
 fs.writeFileSync(path.join(OUT, 'tally.txt'), Object.entries(tally).map(([k, v]) => `${k}: ${v}`).join('\n'))
 console.log('統合後の内訳 -> data/shogai-kojo/tally.txt')

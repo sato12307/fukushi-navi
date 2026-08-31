@@ -33,6 +33,7 @@
 import fs from 'node:fs'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
+import { readDateLedger } from './shogai-kojo-readdate.mjs'
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..')
 const CACHE = path.join(ROOT, '.cache', 'shogai-kojo')
@@ -82,12 +83,16 @@ const targets = docs.filter((d) => /^https?:\/\//.test(d.original_url || ''))
 console.log(`原典URLがあるもの: ${targets.length}件（残り ${docs.length - targets.length}件は索引側にURLが無く、取りに行けない）`)
 
 const key = (d) => `${d.municipality_id}-${d.original_url.replace(/\W+/g, '').slice(-40)}.html`
+// ★「いつ読んだか」は取ってきたここでしか分からない。ビルド日で代用しない。
+//   キャッシュに当たった件は前回取った日のまま据え置く（今日は取りに行っていない）。
+//   [[crawl-date-flattening]]
+const led = readDateLedger(CACHE)
 let hit = 0, got = 0, ng = 0
 const rows = []
 for (const d of targets) {
   const p = path.join(CACHE, key(d))
-  let html = null
-  if (fs.existsSync(p)) { html = fs.readFileSync(p, 'utf8'); hit++ }
+  let html = null, readAt = null
+  if (fs.existsSync(p)) { html = fs.readFileSync(p, 'utf8'); readAt = led.of(key(d), p); hit++ }
   else {
     try {
       const r = await fetch(d.original_url, { headers: { 'user-agent': UA }, redirect: 'follow' })
@@ -101,17 +106,21 @@ for (const d of targets) {
           : /euc/.test(enc) ? 'euc-jp' : 'utf-8'
         html = new TextDecoder(label, { fatal: false }).decode(buf)
         fs.writeFileSync(p, html)
+        readAt = led.stamp(key(d))
         got++
       } else ng++
     } catch { ng++ }
     await sleep(1100)   // 相手は自治体の共用サーバ。1秒以上あける。
   }
-  if (html) rows.push({ ...d, _cache: path.basename(p), _bytes: html.length })
+  if (html) rows.push({ ...d, _cache: path.basename(p), _bytes: html.length, fetchedAt: readAt })
 }
+led.save()
 console.log(`取得: 新規 ${got} / キャッシュ ${hit} / 失敗 ${ng}`)
 
 fs.writeFileSync(path.join(OUT, 'sources.json'), JSON.stringify({
-  fetchedAt: new Date().toISOString(),
+  // ★行ごとの fetchedAt（＝その原典を読んだ日）と混ぜないこと。こちらは収集器を
+  //   最後に流した時刻でしかなく、キャッシュに当たった原典は今日読んでいない。
+  ranAt: new Date().toISOString(),
   note: '索引は条例Webアーカイブデータベース（同志社大）。規約により索引そのものは公開しない。公開するのは各自治体の原典から読み取った基準のみ。',
   count: rows.length,
   rows,

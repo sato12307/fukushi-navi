@@ -1,5 +1,5 @@
 {
- "parsedAt": "2026-08-27T15:48:41.390Z",
+ "parsedAt": "2026-08-31T17:26:08.559Z",
  "tally": {
   "判定ランクを公表していない": 19,
   "基準が読み取れない": 6,
@@ -13,6 +13,7 @@
    "city": "横浜市",
    "kind": "政令市",
    "url": "https://www.city.yokohama.lg.jp/kenko-iryo-fukushi/fukushi-kaigo/koreisha-kaigo/kaigohoken-igai-service/koukyou-zei/shougaisha-koujo.html",
+   "fetchedAt": "2026-08-27",
    "status": "判定ランクを公表していない",
    "shogai": null,
    "tokubetsu": null
@@ -23,6 +24,7 @@
    "city": "川崎市",
    "kind": "政令市",
    "url": "https://www.city.kawasaki.jp/templates/outline/350/0000071709.html",
+   "fetchedAt": "2026-08-27",
    "status": "判定ランクを公表していない",
    "shogai": null,
    "tokubetsu": null
@@ -33,6 +35,7 @@
    "city": "名古屋市",
    "kind": "政令市",
    "url": "https://www.city.nagoya.jp/kenkofukushi/page/0000167338.html",
+   "fetchedAt": "2026-08-27",
    "status": "基準が読み取れない",
    "shogai": null,
    "tokubetsu": null
@@ -43,6 +46,7 @@
    "city": "大阪市",
    "kind": "政令市",
    "url": "https://www.city.osaka.lg.jp/fukushi/page/0000058487.html",
+   "fetchedAt": "2026-08-27",
    "status": "基準が読み取れない",
    "shogai": null,
    "tokubetsu": null
@@ -53,6 +57,7 @@
    "city": "神戸市",
    "kind": "政令市",
    "url": "https://www.city.kobe.lg.jp/a39067/kenko/fukushi/koreshafukushi/am06/nenkin/kaigozeikoujyo.html",
+   "fetchedAt": "2026-08-27",
    "status": "判定ランクを公表していない",
    "shogai": null,
    "tokubetsu": null
@@ -63,6 +68,7 @@
    "city": "京都市",
    "kind": "政令市",
    "url": "https://www.city.kyoto.lg.jp/hokenfukushi/page/0000317370.html",
+   "fetchedAt": "2026-08-27",
    "status": "読めた(表)",
    "shogai": {
     "ninchi": "Ⅱa"
@@ -78,6 +84,7 @@
    "city": "仙台市",
    "kind": "政令市",
    "url": "https://www.city.sendai.jp/hokatsushien/download/bunyabetsu/kore/kore/shogaisha.html",
+   "fetchedAt": "2026-08-27",
    "status": "判定ランクを公表していない",
    "shogai": null,
    "tokubetsu": null
@@ -88,6 +95,7 @@
    "city": "さいたま市",
    "kind": "政令市",
    "url": "https://www.city.saitama.lg.jp/007/007/007/p002688.html",
+   "fetchedAt": "2026-08-27",
    "status": "判定ランクを公表していない",
    "shogai": null,
    "tokubetsu": null
@@ -98,6 +106,7 @@
    "city": "福岡市",
    "kind": "政令市",
    "url": "https://www.city.fukuoka.lg.jp/fukushi/oldage-welfare/health/4-010103-2.html",
+   "fetchedAt": "2026-08-27",
    "status": "基準が読み取れない",
    "shogai": null,
    "tokubetsu": null
@@ -108,6 +117,7 @@
    "city": "広島市",
    "kind": "政令市",
    "url": "https://www.city.hiroshima.lg.jp/site/koureisha/5934.html",
+   "fetchedAt": "2026-08-27",
    "status": "判定ランクを公表していない",
    "shogai": null,
    "tokubetsu": null
@@ -118,6 +128,7 @@
    "city": "千葉市",
    "kind": "政令市",
    "url": "https://www.city.chiba.jp/hokenfukushi/koreishogai/korei/shougaishanintei.html",
+   "fetchedAt": "2026-08-27",
    "status": "判定ランクを公表していない",
    "shogai": null,
    "tokubetsu": null
@@ -128,6 +139,7 @@
    "city": "静岡市",
    "kind": "政令市",
    "url": "https://www.city.shizuoka.lg.jp/s2837/s002787.html",
+   "fetchedAt": "2026-08-27",
    "status": "判定ランクを公表していない",
    "shogai": null,
    "tokubetsu": null
@@ -138,6 +150,7 @@
    "city": "岡山市",
    "kind": "政令市",
    "url": "https://www.city.okayama.jp/kurashi/0000007341.html",
+   "fetchedAt": "2026-08-27",
    "status": "判定ランクを公表していない",
    "shogai": null,
    "tokubetsu": null
@@ -148,6 +161,7 @@
    "city": "熊本市",
    "kind": "政令市",
    "url": "https://www.city.kumamoto.jp/kiji0031779/index.html",
+   "fetchedAt": "2026-08-27",
    "status": "判定ランクを公表していない",
    "shogai": null,
    "tokubetsu": null
@@ -158,6 +172,7 @@
    "city": "大田区",
    "kind": "特別区",
    "url": "https://www.city.ota.tokyo.jp/seikatsu/fukushi/kourei/nenkin_zei/youkaigoninteishatounokoujyo.html",
+   "fetchedAt": "2026-08-27",
    "status": "読めた(文章)",
    "shogai": {
     "ninchi": "Ⅱa",
@@ -174,6 +189,7 @@
    "city": "葛飾区",
    "kind": "特別区",
    "url": "https://www.city.katsushika.lg.jp/kenkou/1000051/1002106/1030310/1018285.html",
+   "fetchedAt": "2026-08-27",
    "status": "基準が読み取れない",
    "shogai": null,
    "tokubetsu": null
@@ -184,6 +200,7 @@
    "city": "中央区",
    "kind": "特別区",
    "url": "https://www.city.chuo.lg.jp/a0029/20241227syogai.html",
+   "fetchedAt": "2026-08-27",
    "status": "判定ランクを公表していない",
    "shogai": null,
    "tokubetsu": null
@@ -194,6 +211,7 @@
    "city": "世田谷区",
    "kind": "特別区",
    "url": "https://www.city.setagaya.lg.jp/02061/221.html",
+   "fetchedAt": "2026-08-27",
    "status": "読めた(表)",
    "shogai": {
     "kaigo": "要介護3"
@@ -208,6 +226,7 @@
    "city": "八王子市",
    "kind": "中核市",
    "url": "https://www.city.hachioji.tokyo.jp/kurashi/welfare/004/004/001/p003860.html",
+   "fetchedAt": "2026-08-27",
    "status": "判定ランクを公表していない",
    "shogai": null,
    "tokubetsu": null
@@ -218,6 +237,7 @@
    "city": "船橋市",
    "kind": "中核市",
    "url": "https://www.city.funabashi.lg.jp/kenkou/koureisha/002/p001788.html",
+   "fetchedAt": "2026-08-27",
    "status": "判定ランクを公表していない",
    "shogai": null,
    "tokubetsu": null
@@ -228,6 +248,7 @@
    "city": "浦安市",
    "kind": "市",
    "url": "https://www.city.urayasu.lg.jp/fukushi/koureisha/hoken/1040862.html",
+   "fetchedAt": "2026-08-27",
    "status": "読めた(文章)",
    "shogai": null,
    "tokubetsu": {
@@ -241,6 +262,7 @@
    "city": "沼津市",
    "kind": "市",
    "url": "https://www.city.numazu.shizuoka.jp/kurashi/fukushi/kaigo/shimin/shogaikojyo.htm",
+   "fetchedAt": "2026-08-27",
    "status": "読めた(表)",
    "shogai": {
     "kaigo": "要介護3",
@@ -254,6 +276,7 @@
    "city": "東大阪市",
    "kind": "中核市",
    "url": "https://www.city.higashiosaka.lg.jp/0000004368.html",
+   "fetchedAt": "2026-08-27",
    "status": "判定ランクを公表していない",
    "shogai": null,
    "tokubetsu": null
@@ -264,6 +287,7 @@
    "city": "八尾市",
    "kind": "中核市",
    "url": "https://www.city.yao.osaka.jp/kenkou_fukushi/koureisha_hukushi/1007856/1007861.html",
+   "fetchedAt": "2026-08-27",
    "status": "判定ランクを公表していない",
    "shogai": null,
    "tokubetsu": null
@@ -274,6 +298,7 @@
    "city": "三田市",
    "kind": "市",
    "url": "https://www.city.sanda.lg.jp/soshiki/30/gyomu/kourei_fukushi_kaigo/107/81/27665.html",
+   "fetchedAt": "2026-08-27",
    "status": "読めた(文章)",
    "shogai": {
     "kaigo": "要支援1"
@@ -286,6 +311,7 @@
    "city": "旭川市",
    "kind": "中核市",
    "url": "https://www.city.asahikawa.hokkaido.jp/kurashi/101/1051/03/d055977.html",
+   "fetchedAt": "2026-08-27",
    "status": "判定ランクを公表していない",
    "shogai": null,
    "tokubetsu": null
@@ -296,6 +322,7 @@
    "city": "新潟市",
    "kind": "政令市",
    "url": "https://www.city.niigata.lg.jp/iryo/kaigo/kaigoindex/zeikojyo.html",
+   "fetchedAt": "2026-08-27",
    "status": "読めた(文章)",
    "shogai": {
     "netakiri": "B1"
@@ -308,6 +335,7 @@
    "city": "浜松市",
    "kind": "政令市",
    "url": "https://www.city.hamamatsu.shizuoka.jp/kourei/welfare/elderly/zaitaku/yuuguu.html",
+   "fetchedAt": "2026-08-27",
    "status": "判定ランクを公表していない",
    "shogai": null,
    "tokubetsu": null
@@ -318,6 +346,7 @@
    "city": "北九州市",
    "kind": "政令市",
    "url": "https://www.city.kitakyushu.lg.jp/contents/924_10966.html",
+   "fetchedAt": "2026-08-27",
    "status": "基準が読み取れない",
    "shogai": null,
    "tokubetsu": null
@@ -328,6 +357,7 @@
    "city": "堺市",
    "kind": "政令市",
    "url": "https://www.city.sakai.lg.jp/kenko/fukushikaigo/shogaifukushi/shiori/shiori/zei-keigen.html",
+   "fetchedAt": "2026-08-27",
    "status": "判定ランクを公表していない",
    "shogai": null,
    "tokubetsu": null
@@ -338,6 +368,7 @@
    "city": "練馬区",
    "kind": "特別区",
    "url": "https://www.city.nerima.tokyo.jp/hokenfukushi/shogai/genmen/zei_shogaishakojo.html",
+   "fetchedAt": "2026-08-27",
    "status": "基準が読み取れない",
    "shogai": null,
    "tokubetsu": null
@@ -348,6 +379,7 @@
    "city": "足立区",
    "kind": "特別区",
    "url": "https://www.city.adachi.tokyo.jp/s-engo/shougaishakoujo.html",
+   "fetchedAt": "2026-08-27",
    "status": "判定ランクを公表していない",
    "shogai": null,
    "tokubetsu": null

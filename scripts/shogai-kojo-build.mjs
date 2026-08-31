@@ -18,18 +18,31 @@
 //   全国地方公共団体コード（6桁）をファイル名にする。日本語名をURLにすると
 //   percent-encoding 由来で本番が全数404になる事故が艦隊で起きている。
 //   [[encoded-filename-csv-404]] 読者に見せる名前は title と h1 に置けば足りる。
+//
+// ★ビルド日を「読み取り日」として出さない
+//   収集器はキャッシュ優先で動くので、原典を1件も取りに行かずにビルドし直すことがある。
+//   そこで `new Date()` を読み取り日として出すと、**確認していない日に
+//   「今日、公表資料を確認した」と書いた438枚が公開される**。艦隊で実測済みの事故型。
+//   [[crawl-date-flattening]]
+//   ∴ 日付はレコードが持つ fetchedAt（＝収集器が実際に取ってきた日）だけから出す。
+//   ∴ このファイルに `new Date()` は無い。増やさないこと。
 // ─────────────────────────────────────────────────────────────────────────────
 import fs from 'node:fs'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { NINCHI, NETAKIRI, KAIGO, rank } from './shogai-kojo-lib.mjs'
 import { page, esc, SITE } from './shogai-kojo-page.mjs'
+import { SEED_READ_DATE, asOf, latestOf } from './shogai-kojo-readdate.mjs'
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..')
 const DATA = path.join(ROOT, 'data', 'shogai-kojo')
 const OUT = path.join(ROOT, 'shogai-kojo')
-const TODAY = new Date().toISOString().slice(0, 10)
 fs.mkdirSync(OUT, { recursive: true })
+
+// その自治体の原典を実際に読んだ日。基準を別表（添付のRTF/DOCX）から読んだ自治体は
+// 本文と別表で取得日が違うので、**古いほうを採る**。ページは根拠のいちばん古い部分より
+// 新しくは名乗れない。収集器より前のレコードは日付を持たないので初回収集日に落とす。
+const readAt = (r) => [r.fetchedAt, r.bessiFetchedAt].filter(Boolean).sort()[0] || SEED_READ_DATE
 
 
 // ── データを1自治体1件に畳む（読めたものを優先）──────────────────────────────
@@ -84,9 +97,10 @@ const critTable = (r) => {
 let made = 0
 for (const r of [...ok, ...notPublished]) {
   const name = `${r.pref}${r.city}`
+  const at = readAt(r)
   const has = /読めた/.test(r.status)
   const title = has
-    ? `${name}の障害者控除対象者認定｜要介護でも対象になる基準（${TODAY.slice(0, 4)}年版）｜フクシル`
+    ? `${name}の障害者控除対象者認定｜要介護でも対象になる基準（${at.slice(0, 4)}年版）｜フクシル`
     : `${name}の障害者控除対象者認定｜認定基準は公表されていません｜フクシル`
   const desc = has
     ? `${name}で「障害者控除対象者認定」を受けられる基準。要介護認定を受けている65歳以上なら、障害者手帳がなくても所得税27万円・特別障害者なら40万円の控除が使えます。${name}が定めた判定ランクの下限を、根拠の例規リンクつきで掲載。`
@@ -113,7 +127,7 @@ for (const r of [...ok, ...notPublished]) {
   const src = r.sourceUrl || r.url
   const body = `  <p class="breadcrumb"><a href="../index.html">トップ</a> ＞ <a href="./index.html">障害者控除の認定基準（自治体別）</a> ＞ ${esc(name)}</p>
   <h1>${esc(name)}の障害者控除対象者認定</h1>
-  <p class="updated">最終更新：${TODAY} ／ 出典は${esc(name)}が公開している${r.reikiTitle ? '例規' : 'ページ'}（末尾にリンク）</p>
+  <p class="updated">最終更新：${at} ／ 出典は${esc(name)}が公開している${r.reikiTitle ? '例規' : 'ページ'}（末尾にリンク）</p>
 
   <p class="lead">${esc(name)}にお住まいで<strong>65歳以上・要介護認定を受けている</strong>方は、障害者手帳がなくても
   <strong>「障害者控除対象者認定書」</strong>を受けられる場合があります。認定されると、所得税で<strong>27万円</strong>（特別障害者なら<strong>40万円</strong>、
@@ -122,7 +136,7 @@ for (const r of [...ok, ...notPublished]) {
 ${has ? `  <div class="callout point"><p><span class="tag">${esc(name)}の基準</span>${esc(name)}が定めている判定ランクの下限です。ここに届いていれば対象になり得ますが、<strong>最終的な判断は窓口が行います</strong>。</p></div>
 ${critTable(r)}
 ${verdicts}` : `  <div class="callout warn"><p><span class="tag">確認できませんでした</span>${esc(name)}は、対象になる状態を「知的障害者（軽度・中度）に準ずる方」といった区分までは示していますが、
-  <strong>実際にどの判定ランク（日常生活自立度・要介護度）から対象になるのかを公表していません</strong>（${TODAY}時点、当サイトが公開ページを確認した範囲）。
+  <strong>実際にどの判定ランク（日常生活自立度・要介護度）から対象になるのかを公表していません</strong>（${at}時点、当サイトが公開ページを確認した範囲）。
   対象かどうかは窓口でご確認ください。他の自治体では公表しているところもあり、その一覧は<a href="./index.html">こちら</a>です。</p></div>`}
 
   <h2>いくら軽くなるのか</h2>
@@ -156,7 +170,7 @@ ${verdicts}` : `  <div class="callout warn"><p><span class="tag">確認できま
   ${r.bessiUrl ? `<li>別表：<a href="${esc(r.bessiUrl)}" rel="nofollow">${esc(r.bessiUrl)}</a></li>` : ''}
   <li>国税庁「市町村長等の障害者認定と介護保険法の要介護認定について」<a href="https://www.nta.go.jp/taxes/shiraberu/taxanswer/shotoku/1185.htm" rel="nofollow">タックスアンサー No.1185</a></li>
   </ul>
-  <p class="disclaimer">当サイトは${esc(name)}とは関係のない個人が運営しています。掲載内容は上記の公表資料を${TODAY}時点で読み取ったもので、
+  <p class="disclaimer">当サイトは${esc(name)}とは関係のない個人が運営しています。掲載内容は上記の公表資料を${at}時点で読み取ったもので、
   制度の適用可否を保証するものではありません。誤りを見つけられた場合はご連絡ください。訂正します。</p>
   </div>
 
@@ -167,7 +181,7 @@ ${verdicts}` : `  <div class="callout warn"><p><span class="tag">確認できま
     title, desc, canonical: `/shogai-kojo/${r.code}.html`, depth: 1, body,
     jsonld: {
       '@context': 'https://schema.org', '@type': 'Article', headline: title.split('｜')[0],
-      description: desc, inLanguage: 'ja', datePublished: TODAY, dateModified: TODAY,
+      description: desc, inLanguage: 'ja', datePublished: at, dateModified: at,
       author: { '@type': 'Organization', name: 'フクシル' }, publisher: { '@type': 'Organization', name: 'フクシル' },
       about: { '@type': 'AdministrativeArea', name },
     },
@@ -197,6 +211,14 @@ const headline = ['Ⅱa', 'Ⅲa', 'Ⅳ'].map((lv) => {
 //   引用されたら信用は戻らない）。データが支えない項目はその項目ごと作らない。
 const pct = (a, b) => (b ? Math.round((a / b) * 100) : 0)
 
+// ★ハブは全国ぶんをまとめて語るので、日付も「収録した全件をいつ読んだか」で書く。
+//   1日で取り切れば1つの日付、取り直しが分かれれば範囲になる。いちばん新しい日だけを
+//   出すと、据え置いた自治体まで新しく確認したように読める。
+const AS_OF = asOf(all.map(readAt))
+const LATEST = latestOf(all.map(readAt))
+// 政令市の段は政令市18市についての主張なので、その18市を読んだ日で書く。
+const AS_OF_SEIREI = asOf(all.filter((r) => r.kind === '政令市').map(readAt))
+
 // 下限値の分布（読み取れた自治体のうち、その物差しを使っているものだけ）
 const distOf = (key, which, list) => {
   const m = new Map()
@@ -217,15 +239,15 @@ const cK5 = countAt('要介護5', KAIGO, 'kaigo')
 const uK = usersOf('kaigo').length, uN = usersOf('ninchi').length, uT = usersOf('netakiri').length
 
 const facts = [
-  `${TODAY}時点、全国${all.length}市区町村の障害者控除対象者認定を収録し、うち<strong>${ok.length}自治体</strong>で判定ランク（要介護度・日常生活自立度）の下限を公表資料から読み取れた（フクシル調べ・N=${all.length}）。`,
-  `認知症高齢者の日常生活自立度が<strong>Ⅲa</strong>の人は、この物差しを使う${uN}自治体のうち<strong>${cN3.tokubetsu}自治体で特別障害者（所得税40万円）・${cN3.shogai}自治体で障害者（27万円）・${cN3.none}自治体で対象外</strong>に分かれる（N=${uN}・${TODAY}時点）。`,
-  `同じ物差しで<strong>Ⅳ</strong>（最重度に近い区分）まで進むと、<strong>${cN4.tokubetsu}自治体が特別障害者・${cN4.shogai}自治体が障害者</strong>となり、対象外は${uN}自治体中${cN4.none}自治体まで減る（N=${uN}・${TODAY}時点）。`,
-  `<strong>要介護3</strong>の人は、要介護度を判定に使う${uK}自治体のうち<strong>${cK3.tokubetsu}自治体で特別障害者・${cK3.shogai}自治体で障害者・${cK3.none}自治体で対象外</strong>（N=${uK}・${TODAY}時点）。`,
-  `要介護度で判定する${uK}自治体のうち、<strong>要介護1では${cK1.none}自治体（${pct(cK1.none, uK)}%）が対象外</strong>だが、<strong>要介護5では対象外が${cK5.none}自治体</strong>になる（N=${uK}・${TODAY}時点）。`,
-  `判定に使う物差しは自治体によって違い、読み取れた${ok.length}自治体のうち<strong>要介護度を使うのが${uK}・認知症高齢者の日常生活自立度が${uN}・障害高齢者の日常生活自立度（寝たきり度）が${uT}</strong>（重複あり・N=${ok.length}・${TODAY}時点）。`,
-  `「障害者（27万円）」の下限を要介護度で定めている自治体の内訳は <strong>${distText(distOf('kaigo', 'shogai', KAIGO))}</strong>（自治体数・${TODAY}時点）。`,
-  `「特別障害者（40万円）」の下限を認知症高齢者の日常生活自立度で定めている自治体の内訳は <strong>${distText(distOf('ninchi', 'tokubetsu', NINCHI))}</strong>（自治体数・${TODAY}時点）。`,
-  `判定ランクを<strong>公表していない</strong>と1件ずつ確認できたのは${notPublished.length}自治体、当サイトがまだ読み取れていないものが${unread.length}自治体（N=${all.length}・${TODAY}時点）。`,
+  `${AS_OF}時点、全国${all.length}市区町村の障害者控除対象者認定を収録し、うち<strong>${ok.length}自治体</strong>で判定ランク（要介護度・日常生活自立度）の下限を公表資料から読み取れた（フクシル調べ・N=${all.length}）。`,
+  `認知症高齢者の日常生活自立度が<strong>Ⅲa</strong>の人は、この物差しを使う${uN}自治体のうち<strong>${cN3.tokubetsu}自治体で特別障害者（所得税40万円）・${cN3.shogai}自治体で障害者（27万円）・${cN3.none}自治体で対象外</strong>に分かれる（N=${uN}・${AS_OF}時点）。`,
+  `同じ物差しで<strong>Ⅳ</strong>（最重度に近い区分）まで進むと、<strong>${cN4.tokubetsu}自治体が特別障害者・${cN4.shogai}自治体が障害者</strong>となり、対象外は${uN}自治体中${cN4.none}自治体まで減る（N=${uN}・${AS_OF}時点）。`,
+  `<strong>要介護3</strong>の人は、要介護度を判定に使う${uK}自治体のうち<strong>${cK3.tokubetsu}自治体で特別障害者・${cK3.shogai}自治体で障害者・${cK3.none}自治体で対象外</strong>（N=${uK}・${AS_OF}時点）。`,
+  `要介護度で判定する${uK}自治体のうち、<strong>要介護1では${cK1.none}自治体（${pct(cK1.none, uK)}%）が対象外</strong>だが、<strong>要介護5では対象外が${cK5.none}自治体</strong>になる（N=${uK}・${AS_OF}時点）。`,
+  `判定に使う物差しは自治体によって違い、読み取れた${ok.length}自治体のうち<strong>要介護度を使うのが${uK}・認知症高齢者の日常生活自立度が${uN}・障害高齢者の日常生活自立度（寝たきり度）が${uT}</strong>（重複あり・N=${ok.length}・${AS_OF}時点）。`,
+  `「障害者（27万円）」の下限を要介護度で定めている自治体の内訳は <strong>${distText(distOf('kaigo', 'shogai', KAIGO))}</strong>（自治体数・${AS_OF}時点）。`,
+  `「特別障害者（40万円）」の下限を認知症高齢者の日常生活自立度で定めている自治体の内訳は <strong>${distText(distOf('ninchi', 'tokubetsu', NINCHI))}</strong>（自治体数・${AS_OF}時点）。`,
+  `判定ランクを<strong>公表していない</strong>と1件ずつ確認できたのは${notPublished.length}自治体、当サイトがまだ読み取れていないものが${unread.length}自治体（N=${all.length}・${AS_OF}時点）。`,
 ]
 
 // CSV は data/ に置く（この艦の配布物の置き場に合わせる）。
@@ -243,7 +265,7 @@ for (const r of all) {
   csvRows.push([r.code, r.pref, r.city, r.status,
     r.shogai?.kaigo, r.shogai?.ninchi, r.shogai?.netakiri,
     r.tokubetsu?.kaigo, r.tokubetsu?.ninchi, r.tokubetsu?.netakiri,
-    r.reikiTitle, r.announced, r.updated, r.sourceUrl || r.url, TODAY].map(csvCell).join(','))
+    r.reikiTitle, r.announced, r.updated, r.sourceUrl || r.url, readAt(r)].map(csvCell).join(','))
 }
 fs.writeFileSync(path.join(ROOT, 'data', 'shogai-kojo-kijun.csv'), '\ufeff' + csvRows.join('\n') + '\n')
 
@@ -255,14 +277,14 @@ const citeBlock = `  <h2 id="toukei">そのまま引用できる数値（${ok.le
 ${facts.map((f) => `  <li>${f}</li>`).join('\n')}
   </ul>
   <p class="note"><strong>集計の範囲（N）：</strong>全国${all.length}市区町村（うち判定ランクを読み取れたもの ${ok.length}／公表なしと確認できたもの ${notPublished.length}／未読取 ${unread.length}）。
-  <strong>データ読み取り日：</strong>${TODAY}。<strong>更新頻度：</strong>例規データの再取得に合わせて自動で数え直しています。
+  <strong>データ読み取り日：</strong>${AS_OF}。<strong>更新頻度：</strong>例規データの再取得に合わせて自動で数え直しています。
   ／ <strong><a href="../data/shogai-kojo-kijun.csv" download>全${all.length}自治体のCSVをダウンロード</a></strong>（UTF-8・${csvRows.length - 1}行）</p>
 
   <h2>このデータについて（引用・転載）</h2>
   <p>この一覧は、自治体ごとにバラバラに公表されている障害者控除対象者認定の基準を、当サイトが横断して整理した一次まとめです。
   <strong>出典を明記していただければ、数字・表・CSVの引用と転載は自由です</strong>（リンクの有無は問いません）。
   推奨する記載例：<strong>「出典: フクシル（障害者控除対象者認定の基準・自治体別） https://fukushiru.com/shogai-kojo/」</strong>。
-  基準は自治体の改正で変わるため、<strong>読み取り日（${TODAY}）も併せて記載</strong>いただけると読者に親切です。
+  基準は自治体の改正で変わるため、<strong>読み取り日（${AS_OF}）も併せて記載</strong>いただけると読者に親切です。
   記事・書籍・研修資料・ケアマネジャーや税理士の実務でご自由にお使いください。
   数字の誤り・古くなった値を見つけられた場合はご連絡ください。確認して直します。</p>
 `
@@ -282,7 +304,7 @@ const prefBlocks = [...byPref.entries()].map(([pref, list]) => {
 
 const hubBody = `  <p class="breadcrumb"><a href="../index.html">トップ</a> ＞ 障害者控除の認定基準（自治体別）</p>
   <h1>障害者控除対象者認定の基準は、街によってこれだけ違う</h1>
-  <p class="updated">最終更新：${TODAY} ／ ${all.length}自治体を収録（うち基準を読み取れたもの ${ok.length}）</p>
+  <p class="updated">最終更新：${LATEST} ／ ${all.length}自治体を収録（うち基準を読み取れたもの ${ok.length}）</p>
 
   <p class="lead">65歳以上で要介護認定を受けている方は、<strong>障害者手帳がなくても</strong>市区町村の認定を受ければ
   所得税・住民税の障害者控除が使えます。ところが<strong>その認定基準は市区町村がそれぞれ決めており、全国で統一されていません</strong>。
@@ -301,7 +323,7 @@ const hubBody = `  <p class="breadcrumb"><a href="../index.html">トップ</a> �
   自治体によって、要介護度で決めるところ・日常生活自立度で決めるところ・両方を使うところがあります。</p>
 
   <h2>大都市ほど、基準が公表されていない</h2>
-  <p>政令指定都市18市のうち、実際の判定ランクを公表していたのは<strong>2市だけ</strong>でした（${TODAY}時点、当サイトが公開ページを確認した範囲）。
+  <p>政令指定都市18市のうち、実際の判定ランクを公表していたのは<strong>2市だけ</strong>でした（${AS_OF_SEIREI}時点、当サイトが公開ページを確認した範囲）。
   多くの大都市は「知的障害者（軽度・中度）に準ずる方」といった区分までは示しますが、どのランクから対象かは書いていません。
   人口の多い街ほど、事前に自分が対象か調べにくい状態です。</p>
 
@@ -339,7 +361,7 @@ fs.writeFileSync(path.join(OUT, 'index.html'), page({
     '@context': 'https://schema.org', '@type': 'Dataset',
     name: '障害者控除対象者認定の自治体別 認定基準',
     description: `全国${all.length}市区町村について、障害者控除対象者認定の判定ランク（障害高齢者の日常生活自立度・認知症高齢者の日常生活自立度・要介護度）の下限を、各自治体の公表資料から読み取ったもの。`,
-    inLanguage: 'ja', dateModified: TODAY, creator: { '@type': 'Organization', name: 'フクシル' },
+    inLanguage: 'ja', dateModified: LATEST, creator: { '@type': 'Organization', name: 'フクシル' },
   },
 }))
 // ── ③ 取り残しを消す ────────────────────────────────────────────────────────
@@ -363,9 +385,11 @@ for (const f of fs.readdirSync(OUT)) {
 const smPath = path.join(ROOT, 'sitemap.xml')
 let sm = fs.readFileSync(smPath, 'utf8')
 sm = sm.replace(/^\s*<url>(?:(?!<\/url>)[\s\S])*\/shogai-kojo\/[\s\S]*?<\/url>\n?/gm, '')
-const urls = [`  <url><loc>${SITE}/shogai-kojo/</loc><lastmod>${TODAY}</lastmod><priority>0.9</priority></url>`]
+// lastmod もビルド日にしない。取り直していない面まで「今日更新した」と申告すると、
+// 毎回の再クロールを促しておいて中身が同じ、という信号を送り続けることになる。
+const urls = [`  <url><loc>${SITE}/shogai-kojo/</loc><lastmod>${LATEST}</lastmod><priority>0.9</priority></url>`]
   .concat([...ok, ...notPublished].map((r) =>
-    `  <url><loc>${SITE}/shogai-kojo/${r.code}.html</loc><lastmod>${TODAY}</lastmod><priority>0.6</priority></url>`))
+    `  <url><loc>${SITE}/shogai-kojo/${r.code}.html</loc><lastmod>${readAt(r)}</lastmod><priority>0.6</priority></url>`))
 sm = sm.replace('</urlset>', urls.join('\n') + '\n</urlset>')
 fs.writeFileSync(smPath, sm)
 const total = (sm.match(/<url>/g) || []).length

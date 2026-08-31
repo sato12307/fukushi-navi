@@ -32,11 +32,15 @@ import fs from 'node:fs'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { criteriaFromText, clean as libClean } from './shogai-kojo-lib.mjs'
+import { readDateLedger } from './shogai-kojo-readdate.mjs'
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..')
 const CACHE = path.join(ROOT, '.cache', 'shogai-kojo')
 const OUT = path.join(ROOT, 'data', 'shogai-kojo')
 const src = JSON.parse(fs.readFileSync(path.join(OUT, 'sources.json'), 'utf8'))
+// ★読み取り日は収集器が記録した事実を運ぶだけ。ここで作らない。
+//   古い sources.json（fetchedAt を持たない）でも動くよう、台帳から引き直す。
+const led = readDateLedger(CACHE)
 
 const zen = (s) => String(s).replace(/[０-９Ａ-Ｚａ-ｚ]/g, (c) => String.fromCharCode(c.charCodeAt(0) - 0xfee0))
 // ★「障がい者」「障碍者」表記が全国で混在する。ここで一本化しないと、ひらがな表記の
@@ -168,12 +172,14 @@ for (const row of src.rows) {
     reikiTitle: row.title, reikiType: row.type,
     announced: (row.announcement_date || '').slice(0, 10), updated: (row.last_updated_date || '').slice(0, 10),
     amendments: hist.length, sourceUrl: row.original_url,
+    fetchedAt: row.fetchedAt || led.of(row._cache, p),
     status,
     shogai: Object.keys(res.shogai).length ? res.shogai : null,
     tokubetsu: Object.keys(res.tokubetsu).length ? res.tokubetsu : null,
   })
 }
 
+led.save()
 fs.writeFileSync(path.join(OUT, 'records.json'), JSON.stringify({ parsedAt: new Date().toISOString(), count: recs.length, tally, records: recs }, null, 1))
 
 // ── 読める形の報告（コンソールは日本語を出せないのでファイルに書く）──────────

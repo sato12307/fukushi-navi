@@ -20,6 +20,7 @@ import fs from 'node:fs'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { tablesFromHtml, criteriaFromRows, criteriaFromText, headIndex, flipped, hasAny, clean } from './shogai-kojo-lib.mjs'
+import { readDateLedger } from './shogai-kojo-readdate.mjs'
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..')
 const CACHE = path.join(ROOT, '.cache', 'shogai-kojo-cities')
@@ -43,21 +44,25 @@ const toText = (html) => clean(html
   .replace(/<\/(p|div|li|tr|h[1-6]|td|th)>/gi, ' ')
   .replace(/<[^>]+>/g, ''))
 
+// ★「いつ読んだか」は取ってきたここでしか分からない。ビルド日で代用しない。
+//   キャッシュに当たった件は前回取った日のまま据え置く（今日は取りに行っていない）。
+//   [[crawl-date-flattening]]
+const led = readDateLedger(CACHE)
 const recs = []
 const tally = {}
 let got = 0, hit = 0, ng = 0
 for (const c of seed.cities) {
   const p = path.join(CACHE, `${c.code}.html`)
-  let html = null
-  if (fs.existsSync(p)) { html = fs.readFileSync(p, 'utf8'); hit++ }
+  let html = null, readAt = null
+  if (fs.existsSync(p)) { html = fs.readFileSync(p, 'utf8'); readAt = led.of(`${c.code}.html`, p); hit++ }
   else {
     try {
       const r = await fetch(c.url, { headers: { 'user-agent': UA }, redirect: 'follow' })
-      if (r.ok) { html = decode(Buffer.from(await r.arrayBuffer())); fs.writeFileSync(p, html); got++ } else ng++
+      if (r.ok) { html = decode(Buffer.from(await r.arrayBuffer())); fs.writeFileSync(p, html); readAt = led.stamp(`${c.code}.html`); got++ } else ng++
     } catch { ng++ }
     await sleep(1100)
   }
-  if (!html) { recs.push({ ...c, status: '取得できない' }); continue }
+  if (!html) { recs.push({ ...c, fetchedAt: null, status: '取得できない' }); continue }
 
   // ★表と地の文の両方を試して、**多く埋まったほうを採る**。
   //   表で1つだけ当たった時点で打ち切ると、地の文にある本命を見落とす。
@@ -84,11 +89,12 @@ for (const c of seed.cities) {
   if (bad.length) status = '要確認(順序が逆転)'
   tally[status] = (tally[status] || 0) + 1
   recs.push({
-    ...c, status,
+    ...c, fetchedAt: readAt, status,
     shogai: hasAny(res.shogai) ? res.shogai : null,
     tokubetsu: hasAny(res.tokubetsu) ? res.tokubetsu : null,
   })
 }
+led.save()
 console.log(`取得: 新規 ${got} / キャッシュ ${hit} / 失敗 ${ng}`)
 
 fs.writeFileSync(path.join(OUT, 'cities-records.json'), JSON.stringify({ parsedAt: new Date().toISOString(), tally, records: recs }, null, 1))
