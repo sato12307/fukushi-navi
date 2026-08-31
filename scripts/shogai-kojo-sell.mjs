@@ -122,7 +122,7 @@ write('pack/index.html', page({
 write('pack/kanryo/index.html', page({
   title: 'ご購入ありがとうございます｜フクシル',
   desc: '障害者控除 還付申請パックのダウンロード画面です。',
-  canonical: '/pack/kanryo/', depth: 1, noindex: true,
+  canonical: '/pack/kanryo/', depth: 2, noindex: true,
   body: `  <h1>ご購入ありがとうございます</h1>
   <p class="lead">下のボタンからダウンロードしてください。<strong>このページのURLは購入から60日間有効です。</strong>ブックマークしておくと再ダウンロードできます。</p>
   <p><a id="dl" class="card" style="display:inline-block;padding:.8rem 1.6rem;font-weight:600" href="#">パックをダウンロード（HTML）</a></p>

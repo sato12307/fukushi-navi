@@ -17,7 +17,9 @@ export const esc = (s) => String(s ?? '').replace(/[&<>"]/g, (c) => ({ '&': '&am
 // noindex は「購入者だけが来る画面」に使う（/pack/kanryo/）。
 // 特商法表記と規約は買う前に読めることが要件なので、こちらは索引させる。
 export const page = ({ title, desc, canonical, depth, body, jsonld, noindex }) => {
-  const up = depth === 0 ? './' : '../'
+  // depth は「サイト根からの階層」。/pack/kanryo/ のような2階層下で '../' を使うと
+  // /pack/assets/style.css を見にいって404になる。[[relative-asset-paths-subpages]]
+  const up = depth === 0 ? './' : '../'.repeat(depth)
   return `<!DOCTYPE html>
 <html lang="ja">
 <head>
