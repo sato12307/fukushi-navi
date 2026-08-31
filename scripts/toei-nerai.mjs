@@ -135,9 +135,9 @@ const num = (x) => x.toLocaleString('ja-JP')
 const cityRows = byCity.map((c) => `<tr><td>${esc(c.city)}</td><td class="num">${c.n}</td><td class="num">${r1(c.med)}倍</td><td class="num">${c.suki}</td></tr>`).join('\n')
 const kondeRows = konde.slice(0, 10).map((h) => `<tr><td>${esc(h.city)}</td><td>${esc(h.name)}</td><td>${esc(h.cat)}</td><td class="num">${r1(h.med)}倍</td><td class="num">${h.n}</td></tr>`).join('\n')
 const cutBlocks = cuts.map((c) => `  <h3>${esc(c.label)}</h3>
-  <table class="grid"><thead><tr><th>${esc(c.label)}</th><th class="num">募集件数</th><th class="num">倍率の中央値</th></tr></thead><tbody>
+  <div class="table-wrap"><table><thead><tr><th>${esc(c.label)}</th><th class="num">募集件数</th><th class="num">倍率の中央値</th></tr></thead><tbody>
 ${c.groups.map((g) => `  <tr><td>${esc(g.k)}</td><td class="num">${num(g.n)}</td><td class="num">${r1(g.med)}倍</td></tr>`).join('\n')}
-  </tbody></table>`).join('\n\n')
+  </tbody></table></div>`).join('\n\n')
 
 write('toei/index.html', page({
   title: `都営住宅で毎回すいている住宅はどこか｜${F.rounds}回の募集を横に並べた実測｜フクシル`,
@@ -156,15 +156,15 @@ write('toei/index.html', page({
   <h2>① 混んでいる住宅（実名・無料）</h2>
   <p>よく引き合いに出されるのはこちらです。${MIN_N}件以上の募集が観測できた申込先のうち、倍率の中央値が高い順。</p>
   <p class="note">同じ建物でも募集区分が違えば別の申込先として数えています。「世帯向」と「病死等があった住宅」では倍率がまるで違うためです。</p>
-  <table class="grid"><thead><tr><th>区市町</th><th>住宅</th><th>募集区分</th><th class="num">倍率の中央値</th><th class="num">観測した募集件数</th></tr></thead><tbody>
+  <div class="table-wrap"><table><thead><tr><th>区市町</th><th>住宅</th><th>募集区分</th><th class="num">倍率の中央値</th><th class="num">観測した募集件数</th></tr></thead><tbody>
 ${kondeRows}
-  </tbody></table>
+  </tbody></table></div>
 
   <h2>② 区市町ごとの相場（無料）</h2>
   <p>${MIN_N}件以上観測できた申込先が3件以上ある${byCity.length}区市町。病死等があった住宅は除いてあります。「すいている数」は、中央値が${SUKI}倍未満だった申込先の件数です。</p>
-  <table class="grid"><thead><tr><th>区市町</th><th class="num">対象の申込先</th><th class="num">倍率の中央値</th><th class="num">すいている数</th></tr></thead><tbody>
+  <div class="table-wrap"><table><thead><tr><th>区市町</th><th class="num">対象の申込先</th><th class="num">倍率の中央値</th><th class="num">すいている数</th></tr></thead><tbody>
 ${cityRows}
-  </tbody></table>
+  </tbody></table></div>
 
   <h2>③ 条件を1つ変えると倍率はどう動くか（無料）</h2>
   <p>募集${num(F.rows)}件を条件ごとに分けて、倍率の中央値を出したものです。何をあきらめると何倍ぶん軽くなるかの目安になります。</p>
