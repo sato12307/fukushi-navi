@@ -21,6 +21,8 @@ import { page, esc, SITE } from './shogai-kojo-page.mjs'
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..')
 const DATA = path.join(ROOT, 'data', 'shogai-kojo')
 const TODAY = new Date().toISOString().slice(0, 10)
+// 規約の制定日。中身を変えたときだけ手で書き換える（ビルド日を入れない）。
+const KIYAKU_SEITEI = "2026-08-31"
 const PRICE = 500
 
 // 販売者の表記は艦隊で共通（実在の所在地・電話番号）。
@@ -51,7 +53,10 @@ const write = (rel, html) => {
 
 // ── /pack/ ──────────────────────────────────────────────────────────────────
 write('pack/index.html', page({
-  title: `親の障害者控除 還付申請パック（${items.length}市区町村版）｜フクシル`,
+  // ★① 題名を読者が打つ言葉に（2026-09-01）。この艦の主戦場はBingで、
+  //   「障害者控除」「特別障害者控除」が9位・表示2,148・クリック103。
+  //   ∴ 商品名（還付申請パック）ではなく、その人が知りたいこと（5年分いくら戻るか）を先に置く。
+  title: `親の障害者控除、過去5年分でいくら戻るか｜${items.length}市区町村の認定基準と申請手順｜フクシル`,
   desc: `要介護の親御さんが障害者控除の対象になるかを確かめ、過去5年分さかのぼって税金を取り戻すための手順書。自立度ランクが書かれた書類の探し方、税率別の還付試算、更正の請求の手順まで。${items.length}市区町村それぞれの認定基準に対応。${PRICE}円。`,
   canonical: '/pack/', depth: 1,
   body: `  <p class="breadcrumb"><a href="../index.html">トップ</a> ＞ 還付申請パック</p>
@@ -157,8 +162,8 @@ write('tokushoho/index.html', page({
   <p class="note">通信販売に関する表示です。<strong>無料で提供している部分（制度の解説・自治体別の認定基準・都営住宅の区市町別の相場・各種計算機）については、購入の必要はありません。</strong></p>
   <p class="note">販売している商品は次の2つです。どちらもHTMLファイルのダウンロード販売で、価格・引渡し・返品の条件は下表のとおり共通です。</p>
   <ul class="note">
-  <li><a href="../pack/">親の障害者控除 還付申請パック</a>（市区町村ごと・${PRICE}円）</li>
-  <li><a href="../toei/">都営住宅 申込先えらび</a>（${PRICE}円）</li>
+  <li><a href="../pack/">親の障害者控除の還付申請一式</a>（市区町村ごと・${PRICE}円）</li>
+  <li><a href="../toei/">都営住宅の申込先えらび</a>（${PRICE}円）</li>
   </ul>
   <div class="table-wrap"><table><tbody>
   <tr><th>販売業者</th><td>${esc(SELLER.name)}</td></tr>
@@ -222,7 +227,11 @@ write('kiyaku/index.html', page({
   <h2>第7条（誤りのご指摘）</h2>
   <p>掲載内容に誤りを見つけられた場合は <a href="mailto:${SELLER.mail}">${SELLER.mail}</a> までご連絡ください。確認のうえ訂正します。</p>
 
-  <p class="note">制定：${TODAY}　／　<a href="../tokushoho/">特定商取引法に基づく表記</a>／<a href="../about.html">このサイトについて</a></p>
+  ${/* ★制定日はビルド日ではない（2026-09-01 修正）。
+       それまで ${TODAY} を入れていたため、規約を1文字も変えていない日でも
+       「制定：本日」に書き換わっていた。規約の制定日は約束の効力に関わる日付なので、
+       中身を変えたときだけ手で動かす。 */''}
+  <p class="note">制定：${KIYAKU_SEITEI}　／　<a href="../tokushoho/">特定商取引法に基づく表記</a>／<a href="../about.html">このサイトについて</a></p>
 `,
 }))
 
