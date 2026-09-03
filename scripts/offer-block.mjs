@@ -29,7 +29,7 @@ export function offerPack({ name = '', up = '../' } = {}) {
   <li>窓口での<strong>持ち物のチェックリスト</strong>と、「過去◯年分も」と伝えるべき理由</li>
   </ul>
   <p class="price"><b>${PACK_PRICE}円</b><span>買い切り・税込。HTMLファイル1つ、印刷してそのまま窓口へ</span></p>
-  <p><a class="btn-primary" href="${up}pack/">${PACK_PRICE}円で手順書を受け取る →</a></p>
+  <p><a class="btn-primary" href="${up}pack/">${PACK_PRICE}円で手順書を受け取る&nbsp;→</a></p>
   <p class="fine"><strong>買わなくても手続きはできます。</strong>迷ったら先に<a href="${up}shogai-kojo/">自治体別の一覧</a>で、自分の街の基準だけ確かめてください。</p>
   </div>`
 }
@@ -47,7 +47,7 @@ export function offerToei({ up = '../' } = {}) {
   <li>観測できた<strong>全申込先の索引</strong>（区市町・住宅名・募集区分・倍率の中央値／最低／最高・観測件数・エレベーター・建てられた年）</li>
   </ul>
   <p class="price"><b>${TOEI_PRICE}円</b><span>買い切り・税込。HTMLファイル1つ、印刷可</span></p>
-  <p><a class="btn-primary" href="${up}toei/">${TOEI_PRICE}円で一覧を受け取る →</a></p>
+  <p><a class="btn-primary" href="${up}toei/">${TOEI_PRICE}円で一覧を受け取る&nbsp;→</a></p>
   <p class="fine"><strong>買わなくても申し込みはできます。</strong>上の相場だけでも、どのあたりを狙うかは決められます。</p>
   </div>`
 }

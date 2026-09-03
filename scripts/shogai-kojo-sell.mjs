@@ -70,7 +70,7 @@ write('pack/index.html', page({
   <strong>お住まいの市区町村で対象になる基準は、無料で公開しています。</strong>
   → <a href="../shogai-kojo/">全国の認定基準を比べる</a>　制度の説明は<a href="../articles/shogaisha-kojo-tax.html">こちら</a>。
   こちらのページで足りる方は、購入する必要はありません。</p></div>
-  <p><a class="btn-primary" href="#kau">${PRICE}円で手順書を受け取る →</a> <span class="note" style="display:inline-block;margin-left:.6rem">市区町村を選んでカード決済。すぐダウンロードできます</span></p>
+  <p class="cta-row"><a class="btn-primary" href="#kau">${PRICE}円で手順書を受け取る&nbsp;→</a> <span class="cta-note">市区町村を選んでカード決済。すぐダウンロードできます</span></p>
 
   <h2>このパックに入っているもの</h2>
   <p>無料ページで「基準」は分かります。そこから先、実際に手続きを終えるまでに詰まるところをまとめました。</p>

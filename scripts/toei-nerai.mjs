@@ -153,7 +153,7 @@ write('toei/index.html', page({
   そのため「たまたま1回だけ空いた住宅」と「いつ見ても空いている住宅」が区別できず、両方まとめて「倍率が高い」と語られています。
   ここでは${RANGE}の${F.rounds}回ぶん、${num(F.rows)}件の募集を住宅名で名寄せして数えました。</p></div>
 
-  <p><a class="btn-primary" href="#kau">住宅名つきの一覧を${PRICE}円で受け取る →</a> <span class="note" style="display:inline-block;margin-left:.6rem">①〜③の相場は無料で、そのまま下に続きます</span></p>
+  <p class="cta-row"><a class="btn-primary" href="#kau">住宅名つきの一覧を${PRICE}円で受け取る&nbsp;→</a> <span class="cta-note">①〜③の相場は無料で、そのまま下に続きます</span></p>
 
   <h2>① 混んでいる住宅（実名・無料）</h2>
   <p>よく引き合いに出されるのはこちらです。${MIN_N}件以上の募集が観測できた申込先のうち、倍率の中央値が高い順。</p>
