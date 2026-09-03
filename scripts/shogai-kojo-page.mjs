@@ -38,7 +38,7 @@ ${noindex ? '<meta name="robots" content="noindex,follow">' : ''}
 <meta property="og:site_name" content="フクシル">
 <meta property="og:url" content="${SITE}${canonical}">
 <meta name="twitter:card" content="summary_large_image">
-<link rel="stylesheet" href="${up}assets/style.css">
+<link rel="stylesheet" href="${up}assets/style.css?v=20260903b">
 ${jsonld ? `<script type="application/ld+json">\n${JSON.stringify(jsonld, null, 2)}\n</script>` : ''}
 </head>
 <body>
