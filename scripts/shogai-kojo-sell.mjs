@@ -70,6 +70,7 @@ write('pack/index.html', page({
   <strong>お住まいの市区町村で対象になる基準は、無料で公開しています。</strong>
   → <a href="../shogai-kojo/">全国の認定基準を比べる</a>　制度の説明は<a href="../articles/shogaisha-kojo-tax.html">こちら</a>。
   こちらのページで足りる方は、購入する必要はありません。</p></div>
+  <p><a class="btn-primary" href="#kau">${PRICE}円で手順書を受け取る →</a> <span class="note" style="display:inline-block;margin-left:.6rem">市区町村を選んでカード決済。すぐダウンロードできます</span></p>
 
   <h2>このパックに入っているもの</h2>
   <p>無料ページで「基準」は分かります。そこから先、実際に手続きを終えるまでに詰まるところをまとめました。</p>
@@ -84,16 +85,17 @@ write('pack/index.html', page({
   </tbody></table></div>
   <p class="note">お住まいの市区町村の認定基準を差し込んだ版をお渡しします。HTMLファイル1つ（約12KB）。ブラウザで開けて、そのまま印刷して窓口に持っていけます。</p>
 
-  <h2>買う</h2>
-  <div class="callout point">
+  <h2 id="kau">受け取る</h2>
+  <div class="offer">
+  <p class="price"><b>${PRICE}円</b><span>買い切り・税込。HTMLファイル1つ、印刷してそのまま窓口へ</span></p>
   <p><label for="mun"><strong>お住まいの市区町村を選んでください</strong></label></p>
   <p><select id="mun" style="width:100%;max-width:22rem;padding:.5rem;font-size:1rem">
   <option value="">— 選択してください —</option>
   ${options}
   </select></p>
-  <p style="margin-top:1rem"><button id="buy" style="padding:.7rem 1.6rem;font-size:1.05rem;font-weight:600;border-radius:5px;border:0;background:#1a5c8a;color:#fff;cursor:pointer">${PRICE}円で購入する</button>
+  <p style="margin-top:1rem"><button id="buy" class="btn-primary">${PRICE}円で手順書を受け取る</button>
   <span id="msg" style="margin-left:.8rem"></span></p>
-  <p class="note">クレジットカード決済（Stripe）。カード情報は当方を経由しません。お支払い後すぐダウンロードできます。</p>
+  <p class="fine">クレジットカード決済（Stripe）。カード情報は当方を経由しません。お支払い後すぐダウンロードできます。<strong>買わなくても手続きはできます</strong>——無料で読める範囲は上のとおりです。</p>
   </div>
 
   <div class="callout warn"><p><span class="tag">先に確認してください</span>

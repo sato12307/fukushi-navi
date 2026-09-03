@@ -153,6 +153,8 @@ write('toei/index.html', page({
   そのため「たまたま1回だけ空いた住宅」と「いつ見ても空いている住宅」が区別できず、両方まとめて「倍率が高い」と語られています。
   ここでは${RANGE}の${F.rounds}回ぶん、${num(F.rows)}件の募集を住宅名で名寄せして数えました。</p></div>
 
+  <p><a class="btn-primary" href="#kau">住宅名つきの一覧を${PRICE}円で受け取る →</a> <span class="note" style="display:inline-block;margin-left:.6rem">①〜③の相場は無料で、そのまま下に続きます</span></p>
+
   <h2>① 混んでいる住宅（実名・無料）</h2>
   <p>よく引き合いに出されるのはこちらです。${MIN_N}件以上の募集が観測できた申込先のうち、倍率の中央値が高い順。</p>
   <p class="note">同じ建物でも募集区分が違えば別の申込先として数えています。「世帯向」と「病死等があった住宅」では倍率がまるで違うためです。</p>
@@ -174,7 +176,8 @@ ${cutBlocks}
   ここまでが無料で読めるところです。<strong>買わなくても申し込みはできます。</strong>
   上の相場だけでも、どのあたりを狙うかは決められます。</p></div>
 
-  <h2>④ 住宅名つきの一覧（${PRICE}円）</h2>
+  <h2 id="kau">④ 住宅名つきの一覧（${PRICE}円）</h2>
+  <div class="offer">
   <p>申込書に書けるのは基本的に<strong>1回につき1つ</strong>です。相場が分かっても、最後は住宅名を1つ選ぶことになります。
   そこを決めるための一覧を用意しました。</p>
   <ul>
@@ -185,8 +188,11 @@ ${cutBlocks}
   <li>「${JIKO}」${F.suki - F.sukiIppan}件は<strong>別掲</strong>。すいている側にはこの区分が集まるので、知らずに選ぶことがないよう分けました。</li>
   </ul>
 
-  <p><button id="buy" class="cta-btn" type="button">${PRICE}円で購入する（HTML・印刷可）</button></p>
+  <p class="price"><b>${PRICE}円</b><span>買い切り・税込。HTMLファイル1つ、印刷可</span></p>
+  <p><button id="buy" class="btn-primary" type="button">${PRICE}円で一覧を受け取る</button></p>
   <p id="msg" class="note"></p>
+  <p class="fine"><strong>買わなくても申し込みはできます。</strong>上の相場だけでも、どのあたりを狙うかは決められます。</p>
+  </div>
 
   <div class="callout warn"><p><span class="tag">先に読んでください</span>
   これは<strong>過去の実測から作った目安</strong>で、次の募集の倍率を約束するものではありません。募集される住宅は回ごとに変わり、

@@ -28,6 +28,7 @@
 //   ∴ このファイルに `new Date()` は無い。増やさないこと。
 // ─────────────────────────────────────────────────────────────────────────────
 import fs from 'node:fs'
+import { offerPack } from './offer-block.mjs'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { NINCHI, NETAKIRI, KAIGO, rank } from './shogai-kojo-lib.mjs'
@@ -157,13 +158,7 @@ ${verdicts}` : `  <div class="callout warn"><p><span class="tag">確認できま
   <li><strong>過去の分もさかのぼれる場合があります。</strong>すでに確定申告した年の還付は、原則5年前まで請求できます。</li>
   </ul>
 
-  <div class="callout point"><p><span class="tag">手続きまで進めるなら</span>
-  ここまでが無料で読めるところです。実際に認定書をもらって<strong>過去5年分をさかのぼる</strong>には、
-  親御さんの自立度ランクが書かれた書類を取り寄せ、還付額を試算し、更正の請求か還付申告を出す必要があります。
-  その手順を${esc(name)}の基準に合わせてまとめた手引きを用意しています（<strong>500円</strong>・買い切り）。
-  中身は、①親のランク（日常生活自立度）が<strong>どの書類のどこに書いてあるか</strong>と、手元にないときの取り寄せ方（開示請求）、②所得税率5〜33%×3区分の<strong>還付額の試算表</strong>（年額と5年分）、③確定申告済みなら更正の請求・未申告なら還付申告、それぞれの<strong>必要書類と出し方</strong>、④窓口での持ち物と伝え方、です。HTMLファイル1つで、印刷してそのまま窓口に持っていけます。
-  <strong>買わなくても手続きはできます。</strong>
-  → <a href="../pack/">5年分さかのぼる手順を見る（500円）</a></p></div>
+${offerPack({ name, up: '../' })}
 
   <div class="sources">
   <h2>出典</h2>
@@ -333,13 +328,7 @@ ${citeBlock}  <h2>自治体別の一覧</h2>
   <p class="note">「下限」は、その値<strong>以上</strong>であれば対象になり得るという意味です。表に無い自治体は、例規を公表していないか、当サイトがまだ収録できていません。</p>
 ${prefBlocks}
 
-  <div class="callout point"><p><span class="tag">手続きまで進めるなら</span>
-  この一覧で分かるのは「基準」までです。実際に認定書をもらって過去5年分をさかのぼるには、
-  親御さんの自立度ランクが書かれた書類を取り寄せ、還付額を試算し、更正の請求か還付申告を出す必要があります。
-  その手順をお住まいの市区町村の基準に合わせてまとめた手引きを用意しています（<strong>500円</strong>・買い切り）。
-  中身は、①親のランク（日常生活自立度）が<strong>どの書類のどこに書いてあるか</strong>と、手元にないときの取り寄せ方（開示請求）、②所得税率5〜33%×3区分の<strong>還付額の試算表</strong>（年額と5年分）、③確定申告済みなら更正の請求・未申告なら還付申告、それぞれの<strong>必要書類と出し方</strong>、④窓口での持ち物と伝え方、です。HTMLファイル1つで、印刷してそのまま窓口に持っていけます。
-  <strong>買わなくても手続きはできます。</strong>
-  → <a href="../pack/">5年分さかのぼる手順を見る（500円）</a></p></div>
+${offerPack({ up: '../' })}
 
   <div class="sources">
   <h2>この一覧の作り方と限界</h2>

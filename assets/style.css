@@ -141,3 +141,24 @@ small.warn { display: block; margin-top: .3em; font-size: .85rem; }
 .center-list { columns: 2; column-gap: 1.6em; }
 .center-list li { break-inside: avoid; }
 @media (max-width: 620px) { .center-list { columns: 1; } }
+
+
+/* 有料の案内（offer）。2026-09-03
+   無料のコールアウト（.callout.point）と同じ見た目で有料の案内を出していたので、
+   「ただの注記」に見えて誰も押していなかった（08-28〜09-02 来訪250・押した0）。
+   有料は白いカード＋ブランド色の上罫＋値段を大きく＋主ボタン、で無料の注記と別物にする。
+   煽らない：期限・残数・取り消し線の値段は使わない。 */
+.offer { background: #fff; border: 1.5px solid var(--line); border-top: 5px solid var(--brand); border-radius: 12px; padding: 20px 22px; margin: 1.6em 0; box-shadow: 0 2px 10px rgba(20,60,70,.08); }
+.offer .kicker { display: inline-block; font-size: .74rem; font-weight: 700; color: var(--brand-dark); background: var(--accent); padding: 2px 10px; border-radius: 999px; margin-bottom: 8px; }
+.offer h3 { margin: 0 0 8px; font-size: 1.15rem; line-height: 1.45; }
+.offer p { margin: .5em 0; }
+.offer ul { margin: .5em 0 .8em; padding-left: 1.3em; }
+.offer li { margin: .2em 0; }
+.offer .price { display: flex; align-items: baseline; gap: 10px; margin: 12px 0 8px; flex-wrap: wrap; }
+.offer .price b { font-size: 2rem; line-height: 1; color: var(--ink); }
+.offer .price span { color: var(--sub); font-size: .9rem; }
+.btn-primary { display: inline-block; background: var(--brand); color: #fff !important; text-decoration: none !important; font-weight: 700; font-size: 1.08rem; padding: 14px 26px; border-radius: 10px; border: 0; cursor: pointer; box-shadow: 0 2px 6px rgba(31,111,120,.3); font-family: inherit; }
+.btn-primary:hover { background: var(--brand-dark); }
+.btn-primary:disabled { opacity: .55; cursor: default; }
+.offer .fine { font-size: .86rem; color: var(--sub); margin-top: 10px; }
+@media (max-width: 620px) { .offer { padding: 16px; } .btn-primary { display: block; width: 100%; text-align: center; box-sizing: border-box; } }
