@@ -59,6 +59,22 @@ write('pack/index.html', page({
   title: `親の障害者控除、過去5年分でいくら戻るか｜${items.length}市区町村の認定基準と申請手順｜フクシル`,
   desc: `要介護の親御さんが障害者控除の対象になるかを確かめ、過去5年分さかのぼって税金を取り戻すための手順書。自立度ランクが書かれた書類の探し方、税率別の還付試算、更正の請求の手順まで。${items.length}市区町村それぞれの認定基準に対応。${PRICE}円。`,
   canonical: '/pack/', depth: 1,
+  // ★2026-09-05 冒頭だけ実物を見せる形にしたので、Googleへ「この面には有料部分がある」と申告する。
+  //   人とクローラーへ同じものを出しているので隠す必要がない（切った本文はHTMLに無い）。
+  //   cssSelector は抜粋の枠。ここから先は無料では読めない、という意味。
+  jsonld: {
+    '@context': 'https://schema.org',
+    '@type': 'WebPage',
+    name: '親の障害者控除、過去5年分をさかのぼって取り戻すための手順書',
+    url: `${SITE}/pack/`,
+    isAccessibleForFree: false,
+    hasPart: {
+      '@type': 'WebPageElement',
+      isAccessibleForFree: false,
+      cssSelector: '.peek',
+    },
+    offers: { '@type': 'Offer', price: String(PRICE), priceCurrency: 'JPY' },
+  },
   body: `  <p class="breadcrumb"><a href="../index.html">トップ</a> ＞ 還付申請パック</p>
   <h1>親の障害者控除、<br>過去5年分をさかのぼって取り戻すための手順書</h1>
   <p class="updated">最終更新：${TODAY} ／ ${items.length}市区町村版をご用意しています</p>
@@ -84,6 +100,61 @@ write('pack/index.html', page({
   <tr><th>窓口で何を言えばいいか</th><td>持ち物のチェックリストと、「過去◯年分も」と伝えるべき理由。</td></tr>
   </tbody></table></div>
   <p class="note">お住まいの市区町村の認定基準を差し込んだ版をお渡しします。HTMLファイル1つ（約12KB）。ブラウザで開けて、そのまま印刷して窓口に持っていけます。</p>
+
+  ${/* ★2026-09-05 中身の冒頭を実物のまま見せる（note型の試験・ユーザー指示）。
+        これまでこの面は中身を「表で説明」するだけで、実物を1行も見せていなかった。
+        買う前に品物を見られないので、説明を信じるかどうかの賭けになっていた。
+
+        ★守っていること
+        (1) 出しているのは**実物のパックの本文そのまま**（市区町村名だけ一般化）。宣伝用の別文章ではない。
+        (2) 切ったあとの本文は**HTMLに一切入れていない**。かすませているのは「ここで切れている」
+            という印であって、隠し文字の上に膜を張っているのではない。ソースを見ても続きは無い。
+            この点は画面にも書く（「剥がせば読める」と誤解されると、それは嘘になる）。
+        (3) 一番おいしいところ（ランクがどの書類のどこに書いてあるか）を無料側に出す。
+            出し惜しみして切ると、中身が薄いのを隠していると読まれる。
+        (4) Googleへは isAccessibleForFree:false で申告する（上の jsonld）。
+            人とクローラーに違うものを出していないので、隠さず書ける。
+        (5) ★この艦のCSSはダークモードを持たない。ここだけ prefers-color-scheme を足すと
+            本文が明るいまま枠だけ黒くなり、抜粋が読めなくなる（2026-09-05に実際そうなった）。
+            親のCSSに無い前提を持ち込まない。 */''}
+  <h2>中身を少しだけ読む</h2>
+  <p>説明だけでは分からないと思うので、実物の冒頭をそのまま出します。市区町村名のところだけ伏せてあります。</p>
+  <style>
+  .peek{position:relative;border:1px solid #d7dee2;border-radius:12px;background:#fff;
+    padding:22px 24px 0;margin:1.2em 0 0;overflow:hidden;max-height:36rem}
+  .peek::after{content:"";position:absolute;left:0;right:0;bottom:0;height:7rem;pointer-events:none;
+    background:linear-gradient(to bottom,rgba(255,255,255,0) 0%,rgba(255,255,255,.82) 58%,#fff 96%)}
+  .peek>*:last-child{filter:blur(2.2px);opacity:.8}
+  .peek h3.pk{font-size:1.24rem;margin:0 0 .2em;line-height:1.4}
+  .peek h4.pk{font-size:1.02rem;margin:1.3em 0 .35em}
+  .peek .pkmeta{font-size:.78rem;color:#68767c;margin:0 0 1.1em}
+  .peek table{font-size:.9rem}
+  .peekcut{position:relative;margin:-2.2rem 0 0;text-align:center;z-index:2}
+  .peekcut span{display:inline-block;background:#e8f2f3;color:#14545e;
+    font-size:.8rem;font-weight:700;border-radius:999px;padding:4px 14px}
+  </style>
+  <div class="peek" aria-label="パックの冒頭（抜粋）">
+    <h3 class="pk">お住まいの市区町村版　親の障害者控除 還付申請パック</h3>
+    <p class="pkmeta">フクシル（fukushiru.com） ／ 購入者のみ配布</p>
+    <p><b>このパックは、要介護認定を受けている親御さんについて「障害者控除の対象になるか」を確かめ、過去にさかのぼって税金を取り戻すまでを、順番どおりに進めるためのものです。</b></p>
+    <h4 class="pk">ステップ1　親の「自立度ランク」を調べる</h4>
+    <h4 class="pk">ランクはどこに書いてあるか</h4>
+    <p>「認知症高齢者の日常生活自立度」と「障害高齢者の日常生活自立度（寝たきり度）」は、介護認定のときに作られた次の書類に記載されています。<b>介護保険証には書かれていません。</b></p>
+    <div class="table-wrap"><table>
+    <thead><tr><th>書類</th><th>どこを見るか</th><th>手元にないとき</th></tr></thead>
+    <tbody><tr><th>主治医意見書</th><td>「3. 心身の状態に関する意見」の欄。<b>障害高齢者の日常生活自立度</b>（J1〜C2）と<b>認知症高齢者の日常生活自立度</b>（Ⅰ〜M）が並んで書かれています。</td><td>市区町村の介護保険担当に<b>開示請求</b>をすれば写しがもらえます</td></tr></tbody>
+    </table></div>
+    <p>開示請求は無料か数百円で、1〜2週間かかることが多いです。確定申告の期限直前だと間に合わないことがあるので、先にここから始めてください。</p>
+  </div>
+  <p class="peekcut"><span>抜粋はここまで</span></p>
+  <p class="note" style="margin-top:1.1rem">かすんでいるのは「ここで切れている」という印です。<strong>この先の本文はこのページに入っていません</strong>（ソースを見ても続きは出てきません）。上の抜粋は実物からそのまま持ってきたもので、宣伝用に書き直したものではありません。</p>
+  <p>ここから先に入っているのは、次の4つです。</p>
+  <ul>
+  <li><strong>ステップ2　いくら戻るか試算する</strong>— 所得税率5〜33%×障害者／特別障害者／同居特別障害者の9通りの試算表（年額と5年分）</li>
+  <li><strong>ステップ3　認定書をもらう</strong>— 申請の出し方と、窓口で伝えること</li>
+  <li><strong>ステップ4　税金を取り戻す</strong>— 更正の請求と還付申告の出し分け、必要書類</li>
+  <li><strong>ステップ5　確認</strong>— 持ち物のチェックリストと、住民税側で起きること</li>
+  </ul>
 
   <h2 id="kau">受け取る</h2>
   <div class="offer">
