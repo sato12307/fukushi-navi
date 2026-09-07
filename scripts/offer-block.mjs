@@ -114,23 +114,21 @@ const PACK_PEEK = {
     <p><b>5年ぶんまとめて出せます。</b>年ごとに書類を分けて、同時に提出してかまいません。税務署の窓口でも、e-Taxでも、郵送でも受け付けています。</p>`,
 }
 
-// 都営住宅の資料（.dist/toei-pack.html）の冒頭。表は上2行で切っている。
-const TOEI_PEEK = `    <h4 class="pk">1. まず全体像</h4>
-    <ul>
-    <li>観測できた申込先（住宅×募集区分） <b>2980件</b>。うち4件以上の募集が観測できた <b>1320件</b>を集計の対象にしています。</li>
-    <li>同じ建物でも募集区分が違えば別に数えています。混ぜると、病死等があった回だけ安かった住宅が「毎回すいている」に化けるためです。</li>
-    <li>その1320件の倍率の中央値は <b>4.5倍</b>。</li>
-    <li>中央値が5倍未満だった申込先は <b>689件（52%）</b>。うち病死等があった住宅を除くと568件。</li>
-    <li>申込者ゼロの募集が1回以上あった申込先 <b>418件</b>。</li>
-    </ul>
-    <h4 class="pk">2. 毎回すいている申込先（病死等があった住宅を除く・568件）</h4>
+// 都営住宅の資料（.dist/toei-pack.html）の本体（2章）の冒頭。表は上3行で切っている。
+// ★1章（全体像の数字）ではなく2章から切る。全体像の数字はカードの箇条書きに出しているので、
+//   同じものを抜粋にも入れると、抜粋の枠に入りきる高さのうち表が1行も見えなくなる（09-08に実測）。
+//   抜粋で見せるべきは「実物がどういう形をしているか」＝住宅名と倍率が並んだ表そのもの。
+const TOEI_PEEK = `    <h4 class="pk">2. 毎回すいている申込先（病死等があった住宅を除く・568件）</h4>
     <p>4件以上観測できて、倍率の<b>中央値</b>が5倍未満だったものだけを載せています。中央値で切っているので、<b>1回だけたまたま空いた住宅は入りません</b>。区市町ごと、倍率の低い順。</p>
+    <h4 class="pk">三鷹市（16件）</h4>
     <div class="table-wrap"><table>
     <thead><tr><th>区市町</th><th>住宅</th><th>募集区分</th><th class="num">中央値</th><th class="num">最低</th><th class="num">最高</th><th class="num">観測</th><th class="num">申込0</th></tr></thead>
     <tbody>
     <tr><td>三鷹市</td><td>中原四丁目第２</td><td>世帯向（一般募集住宅）</td><td class="num">0</td><td class="num">0</td><td class="num">3</td><td class="num">8</td><td class="num">5</td></tr>
     <tr><td>三鷹市</td><td>井口五丁目</td><td>世帯向（一般募集住宅）</td><td class="num">0.5</td><td class="num">0</td><td class="num">2</td><td class="num">8</td><td class="num">2</td></tr>
-    </tbody></table></div>`
+    <tr><td>三鷹市</td><td>上連雀九丁目</td><td>世帯向（一般募集住宅）</td><td class="num">0.5</td><td class="num">0</td><td class="num">14</td><td class="num">7</td><td class="num">2</td></tr>
+    </tbody></table></div>
+    <h4 class="pk">世田谷区（8件）</h4>`
 
 // 抜粋の枠。かすませるのは「ここで切れている」という印で、隠しているのではない。
 const peekBox = (label, inner) => `  <p class="peek-lead">説明だけでは分からないと思うので、<strong>実物の冒頭をそのまま</strong>出します。宣伝用に書き直したものではありません。</p>
