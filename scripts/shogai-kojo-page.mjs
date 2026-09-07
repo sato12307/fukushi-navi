@@ -38,7 +38,7 @@ ${noindex ? '<meta name="robots" content="noindex,follow">' : ''}
 <meta property="og:site_name" content="フクシル">
 <meta property="og:url" content="${SITE}${canonical}">
 <meta name="twitter:card" content="summary_large_image">
-<link rel="stylesheet" href="${up}assets/style.css?v=20260903d">
+<link rel="stylesheet" href="${up}assets/style.css?v=20260908a">
 ${jsonld ? `<script type="application/ld+json">\n${JSON.stringify(jsonld, null, 2)}\n</script>` : ''}
 </head>
 <body>
@@ -71,6 +71,9 @@ ${body}
 <script>
 ${EV}
 </script>
+${/* 記事の中の売り場（.offer[data-offer]）の決済と計測。カードが無いページでは即 return するので、
+     どのページから読んでも害はない。判定を各ページに写経しないためここ1か所で読む。 */''}
+<script src="${up}assets/buy.js?v=20260908a" defer></script>
 </body>
 </html>
 `

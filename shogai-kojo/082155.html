@@ -16,7 +16,7 @@
 <meta property="og:site_name" content="フクシル">
 <meta property="og:url" content="https://fukushiru.com/shogai-kojo/082155.html">
 <meta name="twitter:card" content="summary_large_image">
-<link rel="stylesheet" href="../assets/style.css?v=20260903d">
+<link rel="stylesheet" href="../assets/style.css?v=20260908a">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -90,9 +90,10 @@
   <li><strong>過去の分もさかのぼれる場合があります。</strong>すでに確定申告した年の還付は、原則5年前まで請求できます。</li>
   </ul>
 
-  <div class="offer" id="offer-pack">
+  <div class="offer" id="offer-pack" data-offer="pack" data-code="082155">
   <span class="kicker">手続きまで進めるなら</span>
   <h3>親の障害者控除、過去5年分をさかのぼって取り戻す手順書</h3>
+  <p class="price"><b>500円</b><span>買い切り・税込。HTMLファイル1つ、印刷してそのまま窓口へ</span></p>
   <p>ここまでが無料で読めるところです。ここから先＝認定書をもらい、還付額を試算し、更正の請求か還付申告を出すまでを、茨城県北茨城市の基準に合わせて1つにまとめました。</p>
   <ul>
   <li>親のランク（日常生活自立度）が<strong>どの書類のどこに書いてあるか</strong>と、手元にないときの取り寄せ方（開示請求）</li>
@@ -100,9 +101,26 @@
   <li>確定申告済みなら更正の請求・未申告なら還付申告、それぞれの<strong>必要書類と出し方</strong></li>
   <li>窓口での<strong>持ち物のチェックリスト</strong>と、「過去◯年分も」と伝えるべき理由</li>
   </ul>
-  <p class="price"><b>500円</b><span>買い切り・税込。HTMLファイル1つ、印刷してそのまま窓口へ</span></p>
-  <p><a class="btn-primary" href="../pack/">500円で手順書を受け取る&nbsp;→</a></p>
-  <p class="fine"><strong>買わなくても手続きはできます。</strong>迷ったら先に<a href="../shogai-kojo/">自治体別の一覧</a>で、自分の街の基準だけ確かめてください。</p>
+  <p class="peek-lead">説明だけでは分からないと思うので、<strong>実物の冒頭をそのまま</strong>出します。宣伝用に書き直したものではありません。</p>
+  <div class="peek" aria-label="手順書の冒頭（抜粋）">
+    <h4 class="pk">ステップ3　認定書をもらう</h4>
+    <p>茨城県北茨城市の窓口に「<b>障害者控除対象者認定書</b>を申請したい」と伝えます。申請書は窓口かウェブサイトで手に入ります。</p>
+    <p><b>持っていくもの（一般的な例。事前に電話で確認してください）</b></p>
+    <ul>
+    <li>障害者控除対象者認定申請書（窓口またはサイトで入手）</li>
+    <li>介護保険被保険者証</li>
+    <li>申請する人の本人確認書類</li>
+    <li>親御さん本人以外が申請する場合は、続柄が分かるものや委任状</li>
+    </ul>
+    <p><b>認定書は年ごとに出ます。</b>過去の年の分もさかのぼって申請できるのが普通です（自治体によって何年前まで出せるかが違うので、「過去◯年分もほしい」と最初に伝えてください）。判定の基準日は、その年の<b>12月31日</b>の状態です。</p>
+  </div>
+  <p class="peekcut"><span>抜粋はここまで</span></p>
+  <p class="fine">かすんでいるのは「ここで切れている」という印です。<strong>この先の本文はこのページに入っていません</strong>（ソースを見ても続きは出てきません）。</p>
+  <p class="fine">先に確認してください：この控除で税金が戻るのは、<strong>親御さん本人が税を納めている</strong>か、<strong>あなたが親御さんを扶養親族として申告している</strong>場合です。どちらにも当てはまらないと、控除する税金がないため戻るお金はありません。</p>
+
+  <p class="buyrow"><button type="button" class="btn-primary" data-buy>500円で手順書を受け取る</button> <span class="buymsg" role="status"></span></p>
+  <p class="fine"><strong>買わなくても手続きはできます。</strong>迷ったら先に<a href="../shogai-kojo/">自治体別の一覧</a>で、自分の街の基準だけ確かめてください。制度の説明は<a href="../articles/shogaisha-kojo-tax.html">こちらの記事</a>で全部無料です。</p>
+  <p class="fine">クレジットカード決済（Stripe）。カード情報は当方を経由しません。お支払い後すぐダウンロードできます。<a href="../pack/">売り場のページ</a>／<a href="../tokushoho/">特定商取引法に基づく表記</a>／<a href="../kiyaku/">利用規約</a></p>
   </div>
 
   <div class="sources">
@@ -134,9 +152,26 @@
    数えるのは押された回数だけで、誰が押したかは記録しない。
    ★リンクの計測は sendBeacon を使う。fetch だと遷移で中断されて落ちる。
    ★この判定はここ1か所だけに置く。生成ページは build 時にこのファイルを読んで埋め込み、
-     手書きの記事は script の src で読む。2か所に書くと必ずずれる。[[same-question-two-implementations]] */
+     手書きの記事は script の src で読む。2か所に書くと必ずずれる。[[same-question-two-implementations]]
+   ★2026-09-08 自分の閲覧を数えない判定もここに入れた。
+     確認のために自分で開いた回数が混ざると、「見られている／押されている」の判断を丸ごと誤る。
+     https://fukushiru.com/?self=1 を一度開けばこの端末は以後ずっと除外される（#self でも同じ）。
+     戻すときは localStorage.removeItem('ev_off')。
+     イベント名は [a-z_] だけにすること。worker 側が数字を落とすので pack2 は pack になる。 */
 (function () {
+  // 自分で立てた印。localStorage が使えない環境（プライベートウィンドウ等）でも計測は続ける。
+  try {
+    if (/[?&]self=1(?:&|$)/.test(location.search) || location.hash === '#self') localStorage.setItem('ev_off', '1')
+  } catch (e) { /* 保存できなくても本文は動かす */ }
+
+  // 送らない相手＝自分の端末と、自動で開いているブラウザ（ヘッドレス巡回）。
+  function off() {
+    try { if (localStorage.getItem('ev_off') === '1') return true } catch (e) { /* 読めなければ除外しない */ }
+    return navigator.webdriver === true
+  }
+
   function ev(n) {
+    if (off()) return
     try {
       var b = JSON.stringify({ n: n })
       if (navigator.sendBeacon) { navigator.sendBeacon('/api/ev', new Blob([b], { type: 'application/json' })); return }
@@ -163,5 +198,7 @@
   }, true)
 })();
 </script>
+
+<script src="../assets/buy.js?v=20260908a" defer></script>
 </body>
 </html>

@@ -28,7 +28,7 @@
 //   ∴ このファイルに `new Date()` は無い。増やさないこと。
 // ─────────────────────────────────────────────────────────────────────────────
 import fs from 'node:fs'
-import { offerPack } from './offer-block.mjs'
+import { offerPackLeaf } from './offer-block.mjs'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { NINCHI, NETAKIRI, KAIGO, rank } from './shogai-kojo-lib.mjs'
@@ -158,7 +158,7 @@ ${verdicts}` : `  <div class="callout warn"><p><span class="tag">確認できま
   <li><strong>過去の分もさかのぼれる場合があります。</strong>すでに確定申告した年の還付は、原則5年前まで請求できます。</li>
   </ul>
 
-${offerPack({ name, up: '../' })}
+${offerPackLeaf({ code: r.code, name, peek: 'nintei', up: '../' })}
 
   <div class="sources">
   <h2>出典</h2>
@@ -328,7 +328,7 @@ ${citeBlock}  <h2>自治体別の一覧</h2>
   <p class="note">「下限」は、その値<strong>以上</strong>であれば対象になり得るという意味です。表に無い自治体は、例規を公表していないか、当サイトがまだ収録できていません。</p>
 ${prefBlocks}
 
-${offerPack({ up: '../' })}
+${offerPackLeaf({ peek: 'rank', up: '../' })}
 
   <div class="sources">
   <h2>この一覧の作り方と限界</h2>

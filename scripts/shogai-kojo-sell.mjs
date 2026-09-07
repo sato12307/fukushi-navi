@@ -20,7 +20,8 @@ import { page, esc, SITE } from './shogai-kojo-page.mjs'
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..')
 const DATA = path.join(ROOT, 'data', 'shogai-kojo')
-const TODAY = new Date().toISOString().slice(0, 10)
+// 日本時間で切る。UTCで切ると、日本の朝9時前に回したビルドが「昨日」を最終更新として出す。
+const TODAY = new Date(Date.now() + 9 * 3600 * 1000).toISOString().slice(0, 10)
 // 規約の制定日。中身を変えたときだけ手で書き換える（ビルド日を入れない）。
 const KIYAKU_SEITEI = "2026-08-31"
 const PRICE = 500
@@ -119,20 +120,8 @@ write('pack/index.html', page({
             親のCSSに無い前提を持ち込まない。 */''}
   <h2>中身を少しだけ読む</h2>
   <p>説明だけでは分からないと思うので、実物の冒頭をそのまま出します。市区町村名のところだけ伏せてあります。</p>
-  <style>
-  .peek{position:relative;border:1px solid #d7dee2;border-radius:12px;background:#fff;
-    padding:22px 24px 0;margin:1.2em 0 0;overflow:hidden;max-height:36rem}
-  .peek::after{content:"";position:absolute;left:0;right:0;bottom:0;height:7rem;pointer-events:none;
-    background:linear-gradient(to bottom,rgba(255,255,255,0) 0%,rgba(255,255,255,.82) 58%,#fff 96%)}
-  .peek>*:last-child{filter:blur(2.2px);opacity:.8}
-  .peek h3.pk{font-size:1.24rem;margin:0 0 .2em;line-height:1.4}
-  .peek h4.pk{font-size:1.02rem;margin:1.3em 0 .35em}
-  .peek .pkmeta{font-size:.78rem;color:#68767c;margin:0 0 1.1em}
-  .peek table{font-size:.9rem}
-  .peekcut{position:relative;margin:-2.2rem 0 0;text-align:center;z-index:2}
-  .peekcut span{display:inline-block;background:#e8f2f3;color:#14545e;
-    font-size:.8rem;font-weight:700;border-radius:999px;padding:4px 14px}
-  </style>
+  ${/* ★2026-09-08 抜粋の見た目は assets/style.css へ移した。記事の中にも同じ抜粋を置くので、
+        ここに書いたままだと同じ見た目を2か所に写経することになる。[[same-question-two-implementations]] */''}
   <div class="peek" aria-label="パックの冒頭（抜粋）">
     <h3 class="pk">お住まいの市区町村版　親の障害者控除 還付申請パック</h3>
     <p class="pkmeta">フクシル（fukushiru.com） ／ 購入者のみ配布</p>

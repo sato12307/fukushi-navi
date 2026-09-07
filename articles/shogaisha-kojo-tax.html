@@ -15,7 +15,7 @@
 <meta property="og:site_name" content="フクシル">
 <meta property="og:url" content="https://fukushiru.com/articles/shogaisha-kojo-tax.html">
 <meta name="twitter:card" content="summary_large_image">
-<link rel="stylesheet" href="../assets/style.css?v=20260903d">
+<link rel="stylesheet" href="../assets/style.css?v=20260908a">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -207,9 +207,11 @@
   <p>確定申告書の「所得から差し引かれる金額」のうち<strong>障害者控除の欄</strong>に控除額を記入し、本人・配偶者・扶養親族の別や特別障害者・同居特別障害者の区分を記載します。会社員でも、年末調整で申告し忘れた場合は確定申告で追加できます。過去の分についても、要件を満たしていれば<strong>さかのぼって申告（還付申告）できる場合があります【要確認】</strong>。</p>
 
   <!-- offer:pack -->
-  <div class="offer" id="offer-pack">
+  <p class="offer-lead">上の「さかのぼって申告できる場合があります」を、自分の親御さんに当てはめて確かめ、実際に出すところまでをまとめたものがあります。</p>
+  <div class="offer" id="offer-pack" data-offer="pack">
   <span class="kicker">手続きまで進めるなら</span>
   <h3>親の障害者控除、過去5年分をさかのぼって取り戻す手順書</h3>
+  <p class="price"><b>500円</b><span>買い切り・税込。HTMLファイル1つ、印刷してそのまま窓口へ</span></p>
   <p>ここまでが無料で読めるところです。ここから先＝認定書をもらい、還付額を試算し、更正の請求か還付申告を出すまでを、お住まいの市区町村の基準に合わせて1つにまとめました。</p>
   <ul>
   <li>親のランク（日常生活自立度）が<strong>どの書類のどこに書いてあるか</strong>と、手元にないときの取り寄せ方（開示請求）</li>
@@ -217,9 +219,27 @@
   <li>確定申告済みなら更正の請求・未申告なら還付申告、それぞれの<strong>必要書類と出し方</strong></li>
   <li>窓口での<strong>持ち物のチェックリスト</strong>と、「過去◯年分も」と伝えるべき理由</li>
   </ul>
-  <p class="price"><b>500円</b><span>買い切り・税込。HTMLファイル1つ、印刷してそのまま窓口へ</span></p>
-  <p><a class="btn-primary" href="../pack/">500円で手順書を受け取る&nbsp;→</a></p>
-  <p class="fine"><strong>買わなくても手続きはできます。</strong>迷ったら先に<a href="../shogai-kojo/">自治体別の一覧</a>で、自分の街の基準だけ確かめてください。</p>
+  <p class="peek-lead">説明だけでは分からないと思うので、<strong>実物の冒頭をそのまま</strong>出します。宣伝用に書き直したものではありません。</p>
+  <div class="peek" aria-label="手順書の冒頭（抜粋）">
+    <h4 class="pk">ステップ4　税金を取り戻す</h4>
+    <p>認定書が手に入ったら、年ごとにやり方が分かれます。</p>
+    <div class="table-wrap"><table>
+    <thead><tr><th>状況</th><th>やること</th><th>期限</th></tr></thead>
+    <tbody>
+    <tr><th>今年の分（これから）</th><td>勤め先の<b>年末調整</b>で申告。扶養控除等申告書の障害者欄に記入し、認定書の写しを添える</td><td>年末調整のとき</td></tr>
+    <tr><th>過去の年で<b>確定申告をしていない</b></th><td><b>還付申告</b>。その年の確定申告書を新たに提出する</td><td>その年の翌年1月1日から<b>5年</b></td></tr>
+    <tr><th>過去の年で<b>確定申告をしている</b></th><td><b>更正の請求</b>。「更正の請求書」を提出する</td><td>申告期限から<b>5年</b></td></tr>
+    </tbody></table></div>
+    <p><b>5年ぶんまとめて出せます。</b>年ごとに書類を分けて、同時に提出してかまいません。税務署の窓口でも、e-Taxでも、郵送でも受け付けています。</p>
+  </div>
+  <p class="peekcut"><span>抜粋はここまで</span></p>
+  <p class="fine">かすんでいるのは「ここで切れている」という印です。<strong>この先の本文はこのページに入っていません</strong>（ソースを見ても続きは出てきません）。</p>
+  <p class="fine">先に確認してください：この控除で税金が戻るのは、<strong>親御さん本人が税を納めている</strong>か、<strong>あなたが親御さんを扶養親族として申告している</strong>場合です。どちらにも当てはまらないと、控除する税金がないため戻るお金はありません。</p>
+  <p><label for="munsel-pack"><strong>お住まいの市区町村を選んでください</strong></label></p>
+  <p><select id="munsel-pack" class="munsel" data-munsel><option value="">— 読み込み中 —</option></select></p>
+  <p class="buyrow"><button type="button" class="btn-primary" data-buy>500円で手順書を受け取る</button> <span class="buymsg" role="status"></span></p>
+  <p class="fine"><strong>買わなくても手続きはできます。</strong>迷ったら先に<a href="../shogai-kojo/">自治体別の一覧</a>で、自分の街の基準だけ確かめてください。制度の説明は<a href="../articles/shogaisha-kojo-tax.html">こちらの記事</a>で全部無料です。</p>
+  <p class="fine">クレジットカード決済（Stripe）。カード情報は当方を経由しません。お支払い後すぐダウンロードできます。<a href="../pack/">売り場のページ</a>／<a href="../tokushoho/">特定商取引法に基づく表記</a>／<a href="../kiyaku/">利用規約</a></p>
   </div>
   <!-- /offer -->
 
@@ -280,6 +300,7 @@
     <p>© 2026 フクシル. 本サイトの情報は一般的な参考情報であり、正確性を保証するものではありません。</p>
   </div>
 </footer>
-<script src="../assets/ev.js" defer></script>
+<script src="../assets/ev.js?v=20260908a" defer></script>
+<script src="../assets/buy.js?v=20260908a" defer></script>
 </body>
 </html>
