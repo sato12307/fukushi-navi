@@ -15,9 +15,16 @@
 import fs from 'node:fs'
 import { offerPackLeaf, offerToeiLeaf } from './offer-block.mjs'
 
+// ★2026-09-08(2) 東京都以外の記事から都営の売り場を外した
+//   商品は東京都の都営住宅だけを扱う。札幌市・福岡市などの記事や、全国横断の記事に置くと
+//   読者の地域と商品が合わない。カードに「東京都だけ」と書いてあっても、棚として無関係。
+//   ∴ toei を置くのは「東京と明示できる記事」だけにする（toei-* 11枚＋koei-tokyo）。
+//   外したのは koei-* 16枚（道府県別11＋全国横断5）。全国横断のもの
+//   （danchi-ranking / hairiyasui / jutaku-bairitsu / shunyu-kijun / yachin-keisan）は
+//   読者がどこの人か決められないので、迷ったら外す側に倒した。
+
 // 商品につなぐ一言。記事の答えと商品の関係を、その記事の言葉で書く（無料の本文）。
 const LEAD_TOEI_TOKYO = '上の相場で「どのあたりが空いているか」までは分かります。申込書に書けるのは基本的に1回につき1つなので、最後は住宅名を1つに決めることになります。そこだけは住宅ごとの実測が要ります。'
-const LEAD_TOEI_OTHER = 'ここから先は東京都の話です。当サイトは<strong>都営住宅</strong>について、定期募集16回ぶん13,349件の実測を住宅ごとに名寄せしてあります。東京都で探している方・東京への転居を考えている方はどうぞ（他の道府県の公営住宅は入っていません）。'
 
 // kind … pack / toei　peek … 抜粋にどの節を使うか　before … 目印が無い記事の挿入位置（この直前に入れる）
 const TARGETS = {
@@ -61,23 +68,9 @@ const TARGETS = {
   'toei-machida.html': { kind: 'toei', lead: LEAD_TOEI_TOKYO },
   'toei-nerima.html': { kind: 'toei', lead: LEAD_TOEI_TOKYO },
   'koei-tokyo.html': { kind: 'toei', before: /  <div class="cta-box" data-aff="hikkoshi"/, lead: LEAD_TOEI_TOKYO },
-  // 全国の記事。商品は東京都のものなので、そう名乗る（カード本文にも書いてある）。
-  'koei-chiba.html': { kind: 'toei', before: /  <div class="cta-box" data-aff="hikkoshi"/, lead: LEAD_TOEI_OTHER },
-  'koei-fukuoka.html': { kind: 'toei', before: /  <div class="cta-box" data-aff="hikkoshi"/, lead: LEAD_TOEI_OTHER },
-  'koei-hairiyasui.html': { kind: 'toei', before: /  <div class="cta-box" data-aff="hikkoshi"/, lead: LEAD_TOEI_OTHER },
-  'koei-jutaku-bairitsu.html': { kind: 'toei', before: /  <div class="cta-box" data-aff="hikkoshi"/, lead: LEAD_TOEI_OTHER },
-  'koei-kawasaki.html': { kind: 'toei', before: /  <div class="cta-box" data-aff="hikkoshi"/, lead: LEAD_TOEI_OTHER },
-  'koei-kobe.html': { kind: 'toei', before: /  <div class="cta-box" data-aff="hikkoshi"/, lead: LEAD_TOEI_OTHER },
-  'koei-kyoto.html': { kind: 'toei', before: /  <div class="cta-box" data-aff="hikkoshi"/, lead: LEAD_TOEI_OTHER },
-  'koei-nagoya.html': { kind: 'toei', before: /  <div class="cta-box" data-aff="hikkoshi"/, lead: LEAD_TOEI_OTHER },
-  'koei-osaka.html': { kind: 'toei', before: /  <div class="cta-box" data-aff="hikkoshi"/, lead: LEAD_TOEI_OTHER },
-  'koei-saitama.html': { kind: 'toei', before: /  <div class="cta-box" data-aff="hikkoshi"/, lead: LEAD_TOEI_OTHER },
-  'koei-sapporo.html': { kind: 'toei', before: /  <div class="cta-box" data-aff="hikkoshi"/, lead: LEAD_TOEI_OTHER },
-  'koei-sendai.html': { kind: 'toei', before: /  <div class="cta-box" data-aff="hikkoshi"/, lead: LEAD_TOEI_OTHER },
-  'koei-yokohama.html': { kind: 'toei', before: /  <div class="cta-box" data-aff="hikkoshi"/, lead: LEAD_TOEI_OTHER },
-  'koei-danchi-ranking.html': { kind: 'toei', before: /  <h2>このデータについて（引用・転載）<\/h2>/, lead: LEAD_TOEI_OTHER },
-  'koei-shunyu-kijun.html': { kind: 'toei', before: /  <h2>③ 政令月収の計算式と、引ける控除の一覧<\/h2>/, lead: LEAD_TOEI_OTHER },
-  'koei-yachin-keisan.html': { kind: 'toei', before: /  <h2>④ 同じ住戸でも、収入で家賃は約2\.6倍変わる<\/h2>/, lead: LEAD_TOEI_OTHER },
+  // 東京以外の公営住宅の記事（koei-chiba / fukuoka / kawasaki / kobe / kyoto / nagoya / osaka /
+  // saitama / sapporo / sendai / yokohama）と、全国横断の記事（koei-danchi-ranking /
+  // hairiyasui / jutaku-bairitsu / shunyu-kijun / yachin-keisan）には置かない。2026-09-08(2)
 }
 
 const block = (t) => {
