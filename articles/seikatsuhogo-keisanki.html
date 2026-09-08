@@ -220,28 +220,8 @@
       <div class="bd" id="g-bd"></div>
     </div>
   </div>
+
   <p class="mini-note">経過的加算は世帯人数5人まで・生活扶助本体分を実装しています（母子世帯等の経過的加算〜3,330円と、3歳未満の児童がいる場合等の児童養育の経過的加算4,330円は含みません＝その分だけ実際はやや多くなることがあります）。妊産婦加算・介護施設入所者等は対象外です。</p>
-
-  <h2>③ 働いた収入がある場合【差額支給の計算】</h2>
-  <p>「収入があったら打ち切り」ではありません。<strong>収入が最低生活費より少なければ差額が支給</strong>されます。しかも働いた収入は<strong>勤労控除</strong>（最低でも月15,200円）の分だけ「なかったこと」にして計算されるので、<strong>働いた分だけ手元に残るお金は必ず増えます</strong>。</p>
-
-  <div class="calc" role="group" aria-label="差額支給の計算機">
-    <h4>差額支給 計算機</h4>
-    <div class="row">
-      <label for="i-work">働いた収入（月・手取りでなく総支給）</label>
-      <input type="number" id="i-work" inputmode="numeric" min="0" step="1000" placeholder="例: 80000"> 円
-    </div>
-    <div class="row">
-      <label for="i-other">年金・手当など他の収入（月）</label>
-      <input type="number" id="i-other" inputmode="numeric" min="0" step="1000" placeholder="例: 65000"> 円
-      <span class="mini-note">障害年金・児童扶養手当・仕送りなど（控除なしで全額認定）</span>
-    </div>
-    <div class="out" aria-live="polite">
-      <div>保護費（支給額）の目安：<span class="total" id="i-total">—</span><span style="font-weight:700">／月</span></div>
-      <div class="bd" id="i-bd"></div>
-    </div>
-  </div>
-  <p class="mini-note">勤労控除はここでは基礎控除の概算（15,200円＋超過分の約10%）で計算しています。実際は収入額に応じた控除額表で決まり、未成年者控除・新規就労控除などが上乗せされる場合があります。</p>
 
 <!-- offer:pack -->
   <p class="offer-lead">申請を考える前に、<strong>使い切れていない控除</strong>がないかも確かめてください。要介護認定を受けている親御さんは、障害者手帳がなくても市区町村の認定を受ければ障害者控除の対象になることがあり、過去5年分までさかのぼって税金を取り戻せます。<strong>すでに保護を受けている世帯は課税されていないことが多く、その場合に戻るお金はありません</strong>——親御さんやご家族に納税している人がいる場合の話です。</p>
@@ -279,6 +259,27 @@
   <p class="fine">クレジットカード決済（Stripe）。カード情報は当方を経由しません。お支払い後すぐダウンロードできます。<a href="../pack/">売り場のページ</a>／<a href="../tokushoho/">特定商取引法に基づく表記</a>／<a href="../kiyaku/">利用規約</a></p>
   </div>
   <!-- /offer -->
+
+  <h2>③ 働いた収入がある場合【差額支給の計算】</h2>
+  <p>「収入があったら打ち切り」ではありません。<strong>収入が最低生活費より少なければ差額が支給</strong>されます。しかも働いた収入は<strong>勤労控除</strong>（最低でも月15,200円）の分だけ「なかったこと」にして計算されるので、<strong>働いた分だけ手元に残るお金は必ず増えます</strong>。</p>
+
+  <div class="calc" role="group" aria-label="差額支給の計算機">
+    <h4>差額支給 計算機</h4>
+    <div class="row">
+      <label for="i-work">働いた収入（月・手取りでなく総支給）</label>
+      <input type="number" id="i-work" inputmode="numeric" min="0" step="1000" placeholder="例: 80000"> 円
+    </div>
+    <div class="row">
+      <label for="i-other">年金・手当など他の収入（月）</label>
+      <input type="number" id="i-other" inputmode="numeric" min="0" step="1000" placeholder="例: 65000"> 円
+      <span class="mini-note">障害年金・児童扶養手当・仕送りなど（控除なしで全額認定）</span>
+    </div>
+    <div class="out" aria-live="polite">
+      <div>保護費（支給額）の目安：<span class="total" id="i-total">—</span><span style="font-weight:700">／月</span></div>
+      <div class="bd" id="i-bd"></div>
+    </div>
+  </div>
+  <p class="mini-note">勤労控除はここでは基礎控除の概算（15,200円＋超過分の約10%）で計算しています。実際は収入額に応じた控除額表で決まり、未成年者控除・新規就労控除などが上乗せされる場合があります。</p>
 
   <h2>④ よくある誤解と、申請前に知っておくこと</h2>
   <ul>

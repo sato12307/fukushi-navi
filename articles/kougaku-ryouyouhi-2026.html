@@ -114,37 +114,6 @@
   </div>
   <p class="mini-note">「医療費」は10割の総額（窓口で払う3割の元の金額）。70歳以上は別の区分表（外来特例あり）で、こちらも同時期に改定されています。年間上限は8月〜翌7月の12か月間の自己負担合計に対する上限で、超えた分が支給されます。</p>
 
-  <h2>② あなたの上限額は？【自動計算】</h2>
-  <div class="calc" role="group" aria-label="高額療養費の自己負担上限計算機">
-    <h4>自己負担上限額 計算機（70歳未満）</h4>
-    <div class="row">
-      <label for="k-bracket">所得区分（年収の目安）</label>
-      <select id="k-bracket">
-        <option value="a">ア：年収 約1,160万円〜</option>
-        <option value="i">イ：年収 約770〜1,160万円</option>
-        <option value="u" selected>ウ：年収 約370〜770万円</option>
-        <option value="e">エ：年収 〜約370万円</option>
-        <option value="o">オ：住民税非課税世帯</option>
-      </select>
-    </div>
-    <div class="row">
-      <label for="k-cost">その月の医療費（10割の総額）</label>
-      <input type="number" id="k-cost" inputmode="numeric" min="0" step="10000" placeholder="例: 1000000"> 円
-      <span class="mini-note">窓口3割負担の額しかわからなければ ×3.33 が目安</span>
-    </div>
-    <div class="row">
-      <label for="k-tasu">直近12か月で上限に達した月</label>
-      <select id="k-tasu">
-        <option value="0" selected>3回以下（通常）</option>
-        <option value="1">すでに3回ある（今月は4回目以降＝多数回該当）</option>
-      </select>
-    </div>
-    <div class="out" aria-live="polite">
-      <div>今月の自己負担上限：<span class="total" id="k-out">—</span></div>
-      <div class="bd" id="k-bd"></div>
-    </div>
-  </div>
-
 <!-- offer:pack -->
   <p class="offer-lead">重い医療費が<strong>要介護認定を受けている親御さん</strong>の分なら、税のほうでも取り戻せることがあります。障害者手帳がなくても、市区町村の認定を受ければ障害者控除の対象になり、申告していなかった分は<strong>過去5年分までさかのぼれます</strong>（<a href="shogaisha-kojo-tax.html">制度の説明</a>と<a href="../shogai-kojo/">自治体別の認定基準</a>は無料です）。</p>
   <div class="offer" id="offer-pack" data-offer="pack">
@@ -179,6 +148,37 @@
   <p class="fine">クレジットカード決済（Stripe）。カード情報は当方を経由しません。お支払い後すぐダウンロードできます。<a href="../pack/">売り場のページ</a>／<a href="../tokushoho/">特定商取引法に基づく表記</a>／<a href="../kiyaku/">利用規約</a></p>
   </div>
   <!-- /offer -->
+
+  <h2>② あなたの上限額は？【自動計算】</h2>
+  <div class="calc" role="group" aria-label="高額療養費の自己負担上限計算機">
+    <h4>自己負担上限額 計算機（70歳未満）</h4>
+    <div class="row">
+      <label for="k-bracket">所得区分（年収の目安）</label>
+      <select id="k-bracket">
+        <option value="a">ア：年収 約1,160万円〜</option>
+        <option value="i">イ：年収 約770〜1,160万円</option>
+        <option value="u" selected>ウ：年収 約370〜770万円</option>
+        <option value="e">エ：年収 〜約370万円</option>
+        <option value="o">オ：住民税非課税世帯</option>
+      </select>
+    </div>
+    <div class="row">
+      <label for="k-cost">その月の医療費（10割の総額）</label>
+      <input type="number" id="k-cost" inputmode="numeric" min="0" step="10000" placeholder="例: 1000000"> 円
+      <span class="mini-note">窓口3割負担の額しかわからなければ ×3.33 が目安</span>
+    </div>
+    <div class="row">
+      <label for="k-tasu">直近12か月で上限に達した月</label>
+      <select id="k-tasu">
+        <option value="0" selected>3回以下（通常）</option>
+        <option value="1">すでに3回ある（今月は4回目以降＝多数回該当）</option>
+      </select>
+    </div>
+    <div class="out" aria-live="polite">
+      <div>今月の自己負担上限：<span class="total" id="k-out">—</span></div>
+      <div class="bd" id="k-bd"></div>
+    </div>
+  </div>
 
   <h2>③ 窓口で大金を払わないために</h2>
   <ul>
