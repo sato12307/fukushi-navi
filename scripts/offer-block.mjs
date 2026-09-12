@@ -10,6 +10,12 @@
 //   以前は無料の注記と同じ見た目で出していたので「ただの注記」に見えて誰も押していなかった
 //   （08-28〜09-02 来訪250・押した0）。煽らない（期限・残数・取り消し線は使わない）。
 //   「買わなくてもできる」は消さず、ボタンの下に置く。
+// 都営住宅の資料の抜粋は scripts/toei-nerai.mjs が資料と同じ行から書き出す（下の TOEI_PEEK の説明）。
+// ★2026-09-13(2) 抜粋の表の右端（住宅名と同じ名前の町丁目の住宅侵入の件数）には、率ではない・所在地と一致しない場合がある・
+//   出典（警視庁・CC BY 4.0）を抜粋の枠の外に必ず添える（TOEI_PEEK_NOTE）。抜粋の中は資料そのままなので書き足さない。
+//   「4件以上」「5倍未満」「16回」も資料と同じ定数から受け取る（TOEI_FACTS）。手で書くと資料を作り直したときにずれる。
+import { TOEI_PEEK, TOEI_PEEK_NOTE, TOEI_FACTS } from './toei-peek.mjs'
+
 export const PACK_PRICE = 500
 export const TOEI_PRICE = 500
 
@@ -39,12 +45,12 @@ export function offerToei({ up = '../' } = {}) {
   return `  <div class="offer" id="offer-toei">
   <span class="kicker">申込先を1つに決めるなら</span>
   <h3>都営住宅で「毎回すいている申込先」の住宅名つき一覧</h3>
-  <p>ここまでが無料で読めるところです。このページで分かるのは「申込者ゼロが出たことがある」まで。<strong>1回だけ空いた住宅と、いつ見ても空いている住宅は区別できません</strong>。定期募集16回を住宅と募集区分ごとに名寄せして、中央値で選り分けた一覧です。</p>
+  <p>ここまでが無料で読めるところです。このページで分かるのは「申込者ゼロが出たことがある」まで。<strong>1回だけ空いた住宅と、いつ見ても空いている住宅は区別できません</strong>。定期募集${TOEI_FACTS.rounds}回を住宅と募集区分ごとに名寄せして、中央値で選り分けた一覧です。</p>
   <ul>
-  <li><strong>毎回すいている申込先</strong>（4回以上観測できて、倍率の中央値が5倍未満のものだけ。1回だけ空いた住宅は入れていません）</li>
+  <li><strong>毎回すいている申込先</strong>（${TOEI_FACTS.minN}件以上の募集を観測できて、倍率の中央値が${TOEI_FACTS.suki}倍未満のものだけ。1回だけ空いた住宅は入れていません）</li>
   <li>回によって当たりやすさが<strong>大きく動く申込先</strong>（住宅を変えるより、出す回を変えるほうが効く相手）</li>
   <li>申込者ゼロが出た申込先と<strong>その回数</strong></li>
-  <li>観測できた<strong>全申込先の索引</strong>（区市町・住宅名・募集区分・倍率の中央値／最低／最高・観測件数・エレベーター・建てられた年）</li>
+  <li>観測できた<strong>全申込先の索引</strong>（区市町・住宅名・募集区分・倍率の中央値／最低／最高・観測件数・エレベーター・建てられた年・住宅名と同じ名前の町丁目の世帯数と住宅侵入の件数）</li>
   </ul>
   <p class="price"><b>${TOEI_PRICE}円</b><span>買い切り・税込。HTMLファイル1つ、印刷可</span></p>
   <p><a class="btn-primary" href="${up}toei/">${TOEI_PRICE}円で一覧を受け取る&nbsp;→</a></p>
@@ -118,17 +124,10 @@ const PACK_PEEK = {
 // ★1章（全体像の数字）ではなく2章から切る。全体像の数字はカードの箇条書きに出しているので、
 //   同じものを抜粋にも入れると、抜粋の枠に入りきる高さのうち表が1行も見えなくなる（09-08に実測）。
 //   抜粋で見せるべきは「実物がどういう形をしているか」＝住宅名と倍率が並んだ表そのもの。
-const TOEI_PEEK = `    <h4 class="pk">2. 毎回すいている申込先（病死等があった住宅を除く・568件）</h4>
-    <p>4件以上観測できて、倍率の<b>中央値</b>が5倍未満だったものだけを載せています。中央値で切っているので、<b>1回だけたまたま空いた住宅は入りません</b>。区市町ごと、倍率の低い順。</p>
-    <h4 class="pk">三鷹市（16件）</h4>
-    <div class="table-wrap"><table>
-    <thead><tr><th>区市町</th><th>住宅</th><th>募集区分</th><th class="num">中央値</th><th class="num">最低</th><th class="num">最高</th><th class="num">観測</th><th class="num">申込0</th></tr></thead>
-    <tbody>
-    <tr><td>三鷹市</td><td>中原四丁目第２</td><td>世帯向（一般募集住宅）</td><td class="num">0</td><td class="num">0</td><td class="num">3</td><td class="num">8</td><td class="num">5</td></tr>
-    <tr><td>三鷹市</td><td>井口五丁目</td><td>世帯向（一般募集住宅）</td><td class="num">0.5</td><td class="num">0</td><td class="num">2</td><td class="num">8</td><td class="num">2</td></tr>
-    <tr><td>三鷹市</td><td>上連雀九丁目</td><td>世帯向（一般募集住宅）</td><td class="num">0.5</td><td class="num">0</td><td class="num">14</td><td class="num">7</td><td class="num">2</td></tr>
-    </tbody></table></div>
-    <h4 class="pk">世田谷区（8件）</h4>`
+// ★2026-09-13 ここに手で切った抜粋を置くのをやめた。資料を作り直したのに抜粋だけ古いまま
+//   （568件・8列。作り直した資料は590件・11列）記事12本に「実物の冒頭をそのまま」として残ったため。
+//   いまは scripts/toei-nerai.mjs が資料と同じ見出し・同じ行から scripts/toei-peek.mjs を書き、
+//   資料の本文と突き合わせてから出す。資料を作り直したら node scripts/stamp-offers.mjs で記事へ貼り直す。
 
 // 抜粋の枠。かすませるのは「ここで切れている」という印で、隠しているのではない。
 const peekBox = (label, inner) => `  <p class="peek-lead">説明だけでは分からないと思うので、<strong>実物の冒頭をそのまま</strong>出します。宣伝用に書き直したものではありません。</p>
@@ -179,14 +178,15 @@ export function offerToeiLeaf({ up = '../' } = {}) {
   <span class="kicker">申込先を1つに決めるなら</span>
   <h3>都営住宅（東京都）で「毎回すいている申込先」の住宅名つき一覧</h3>
   <p class="price"><b>${TOEI_PRICE}円</b><span>買い切り・税込。HTMLファイル1つ、印刷可</span></p>
-  <p>申込書に書けるのは基本的に1回につき1つです。相場が分かっても、最後は住宅名を1つ選ぶことになります。<strong>1回だけ空いた住宅と、いつ見ても空いている住宅は区別できません</strong>。定期募集16回を住宅と募集区分ごとに名寄せして、中央値で選り分けた一覧です。</p>
+  <p>申込書に書けるのは基本的に1回につき1つです。相場が分かっても、最後は住宅名を1つ選ぶことになります。<strong>1回だけ空いた住宅と、いつ見ても空いている住宅は区別できません</strong>。定期募集${TOEI_FACTS.rounds}回を住宅と募集区分ごとに名寄せして、中央値で選り分けた一覧です。</p>
   <ul>
-  <li><strong>毎回すいている申込先</strong>（4回以上観測できて、倍率の中央値が5倍未満のものだけ。1回だけ空いた住宅は入れていません）</li>
+  <li><strong>毎回すいている申込先</strong>（${TOEI_FACTS.minN}件以上の募集を観測できて、倍率の中央値が${TOEI_FACTS.suki}倍未満のものだけ。1回だけ空いた住宅は入れていません）</li>
   <li>回によって当たりやすさが<strong>大きく動く申込先</strong>（住宅を変えるより、出す回を変えるほうが効く相手）</li>
   <li>申込者ゼロが出た申込先と<strong>その回数</strong></li>
-  <li>観測できた<strong>全申込先の索引</strong>（区市町・住宅名・募集区分・倍率の中央値／最低／最高・観測件数・エレベーター・建てられた年）</li>
+  <li>観測できた<strong>全申込先の索引</strong>（区市町・住宅名・募集区分・倍率の中央値／最低／最高・観測件数・エレベーター・建てられた年・住宅名と同じ名前の町丁目の世帯数と住宅侵入の件数）</li>
   </ul>
 ${peekBox('一覧の冒頭（抜粋）', TOEI_PEEK)}
+  <p class="fine">${TOEI_PEEK_NOTE}</p>
   <p class="fine">先に確認してください：これは<strong>過去の実測から作った目安</strong>で、次の募集の倍率を約束するものではありません。募集される住宅は回ごとに変わります。申込資格（都内在住・収入基準など）は東京都・JKK東京の募集案内でご確認ください。<strong>対象は東京都の都営住宅だけ</strong>で、他の道府県の公営住宅は入っていません。</p>
   <p class="buyrow"><button type="button" class="btn-primary" data-buy>${TOEI_PRICE}円で一覧を受け取る</button> <span class="buymsg" role="status"></span></p>
   <p class="fine"><strong>買わなくても申し込みはできます。</strong>区市町ごとの相場は<a href="${up}toei/">無料の一覧</a>で全部公開しています。</p>

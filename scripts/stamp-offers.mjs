@@ -131,6 +131,7 @@ if (missing.length) { console.error('表にあるのに記事が無い:', missin
 //   3.2〜8.0画面の深さに残っていた）。剥がす→入れるにすると、何度流しても結果が同じになる。
 let moved = 0, replaced = 0, inserted = 0
 const failed = []
+const changedFiles = []   // 貼り直しで中身が変わった記事（sitemap の lastmod を動かす）
 for (const f of files) {
   const t = TARGETS[f]
   if (!t) continue
@@ -147,9 +148,28 @@ for (const f of files) {
     had ? moved++ : inserted++
   } else if (had) { s = s.replace(marked, `\n\n${block(t)}\n\n`); replaced++ }
   else { failed.push(f); continue }
-  fs.writeFileSync(p, crlf ? s.replace(/\n/g, '\r\n') : s)
+  const out = crlf ? s.replace(/\n/g, '\r\n') : s
+  if (out !== raw) changedFiles.push(f)
+  fs.writeFileSync(p, out)
 }
 if (failed.length) { console.error('位置が見つからない:', failed.join(', ')); process.exit(1) }
+
+// ★2026-09-13 中身が変わった記事は sitemap.xml の lastmod を今日（日本時間）にする。
+//   売り場の抜粋（件数・列）を貼り直しても記事の lastmod は古いままで、/toei/ だけ新しい日付になっていた。
+//   変わらなかった記事の日付は動かさない。sitemap に載っていない記事は名前を出すだけで、行は足さない。
+if (changedFiles.length) {
+  const smRaw = fs.readFileSync('sitemap.xml', 'utf8')
+  const today = new Date(Date.now() + 9 * 3600e3).toISOString().slice(0, 10)
+  let sm = smRaw
+  const notIn = []
+  for (const f of changedFiles) {
+    const re = new RegExp(`(<loc>[^<]*/articles/${f.replace(/\./g, '\\.')}</loc><lastmod>)([^<]*)(</lastmod>)`)
+    if (!re.test(sm)) { notIn.push(f); continue }
+    sm = sm.replace(re, (_, a, _d, c) => a + today + c)
+  }
+  if (sm !== smRaw) fs.writeFileSync('sitemap.xml', sm)
+  console.log(`中身が変わった記事 ${changedFiles.length}枚 → sitemap の lastmod を ${today} に${notIn.length ? `（sitemap に無い：${notIn.join(', ')}）` : ''}`)
+}
 
 // 検算：表の枚数と、実際にカードが入っている記事の枚数を突き合わせる。
 // 数が合わないまま公開すると、置いたつもりの面が空のまま何日も気づけない。
