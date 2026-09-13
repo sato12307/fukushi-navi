@@ -41,6 +41,12 @@ const MIN_N = 4          // これ未満の観測しかない住宅は「毎回�
 const SUKI = 5           // 中央値がこれ未満なら「すいている」
 const MIN_CITY = 3       // 区市町ごとの相場は、対象の申込先がこれ以上ある区市町だけ出す
 const BURE = 10          // 最高が最低のこれ倍以上なら「回によって動く」
+// ★2026-09-13(3) 町全体の合計を出す線（ユーザー判断）。住宅名が町の名前までしか一致しないとき、
+//   その町の丁目がこの数以下で、かつ町全体の世帯がこの数未満のときだけ町全体の合計を出す。
+//   超える町（光が丘＝7つの丁目・世帯11,933／国領町＝8つの丁目・世帯14,545 など）は、合計が住宅のまわりの
+//   様子とかけ離れやすいので数字を出さず、「町が広いため数字なし」と丁目の数を書く。
+const TOWN_MAX_CHOME = 3
+const TOWN_MAX_SETAI = 5000
 const SRC = 'JKK東京（東京都住宅供給公社）が募集回ごとに公表する「申込地区別倍率表」PDF'
 const JIKO = '居室内で病死等があった住宅'
 
@@ -136,31 +142,45 @@ const wardsNamed = (name) => {
 }
 
 // 同じ区の同じ名前の町丁目。無ければ町名まで（丁目を落として）引き、町全体の合計を返す。
-//   戻り値 undefined＝見つからない／null＝同じ区に同じ名前が2つ以上あって決められない
+//   戻り値 undefined＝見つからない
+//          { level:'area' }＝同じ区の同じ名前の町丁目（数字あり）
+//          { level:'town' }＝町名までしか一致しない・町が線の内側なので町全体の合計（数字あり・丁目の数つき）
+//          { level:'wide' }＝町名までしか一致しない・町が線を超えるので数字なし（丁目の数を理由に添える）
+//          { level:'ambiguous' }＝同じ区に同じ名前が2つ以上あって決められない（数字なし）
+//   ★2026-09-13(3) 以前は「決められない」も null で、ページでは「見つかりません」と同じ書き方になっていた。分けた。
 const envByKey = (city, k) => {
   const hit = (AREA_BY_KEY.get(k) || []).filter((x) => x.ward === city)
   if (hit.length === 1) {
     const a = hit[0].area
     return { level: 'area', label: a.name, setai: a.setai, burglary: a.burglary, path: a.path }
   }
-  if (hit.length > 1) return null
+  if (hit.length > 1) return { level: 'ambiguous', label: hit[0].area.name, count: hit.length }
   const town = k.replace(/[〇一二三四五六七八九十]+丁目$/, '')
   const ts = town ? TOWN_BY_KEY.get(`${city}|${town}`) || [] : []
-  if (ts.length > 1) return null
+  if (ts.length > 1) return { level: 'ambiguous', label: ts[0].town, count: ts.length }
   if (ts.length === 0) return undefined
   const t = ts[0]
+  const chome = t.areas.length
+  // 台帳の町の中身はふつう「〇丁目」だけ。丁目の付かない町丁目が混ざる町は「町丁目」と数える。
+  const unit = t.areas.every((a) => /丁目$/.test(a.name)) ? '丁目' : '町丁目'
+  if (!(chome <= TOWN_MAX_CHOME && Number.isFinite(t.setai) && t.setai < TOWN_MAX_SETAI)) {
+    return { level: 'wide', label: t.town, setai: t.setai, chome, unit }
+  }
   // ★町の合計は、公表の無い町丁目を飛ばして足してある。1つでも混ざれば件数は出さない（少なく見せない）。
   const partial = t.areas.some((a) => a.burglary == null)
-  return { level: 'town', label: t.town, setai: t.setai, burglary: partial ? null : t.burglary }
+  return { level: 'town', label: t.town, setai: t.setai, burglary: partial ? null : t.burglary, chome, unit }
 }
+// 数字を出す一致か（同じ名前の町丁目、または線の内側の町全体）
+const hasNum = (e) => !!e && (e.level === 'area' || e.level === 'town')
 // 住宅名そのまま（町丁目→町）で引き、どちらにも無いときだけ頭の区市町名を外して（町丁目→町）引く。
+//   戻り値 null＝どちらでも見つからない
 const envOf = (city, name) => {
   const k = houseKey(name)
   const e = envByKey(city, k)
   if (e !== undefined) return e
   const rest = stripStem(k, city)
   const e2 = rest ? envByKey(city, rest) : undefined
-  return e2 === undefined ? null : e2 && { ...e2, stem: true }
+  return e2 === undefined ? null : { ...e2, stem: true }
 }
 
 // ── 区市町名の読み取り切れ ──────────────────────────────────────────────────
@@ -240,7 +260,7 @@ const houses = [...by.entries()].map(([k, v]) => {
     era: mode(v.map((x) => x.era).filter(Boolean)),
     eras: new Set(v.map((x) => x.era).filter(Boolean)).size,   // 2以上＝号棟などで建てられた年が混ざっている
     ledger: v.filter((x) => x.city_by === 'ledger').length,   // 区を台帳で確定した行の数
-    env: envOf(city, name),                                    // 同じ区の同じ名前の町丁目（無ければ null）
+    env: envOf(city, name),                                    // 同じ区の同じ名前の町丁目（数字を出すかは hasNum・見つからなければ null）
   }
 }).sort((a, b) => a.med - b.med || b.n - a.n)
 
@@ -305,7 +325,10 @@ const F = {
   zeroHouses: enough.filter((h) => h.zero > 0).length,
   from: ROUNDS[0], to: ROUNDS[ROUNDS.length - 1],
   rowsHead: LEDGER.head, rowsLedger: LEDGER.recovered,
-  envEnough: enough.filter((h) => h.env).length,
+  envEnough: enough.filter((h) => hasNum(h.env)).length,
+  envTown: enough.filter((h) => h.env && h.env.level === 'town').length,
+  envWide: enough.filter((h) => h.env && h.env.level === 'wide').length,
+  envAmb: enough.filter((h) => h.env && h.env.level === 'ambiguous').length,
   eraMixed: enough.filter((h) => h.eras > 1).length,
 }
 const era = (r) => `${r.slice(0, 4)}年${Number(r.slice(5))}月`
@@ -330,11 +353,19 @@ const num = (x) => x.toLocaleString('ja-JP')
 //     建物の所在地を確かめたものではない。この2つを必ず注記に書く。
 //   ★burglary が null は「公表なし」。0件と書かない。
 const WIN_TXT = `${ENV.window.from}〜${ENV.window.to}年の${ENV.window.n}年間`
-const envCell = (e, withWin) => {
-  if (!e) return '—'
+const tsu = (n) => (n < 10 ? `${n}つ` : `${n}`)   // 7つの丁目／10の丁目
+// free＝無料ページ①の表（見つからない・決められないを文で書く）。有料資料と抜粋は短い書き方。
+const envCell = (e, withWin, free = false) => {
+  if (!e) return free ? NO_ENV_FREE : '—'
+  if (e.level === 'ambiguous') {
+    return free
+      ? `同じ区に「${esc(e.label)}」が${tsu(e.count)}あり、どれか決められません（数字なし）`
+      : `${esc(e.label)}（同じ区に同じ名前が${tsu(e.count)}あり、決められないため数字なし）`
+  }
+  if (e.level === 'wide') return `${esc(e.label)}（町が広いため数字なし・${tsu(e.chome)}の${e.unit}）`
   const where = e.level === 'area'
     ? `<a href="${esc(ENV.site + e.path)}">${esc(e.label)}</a>`
-    : `${esc(e.label)}（町全体）`
+    : `${esc(e.label)}（町全体・${tsu(e.chome)}の${e.unit}）`
   const setai = Number.isFinite(e.setai) ? `世帯${num(e.setai)}` : '世帯数なし'
   const b = e.burglary == null ? '住宅侵入は公表なし' : `住宅侵入${num(e.burglary)}件${withWin ? `（${WIN_TXT}）` : ''}`
   return `${where}：${setai}・${b}`
@@ -343,7 +374,7 @@ const envCell = (e, withWin) => {
 const NO_ENV_FREE = '同じ区に同じ名前の町丁目は見つかりません（数字なし）'
 const envNote = (where) => [
   `「住宅と同じ名前の町丁目」の欄は、姉妹サイト<a href="${esc(ENV.site)}/">住環境データ東京</a>が町丁目ごとにまとめた数字です。住宅侵入（空き巣・忍込み・居空き）は${WIN_TXT}の<strong>件数そのもので、率ではありません</strong>。世帯の多い町ほど件数は大きく出ます。<strong>0件は被害がなかったという意味ではありません</strong>（認知件数は、警察に届出があって初めて数えられます）。リンク先の町丁目ページに大きく出ている住宅侵入の件数は、${ENV.window.from}年より前の年も含めた合計なので、ここの${ENV.window.n}年間の件数より大きいことがあります（どちらも同じ警視庁の公表資料から数えたものです）。`,
-  `住宅名と同じ名前の町丁目の数字で、<strong>建物の所在地がその町丁目と一致しない場合があります</strong>（町の名前が付いた住宅でも、建物が隣の町丁目に建っていることがあります）。住宅名の頭に区市町名が付いているもの（府中美好町一丁目 など）は、頭の区市町名を外した町丁目名で引いています（北区・港区のように区名が1文字のものは外していません）。町の名前までしか一致しないものは町全体の合計で「（町全体）」と書いています。<strong>町が大きいほど、町全体の数字は住宅のまわりの様子を表しにくくなります</strong>。同じ区に同じ名前の町丁目が見つからないものは数字を付けていません（${where === 'free' ? `①の表では「${NO_ENV_FREE}」と書いています` : '表では「—」'}）。住宅侵入の件数が公表されていない町丁目（町全体の場合は、公表の無い町丁目を1つでも含む町）は件数を書いていません（0件という意味ではありません）。`,
+  `住宅名と同じ名前の町丁目の数字で、<strong>建物の所在地がその町丁目と一致しない場合があります</strong>（町の名前が付いた住宅でも、建物が隣の町丁目に建っていることがあります）。住宅名の頭に区市町名が付いているもの（府中美好町一丁目 など）は、頭の区市町名を外した町丁目名で引いています（北区・港区のように区名が1文字のものは外していません）。町の名前までしか一致しないもの（住宅名に丁目が付いていないもの など）は、<strong>その町の丁目が${TOWN_MAX_CHOME}つ以下で、かつ町全体の世帯が${num(TOWN_MAX_SETAI)}未満のときだけ</strong>町全体の合計を出し、「（町全体・2つの丁目）」のように何丁目ぶんの合計かを添えています。町が大きいほど、町全体の数字は住宅のまわりの様子を表しにくくなるためです。<strong>この線を超える町は数字を出さず</strong>、「（町が広いため数字なし・7つの丁目）」のように丁目の数を書いています（索引${num(F.enough)}件のうち、町全体の合計を出したもの${num(F.envTown)}件・町が広いため数字なしのもの${num(F.envWide)}件）。同じ区に同じ名前の町丁目が見つからないものは数字を付けていません（${where === 'free' ? `①の表では「${NO_ENV_FREE}」と書いています` : '表では「—」'}）。同じ区に同じ名前の町丁目が2つ以上あってどれか決められないものも数字を付けず、見つからないものと分けて「決められません」と書いています（索引のうち${num(F.envAmb)}件）。住宅侵入の件数が公表されていない町丁目（町全体の場合は、公表の無い町丁目を1つでも含む町）は件数を書いていません（0件という意味ではありません）。`,
   `倍率表の行のうち、行頭に区市町が無かった${num(LEDGER.untrusted)}行は、区市町を確かめられないため以前は集計から外していました。このうち<strong>住宅名が東京都内でただ1つの区にだけある町丁目名だった${num(LEDGER.recovered)}行は、その区の住宅として集計に含めています</strong>（住環境データ東京の町丁目台帳で区を確定。${LEDGER.recoveredStem ? `うち${num(LEDGER.recoveredStem)}行は、住宅名の頭に付いた区市町名を外すと、その区市町にだけある町丁目名になるものです。また` : 'うち'}${num(LEDGER.moved)}行は、読み取りで前の行から引き継いでいた区市町とは別の区でした）。2つ以上の区にある名前の${num(LEDGER.multi)}行と、台帳に無い名前の${num(LEDGER.none)}行は、今までどおり含めていません。行頭に区市町があった行で、住宅名の町丁目が別の1つの区にだけあったものは${num(LEDGER.conflict)}行${LEDGER.conflict ? 'で、区は書き換えていません' : 'でした'}。`,
   `住環境の数字の出典＝警視庁「区市町村の町丁別、罪種別及び手口別認知件数」（東京都オープンデータ利用規約に基づき<a href="https://creativecommons.org/licenses/by/4.0/deed.ja" rel="license">クリエイティブ・コモンズ・ライセンス 表示4.0国際（CC BY 4.0）</a>のもとで提供）と、総務省統計局「令和2年国勢調査 小地域集計」（世帯数）。住環境データ東京が町丁目ごとに集計したものを、当サイトが住宅名と突き合わせて加工し掲載しています。警視庁・総務省統計局が作成したものではありません。`,
   ...(SPILL.length ? [`行頭の区市町名の末尾が次の欄（申込区分（人数））にはみ出して読み取られていた${num(SPILL.length)}行は、つなげた名前が台帳の区市町名にちょうど1つ一致したため、その区市町の行として数えています（例：「${esc(SPILL[0].city)}」＋「${esc(SPILL[0].head)}」→ ${esc(SPILL[0].ward)}）。`] : []),
@@ -352,7 +383,7 @@ const envNote = (where) => [
 // ── 無料ページ /toei/ ────────────────────────────────────────────────────────
 // ここで出すのは「相場」まで。住宅の実名つきの狙い目一覧が有料の中身。
 const cityRows = byCity.map((c) => `<tr><td>${esc(c.city)}</td><td class="num">${c.n}</td><td class="num">${r1(c.med)}倍</td><td class="num">${c.suki}</td></tr>`).join('\n')
-const kondeRows = konde.slice(0, 10).map((h) => `<tr><td>${esc(h.city)}</td><td>${esc(h.name)}</td><td>${esc(h.cat)}</td><td class="num">${r1(h.med)}倍</td><td class="num">${h.n}</td></tr>\n<tr><td colspan="5" style="font-size:.88rem"><span style="color:#566">住宅と同じ名前の町丁目</span>　${h.env ? envCell(h.env, true) : NO_ENV_FREE}</td></tr>`).join('\n')
+const kondeRows = konde.slice(0, 10).map((h) => `<tr><td>${esc(h.city)}</td><td>${esc(h.name)}</td><td>${esc(h.cat)}</td><td class="num">${r1(h.med)}倍</td><td class="num">${h.n}</td></tr>\n<tr><td colspan="5" style="font-size:.88rem"><span style="color:#566">住宅と同じ名前の町丁目</span>　${envCell(h.env, true, true)}</td></tr>`).join('\n')
 const cutBlocks = cuts.map((c) => `  <h3>${esc(c.label)}</h3>
   <p class="note">${cutNote(c)}</p>
   <div class="table-wrap"><table><thead><tr><th>${esc(c.label)}</th><th class="num">募集件数</th><th class="num">倍率の中央値</th></tr></thead><tbody>
@@ -547,7 +578,7 @@ td.num,th.num{text-align:right;font-variant-numeric:tabular-nums}
 <li>中央値が${SUKI}倍未満だった申込先は <strong>${F.suki}件（${F.sukiPct}%）</strong>。うち病死等があった住宅を除くと${F.sukiIppan}件。</li>
 <li>申込者ゼロの募集が1回以上あった申込先 <strong>${F.zeroHouses}件</strong>。</li>
 <li>最高と最低が${BURE}倍以上ひらいた申込先 <strong>${F.buread}件</strong>。</li>
-<li>表の右端に、住宅名と同じ名前の町丁目の世帯数と住宅侵入の件数（姉妹サイト 住環境データ東京）を添えています（索引${num(F.enough)}件のうち${num(F.envEnough)}件）。件数は率ではなく、建物の所在地と一致しないことがあります。読み方は7章。</li>
+<li>表の右端に、住宅名と同じ名前の町丁目の世帯数と住宅侵入の件数（姉妹サイト 住環境データ東京）を添えています（索引${num(F.enough)}件のうち${num(F.envEnough)}件。住宅名が町の名前までしか一致せず、町が広いため数字を付けていないもの${num(F.envWide)}件）。件数は率ではなく、建物の所在地と一致しないことがあります。読み方は7章。</li>
 </ul>
 <p class="note">「観測」の単位は募集件数で、募集回の数ではありません。同じ回に同じ住宅で複数の住戸が募集されることがあり、その1件ずつを数えています。</p>
 
@@ -625,7 +656,7 @@ const TOEI_PEEK = `${peekBody}\n${peekNext}`
 }
 // ★2026-09-13(2) 抜粋の表には住宅侵入の件数が載る。記事には「率ではない・所在地と一致しない場合がある・0件の意味・出典」が
 //   どこにも無かったので、記事の抜粋の枠の外に添える（抜粋の中は資料そのままにするため、枠の中には書き足さない）。
-const PEEK_NOTE = `抜粋の表の右端は、住宅名と同じ名前の町丁目の数字です（姉妹サイト<a href="${esc(ENV.site)}/">住環境データ東京</a>が町丁目ごとに集計）。住宅侵入は${WIN_TXT}の<strong>件数そのもので、率ではありません</strong>（世帯の多い町ほど大きく出ます）。<strong>建物の所在地がその町丁目と一致しない場合があります</strong>。0件は被害がなかったという意味ではありません（警察に届出があって初めて数えられます）。出典＝警視庁「区市町村の町丁別、罪種別及び手口別認知件数」（東京都オープンデータ・<a href="https://creativecommons.org/licenses/by/4.0/deed.ja" rel="license">CC BY 4.0</a>）、総務省統計局「令和2年国勢調査 小地域集計」（世帯数）。当サイトが住宅名と突き合わせて加工したもので、警視庁・総務省統計局が作成したものではありません。`
+const PEEK_NOTE = `抜粋の表の右端は、住宅名と同じ名前の町丁目の数字です（姉妹サイト<a href="${esc(ENV.site)}/">住環境データ東京</a>が町丁目ごとに集計）。住宅侵入は${WIN_TXT}の<strong>件数そのもので、率ではありません</strong>（世帯の多い町ほど大きく出ます）。<strong>建物の所在地がその町丁目と一致しない場合があります</strong>。「（町全体・2つの丁目）」のように書いたものは、住宅名が町の名前までしか一致しなかったときの、町全体の合計です（丁目が${TOWN_MAX_CHOME}つ以下で、世帯が${num(TOWN_MAX_SETAI)}未満の町だけ）。「数字なし」は、町が広いか、同じ区に同じ名前の町丁目が2つ以上あって決められないため、数字を付けていないという意味です（同じ名前の町丁目が見つからないものは「—」）。0件は被害がなかったという意味ではありません（警察に届出があって初めて数えられます）。出典＝警視庁「区市町村の町丁別、罪種別及び手口別認知件数」（東京都オープンデータ・<a href="https://creativecommons.org/licenses/by/4.0/deed.ja" rel="license">CC BY 4.0</a>）、総務省統計局「令和2年国勢調査 小地域集計」（世帯数）。当サイトが住宅名と突き合わせて加工したもので、警視庁・総務省統計局が作成したものではありません。`
 const tpl = (s) => s.replace(/\\/g, '\\\\').replace(/`/g, '\\`').replace(/\$\{/g, '\\${')
 write('scripts/toei-peek.mjs', `// 自動生成：scripts/toei-nerai.mjs が .dist/toei-pack.html と同じ行から書く。手で直さない。
 // 有料資料の2章の冒頭。表は上${PEEK_ROWS}行で切っている。記事への貼り付けは scripts/stamp-offers.mjs。
@@ -685,8 +716,17 @@ console.log(`  行頭に区市町あり ${LEDGER.head}行のうち町丁目名�
   const byName = new Map(houses.map((h) => [`${h.city}|${h.name}`, h.env]))
   const lv = (list, l) => list.filter((e) => e && e.level === l).length
   const envs = [...byName.values()]
+  const idx = enough.map((h) => h.env)
   console.log(`  抜粋 scripts/toei-peek.mjs（2章 ${peekCity.city}の上${PEEK_ROWS}行）／トップのカード・sitemap: ${pending.map(([rel]) => rel).filter((rel) => rel === 'index.html' || rel === 'sitemap.xml').join('・') || '変更なし'}`)
   console.log(`  条件別の表の母数: ${cuts.map((c) => `${c.label} ${c.base}`).join('／')}・建築の年が混ざる ${F.eraMixed}件`)
   console.log(`  次に: node scripts/stamp-offers.mjs（記事12本の抜粋を貼り直す）。KV へは scripts/toei-put-pack.mjs（入れる前に資料・/toei/・トップ・記事を突き合わせる）`)
-  console.log(`  住環境の数字: 索引${F.enough}件中 ${F.envEnough}件（頭の区市町名を外して ${enough.filter((h) => h.env && h.env.stem).length}・町丁目 ${lv(enough.map((h) => h.env), 'area')}・町全体 ${lv(enough.map((h) => h.env), 'town')}）／区×住宅名 ${byName.size}件中 ${envs.filter(Boolean).length}件（町丁目 ${lv(envs, 'area')}・町全体 ${lv(envs, 'town')}）／無料ページの表 ${konde.slice(0, 10).filter((h) => h.env).length}/10`)
+  console.log(`  住環境の数字: 索引${F.enough}件中 ${F.envEnough}件（頭の区市町名を外して ${enough.filter((h) => hasNum(h.env) && h.env.stem).length}・町丁目 ${lv(idx, 'area')}・町全体 ${lv(idx, 'town')}）・数字なし（町が広い ${lv(idx, 'wide')}・決められない ${lv(idx, 'ambiguous')}・見つからない ${idx.filter((e) => !e).length}）／区×住宅名 ${byName.size}件中 ${envs.filter(hasNum).length}件（町丁目 ${lv(envs, 'area')}・町全体 ${lv(envs, 'town')}・町が広い ${lv(envs, 'wide')}・決められない ${lv(envs, 'ambiguous')}）／無料ページの表 ${konde.slice(0, 10).filter((h) => hasNum(h.env)).length}/10`)
+  // 町全体の線で分けた町（索引に出る行の数つき）
+  const townList = (l) => {
+    const m = new Map()
+    for (const h of enough) if (h.env && h.env.level === l) { const k = `${h.city}${h.env.label}（${tsu(h.env.chome)}の${h.env.unit}・世帯${num(h.env.setai)}）`; m.set(k, (m.get(k) || 0) + 1) }
+    return [...m].map(([k, n]) => `${k}×${n}`).join(' / ')
+  }
+  console.log(`  町全体の合計を出した町: ${townList('town') || 'なし'}`)
+  console.log(`  町が広いため数字なしにした町: ${townList('wide') || 'なし'}`)
 }
