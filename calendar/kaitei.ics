@@ -1,0 +1,36 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//fukushiru.com//kaitei//JA
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+X-WR-CALNAME:くらしの福祉｜制度の金額が変わる日
+X-WR-CALDESC:くらしの福祉で扱っている金額のうち、変わ
+ る日が決まっているもの。
+X-PUBLISHED-TTL:P1D
+REFRESH-INTERVAL;VALUE=DURATION:P1D
+BEGIN:VEVENT
+UID:kaitei-20261001-e7949fe6b4bb@fukushiru.com
+DTSTAMP:20260914T052750Z
+DTSTART;VALUE=DATE:20261001
+DTEND;VALUE=DATE:20261002
+SUMMARY:生活保護の特例加算が月2\,500円になる
+DESCRIPTION:令和8年6月11日 厚生労働省告示第245号。前回（
+ 令和7年10月1日）は1\,500円でした。\nhttps://fukushiru.com/art
+ icles/seikatsuhogo-keisanki.html
+URL:https://fukushiru.com/articles/seikatsuhogo-keisanki.html
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:kaitei-20270331-e7949fe6b4bb@fukushiru.com
+DTSTAMP:20260914T052750Z
+DTSTART;VALUE=DATE:20270331
+DTEND;VALUE=DATE:20270401
+SUMMARY:生活保護の特例加算の期限
+DESCRIPTION:令和7〜8年度の臨時の措置として、この日まで
+ と決められています。その先は例年どおりなら12月末
+ の予算折衝で決まります。\nhttps://fukushiru.com/articles/seik
+ atsuhogo-keisanki.html
+URL:https://fukushiru.com/articles/seikatsuhogo-keisanki.html
+TRANSP:TRANSPARENT
+END:VEVENT
+END:VCALENDAR

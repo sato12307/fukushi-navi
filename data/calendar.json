@@ -1,0 +1,73 @@
+{
+  "_doc": "くらしの福祉の予定表。カレンダー（.ics）として配るための確定日。一次情報で日付まで確認できたものだけを書く。",
+  "_rule": [
+    "★ここに書いてよいのは、一次情報に【年月日】で書かれていた日だけ。「毎年◯月ごろ」という傾向は書かない。",
+    "★規則から計算した日は kind:'計算' とし、面にもその旨を出す。公表された予定表が出たら差し替える。",
+    "★生活保護費の支給日は【全国共通のルールが存在しない】ので載せない（横浜1〜5日・さいたま5日・宇土1日・豊島区は月末と、自治体ごとにばらばら）。",
+    "★児童手当・特別障害者手当・障害児福祉手当は支給【月】までしか国が定めていない（日は自治体）。だから載せない。",
+    "★特別障害者手当は4月・7月・10月・1月、障害児福祉手当は2月・5月・8月・11月。取り違えやすいので、もし将来載せるならここを確認すること。"
+  ],
+  "verifiedAt": "2026-09-14",
+  "calendars": [
+    {
+      "slug": "nenkin",
+      "name": "年金の支給日",
+      "desc": "公的年金（老齢・障害・遺族）の支給日。偶数月の15日で、15日が土日祝のときは直前の平日になります。障害年金も同じ日です。",
+      "note": "日本年金機構が公表している年間予定表に日付まで載っているのは2027年2月までです。それ以降は規則から計算した日で、2027年度の予定表が公表されたら差し替えます。",
+      "sources": [
+        { "name": "日本年金機構「年金はいつ支払われますか。」", "url": "https://www.nenkin.go.jp/section/faq/jukyu/uketori/uketori/shiharaiduki/20140421-01.html" },
+        { "name": "日本年金機構 主な行事・通知書発送の年間予定表（令和8年度）", "url": "https://www.nenkin.go.jp/service/seidozenpan/20150601.html" }
+      ],
+      "events": [
+        { "date": "2026-10-15", "title": "年金の支給日（8月・9月分）", "kind": "公表" },
+        { "date": "2026-12-15", "title": "年金の支給日（10月・11月分）", "kind": "公表" },
+        { "date": "2027-02-15", "title": "年金の支給日（12月・1月分）", "kind": "公表" },
+        { "date": "2027-04-15", "title": "年金の支給日（2月・3月分）", "kind": "計算" },
+        { "date": "2027-06-15", "title": "年金の支給日（4月・5月分）", "kind": "計算" },
+        { "date": "2027-08-13", "title": "年金の支給日（6月・7月分）", "kind": "計算", "note": "8月15日が日曜のため前倒し" },
+        { "date": "2027-10-15", "title": "年金の支給日（8月・9月分）", "kind": "計算" },
+        { "date": "2027-12-15", "title": "年金の支給日（10月・11月分）", "kind": "計算" },
+        { "date": "2028-02-15", "title": "年金の支給日（12月・1月分）", "kind": "計算" }
+      ]
+    },
+    {
+      "slug": "kaitei",
+      "name": "制度の金額が変わる日",
+      "desc": "くらしの福祉で扱っている金額のうち、変わる日が決まっているもの。",
+      "note": "税の控除額（障害者控除など）は毎年12月下旬の税制改正大綱で変更の有無が決まりますが、日付が決まるのはそのあとなので、決まってから足します。",
+      "sources": [
+        { "name": "生活保護法による保護の基準（告示本文・厚生労働省）", "url": "https://www.mhlw.go.jp/web/t_doc?dataId=82051000&dataType=0" }
+      ],
+      "events": [
+        { "date": "2026-10-01", "title": "生活保護の特例加算が月2,500円になる", "kind": "公表", "note": "令和8年6月11日 厚生労働省告示第245号。前回（令和7年10月1日）は1,500円でした。", "url": "https://fukushiru.com/articles/seikatsuhogo-keisanki.html" },
+        { "date": "2027-03-31", "title": "生活保護の特例加算の期限", "kind": "公表", "note": "令和7〜8年度の臨時の措置として、この日までと決められています。その先は例年どおりなら12月末の予算折衝で決まります。", "url": "https://fukushiru.com/articles/seikatsuhogo-keisanki.html" }
+      ]
+    },
+    {
+      "slug": "koei",
+      "name": "公営住宅の募集",
+      "desc": "都営住宅と主要都市の市営住宅で、申込期間・抽せん日・結果発表日が公表されているもの。",
+      "note": "公表されている回だけを載せています。都営は年4回の定期募集（5月・8月・11月・2月）と毎月募集がありますが、次の回の日付は開催の2週間〜1か月前に公表されます。公表され次第この表に足します。★自治体ごとに回数も月も違います（横浜市は4月・10月、大阪市の定期募集は年2回）。",
+      "sources": [
+        { "name": "JKK東京 都営住宅 定期募集", "url": "https://www.to-kousya.or.jp/kouei/toeibosyu/index_teiki.html" },
+        { "name": "東京都 令和8年8月都営住宅入居者募集の概要", "url": "https://www.metro.tokyo.lg.jp/information/press/2026/07/2026072209" },
+        { "name": "大阪市 令和8年度の市営住宅入居者募集の日程", "url": "https://www.city.osaka.lg.jp/hodoshiryo/toshiseibi/0000675035.html" },
+        { "name": "名古屋市 令和8年度第2回市営住宅入居者一般募集", "url": "https://www.city.nagoya.jp/kurashi/juutaku/1014583/1014585/1014586/1014587/1014589/1014591.html" },
+        { "name": "札幌市 市営住宅", "url": "https://www.city.sapporo.jp/toshi/jutaku/01osumai/siju/siju.html" },
+        { "name": "福岡市住宅供給公社 定期募集（抽選方式）", "url": "https://www.nicety.or.jp/shiei1-osagashi/lottery-app/" }
+      ],
+      "events": [
+        { "date": "2026-09-18", "title": "都営住宅 8月定期募集 倍率表の掲示（18時ごろ）", "kind": "公表", "url": "https://www.to-kousya.or.jp/kouei/toeibosyu/teiki_2026_8.html" },
+        { "date": "2026-09-18", "title": "名古屋市営住宅 第2回 抽選（10時）", "kind": "公表", "url": "https://www.city.nagoya.jp/kurashi/juutaku/1014583/1014585/1014586/1014587/1014589/1014591.html" },
+        { "date": "2026-09-24", "title": "都営住宅 9月毎月募集 申込書の配布終了（18時）", "kind": "公表", "url": "https://www.to-kousya.or.jp/kouei/toeibosyu/maituki_r8_9.html" },
+        { "date": "2026-09-25", "title": "都営住宅 8月定期募集 抽せん（9時30分・都庁第二本庁舎）", "kind": "公表", "url": "https://www.to-kousya.or.jp/kouei/toeibosyu/teiki_2026_8.html" },
+        { "date": "2026-09-30", "title": "都営住宅 9月毎月募集 申込締切（オンライン23時59分）", "kind": "公表", "url": "https://www.to-kousya.or.jp/kouei/toeibosyu/maituki_r8_9.html" },
+        { "date": "2026-10-28", "title": "都営住宅 9月毎月募集 抽せん・結果発表（抽せん9時30分／結果18時以降）", "kind": "公表", "url": "https://www.to-kousya.or.jp/kouei/toeibosyu/maituki_r8_9.html" },
+        { "date": "2026-11-02", "end": "2026-11-16", "title": "大阪市営住宅 親子近居等募集 申込書の配布・受付", "kind": "公表", "url": "https://www.city.osaka.lg.jp/hodoshiryo/toshiseibi/0000675035.html" },
+        { "date": "2026-11-04", "end": "2026-11-13", "title": "福岡市営住宅 定期募集（抽選方式）受付", "kind": "公表", "note": "公社のページに「予定」と付記されています。", "url": "https://www.nicety.or.jp/shiei1-osagashi/lottery-app/" },
+        { "date": "2026-12-01", "end": "2026-12-09", "title": "札幌市営住宅 後期募集 受付", "kind": "公表", "url": "https://www.city.sapporo.jp/toshi/jutaku/01osumai/siju/siju.html" },
+        { "date": "2027-02-01", "end": "2027-02-15", "title": "大阪市営住宅 2月定期募集 申込書の配布・受付", "kind": "公表", "url": "https://www.city.osaka.lg.jp/hodoshiryo/toshiseibi/0000675035.html" }
+      ]
+    }
+  ]
+}

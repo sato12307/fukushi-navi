@@ -70,6 +70,9 @@ export function kaiteiBlock(key) {
   }
 
   // ④ 次に確定する日
+  //   ★日付が決まっているものは、カレンダーに入れる導線を添える（2026-09-14）。
+  //     金額を受け取って帰る面を、その日にまた戻ってくる面にするのがこの区画の目的なので、
+  //     「次はこの日」と書くだけで終わらせず、思い出す係をカレンダーアプリに渡す。
   if (it.nextText) {
     const badge = it.next ? `<strong>${esc(jp(it.next))}</strong>まで。` : ''
     rows.push(`<p><strong>次に確定する日</strong><br>${badge}${esc(it.nextText)}</p>`)
@@ -77,9 +80,15 @@ export function kaiteiBlock(key) {
 
   const src = (it.sources || []).map((s) => `<a href="${esc(s.url)}" rel="nofollow">${esc(s.name)}</a>`).join('　／　')
 
+  // ★予定表への導線は全部の面に置く（2026-09-14）。
+  //   確定日を持つのは生活保護だけだが、年金の支給日はどの記事の読者にも関わる。
+  //   「次はこの日」と書いて終わりにせず、思い出す係をカレンダーアプリへ渡すのがこの区画の目的。
+  const cal = `  <p><a href="/calendar/">くらしの福祉の予定表</a>：年金の支給日・制度が変わる日・公営住宅の募集を、カレンダーに登録できます（無料・登録不要）。</p>`
+
   return `  <div class="callout note" data-kaitei="${esc(key)}">
   <p><strong>この金額は、いつ決まったものか</strong></p>
   ${rows.join('\n  ')}
+${cal}
   <p class="updated">出典：${src}<br>当サイトが一次情報を直接読んで確認した内容です（確認日 ${esc(KAITEI.verifiedAt)}）。制度の適用可否は必ず窓口でご確認ください。</p>
   </div>`
 }

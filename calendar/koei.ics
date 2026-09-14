@@ -1,0 +1,121 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//fukushiru.com//koei//JA
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+X-WR-CALNAME:くらしの福祉｜公営住宅の募集
+X-WR-CALDESC:都営住宅と主要都市の市営住宅で、申込期間
+ ・抽せん日・結果発表日が公表されているもの。
+X-PUBLISHED-TTL:P1D
+REFRESH-INTERVAL;VALUE=DURATION:P1D
+BEGIN:VEVENT
+UID:koei-20260918-e983bde596b6@fukushiru.com
+DTSTAMP:20260914T052750Z
+DTSTART;VALUE=DATE:20260918
+DTEND;VALUE=DATE:20260919
+SUMMARY:都営住宅 8月定期募集 倍率表の掲示（18時ごろ）
+DESCRIPTION:https://www.to-kousya.or.jp/kouei/toeibosyu/teiki_2026_8.html
+URL:https://www.to-kousya.or.jp/kouei/toeibosyu/teiki_2026_8.html
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:koei-20260918-e5908de58fa4@fukushiru.com
+DTSTAMP:20260914T052750Z
+DTSTART;VALUE=DATE:20260918
+DTEND;VALUE=DATE:20260919
+SUMMARY:名古屋市営住宅 第2回 抽選（10時）
+DESCRIPTION:https://www.city.nagoya.jp/kurashi/juutaku/1014583/1014585/101
+ 4586/1014587/1014589/1014591.html
+URL:https://www.city.nagoya.jp/kurashi/juutaku/1014583/1014585/1014586/101
+ 4587/1014589/1014591.html
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:koei-20260924-e983bde596b6@fukushiru.com
+DTSTAMP:20260914T052750Z
+DTSTART;VALUE=DATE:20260924
+DTEND;VALUE=DATE:20260925
+SUMMARY:都営住宅 9月毎月募集 申込書の配布終了（18時）
+DESCRIPTION:https://www.to-kousya.or.jp/kouei/toeibosyu/maituki_r8_9.html
+URL:https://www.to-kousya.or.jp/kouei/toeibosyu/maituki_r8_9.html
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:koei-20260925-e983bde596b6@fukushiru.com
+DTSTAMP:20260914T052750Z
+DTSTART;VALUE=DATE:20260925
+DTEND;VALUE=DATE:20260926
+SUMMARY:都営住宅 8月定期募集 抽せん（9時30分・都庁第二
+ 本庁舎）
+DESCRIPTION:https://www.to-kousya.or.jp/kouei/toeibosyu/teiki_2026_8.html
+URL:https://www.to-kousya.or.jp/kouei/toeibosyu/teiki_2026_8.html
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:koei-20260930-e983bde596b6@fukushiru.com
+DTSTAMP:20260914T052750Z
+DTSTART;VALUE=DATE:20260930
+DTEND;VALUE=DATE:20261001
+SUMMARY:都営住宅 9月毎月募集 申込締切（オンライン23時5
+ 9分）
+DESCRIPTION:https://www.to-kousya.or.jp/kouei/toeibosyu/maituki_r8_9.html
+URL:https://www.to-kousya.or.jp/kouei/toeibosyu/maituki_r8_9.html
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:koei-20261028-e983bde596b6@fukushiru.com
+DTSTAMP:20260914T052750Z
+DTSTART;VALUE=DATE:20261028
+DTEND;VALUE=DATE:20261029
+SUMMARY:都営住宅 9月毎月募集 抽せん・結果発表（抽せん
+ 9時30分／結果18時以降）
+DESCRIPTION:https://www.to-kousya.or.jp/kouei/toeibosyu/maituki_r8_9.html
+URL:https://www.to-kousya.or.jp/kouei/toeibosyu/maituki_r8_9.html
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:koei-20261102-e5a4a7e998aa@fukushiru.com
+DTSTAMP:20260914T052750Z
+DTSTART;VALUE=DATE:20261102
+DTEND;VALUE=DATE:20261117
+SUMMARY:大阪市営住宅 親子近居等募集 申込書の配布・受
+ 付
+DESCRIPTION:https://www.city.osaka.lg.jp/hodoshiryo/toshiseibi/0000675035.
+ html
+URL:https://www.city.osaka.lg.jp/hodoshiryo/toshiseibi/0000675035.html
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:koei-20261104-e7a68fe5b2a1@fukushiru.com
+DTSTAMP:20260914T052750Z
+DTSTART;VALUE=DATE:20261104
+DTEND;VALUE=DATE:20261114
+SUMMARY:福岡市営住宅 定期募集（抽選方式）受付
+DESCRIPTION:公社のページに「予定」と付記されています
+ 。\nhttps://www.nicety.or.jp/shiei1-osagashi/lottery-app/
+URL:https://www.nicety.or.jp/shiei1-osagashi/lottery-app/
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:koei-20261201-e69cade5b98c@fukushiru.com
+DTSTAMP:20260914T052750Z
+DTSTART;VALUE=DATE:20261201
+DTEND;VALUE=DATE:20261210
+SUMMARY:札幌市営住宅 後期募集 受付
+DESCRIPTION:https://www.city.sapporo.jp/toshi/jutaku/01osumai/siju/siju.ht
+ ml
+URL:https://www.city.sapporo.jp/toshi/jutaku/01osumai/siju/siju.html
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:koei-20270201-e5a4a7e998aa@fukushiru.com
+DTSTAMP:20260914T052750Z
+DTSTART;VALUE=DATE:20270201
+DTEND;VALUE=DATE:20270216
+SUMMARY:大阪市営住宅 2月定期募集 申込書の配布・受付
+DESCRIPTION:https://www.city.osaka.lg.jp/hodoshiryo/toshiseibi/0000675035.
+ html
+URL:https://www.city.osaka.lg.jp/hodoshiryo/toshiseibi/0000675035.html
+TRANSP:TRANSPARENT
+END:VEVENT
+END:VCALENDAR
