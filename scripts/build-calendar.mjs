@@ -90,10 +90,13 @@ const secs = DATA.calendars.map((cal) => {
   // ★class を新しく作らない。style.css に定義が無いクラスを書くと、ただの素の見た目で出る
   //   （今日 .fine で実際に踏んだ）。ここは行数も少ないので inline style で足りる。
   // ★過ぎた予定は「薄くする」だけにしない。色が効かない環境で区別が消えるので、文字でも示す。
+  // ★「終了」の判定をビルド時に固めない（2026-09-14）。
+  //   この面は生成物をコミットする方式なので、回し直さないと日付が古いまま残る。
+  //   ビルド日で終了を決めると、次に回すまで過ぎた予定が「これから」の顔で並ぶ。
+  //   ∴ data-date だけ埋めておいて、終了かどうかは見た人のブラウザがその場で決める。
   const rows = cal.events.map((e) => {
-    const past = (e.end || e.date) < TODAY
     const span = e.end ? `${jp(e.date)}〜${jp(e.end)}` : `${jp(e.date)}（${wd(e.date)}）`
-    return `<tr${past ? ' style="opacity:.55"' : ''}><td style="white-space:nowrap">${esc(span)}</td><td>${past ? '<small>【終了】</small> ' : ''}${esc(e.title)}${e.kind === '計算' ? ' <small>（規則から計算した見込み）</small>' : ''}${e.note ? `<br><small>${esc(e.note)}</small>` : ''}${e.url ? `<br><small><a href="${esc(e.url)}" rel="nofollow">出典のページ</a></small>` : ''}</td></tr>`
+    return `<tr data-until="${esc(e.end || e.date)}"><td style="white-space:nowrap">${esc(span)}</td><td>${esc(e.title)}${e.kind === '計算' ? ' <small>（規則から計算した見込み）</small>' : ''}${e.note ? `<br><small>${esc(e.note)}</small>` : ''}${e.url ? `<br><small><a href="${esc(e.url)}" rel="nofollow">出典のページ</a></small>` : ''}</td></tr>`
   }).join('\n')
   return `<h2 id="${esc(cal.slug)}">${esc(cal.name)}</h2>
 <p>${esc(cal.desc)}</p>
@@ -128,7 +131,26 @@ ${secs}
 </ul>
 
 <p class="updated">この予定表の確認日：${esc(DATA.verifiedAt)}　／　ページの生成日：${esc(TODAY)}<br>
-日付は各出典のページで確認したものです。変更されることがありますので、大切な手続きの前は必ず出典元でご確認ください。</p>`
+日付は各出典のページで確認したものです。変更されることがありますので、大切な手続きの前は必ず出典元でご確認ください。</p>
+
+<script>
+/* 過ぎた予定に印を付ける。★ビルド時に決めないこと——この面は生成物をコミットする方式なので、
+   回し直すまで日付が固まってしまい、過ぎた予定が「これから」の顔で並ぶ。見た人のブラウザが
+   その場で判定すれば、次にビルドするまでの間も正しく見える。 */
+(function () {
+  var t = new Date(Date.now() + 9 * 3600e3).toISOString().slice(0, 10)
+  var rows = document.querySelectorAll('tr[data-until]')
+  var n = 0
+  for (var i = 0; i < rows.length; i++) {
+    var u = rows[i].getAttribute('data-until')
+    if (!u || u >= t) continue
+    rows[i].style.opacity = '.55'
+    var td = rows[i].cells[1]
+    if (td) td.insertAdjacentHTML('afterbegin', '<small>【終了】</small> ')
+    n++
+  }
+})();
+</script>`
 
 fs.writeFileSync(path.join(OUT, 'index.html'), page({
   title: 'くらしの福祉の予定表｜年金の支給日・制度が変わる日・公営住宅の募集をカレンダーに',
