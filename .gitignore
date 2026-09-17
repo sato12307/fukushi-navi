@@ -14,3 +14,8 @@ tools/__pycache__/
 
 # 有料パックの生成物。ここが公開されると売り物がそのまま無料配布になる。
 .dist/
+
+# 川崎市の応募状況表PDF(27回分)を読み取った生の中間ファイル(673KB)。
+# PDFから再生成できる（node scripts/kawasaki-fetch.mjs → python scripts/kawasaki-parse.py）。
+# 都営と同じ扱い＝公開するのは検算ゲートを通した生成物だけにする。
+data/kawasaki-bairitsu.json
