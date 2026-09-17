@@ -24,3 +24,4 @@ data/kawasaki-bairitsu.json
 # PDFから再生成できる（*-fetch.mjs → *-parse.py）。川崎・都営と同じ扱い。
 data/shizuoka-bairitsu.json
 data/yokohama-bairitsu.json
+.tmp-*
