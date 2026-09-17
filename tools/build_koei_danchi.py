@@ -91,10 +91,18 @@ def rank_rows(units):
     )
     for i, u in enumerate(ranked, 1):
         cls = "hi" if u["val"] >= 1 else "lo"
+        # ★2026-09-17 特徴を同じ行に置くのをやめ、次の行へ落とした。
+        #   320px幅で実測したら、この表だけ1行が平均219px・最大434pxあった
+        #   （同じ面の他の表は80〜106px）。原因は6列目の「特徴」が長文で、
+        #   画面の外にある列が行の高さを決めていたこと。表を横に送らないと
+        #   見えない列のせいで、見えている部分が空白だらけになる。
+        #   ∴ 主要な数字は1行に収め、特徴は colspan の行に回す。
+        #   （/toei/ の無料ページが町丁目の数字で使っているのと同じ形）
         rows.append(
             '      <tr><td class="rk">{i}</td><th scope="row">{n}</th>'
             '<td class="cty">{c}</td><td class="{cls}">{r}</td>'
-            '<td class="rel">{rel}</td><td>{a}</td></tr>'.format(
+            '<td class="rel">{rel}</td></tr>\n'
+            '      <tr class="attr"><td></td><td colspan="4">{a}</td></tr>'.format(
                 i=i, n=esc(u["name"]), c=esc(u["city"]), r=esc(u["ratio_text"]),
                 rel=esc(fmt_rel(u["val"], u["qual"], u["base"])), a=u["attr"], cls=cls,
             )
@@ -240,6 +248,9 @@ PAGE = r"""<!DOCTYPE html>
 .ratio-table td.rel { white-space: nowrap; color: var(--sub); }
 .ratio-table td.gap { font-weight: 700; white-space: nowrap; }
 .ratio-table span.sub { font-weight: 400; font-size: .82rem; color: var(--sub); }
+/* 特徴の行。上の行と1件ぶんに見えるよう、間の罫線を消して字を小さくする。 */
+.ratio-table tr.attr td { border-top: 0; padding-top: 0; font-size: .84rem; color: var(--sub); white-space: normal; }
+.ratio-table tr:not(.attr) td, .ratio-table tr:not(.attr) th { border-top: 1px solid var(--line); }
 </style>
 </head>
 <body>
@@ -293,7 +304,7 @@ PAGE = r"""<!DOCTYPE html>
   <div class="table-wrap">
   <table class="ratio-table">
     <caption>団地・住戸別の応募倍率（@@NCITY@@市@@NUNIT@@件・出典は末尾）</caption>
-    <thead><tr><th scope="col">#</th><th scope="col">団地・住戸</th><th scope="col">市</th><th scope="col">応募倍率</th><th scope="col">市平均比</th><th scope="col">特徴（分かる範囲）</th></tr></thead>
+    <thead><tr><th scope="col">#</th><th scope="col">団地・住戸</th><th scope="col">市</th><th scope="col">応募倍率</th><th scope="col">市平均比</th></tr></thead>
     <tbody>
 @@RANK@@
     </tbody>

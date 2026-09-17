@@ -133,6 +133,43 @@
   </div>
   <!-- /kaitei -->
 
+<!-- offer:pack -->
+  <p class="offer-lead">上の早見表の<strong>27万円・40万円・75万円</strong>を、自分の親御さんに当てはめて確かめ、認定書をもらって<strong>過去5年分をさかのぼって出す</strong>ところまでをまとめたものがあります。</p>
+  <div class="offer" id="offer-pack" data-offer="pack">
+  <span class="kicker">手続きまで進めるなら</span>
+  <h3>親の障害者控除、過去5年分をさかのぼって取り戻す手順書</h3>
+  <p class="price"><b>500円</b><span>買い切り・税込。HTMLファイル1つ、印刷してそのまま窓口へ</span></p>
+  <p>ここまでが無料で読めるところです。ここから先＝認定書をもらい、還付額を試算し、更正の請求か還付申告を出すまでを、お住まいの市区町村の基準に合わせて1つにまとめました。</p>
+  <ul>
+  <li>親のランク（日常生活自立度）が<strong>どの書類のどこに書いてあるか</strong>と、手元にないときの取り寄せ方（開示請求）</li>
+  <li>所得税率5〜33%×障害者／特別障害者／同居特別障害者の<strong>還付額の試算表</strong>（年額と5年分）</li>
+  <li>確定申告済みなら更正の請求・未申告なら還付申告、それぞれの<strong>必要書類と出し方</strong></li>
+  <li>窓口での<strong>持ち物のチェックリスト</strong>と、「過去◯年分も」と伝えるべき理由</li>
+  </ul>
+  <p class="fine">先に確認してください：この控除で税金が戻るのは、<strong>親御さん本人が税を納めている</strong>か、<strong>あなたが親御さんを扶養親族として申告している</strong>場合です。どちらにも当てはまらないと、控除する税金がないため戻るお金はありません。</p>
+  <p><label for="munsel-pack"><strong>お住まいの市区町村を選んでください</strong></label></p>
+  <p><select id="munsel-pack" class="munsel" data-munsel><option value="">— 読み込み中 —</option></select></p>
+  <p class="buyrow"><button type="button" class="btn-primary" data-buy>500円で手順書を受け取る</button> <span class="buymsg" role="status"></span></p>
+  <p class="peek-lead">説明だけでは分からないと思うので、<strong>実物の冒頭をそのまま</strong>出します。宣伝用に書き直したものではありません。</p>
+  <div class="peek" aria-label="手順書の冒頭（抜粋）">
+    <h4 class="pk">ステップ4　税金を取り戻す</h4>
+    <p>認定書が手に入ったら、年ごとにやり方が分かれます。</p>
+    <div class="table-wrap"><table>
+    <thead><tr><th>状況</th><th>やること</th><th>期限</th></tr></thead>
+    <tbody>
+    <tr><th>今年の分（これから）</th><td>勤め先の<b>年末調整</b>で申告。扶養控除等申告書の障害者欄に記入し、認定書の写しを添える</td><td>年末調整のとき</td></tr>
+    <tr><th>過去の年で<b>確定申告をしていない</b></th><td><b>還付申告</b>。その年の確定申告書を新たに提出する</td><td>その年の翌年1月1日から<b>5年</b></td></tr>
+    <tr><th>過去の年で<b>確定申告をしている</b></th><td><b>更正の請求</b>。「更正の請求書」を提出する</td><td>申告期限から<b>5年</b></td></tr>
+    </tbody></table></div>
+    <p><b>5年ぶんまとめて出せます。</b>年ごとに書類を分けて、同時に提出してかまいません。税務署の窓口でも、e-Taxでも、郵送でも受け付けています。</p>
+  </div>
+  <p class="peekcut"><span>抜粋はここまで</span></p>
+  <p class="fine">かすんでいるのは「ここで切れている」という印です。<strong>この先の本文はこのページに入っていません</strong>（ソースを見ても続きは出てきません）。</p>
+  <p class="fine"><strong>買わなくても手続きはできます。</strong>迷ったら先に<a href="../shogai-kojo/">自治体別の一覧</a>で、自分の街の基準だけ確かめてください。制度の説明は<a href="../articles/shogaisha-kojo-tax.html">こちらの記事</a>で全部無料です。</p>
+  <p class="fine">クレジットカード決済（Stripe）。カード情報は当方を経由しません。お支払い後すぐダウンロードできます。<a href="../pack/">売り場のページ</a>／<a href="../tokushoho/">特定商取引法に基づく表記</a>／<a href="../kiyaku/">利用規約</a></p>
+  </div>
+  <!-- /offer -->
+
   <h2>② 実際にいくら軽くなる？（減税額の考え方）</h2>
   <p>障害者控除は「所得控除」なので、減税額は<strong>「控除額 × あなたの税率」</strong>でおおよそ決まります。所得税は所得が多いほど税率が上がる累進課税（5%〜45%）で、住民税は<strong>原則10%</strong>です。下の表は「障害者控除（所得税27万円・住民税26万円）」を受けた場合の、ざっくりした目安です。</p>
 
@@ -175,43 +212,6 @@
   <div class="callout point">
     <p><span class="tag">親が要介護なら</span>障害者手帳がなくても、<strong>要介護認定を受けている親御さん</strong>は市区町村の認定を受ければ障害者控除の対象になることがあります（→ <a href="#nintei">④ 障害者控除対象者認定書</a>）。申告していなかった分は<strong>過去5年分までさかのぼって還付を請求できます</strong>。</p>
   </div>
-
-<!-- offer:pack -->
-  <p class="offer-lead">上の「さかのぼって申告できる場合があります」を、自分の親御さんに当てはめて確かめ、実際に出すところまでをまとめたものがあります。</p>
-  <div class="offer" id="offer-pack" data-offer="pack">
-  <span class="kicker">手続きまで進めるなら</span>
-  <h3>親の障害者控除、過去5年分をさかのぼって取り戻す手順書</h3>
-  <p class="price"><b>500円</b><span>買い切り・税込。HTMLファイル1つ、印刷してそのまま窓口へ</span></p>
-  <p>ここまでが無料で読めるところです。ここから先＝認定書をもらい、還付額を試算し、更正の請求か還付申告を出すまでを、お住まいの市区町村の基準に合わせて1つにまとめました。</p>
-  <ul>
-  <li>親のランク（日常生活自立度）が<strong>どの書類のどこに書いてあるか</strong>と、手元にないときの取り寄せ方（開示請求）</li>
-  <li>所得税率5〜33%×障害者／特別障害者／同居特別障害者の<strong>還付額の試算表</strong>（年額と5年分）</li>
-  <li>確定申告済みなら更正の請求・未申告なら還付申告、それぞれの<strong>必要書類と出し方</strong></li>
-  <li>窓口での<strong>持ち物のチェックリスト</strong>と、「過去◯年分も」と伝えるべき理由</li>
-  </ul>
-  <p class="fine">先に確認してください：この控除で税金が戻るのは、<strong>親御さん本人が税を納めている</strong>か、<strong>あなたが親御さんを扶養親族として申告している</strong>場合です。どちらにも当てはまらないと、控除する税金がないため戻るお金はありません。</p>
-  <p><label for="munsel-pack"><strong>お住まいの市区町村を選んでください</strong></label></p>
-  <p><select id="munsel-pack" class="munsel" data-munsel><option value="">— 読み込み中 —</option></select></p>
-  <p class="buyrow"><button type="button" class="btn-primary" data-buy>500円で手順書を受け取る</button> <span class="buymsg" role="status"></span></p>
-  <p class="peek-lead">説明だけでは分からないと思うので、<strong>実物の冒頭をそのまま</strong>出します。宣伝用に書き直したものではありません。</p>
-  <div class="peek" aria-label="手順書の冒頭（抜粋）">
-    <h4 class="pk">ステップ4　税金を取り戻す</h4>
-    <p>認定書が手に入ったら、年ごとにやり方が分かれます。</p>
-    <div class="table-wrap"><table>
-    <thead><tr><th>状況</th><th>やること</th><th>期限</th></tr></thead>
-    <tbody>
-    <tr><th>今年の分（これから）</th><td>勤め先の<b>年末調整</b>で申告。扶養控除等申告書の障害者欄に記入し、認定書の写しを添える</td><td>年末調整のとき</td></tr>
-    <tr><th>過去の年で<b>確定申告をしていない</b></th><td><b>還付申告</b>。その年の確定申告書を新たに提出する</td><td>その年の翌年1月1日から<b>5年</b></td></tr>
-    <tr><th>過去の年で<b>確定申告をしている</b></th><td><b>更正の請求</b>。「更正の請求書」を提出する</td><td>申告期限から<b>5年</b></td></tr>
-    </tbody></table></div>
-    <p><b>5年ぶんまとめて出せます。</b>年ごとに書類を分けて、同時に提出してかまいません。税務署の窓口でも、e-Taxでも、郵送でも受け付けています。</p>
-  </div>
-  <p class="peekcut"><span>抜粋はここまで</span></p>
-  <p class="fine">かすんでいるのは「ここで切れている」という印です。<strong>この先の本文はこのページに入っていません</strong>（ソースを見ても続きは出てきません）。</p>
-  <p class="fine"><strong>買わなくても手続きはできます。</strong>迷ったら先に<a href="../shogai-kojo/">自治体別の一覧</a>で、自分の街の基準だけ確かめてください。制度の説明は<a href="../articles/shogaisha-kojo-tax.html">こちらの記事</a>で全部無料です。</p>
-  <p class="fine">クレジットカード決済（Stripe）。カード情報は当方を経由しません。お支払い後すぐダウンロードできます。<a href="../pack/">売り場のページ</a>／<a href="../tokushoho/">特定商取引法に基づく表記</a>／<a href="../kiyaku/">利用規約</a></p>
-  </div>
-  <!-- /offer -->
 
   <h2>③ 「特別障害者」「同居特別障害者」とは？</h2>
   <p>控除額が大きくなる「特別障害者」「同居特別障害者」に当たるかどうかは、控除額に直結する大事なポイントです。国税庁の説明をもとに、おおまかな目安を整理します。</p>
