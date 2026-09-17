@@ -197,6 +197,7 @@ def plain(s):
 NERAI_CITIES = {
     "kawasaki": u"川崎市", "shizuoka": u"静岡市",
     "yokohama": u"横浜市", "kobe": u"神戸市",
+    # 相模原は記事が無い（12市に入っていない）。ハブ記事の実測一覧から渡している。
 }
 NERAI_HTML = u"""  <div class="callout point">
     <p><span class="tag">この市は実測がそろっています</span>{name}は募集回ごとの応募状況が公表されているので、

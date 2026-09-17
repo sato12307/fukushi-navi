@@ -32,7 +32,8 @@
     kawasaki: { product: 'kawasaki', perCity: false, seen: 'kawasaki_offer_seen', read: 'kawasaki_offer_read', buy: 'kawasaki_leaf_buy' },
     shizuoka: { product: 'shizuoka', perCity: false, seen: 'shizuoka_offer_seen', read: 'shizuoka_offer_read', buy: 'shizuoka_leaf_buy' },
     yokohama: { product: 'yokohama', perCity: false, seen: 'yokohama_offer_seen', read: 'yokohama_offer_read', buy: 'yokohama_leaf_buy' },
-    kobe: { product: 'kobe', perCity: false, seen: 'kobe_offer_seen', read: 'kobe_offer_read', buy: 'kobe_leaf_buy' }
+    kobe: { product: 'kobe', perCity: false, seen: 'kobe_offer_seen', read: 'kobe_offer_read', buy: 'kobe_leaf_buy' },
+    sagamihara: { product: 'sagamihara', perCity: false, seen: 'sagamihara_offer_seen', read: 'sagamihara_offer_read', buy: 'sagamihara_leaf_buy' }
   }
 
   // ── どこまで進んだかを3段で数える ────────────────────────────────────────
