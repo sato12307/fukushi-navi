@@ -34,7 +34,7 @@ function rpc (ws) { let id = 0; const w = new Map(); const ev = []; ws.addEventL
 //   実測（直した直後）＝生成物 4.2〜5.3画面 ／ 手書き 6.1〜6.6画面。
 const MAX_SCREENS = 6.0
 const MAX_SCREENS_ARTICLE = 7.0
-const GENERATED = /^(articles\/toei-|shogai-kojo\/|kawasaki\/)/
+const GENERATED = /^(articles\/toei-|shogai-kojo\/|kawasaki\/|shizuoka\/|yokohama\/)/
 // 冒頭の案内は生成物にだけ一律で要求する。手書きの記事は「商品と読者が合っている面だけ」に
 // 置くと決めてあるため（scripts/stamp-offers.mjs の jumpBefore）。
 
@@ -50,7 +50,9 @@ const files = [
   ...fs.readdirSync('shogai-kojo').filter((f) => f.endsWith('.html')).map((f) => 'shogai-kojo/' + f),
   //   ★2026-09-17(3) 川崎の無料ページ（売り場カードのある面）も足す。
   //     /kawasaki/kanryo/ は購入者だけが来る画面なので見ない。
-  'kawasaki/index.html',
+  //   ★2026-09-17(4) 政令市が3つになった。売り場カードのある無料ページは全部見る。
+  //     /<市>/kanryo/ は購入者だけが来る画面なので見ない。
+  ...['kawasaki', 'shizuoka', 'yokohama'].map((k) => k + '/index.html').filter((f) => fs.existsSync(f)),
 ].sort()
 // 売り場の有無で当てる検査を分ける（売り場を置かない面もある。例＝東京都以外の公営住宅の記事）
 const hasOffer = (html) => /class="offer"/.test(html)

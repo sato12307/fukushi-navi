@@ -30,29 +30,33 @@ const esc = (s) => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replac
 //   置き場所（どの面のどこに入れるか）は呼ぶ側が決める。
 // ★新しい class を作らない。既存の .callout.note だけで組む
 //   （スコープ付きの定義を踏む事故と、cssの版番号の付け直しを避ける）。
-export function jumpKawasaki({ rounds = 27, price = 500 } = {}) {
+// ★政令市の「申込先えらび」は市ごとに商品を分ける（A案・ユーザー裁定）。
+//   読者の地域と商品を合わせるため、政令市をまとめた1つの資料にはしない。
+//   文面はここ1か所。市ごとに違うのは「市名・回数・軸の呼び名・件数」だけなので、
+//   生成器（scripts/koei-nerai.mjs）が数えた実数を facts で渡してもらう。
+//   ★ここに市ごとの if を増やさない。増えたら facts に欄を足す。
+export function jumpKoei(f) {
   return `  <div class="callout note">
-    <p><span class="tag">有料の一覧</span>このページの相場は全部無料です。そのうえで<strong>住宅名を1つに決める</strong>ところまで要るなら、定期募集${rounds}回を名寄せして「毎回すいている申込先」を住宅名つきで並べた一覧（<strong>${price}円</strong>・買い切り）があります。<a href="#offer-kawasaki">中身と値段を見る →</a></p>
+    <p><span class="tag">有料の一覧</span>このページの相場は全部無料です。そのうえで<strong>申込先を1つに決める</strong>ところまで要るなら、定期募集${f.rounds}回を名寄せして「毎回すいている申込先」を並べた一覧（<strong>${f.price}円</strong>・買い切り）があります。<a href="#offer-${f.key}">中身と値段を見る →</a></p>
   </div>`
 }
 
-/** 川崎市営住宅の申込先えらび。facts＝生成器が数えた実数、peek＝実物の冒頭（生成器が資料と同じ行から切る） */
-export function offerKawasakiLeaf({ facts, peek, up = '../' } = {}) {
-  const f = facts
-  return `  <div class="offer" id="offer-kawasaki" data-offer="kawasaki">
+/** 政令市の申込先えらび。facts＝生成器が数えた実数、peek＝実物の冒頭（資料と同じ行から切る） */
+export function offerKoeiLeaf({ facts: f, peek, up = '../' } = {}) {
+  return `  <div class="offer" id="offer-${f.key}" data-offer="${f.key}">
   <span class="kicker">申込先を1つに決めるなら</span>
-  <h3>川崎市営住宅で「毎回すいている申込先」の住宅名つき一覧</h3>
+  <h3>${f.city}営住宅で「毎回すいている申込先」の一覧</h3>
   <p class="price"><b>${f.price}円</b><span>買い切り・税込。HTMLファイル1つ、印刷可</span></p>
-  <p>ここまでが無料で読めるところです。このページで分かるのは「どの区分が空きやすいか」まで。<strong>1回だけ空いた住宅と、いつ見ても空いている住宅は区別できません</strong>。定期募集${f.rounds}回を住宅と募集区分ごとに名寄せして、中央値で選り分けた一覧です。</p>
+  <p>ここまでが無料で読めるところです。このページで分かるのは「どの${f.axis}が空きやすいか」まで。<strong>1回だけ空いた住宅と、いつ見ても空いている住宅は区別できません</strong>。定期募集${f.rounds}回を申込先ごとに名寄せして、中央値で選り分けた一覧です。</p>
   <ul>
   <li><strong>毎回すいている申込先</strong>（${f.minN}件以上の募集を観測できて、倍率の中央値が${f.suki}倍未満のものだけ<strong>${f.sukiN}件</strong>。1回だけ空いた住宅は入れていません）</li>
   <li>回によって当たりやすさが<strong>大きく動く申込先</strong>（${f.bureN}件。住宅を変えるより、出す回を変えるほうが効く相手）</li>
   <li>申込者ゼロが出た申込先と<strong>その回数</strong></li>
-  <li>観測できた<strong>全申込先の索引${f.enoughN}件</strong>（住宅名・種別・募集区分・倍率の中央値／最低／最高・観測件数・申込0の回数・のべ募集戸数・最後に募集された回）</li>
+  <li>観測できた<strong>全申込先の索引${f.enoughN}件</strong>（倍率の中央値／最低／最高・観測件数・申込0の回数・のべ募集戸数・最後に募集された回）</li>
   </ul>
-  <p class="fine">先に確認してください：これは<strong>過去の実測から作った目安</strong>で、次の募集の倍率を約束するものではありません。募集される住宅は回ごとに変わります。申込資格（市内在住・収入基準など）は川崎市の募集案内でご確認ください。<strong>対象は川崎市営住宅だけ</strong>で、神奈川県営住宅・都営住宅は入っていません。</p>
+  <p class="fine">先に確認してください：これは<strong>過去の実測から作った目安</strong>で、次の募集の倍率を約束するものではありません。募集される住宅は回ごとに変わります。申込資格（市内在住・収入基準など）は${f.city}の募集案内でご確認ください。<strong>対象は${f.only}</strong>で、都道府県営住宅や他市の市営住宅は入っていません。</p>
   <p class="buyrow"><button type="button" class="btn-primary" data-buy>${f.price}円で一覧を受け取る</button> <span class="buymsg" role="status"></span></p>
-  <p class="fine"><strong>買わなくても申し込みはできます。</strong>募集区分ごとの相場と混んでいる住宅の実名は、上に全部出しています。</p>
+  <p class="fine"><strong>買わなくても申し込みはできます。</strong>${f.axis}ごとの相場と混んでいる申込先の実名は、上に全部出しています。</p>
 ${peek ? peekBox('一覧の冒頭（抜粋）', peek) : ''}
   <p class="fine">クレジットカード決済（Stripe）。カード情報は当方を経由しません。お支払い後すぐダウンロードできます。<a href="${up}tokushoho/">特定商取引法に基づく表記</a>／<a href="${up}kiyaku/">利用規約</a></p>
   </div>`

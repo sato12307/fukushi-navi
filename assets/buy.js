@@ -26,9 +26,12 @@
   var P = {
     pack: { product: 'kojo', perCity: true, seen: 'pack_offer_seen', read: 'pack_offer_read', pick: 'pack_city_pick', buy: 'pack_leaf_buy' },
     toei: { product: 'toei', perCity: false, seen: 'toei_offer_seen', read: 'toei_offer_read', buy: 'toei_leaf_buy' },
-    // 川崎市営住宅の申込先えらび（2026-09-17）。都営と同じ形だが別の商品なので
-    // イベント名もKVのキーも分ける。同じ名前にすると、どちらが売れたのか二度と分けられない。
-    kawasaki: { product: 'kawasaki', perCity: false, seen: 'kawasaki_offer_seen', read: 'kawasaki_offer_read', buy: 'kawasaki_leaf_buy' }
+    // 政令市の申込先えらび（2026-09-17）。市ごとに商品を分ける（A案）。
+    // ★イベント名もKVのキーも市ごとに分ける。同じ名前にすると、どの市が売れたのか
+    //   tools/buy-funnel.mjs で二度と分けられない。市を足すときはここに1行足す。
+    kawasaki: { product: 'kawasaki', perCity: false, seen: 'kawasaki_offer_seen', read: 'kawasaki_offer_read', buy: 'kawasaki_leaf_buy' },
+    shizuoka: { product: 'shizuoka', perCity: false, seen: 'shizuoka_offer_seen', read: 'shizuoka_offer_read', buy: 'shizuoka_leaf_buy' },
+    yokohama: { product: 'yokohama', perCity: false, seen: 'yokohama_offer_seen', read: 'yokohama_offer_read', buy: 'yokohama_leaf_buy' }
   }
 
   // ── どこまで進んだかを3段で数える ────────────────────────────────────────
