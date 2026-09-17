@@ -162,8 +162,12 @@ def runs(line):
     return out
 
 
-NIN = re.compile(r"(?:^|\s)(\d{1,2})\s*人(以上)?")
+# 「3~5人」の 5 は直前が ~ なので、空白だけを区切りにすると拾えない（京都市で実際に落ちた）。
+# 「単身世帯」を1人と書く自治体もある（名古屋市）。
+NIN = re.compile(r"(?:^|[\s~～〜ー\-－・、,])(\d{1,2})\s*人(以上)?|(単身)")
 BARE = re.compile(r"(?<![(（\d])(\d{1,3}(?:,\d{3})+)(?![)）])")
+# 金額が先・世帯の別があとに括弧で来る書き方（神戸市）
+REV = re.compile(r"(\d{1,3}(?:,\d{3})+)\s*円?\s*[(（]([^)）]{1,14})[)）]")
 
 
 def vertical(lines):
@@ -188,34 +192,59 @@ def vertical(lines):
     #   ∴ 人員ごとに **候補を全部ためて**、条件を満たす組み合わせを探す。
     got = {}
     for l in lines:
+        # 「3~5人」は下限の3で数える。そのままだと ~ の直後の 5 を拾って
+        # 3人の欄が空になる（京都市で実際に落ちた）。
+        l = re.sub(r"(\d)\s*[~～〜ー\-－]\s*(\d)\s*人", r"\1人", l)
         for m in NIN.finditer(l):
-            n = int(m.group(1))
-            if not 1 <= n <= 7:
-                continue
-            key = 7 if m.group(2) or n >= 7 else n
+            if m.group(3):  # 「単身」
+                key = 1
+            else:
+                n = int(m.group(1))
+                if not 1 <= n <= 7:
+                    continue
+                # 3人・4人・5人は同じ band（3〜5人）。人員ごとに分けて書く自治体があるので畳む。
+                key = 7 if m.group(2) or n >= 7 else (3 if 3 <= n <= 5 else n)
             b = BARE.search(l[m.end():])
             if not b:
                 continue
             v = int(b.group(1).replace(",", ""))
             if LO <= v <= HI and v % 100 == 0:  # 限度額は必ず100円単位。第2類(27,790)はここで落ちる
                 got.setdefault(key, []).append(v)
+        # ★逆順で書く自治体がある（神戸市）。
+        #   「上限額 40,000円(単身世帯) 48,000円(2人世帯) 52,000円(3~5人世帯) …」
+        #   金額が先、世帯の別があとに括弧で付く。
+        for m in REV.finditer(l):
+            v = int(m.group(1).replace(",", ""))
+            if not (LO <= v <= HI and v % 100 == 0):
+                continue
+            lab = m.group(2)
+            if "単身" in lab:
+                key = 1
+            else:
+                mm = re.search(r"(\d{1,2})\s*人(以上)?", lab)
+                if not mm:
+                    continue
+                n = int(mm.group(1))
+                key = 7 if mm.group(2) or n >= 7 else (3 if 3 <= n <= 5 else n)
+            got.setdefault(key, []).append(v)
     need = [1, 2, 3, 6, 7]  # 1人 / 2人 / 3〜5人 / 6人 / 7人以上
-    if not all(k in got for k in need):
+    # ★住居確保給付金の案内は4人世帯までしか出さないことがある（名古屋市）。
+    #   1・2・3〜5人が揃えば、残りは None のまま採る（欠けているものを埋めない）。
+    if not all(k in got for k in need[:3]):
         return []
     for c0 in sorted(set(got[1])):
         if not TANSHIN_LO <= c0 <= TANSHIN_HI:
             continue
         chain = [c0]
         for k in need[1:]:
-            nxt = [v for v in sorted(set(got[k])) if v >= chain[-1]]
-            if not nxt:
-                break
-            chain.append(nxt[0])
-        if len(chain) != 5:
+            nxt = [v for v in sorted(set(got.get(k, []))) if v >= chain[-1]]
+            chain.append(nxt[0] if nxt else None)
+        if chain[1] is None or chain[2] is None:
             continue
-        # 7人以上は単身のおおむね1.5倍前後（実測: 東京都1.56 / 埼玉県1.56 / 札幌市1.56）。
+        last = chain[4] or chain[3] or chain[2]
+        # 世帯が増えたときの伸びはおおむね1.2〜2.0倍（実測: 東京都1.56 / 埼玉県1.56 / 札幌市1.56）。
         # ここを外れる組み合わせは、別々の表の数字を寄せ集めている。
-        if 1.2 <= chain[4] / chain[0] <= 2.0:
+        if 1.15 <= last / chain[0] <= 2.0:
             return [chain]
     return []
 
@@ -326,6 +355,12 @@ def main():
             stat["未調査"] += 1
             continue
         rows, url, err = parse_org(t["name"])
+        # ★都道府県は県内に級地が何段階もある。級地の書いていない行を採ると
+        #   「どの級地の額か分からない数字」を県の値として置くことになる
+        #   （北海道で振興局のページから 25,000… を拾って実際にそうなった）。
+        #   指定都市・中核市は級地が1つなので無記名でよい。
+        if rows and t["level"] == "都道府県" and any(not r["kyuchi"] for r in rows):
+            rows, err = None, "級地の書いていない表しか取れていない（県内に複数の級地があるので特定できない）"
         if not rows:
             t["status"] = "B"
             t["note"] = err
@@ -340,7 +375,7 @@ def main():
         result[t["name"]] = {"level": t["level"], "pref": t["pref"], "source": url, "rows": rows}
         for r in rows:
             lab = r["kyuchi"] or "(級地の記載なし)"
-            print(f"A  {t['name']:8s} {lab:10s} " + " / ".join(f"{v:,}" for v in r["yen"]))
+            print(f"A  {t['name']:8s} {lab:10s} " + " / ".join(f"{v:,}" if v else "—" for v in r["yen"]))
     print(f"\nA {stat['A']} / B {stat['B']} / 未調査 {stat['未調査']}  （全{len(L['targets'])}機関）")
     if DRY:
         return

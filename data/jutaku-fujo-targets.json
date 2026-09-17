@@ -48,7 +48,7 @@
    "level": "都道府県",
    "pref": "北海道",
    "status": "B",
-   "note": "3e8c9b32.pdf:限度額の表が見つからない; 63a7de45.html:限度額の表が見つからない; 7b67e8ca.pdf:限度額の表が見つからない; c3138aa9.html:限度額の表が見つからない; facb884e.html:限度額の表が見つからない",
+   "note": "級地の書いていない表しか取れていない（県内に複数の級地があるので特定できない）",
    "checked": "2026-09-17",
    "urls": [
     "https://www.pref.hokkaido.lg.jp/hf/feg/hog/hogoanai1.html",
@@ -508,15 +508,15 @@
    "name": "京都市",
    "level": "指定都市",
    "pref": "京都府",
-   "status": "B",
-   "note": "81e0a681.pdf:生活保護の書類ではない; 91a4b745.html:限度額の表が見つからない; d8fc451a.pdf:限度額の表が見つからない",
+   "status": "A",
+   "note": null,
    "checked": "2026-09-17",
    "urls": [
     "https://www.city.kyoto.lg.jp/hokenfukushi/cmsfiles/contents/0000344/344816/0710_kijun.pdf",
     "https://www.city.kyoto.lg.jp/hokenfukushi/page/0000149325.html",
     "https://www.city.kyoto.lg.jp/hokenfukushi/cmsfiles/contents/0000005/5320/0508jyukyuu.pdf"
    ],
-   "picked": null
+   "picked": "https://www.city.kyoto.lg.jp/hokenfukushi/page/0000149325.html"
   },
   {
    "name": "仙台市",
@@ -552,15 +552,15 @@
    "name": "名古屋市",
    "level": "指定都市",
    "pref": "愛知県",
-   "status": "B",
-   "note": "04074de2.html:限度額の表が見つからない; 194f23a1.html:限度額の表が見つからない; 23b4f6a1.html:限度額の表が見つからない; 2c114380.pdf:限度額の表が見つからない; 7f2fd065.html:限度額の表が見つからない",
+   "status": "A",
+   "note": null,
    "checked": "2026-09-17",
    "urls": [
     "https://www.city.nagoya.jp/kenkofukushi/page/0000128510.html",
     "https://www.city.nagoya.jp/_res/projects/default_project/_page_/001/016/734/317seikatuhogo.pdf",
     "https://www.city.nagoya.jp/kenkofukushi/fukushi/1051323/1016734.html"
    ],
-   "picked": null
+   "picked": "https://www.city.nagoya.jp/kenkofukushi/page/0000128510.html"
   },
   {
    "name": "堺市",
@@ -685,14 +685,14 @@
    "name": "神戸市",
    "level": "指定都市",
    "pref": "兵庫県",
-   "status": "B",
-   "note": "32173c48.pdf:限度額の表が見つからない; 47ce43f5.pdf:限度額の表が見つからない; 52c3330c.pdf:限度額の表が見つからない; 566c22f2.html:限度額の表が見つからない; 822cfec6.pdf:限度額の表が見つからない; abfefb05.pdf:限度額の表が見つからない; c4009dd3.pdf:限度額の表が見つからない; ed7a1346.p",
+   "status": "A",
+   "note": null,
    "checked": "2026-09-17",
    "urls": [
     "https://www.city.kobe.lg.jp/documents/4788/03_jyukakupanfu.pdf",
     "https://www.city.kobe.lg.jp/a38463/kenko/chiikifukushi/sekatsukonkyusha/jukyokakuho.html"
    ],
-   "picked": null
+   "picked": "https://www.city.kobe.lg.jp/a38463/kenko/chiikifukushi/sekatsukonkyusha/jukyokakuho.html"
   },
   {
    "name": "福岡市",
