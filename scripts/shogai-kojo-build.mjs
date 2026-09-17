@@ -28,7 +28,16 @@
 //   ∴ このファイルに `new Date()` は無い。増やさないこと。
 // ─────────────────────────────────────────────────────────────────────────────
 import fs from 'node:fs'
-import { offerPackLeaf } from './offer-block.mjs'
+import { offerPackLeaf, jumpPack } from './offer-block.mjs'
+// ★2026-09-17 売り場の位置を実測して直した（390x844）。
+//   自治体別438枚 … 買うボタンが5.1画面目・冒頭の案内なし。案内を「その街の基準の表」の直後へ。
+//   一覧ページ    … カードが **48.2画面目**（437自治体の表43,590pxの後ろ）。誰の目にも入らない。
+//                   ∴ 表より前（要点の直後）へ出し、冒頭にも案内を置く。
+//   ★自治体別は「いくら軽くなるのか」の直後へ（「気をつけること」の前）。
+//     そこより後ろだと、面の長い76枚で買うボタンが6.2〜6.3画面に落ちる（320x800で実測）。
+//     カードの文句（過去5年分をさかのぼる）は「気をつけること」の最後の項目と同じことを
+//     言っているので、順番が入れ替わっても読み手の理解は欠けない。
+//   位置は中身を足すと黙って深くなる。検査は scripts/toei-check.mjs。[[sales-page-funnel-wiring]]
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { NINCHI, NETAKIRI, KAIGO, rank } from './shogai-kojo-lib.mjs'
@@ -136,9 +145,11 @@ for (const r of [...ok, ...notPublished]) {
 
 ${has ? `  <div class="callout point"><p><span class="tag">${esc(name)}の基準</span>${esc(name)}が定めている判定ランクの下限です。ここに届いていれば対象になり得ますが、<strong>最終的な判断は窓口が行います</strong>。</p></div>
 ${critTable(r)}
+${jumpPack()}
 ${verdicts}` : `  <div class="callout warn"><p><span class="tag">確認できませんでした</span>${esc(name)}は、対象になる状態を「知的障害者（軽度・中度）に準ずる方」といった区分までは示していますが、
   <strong>実際にどの判定ランク（日常生活自立度・要介護度）から対象になるのかを公表していません</strong>（${at}時点、当サイトが公開ページを確認した範囲）。
-  対象かどうかは窓口でご確認ください。他の自治体では公表しているところもあり、その一覧は<a href="./index.html">こちら</a>です。</p></div>`}
+  対象かどうかは窓口でご確認ください。他の自治体では公表しているところもあり、その一覧は<a href="./index.html">こちら</a>です。</p></div>
+${jumpPack()}`}
 
   <h2>いくら軽くなるのか</h2>
   <div class="table-wrap"><table>
@@ -150,6 +161,8 @@ ${verdicts}` : `  <div class="callout warn"><p><span class="tag">確認できま
   <p class="note">これは「税金が○万円安くなる」のではなく、<strong>課税所得を減らす</strong>しくみです。実際の減税額は控除額×税率。
   くわしくは<a href="../articles/shogaisha-kojo-tax.html">障害者控除で税金はいくら安くなるか</a>をご覧ください。</p>
 
+${offerPackLeaf({ code: r.code, name, peek: 'nintei', up: '../' })}
+
   <h2>気をつけること</h2>
   <ul>
   <li><strong>要介護認定を受けていれば自動で対象、ではありません。</strong>要介護認定と障害者控除の認定は別の判断です。申請が必要です。</li>
@@ -157,8 +170,6 @@ ${verdicts}` : `  <div class="callout warn"><p><span class="tag">確認できま
   <li>判定の基準日は、控除を受ける年の<strong>12月31日</strong>です（その年に亡くなった場合はその日）。</li>
   <li><strong>過去の分もさかのぼれる場合があります。</strong>すでに確定申告した年の還付は、原則5年前まで請求できます。</li>
   </ul>
-
-${offerPackLeaf({ code: r.code, name, peek: 'nintei', up: '../' })}
 
   <div class="sources">
   <h2>出典</h2>
@@ -312,6 +323,8 @@ const hubBody = `  <p class="breadcrumb"><a href="../index.html">トップ</a> �
   同じ「認知症高齢者の日常生活自立度Ⅲ」の人でも、<strong>${countAt('Ⅲa', NINCHI, 'ninchi').tokubetsu}自治体では特別障害者（40万円）、${countAt('Ⅲa', NINCHI, 'ninchi').shogai}自治体では障害者どまり（27万円）、${countAt('Ⅲa', NINCHI, 'ninchi').none}自治体では対象外</strong>です。
   ご自身の街の基準を下の一覧から確認してください。</p></div>
 
+${jumpPack()}
+
   <h2>同じ状態の人が、街によってどう分かれるか</h2>
   <div class="table-wrap"><table>
   <thead><tr><th>本人の状態</th><th>特別障害者<br><small>40万円</small></th><th>障害者<br><small>27万円</small></th><th>対象外</th></tr></thead>
@@ -324,11 +337,11 @@ const hubBody = `  <p class="breadcrumb"><a href="../index.html">トップ</a> �
   多くの大都市は「知的障害者（軽度・中度）に準ずる方」といった区分までは示しますが、どのランクから対象かは書いていません。
   人口の多い街ほど、事前に自分が対象か調べにくい状態です。</p>
 
+${offerPackLeaf({ peek: 'rank', up: '../' })}
+
 ${citeBlock}  <h2>自治体別の一覧</h2>
   <p class="note">「下限」は、その値<strong>以上</strong>であれば対象になり得るという意味です。表に無い自治体は、例規を公表していないか、当サイトがまだ収録できていません。</p>
 ${prefBlocks}
-
-${offerPackLeaf({ peek: 'rank', up: '../' })}
 
   <div class="sources">
   <h2>この一覧の作り方と限界</h2>

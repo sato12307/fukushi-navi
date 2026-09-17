@@ -25,7 +25,14 @@ function rpc (ws) { let id = 0; const w = new Map(); const ev = []; ws.addEventL
 // 買うボタンが許される深さ（画面数・320x800）。数字はメッセージにも出すので必ずここ1か所から。
 const MAX_SCREENS = 6.0
 
-const files = fs.readdirSync('articles').filter((f) => /^toei-/.test(f)).sort()
+// 見る面＝売り場カードのある生成物ぜんぶ。★2026-09-17 都営54本だけを見ていたが、
+//   同じ日に 自治体別438枚は買うボタン5.1画面・冒頭の案内なし、
+//   一覧ページは **カードが48.2画面目**（437自治体の表の後ろ）で放置されていた。
+//   都営だけ見ていたから気づけなかった。∴ 売り場のある面はぜんぶここで見る。
+const files = [
+  ...fs.readdirSync('articles').filter((f) => /^toei-/.test(f)).map((f) => 'articles/' + f),
+  ...fs.readdirSync('shogai-kojo').filter((f) => f.endsWith('.html')).map((f) => 'shogai-kojo/' + f),
+].sort()
 const bad = []
 try {
   const ws = new WebSocket(await wsUrl())
@@ -36,7 +43,7 @@ try {
   await cdp.send('Emulation.setDeviceMetricsOverride', { width: 320, height: 800, deviceScaleFactor: 1, mobile: true }, sessionId)
   await cdp.send('Page.enable', {}, sessionId)
   for (const f of files) {
-    const url = 'file:///' + path.resolve('articles', f).replace(/\\/g, '/')
+    const url = 'file:///' + path.resolve(f).replace(/\\/g, '/')
     await cdp.send('Page.navigate', { url }, sessionId)
     await cdp.waitFor('Page.loadEventFired')
     await sleep(120)
@@ -57,7 +64,7 @@ try {
         return {
           w: de.scrollWidth, cw: de.clientWidth, vh: window.innerHeight,
           over, tall,
-          cards: document.querySelectorAll('.offer[data-offer="toei"]').length,
+          cards: document.querySelectorAll('.offer[data-offer]').length,
           buy: document.querySelectorAll('[data-buy]').length,
           h1: (document.querySelector('h1') || {}).textContent || '',
           title: document.title,
@@ -65,7 +72,7 @@ try {
           jsonld: [...document.querySelectorAll('script[type="application/ld+json"]')].map((s) => { try { JSON.parse(s.textContent); return 'ok' } catch (e) { return 'NG' } }),
           // 売り場の深さ。画面の何枚目にあるか＝押せる位置にあるかどうか。
           btnTop: (() => { const b = document.querySelector('.offer .buyrow'); return b ? Math.round(b.getBoundingClientRect().top + window.scrollY) : null })(),
-          jump: document.querySelectorAll('a[href="#offer-toei"]').length,
+          jump: document.querySelectorAll('a[href^="#offer-"]').length,
         }
       })()`,
     }, sessionId)).result.value
@@ -84,7 +91,7 @@ try {
     //   線は 6.0画面。これを超えたら、カードの中身か手前の節を削ること。
     if (r.btnTop == null) msg.push('買うボタンの行（.buyrow）が無い')
     else if (r.btnTop / r.vh > MAX_SCREENS) msg.push(`買うボタンが深すぎる ${(r.btnTop / r.vh).toFixed(1)}画面（線は${MAX_SCREENS}）`)
-    if (!r.jump) msg.push('冒頭に売り場への案内（#offer-toei へのリンク）が無い')
+    if (!r.jump) msg.push('冒頭に売り場への案内（#offer-* へのリンク）が無い')
     if (!r.title.includes('フクシル')) msg.push('titleが変')
     if (msg.length) bad.push(`${f}: ${msg.join(' / ')}`)
   }
@@ -98,7 +105,7 @@ try {
   const nm = TEIKI.find((x) => x > m)
   const want = `${nm ? y : y + 1}年${nm || TEIKI[0]}月`
   const stale = files.filter((f) => {
-    const s = fs.readFileSync(path.join('articles', f), 'utf8')
+    const s = fs.readFileSync(f, 'utf8')
     return s.includes('次の定期募集は') && !s.includes(`次の定期募集は${want}`)
   })
   if (stale.length) bad.push(`「次の定期募集」が古い ${stale.length}本（いまは${want}）→ node scripts/toei-machi.mjs を回し直す`)
@@ -109,7 +116,8 @@ try {
 {
   const tokyo = fs.readFileSync(path.join('articles', 'koei-tokyo.html'), 'utf8')
   const links = new Set([...tokyo.matchAll(/toei-[a-z]+\.html/g)].map((m) => m[0]))
-  const missing = files.filter((f) => /^toei-[a-z]+\.html$/.test(f) && !/^toei-waku-/.test(f) && !links.has(f))
+  const missing = files.map((f) => f.replace('articles/', ''))
+    .filter((f) => /^toei-[a-z]+\.html$/.test(f) && !/^toei-waku-/.test(f) && !links.has(f))
   if (missing.length) bad.push(`koei-tokyo.html から行けない面が ${missing.length}本（python tools/build_koei_cities.py を回す）：${missing.slice(0, 5).join(', ')}`)
 }
 

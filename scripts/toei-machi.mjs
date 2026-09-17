@@ -33,7 +33,7 @@
 import fs from 'node:fs'
 import path from 'node:path'
 import { page, esc, SITE } from './shogai-kojo-page.mjs'
-import { offerToeiLeaf, TOEI_PRICE } from './offer-block.mjs'
+import { offerToeiLeaf, jumpToei } from './offer-block.mjs'
 import {
   ROOT, MIN_N, SUKI, MIN_CITY, JIKO, READ_AT, SRC, ROUNDS, rows, houses, enough,
   med, r1, mode, CITIES, F, RANGE, era, hasNum,
@@ -195,15 +195,9 @@ const near = (s) => {
   return around.map((x) => `<a href="toei-${x.slug}.html">${esc(x.city)}</a>`).join(' ／ ')
 }
 
-// ★冒頭の要約のすぐ下に置く1行の案内（2026-09-17）。
-//   実測で、売り場カードは3.7画面目・買うボタンは6.2画面目にあった。カードを上げるだけでは
-//   「無料の答えより先に売り込みが来る」形になるので、**存在だけを0.9画面の位置で知らせて、
-//   本体はページの中ほどに置く**という分け方にした。
-//   ★新しい class を作らない。既存の .callout.note と .btn-primary だけで組む
-//     （定義済みかスコープ付きかを確かめる手間と、cssの版番号の付け直しを避ける）。
-const JUMP = `  <div class="callout note">
-    <p><span class="tag">有料の一覧</span>このページの相場は全部無料です。そのうえで<strong>住宅名を1つに決める</strong>ところまで要るなら、定期募集${F.rounds}回を名寄せして「毎回すいている申込先」を住宅名つきで並べた一覧（<strong>${TOEI_PRICE}円</strong>・買い切り）があります。<a href="#offer-toei">中身と値段を見る →</a></p>
-  </div>`
+// 冒頭に置く1行の案内。文面・値段・募集回数の正典は scripts/offer-block.mjs。
+// ここが決めるのは「どの面のどこに入れるか」だけ。
+const JUMP = jumpToei()
 
 // 売り場のカード（全ページ共通・offer-block.mjs が正典）
 const OFFER = `  <p class="offer-lead">上の相場で「どのあたりが空いているか」までは分かります。申込書に書けるのは基本的に1回につき1つなので、最後は住宅名を1つに決めることになります。そこだけは住宅ごとの実測が要ります。</p>

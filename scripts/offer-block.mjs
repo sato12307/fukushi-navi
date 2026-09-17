@@ -21,6 +21,26 @@ export const TOEI_PRICE = 500
 
 const esc = (s) => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
 
+// ── 冒頭に置く1行の案内 ────────────────────────────────────────────────────
+// ★なぜ売り場カードと別に要るか（2026-09-17）
+//   実測で、売り場カードは記事の3〜4画面目、買うボタンは4〜6画面目にあった。
+//   カードごと上へ持ってくると「無料の答えより先に売り込みが来る」形になる。
+//   ∴ **存在だけを1画面目で知らせて、本体は今の位置に置く**という分け方にする。
+//   値段・募集回数はカードと同じ定数から取り、文面もここ1か所に置く。
+//   置き場所（どの面のどこに入れるか）は呼ぶ側が決める。
+// ★新しい class を作らない。既存の .callout.note だけで組む
+//   （スコープ付きの定義を踏む事故と、cssの版番号の付け直しを避ける）。
+export function jumpPack() {
+  return `  <div class="callout note">
+    <p><span class="tag">有料の手順書</span>制度の説明とお住まいの市区町村の基準は、このサイトで全部無料で読めます。そのうえで<strong>認定書をもらって過去5年分を取り戻すところまで</strong>進めるなら、手順書（<strong>${PACK_PRICE}円</strong>・買い切り）があります。<a href="#offer-pack">中身と値段を見る →</a></p>
+  </div>`
+}
+export function jumpToei() {
+  return `  <div class="callout note">
+    <p><span class="tag">有料の一覧</span>このページの相場は全部無料です。そのうえで<strong>住宅名を1つに決める</strong>ところまで要るなら、定期募集${TOEI_FACTS.rounds}回を名寄せして「毎回すいている申込先」を住宅名つきで並べた一覧（<strong>${TOEI_PRICE}円</strong>・買い切り）があります。<a href="#offer-toei">中身と値段を見る →</a></p>
+  </div>`
+}
+
 /** 親の障害者控除の手順書。name＝市区町村名（空なら一般） up＝ルートへの相対（記事・自治体別ページはどちらも '../'） */
 export function offerPack({ name = '', up = '../' } = {}) {
   const whose = name ? `${esc(name)}の基準に合わせて` : 'お住まいの市区町村の基準に合わせて'

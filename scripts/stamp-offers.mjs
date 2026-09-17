@@ -13,8 +13,7 @@
 //   手書きの記事が40枚あり、目で数えると必ず抜ける。表と実際の枚数を最後に突き合わせる。
 //   ここに無い記事には置かない（商品と関係のない記事に売り場を置かない）。
 import fs from 'node:fs'
-import { offerPackLeaf, offerToeiLeaf, PACK_PRICE, TOEI_PRICE } from './offer-block.mjs'
-import { TOEI_FACTS } from './toei-peek.mjs'
+import { offerPackLeaf, offerToeiLeaf, jumpPack, jumpToei } from './offer-block.mjs'
 
 // ★2026-09-08(2) 東京都以外の記事から都営の売り場を外した
 //   商品は東京都の都営住宅だけを扱う。札幌市・福岡市などの記事や、全国横断の記事に置くと
@@ -111,22 +110,11 @@ const TARGETS = {
   // hairiyasui / jutaku-bairitsu / shunyu-kijun / yachin-keisan）には置かない。2026-09-08(2)
 }
 
-// ★2026-09-17 冒頭に置く1行の案内。
-//   実測で、売り場カードは記事の3〜4画面目にあり、買うボタンは4〜6画面目だった。
-//   カードごと上へ持ってくると「無料の答えより先に売り込みが来る」形になるので、
-//   **存在だけを1画面目で知らせて、本体は今の位置に置く**という分け方にした。
-//   生成している都営の面（scripts/toei-machi.mjs）と同じ考え方・同じ見た目。
-//   ★置くのは「商品と読者が合っている面」だけ。住民税非課税・高額療養費・生活保護の面は
-//     読者の用事と商品（親の障害者控除の手順書）がずれているので、案内を強めない。
-//     カードはそのまま置いておく（撒き餌として面そのものは価値がある）。
-//   ★新しい class を作らない（既存の .callout.note だけ）。値段は offer-block.mjs の定数から。
-const jump = (kind) => kind === 'toei'
-  ? `  <div class="callout note">
-    <p><span class="tag">有料の一覧</span>このページの相場は全部無料です。そのうえで<strong>住宅名を1つに決める</strong>ところまで要るなら、定期募集${TOEI_FACTS.rounds}回を名寄せして「毎回すいている申込先」を住宅名つきで並べた一覧（<strong>${TOEI_PRICE}円</strong>・買い切り）があります。<a href="#offer-toei">中身と値段を見る →</a></p>
-  </div>`
-  : `  <div class="callout note">
-    <p><span class="tag">有料の手順書</span>制度の説明とお住まいの市区町村の基準は、このサイトで全部無料で読めます。そのうえで<strong>認定書をもらって過去5年分を取り戻すところまで</strong>進めるなら、手順書（<strong>${PACK_PRICE}円</strong>・買い切り）があります。<a href="#offer-pack">中身と値段を見る →</a></p>
-  </div>`
+// 冒頭に置く1行の案内。文面・値段の正典は scripts/offer-block.mjs。
+// ★置くのは「商品と読者が合っている面」だけ（下の表の jumpBefore）。
+//   住民税非課税・高額療養費・生活保護の面は、読者の用事と商品（親の障害者控除の手順書）が
+//   ずれているので案内を強めない。カードはそのまま置く（面そのものは撒き餌として価値がある）。
+const jump = (kind) => (kind === 'toei' ? jumpToei() : jumpPack())
 
 const block = (t) => {
   const card = t.kind === 'pack' ? offerPackLeaf({ peek: t.peek, up: '../' }) : offerToeiLeaf({ up: '../' })
