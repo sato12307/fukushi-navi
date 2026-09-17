@@ -39,9 +39,6 @@ import { offerPackLeaf, offerToeiLeaf } from './offer-block.mjs'
 // 商品につなぐ一言。記事の答えと商品の関係を、その記事の言葉で書く（無料の本文）。
 const LEAD_TOEI_TOKYO = '上の相場で「どのあたりが空いているか」までは分かります。申込書に書けるのは基本的に1回につき1つなので、最後は住宅名を1つに決めることになります。そこだけは住宅ごとの実測が要ります。'
 
-// 都営11枚に共通の目印。この見出しの直前＝冒頭の「数字だけ」の囲みの直後。
-const DANCHI = /  <h2 id="danchi">/
-
 // kind … pack / toei　peek … 抜粋にどの節を使うか
 // before … 置く位置（この直前に入れる）。すでに貼ってあるカードも、ここが指す場所へ動かす。
 // keep  … before を書かない面の理由。今の場所が「答えの直後」で動かす必要が無いことを明記する
@@ -96,17 +93,11 @@ const TARGETS = {
   // カードは注意書きの後（5,001〜7,583px＝6.2〜9.3画面）にあった。①の表は区によって
   // 15〜83行あり、その下に回すと足立区で6.2画面のまま。∴ 11枚とも「数字だけ」の囲みの直後
   //（＝この面の答えを数行で言い切っている場所）へ揃える。目印の行はどの記事でも同じ。
-  'toei-adachi.html': { kind: 'toei', before: DANCHI, lead: LEAD_TOEI_TOKYO },
-  'toei-fuchu.html': { kind: 'toei', before: DANCHI, lead: LEAD_TOEI_TOKYO },
-  'toei-hachioji.html': { kind: 'toei', before: DANCHI, lead: LEAD_TOEI_TOKYO },
-  'toei-higashimurayama.html': { kind: 'toei', before: DANCHI, lead: LEAD_TOEI_TOKYO },
-  'toei-itabashi.html': { kind: 'toei', before: DANCHI, lead: LEAD_TOEI_TOKYO },
-  'toei-katsushika.html': { kind: 'toei', before: DANCHI, lead: LEAD_TOEI_TOKYO },
-  'toei-kiyose.html': { kind: 'toei', before: DANCHI, lead: LEAD_TOEI_TOKYO },
-  'toei-kodaira.html': { kind: 'toei', before: DANCHI, lead: LEAD_TOEI_TOKYO },
-  'toei-koto.html': { kind: 'toei', before: DANCHI, lead: LEAD_TOEI_TOKYO },
-  'toei-machida.html': { kind: 'toei', before: DANCHI, lead: LEAD_TOEI_TOKYO },
-  'toei-nerima.html': { kind: 'toei', before: DANCHI, lead: LEAD_TOEI_TOKYO },
+  // ★2026-09-17 都営の区市町別11枚をこの表から外した。scripts/toei-machi.mjs が
+  //   48区市町ぶんを生成するようになり、売り場のカードも生成器が埋めている。
+  //   ここに残すと、目印コメントの無い生成ページに2枚目のカードを挿し込んでしまう
+  //   （before の <h2 id="danchi"> が生成ページにもあるため、剥がす側が空振りする）。
+  //   手書きで残っているのは koei-tokyo.html だけ。
   // 引越しアフィリの箱の直前（15,991px＝19.7画面。ページの69%地点）から、
   // ①「倍率が高い住戸・低い住戸（実例）」の2つの表の直後へ。導入文の「上の相場で
   // どのあたりが空いているか」がそのまま指す場所になる。
