@@ -74,5 +74,33 @@ try {
     if (msg.length) bad.push(`${f}: ${msg.join(' / ')}`)
   }
 } finally { child.kill() }
+// ★「次の定期募集は◯年◯月」は生成したときの日付で静的HTMLに焼き込まれる。
+//   回が過ぎても面はそのまま残り、**誤った案内を出し続ける**。回るたびに賞味期限を見る。
+{
+  const TEIKI = [2, 5, 8, 11]
+  const now = new Date(Date.now() + 9 * 3600e3)
+  const y = now.getUTCFullYear(), m = now.getUTCMonth() + 1
+  const nm = TEIKI.find((x) => x > m)
+  const want = `${nm ? y : y + 1}年${nm || TEIKI[0]}月`
+  const stale = files.filter((f) => {
+    const s = fs.readFileSync(path.join('articles', f), 'utf8')
+    return s.includes('次の定期募集は') && !s.includes(`次の定期募集は${want}`)
+  })
+  if (stale.length) bad.push(`「次の定期募集」が古い ${stale.length}本（いまは${want}）→ node scripts/toei-machi.mjs を回し直す`)
+}
+
+// ★入口の検算。articles/koei-tokyo.html は data/koei-cities.json から毎月描き直されるので、
+//   描画後のHTMLに48本ぶんのリンクが残っているかを見る。ここが消えると新しい面へ誰も行けない。
+{
+  const tokyo = fs.readFileSync(path.join('articles', 'koei-tokyo.html'), 'utf8')
+  const links = new Set([...tokyo.matchAll(/toei-[a-z]+\.html/g)].map((m) => m[0]))
+  const missing = files.filter((f) => /^toei-[a-z]+\.html$/.test(f) && !/^toei-waku-/.test(f) && !links.has(f))
+  if (missing.length) bad.push(`koei-tokyo.html から行けない面が ${missing.length}本（python tools/build_koei_cities.py を回す）：${missing.slice(0, 5).join(', ')}`)
+}
+
 console.log(`検査 ${files.length}本`)
-if (bad.length) { console.log(`★問題 ${bad.length}本`); bad.slice(0, 20).forEach((b) => console.log('  ' + b)) } else console.log('問題なし')
+if (!bad.length) { console.log('問題なし'); process.exit(0) }
+// ★終了コードを1にする。0のままだと、デプロイに繋いだときに素通りする＝関所にならない。
+console.log(`★問題 ${bad.length}本`)
+bad.forEach((b) => console.log('  ' + b))
+process.exit(1)

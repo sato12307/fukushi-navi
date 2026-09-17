@@ -45,8 +45,13 @@ const html = fs.readFileSync(src)
     if (!read('index.html').includes(`${m6[1]}件の申込先`)) bad.push(`トップの案内カードが資料の索引（${m6[1]}件）と違う`)
     if (!TOEI_PEEK.includes(`除く・${m2[1]}件）`)) bad.push('scripts/toei-peek.mjs が資料と違う（node scripts/toei-nerai.mjs を回し直す）')
     if (!flat(packS).includes(flat(TOEI_PEEK.slice(0, TOEI_PEEK.lastIndexOf('<h4'))))) bad.push('抜粋の文字が資料の本文に見つからない')
+    // ★選び方を目印コメントから「実際に都営の売り場が入っているか」へ（2026-09-17）。
+    //   目印を付けるのは手書き記事へ貼る scripts/stamp-offers.mjs だけで、
+    //   scripts/toei-machi.mjs が生成する54本には目印が無い。コメントで選ぶと
+    //   **生成した54本が関所を素通りし、古い抜粋のまま「実物の冒頭」を名乗る**。
+    //   実測：抜粋の入った記事55本のうち、目印があるのは1本だけだった。
     const arts = fs.readdirSync(path.join(ROOT, 'articles')).filter((f) => f.endsWith('.html'))
-      .filter((f) => read(`articles/${f}`).includes('<!-- offer:toei -->'))
+      .filter((f) => read(`articles/${f}`).includes('data-offer="toei"'))
     const stale = arts.filter((f) => !read(`articles/${f}`).includes(TOEI_PEEK))
     if (!arts.length) bad.push('都営の売り場が入った記事が0本')
     if (stale.length) bad.push(`記事の抜粋が資料と違う ${stale.length}本（node scripts/stamp-offers.mjs）：${stale.join(', ')}`)

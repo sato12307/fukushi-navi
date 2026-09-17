@@ -2,6 +2,12 @@
 # data/koei-cities.json から、住戸別の実データが濃い都市だけの「市別ページ」を生成する。
 # 品質ゲート: 実データ(top/bottom/factors)を持つ都市のみ。薄いスタブは作らない。
 # 各ページに①倍率の実例 ②市固有の因子(公式引用つき) ③補正計算機 ④当選確率シミュレーター を内蔵。
+# ★2026-09-17 雛形に ev.js（計測）と buy.js（記事内の売り場）を足した。
+#   それまでこの生成器は2つとも出力しておらず、毎月1日のCI（.github/workflows/koei-jutaku.yml）が
+#   回るたびに12面から剥がれていた＝手で足した分が上書きされる。style.css の版番号も落ちていた。
+#   koei-tokyo.html は都営の売り場カードを持つ面なので、剥がれると買うボタンが動かなくなる。
+#   版番号は assets/ を上げたらここも手で上げること。[[deploy-gate-after-generators]]
+
 import json
 import os
 import html
@@ -212,7 +218,7 @@ PAGE = r"""<!DOCTYPE html>
 <meta property="og:site_name" content="フクシル">
 <meta property="og:url" content="https://fukushiru.com/articles/@@SLUG@@.html">
 <meta name="twitter:card" content="summary_large_image">
-<link rel="stylesheet" href="../assets/style.css">
+<link rel="stylesheet" href="../assets/style.css?v=20260908a">
 <script type="application/ld+json">
 @@JSONLD@@
 </script>
@@ -336,6 +342,8 @@ PAGE = r"""<!DOCTYPE html>
 </footer>
 @@CALCJS@@
 <script src="../assets/aff.js" defer></script>
+<script src="../assets/ev.js?v=20260908a" defer></script>
+<script src="../assets/buy.js?v=20260917a" defer></script>
 </body>
 </html>
 """

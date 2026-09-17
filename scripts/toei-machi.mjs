@@ -78,13 +78,20 @@ const CATS = [
   { cat: '単身者用車いす使用者向', short: '単身・車いす', who: '車いすを使う単身の人', when: [2, 8] },
 ]
 
+// ★「申込者ゼロ」の判定はこの1本だけ。倍率が0でも申込者がいる行が209件ある
+//   （例 北区/桐ケ丘一丁目 申込27・戸1。倍率欄の読み取り落ち）。倍率だけで数えると
+//   ゼロ率が水増しされ、しかも面には「申込者数と倍率がともに0と読めた募集」と書いてある。
+//   実測で 1,700件（倍率だけ）→ 1,491件（両方）。∴ 定義を書く場所を増やさない。
+const isZero = (r) => r.moushikomi === 0 && r.bairitsu === 0
+const zeroOf = (src) => src.filter(isZero)
+
 // 募集区分ごとの実測（src を差し替えれば区市町ぶんだけにできる）
 const catStat = (src = rows) => {
   const g = new Map()
-  for (const r of src) { if (!g.has(r.cat)) g.set(r.cat, []); g.get(r.cat).push(r.bairitsu) }
+  for (const r of src) { if (!g.has(r.cat)) g.set(r.cat, []); g.get(r.cat).push(r) }
   return CATS.map((c) => {
     const a = g.get(c.cat) || []
-    return { ...c, n: a.length, med: a.length ? r1(med(a)) : null, zero: a.filter((x) => x === 0).length }
+    return { ...c, n: a.length, med: a.length ? r1(med(a.map((x) => x.bairitsu))) : null, zero: zeroOf(a).length }
   }).filter((c) => c.n > 0).sort((a, b) => a.med - b.med)
 }
 const CAT_ALL = catStat()
@@ -131,9 +138,10 @@ const WAKU_LEAD = (() => {
 
 
 // ── 区市町ごとの実測 ────────────────────────────────────────────────────────
-//   ★「申込者ゼロ」は moushikomi と bairitsu がともに0と読めた行だけ。片方しか読めない行は数えない。
-//     読めなかったものを「空いていた」に混ぜると、この面の数字が上ぶれする。
-const zeroOf = (src) => src.filter((r) => r.moushikomi === 0 && r.bairitsu === 0)
+// ★作った日は面ごとに違う。既存11本は2026-08-24、今回足した37本は今日。
+//   全部を同じ日にすると、検索側に「37本が8月からあった」と申告することになる。
+const BORN_2608 = new Set(['adachi', 'fuchu', 'hachioji', 'higashimurayama', 'itabashi', 'katsushika', 'kiyose', 'kodaira', 'koto', 'machida', 'nerima'])
+const TODAY = new Date(Date.now() + 9 * 3600e3).toISOString().slice(0, 10)
 
 const stat = (city) => {
   const rs = rows.filter((r) => r.city === city)
@@ -161,8 +169,8 @@ const stat = (city) => {
   const ev = { yes: rs.filter((r) => r.ev === '有').length, no: rs.filter((r) => r.ev === '無').length }
   const ippan = en.filter((h) => !h.jiko)
   return {
-    city, slug: SLUG[city], rows: rs, houses: hs, enough: en,
-    zero: z.length, zeroKoho: z.reduce((a, x) => a + (x.koho || 0), 0), zHouses,
+    city, slug: SLUG[city], rows: rs, houses: hs, enough: en, published: BORN_2608.has(SLUG[city]) ? '2026-08-24' : TODAY,
+    zero: z.length, zeroKoho: z.reduce((a, x) => a + (x.koho || 0), 0), zHouses, ippan,
     byRound, ev,
     med: ippan.length ? r1(med(ippan.map((h) => h.med))) : null,
     suki: ippan.filter((h) => h.med < SUKI).sort((a, b) => a.med - b.med || b.n - a.n),
@@ -192,6 +200,7 @@ const OFFER = `  <p class="offer-lead">上の相場で「どのあたりが空�
 ${offerToeiLeaf({ up: '../' })}`
 
 // ── 区市町ページ ────────────────────────────────────────────────────────────
+
 const cityPage = (s) => {
   const hasZero = s.zero > 0
   const title = hasZero
@@ -207,7 +216,7 @@ const cityPage = (s) => {
     {
       q: `${s.city}の都営住宅で倍率が低いのはどの住宅ですか？`,
       a: s.suki.length
-        ? `${s.city}で${MIN_N}件以上の募集を観測できた申込先のうち、倍率の中央値が${SUKI}倍未満だったのは${s.suki.length}件です。もっとも低いのは${s.suki[0].name}（${s.suki[0].cat}・中央値${r1(s.suki[0].med)}倍・${s.suki[0].n}件観測）でした。${hasZero ? `また、誰も申し込まなかった回がある住宅は${s.zHouses.length}あり、いちばん多いのは${topZero.name}（${topZero.n}回）です。` : ''}ただしこれは過去の記録で、次回の募集に同じ住宅が出るとはかぎりません。申込資格（収入基準・住宅困窮要件・単身入居の可否）を満たすことが前提です。`
+        ? `${s.city}で${MIN_N}件以上の募集を観測できた申込先（${JIKO}を除く${s.ippan.length}件）のうち、倍率の中央値が${SUKI}倍未満だったのは${s.suki.length}件です。もっとも低いのは${s.suki[0].name}（${s.suki[0].cat}・中央値${r1(s.suki[0].med)}倍・${s.suki[0].n}件観測）でした。${hasZero ? `また、誰も申し込まなかった回がある住宅は${s.zHouses.length}あり、いちばん多いのは${topZero.name}（${topZero.n}回）です。` : ''}ただしこれは過去の記録で、次回の募集に同じ住宅が出るとはかぎりません。申込資格（収入基準・住宅困窮要件・単身入居の可否）を満たすことが前提です。`
         : `${s.city}では、${MIN_N}件以上の募集を観測できた申込先のうち、倍率の中央値が${SUKI}倍未満のものはありませんでした。${s.city}全体の倍率の中央値は${s.med}倍です。`,
     },
     {
@@ -247,7 +256,7 @@ ${tbl('<th>募集回</th><th class="num">観測できた募集</th><th class="nu
   <p class="lead">都営住宅は「倍率が高くて当たらない」と語られますが、実際の倍率は<strong>住宅より先に、申し込む区分で大きく変わります</strong>。JKK東京は募集回ごとに倍率表を出すだけで、回をまたいで並べた集計は公表していないため、ここでは${F.rounds}回分を読み直して${esc(s.city)}のぶんだけを取り出しました。</p>
 
   <div class="callout point">
-    <p><span class="tag">数字だけ</span>${esc(s.city)}で観測できた募集は<strong>${num(s.rows.length)}件</strong>（都内${RANK.get(s.city)}番目）。倍率の中央値は<strong>${s.med}倍</strong>で、${MIN_N}件以上観測できた申込先${num(s.enough.length)}件のうち<strong>${s.suki.length}件</strong>が${SUKI}倍未満でした。${hasZero ? `誰も申し込まなかった募集は<strong>${s.zero}件（のべ${s.zeroKoho}戸）・${s.zHouses.length}住宅</strong>で、都全体${num(ZERO_ALL)}件の<strong>${pct(s.zero, ZERO_ALL)}%</strong>にあたります。もっとも多いのは<strong>${esc(topZero.name)}（${topZero.n}回）</strong>です。` : `${esc(s.city)}では、誰も申し込まなかった募集は確認できませんでした。`}</p>
+    <p><span class="tag">数字だけ</span>${esc(s.city)}で観測できた募集は<strong>${num(s.rows.length)}件</strong>（都内${RANK.get(s.city)}番目）。倍率の中央値は<strong>${s.med}倍</strong>で、${MIN_N}件以上観測できた申込先は${num(s.enough.length)}件で、そのうち${JIKO}を除いた${num(s.ippan.length)}件のうち<strong>${s.suki.length}件</strong>が${SUKI}倍未満でした。${hasZero ? `誰も申し込まなかった募集は<strong>${s.zero}件（のべ${s.zeroKoho}戸）・${s.zHouses.length}住宅</strong>で、都全体${num(ZERO_ALL)}件の<strong>${pct(s.zero, ZERO_ALL)}%</strong>にあたります。もっとも多いのは<strong>${esc(topZero.name)}（${topZero.n}回）</strong>です。` : `${esc(s.city)}では、誰も申し込まなかった募集は確認できませんでした。`}</p>
   </div>
 
   <h2 id="waku">① まず「どの区分で出すか」で倍率が変わる</h2>
@@ -304,7 +313,7 @@ ${faq.map((f) => `  <h3>Q. ${esc(f.q)}</h3>\n  <p>A. ${f.a}</p>`).join('\n')}
   return page({
     title, desc, canonical: `/articles/toei-${s.slug}.html`, depth: 1, body,
     jsonld: [
-      { '@context': 'https://schema.org', '@type': 'Article', headline: title.split('｜')[0], description: desc, inLanguage: 'ja', url: `${SITE}/articles/toei-${s.slug}.html`, datePublished: '2026-08-24', dateModified: READ_AT, author: { '@type': 'Organization', name: 'フクシル' }, publisher: { '@type': 'Organization', name: 'フクシル' } },
+      { '@context': 'https://schema.org', '@type': 'Article', headline: title.split('｜')[0], description: desc, inLanguage: 'ja', url: `${SITE}/articles/toei-${s.slug}.html`, datePublished: s.published, dateModified: READ_AT, author: { '@type': 'Organization', name: 'フクシル' }, publisher: { '@type': 'Organization', name: 'フクシル' } },
       { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faq.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a.replace(/<[^>]+>/g, '') } })) },
     ],
   })
@@ -335,11 +344,11 @@ const wakuStat = (c) => {
   //   [[median-history-is-not-price-change]]
   const byRound = ROUNDS.map((r) => {
     const a = rs.filter((x) => x.round === r)
-    return { round: r, n: a.length, med: a.length ? r1(med(a.map((x) => x.bairitsu))) : null, zero: a.filter((x) => x.bairitsu === 0).length }
+    return { round: r, n: a.length, med: a.length ? r1(med(a.map((x) => x.bairitsu))) : null, zero: zeroOf(a).length }
   }).filter((x) => x.n > 0)
   const byCity = CITIES.map((city) => {
     const a = rs.filter((x) => x.city === city)
-    return { city, n: a.length, med: a.length ? r1(med(a.map((x) => x.bairitsu))) : null, zero: a.filter((x) => x.bairitsu === 0).length }
+    return { city, n: a.length, med: a.length ? r1(med(a.map((x) => x.bairitsu))) : null, zero: zeroOf(a).length }
   }).filter((x) => x.n >= 10).sort((a, b) => a.med - b.med)
   return {
     ...c, slug: WAKU_SLUG[c.cat], rows: rs, houses: hs, byRound, byCity,
@@ -526,32 +535,47 @@ for (const w of WAKUS) write(`articles/toei-waku-${w.slug}.html`, wakuPage(w))
 // ── 入口をつなぎ直す ────────────────────────────────────────────────────────
 //   ★区市町ページ48本を作っても、そこへ行ける場所が無ければ誰も来ない。
 //     実測で、既存11本は sitemap にも内部リンクにも載っていたのに検索から0だった。
-//     ∴ 入口は「東京都の面の区市町別の表」＝いちばん人が降りている場所に置く。
-//   ★koei-tokyo.html は手書きの記事だが、この表だけは生成側で持つ。
-//     同じ問い（区市町ごとに何件あまったか）の答えが手書きと生成器の2か所にあると必ずずれる。
-//     実際いま手書き側は葛飾区172件、読み取りを直した側は175件で食い違っている。
-//     [[same-question-two-implementations]]
+//     ∴ 入口は東京都の面（articles/koei-tokyo.html）の区市町別の表に置く。
+//
+//   ★★2026-09-17 レンダ済みHTMLに書き込んではいけない（初回これをやって危うく壊すところだった）。
+//     articles/koei-tokyo.html は **data/koei-cities.json の tokyo.extra_html から毎月作り直される**
+//     （.github/workflows/koei-jutaku.yml が毎月1日に tools/build_koei_cities.py を回して
+//      git add articles/koei-tokyo.html までする）。HTMLに直接書くと 10-01 に消える。実際に
+//     python tools/build_koei_cities.py を回して、48本のリンクが消えることを確認した。
+//     ∴ 書き込むのは **元データ（data/koei-cities.json）** のほう。描画は python 側に任せる。
+//     [[same-question-two-implementations]] / [[stale-production-build-drift]]
 {
-  const p = path.join(ROOT, 'articles', 'koei-tokyo.html')
-  const src = fs.readFileSync(p, 'utf8')
-  // ★見出しは「区市町別」で始まる表が2つある（もう1つは令和7年5月の公表値の抜粋）。
-  //   募集割れの表だけを指すように、見出しの続きまで含めて選ぶ。
-  const re = /<table class="ratio-table">\s*<caption>区市町別 募集割れ[\s\S]*?<\/table>/g
-  const hits = src.match(re) || []
-  if (hits.length !== 1) die(`koei-tokyo.html の区市町別テーブルが ${hits.length} 個見つかりました（1個のはず）。`)
+  const p = path.join(ROOT, 'data', 'koei-cities.json')
+  const raw = fs.readFileSync(p, 'utf8')
+  const data = JSON.parse(raw)
+  const list = Array.isArray(data) ? data : (data.cities || [])
+  const tokyo = list.find((c) => c.slug === 'tokyo')
+  if (!tokyo || !Array.isArray(tokyo.extra_html)) die('data/koei-cities.json に tokyo.extra_html（行の配列）がありません。')
+  const H = tokyo.extra_html
+  // 置き換える範囲＝「区市町別 募集割れ」の表。見出しの行から、その次に来る </table> まで。
+  const cap = H.findIndex((l) => l.includes('<caption>区市町別 募集割れ'))
+  if (cap < 0) die('tokyo.extra_html に「区市町別 募集割れ」の表が見つかりません。')
+  const open = H.slice(0, cap).map((l, i) => [l, i]).filter(([l]) => l.includes('<table class="ratio-table">')).pop()
+  const end = H.findIndex((l, i) => i > cap && l.trim() === '</table>')
+  if (!open || end < 0) die('「区市町別 募集割れ」の表の範囲を決められません。')
+
   const withZero = PAGES.filter((s) => s.zero > 0).sort((a, b) => b.zero - a.zero)
   const rest = PAGES.filter((s) => s.zero === 0)
-  const tableHtml = `<table class="ratio-table">
-    <caption>区市町別 募集割れ（申込者ゼロ）が確認できた件数・${RANGE}／読み取り ${READ_AT}</caption>
-    <thead><tr><th scope="col">区市町</th><th scope="col">確認件数</th><th scope="col">対象になった住宅数</th><th scope="col">倍率の中央値</th></tr></thead>
-    <tbody>
-${withZero.map((s) => `      <tr><th scope="row"><a href="toei-${s.slug}.html">${esc(s.city)}の倍率一覧</a></th><td class="lo">${s.zero}件</td><td>${s.zHouses.length}住宅</td><td class="num">${s.med}倍</td></tr>`).join('\n')}
-${rest.map((s) => `      <tr><th scope="row"><a href="toei-${s.slug}.html">${esc(s.city)}の倍率一覧</a></th><td class="num">—</td><td>—</td><td class="num">${s.med}倍</td></tr>`).join('\n')}
-    </tbody>
-    <tfoot><tr><td colspan="4">「—」は、この読み取りでは申込者ゼロの募集を確認できなかった区市町です（無かったと確定させるものではありません）。倍率の中央値は${MIN_N}件以上観測できた申込先のうち${JIKO}を除いたものです。区分によって倍率は${WAKU_LEAD.ratio}倍変わります（<a href="toei-waku.html">募集区分ごとの倍率</a>）。</td></tr></tfoot>
-    </table>`
-  const next = src.replace(re, tableHtml)
-  if (next !== src) write('articles/koei-tokyo.html', next)
+  const rowOf = (s, z) => `      <tr><th scope="row"><a href="toei-${s.slug}.html">${esc(s.city)}の倍率一覧</a></th><td class="${z ? 'lo' : 'num'}">${z ? `${s.zero}件` : '—'}</td><td>${z ? `${s.zHouses.length}住宅` : '—'}</td><td class="num">${s.med}倍</td></tr>`
+  const block = [
+    '  <table class="ratio-table">',
+    `    <caption>区市町別 募集割れ（申込者ゼロ）が確認できた件数と倍率の中央値・${RANGE}</caption>`,
+    '    <thead><tr><th scope="col">区市町</th><th scope="col">確認件数</th><th scope="col">対象になった住宅数</th><th scope="col">倍率の中央値</th></tr></thead>',
+    '    <tbody>',
+    ...withZero.map((s) => rowOf(s, true)),
+    ...rest.map((s) => rowOf(s, false)),
+    '    </tbody>',
+    `    <tfoot><tr><td colspan="4">「—」は、この読み取りでは申込者ゼロの募集を確認できなかった区市町です（無かったと確定させるものではありません）。<strong>この表の件数は、上の1,360件より広い読み取り（行頭に区市町が無くても住宅名から区を確定できた行を含む${num(zeroOf(rows).length)}件）で数えています。</strong>倍率の中央値は${MIN_N}件以上観測できた申込先のうち${JIKO}を除いたものです。区分によって倍率は${WAKU_LEAD.ratio}倍変わります（<a href="toei-waku.html">募集区分ごとの倍率</a>）。読み取り日 ${READ_AT}。</td></tr></tfoot>`,
+    '    </table>',
+  ]
+  H.splice(open[1], end - open[1] + 1, ...block)
+  const next = JSON.stringify(data, null, 2) + '\n'
+  if (next !== raw) write('data/koei-cities.json', next)
 }
 
 // ── 書き出し ────────────────────────────────────────────────────────────────

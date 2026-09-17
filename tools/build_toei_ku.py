@@ -21,6 +21,24 @@
   回をまたいで集計した資料は公表していない。検索側は「◯◯区 都営住宅 倍率」のように
   区市町名で引くのに、答えは都全体の平均しか無い、という空白がある。
 """
+import sys as _sys
+# ★2026-09-17 この生成器は退役した。書き先が JS 側の生成器と重なっている。
+#   articles/toei-<slug>.html を11本書くが、いまは48本を scripts/toei-machi.mjs が生成している。
+#   JS側のほうが読み取りが広く（行頭に区市町が無くても住宅名から区を確定した行を使う）、
+#   対象も48区市町ある。2つが同じファイルを書くと、あとに回したほうが勝つ＝人が気づけない事故になる。
+#   実際このガードを入れる前に一度回してしまい、48本ぶんの入口と11本の面が巻き戻った。
+#   [[same-question-two-implementations]] / [[stale-production-build-drift]]
+#   どうしても回したいときだけ --i-know を付ける。
+if "--i-know" not in _sys.argv:
+    _sys.stderr.write(
+        "このスクリプトは退役しました（書き先が scripts/toei-machi.mjs と重なります）。\n"
+        "  いま回すべきもの: node scripts/toei-nerai.mjs && node scripts/toei-machi.mjs\n"
+        "  そのあと:         python tools/build_koei_cities.py（koei-tokyo.html の描画）\n"
+        "  検査:             node scripts/toei-check.mjs\n"
+        "本当に回すなら --i-know を付けてください。\n")
+    _sys.exit(2)
+
+
 import csv, io, json, os, re, sys
 from collections import Counter, defaultdict
 

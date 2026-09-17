@@ -16,6 +16,7 @@
 //   ・一次情報に【年月日】で書かれた日だけ。「毎年◯月ごろ」は載せない
 //   ・規則から計算した日は kind:'計算' と明示し、面にもそう出す
 //   ・生活保護費の支給日は全国共通ルールが無いので載せない
+import { createHash } from 'node:crypto'
 import fs from 'node:fs'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
@@ -27,6 +28,8 @@ const OUT = path.join(ROOT, 'calendar')
 fs.mkdirSync(OUT, { recursive: true })
 
 // ── ICS（RFC 5545）────────────────────────────────────────────────────────────
+// 題名を短い固定長の印にする（UID用）。題名が1文字でも違えば別の印になる。
+const titleId = (t) => createHash('sha1').update(String(t), 'utf8').digest('hex').slice(0, 12)
 const icsEsc = (s) => String(s ?? '').replace(/\\/g, '\\\\').replace(/;/g, '\\;').replace(/,/g, '\\,').replace(/\n/g, '\\n')
 // 1行75オクテットまで（RFC 5545）。★文字数でなくバイト数で数えること。
 //   日本語は1文字3バイト・URLは1文字1バイトなので、文字数で折ると
@@ -63,7 +66,13 @@ function toIcs(cal) {
     const body = [e.note || '', e.kind === '計算' ? '※この日は規則から計算したものです。公表された予定表が出たら差し替えます。' : '', e.url || `${SITE}/calendar/`]
       .filter(Boolean).join('\n')
     L.push('BEGIN:VEVENT')
-    L.push(`UID:${cal.slug}-${ymd(e.date)}-${Buffer.from(e.title).toString('hex').slice(0, 12)}@fukushiru.com`)
+    // ★UIDは題名ぜんぶから作る。先頭6バイト（＝日本語2文字）だけだと、同じ日に
+    //   「都営住宅 ◯◯」が2件並んだ瞬間にUIDが一致し、購読側で片方が静かに消える。
+    //   いまの10件は偶然ぶつかっていないだけで、都営の予定は6件が同じ2文字で始まっている。
+    //   ★UIDの作り方を変えると、すでに購読している人の手元では「前の予定が消えて新しい予定が入る」
+    //     形になる。公開3日目（2026-09-14公開・09-17変更）で購読者がほぼ居ないうちに変えた。
+    //     これ以降は変えないこと。
+    L.push(`UID:${cal.slug}-${ymd(e.date)}-${titleId(e.title)}@fukushiru.com`)
     L.push('DTSTAMP:' + STAMP)
     L.push('DTSTART;VALUE=DATE:' + ymd(e.date))
     L.push('DTEND;VALUE=DATE:' + ymd(end))
