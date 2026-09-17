@@ -13,7 +13,8 @@
 //   手書きの記事が40枚あり、目で数えると必ず抜ける。表と実際の枚数を最後に突き合わせる。
 //   ここに無い記事には置かない（商品と関係のない記事に売り場を置かない）。
 import fs from 'node:fs'
-import { offerPackLeaf, offerToeiLeaf } from './offer-block.mjs'
+import { offerPackLeaf, offerToeiLeaf, PACK_PRICE, TOEI_PRICE } from './offer-block.mjs'
+import { TOEI_FACTS } from './toei-peek.mjs'
 
 // ★2026-09-08(2) 東京都以外の記事から都営の売り場を外した
 //   商品は東京都の都営住宅だけを扱う。札幌市・福岡市などの記事や、全国横断の記事に置くと
@@ -52,6 +53,8 @@ const TARGETS = {
     // ★これ以上は上げられない：導入文が本文の「さかのぼって申告できる場合があります」を
     //   引用している。①早見表の直後（2,073px）へ出すと、引用元が本文に無い状態になる。
     before: /  <h2>③ 「特別障害者」「同居特別障害者」とは？<\/h2>/,
+    // 商品と読者が合っている唯一の pack の面。冒頭にも案内を出す。
+    jumpBefore: /  <h2[^>]*>① 控除額はいくら？/,
     lead: '上の「さかのぼって申告できる場合があります」を、自分の親御さんに当てはめて確かめ、実際に出すところまでをまとめたものがあります。',
   },
   'juminzei-hikazei-check.html': {
@@ -101,11 +104,29 @@ const TARGETS = {
   // 引越しアフィリの箱の直前（15,991px＝19.7画面。ページの69%地点）から、
   // ①「倍率が高い住戸・低い住戸（実例）」の2つの表の直後へ。導入文の「上の相場で
   // どのあたりが空いているか」がそのまま指す場所になる。
-  'koei-tokyo.html': { kind: 'toei', before: /  <h2>② 東京都で倍率を左右する要因<\/h2>/, lead: LEAD_TOEI_TOKYO },
+  'koei-tokyo.html': { kind: 'toei', before: /  <h2>② 東京都で倍率を左右する要因<\/h2>/, lead: LEAD_TOEI_TOKYO,
+    jumpBefore: /  <h2[^>]*>① 倍率が高い住戸・低い住戸/ },
   // 東京以外の公営住宅の記事（koei-chiba / fukuoka / kawasaki / kobe / kyoto / nagoya / osaka /
   // saitama / sapporo / sendai / yokohama）と、全国横断の記事（koei-danchi-ranking /
   // hairiyasui / jutaku-bairitsu / shunyu-kijun / yachin-keisan）には置かない。2026-09-08(2)
 }
+
+// ★2026-09-17 冒頭に置く1行の案内。
+//   実測で、売り場カードは記事の3〜4画面目にあり、買うボタンは4〜6画面目だった。
+//   カードごと上へ持ってくると「無料の答えより先に売り込みが来る」形になるので、
+//   **存在だけを1画面目で知らせて、本体は今の位置に置く**という分け方にした。
+//   生成している都営の面（scripts/toei-machi.mjs）と同じ考え方・同じ見た目。
+//   ★置くのは「商品と読者が合っている面」だけ。住民税非課税・高額療養費・生活保護の面は
+//     読者の用事と商品（親の障害者控除の手順書）がずれているので、案内を強めない。
+//     カードはそのまま置いておく（撒き餌として面そのものは価値がある）。
+//   ★新しい class を作らない（既存の .callout.note だけ）。値段は offer-block.mjs の定数から。
+const jump = (kind) => kind === 'toei'
+  ? `  <div class="callout note">
+    <p><span class="tag">有料の一覧</span>このページの相場は全部無料です。そのうえで<strong>住宅名を1つに決める</strong>ところまで要るなら、定期募集${TOEI_FACTS.rounds}回を名寄せして「毎回すいている申込先」を住宅名つきで並べた一覧（<strong>${TOEI_PRICE}円</strong>・買い切り）があります。<a href="#offer-toei">中身と値段を見る →</a></p>
+  </div>`
+  : `  <div class="callout note">
+    <p><span class="tag">有料の手順書</span>制度の説明とお住まいの市区町村の基準は、このサイトで全部無料で読めます。そのうえで<strong>認定書をもらって過去5年分を取り戻すところまで</strong>進めるなら、手順書（<strong>${PACK_PRICE}円</strong>・買い切り）があります。<a href="#offer-pack">中身と値段を見る →</a></p>
+  </div>`
 
 const block = (t) => {
   const card = t.kind === 'pack' ? offerPackLeaf({ peek: t.peek, up: '../' }) : offerToeiLeaf({ up: '../' })
@@ -120,7 +141,7 @@ if (missing.length) { console.error('表にあるのに記事が無い:', missin
 // ★before があれば「剥がしてから入れ直す」。貼り直すだけの実装だと、表に書いた位置を直しても
 //   すでにカードのある記事は永久に元の場所のままになる（実際そうなっていて、記事5枚が
 //   3.2〜8.0画面の深さに残っていた）。剥がす→入れるにすると、何度流しても結果が同じになる。
-let moved = 0, replaced = 0, inserted = 0
+let moved = 0, replaced = 0, inserted = 0, jumped = 0
 const failed = []
 const changedFiles = []   // 貼り直しで中身が変わった記事（sitemap の lastmod を動かす）
 for (const f of files) {
@@ -132,6 +153,15 @@ for (const f of files) {
   let s = raw.replace(/\r\n/g, '\n')
   const marked = /\n*<!-- offer:(?:pack|toei) -->[\s\S]*?<!-- \/offer -->\n*/
   const had = marked.test(s)
+  // ★冒頭の案内も「剥がしてから入れ直す」。貼り直すだけだと、文言や値段を変えても
+  //   すでに入っている面は永久に古いままになる（売り場カードで同じ穴を踏んでいる）。
+  const jumpMark = /\n*<!-- jump -->[\s\S]*?<!-- \/jump -->\n*/
+  s = s.replace(jumpMark, '\n\n')
+  if (t.jumpBefore) {
+    if (!t.jumpBefore.test(s)) { failed.push(`${f}（冒頭の案内の位置）`); continue }
+    s = s.replace(t.jumpBefore, (m) => `<!-- jump -->\n${jump(t.kind)}\n  <!-- /jump -->\n\n${m}`)
+    jumped++
+  }
   if (t.before) {
     if (had) s = s.replace(marked, '\n\n')            // いま貼ってある場所から剥がす
     if (!t.before.test(s)) { failed.push(f); continue }
@@ -167,5 +197,12 @@ if (changedFiles.length) {
 const has = files.filter((f) => /<!-- offer:(pack|toei) -->/.test(fs.readFileSync('articles/' + f, 'utf8')))
 const n = { pack: 0, toei: 0 }
 for (const f of Object.keys(TARGETS)) n[TARGETS[f].kind]++
-console.log(`位置を決め直し ${moved} ／ その場で貼り直し ${replaced} ／ 新規 ${inserted} ／ 表 ${Object.keys(TARGETS).length}枚（pack ${n.pack}・toei ${n.toei}）／ 実際にカードのある記事 ${has.length}枚`)
+console.log(`位置を決め直し ${moved} ／ その場で貼り直し ${replaced} ／ 新規 ${inserted} ／ 冒頭の案内 ${jumped} ／ 表 ${Object.keys(TARGETS).length}枚（pack ${n.pack}・toei ${n.toei}）／ 実際にカードのある記事 ${has.length}枚`)
 if (has.length !== Object.keys(TARGETS).length) { console.error('★数が合わない'); process.exit(1) }
+// 冒頭の案内を書いた面に実際に入っているか（目印ではなくリンクの実在で数える）
+{
+  const want = Object.entries(TARGETS).filter(([, t]) => t.jumpBefore)
+  const miss = want.filter(([f, t]) => !fs.readFileSync('articles/' + f, 'utf8').includes(`href=\"#offer-${t.kind}\"`))
+  if (miss.length) { console.error('★冒頭の案内が入っていない: ' + miss.map(([f]) => f).join(', ')); process.exit(1) }
+  console.log(`冒頭の案内を置いた面 ${want.length}枚：${want.map(([f]) => f).join('・')}`)
+}
