@@ -361,10 +361,12 @@
    "name": "福岡県",
    "level": "都道府県",
    "pref": "福岡県",
-   "status": "未調査",
-   "note": null,
-   "checked": null,
-   "urls": [],
+   "status": "B",
+   "note": "16015b79.pdf:限度額の表が見つからない; 2135a03d.html:限度額の表が見つからない; 222c403f.pdf:限度額の表が見つからない; 62407bda.html:生活保護の書類ではない; 6c1445cc.html:生活保護の書類ではない; 96e789df.pdf:限度額の表が見つからない; bce50d16.html:生活保護の書類ではない; d36e2a68.h",
+   "checked": "2026-09-17",
+   "urls": [
+    "https://www.pref.fukuoka.lg.jp/contents/jyukyokakuho.html"
+   ],
    "picked": null
   },
   {
@@ -498,11 +500,14 @@
    "name": "さいたま市",
    "level": "指定都市",
    "pref": "埼玉県",
-   "status": "未調査",
+   "status": "A",
    "note": null,
-   "checked": null,
-   "urls": [],
-   "picked": null
+   "checked": "2026-09-17",
+   "urls": [
+    "https://www.city.saitama.lg.jp/002/003/002/p088576_d/fil/jukyokakuhokyuhukinshiori.pdf",
+    "https://www.city.saitama.lg.jp/002/003/002/p072573.html"
+   ],
+   "picked": "https://www.city.saitama.lg.jp/002/003/002/p072573_d/fil/youshiki2-1.pdf"
   },
   {
    "name": "京都市",
@@ -522,31 +527,38 @@
    "name": "仙台市",
    "level": "指定都市",
    "pref": "宮城県",
-   "status": "未調査",
+   "status": "A",
    "note": null,
-   "checked": null,
-   "urls": [],
-   "picked": null
+   "checked": "2026-09-17",
+   "urls": [
+    "https://www.city.sendai.jp/hogoshien/kurashi/tetsuzuki/sekatsu/sekatsu/jukyokakuhokyufukin.html"
+   ],
+   "picked": "https://www.city.sendai.jp/hogoshien/kurashi/tetsuzuki/sekatsu/sekatsu/jukyokakuhokyufukin.html"
   },
   {
    "name": "北九州市",
    "level": "指定都市",
    "pref": "福岡県",
-   "status": "未調査",
+   "status": "A",
    "note": null,
-   "checked": null,
-   "urls": [],
-   "picked": null
+   "checked": "2026-09-17",
+   "urls": [
+    "https://www.city.kitakyushu.lg.jp/contents/924_11335.html"
+   ],
+   "picked": "https://www.city.kitakyushu.lg.jp/contents/924_11335.html"
   },
   {
    "name": "千葉市",
    "level": "指定都市",
    "pref": "千葉県",
-   "status": "未調査",
+   "status": "A",
    "note": null,
-   "checked": null,
-   "urls": [],
-   "picked": null
+   "checked": "2026-09-17",
+   "urls": [
+    "https://www.city.chiba.jp/hokenfukushi/hogo/jyukyokakuhokyuhukinn.html",
+    "https://www.city.chiba.jp/hokenfukushi/hogo/documents/jukyo-goannai-reiwa5nen4gastu-syusei.pdf"
+   ],
+   "picked": "https://www.city.chiba.jp/hokenfukushi/hogo/jyukyokakuhokyuhukinn.html"
   },
   {
    "name": "名古屋市",
@@ -598,21 +610,25 @@
    "name": "川崎市",
    "level": "指定都市",
    "pref": "神奈川県",
-   "status": "未調査",
+   "status": "A",
    "note": null,
-   "checked": null,
-   "urls": [],
-   "picked": null
+   "checked": "2026-09-17",
+   "urls": [
+    "https://www.city.kawasaki.jp/350/page/0000048949.html"
+   ],
+   "picked": "https://www.city.kawasaki.jp/350/page/0000175384.html"
   },
   {
    "name": "広島市",
    "level": "指定都市",
    "pref": "広島県",
-   "status": "未調査",
+   "status": "A",
    "note": null,
-   "checked": null,
-   "urls": [],
-   "picked": null
+   "checked": "2026-09-17",
+   "urls": [
+    "https://www.city.hiroshima.lg.jp/living/fukushi-kaigo/1021239/1021956.html"
+   ],
+   "picked": "https://www.city.hiroshima.lg.jp/living/fukushi-kaigo/1021239/1021956.html"
   },
   {
    "name": "新潟市",
@@ -641,15 +657,16 @@
    "name": "横浜市",
    "level": "指定都市",
    "pref": "神奈川県",
-   "status": "B",
-   "note": "4f7963fc.pdf:限度額の表が見つからない; 68ae8a58.pdf:生活保護の書類ではない; 713ed5a7.pdf:限度額の表が見つからない; bd61ebc0.pdf:限度額の表が見つからない; f316ec05.html:限度額の表が見つからない",
+   "status": "A",
+   "note": null,
    "checked": "2026-09-17",
    "urls": [
     "https://www.city.yokohama.lg.jp/kenko-iryo-fukushi/fukushi-kaigo/seikatsu/seikatsuhogo/hogo.files/Seiho_Shiori_A4_2025.pdf",
     "https://www.city.yokohama.lg.jp/kenko-iryo-fukushi/fukushi-kaigo/seikatsu/jiritsu/jukyokakuho.files/jyukaku_yachin_20250401.pdf",
-    "https://www.city.yokohama.lg.jp/kenko-iryo-fukushi/fukushi-kaigo/seikatsu/seikatsuhogo/hogo.html"
+    "https://www.city.yokohama.lg.jp/kenko-iryo-fukushi/fukushi-kaigo/seikatsu/seikatsuhogo/hogo.html",
+    "https://www.city.yokohama.lg.jp/kenko-iryo-fukushi/fukushi-kaigo/seikatsu/jiritsu/jukyokakuho.html"
    ],
-   "picked": null
+   "picked": "https://www.city.yokohama.lg.jp/kenko-iryo-fukushi/fukushi-kaigo/seikatsu/jiritsu/jukyokakuho.html"
   },
   {
    "name": "浜松市",
@@ -1155,10 +1172,12 @@
    "name": "秋田市",
    "level": "中核市",
    "pref": "秋田県",
-   "status": "未調査",
-   "note": null,
-   "checked": null,
-   "urls": [],
+   "status": "B",
+   "note": "fcf7e97c.html:限度額の表が見つからない",
+   "checked": "2026-09-17",
+   "urls": [
+    "https://www.city.akita.lg.jp/kurashi/okomarinokata/1006020/1025008.html"
+   ],
    "picked": null
   },
   {

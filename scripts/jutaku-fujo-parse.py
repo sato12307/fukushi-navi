@@ -134,6 +134,28 @@ def kyuchi_label(s):
     return f"{a}級地-{m.group(2)}" if m.group(2) else f"{a}級地"
 
 
+def shape_ok(c):
+    """5つ組が「住宅扶助の限度額らしい形」かを見る。
+
+    ★この制度は全国共通の倍率で組まれているので、単身を1としたときの比が
+      どの自治体でもほぼ同じになる（14機関で実測）。
+        2人 ≒ 1.19  /  3〜5人 ≒ 1.30  /  6人 ≒ 1.40  /  7人以上 ≒ 1.56
+      例: 東京1級地 53,700 → 64,000(1.19) 69,800(1.30) 75,000(1.40) 83,800(1.56)
+          札幌市    36,000 → 43,000(1.19) 46,000(1.28) 50,000(1.39) 56,000(1.56)
+    ★これが効いた場面: 広島市の面は「単身38,000、2人46,000…」が1行に並んでいて、
+      別の場所の 32,000 を単身として拾った組み合わせも単調・100円単位を満たしてしまう。
+      比で見ると 46,000/32,000＝1.44 で 2人の比(≒1.19)から外れるので落とせる。
+    """
+    band = [(1, 1.12, 1.28), (2, 1.22, 1.40), (3, 1.32, 1.50), (4, 1.44, 1.72)]
+    if not c or not c[0]:
+        return False
+    for i, lo, hi in band:
+        if i < len(c) and c[i]:
+            if not lo <= c[i] / c[0] <= hi:
+                return False
+    return True
+
+
 def runs(line):
     """1行のなかの数字の並びから、条件を満たす5つ組を取り出す。"""
     vals = []
@@ -156,7 +178,8 @@ def runs(line):
             if (all(c[k] <= c[k + 1] for k in range(4))
                     and c[0] >= c[1] * 0.6
                     and TANSHIN_LO <= c[0] <= TANSHIN_HI
-                    and all(v % 100 == 0 for v in c)):  # 限度額は必ず100円単位
+                    and all(v % 100 == 0 for v in c)  # 限度額は必ず100円単位
+                    and shape_ok(c)):
                 out.append(c)
         i = j
     return out
@@ -166,6 +189,7 @@ def runs(line):
 # 「単身世帯」を1人と書く自治体もある（名古屋市）。
 NIN = re.compile(r"(?:^|[\s~～〜ー\-－・、,])(\d{1,2})\s*人(以上)?|(単身)")
 BARE = re.compile(r"(?<![(（\d])(\d{1,3}(?:,\d{3})+)(?![)）])")
+BARE_ANY = re.compile(r"(\d{1,3}(?:,\d{3})+)")
 # 金額が先・世帯の別があとに括弧で来る書き方（神戸市）
 REV = re.compile(r"(\d{1,3}(?:,\d{3})+)\s*円?\s*[(（]([^)）]{1,14})[)）]")
 
@@ -195,7 +219,14 @@ def vertical(lines):
         # 「3~5人」は下限の3で数える。そのままだと ~ の直後の 5 を拾って
         # 3人の欄が空になる（京都市で実際に落ちた）。
         l = re.sub(r"(\d)\s*[~～〜ー\-－]\s*(\d)\s*人", r"\1人", l)
-        for m in NIN.finditer(l):
+        # ★1行に全部が入っている面がある（広島市:
+        #   「単身世帯:38,000円、2人世帯:46,000円、3人~5人世帯:49,000円、…」）。
+        #   ラベルの後ろを行末まで候補にすると、単身の欄に2人以降の金額まで入り、
+        #   「どの人員も同じ額」という組み合わせが通ってしまう（実際に単身46,000で通った。正しくは38,000）。
+        #   ∴ 候補にするのは **次のラベルが出るまで** の範囲だけ。
+        ms = list(NIN.finditer(l))
+        for mi, m in enumerate(ms):
+            stop = ms[mi + 1].start() if mi + 1 < len(ms) else len(l)
             if m.group(3):  # 「単身」
                 key = 1
             else:
@@ -204,12 +235,15 @@ def vertical(lines):
                     continue
                 # 3人・4人・5人は同じ band（3〜5人）。人員ごとに分けて書く自治体があるので畳む。
                 key = 7 if m.group(2) or n >= 7 else (3 if 3 <= n <= 5 else n)
-            b = BARE.search(l[m.end():])
-            if not b:
-                continue
-            v = int(b.group(1).replace(",", ""))
-            if LO <= v <= HI and v % 100 == 0:  # 限度額は必ず100円単位。第2類(27,790)はここで落ちる
-                got.setdefault(key, []).append(v)
+            # ★行の最初の数字だけを採ると落ちる。川崎市は
+            #     「1人 92,000円 家賃額(53,700円) 145,700円」
+            #   と収入基準額が先に来て、限度額は**括弧の中**にある。
+            #   ∴ 行の数字を全部候補にして、あとの組み合わせ探しに選ばせる。
+            #   （100円単位・単身2万〜6万・単調・1.15〜2.0倍 の4条件が効いているので通る）
+            for b in BARE_ANY.finditer(l[m.end():stop]):
+                v = int(b.group(1).replace(",", ""))
+                if LO <= v <= HI and v % 100 == 0:  # 限度額は必ず100円単位。第2類(27,790)はここで落ちる
+                    got.setdefault(key, []).append(v)
         # ★逆順で書く自治体がある（神戸市）。
         #   「上限額 40,000円(単身世帯) 48,000円(2人世帯) 52,000円(3~5人世帯) …」
         #   金額が先、世帯の別があとに括弧で付く。
@@ -241,10 +275,7 @@ def vertical(lines):
             chain.append(nxt[0] if nxt else None)
         if chain[1] is None or chain[2] is None:
             continue
-        last = chain[4] or chain[3] or chain[2]
-        # 世帯が増えたときの伸びはおおむね1.2〜2.0倍（実測: 東京都1.56 / 埼玉県1.56 / 札幌市1.56）。
-        # ここを外れる組み合わせは、別々の表の数字を寄せ集めている。
-        if 1.15 <= last / chain[0] <= 2.0:
+        if shape_ok(chain):
             return [chain]
     return []
 
