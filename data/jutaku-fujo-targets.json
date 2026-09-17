@@ -1,0 +1,1323 @@
+{
+ "note": "生活保護の住宅扶助（家賃・間代等）の限度額を公表している実施機関の台帳。限度額を決めるのは都道府県・指定都市・中核市の129機関だけで、市町村ごとには決まらない（町村部は都道府県が定める）。129機関の顔ぶれは被保護者調査 第18表と同一なので、data/hogo-shinsei.json から起こしている。 URLは候補を複数持ち、parse が読めたものを picked に記録する。",
+ "gate": "A=候補のどれかから［1人/2人/3〜5人/6人/7人以上］の額が読めた、B=候補は取れたが額の表が見つからない、C=候補が1本も取れない",
+ "updated": "2026-09-17",
+ "targets": [
+  {
+   "name": "三重県",
+   "level": "都道府県",
+   "pref": "三重県",
+   "status": "未調査",
+   "note": null,
+   "checked": null,
+   "urls": [],
+   "picked": null
+  },
+  {
+   "name": "京都府",
+   "level": "都道府県",
+   "pref": "京都府",
+   "status": "未調査",
+   "note": null,
+   "checked": null,
+   "urls": [],
+   "picked": null
+  },
+  {
+   "name": "佐賀県",
+   "level": "都道府県",
+   "pref": "佐賀県",
+   "status": "未調査",
+   "note": null,
+   "checked": null,
+   "urls": [],
+   "picked": null
+  },
+  {
+   "name": "兵庫県",
+   "level": "都道府県",
+   "pref": "兵庫県",
+   "status": "未調査",
+   "note": null,
+   "checked": null,
+   "urls": [],
+   "picked": null
+  },
+  {
+   "name": "北海道",
+   "level": "都道府県",
+   "pref": "北海道",
+   "status": "B",
+   "note": "3e8c9b32.pdf:限度額の表が見つからない; 63a7de45.html:限度額の表が見つからない; 7b67e8ca.pdf:本文に「住宅扶助」も「住居確保給付金」も無い; c3138aa9.html:限度額の表が見つからない; facb884e.html:限度額の表が見つからない",
+   "checked": "2026-09-17",
+   "urls": [
+    "https://www.pref.hokkaido.lg.jp/hf/feg/hog/hogoanai1.html",
+    "https://www.rumoi.pref.hokkaido.lg.jp/hk/syf/129011.html",
+    "https://www.tokachi.pref.hokkaido.lg.jp/hk/syf/seikatuhogo.html"
+   ],
+   "picked": null
+  },
+  {
+   "name": "千葉県",
+   "level": "都道府県",
+   "pref": "千葉県",
+   "status": "未調査",
+   "note": null,
+   "checked": null,
+   "urls": [],
+   "picked": null
+  },
+  {
+   "name": "和歌山県",
+   "level": "都道府県",
+   "pref": "和歌山県",
+   "status": "未調査",
+   "note": null,
+   "checked": null,
+   "urls": [],
+   "picked": null
+  },
+  {
+   "name": "埼玉県",
+   "level": "都道府県",
+   "pref": "埼玉県",
+   "status": "A",
+   "note": null,
+   "checked": "2026-09-17",
+   "urls": [
+    "https://www.pref.saitama.lg.jp/a0602/seihozenpan/910-20091209-89.html"
+   ],
+   "picked": "https://www.pref.saitama.lg.jp/a0602/seihozenpan/910-20091209-89.html"
+  },
+  {
+   "name": "大分県",
+   "level": "都道府県",
+   "pref": "大分県",
+   "status": "未調査",
+   "note": null,
+   "checked": null,
+   "urls": [],
+   "picked": null
+  },
+  {
+   "name": "大阪府",
+   "level": "都道府県",
+   "pref": "大阪府",
+   "status": "未調査",
+   "note": null,
+   "checked": null,
+   "urls": [],
+   "picked": null
+  },
+  {
+   "name": "奈良県",
+   "level": "都道府県",
+   "pref": "奈良県",
+   "status": "未調査",
+   "note": null,
+   "checked": null,
+   "urls": [],
+   "picked": null
+  },
+  {
+   "name": "宮城県",
+   "level": "都道府県",
+   "pref": "宮城県",
+   "status": "B",
+   "note": "13430301.html:本文に「住宅扶助」も「住居確保給付金」も無い; 8000554e.html:本文に「住宅扶助」も「住居確保給付金」も無い; feddbc8d.html:本文に「住宅扶助」も「住居確保給付金」も無い",
+   "checked": "2026-09-17",
+   "urls": [
+    "https://www.pref.miyagi.jp/soshiki/ks-health/seiho03.html",
+    "https://www.pref.miyagi.jp/soshiki/syahuku/jyoho5-2.html"
+   ],
+   "picked": null
+  },
+  {
+   "name": "宮崎県",
+   "level": "都道府県",
+   "pref": "宮崎県",
+   "status": "未調査",
+   "note": null,
+   "checked": null,
+   "urls": [],
+   "picked": null
+  },
+  {
+   "name": "富山県",
+   "level": "都道府県",
+   "pref": "富山県",
+   "status": "未調査",
+   "note": null,
+   "checked": null,
+   "urls": [],
+   "picked": null
+  },
+  {
+   "name": "山口県",
+   "level": "都道府県",
+   "pref": "山口県",
+   "status": "未調査",
+   "note": null,
+   "checked": null,
+   "urls": [],
+   "picked": null
+  },
+  {
+   "name": "山形県",
+   "level": "都道府県",
+   "pref": "山形県",
+   "status": "未調査",
+   "note": null,
+   "checked": null,
+   "urls": [],
+   "picked": null
+  },
+  {
+   "name": "山梨県",
+   "level": "都道府県",
+   "pref": "山梨県",
+   "status": "未調査",
+   "note": null,
+   "checked": null,
+   "urls": [],
+   "picked": null
+  },
+  {
+   "name": "岐阜県",
+   "level": "都道府県",
+   "pref": "岐阜県",
+   "status": "未調査",
+   "note": null,
+   "checked": null,
+   "urls": [],
+   "picked": null
+  },
+  {
+   "name": "岡山県",
+   "level": "都道府県",
+   "pref": "岡山県",
+   "status": "未調査",
+   "note": null,
+   "checked": null,
+   "urls": [],
+   "picked": null
+  },
+  {
+   "name": "岩手県",
+   "level": "都道府県",
+   "pref": "岩手県",
+   "status": "未調査",
+   "note": null,
+   "checked": null,
+   "urls": [],
+   "picked": null
+  },
+  {
+   "name": "島根県",
+   "level": "都道府県",
+   "pref": "島根県",
+   "status": "未調査",
+   "note": null,
+   "checked": null,
+   "urls": [],
+   "picked": null
+  },
+  {
+   "name": "広島県",
+   "level": "都道府県",
+   "pref": "広島県",
+   "status": "未調査",
+   "note": null,
+   "checked": null,
+   "urls": [],
+   "picked": null
+  },
+  {
+   "name": "徳島県",
+   "level": "都道府県",
+   "pref": "徳島県",
+   "status": "未調査",
+   "note": null,
+   "checked": null,
+   "urls": [],
+   "picked": null
+  },
+  {
+   "name": "愛媛県",
+   "level": "都道府県",
+   "pref": "愛媛県",
+   "status": "未調査",
+   "note": null,
+   "checked": null,
+   "urls": [],
+   "picked": null
+  },
+  {
+   "name": "愛知県",
+   "level": "都道府県",
+   "pref": "愛知県",
+   "status": "未調査",
+   "note": null,
+   "checked": null,
+   "urls": [],
+   "picked": null
+  },
+  {
+   "name": "新潟県",
+   "level": "都道府県",
+   "pref": "新潟県",
+   "status": "未調査",
+   "note": null,
+   "checked": null,
+   "urls": [],
+   "picked": null
+  },
+  {
+   "name": "東京都",
+   "level": "都道府県",
+   "pref": "東京都",
+   "status": "未調査",
+   "note": null,
+   "checked": null,
+   "urls": [],
+   "picked": null
+  },
+  {
+   "name": "栃木県",
+   "level": "都道府県",
+   "pref": "栃木県",
+   "status": "未調査",
+   "note": null,
+   "checked": null,
+   "urls": [],
+   "picked": null
+  },
+  {
+   "name": "沖縄県",
+   "level": "都道府県",
+   "pref": "沖縄県",
+   "status": "未調査",
+   "note": null,
+   "checked": null,
+   "urls": [],
+   "picked": null
+  },
+  {
+   "name": "滋賀県",
+   "level": "都道府県",
+   "pref": "滋賀県",
+   "status": "未調査",
+   "note": null,
+   "checked": null,
+   "urls": [],
+   "picked": null
+  },
+  {
+   "name": "熊本県",
+   "level": "都道府県",
+   "pref": "熊本県",
+   "status": "未調査",
+   "note": null,
+   "checked": null,
+   "urls": [],
+   "picked": null
+  },
+  {
+   "name": "石川県",
+   "level": "都道府県",
+   "pref": "石川県",
+   "status": "未調査",
+   "note": null,
+   "checked": null,
+   "urls": [],
+   "picked": null
+  },
+  {
+   "name": "神奈川県",
+   "level": "都道府県",
+   "pref": "神奈川県",
+   "status": "未調査",
+   "note": null,
+   "checked": null,
+   "urls": [],
+   "picked": null
+  },
+  {
+   "name": "福井県",
+   "level": "都道府県",
+   "pref": "福井県",
+   "status": "未調査",
+   "note": null,
+   "checked": null,
+   "urls": [],
+   "picked": null
+  },
+  {
+   "name": "福岡県",
+   "level": "都道府県",
+   "pref": "福岡県",
+   "status": "未調査",
+   "note": null,
+   "checked": null,
+   "urls": [],
+   "picked": null
+  },
+  {
+   "name": "福島県",
+   "level": "都道府県",
+   "pref": "福島県",
+   "status": "未調査",
+   "note": null,
+   "checked": null,
+   "urls": [],
+   "picked": null
+  },
+  {
+   "name": "秋田県",
+   "level": "都道府県",
+   "pref": "秋田県",
+   "status": "B",
+   "note": "1d9875d3.pdf:限度額の表が見つからない; 730356b8.html:本文に「住宅扶助」も「住居確保給付金」も無い; 974bebdc.pdf:限度額の表が見つからない; c331f7ef.pdf:限度額の表が見つからない",
+   "checked": "2026-09-17",
+   "urls": [
+    "https://www.pref.akita.lg.jp/pages/archive/293",
+    "https://www.pref.akita.lg.jp/uploads/public/archive_0000000293_00/02-1_%EF%BC%88%E5%8F%97%E7%B5%A6%E8%80%85%E7%94%A8%EF%BC%89%E5%85%A8%E6%96%87.pdf",
+    "https://www.pref.akita.lg.jp/uploads/public/archive_0000000293_00/3_%E4%BF%9D%E8%AD%B7%E3%81%AE%E3%81%97%E3%81%8A%E3%82%8A%EF%BC%88%E7%94%B3%E8%AB%8B%E8%80%85%E7%94%A8%EF%BC%89.pdf"
+   ],
+   "picked": null
+  },
+  {
+   "name": "群馬県",
+   "level": "都道府県",
+   "pref": "群馬県",
+   "status": "未調査",
+   "note": null,
+   "checked": null,
+   "urls": [],
+   "picked": null
+  },
+  {
+   "name": "茨城県",
+   "level": "都道府県",
+   "pref": "茨城県",
+   "status": "未調査",
+   "note": null,
+   "checked": null,
+   "urls": [],
+   "picked": null
+  },
+  {
+   "name": "長崎県",
+   "level": "都道府県",
+   "pref": "長崎県",
+   "status": "未調査",
+   "note": null,
+   "checked": null,
+   "urls": [],
+   "picked": null
+  },
+  {
+   "name": "長野県",
+   "level": "都道府県",
+   "pref": "長野県",
+   "status": "未調査",
+   "note": null,
+   "checked": null,
+   "urls": [],
+   "picked": null
+  },
+  {
+   "name": "青森県",
+   "level": "都道府県",
+   "pref": "青森県",
+   "status": "B",
+   "note": "c8a34c55.html:限度額の表が見つからない; cbb7fd81.html:限度額の表が見つからない",
+   "checked": "2026-09-17",
+   "urls": [
+    "https://www.pref.aomori.lg.jp/soshiki/kenko/se-fukushi/2008-0627-1527-425.html",
+    "https://www.pref.aomori.lg.jp/soshiki/kenmin/sa-fukushi/hogo.html"
+   ],
+   "picked": null
+  },
+  {
+   "name": "静岡県",
+   "level": "都道府県",
+   "pref": "静岡県",
+   "status": "未調査",
+   "note": null,
+   "checked": null,
+   "urls": [],
+   "picked": null
+  },
+  {
+   "name": "香川県",
+   "level": "都道府県",
+   "pref": "香川県",
+   "status": "未調査",
+   "note": null,
+   "checked": null,
+   "urls": [],
+   "picked": null
+  },
+  {
+   "name": "高知県",
+   "level": "都道府県",
+   "pref": "高知県",
+   "status": "未調査",
+   "note": null,
+   "checked": null,
+   "urls": [],
+   "picked": null
+  },
+  {
+   "name": "鳥取県",
+   "level": "都道府県",
+   "pref": "鳥取県",
+   "status": "未調査",
+   "note": null,
+   "checked": null,
+   "urls": [],
+   "picked": null
+  },
+  {
+   "name": "鹿児島県",
+   "level": "都道府県",
+   "pref": "鹿児島県",
+   "status": "未調査",
+   "note": null,
+   "checked": null,
+   "urls": [],
+   "picked": null
+  },
+  {
+   "name": "さいたま市",
+   "level": "指定都市",
+   "pref": "埼玉県",
+   "status": "未調査",
+   "note": null,
+   "checked": null,
+   "urls": [],
+   "picked": null
+  },
+  {
+   "name": "京都市",
+   "level": "指定都市",
+   "pref": "京都府",
+   "status": "未調査",
+   "note": null,
+   "checked": null,
+   "urls": [],
+   "picked": null
+  },
+  {
+   "name": "仙台市",
+   "level": "指定都市",
+   "pref": "宮城県",
+   "status": "未調査",
+   "note": null,
+   "checked": null,
+   "urls": [],
+   "picked": null
+  },
+  {
+   "name": "北九州市",
+   "level": "指定都市",
+   "pref": "福岡県",
+   "status": "未調査",
+   "note": null,
+   "checked": null,
+   "urls": [],
+   "picked": null
+  },
+  {
+   "name": "千葉市",
+   "level": "指定都市",
+   "pref": "千葉県",
+   "status": "未調査",
+   "note": null,
+   "checked": null,
+   "urls": [],
+   "picked": null
+  },
+  {
+   "name": "名古屋市",
+   "level": "指定都市",
+   "pref": "愛知県",
+   "status": "未調査",
+   "note": null,
+   "checked": null,
+   "urls": [],
+   "picked": null
+  },
+  {
+   "name": "堺市",
+   "level": "指定都市",
+   "pref": "大阪府",
+   "status": "未調査",
+   "note": null,
+   "checked": null,
+   "urls": [],
+   "picked": null
+  },
+  {
+   "name": "大阪市",
+   "level": "指定都市",
+   "pref": "大阪府",
+   "status": "A",
+   "note": null,
+   "checked": "2026-09-17",
+   "urls": [
+    "https://www.city.osaka.lg.jp/fukushi/page/0000086902.html"
+   ],
+   "picked": "https://www.city.osaka.lg.jp/fukushi/page/0000086902.html"
+  },
+  {
+   "name": "岡山市",
+   "level": "指定都市",
+   "pref": "岡山県",
+   "status": "未調査",
+   "note": null,
+   "checked": null,
+   "urls": [],
+   "picked": null
+  },
+  {
+   "name": "川崎市",
+   "level": "指定都市",
+   "pref": "神奈川県",
+   "status": "未調査",
+   "note": null,
+   "checked": null,
+   "urls": [],
+   "picked": null
+  },
+  {
+   "name": "広島市",
+   "level": "指定都市",
+   "pref": "広島県",
+   "status": "未調査",
+   "note": null,
+   "checked": null,
+   "urls": [],
+   "picked": null
+  },
+  {
+   "name": "新潟市",
+   "level": "指定都市",
+   "pref": "新潟県",
+   "status": "未調査",
+   "note": null,
+   "checked": null,
+   "urls": [],
+   "picked": null
+  },
+  {
+   "name": "札幌市",
+   "level": "指定都市",
+   "pref": "北海道",
+   "status": "B",
+   "note": "キャッシュが無い（fetch がまだ）",
+   "checked": "2026-09-17",
+   "urls": [
+    "https://www.city.sapporo.jp/fukushi-guide/documents/seikatsuhogo-r8-4-kijunn.pdf"
+   ],
+   "picked": null
+  },
+  {
+   "name": "横浜市",
+   "level": "指定都市",
+   "pref": "神奈川県",
+   "status": "未調査",
+   "note": null,
+   "checked": null,
+   "urls": [],
+   "picked": null
+  },
+  {
+   "name": "浜松市",
+   "level": "指定都市",
+   "pref": "静岡県",
+   "status": "未調査",
+   "note": null,
+   "checked": null,
+   "urls": [],
+   "picked": null
+  },
+  {
+   "name": "熊本市",
+   "level": "指定都市",
+   "pref": "熊本県",
+   "status": "未調査",
+   "note": null,
+   "checked": null,
+   "urls": [],
+   "picked": null
+  },
+  {
+   "name": "相模原市",
+   "level": "指定都市",
+   "pref": "神奈川県",
+   "status": "未調査",
+   "note": null,
+   "checked": null,
+   "urls": [],
+   "picked": null
+  },
+  {
+   "name": "神戸市",
+   "level": "指定都市",
+   "pref": "兵庫県",
+   "status": "B",
+   "note": "32173c48.pdf:限度額の表が見つからない; 47ce43f5.pdf:限度額の表が見つからない; 52c3330c.pdf:限度額の表が見つからない; 566c22f2.html:限度額の表が見つからない; 822cfec6.pdf:限度額の表が見つからない; abfefb05.pdf:限度額の表が見つからない; c4009dd3.pdf:限度額の表が見つからない; ed7a1346.p",
+   "checked": "2026-09-17",
+   "urls": [
+    "https://www.city.kobe.lg.jp/documents/4788/03_jyukakupanfu.pdf",
+    "https://www.city.kobe.lg.jp/a38463/kenko/chiikifukushi/sekatsukonkyusha/jukyokakuho.html"
+   ],
+   "picked": null
+  },
+  {
+   "name": "福岡市",
+   "level": "指定都市",
+   "pref": "福岡県",
+   "status": "未調査",
+   "note": null,
+   "checked": null,
+   "urls": [],
+   "picked": null
+  },
+  {
+   "name": "静岡市",
+   "level": "指定都市",
+   "pref": "静岡県",
+   "status": "未調査",
+   "note": null,
+   "checked": null,
+   "urls": [],
+   "picked": null
+  },
+  {
+   "name": "いわき市",
+   "level": "中核市",
+   "pref": "福島県",
+   "status": "未調査",
+   "note": null,
+   "checked": null,
+   "urls": [],
+   "picked": null
+  },
+  {
+   "name": "一宮市",
+   "level": "中核市",
+   "pref": "愛知県",
+   "status": "未調査",
+   "note": null,
+   "checked": null,
+   "urls": [],
+   "picked": null
+  },
+  {
+   "name": "下関市",
+   "level": "中核市",
+   "pref": "山口県",
+   "status": "未調査",
+   "note": null,
+   "checked": null,
+   "urls": [],
+   "picked": null
+  },
+  {
+   "name": "久留米市",
+   "level": "中核市",
+   "pref": "福岡県",
+   "status": "未調査",
+   "note": null,
+   "checked": null,
+   "urls": [],
+   "picked": null
+  },
+  {
+   "name": "佐世保市",
+   "level": "中核市",
+   "pref": "長崎県",
+   "status": "未調査",
+   "note": null,
+   "checked": null,
+   "urls": [],
+   "picked": null
+  },
+  {
+   "name": "倉敷市",
+   "level": "中核市",
+   "pref": "岡山県",
+   "status": "未調査",
+   "note": null,
+   "checked": null,
+   "urls": [],
+   "picked": null
+  },
+  {
+   "name": "八尾市",
+   "level": "中核市",
+   "pref": "大阪府",
+   "status": "未調査",
+   "note": null,
+   "checked": null,
+   "urls": [],
+   "picked": null
+  },
+  {
+   "name": "八戸市",
+   "level": "中核市",
+   "pref": "青森県",
+   "status": "未調査",
+   "note": null,
+   "checked": null,
+   "urls": [],
+   "picked": null
+  },
+  {
+   "name": "八王子市",
+   "level": "中核市",
+   "pref": "東京都",
+   "status": "未調査",
+   "note": null,
+   "checked": null,
+   "urls": [],
+   "picked": null
+  },
+  {
+   "name": "函館市",
+   "level": "中核市",
+   "pref": "北海道",
+   "status": "未調査",
+   "note": null,
+   "checked": null,
+   "urls": [],
+   "picked": null
+  },
+  {
+   "name": "前橋市",
+   "level": "中核市",
+   "pref": "群馬県",
+   "status": "未調査",
+   "note": null,
+   "checked": null,
+   "urls": [],
+   "picked": null
+  },
+  {
+   "name": "吹田市",
+   "level": "中核市",
+   "pref": "大阪府",
+   "status": "未調査",
+   "note": null,
+   "checked": null,
+   "urls": [],
+   "picked": null
+  },
+  {
+   "name": "呉市",
+   "level": "中核市",
+   "pref": "広島県",
+   "status": "未調査",
+   "note": null,
+   "checked": null,
+   "urls": [],
+   "picked": null
+  },
+  {
+   "name": "和歌山市",
+   "level": "中核市",
+   "pref": "和歌山県",
+   "status": "未調査",
+   "note": null,
+   "checked": null,
+   "urls": [],
+   "picked": null
+  },
+  {
+   "name": "大分市",
+   "level": "中核市",
+   "pref": "大分県",
+   "status": "未調査",
+   "note": null,
+   "checked": null,
+   "urls": [],
+   "picked": null
+  },
+  {
+   "name": "大津市",
+   "level": "中核市",
+   "pref": "滋賀県",
+   "status": "未調査",
+   "note": null,
+   "checked": null,
+   "urls": [],
+   "picked": null
+  },
+  {
+   "name": "奈良市",
+   "level": "中核市",
+   "pref": "奈良県",
+   "status": "未調査",
+   "note": null,
+   "checked": null,
+   "urls": [],
+   "picked": null
+  },
+  {
+   "name": "姫路市",
+   "level": "中核市",
+   "pref": "兵庫県",
+   "status": "未調査",
+   "note": null,
+   "checked": null,
+   "urls": [],
+   "picked": null
+  },
+  {
+   "name": "宇都宮市",
+   "level": "中核市",
+   "pref": "栃木県",
+   "status": "未調査",
+   "note": null,
+   "checked": null,
+   "urls": [],
+   "picked": null
+  },
+  {
+   "name": "宮崎市",
+   "level": "中核市",
+   "pref": "宮崎県",
+   "status": "未調査",
+   "note": null,
+   "checked": null,
+   "urls": [],
+   "picked": null
+  },
+  {
+   "name": "富山市",
+   "level": "中核市",
+   "pref": "富山県",
+   "status": "未調査",
+   "note": null,
+   "checked": null,
+   "urls": [],
+   "picked": null
+  },
+  {
+   "name": "寝屋川市",
+   "level": "中核市",
+   "pref": "大阪府",
+   "status": "未調査",
+   "note": null,
+   "checked": null,
+   "urls": [],
+   "picked": null
+  },
+  {
+   "name": "尼崎市",
+   "level": "中核市",
+   "pref": "兵庫県",
+   "status": "未調査",
+   "note": null,
+   "checked": null,
+   "urls": [],
+   "picked": null
+  },
+  {
+   "name": "山形市",
+   "level": "中核市",
+   "pref": "山形県",
+   "status": "未調査",
+   "note": null,
+   "checked": null,
+   "urls": [],
+   "picked": null
+  },
+  {
+   "name": "岐阜市",
+   "level": "中核市",
+   "pref": "岐阜県",
+   "status": "未調査",
+   "note": null,
+   "checked": null,
+   "urls": [],
+   "picked": null
+  },
+  {
+   "name": "岡崎市",
+   "level": "中核市",
+   "pref": "愛知県",
+   "status": "未調査",
+   "note": null,
+   "checked": null,
+   "urls": [],
+   "picked": null
+  },
+  {
+   "name": "川口市",
+   "level": "中核市",
+   "pref": "埼玉県",
+   "status": "未調査",
+   "note": null,
+   "checked": null,
+   "urls": [],
+   "picked": null
+  },
+  {
+   "name": "川越市",
+   "level": "中核市",
+   "pref": "埼玉県",
+   "status": "未調査",
+   "note": null,
+   "checked": null,
+   "urls": [],
+   "picked": null
+  },
+  {
+   "name": "旭川市",
+   "level": "中核市",
+   "pref": "北海道",
+   "status": "未調査",
+   "note": null,
+   "checked": null,
+   "urls": [],
+   "picked": null
+  },
+  {
+   "name": "明石市",
+   "level": "中核市",
+   "pref": "兵庫県",
+   "status": "未調査",
+   "note": null,
+   "checked": null,
+   "urls": [],
+   "picked": null
+  },
+  {
+   "name": "東大阪市",
+   "level": "中核市",
+   "pref": "大阪府",
+   "status": "未調査",
+   "note": null,
+   "checked": null,
+   "urls": [],
+   "picked": null
+  },
+  {
+   "name": "松山市",
+   "level": "中核市",
+   "pref": "愛媛県",
+   "status": "B",
+   "note": "209aa694.html:本文に「住宅扶助」も「住居確保給付金」も無い; 6f83455a.html:限度額の表が見つからない; 9a62a504.html:本文に「住宅扶助」も「住居確保給付金」も無い; acabaf84.html:限度額の表が見つからない",
+   "checked": "2026-09-17",
+   "urls": [
+    "https://www.city.matsuyama.ehime.jp/kurashi/fukushi/shakai/hogo/naiyou/index.html",
+    "https://www.city.matsuyama.ehime.jp/kurashi/fukushi/shakai/ziritsushien/zyuukyo/jyukyokakuho2.html"
+   ],
+   "picked": null
+  },
+  {
+   "name": "松本市",
+   "level": "中核市",
+   "pref": "長野県",
+   "status": "未調査",
+   "note": null,
+   "checked": null,
+   "urls": [],
+   "picked": null
+  },
+  {
+   "name": "松江市",
+   "level": "中核市",
+   "pref": "島根県",
+   "status": "未調査",
+   "note": null,
+   "checked": null,
+   "urls": [],
+   "picked": null
+  },
+  {
+   "name": "枚方市",
+   "level": "中核市",
+   "pref": "大阪府",
+   "status": "未調査",
+   "note": null,
+   "checked": null,
+   "urls": [],
+   "picked": null
+  },
+  {
+   "name": "柏市",
+   "level": "中核市",
+   "pref": "千葉県",
+   "status": "未調査",
+   "note": null,
+   "checked": null,
+   "urls": [],
+   "picked": null
+  },
+  {
+   "name": "横須賀市",
+   "level": "中核市",
+   "pref": "神奈川県",
+   "status": "未調査",
+   "note": null,
+   "checked": null,
+   "urls": [],
+   "picked": null
+  },
+  {
+   "name": "水戸市",
+   "level": "中核市",
+   "pref": "茨城県",
+   "status": "未調査",
+   "note": null,
+   "checked": null,
+   "urls": [],
+   "picked": null
+  },
+  {
+   "name": "甲府市",
+   "level": "中核市",
+   "pref": "山梨県",
+   "status": "未調査",
+   "note": null,
+   "checked": null,
+   "urls": [],
+   "picked": null
+  },
+  {
+   "name": "盛岡市",
+   "level": "中核市",
+   "pref": "岩手県",
+   "status": "未調査",
+   "note": null,
+   "checked": null,
+   "urls": [],
+   "picked": null
+  },
+  {
+   "name": "福井市",
+   "level": "中核市",
+   "pref": "福井県",
+   "status": "未調査",
+   "note": null,
+   "checked": null,
+   "urls": [],
+   "picked": null
+  },
+  {
+   "name": "福山市",
+   "level": "中核市",
+   "pref": "広島県",
+   "status": "未調査",
+   "note": null,
+   "checked": null,
+   "urls": [],
+   "picked": null
+  },
+  {
+   "name": "福島市",
+   "level": "中核市",
+   "pref": "福島県",
+   "status": "未調査",
+   "note": null,
+   "checked": null,
+   "urls": [],
+   "picked": null
+  },
+  {
+   "name": "秋田市",
+   "level": "中核市",
+   "pref": "秋田県",
+   "status": "未調査",
+   "note": null,
+   "checked": null,
+   "urls": [],
+   "picked": null
+  },
+  {
+   "name": "船橋市",
+   "level": "中核市",
+   "pref": "千葉県",
+   "status": "未調査",
+   "note": null,
+   "checked": null,
+   "urls": [],
+   "picked": null
+  },
+  {
+   "name": "西宮市",
+   "level": "中核市",
+   "pref": "兵庫県",
+   "status": "未調査",
+   "note": null,
+   "checked": null,
+   "urls": [],
+   "picked": null
+  },
+  {
+   "name": "豊中市",
+   "level": "中核市",
+   "pref": "大阪府",
+   "status": "未調査",
+   "note": null,
+   "checked": null,
+   "urls": [],
+   "picked": null
+  },
+  {
+   "name": "豊橋市",
+   "level": "中核市",
+   "pref": "愛知県",
+   "status": "未調査",
+   "note": null,
+   "checked": null,
+   "urls": [],
+   "picked": null
+  },
+  {
+   "name": "豊田市",
+   "level": "中核市",
+   "pref": "愛知県",
+   "status": "未調査",
+   "note": null,
+   "checked": null,
+   "urls": [],
+   "picked": null
+  },
+  {
+   "name": "越谷市",
+   "level": "中核市",
+   "pref": "埼玉県",
+   "status": "未調査",
+   "note": null,
+   "checked": null,
+   "urls": [],
+   "picked": null
+  },
+  {
+   "name": "那覇市",
+   "level": "中核市",
+   "pref": "沖縄県",
+   "status": "未調査",
+   "note": null,
+   "checked": null,
+   "urls": [],
+   "picked": null
+  },
+  {
+   "name": "郡山市",
+   "level": "中核市",
+   "pref": "福島県",
+   "status": "未調査",
+   "note": null,
+   "checked": null,
+   "urls": [],
+   "picked": null
+  },
+  {
+   "name": "金沢市",
+   "level": "中核市",
+   "pref": "石川県",
+   "status": "未調査",
+   "note": null,
+   "checked": null,
+   "urls": [],
+   "picked": null
+  },
+  {
+   "name": "長崎市",
+   "level": "中核市",
+   "pref": "長崎県",
+   "status": "未調査",
+   "note": null,
+   "checked": null,
+   "urls": [],
+   "picked": null
+  },
+  {
+   "name": "長野市",
+   "level": "中核市",
+   "pref": "長野県",
+   "status": "未調査",
+   "note": null,
+   "checked": null,
+   "urls": [],
+   "picked": null
+  },
+  {
+   "name": "青森市",
+   "level": "中核市",
+   "pref": "青森県",
+   "status": "未調査",
+   "note": null,
+   "checked": null,
+   "urls": [],
+   "picked": null
+  },
+  {
+   "name": "高崎市",
+   "level": "中核市",
+   "pref": "群馬県",
+   "status": "未調査",
+   "note": null,
+   "checked": null,
+   "urls": [],
+   "picked": null
+  },
+  {
+   "name": "高松市",
+   "level": "中核市",
+   "pref": "香川県",
+   "status": "未調査",
+   "note": null,
+   "checked": null,
+   "urls": [],
+   "picked": null
+  },
+  {
+   "name": "高槻市",
+   "level": "中核市",
+   "pref": "大阪府",
+   "status": "未調査",
+   "note": null,
+   "checked": null,
+   "urls": [],
+   "picked": null
+  },
+  {
+   "name": "高知市",
+   "level": "中核市",
+   "pref": "高知県",
+   "status": "未調査",
+   "note": null,
+   "checked": null,
+   "urls": [],
+   "picked": null
+  },
+  {
+   "name": "鳥取市",
+   "level": "中核市",
+   "pref": "鳥取県",
+   "status": "未調査",
+   "note": null,
+   "checked": null,
+   "urls": [],
+   "picked": null
+  },
+  {
+   "name": "鹿児島市",
+   "level": "中核市",
+   "pref": "鹿児島県",
+   "status": "未調査",
+   "note": null,
+   "checked": null,
+   "urls": [],
+   "picked": null
+  }
+ ]
+}
