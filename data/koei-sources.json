@@ -1,0 +1,129 @@
+{
+  "_doc": "政令指定都市20市＋東京都について、市営住宅の応募倍率を『住宅名まで分かる形で・複数回ぶん』取れるかを実地で確かめた結果。都営の商品（定期募集を回またぎで名寄せして『毎回すいている申込先』を出す）を他市へ広げられるかの判定に使う。",
+  "_rule": [
+    "★grade は『商品（毎回すいている申込先）が作れるか』の判定であって、市の姿勢の評価ではない。",
+    "★verified='実地' は、この作業で実際にページ／PDFを取得して中身を見たもの。'既存調査' は data/koei-cities.json の sources に記録が残っているだけで、今回は取り直していない。混ぜて読まないこと。",
+    "★granularity が '地区' や '市全体' のものは、住宅名が無いので都営と同じ商品にはならない（新潟がこれ）。面としては使えるが商品にはしない。",
+    "★rounds は『いま取れる過去回の数』。ここが1〜3回の市は、回ごとに前の分が消えている＝いま集め始めた者だけが数年後に中央値を持てる。逆に川崎のように30回残っている市は後追いで一気に作れる。",
+    "★PDFから日本語を取り出すときは pdftotext に -enc UTF-8 が要る。付けないと数字しか出ず『読めない』と誤判定する（今回いちど踏んだ）。"
+  ],
+  "checkedAt": "2026-09-17",
+  "cities": [
+    {
+      "city": "川崎市", "slug": "kawasaki", "seirei": true, "grade": "A",
+      "granularity": "住宅別（コード・住宅名・募集戸数・応募者数・倍率）",
+      "rounds": 30, "span": "令和元年6月〜令和8年6月",
+      "archive": "市サイトに回ごとの個別ページが残る（/500/page/00001xxxxx.html）。一覧ページあり",
+      "format": "PDF（1段組・pdftotext -enc UTF-8 -layout で読める。倍率の列が行からずれるので都営と同じ行対応の作り直しが要る）",
+      "rows": 93,
+      "index": "https://www.city.kawasaki.jp/kurashi/category/24-4-2-2-1-3-0-0-0-0.html",
+      "sample": "https://www.city.kawasaki.jp/500/cmsfiles/contents/0000189/189277/oubozyoukyouhyo.pdf",
+      "verified": "実地",
+      "note": "★最優先。30回×住宅別は都営の16回を上回る。これだけで都営と同じ商品が作れる"
+    },
+    {
+      "city": "静岡市", "slug": "shizuoka", "seirei": true, "grade": "A",
+      "granularity": "団地別（区・団地番号・団地名・間取り・階数・空部屋戸数・募集戸数・申込数・倍率）",
+      "rounds": null, "span": "年6回。s-jutaku.com の archives に回ごとの記事",
+      "archive": "指定管理者サイト（s-jutaku.com）の記事に回ごとのPDF。市サイトではない",
+      "format": "PDF（pdftotext -enc UTF-8 -layout で読める）",
+      "index": "https://s-jutaku.com/news/",
+      "sample": "http://s-jutaku.com/managed/wp-content/uploads/2025/04/bairitsu2025_4gatsu.pdf.pdf",
+      "verified": "実地",
+      "note": "都営より細かい（間取り・階数つき）。年6回なので溜まる速さも良い。残っている回数だけ未確認"
+    },
+    {
+      "city": "横浜市", "slug": "yokohama", "seirei": true, "grade": "A",
+      "granularity": "申込地域・住宅別（募集戸数・応募者数・倍率）＋エレベーター記号（□一部階／△踊り場／×なし）＋単身可（※）",
+      "rounds": null, "span": "年2回（4月募集・10月募集）",
+      "archive": "記者発表が年別ディレクトリに残る（/press/kenchiku/2023/, /2025/, /2026/ …）",
+      "format": "PDF（★2段組。左右に分かれるので列の切り出しに注意）",
+      "sample": "https://www.city.yokohama.lg.jp/city-info/koho-kocho/press/kenchiku/2026/shieijutaku20260702.files/0002_20260702.pdf",
+      "verified": "実地",
+      "note": "EVと単身可が資料側に入っている唯一の市。都営では別途集めている属性がタダで付く"
+    },
+    {
+      "city": "堺市", "slug": "sakai", "seirei": true, "grade": "B",
+      "granularity": "★住戸単位（住宅名・棟・号室・有効応募者数・最大抽選番号・倍率）",
+      "rounds": 2, "span": "令和7年11月・令和8年度5月のみ",
+      "archive": "★過去回は消える。募集ページに2回ぶんしか残らない",
+      "format": "PDF（pdftotext -enc UTF-8 -layout で読める）",
+      "index": "https://www.city.sakai.lg.jp/kurashi/jutaku/jutaku/chintai/shiei/Bosyu.html",
+      "verified": "実地",
+      "note": "粒度は艦隊最細。ただし消えるので、いま定点観測を置かないと後から作れない"
+    },
+    {
+      "city": "熊本市", "slug": "kumamoto", "seirei": true, "grade": "B",
+      "granularity": "団地別（団地名・募集戸数・申込者数・倍率）",
+      "rounds": 3, "span": "直近3回のみ（令和7年1月・5月・9月＋最新）",
+      "archive": "★「直近3回分」だけをリンク。それ以前は消える",
+      "format": "PDF",
+      "verified": "実地",
+      "note": "消える側。定点観測の対象"
+    },
+    {
+      "city": "神戸市", "slug": "kobe", "seirei": true, "grade": "B",
+      "granularity": "住戸別の申込者数（当選・補欠抽選番号一覧）",
+      "rounds": null, "span": "少なくとも令和6年11月〜令和7年11月",
+      "archive": "神戸住環境整備公社サイトに回ごとの記事が残る",
+      "verified": "既存調査＋一覧の存在のみ実地",
+      "note": "中身の粒度は既存調査のメモによる。作る前にPDFを1本取って確かめること"
+    },
+    {
+      "city": "京都市", "slug": "kyoto", "seirei": true, "grade": "C",
+      "granularity": "申込区分別（募集戸数・抽選対象者数・倍率）。★住宅別かどうか未確認",
+      "rounds": null, "span": "令和6年4月〜令和8年6月の回ごとに個別ページ",
+      "archive": "市サイトに回ごとの報道発表ページが残る（/tokei/page/00003xxxxx.html）",
+      "verified": "一覧の存在のみ実地",
+      "note": "回は残っているが、住宅名まで出ているかが未確認。ここが分かれ目"
+    },
+    {
+      "city": "大阪市", "slug": "osaka", "seirei": true, "grade": "B",
+      "granularity": "応募状況表",
+      "rounds": null, "span": "不明",
+      "archive": "★既存調査が Web Archive 保存版を使っている＝本家から消える",
+      "verified": "既存調査",
+      "note": "今回リンク切れで取り直せず。消える側として扱う"
+    },
+    {
+      "city": "新潟市", "slug": "niigata", "seirei": true, "grade": "D",
+      "granularity": "★地区×種別まで（新潟島・小針内野…／公営・改良）。住宅名なし",
+      "rounds": 5, "span": "令和3年度〜令和7年度（年度ごとに月別集計）",
+      "archive": "市サイトに5年ぶん残る",
+      "format": "PDF（読める）",
+      "index": "https://www.city.niigata.lg.jp/kurashi/jyutaku/jukankyo/01sieijutaku/tyusen.html",
+      "verified": "実地",
+      "note": "★商品にはならない（住宅名が無い）。地区別の相場としては無料の面に使える"
+    },
+    {
+      "city": "広島市", "slug": "hiroshima", "seirei": true, "grade": "E",
+      "granularity": "なし",
+      "archive": "抽選結果は申込者へ個別通知。応募者1名の住宅は抽選なしで会場告知",
+      "verified": "実地（検索）",
+      "note": "住宅別の公表が見つからない"
+    },
+    {
+      "city": "北九州市", "slug": "kitakyushu", "seirei": true, "grade": "E",
+      "granularity": "なし",
+      "archive": "★「抽選結果は申込者全員に郵送で通知」。公社サイトに団地別の公表なし",
+      "verified": "実地",
+      "note": "年6回募集しているが結果は非公表"
+    },
+    { "city": "札幌市", "slug": "sapporo", "seirei": true, "grade": "C", "granularity": "管理概要資料の団地別（高い／低い団地の比較）", "archive": "年1回の計画・管理資料のみ", "verified": "既存調査", "note": "回ごとの結果は出ていない。年1回の資料から拾う形" },
+    { "city": "さいたま市", "slug": "saitama", "seirei": true, "grade": "C", "granularity": "長寿命化計画のタイプ別・団地別応募状況", "archive": "計画資料（数年に1回）", "verified": "既存調査", "note": "回ごとの結果は出ていない" },
+    { "city": "千葉市", "slug": "chiba", "seirei": true, "grade": "C", "granularity": "定期募集住宅一覧表・抽選結果", "verified": "既存調査", "note": "深さ未確認" },
+    { "city": "仙台市", "slug": "sendai", "seirei": true, "grade": "C", "granularity": "定期募集住宅一覧表（前回応募者数を掲載）", "verified": "既存調査", "note": "★『前回ぶん』が案内に載る形。回ごとに上書きされる可能性。深さ未確認" },
+    { "city": "名古屋市", "slug": "nagoya", "seirei": true, "grade": "C", "granularity": "募集住宅一覧表 p.5「前回募集団地の応募倍率一覧表」", "verified": "既存調査", "note": "★前回ぶんだけ。案内書は回ごとに差し替わる＝消える側" },
+    { "city": "福岡市", "slug": "fukuoka", "seirei": true, "grade": "C", "granularity": "募集案内書の募集住宅一覧", "verified": "既存調査", "note": "深さ未確認" },
+    { "city": "岡山市", "slug": "okayama", "seirei": true, "grade": "?", "archive": "管理センターに抽選結果の掲載はあるが、団地別の公表は確認できず", "verified": "実地（不明）", "note": "要追加確認" },
+    { "city": "相模原市", "slug": "sagamihara", "seirei": true, "grade": "?", "archive": "住宅別の抽選結果の公表が見つからない", "verified": "実地（不明）", "note": "要追加確認" },
+    { "city": "浜松市", "slug": "hamamatsu", "seirei": true, "grade": "?", "archive": "住宅別の抽選結果の公表が見つからない", "verified": "実地（不明）", "note": "要追加確認" },
+    {
+      "city": "東京都", "slug": "tokyo", "seirei": false, "grade": "A",
+      "granularity": "住宅×募集区分（実装済み・data/toei-bairitsu.json 15,426行）",
+      "rounds": 16, "span": "2022-05〜2026-05",
+      "verified": "実装済み",
+      "note": "比較の基準。この艦の唯一の完成品"
+    }
+  ]
+}
