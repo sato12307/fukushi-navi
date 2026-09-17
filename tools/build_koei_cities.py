@@ -189,6 +189,23 @@ def plain(s):
     return re.sub(r"<[^>]+>", "", str(s or "")).strip()
 
 
+# ★この記事から「申込先えらび」の面へ渡す案内（2026-09-17）
+#   川崎・静岡・横浜・神戸は、募集回を何回ぶんも読み取った専用の面がある。
+#   記事のほうは1回ぶんの実例なので、**複数回を名寄せした面がある市は必ずそこへ渡す**。
+#   ここを入れるまで、4市の面はサイトのどこからもリンクされていなかった（実測）。
+#   ★市を足すときは koei-lib.mjs の CITIES と同じ顔ぶれにする。
+NERAI_CITIES = {
+    "kawasaki": u"川崎市", "shizuoka": u"静岡市",
+    "yokohama": u"横浜市", "kobe": u"神戸市",
+}
+NERAI_HTML = u"""  <div class="callout point">
+    <p><span class="tag">この市は実測がそろっています</span>{name}は募集回ごとの応募状況が公表されているので、
+    <strong>複数回ぶんを申込先ごとに名寄せした一覧</strong>を別に作ってあります。下の実例は1回ぶんの抜粋ですが、
+    そちらでは<strong>毎回すいている申込先</strong>と<strong>回によって大きく動く申込先</strong>を分けて見られます。</p>
+    <p><a href="../{slug}/"><strong>{name}営住宅 どこに申し込めば当たりやすいか（実測）を見る →</strong></a></p>
+  </div>
+"""
+
 def units_table(cap, rows, cls):
     tr = "\n".join(
         '      <tr><th scope="row">{n}</th><td class="{c}">{r}</td><td>{a}</td></tr>'.format(
@@ -269,6 +286,7 @@ PAGE = r"""<!DOCTYPE html>
     <p>申込みの前提になる<strong>収入基準</strong>は<a href="koei-shunyu-kijun.html">政令月収の判定計算機</a>で先に確かめられます（単身なら年収およそ296万円、障害者手帳があれば422万円まで）。</p>
   </div>
 
+@@NERAI@@
   <h2>① 倍率が高い住戸・低い住戸（実例）</h2>
 @@TOP@@
 @@BOTTOM@@
@@ -453,6 +471,8 @@ def main():
             "@@CALC@@": calc, "@@EXTRA@@": extra, "@@CALCJS@@": CALC_JS, "@@FAQ_A@@": esc(c["faq_a"]),
             "@@FAQ_EXTRA@@": faq_extra_html,
             "@@TITLE_EXTRA@@": esc(c.get("title_extra", "")),
+            "@@NERAI@@": (NERAI_HTML.format(name=NERAI_CITIES[c["slug"]], slug=c["slug"])
+                          if c["slug"] in NERAI_CITIES else ""),
             "@@RELATED@@": related, "@@SOURCES@@": sources,
         }.items():
             page = page.replace(k, v)

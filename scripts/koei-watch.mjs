@@ -50,6 +50,7 @@ const WATCH = [
       'https://www.jkk-nagoya.or.jp/siei/',
       'https://www.jkk-nagoya.or.jp/siei/bosyuu.html',
     ],
+    follow: /応募状況|抽選結果|倍率|募集/,
     note: '募集案内に「前回募集団地の応募倍率一覧表」が載る。次の回が始まると前の回のページが404になる',
   },
   {
@@ -59,6 +60,7 @@ const WATCH = [
       'https://www.city-kumamoto-jutaku.jp/se/news/',
       'https://www.city-kumamoto-jyutaku.jp/shiei-information/',
     ],
+    follow: /申込受付結果|抽選結果|定期募集|倍率/,
     note: '定期募集は5月・9月・1月ごろ。令和7年1月のサイト刷新で過去の結果は消えた。次の回から拾う',
   },
   {
@@ -87,9 +89,21 @@ const WATCH = [
       'https://www.osaka-jk.or.jp/shiei/',
       'https://www.osaka-jk.or.jp/shiei_iframe',
     ],
-    note: '応募状況表は回ごとの別ページに出る。以前の調査は Web Archive の保存版を使っていた＝本家からは消える',
+    // ★公社の一覧は、市の回別ページ（応募状況・抽選結果）へのリンクを持っている。
+    //   回が終わると市側が404にするが、一覧のリンクは残る。∴ 一覧をたどれば、
+    //   **生きている回はその場で拾える**。実測で応募状況表は383KBのPDFで公表されている。
+    follow: /応募状況|抽選結果|倍率/,
+    note: '応募状況表は回ごとの別ページに出る（市側は回が終わると404にする）。公社の一覧から1段たどって拾う',
   },
 ]
+
+// ★1階層だけリンクをたどる（follow を書いた市だけ）。
+//   大阪・熊本・名古屋は「一覧ページ → 回ごとのページ → PDF」という作りで、
+//   一覧に載っているのはHTMLのリンクだけ。PDFは回ごとのページの中にある。
+//   ∴ 一覧のリンク文字に follow が当たるものだけ、1段だけ開いてPDFを探す。
+//   ★2段はたどらない。市のサイト全体を歩き回ることになり、相手に迷惑で、
+//     関係ないPDFを大量に拾う。1段で足りることは実測で確かめてある。
+const FOLLOW_MAX = 12        // 1つの入口からたどる回別ページの上限
 
 const get = async (url, bin = false) => {
   const r = await fetch(url, { headers: { 'user-agent': UA }, redirect: 'follow' })
@@ -116,11 +130,37 @@ for (const w of WATCH) {
   const seen = fs.existsSync(seenPath) ? JSON.parse(fs.readFileSync(seenPath, 'utf8')) : {}
   const found = []
   let reachable = 0
-  for (const page of w.pages) {
+  // 入口＋（follow があれば）そこから1段たどった回別ページ
+  const targets = [...w.pages]
+  if (w.follow) {
+    for (const page of w.pages) {
+      await sleep(1200)
+      let html
+      try { html = await get(page) } catch { continue }
+      const baseTag = /<base[^>]+href="([^"]+)"/i.exec(html)
+      const base = baseTag ? new URL(baseTag[1], page).href : page
+      let n = 0
+      for (const m of html.matchAll(/<a[^>]+href="([^"]+\.html?)"[^>]*>([\s\S]{0,160}?)<\/a>/gi)) {
+        const text = m[2].replace(/<[^>]+>/g, '').replace(/\s+/g, '')
+        if (!w.follow.test(text)) continue
+        let u
+        try { u = new URL(m[1], base).href } catch { continue }
+        if (targets.includes(u)) continue
+        targets.push(u)
+        if (++n >= FOLLOW_MAX) break
+      }
+    }
+  }
+
+  for (const page of targets) {
     await sleep(1200)
     let html
-    try { html = await get(page) } catch (e) { broken.push(`${w.city} ${page}: ${e.message}`); continue }
-    reachable++
+    try { html = await get(page) } catch (e) {
+      // ★たどった先の404は異常ではない（回が終われば市が消すため）。入口の404だけを異常とする。
+      if (w.pages.includes(page)) broken.push(`${w.city} ${page}: ${e.message}`)
+      continue
+    }
+    if (w.pages.includes(page)) reachable++
     // ★<base href> があればそれを基準にする。見ないと相対パスの解決先を間違える。
     //   実測：京都市のページは /tokei/page/xxx.html にあるが <base href=".../tokei/"> が
     //   置いてあり、href="./cmsfiles/..." の正解は /tokei/cmsfiles/... のほう。

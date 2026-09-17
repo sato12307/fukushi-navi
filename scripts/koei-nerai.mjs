@@ -286,3 +286,46 @@ ${LIMITS}
   console.log(`   読み取り: 使えた${F.rounds}回${F.skippedRounds.length ? ` ／ 使えない${F.skippedRounds.length}回（${F.skippedRounds.join('・')}）` : ''}${F.matched ? ` ／ 公表合計と一致${F.matched}回・差が説明できる${F.explained}回` : ''}`)
   console.log(`   次に: node scripts/koei-put-pack.mjs ${C.key}`)
 }
+
+// ── ハブ記事へ「実測がそろっている市」の表を差し込む ─────────────────────────
+// ★なぜ Python 側（tools/build_koei.py）に書かないか
+//   同じ数え方を2か所に書くと必ずずれる。数字の正典は koei-lib.mjs ひとつにして、
+//   出来上がった表だけをマーカーの間に置く。build_koei.py は自分のマーカーしか
+//   触らないので、月次の再生成でこの表が消えることはない。
+//   [[same-question-two-implementations]]
+// ★この表を入れるまで、4市の面はサイトのどこからもリンクされていなかった（2026-09-17 実測）。
+{
+  const S = '<!-- KOEI:JISSOKU:START -->'
+  const E = '<!-- KOEI:JISSOKU:END -->'
+  const hub = path.join(ROOT, 'articles', 'koei-jutaku-bairitsu.html')
+  const page = fs.readFileSync(hub, 'utf8')
+  if (page.includes(S) && page.includes(E)) {
+    // 面が実際にある市だけ載せる（作っていない市を案内しない）
+    const built = Object.keys(CITIES).filter((k) => fs.existsSync(path.join(ROOT, k, 'index.html')))
+    const rows = built.map((k) => {
+      const D = load(k)
+      return { k, C: CITIES[k], F: D.F, RANGE: D.RANGE }
+    }).sort((a, b) => b.F.rounds - a.F.rounds)
+    const body = [
+      '  <div class="table-wrap">',   // ★狭い画面は横スクロールにする。包まないと320pxではみ出す
+      '  <table class="tbl">',
+      // ★列は3つまで。5列にしたら320px幅で横にはみ出した（scripts/toei-check.mjs が検知）。
+      //   細かい数字は colspan の折り返し行に落とす。[[mobile-layout-audit]]
+      '    <thead><tr><th>市</th><th>回数</th><th>毎回すいている</th></tr></thead>',
+      '    <tbody>',
+      ...rows.flatMap(({ k, C, F, RANGE }) => [
+        `      <tr><th><a href="../${k}/">${C.city}</a></th><td>${F.rounds}回</td><td><strong>${num(F.suki)}件</strong>（${F.sukiPct}%）</td></tr>`,
+        `      <tr><td colspan="3" style="font-size:.85em;color:var(--sub)">${RANGE}／申込先${num(F.all)}件（${MIN_N}回以上 ${num(F.enough)}件）／申込者ゼロが出た申込先 ${num(F.zeroHousesEnough)}件</td></tr>`,
+      ]),
+      '    </tbody>',
+      '  </table>',
+      '  </div>',
+      `  <p style="font-size:.88rem;color:var(--sub)">「毎回すいている」は、${MIN_N}回以上募集のあった申込先のうち、倍率の中央値が${SUKI}倍未満のものです。申込先の数え方は市によって違います（${rows.map((r) => `${r.C.short}＝${r.C.axis.label}まで分ける`).join('／')}）。各市の名前をクリックすると、どの申込先かまで見られます。</p>`,
+    ].join('\n')
+    const next = page.replace(new RegExp(`${S}[\\s\\S]*?${E}`), `${S}\n${body}\n  ${E}`)
+    if (next !== page) {
+      fs.writeFileSync(hub, next)
+      console.log(`\n■ ハブ記事に実測${rows.length}市の表を差し込みました（articles/koei-jutaku-bairitsu.html）`)
+    }
+  }
+}
