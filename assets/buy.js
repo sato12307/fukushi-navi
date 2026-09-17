@@ -25,7 +25,10 @@
   // 商品の対応表。data-offer は計測の名前、product は worker 側の商品ID。
   var P = {
     pack: { product: 'kojo', perCity: true, seen: 'pack_offer_seen', read: 'pack_offer_read', pick: 'pack_city_pick', buy: 'pack_leaf_buy' },
-    toei: { product: 'toei', perCity: false, seen: 'toei_offer_seen', read: 'toei_offer_read', buy: 'toei_leaf_buy' }
+    toei: { product: 'toei', perCity: false, seen: 'toei_offer_seen', read: 'toei_offer_read', buy: 'toei_leaf_buy' },
+    // 川崎市営住宅の申込先えらび（2026-09-17）。都営と同じ形だが別の商品なので
+    // イベント名もKVのキーも分ける。同じ名前にすると、どちらが売れたのか二度と分けられない。
+    kawasaki: { product: 'kawasaki', perCity: false, seen: 'kawasaki_offer_seen', read: 'kawasaki_offer_read', buy: 'kawasaki_leaf_buy' }
   }
 
   // ── どこまで進んだかを3段で数える ────────────────────────────────────────
