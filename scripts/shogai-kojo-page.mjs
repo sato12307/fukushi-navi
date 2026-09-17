@@ -73,7 +73,7 @@ ${EV}
 </script>
 ${/* 記事の中の売り場（.offer[data-offer]）の決済と計測。カードが無いページでは即 return するので、
      どのページから読んでも害はない。判定を各ページに写経しないためここ1か所で読む。 */''}
-<script src="${up}assets/buy.js?v=20260908a" defer></script>
+<script src="${up}assets/buy.js?v=20260917a" defer></script>
 </body>
 </html>
 `
