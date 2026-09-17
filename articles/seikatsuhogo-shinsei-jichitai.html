@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<title>生活保護の却下率、自治体でこれだけ違う【129機関・令和6年度】｜フクシル</title>
+<meta name="description" content="生活保護の申請が何件出され、何件が却下されたかを、厚生労働省の被保護者調査から都道府県・指定都市・中核市の129機関ぶん並べました。令和6年度の却下率は全国8.28%ですが、自治体では1.7%から23.4%まで約13.5倍ひらいています。申請の起きやすさ（人口千人あたり申請件数）と並べて見られる、並べ替え可能な表つき。">
+<link rel="canonical" href="https://fukushiru.com/articles/seikatsuhogo-shinsei-jichitai.html">
+<meta property="og:type" content="article">
+<meta property="og:title" content="生活保護の却下率、自治体でこれだけ違う【129機関・令和6年度】">
+<meta property="og:description" content="却下率は全国8.28%。自治体では1.7%〜23.4%と約13.5倍の差。厚労省の被保護者調査を129機関ぶん、並べ替えできる表にしました。">
+<meta property="og:site_name" content="フクシル">
+<meta property="og:url" content="https://fukushiru.com/articles/seikatsuhogo-shinsei-jichitai.html">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="stylesheet" href="../assets/style.css?v=20260908a">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "生活保護の却下率、自治体でこれだけ違う【129機関・令和6年度】",
+  "description": "厚生労働省「被保護者調査」第18表から、生活保護の申請件数・取下げ件数・却下件数を都道府県・指定都市・中核市の129機関ぶん集計し、却下率と人口千人あたり申請件数を並べた。",
+  "inLanguage": "ja",
+  "datePublished": "2026-09-17",
+  "dateModified": "2026-09-17",
+  "author": { "@type": "Organization", "name": "フクシル" },
+  "publisher": { "@type": "Organization", "name": "フクシル" },
+  "url": "https://fukushiru.com/articles/seikatsuhogo-shinsei-jichitai.html",
+  "mainEntityOfPage": "https://fukushiru.com/articles/seikatsuhogo-shinsei-jichitai.html",
+  "isPartOf": { "@type": "WebSite", "name": "フクシル", "url": "https://fukushiru.com/" }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "生活保護の申請は何割くらい却下されますか？",
+      "acceptedAnswer": { "@type": "Answer", "text": "令和6年度は全国で259,517件の申請があり、21,478件（8.28%）が却下されました。ほかに10,801件（4.16%）が取り下げられています。残りのおおむね9割弱は保護の開始に至っています。" }
+    },
+    {
+      "@type": "Question",
+      "name": "生活保護が通りやすい自治体はありますか？",
+      "acceptedAnswer": { "@type": "Answer", "text": "却下率には自治体差があり、令和6年度で年300件以上の申請がある機関では1.7%（寝屋川市）から23.4%（秋田県）まで約13.5倍ひらいています。ただし却下率が低いことは審査が甘いことを意味しません。申請までたどり着けなかった人は分母に入らないためです。人口千人あたりの申請件数と却下率の相関は-0.15しかなく、ほぼ別々の指標として見る必要があります。" }
+    },
+    {
+      "@type": "Question",
+      "name": "生活保護の却下率は年々上がっていますか？",
+      "acceptedAnswer": { "@type": "Answer", "text": "上がっています。全国の却下率は令和元年度の6.73%から令和6年度の8.28%まで上昇しました。同じ期間に申請件数も223,042件から259,517件へ増えています。" }
+    },
+    {
+      "@type": "Question",
+      "name": "生活保護の申請が却下されたらどうすればいいですか？",
+      "acceptedAnswer": { "@type": "Answer", "text": "却下の通知書を受け取った日の翌日から3か月以内に、都道府県知事あてに審査請求ができます（生活保護法第64条・行政不服審査法）。また、審査請求とは別に、事情が変われば再申請はいつでもできます。申請権に回数制限はありません。" }
+    }
+  ]
+}
+</script>
+<style>
+.stat-row { display: flex; flex-wrap: wrap; gap: 10px; margin: 1em 0; }
+.stat { flex: 1 1 150px; border: 1px solid var(--line); border-radius: 10px; padding: 10px 12px; background: var(--soft); }
+.stat b { display: block; font-size: 1.5rem; font-weight: 800; color: var(--brand-dark); font-variant-numeric: tabular-nums; }
+.stat span { font-size: .82rem; color: var(--sub); }
+.tbl-ctl { display: flex; flex-wrap: wrap; gap: 8px 12px; align-items: center; margin: .8em 0 .4em; }
+.tbl-ctl input, .tbl-ctl select { padding: 6px 8px; border: 1px solid var(--line); border-radius: 6px; font-size: 1rem; max-width: 100%; }
+#jt, .rank-table, #trend { width: 100%; border-collapse: collapse; font-size: .9rem; }
+/* 既定の min-width:520px は9列の表には狭すぎて、320px幅で数字が潰れる。
+   列数に合わせて広げ、枠の中で横にスクロールさせる。 */
+#jt { min-width: 780px; }
+.rank-table { min-width: 620px; }
+#trend { min-width: 560px; }
+#jt th, #jt td, .rank-table th, .rank-table td, #trend th, #trend td { border-bottom: 1px solid var(--line); padding: 6px 7px; }
+/* 129行をそのまま流すと縦21,000pxになり、下の章まで誰も辿り着かない。
+   枠の中でスクロールさせる。見出しは枠に対して sticky なので固定されたまま残る。 */
+#jt-wrap { max-height: 72vh; overflow: auto; border: 1px solid var(--line); border-radius: 8px; }
+#jt thead th { position: sticky; top: 0; z-index: 1; background: var(--soft); cursor: pointer; white-space: nowrap; font-size: .82rem; box-shadow: 0 1px 0 var(--line); }
+#jt caption { caption-side: top; text-align: left; padding: 8px 7px; font-size: .84rem; color: var(--sub); }
+#jt thead th.sorted::after { content: " \25BC"; font-size: .7em; }
+#jt thead th.sorted.asc::after { content: " \25B2"; }
+#jt tbody td { white-space: nowrap; }
+#jt td.n, #jt th.n, .rank-table td.n, .rank-table th.n, #trend td.n, #trend th.n { text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; }
+#jt td.big, .rank-table td.big { font-weight: 800; }
+#jt tbody th, .rank-table tbody th { text-align: left; font-weight: 600; }
+#jt tbody th small, .rank-table tbody th small { font-weight: 400; color: var(--sub); display: block; font-size: .76rem; }
+.quad { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 8px; margin: 1em 0; }
+.quad div { border: 1px solid var(--line); border-radius: 8px; padding: 10px 12px; font-size: .88rem; }
+.quad div b { display: block; margin-bottom: 4px; }
+.mini-note { font-size: .84rem; color: var(--sub); }
+</style>
+</head>
+<body>
+<a class="skip" href="#main">本文へスキップ</a>
+<header class="site-header">
+  <div class="inner">
+    <a class="brand" href="../index.html">フクシル <small>知らないと損する、くらしの福祉</small></a>
+    <nav class="site-nav" aria-label="主要">
+      <a href="../index.html">トップ</a>
+      <a href="seikatsuhogo-keisanki.html">生活保護の計算機</a>
+      <a href="juminzei-hikazei-check.html">住民税非課税</a>
+      <a href="kougaku-ryouyouhi-2026.html">高額療養費</a>
+      <a href="koei-jutaku-bairitsu.html">公営住宅</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+  <p class="breadcrumb"><a href="../index.html">トップ</a> ＞ 生活保護 ＞ 自治体別の却下率</p>
+
+  <h1>生活保護の申請は、<br>どこで何割が却下されているか</h1>
+  <p class="updated">最終更新：2026-09-17 ／ 厚生労働省「被保護者調査（月次調査・確定値）」第18表・第9表（令和6年度）を集計。都道府県・指定都市・中核市の129機関</p>
+
+  <p class="lead">生活保護は国の制度で、基準も全国同じです。それでも<strong>申請が却下される割合は自治体でまるで違います</strong>。令和6年度の全国平均は<strong>8.28%</strong>ですが、年300件以上の申請がある機関で見ると<strong>1.7%から23.4%まで約13.5倍</strong>の開きがあります。この数字は厚生労働省が毎年公表しているのに、<strong>自治体ごとに並べた表はどこにも出ていません</strong>。だから作りました。</p>
+
+  <div class="stat-row">
+    <div class="stat"><b>259,517件</b><span>令和6年度の申請件数（全国）</span></div>
+    <div class="stat"><b>8.28%</b><span>却下（21,478件）</span></div>
+    <div class="stat"><b>4.16%</b><span>取下げ（10,801件）</span></div>
+    <div class="stat"><b>228,542世帯</b><span>保護開始</span></div>
+  </div>
+
+  <div class="callout warn">
+    <p><span class="tag">先に読んでください</span><strong>「却下率が低い＝審査が甘い」ではありません。</strong>却下率の分母は<strong>申請までたどり着いた人</strong>だけです。窓口で申請書を渡さずに帰した場合、その人は分母にも分子にも入らないので、<strong>却下率はかえって下がります</strong>。逆に、申請を広く受け付けている自治体では、通らない見込みの申請も受理されるぶん却下率は上がります。</p>
+    <p>だからこのページは、却下率と一緒に<strong>「人口千人あたり何件の申請が起きているか」</strong>を必ず並べています。実測すると、この2つの相関は<strong>-0.15</strong>しかありません（ほぼ無関係）。<strong>片方から、もう片方を推測することはできません。</strong></p>
+  </div>
+
+  <h2>① 全国の却下率は6年上がり続けている</h2>
+  <p>申請そのものも増えていますが、却下はそれ以上のペースで増えています。取下げは逆に減っています。</p>
+  <div class="table-wrap">
+  <table id="trend">
+    <caption>全国の申請・取下げ・却下（被保護者調査 第18表・年度累計）</caption>
+    <thead><tr><th>年度</th><th class="n">申請件数</th><th class="n">取下げ</th><th class="n">取下げ率</th><th class="n">却下</th><th class="n">却下率</th></tr></thead>
+    <tbody>
+      <tr><th>令和元年度（2019）</th><td class="n">223,042</td><td class="n">11,020</td><td class="n">4.94%</td><td class="n">15,007</td><td class="n"><strong>6.73%</strong></td></tr>
+      <tr><th>令和2年度（2020）</th><td class="n">228,102</td><td class="n">11,742</td><td class="n">5.15%</td><td class="n">15,510</td><td class="n"><strong>6.80%</strong></td></tr>
+      <tr><th>令和3年度（2021）</th><td class="n">229,900</td><td class="n">11,448</td><td class="n">4.98%</td><td class="n">17,513</td><td class="n"><strong>7.62%</strong></td></tr>
+      <tr><th>令和4年度（2022）</th><td class="n">245,704</td><td class="n">11,402</td><td class="n">4.64%</td><td class="n">18,447</td><td class="n"><strong>7.51%</strong></td></tr>
+      <tr><th>令和5年度（2023）</th><td class="n">251,384</td><td class="n">11,173</td><td class="n">4.44%</td><td class="n">19,638</td><td class="n"><strong>7.81%</strong></td></tr>
+      <tr><th>令和6年度（2024）</th><td class="n">259,517</td><td class="n">10,801</td><td class="n">4.16%</td><td class="n">21,478</td><td class="n"><strong>8.28%</strong></td></tr>
+    </tbody>
+  </table>
+  </div>
+  <p class="mini-note">令和元年度から令和6年度で、申請は223,042件→259,517件（16.4%増）、却下率は6.73%→8.28%。取下げ率は4.94%→4.16%と下がりました。</p>
+
+  <h2>② 129機関の全表（並べ替え・絞り込みできます）</h2>
+  <p>見出しを押すと並べ替わります。お住まいの自治体名を入れて探せます。<strong>都道府県の行には、その県にある指定都市・中核市は入っていません</strong>（それぞれ別の行として載っています）。たとえば「秋田県」の行は秋田市を除いた秋田県です。</p>
+  <div class="tbl-ctl">
+    <input id="q" type="search" placeholder="自治体名でしぼる" aria-label="自治体名でしぼる">
+    <select id="lv" aria-label="種別でしぼる">
+      <option value="">すべての種別</option>
+      <option value="都道府県">都道府県（政令市・中核市を除く）</option>
+      <option value="指定都市">指定都市</option>
+      <option value="中核市">中核市</option>
+    </select>
+    <span class="mini-note" id="cnt"></span>
+  </div>
+  <div id="jt-wrap">
+  <table id="jt">
+    <caption>令和6年度　生活保護の申請・取下げ・却下（厚労省 被保護者調査 第18表）</caption>
+    <thead><tr>
+      <th data-k="n">自治体</th>
+      <th data-k="lv">種別</th>
+      <th data-k="s" class="n">申請<br>件数</th>
+      <th data-k="kr" class="n">却下率</th>
+      <th data-k="tr" class="n">取下げ率</th>
+      <th data-k="o" class="n">保護開始<br>世帯数</th>
+      <th data-k="sp" class="n">申請<br>(人口千対)</th>
+      <th data-k="hr" class="n">保護率<br>(人口千対)</th>
+      <th data-k="m" class="n">年度末<br>未処理</th>
+    </tr></thead>
+    <tbody id="jtb"></tbody>
+  </table>
+  </div>
+  <p class="mini-note">表は枠の中でスクロールします（129行）。</p>
+  <p class="mini-note">「申請（人口千対）」は、その自治体の人口1,000人あたり年に何件の申請が起きたか。人口は保護率からの逆算なので0.5%ほどの誤差を含みます。「年度末未処理」は年度をまたいで審査中だった件数です。</p>
+
+  <h2>③ 却下率が高い自治体・低い自治体</h2>
+  <p>年300件以上の申請がある124機関にしぼっています（件数が少ないと率が跳ねるため）。</p>
+  <h3>却下率が高い15機関</h3>
+  <div class="table-wrap">
+  <table class="rank-table">
+    <thead><tr><th>#</th><th>自治体</th><th>種別</th><th class="n">申請件数</th><th class="n">却下率</th><th class="n">申請(人口千対)</th><th class="n">保護率</th></tr></thead>
+    <tbody>
+      <tr><td>1</td><th>秋田県<small title="秋田市を除く">（秋田市を除く）</small></th><td>都道府県</td><td class="n">1,159</td><td class="n big">23.4%</td><td class="n">1.92</td><td class="n">12.4</td></tr>
+      <tr><td>2</td><th>高知県<small title="高知市を除く">（高知市を除く）</small></th><td>都道府県</td><td class="n">1,065</td><td class="n big">22.0%</td><td class="n">3.12</td><td class="n">18.4</td></tr>
+      <tr><td>3</td><th>青森県<small title="八戸市・青森市を除く">（八戸市・青森市を除く）</small></th><td>都道府県</td><td class="n">2,159</td><td class="n big">21.4%</td><td class="n">3.12</td><td class="n">22.2</td></tr>
+      <tr><td>4</td><th>新潟市</th><td>指定都市</td><td class="n">1,548</td><td class="n big">21.1%</td><td class="n">2.02</td><td class="n">15.4</td></tr>
+      <tr><td>5</td><th>岩手県<small title="盛岡市を除く">（盛岡市を除く）</small></th><td>都道府県</td><td class="n">1,464</td><td class="n big">20.2%</td><td class="n">1.69</td><td class="n">9.0</td></tr>
+      <tr><td>6</td><th>鳥取県<small title="鳥取市を除く">（鳥取市を除く）</small></th><td>都道府県</td><td class="n">632</td><td class="n big">19.6%</td><td class="n">1.82</td><td class="n">10.5</td></tr>
+      <tr><td>7</td><th>静岡市</th><td>指定都市</td><td class="n">1,597</td><td class="n big">19.6%</td><td class="n">2.37</td><td class="n">14.1</td></tr>
+      <tr><td>8</td><th>青森市</th><td>中核市</td><td class="n">720</td><td class="n big">17.4%</td><td class="n">2.77</td><td class="n">29.7</td></tr>
+      <tr><td>9</td><th>愛媛県<small title="松山市を除く">（松山市を除く）</small></th><td>都道府県</td><td class="n">1,162</td><td class="n big">17.0%</td><td class="n">1.49</td><td class="n">10.6</td></tr>
+      <tr><td>10</td><th>船橋市</th><td>中核市</td><td class="n">1,177</td><td class="n big">16.8%</td><td class="n">1.81</td><td class="n">14.3</td></tr>
+      <tr><td>11</td><th>島根県<small title="松江市を除く">（松江市を除く）</small></th><td>都道府県</td><td class="n">427</td><td class="n big">16.2%</td><td class="n">0.96</td><td class="n">6.0</td></tr>
+      <tr><td>12</td><th>岡山県<small title="倉敷市・岡山市を除く">（倉敷市・岡山市を除く）</small></th><td>都道府県</td><td class="n">675</td><td class="n big">16.0%</td><td class="n">1.03</td><td class="n">5.7</td></tr>
+      <tr><td>13</td><th>沖縄県<small title="那覇市を除く">（那覇市を除く）</small></th><td>都道府県</td><td class="n">3,980</td><td class="n big">16.0%</td><td class="n">3.45</td><td class="n">22.8</td></tr>
+      <tr><td>14</td><th>神戸市</th><td>指定都市</td><td class="n">4,420</td><td class="n big">15.5%</td><td class="n">2.96</td><td class="n">27.9</td></tr>
+      <tr><td>15</td><th>山形県<small title="山形市を除く">（山形市を除く）</small></th><td>都道府県</td><td class="n">877</td><td class="n big">15.3%</td><td class="n">1.14</td><td class="n">7.2</td></tr>
+    </tbody>
+  </table>
+  </div>
+  <h3>却下率が低い15機関</h3>
+  <div class="table-wrap">
+  <table class="rank-table">
+    <thead><tr><th>#</th><th>自治体</th><th>種別</th><th class="n">申請件数</th><th class="n">却下率</th><th class="n">申請(人口千対)</th><th class="n">保護率</th></tr></thead>
+    <tbody>
+      <tr><td>1</td><th>寝屋川市</th><td>中核市</td><td class="n">751</td><td class="n big">1.7%</td><td class="n">3.35</td><td class="n">33.5</td></tr>
+      <tr><td>2</td><th>岐阜市</th><td>中核市</td><td class="n">605</td><td class="n big">2.3%</td><td class="n">1.53</td><td class="n">14.6</td></tr>
+      <tr><td>3</td><th>鹿児島市</th><td>中核市</td><td class="n">1,278</td><td class="n big">2.4%</td><td class="n">2.19</td><td class="n">25.0</td></tr>
+      <tr><td>4</td><th>八尾市</th><td>中核市</td><td class="n">804</td><td class="n big">2.5%</td><td class="n">3.10</td><td class="n">30.6</td></tr>
+      <tr><td>5</td><th>東大阪市</th><td>中核市</td><td class="n">1,726</td><td class="n big">2.7%</td><td class="n">3.56</td><td class="n">33.3</td></tr>
+      <tr><td>6</td><th>相模原市</th><td>指定都市</td><td class="n">1,767</td><td class="n big">3.2%</td><td class="n">2.44</td><td class="n">19.6</td></tr>
+      <tr><td>7</td><th>大分市</th><td>中核市</td><td class="n">846</td><td class="n big">3.2%</td><td class="n">1.80</td><td class="n">17.1</td></tr>
+      <tr><td>8</td><th>甲府市</th><td>中核市</td><td class="n">342</td><td class="n big">3.2%</td><td class="n">1.86</td><td class="n">15.0</td></tr>
+      <tr><td>9</td><th>長崎市</th><td>中核市</td><td class="n">847</td><td class="n big">3.3%</td><td class="n">2.18</td><td class="n">29.4</td></tr>
+      <tr><td>10</td><th>越谷市</th><td>中核市</td><td class="n">502</td><td class="n big">3.4%</td><td class="n">1.48</td><td class="n">13.2</td></tr>
+      <tr><td>11</td><th>八王子市</th><td>中核市</td><td class="n">1,387</td><td class="n big">3.5%</td><td class="n">2.47</td><td class="n">18.8</td></tr>
+      <tr><td>12</td><th>金沢市</th><td>中核市</td><td class="n">476</td><td class="n big">3.6%</td><td class="n">1.04</td><td class="n">9.2</td></tr>
+      <tr><td>13</td><th>宇都宮市</th><td>中核市</td><td class="n">752</td><td class="n big">3.6%</td><td class="n">1.47</td><td class="n">16.0</td></tr>
+      <tr><td>14</td><th>姫路市</th><td>中核市</td><td class="n">862</td><td class="n big">3.6%</td><td class="n">1.66</td><td class="n">15.8</td></tr>
+      <tr><td>15</td><th>一宮市</th><td>中核市</td><td class="n">508</td><td class="n big">3.7%</td><td class="n">1.35</td><td class="n">9.9</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <h2>④ 「取り下げ」も見ておく</h2>
+  <p>申請を出したあとに取り下げた件数です。全国では申請の4.16%。他の制度が使えることになった、転居した、といった理由もありますが、<strong>取下げは福祉事務所の側から促すこともできる</strong>手続きです。ここが高い機関は、却下率だけを見ると実態より穏やかに見えます。</p>
+  <div class="table-wrap">
+  <table class="rank-table">
+    <thead><tr><th>#</th><th>自治体</th><th>種別</th><th class="n">申請件数</th><th class="n">取下げ率</th><th class="n">申請(人口千対)</th><th class="n">保護率</th></tr></thead>
+    <tbody>
+      <tr><td>1</td><th>船橋市</th><td>中核市</td><td class="n">1,177</td><td class="n big">11.5%</td><td class="n">1.81</td><td class="n">14.3</td></tr>
+      <tr><td>2</td><th>秋田市</th><td>中核市</td><td class="n">544</td><td class="n big">10.8%</td><td class="n">1.84</td><td class="n">17.6</td></tr>
+      <tr><td>3</td><th>久留米市</th><td>中核市</td><td class="n">795</td><td class="n big">9.6%</td><td class="n">2.64</td><td class="n">21.6</td></tr>
+      <tr><td>4</td><th>鹿児島県<small title="鹿児島市を除く">（鹿児島市を除く）</small></th><td>都道府県</td><td class="n">1,756</td><td class="n big">8.9%</td><td class="n">1.86</td><td class="n">14.5</td></tr>
+      <tr><td>5</td><th>那覇市</th><td>中核市</td><td class="n">1,676</td><td class="n big">8.7%</td><td class="n">5.41</td><td class="n">43.7</td></tr>
+      <tr><td>6</td><th>佐世保市</th><td>中核市</td><td class="n">408</td><td class="n big">8.3%</td><td class="n">1.74</td><td class="n">19.3</td></tr>
+      <tr><td>7</td><th>大分市</th><td>中核市</td><td class="n">846</td><td class="n big">7.6%</td><td class="n">1.80</td><td class="n">17.1</td></tr>
+      <tr><td>8</td><th>長崎市</th><td>中核市</td><td class="n">847</td><td class="n big">7.6%</td><td class="n">2.18</td><td class="n">29.4</td></tr>
+      <tr><td>9</td><th>長崎県<small title="佐世保市・長崎市を除く">（佐世保市・長崎市を除く）</small></th><td>都道府県</td><td class="n">1,184</td><td class="n big">7.4%</td><td class="n">1.88</td><td class="n">14.3</td></tr>
+      <tr><td>10</td><th>福岡県<small title="久留米市・北九州市・福岡市を除く">（久留米市・北九州市・福岡市を除く）</small></th><td>都道府県</td><td class="n">4,948</td><td class="n big">7.4%</td><td class="n">2.22</td><td class="n">21.1</td></tr>
+      <tr><td>11</td><th>宮崎県<small title="宮崎市を除く">（宮崎市を除く）</small></th><td>都道府県</td><td class="n">1,344</td><td class="n big">7.4%</td><td class="n">2.10</td><td class="n">13.3</td></tr>
+      <tr><td>12</td><th>熊本市</th><td>指定都市</td><td class="n">2,298</td><td class="n big">7.2%</td><td class="n">3.11</td><td class="n">19.8</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <h2>⑤ 2つの軸で置くと、4つの型に分かれる</h2>
+  <p>横軸に「申請の起きやすさ（人口千対1.81件が中央値）」、縦軸に「却下率（中央値8.58%）」を取ると、124機関は4つに分かれます。<strong>どれが良い・悪いと決められるものではありません</strong>が、自分の住む街がどこにいるかは知っておいて損がありません。かっこ内は各型で申請件数が多い順の3機関です。</p>
+  <div class="quad">
+    <div><b>申請が多く、却下は少ない（35機関）</b>東京都・大阪市・札幌市 など。生活保護が身近で、出せば通っている。</div>
+    <div><b>申請が多く、却下も多い（27機関）</b>横浜市・千葉県・北海道 など。窓口には来られているが、通らない申請も多い。</div>
+    <div><b>申請が少なく、却下も少ない（27機関）</b>愛知県・三重県・浜松市 など。そもそも申請が起きていないが、出たものは通っている。</div>
+    <div><b>申請が少なく、却下は多い（35機関）</b>茨城県・静岡県・兵庫県 など。二重に狭い門になっている。</div>
+  </div>
+  <p class="mini-note">中央値で割っただけの分類です。申請が少ない側の却下率の中央値は9.0%、多い側は6.9%。差はありますが相関は-0.15と弱く、「申請が少ない地域は必ず却下も多い」とは言えません。</p>
+
+  <h2>⑥ 却下されたときにできること</h2>
+  <ul>
+    <li><strong>審査請求</strong>：却下の通知書を受け取った日の翌日から<strong>3か月以内</strong>に、<strong>都道府県知事あて</strong>に審査請求ができます（生活保護法第64条・行政不服審査法）。書式は自由で、費用はかかりません。福祉事務所ではなく都道府県・指定都市の担当に出します。</li>
+    <li><strong>再申請はいつでもできる</strong>：申請権に回数制限はありません。収入が減った・貯金が尽きた・病気になったなど<strong>事情が変われば、何度でも出せます</strong>。</li>
+    <li><strong>通知書をもらう</strong>：却下は必ず<strong>書面</strong>で通知されます。口頭で「無理です」と言われただけなら、それは却下処分ではありません。申請書を出し、書面で結果を受け取るところまでが手続きです。</li>
+    <li><strong>決定の期限</strong>：申請から原則<strong>14日以内</strong>（調査に時間がかかる場合は最長30日）に通知が来ます。この表の「年度末未処理」は、年度をまたいで審査中だった件数です。</li>
+    <li><strong>ひとりで行かない</strong>：お住まいの地域の生活困窮者自立支援の相談窓口、法テラス、支援団体に同行を頼めます。</li>
+  </ul>
+
+  <h2>⑦ この数字の限界（大事なところ）</h2>
+  <ul>
+    <li><strong>申請に至らなかった相談は数字に出ません。</strong>この表にあるのは「申請書が受理された件数」です。窓口での相談件数は被保護者調査では公表されていません。</li>
+    <li><strong>申請者の顔ぶれの違いが入ります。</strong>資産や収入のある人の申請が多ければ、審査の姿勢が同じでも却下率は上がります。</li>
+    <li><strong>都道府県の行に指定都市・中核市は含まれません。</strong>県まるごとの数字ではありません。表では「○○を除く」と書いています。</li>
+    <li><strong>年度累計です。</strong>申請した月と結果が出た月がずれるため、「申請件数＝却下＋取下げ＋開始」にはぴったり一致しません。</li>
+    <li><strong>保護開始には申請によらないものが混ざりえます。</strong>だから開始÷申請を主役の指標にしていません。</li>
+    <li><strong>人口は保護率からの逆算です。</strong>保護率は小数第1位までの公表なので、人口千対の値は0.5%ほどの誤差を含みます。僅差の順位に意味はありません。</li>
+  </ul>
+
+  <div class="callout note">
+    <p><span class="tag">あわせて読みたい</span>実際にいくら受け取れるかは<a href="seikatsuhogo-keisanki.html">生活保護の支給額シミュレーター</a>で。家賃を下げて立て直すなら<a href="koei-jutaku-bairitsu.html">公営住宅の倍率データ</a>と<a href="koei-hairiyasui.html">入りやすい人の条件</a>、生活保護までは必要ない方は<a href="juminzei-hikazei-check.html">住民税非課税の判定</a>と<a href="kougaku-ryouyouhi-2026.html">高額療養費の計算機</a>もどうぞ。</p>
+  </div>
+
+  <h2>コメント（自治体ごとの運用の情報交換）</h2>
+  <p class="mini-note">申請時の体験や、お住まいの自治体の窓口の様子を共有いただけると、同じ立場の方の助けになります。個人が特定される情報はお書きにならないでください。</p>
+  <div id="cusdis_thread"
+    data-host="https://cusdis.com"
+    data-app-id="14dfe8f8-c660-42ee-9cd2-54ee31828ba9"
+    data-page-id="seikatsuhogo-shinsei-jichitai"
+    data-page-url="https://fukushiru.com/articles/seikatsuhogo-shinsei-jichitai.html"
+    data-page-title="生活保護の申請・却下率 自治体別">
+  </div>
+  <script async defer src="https://cusdis.com/js/cusdis.es.js"></script>
+
+  <h2>出典</h2>
+  <ul class="sources">
+    <li>厚生労働省「被保護者調査（月次調査・確定値）」第18表 保護の申請、取下げ、却下、未処理件数、保護開始世帯数…，都道府県－指定都市－中核市×市部－郡部別（令和元年度〜令和6年度） https://www.mhlw.go.jp/toukei/list/74-16b.html</li>
+    <li>厚生労働省「被保護者調査（月次調査・確定値）」第9表 被保護実人員数及び保護率（人口千対），都道府県－指定都市－中核市×月・１か月平均別（令和6年度）</li>
+    <li>総務省「全国地方公共団体コード」（市がどの都道府県にあるかの対応に使用） https://www.soumu.go.jp/denshijiti/code.html</li>
+    <li>厚生労働省「生活保護制度」 https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/hukushi_kaigo/seikatsuhogo/seikatuhogo/index.html</li>
+  </ul>
+
+  <div class="disclaimer">
+    <strong>ご注意：</strong>このページは厚生労働省が公表している集計値をそのまま並べ、割合を計算したものです。<strong>特定の自治体の審査の当否を評価するものではありません。</strong>却下率は申請者の事情や地域の状況によっても変わり、数字だけで「厳しい」「甘い」と判断することはできません。受給の可否は必ずお住まいの福祉事務所にご確認ください。数字の誤りにお気づきの場合は <a href="../about.html">このサイトについて</a> の連絡先までお知らせください。
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="inner">
+    <p><strong>フクシル</strong>— 知らないと損する、くらしの福祉制度を当事者目線でまとめる情報サイトです。</p>
+    <p><a href="../index.html">トップへ戻る</a> ／ <a href="../about.html">このサイトについて</a> ／ <a href="../tokushoho/">特定商取引法に基づく表記</a> ／ <a href="../kiyaku/">利用規約</a></p>
+    <p>© 2026 フクシル. 本サイトの情報は一般的な参考情報であり、正確性を保証するものではありません。</p>
+  </div>
+</footer>
+
+<script>
+var D = {"y":2024,"rows":[{"n":"いわき市","lv":"中核市","ex":null,"pf":"福島県","s":707,"k":77,"t":26,"o":593,"m":21,"j":316692,"hr":13.3},{"n":"さいたま市","lv":"指定都市","ex":null,"pf":"埼玉県","s":2411,"k":221,"t":68,"o":2141,"m":138,"j":1350429,"hr":14},{"n":"一宮市","lv":"中核市","ex":null,"pf":"愛知県","s":508,"k":19,"t":22,"o":466,"m":22,"j":377071,"hr":9.9},{"n":"三重県","lv":"都道府県","ex":null,"pf":null,"s":2329,"k":185,"t":117,"o":1989,"m":95,"j":1710110,"hr":9.1},{"n":"下関市","lv":"中核市","ex":null,"pf":"山口県","s":350,"k":24,"t":25,"o":296,"m":34,"j":241319,"hr":14.4},{"n":"久留米市","lv":"中核市","ex":null,"pf":"福岡県","s":795,"k":48,"t":76,"o":667,"m":43,"j":300880,"hr":21.6},{"n":"京都市","lv":"指定都市","ex":null,"pf":"京都府","s":4301,"k":409,"t":135,"o":3778,"m":1499,"j":1439088,"hr":27.4},{"n":"京都府","lv":"都道府県","ex":["京都市"],"pf":null,"s":1477,"k":189,"t":75,"o":1225,"m":41,"j":1084872,"hr":11.7},{"n":"仙台市","lv":"指定都市","ex":null,"pf":"宮城県","s":2613,"k":134,"t":67,"o":2529,"m":62,"j":1096057,"hr":17.5},{"n":"佐世保市","lv":"中核市","ex":null,"pf":"長崎県","s":408,"k":28,"t":34,"o":353,"m":8,"j":234249,"hr":19.3},{"n":"佐賀県","lv":"都道府県","ex":null,"pf":null,"s":982,"k":104,"t":39,"o":825,"m":67,"j":786196,"hr":9.2},{"n":"倉敷市","lv":"中核市","ex":null,"pf":"岡山県","s":938,"k":82,"t":65,"o":789,"m":28,"j":466797,"hr":15.3},{"n":"八尾市","lv":"中核市","ex":null,"pf":"大阪府","s":804,"k":20,"t":23,"o":756,"m":32,"j":259052,"hr":30.6},{"n":"八戸市","lv":"中核市","ex":null,"pf":"青森県","s":369,"k":35,"t":9,"o":333,"m":9,"j":213536,"hr":18.1},{"n":"八王子市","lv":"中核市","ex":null,"pf":"東京都","s":1387,"k":49,"t":28,"o":1296,"m":38,"j":560957,"hr":18.8},{"n":"兵庫県","lv":"都道府県","ex":["姫路市","尼崎市","明石市","神戸市","西宮市"],"pf":null,"s":2495,"k":234,"t":131,"o":2135,"m":127,"j":2093256,"hr":8.6},{"n":"函館市","lv":"中核市","ex":null,"pf":"北海道","s":1085,"k":67,"t":28,"o":981,"m":43,"j":237307,"hr":45.3},{"n":"前橋市","lv":"中核市","ex":null,"pf":"群馬県","s":525,"k":37,"t":27,"o":448,"m":25,"j":329606,"hr":12.7},{"n":"北九州市","lv":"指定都市","ex":null,"pf":"福岡県","s":2226,"k":138,"t":60,"o":2116,"m":95,"j":907386,"hr":24.1},{"n":"北海道","lv":"都道府県","ex":["函館市","旭川市","札幌市"],"pf":null,"s":5661,"k":556,"t":170,"o":4941,"m":367,"j":2516575,"hr":21.9},{"n":"千葉市","lv":"指定都市","ex":null,"pf":"千葉県","s":3599,"k":286,"t":174,"o":3141,"m":208,"j":983041,"hr":21.7},{"n":"千葉県","lv":"都道府県","ex":["千葉市","柏市","船橋市"],"pf":null,"s":7876,"k":816,"t":436,"o":6598,"m":425,"j":4187154,"hr":13},{"n":"名古屋市","lv":"指定都市","ex":null,"pf":"愛知県","s":7547,"k":420,"t":296,"o":6861,"m":207,"j":2335980,"hr":19.9},{"n":"吹田市","lv":"中核市","ex":null,"pf":"大阪府","s":609,"k":56,"t":26,"o":538,"m":6,"j":384762,"hr":14.7},{"n":"呉市","lv":"中核市","ex":null,"pf":"広島県","s":298,"k":30,"t":11,"o":257,"m":8,"j":202229,"hr":15.7},{"n":"和歌山市","lv":"中核市","ex":null,"pf":"和歌山県","s":958,"k":61,"t":10,"o":882,"m":20,"j":345551,"hr":25.4},{"n":"和歌山県","lv":"都道府県","ex":["和歌山市"],"pf":null,"s":841,"k":109,"t":20,"o":717,"m":27,"j":534623,"hr":10.6},{"n":"埼玉県","lv":"都道府県","ex":["さいたま市","川口市","川越市","越谷市"],"pf":null,"s":8458,"k":430,"t":512,"o":7506,"m":563,"j":4662677,"hr":12.7},{"n":"堺市","lv":"指定都市","ex":null,"pf":"大阪府","s":3153,"k":173,"t":77,"o":2906,"m":119,"j":806867,"hr":30},{"n":"大分市","lv":"中核市","ex":null,"pf":"大分県","s":846,"k":27,"t":64,"o":760,"m":30,"j":469766,"hr":17.1},{"n":"大分県","lv":"都道府県","ex":["大分市"],"pf":null,"s":1259,"k":127,"t":69,"o":1060,"m":81,"j":612378,"hr":16.4},{"n":"大津市","lv":"中核市","ex":null,"pf":"滋賀県","s":448,"k":25,"t":25,"o":393,"m":22,"j":344333,"hr":12},{"n":"大阪市","lv":"指定都市","ex":null,"pf":"大阪府","s":18121,"k":845,"t":803,"o":17394,"m":304,"j":2790606,"hr":46.2},{"n":"大阪府","lv":"都道府県","ex":["八尾市","吹田市","堺市","大阪市","寝屋川市","東大阪市","枚方市","豊中市","高槻市"],"pf":null,"s":7098,"k":469,"t":217,"o":6402,"m":264,"j":2666269,"hr":19.3},{"n":"奈良市","lv":"中核市","ex":null,"pf":"奈良県","s":536,"k":37,"t":13,"o":494,"m":118,"j":347919,"hr":19.7},{"n":"奈良県","lv":"都道府県","ex":["奈良市"],"pf":null,"s":1246,"k":152,"t":30,"o":1058,"m":64,"j":938462,"hr":11.7},{"n":"姫路市","lv":"中核市","ex":null,"pf":"兵庫県","s":862,"k":31,"t":21,"o":811,"m":10,"j":519114,"hr":15.8},{"n":"宇都宮市","lv":"中核市","ex":null,"pf":"栃木県","s":752,"k":27,"t":18,"o":707,"m":112,"j":512000,"hr":16},{"n":"宮城県","lv":"都道府県","ex":["仙台市"],"pf":null,"s":1926,"k":225,"t":94,"o":1614,"m":74,"j":1153010,"hr":10.3},{"n":"宮崎市","lv":"中核市","ex":null,"pf":"宮崎県","s":951,"k":77,"t":29,"o":843,"m":29,"j":395122,"hr":20.5},{"n":"宮崎県","lv":"都道府県","ex":["宮崎市"],"pf":null,"s":1344,"k":126,"t":99,"o":1149,"m":65,"j":639624,"hr":13.3},{"n":"富山市","lv":"中核市","ex":null,"pf":"富山県","s":484,"k":54,"t":15,"o":414,"m":17,"j":405373,"hr":6.7},{"n":"富山県","lv":"都道府県","ex":["富山市"],"pf":null,"s":316,"k":30,"t":11,"o":274,"m":16,"j":584074,"hr":2.7},{"n":"寝屋川市","lv":"中核市","ex":null,"pf":"大阪府","s":751,"k":13,"t":21,"o":725,"m":20,"j":224478,"hr":33.5},{"n":"尼崎市","lv":"中核市","ex":null,"pf":"兵庫県","s":1608,"k":61,"t":36,"o":1519,"m":31,"j":453597,"hr":36.7},{"n":"山口県","lv":"都道府県","ex":["下関市"],"pf":null,"s":1416,"k":188,"t":71,"o":1159,"m":41,"j":1041684,"hr":9.5},{"n":"山形市","lv":"中核市","ex":null,"pf":"山形県","s":263,"k":33,"t":13,"o":217,"m":33,"j":239318,"hr":8.8},{"n":"山形県","lv":"都道府県","ex":["山形市"],"pf":null,"s":877,"k":134,"t":31,"o":717,"m":33,"j":767222,"hr":7.2},{"n":"山梨県","lv":"都道府県","ex":["甲府市"],"pf":null,"s":660,"k":72,"t":21,"o":564,"m":22,"j":604571,"hr":7},{"n":"岐阜市","lv":"中核市","ex":null,"pf":"岐阜県","s":605,"k":14,"t":12,"o":581,"m":33,"j":394795,"hr":14.6},{"n":"岐阜県","lv":"都道府県","ex":["岐阜市"],"pf":null,"s":1180,"k":106,"t":35,"o":1035,"m":35,"j":1525750,"hr":4},{"n":"岡山市","lv":"指定都市","ex":null,"pf":"岡山県","s":1700,"k":121,"t":89,"o":1474,"m":66,"j":714171,"hr":17.5},{"n":"岡山県","lv":"都道府県","ex":["倉敷市","岡山市"],"pf":null,"s":675,"k":108,"t":32,"o":540,"m":14,"j":656842,"hr":5.7},{"n":"岡崎市","lv":"中核市","ex":null,"pf":"愛知県","s":510,"k":25,"t":12,"o":471,"m":24,"j":384000,"hr":7},{"n":"岩手県","lv":"都道府県","ex":["盛岡市"],"pf":null,"s":1464,"k":296,"t":81,"o":1071,"m":60,"j":867889,"hr":9},{"n":"島根県","lv":"都道府県","ex":["松江市"],"pf":null,"s":427,"k":69,"t":17,"o":341,"m":19,"j":444667,"hr":6},{"n":"川口市","lv":"中核市","ex":null,"pf":"埼玉県","s":1325,"k":87,"t":67,"o":1188,"m":10,"j":607202,"hr":19.3},{"n":"川崎市","lv":"指定都市","ex":null,"pf":"神奈川県","s":3488,"k":319,"t":94,"o":3120,"m":102,"j":1553090,"hr":17.8},{"n":"川越市","lv":"中核市","ex":null,"pf":"埼玉県","s":570,"k":30,"t":26,"o":524,"m":22,"j":354492,"hr":11.8},{"n":"広島市","lv":"指定都市","ex":null,"pf":"広島県","s":2764,"k":247,"t":85,"o":2459,"m":64,"j":1178953,"hr":19.1},{"n":"広島県","lv":"都道府県","ex":["呉市","広島市","福山市"],"pf":null,"s":1002,"k":90,"t":37,"o":872,"m":32,"j":885432,"hr":8.1},{"n":"徳島県","lv":"都道府県","ex":null,"pf":null,"s":1172,"k":125,"t":46,"o":1012,"m":57,"j":685932,"hr":17.7},{"n":"愛媛県","lv":"都道府県","ex":["松山市"],"pf":null,"s":1162,"k":197,"t":45,"o":937,"m":36,"j":779434,"hr":10.6},{"n":"愛知県","lv":"都道府県","ex":["一宮市","名古屋市","岡崎市","豊橋市","豊田市"],"pf":null,"s":3696,"k":289,"t":192,"o":3205,"m":147,"j":3589643,"hr":5.6},{"n":"新潟市","lv":"指定都市","ex":null,"pf":"新潟県","s":1548,"k":327,"t":47,"o":1169,"m":51,"j":764935,"hr":15.4},{"n":"新潟県","lv":"都道府県","ex":["新潟市"],"pf":null,"s":1375,"k":183,"t":35,"o":1159,"m":42,"j":1335373,"hr":6.7},{"n":"旭川市","lv":"中核市","ex":null,"pf":"北海道","s":1078,"k":46,"t":28,"o":1003,"m":22,"j":317270,"hr":35.9},{"n":"明石市","lv":"中核市","ex":null,"pf":"兵庫県","s":510,"k":46,"t":23,"o":446,"m":14,"j":306848,"hr":16.5},{"n":"札幌市","lv":"指定都市","ex":null,"pf":"北海道","s":9255,"k":521,"t":260,"o":8458,"m":310,"j":1966934,"hr":36.2},{"n":"東京都","lv":"都道府県","ex":["八王子市"],"pf":null,"s":27908,"k":1319,"t":704,"o":26111,"m":1331,"j":13611295,"hr":19.3},{"n":"東大阪市","lv":"中核市","ex":null,"pf":"大阪府","s":1726,"k":47,"t":22,"o":1677,"m":39,"j":485045,"hr":33.3},{"n":"松山市","lv":"中核市","ex":null,"pf":"愛媛県","s":1016,"k":64,"t":17,"o":938,"m":31,"j":498789,"hr":22.3},{"n":"松本市","lv":"中核市","ex":null,"pf":"長野県","s":292,"k":43,"t":24,"o":224,"m":7,"j":238630,"hr":7.3},{"n":"松江市","lv":"中核市","ex":null,"pf":"島根県","s":320,"k":31,"t":0,"o":305,"m":17,"j":197388,"hr":13.4},{"n":"枚方市","lv":"中核市","ex":null,"pf":"大阪府","s":870,"k":34,"t":31,"o":827,"m":27,"j":390933,"hr":19.3},{"n":"柏市","lv":"中核市","ex":null,"pf":"千葉県","s":730,"k":53,"t":38,"o":656,"m":28,"j":434790,"hr":11.9},{"n":"栃木県","lv":"都道府県","ex":["宇都宮市"],"pf":null,"s":1800,"k":165,"t":83,"o":1551,"m":76,"j":1378471,"hr":8.5},{"n":"横浜市","lv":"指定都市","ex":null,"pf":"神奈川県","s":11653,"k":1187,"t":589,"o":9837,"m":476,"j":3768626,"hr":18.2},{"n":"横須賀市","lv":"中核市","ex":null,"pf":"神奈川県","s":679,"k":84,"t":18,"o":598,"m":13,"j":372267,"hr":15},{"n":"水戸市","lv":"中核市","ex":null,"pf":"茨城県","s":622,"k":59,"t":11,"o":553,"m":229,"j":266392,"hr":19.4},{"n":"沖縄県","lv":"都道府県","ex":["那覇市"],"pf":null,"s":3980,"k":635,"t":236,"o":3080,"m":187,"j":1154430,"hr":22.8},{"n":"浜松市","lv":"指定都市","ex":null,"pf":"静岡県","s":904,"k":56,"t":8,"o":852,"m":38,"j":779140,"hr":9.3},{"n":"滋賀県","lv":"都道府県","ex":["大津市"],"pf":null,"s":1154,"k":141,"t":64,"o":948,"m":53,"j":1059853,"hr":6.8},{"n":"熊本市","lv":"指定都市","ex":null,"pf":"熊本県","s":2298,"k":123,"t":165,"o":2022,"m":178,"j":738434,"hr":19.8},{"n":"熊本県","lv":"都道府県","ex":["熊本市"],"pf":null,"s":1650,"k":163,"t":114,"o":1382,"m":71,"j":960632,"hr":9.5},{"n":"甲府市","lv":"中核市","ex":null,"pf":"山梨県","s":342,"k":11,"t":4,"o":324,"m":9,"j":183667,"hr":15},{"n":"盛岡市","lv":"中核市","ex":null,"pf":"岩手県","s":574,"k":28,"t":15,"o":531,"m":21,"j":279657,"hr":17.5},{"n":"相模原市","lv":"指定都市","ex":null,"pf":"神奈川県","s":1767,"k":56,"t":62,"o":1663,"m":32,"j":724286,"hr":19.6},{"n":"石川県","lv":"都道府県","ex":["金沢市"],"pf":null,"s":382,"k":25,"t":12,"o":344,"m":16,"j":637778,"hr":4.5},{"n":"神奈川県","lv":"都道府県","ex":["川崎市","横浜市","横須賀市","相模原市"],"pf":null,"s":5444,"k":465,"t":316,"o":4705,"m":199,"j":2803588,"hr":13.1},{"n":"神戸市","lv":"指定都市","ex":null,"pf":"兵庫県","s":4420,"k":684,"t":103,"o":3676,"m":184,"j":1492043,"hr":27.9},{"n":"福井市","lv":"中核市","ex":null,"pf":"福井県","s":338,"k":34,"t":8,"o":296,"m":6,"j":254951,"hr":10.3},{"n":"福井県","lv":"都道府県","ex":["福井市"],"pf":null,"s":292,"k":51,"t":8,"o":231,"m":10,"j":482647,"hr":3.4},{"n":"福山市","lv":"中核市","ex":null,"pf":"広島県","s":661,"k":37,"t":40,"o":581,"m":26,"j":448864,"hr":13.2},{"n":"福岡市","lv":"指定都市","ex":null,"pf":"福岡県","s":5808,"k":335,"t":223,"o":5156,"m":1807,"j":1659490,"hr":25.5},{"n":"福岡県","lv":"都道府県","ex":["久留米市","北九州市","福岡市"],"pf":null,"s":4948,"k":646,"t":365,"o":3888,"m":311,"j":2224218,"hr":21.1},{"n":"福島市","lv":"中核市","ex":null,"pf":"福島県","s":513,"k":21,"t":20,"o":454,"m":27,"j":272353,"hr":11.9},{"n":"福島県","lv":"都道府県","ex":["いわき市","福島市","郡山市"],"pf":null,"s":1215,"k":148,"t":72,"o":985,"m":48,"j":834487,"hr":7.8},{"n":"秋田市","lv":"中核市","ex":null,"pf":"秋田県","s":544,"k":59,"t":59,"o":429,"m":11,"j":295511,"hr":17.6},{"n":"秋田県","lv":"都道府県","ex":["秋田市"],"pf":null,"s":1159,"k":271,"t":42,"o":845,"m":35,"j":602419,"hr":12.4},{"n":"群馬県","lv":"都道府県","ex":["前橋市","高崎市"],"pf":null,"s":1509,"k":142,"t":56,"o":1310,"m":50,"j":1186269,"hr":6.7},{"n":"船橋市","lv":"中核市","ex":null,"pf":"千葉県","s":1177,"k":198,"t":135,"o":858,"m":18,"j":650140,"hr":14.3},{"n":"茨城県","lv":"都道府県","ex":["水戸市"],"pf":null,"s":3652,"k":406,"t":171,"o":3060,"m":188,"j":2532737,"hr":9.5},{"n":"西宮市","lv":"中核市","ex":null,"pf":"兵庫県","s":582,"k":22,"t":16,"o":546,"m":17,"j":481491,"hr":16.1},{"n":"豊中市","lv":"中核市","ex":null,"pf":"大阪府","s":858,"k":36,"t":11,"o":800,"m":43,"j":397595,"hr":23.7},{"n":"豊橋市","lv":"中核市","ex":null,"pf":"愛知県","s":461,"k":41,"t":31,"o":397,"m":15,"j":360789,"hr":7.6},{"n":"豊田市","lv":"中核市","ex":null,"pf":"愛知県","s":308,"k":17,"t":13,"o":282,"m":9,"j":416000,"hr":5.5},{"n":"越谷市","lv":"中核市","ex":null,"pf":"埼玉県","s":502,"k":17,"t":13,"o":478,"m":73,"j":338636,"hr":13.2},{"n":"那覇市","lv":"中核市","ex":null,"pf":"沖縄県","s":1676,"k":99,"t":146,"o":1397,"m":189,"j":310069,"hr":43.7},{"n":"郡山市","lv":"中核市","ex":null,"pf":"福島県","s":499,"k":27,"t":17,"o":447,"m":19,"j":318037,"hr":10.7},{"n":"金沢市","lv":"中核市","ex":null,"pf":"石川県","s":476,"k":17,"t":9,"o":439,"m":31,"j":457717,"hr":9.2},{"n":"長崎市","lv":"中核市","ex":null,"pf":"長崎県","s":847,"k":28,"t":64,"o":749,"m":62,"j":388095,"hr":29.4},{"n":"長崎県","lv":"都道府県","ex":["佐世保市","長崎市"],"pf":null,"s":1184,"k":146,"t":88,"o":960,"m":52,"j":631329,"hr":14.3},{"n":"長野市","lv":"中核市","ex":null,"pf":"長野県","s":318,"k":25,"t":5,"o":289,"m":7,"j":362118,"hr":8.5},{"n":"長野県","lv":"都道府県","ex":["松本市","長野市"],"pf":null,"s":1074,"k":148,"t":42,"o":881,"m":34,"j":1374419,"hr":4.3},{"n":"青森市","lv":"中核市","ex":null,"pf":"青森県","s":720,"k":125,"t":45,"o":537,"m":31,"j":260303,"hr":29.7},{"n":"青森県","lv":"都道府県","ex":["八戸市","青森市"],"pf":null,"s":2159,"k":462,"t":89,"o":1582,"m":104,"j":691847,"hr":22.2},{"n":"静岡市","lv":"指定都市","ex":null,"pf":"静岡県","s":1597,"k":313,"t":66,"o":1198,"m":506,"j":673191,"hr":14.1},{"n":"静岡県","lv":"都道府県","ex":["浜松市","静岡市"],"pf":null,"s":2542,"k":219,"t":103,"o":2214,"m":118,"j":2078052,"hr":7.7},{"n":"香川県","lv":"都道府県","ex":["高松市"],"pf":null,"s":574,"k":84,"t":28,"o":467,"m":17,"j":507297,"hr":7.4},{"n":"高崎市","lv":"中核市","ex":null,"pf":"群馬県","s":497,"k":25,"t":21,"o":452,"m":13,"j":366186,"hr":9.7},{"n":"高松市","lv":"中核市","ex":null,"pf":"香川県","s":703,"k":37,"t":18,"o":656,"m":68,"j":410000,"hr":15.3},{"n":"高槻市","lv":"中核市","ex":null,"pf":"大阪府","s":588,"k":29,"t":26,"o":534,"m":16,"j":345706,"hr":16.3},{"n":"高知市","lv":"中核市","ex":null,"pf":"高知県","s":995,"k":95,"t":34,"o":883,"m":26,"j":314144,"hr":33.3},{"n":"高知県","lv":"都道府県","ex":["高知市"],"pf":null,"s":1065,"k":234,"t":62,"o":758,"m":29,"j":341848,"hr":18.4},{"n":"鳥取市","lv":"中核市","ex":null,"pf":"鳥取県","s":299,"k":42,"t":18,"o":239,"m":10,"j":182432,"hr":14.8},{"n":"鳥取県","lv":"都道府県","ex":["鳥取市"],"pf":null,"s":632,"k":124,"t":30,"o":463,"m":32,"j":348190,"hr":10.5},{"n":"鹿児島市","lv":"中核市","ex":null,"pf":"鹿児島県","s":1278,"k":31,"t":64,"o":1182,"m":165,"j":582480,"hr":25},{"n":"鹿児島県","lv":"都道府県","ex":["鹿児島市"],"pf":null,"s":1756,"k":178,"t":156,"o":1413,"m":113,"j":946621,"hr":14.5}]};
+(function () {
+  var rows = D.rows.map(function (r) {
+    r.kr = r.k / r.s * 100;
+    r.tr = r.t / r.s * 100;
+    r.sp = r.j ? r.s / r.j * 1000 : null;
+    return r;
+  });
+  var tb = document.getElementById('jtb');
+  var q = document.getElementById('q');
+  var lv = document.getElementById('lv');
+  var cnt = document.getElementById('cnt');
+  var ths = document.querySelectorAll('#jt thead th');
+  var sortKey = 'kr', sortAsc = false;
+
+  // 大阪府は9市が別掲されている。全部並べると1行が9行ぶんの高さになるので、
+  // 3市を超えたら件数にまとめ、全部は title（マウスを載せると出る）に入れる。
+  function nm(r) {
+    if (r.lv !== '都道府県' || !r.ex) return r.n;
+    var t = r.ex.join('・');
+    var label = r.ex.length <= 3 ? t + 'を除く' : r.ex.length + '市を除く';
+    return r.n + '<small title="' + t + 'を除く">' + label + '</small>';
+  }
+  function fx(v, d) { return v == null ? '—' : v.toFixed(d); }
+  function ja(n) { return Number(n).toLocaleString('ja-JP'); }
+
+  function draw() {
+    var kw = q.value.trim();
+    var k = lv.value;
+    var list = rows.filter(function (r) {
+      if (k && r.lv !== k) return false;
+      if (kw && r.n.indexOf(kw) < 0 && !(r.pf && r.pf.indexOf(kw) >= 0)) return false;
+      return true;
+    });
+    list.sort(function (a, b) {
+      var x = a[sortKey], y = b[sortKey];
+      if (typeof x === 'string') return sortAsc ? x.localeCompare(y, 'ja') : y.localeCompare(x, 'ja');
+      if (x == null) return 1;
+      if (y == null) return -1;
+      return sortAsc ? x - y : y - x;
+    });
+    tb.innerHTML = list.map(function (r) {
+      return '<tr><th>' + nm(r) + '</th><td>' + r.lv + '</td>'
+        + '<td class="n">' + ja(r.s) + '</td>'
+        + '<td class="n big">' + fx(r.kr, 1) + '%</td>'
+        + '<td class="n">' + fx(r.tr, 1) + '%</td>'
+        + '<td class="n">' + ja(r.o) + '</td>'
+        + '<td class="n">' + fx(r.sp, 2) + '</td>'
+        + '<td class="n">' + fx(r.hr, 1) + '</td>'
+        + '<td class="n">' + ja(r.m) + '</td></tr>';
+    }).join('');
+    cnt.textContent = list.length + ' / ' + rows.length + ' 機関';
+  }
+
+  Array.prototype.forEach.call(ths, function (th) {
+    th.addEventListener('click', function () {
+      var k = th.getAttribute('data-k');
+      if (sortKey === k) sortAsc = !sortAsc;
+      else { sortKey = k; sortAsc = (k === 'n' || k === 'lv'); }
+      Array.prototype.forEach.call(ths, function (o) { o.className = o.className.replace(/(^|\s)(sorted|asc)/g, ''); });
+      th.className = (th.className + ' sorted' + (sortAsc ? ' asc' : '')).trim();
+      draw();
+    });
+  });
+  q.addEventListener('input', draw);
+  lv.addEventListener('change', draw);
+  draw();
+})();
+</script>
+</body>
+</html>

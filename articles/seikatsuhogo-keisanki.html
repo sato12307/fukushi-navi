@@ -24,7 +24,7 @@
   "description": "生活保護の最低生活費を厚生労働省の令和8年度基準（第1類・第2類・逓減率・特例加算・経過的加算・各種加算）どおりに自動計算し、12都市の住宅扶助上限と収入認定まで反映するシミュレーター。",
   "inLanguage": "ja",
   "datePublished": "2026-08-03",
-  "dateModified": "2026-08-03",
+  "dateModified": "2026-09-17",
   "author": { "@type": "Organization", "name": "フクシル" },
   "publisher": { "@type": "Organization", "name": "フクシル" },
   "url": "https://fukushiru.com/articles/seikatsuhogo-keisanki.html",
@@ -87,6 +87,7 @@
     <a class="brand" href="../index.html">フクシル <small>知らないと損する、くらしの福祉</small></a>
     <nav class="site-nav" aria-label="主要">
       <a href="../index.html">トップ</a>
+      <a href="seikatsuhogo-shinsei-jichitai.html">自治体別の却下率</a>
       <a href="juminzei-hikazei-check.html">住民税非課税</a>
       <a href="kougaku-ryouyouhi-2026.html">高額療養費</a>
       <a href="koei-jutaku-bairitsu.html">公営住宅</a>
@@ -99,12 +100,16 @@
   <p class="breadcrumb"><a href="../index.html">トップ</a> ＞ 生活保護 ＞ 支給額シミュレーター</p>
 
   <h1>生活保護はいくらもらえる？<br>自動計算シミュレーター【2026年度】</h1>
-  <p class="updated">最終更新：2026-08-03 ／ 厚生労働省「生活扶助基準額の算出方法（令和8年4月）」の計算式・基準額をそのまま実装。すべて<strong>概算</strong>です</p>
+  <p class="updated">最終更新：2026-09-17 ／ 厚生労働省「生活扶助基準額の算出方法（令和8年4月）」の計算式・基準額をそのまま実装。すべて<strong>概算</strong>です</p>
 
   <p class="lead">生活保護の金額は「一律いくら」ではなく、<strong>世帯全員の年齢 × 世帯人数 × 住んでいる地域（級地）</strong>で1円単位まで決まる積み上げ式です。このページは厚生労働省が公表している<strong>令和8年度の基準額表と計算式をそのまま実装</strong>し、ネットの記事にありがちな「ざっくり目安」ではなく、<strong>福祉事務所と同じロジック</strong>で最低生活費を計算します。家賃（住宅扶助）は12都市の上限額に対応。働いた収入がある場合の<strong>差額支給</strong>も概算できます。</p>
 
   <div class="callout point">
     <p><span class="tag">2026年10月から増額へ</span>生活扶助に上乗せされている<strong>特例加算</strong>は現在1人あたり月1,500円ですが、<strong>2026年10月から月2,500円に引き上げられる方針</strong>が示されています（世帯人数×1,000円の増額）。このページは改定後に数値を更新します。</p>
+  </div>
+
+  <div class="callout note">
+    <p><span class="tag">新着</span>金額のつぎに気になるのは「そもそも通るのか」だと思います。厚生労働省の統計から、<a href="seikatsuhogo-shinsei-jichitai.html"><strong>都道府県・指定都市・中核市129機関の却下率</strong></a>を一覧にしました。令和6年度の全国平均は8.28%ですが、自治体では1.7%〜23.4%とひらいています。</p>
   </div>
 
   <h2>① まず結論：単身なら月いくら？【12都市 早見表】</h2>
@@ -301,10 +306,11 @@
     <li><strong>扶養照会</strong>：親族への問い合わせは<strong>拒否の意向を伝えられます</strong>。DV・絶縁など事情がある場合は照会自体を省略できる運用になっています（2021年通知）。</li>
     <li><strong>医療費</strong>：医療扶助として<strong>自己負担ゼロ</strong>。国民健康保険からは抜けます。</li>
     <li><strong>申請は権利</strong>：福祉事務所の窓口で「申請します」と伝えれば、申請書を受け取らない対応（いわゆる水際作戦）は違法です。原則14日以内（最長30日）に可否が通知されます。</li>
+    <li><strong>却下されたら</strong>：通知書を受け取った日の翌日から3か月以内に、都道府県知事あてに審査請求ができます。再申請は回数の制限なくいつでも可能です。<a href="seikatsuhogo-shinsei-jichitai.html">自治体別の却下率と、却下されたときにできること</a>にまとめました。</li>
   </ul>
 
   <div class="callout note">
-    <p><span class="tag">あわせて読みたい</span>家賃を下げて生活を安定させるなら<a href="koei-jutaku-bairitsu.html">公営住宅の倍率データ</a>と<a href="koei-hairiyasui.html">入りやすい人の条件</a>も参考に。生活保護までは必要ないけれど税負担を軽くしたい方は<a href="juminzei-hikazei-check.html">住民税非課税の判定シミュレーター</a>、医療費が心配な方は<a href="kougaku-ryouyouhi-2026.html">高額療養費の計算機（2026年8月改正対応）</a>へ。障害のある方は<a href="shogai-nenkin-keisanki.html">障害年金の計算機</a>もどうぞ。</p>
+    <p><span class="tag">あわせて読みたい</span>申請が通るかどうかが気になる方は<a href="seikatsuhogo-shinsei-jichitai.html">自治体別の却下率</a>へ。家賃を下げて生活を安定させるなら<a href="koei-jutaku-bairitsu.html">公営住宅の倍率データ</a>と<a href="koei-hairiyasui.html">入りやすい人の条件</a>も参考に。生活保護までは必要ないけれど税負担を軽くしたい方は<a href="juminzei-hikazei-check.html">住民税非課税の判定シミュレーター</a>、医療費が心配な方は<a href="kougaku-ryouyouhi-2026.html">高額療養費の計算機（2026年8月改正対応）</a>へ。障害のある方は<a href="shogai-nenkin-keisanki.html">障害年金の計算機</a>もどうぞ。</p>
   </div>
 
   <h2>コメント（体験・自治体ごとの運用の情報交換）</h2>

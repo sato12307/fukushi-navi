@@ -1,0 +1,6354 @@
+{
+ "source": "厚生労働省「被保護者調査（月次調査・確定値）」第18表・第9表",
+ "latest_year": 2024,
+ "years": [
+  2019,
+  2020,
+  2021,
+  2022,
+  2023,
+  2024
+ ],
+ "national": {
+  "level": "全国",
+  "shinsei": 259517,
+  "torisage": 10801,
+  "kyakka": 21478,
+  "kaishi_setai": 228542,
+  "kaishi_nin": 279320,
+  "mishori": 14521,
+  "haishi_setai": 232384,
+  "haishi_nin": 270125,
+  "hist": {
+   "2019": {
+    "shinsei": 223042,
+    "kyakka": 15007,
+    "torisage": 11020,
+    "kaishi_setai": 198767
+   },
+   "2020": {
+    "shinsei": 228102,
+    "kyakka": 15510,
+    "torisage": 11742,
+    "kaishi_setai": 202870
+   },
+   "2021": {
+    "shinsei": 229900,
+    "kyakka": 17513,
+    "torisage": 11448,
+    "kaishi_setai": 202689
+   },
+   "2022": {
+    "shinsei": 245704,
+    "kyakka": 18447,
+    "torisage": 11402,
+    "kaishi_setai": 215294
+   },
+   "2023": {
+    "shinsei": 251384,
+    "kyakka": 19638,
+    "torisage": 11173,
+    "kaishi_setai": 222102
+   },
+   "2024": {
+    "shinsei": 259517,
+    "kyakka": 21478,
+    "torisage": 10801,
+    "kaishi_setai": 228542
+   }
+  },
+  "hogo_nin": 2008061,
+  "hogo_ritsu": 16.2,
+  "jinko": 123954383
+ },
+ "rows": [
+  {
+   "level": "中核市",
+   "shinsei": 707,
+   "torisage": 26,
+   "kyakka": 77,
+   "kaishi_setai": 593,
+   "kaishi_nin": 773,
+   "mishori": 21,
+   "haishi_setai": 554,
+   "haishi_nin": 639,
+   "name": "いわき市",
+   "hist": {
+    "2019": {
+     "shinsei": 591,
+     "kyakka": 33,
+     "torisage": 62
+    },
+    "2020": {
+     "shinsei": 585,
+     "kyakka": 43,
+     "torisage": 66
+    },
+    "2021": {
+     "shinsei": 596,
+     "kyakka": 36,
+     "torisage": 69
+    },
+    "2022": {
+     "shinsei": 633,
+     "kyakka": 45,
+     "torisage": 45
+    },
+    "2023": {
+     "shinsei": 598,
+     "kyakka": 53,
+     "torisage": 38
+    },
+    "2024": {
+     "shinsei": 707,
+     "kyakka": 77,
+     "torisage": 26
+    }
+   },
+   "hogo_nin": 4212,
+   "hogo_ritsu": 13.3,
+   "jinko": 316692,
+   "pref": "福島県"
+  },
+  {
+   "level": "指定都市",
+   "shinsei": 2411,
+   "torisage": 68,
+   "kyakka": 221,
+   "kaishi_setai": 2141,
+   "kaishi_nin": 2636,
+   "mishori": 138,
+   "haishi_setai": 2334,
+   "haishi_nin": 2732,
+   "name": "さいたま市",
+   "hist": {
+    "2019": {
+     "shinsei": 2320,
+     "kyakka": 157,
+     "torisage": 124
+    },
+    "2020": {
+     "shinsei": 2329,
+     "kyakka": 208,
+     "torisage": 89
+    },
+    "2021": {
+     "shinsei": 2370,
+     "kyakka": 226,
+     "torisage": 75
+    },
+    "2022": {
+     "shinsei": 2494,
+     "kyakka": 223,
+     "torisage": 67
+    },
+    "2023": {
+     "shinsei": 2542,
+     "kyakka": 229,
+     "torisage": 74
+    },
+    "2024": {
+     "shinsei": 2411,
+     "kyakka": 221,
+     "torisage": 68
+    }
+   },
+   "hogo_nin": 18906,
+   "hogo_ritsu": 14.0,
+   "jinko": 1350429,
+   "pref": "埼玉県"
+  },
+  {
+   "level": "中核市",
+   "shinsei": 508,
+   "torisage": 22,
+   "kyakka": 19,
+   "kaishi_setai": 466,
+   "kaishi_nin": 564,
+   "mishori": 22,
+   "haishi_setai": 428,
+   "haishi_nin": 494,
+   "name": "一宮市",
+   "hist": {
+    "2021": {
+     "shinsei": 446,
+     "kyakka": 16,
+     "torisage": 13
+    },
+    "2022": {
+     "shinsei": 510,
+     "kyakka": 14,
+     "torisage": 24
+    },
+    "2023": {
+     "shinsei": 539,
+     "kyakka": 14,
+     "torisage": 21
+    },
+    "2024": {
+     "shinsei": 508,
+     "kyakka": 19,
+     "torisage": 22
+    }
+   },
+   "hogo_nin": 3733,
+   "hogo_ritsu": 9.9,
+   "jinko": 377071,
+   "pref": "愛知県"
+  },
+  {
+   "level": "都道府県",
+   "shinsei": 2329,
+   "torisage": 117,
+   "kyakka": 185,
+   "kaishi_setai": 1989,
+   "kaishi_nin": 2474,
+   "mishori": 95,
+   "haishi_setai": 1944,
+   "haishi_nin": 2343,
+   "name": "三重県",
+   "hist": {
+    "2019": {
+     "shinsei": 2000,
+     "kyakka": 173,
+     "torisage": 112
+    },
+    "2020": {
+     "shinsei": 2178,
+     "kyakka": 173,
+     "torisage": 139
+    },
+    "2021": {
+     "shinsei": 2055,
+     "kyakka": 171,
+     "torisage": 145
+    },
+    "2022": {
+     "shinsei": 2099,
+     "kyakka": 145,
+     "torisage": 128
+    },
+    "2023": {
+     "shinsei": 2139,
+     "kyakka": 164,
+     "torisage": 104
+    },
+    "2024": {
+     "shinsei": 2329,
+     "kyakka": 185,
+     "torisage": 117
+    }
+   },
+   "hogo_nin": 15562,
+   "hogo_ritsu": 9.1,
+   "jinko": 1710110,
+   "excluded": []
+  },
+  {
+   "level": "中核市",
+   "shinsei": 350,
+   "torisage": 25,
+   "kyakka": 24,
+   "kaishi_setai": 296,
+   "kaishi_nin": 371,
+   "mishori": 34,
+   "haishi_setai": 360,
+   "haishi_nin": 427,
+   "name": "下関市",
+   "hist": {
+    "2019": {
+     "shinsei": 330,
+     "kyakka": 24,
+     "torisage": 25
+    },
+    "2020": {
+     "shinsei": 313,
+     "kyakka": 24,
+     "torisage": 15
+    },
+    "2021": {
+     "shinsei": 335,
+     "kyakka": 25,
+     "torisage": 10
+    },
+    "2022": {
+     "shinsei": 341,
+     "kyakka": 28,
+     "torisage": 16
+    },
+    "2023": {
+     "shinsei": 368,
+     "kyakka": 28,
+     "torisage": 17
+    },
+    "2024": {
+     "shinsei": 350,
+     "kyakka": 24,
+     "torisage": 25
+    }
+   },
+   "hogo_nin": 3475,
+   "hogo_ritsu": 14.4,
+   "jinko": 241319,
+   "pref": "山口県"
+  },
+  {
+   "level": "中核市",
+   "shinsei": 795,
+   "torisage": 76,
+   "kyakka": 48,
+   "kaishi_setai": 667,
+   "kaishi_nin": 829,
+   "mishori": 43,
+   "haishi_setai": 634,
+   "haishi_nin": 731,
+   "name": "久留米市",
+   "hist": {
+    "2019": {
+     "shinsei": 650,
+     "kyakka": 93,
+     "torisage": 80
+    },
+    "2020": {
+     "shinsei": 746,
+     "kyakka": 55,
+     "torisage": 96
+    },
+    "2021": {
+     "shinsei": 751,
+     "kyakka": 53,
+     "torisage": 99
+    },
+    "2022": {
+     "shinsei": 694,
+     "kyakka": 31,
+     "torisage": 85
+    },
+    "2023": {
+     "shinsei": 776,
+     "kyakka": 42,
+     "torisage": 100
+    },
+    "2024": {
+     "shinsei": 795,
+     "kyakka": 48,
+     "torisage": 76
+    }
+   },
+   "hogo_nin": 6499,
+   "hogo_ritsu": 21.6,
+   "jinko": 300880,
+   "pref": "福岡県"
+  },
+  {
+   "level": "指定都市",
+   "shinsei": 4301,
+   "torisage": 135,
+   "kyakka": 409,
+   "kaishi_setai": 3778,
+   "kaishi_nin": 4692,
+   "mishori": 1499,
+   "haishi_setai": 4130,
+   "haishi_nin": 4985,
+   "name": "京都市",
+   "hist": {
+    "2019": {
+     "shinsei": 3956,
+     "kyakka": 263,
+     "torisage": 162
+    },
+    "2020": {
+     "shinsei": 4036,
+     "kyakka": 270,
+     "torisage": 173
+    },
+    "2021": {
+     "shinsei": 3937,
+     "kyakka": 327,
+     "torisage": 162
+    },
+    "2022": {
+     "shinsei": 4196,
+     "kyakka": 312,
+     "torisage": 167
+    },
+    "2023": {
+     "shinsei": 4397,
+     "kyakka": 436,
+     "torisage": 168
+    },
+    "2024": {
+     "shinsei": 4301,
+     "kyakka": 409,
+     "torisage": 135
+    }
+   },
+   "hogo_nin": 39431,
+   "hogo_ritsu": 27.4,
+   "jinko": 1439088,
+   "pref": "京都府"
+  },
+  {
+   "level": "都道府県",
+   "shinsei": 1477,
+   "torisage": 75,
+   "kyakka": 189,
+   "kaishi_setai": 1225,
+   "kaishi_nin": 1589,
+   "mishori": 41,
+   "haishi_setai": 1336,
+   "haishi_nin": 1655,
+   "name": "京都府",
+   "hist": {
+    "2019": {
+     "shinsei": 1354,
+     "kyakka": 140,
+     "torisage": 81
+    },
+    "2020": {
+     "shinsei": 1452,
+     "kyakka": 178,
+     "torisage": 77
+    },
+    "2021": {
+     "shinsei": 1372,
+     "kyakka": 188,
+     "torisage": 71
+    },
+    "2022": {
+     "shinsei": 1481,
+     "kyakka": 176,
+     "torisage": 75
+    },
+    "2023": {
+     "shinsei": 1474,
+     "kyakka": 204,
+     "torisage": 65
+    },
+    "2024": {
+     "shinsei": 1477,
+     "kyakka": 189,
+     "torisage": 75
+    }
+   },
+   "hogo_nin": 12693,
+   "hogo_ritsu": 11.7,
+   "jinko": 1084872,
+   "excluded": [
+    "京都市"
+   ]
+  },
+  {
+   "level": "指定都市",
+   "shinsei": 2613,
+   "torisage": 67,
+   "kyakka": 134,
+   "kaishi_setai": 2529,
+   "kaishi_nin": 3067,
+   "mishori": 62,
+   "haishi_setai": 2286,
+   "haishi_nin": 2725,
+   "name": "仙台市",
+   "hist": {
+    "2019": {
+     "shinsei": 2133,
+     "kyakka": 92,
+     "torisage": 66
+    },
+    "2020": {
+     "shinsei": 1973,
+     "kyakka": 101,
+     "torisage": 57
+    },
+    "2021": {
+     "shinsei": 2177,
+     "kyakka": 99,
+     "torisage": 70
+    },
+    "2022": {
+     "shinsei": 2391,
+     "kyakka": 115,
+     "torisage": 84
+    },
+    "2023": {
+     "shinsei": 2364,
+     "kyakka": 147,
+     "torisage": 69
+    },
+    "2024": {
+     "shinsei": 2613,
+     "kyakka": 134,
+     "torisage": 67
+    }
+   },
+   "hogo_nin": 19181,
+   "hogo_ritsu": 17.5,
+   "jinko": 1096057,
+   "pref": "宮城県"
+  },
+  {
+   "level": "中核市",
+   "shinsei": 408,
+   "torisage": 34,
+   "kyakka": 28,
+   "kaishi_setai": 353,
+   "kaishi_nin": 454,
+   "mishori": 8,
+   "haishi_setai": 521,
+   "haishi_nin": 616,
+   "name": "佐世保市",
+   "hist": {
+    "2019": {
+     "shinsei": 478,
+     "kyakka": 24,
+     "torisage": 29
+    },
+    "2020": {
+     "shinsei": 455,
+     "kyakka": 27,
+     "torisage": 47
+    },
+    "2021": {
+     "shinsei": 479,
+     "kyakka": 21,
+     "torisage": 39
+    },
+    "2022": {
+     "shinsei": 482,
+     "kyakka": 36,
+     "torisage": 49
+    },
+    "2023": {
+     "shinsei": 453,
+     "kyakka": 27,
+     "torisage": 59
+    },
+    "2024": {
+     "shinsei": 408,
+     "kyakka": 28,
+     "torisage": 34
+    }
+   },
+   "hogo_nin": 4521,
+   "hogo_ritsu": 19.3,
+   "jinko": 234249,
+   "pref": "長崎県"
+  },
+  {
+   "level": "都道府県",
+   "shinsei": 982,
+   "torisage": 39,
+   "kyakka": 104,
+   "kaishi_setai": 825,
+   "kaishi_nin": 1012,
+   "mishori": 67,
+   "haishi_setai": 914,
+   "haishi_nin": 1074,
+   "name": "佐賀県",
+   "hist": {
+    "2019": {
+     "shinsei": 1008,
+     "kyakka": 113,
+     "torisage": 55
+    },
+    "2020": {
+     "shinsei": 1012,
+     "kyakka": 162,
+     "torisage": 38
+    },
+    "2021": {
+     "shinsei": 957,
+     "kyakka": 181,
+     "torisage": 37
+    },
+    "2022": {
+     "shinsei": 966,
+     "kyakka": 138,
+     "torisage": 37
+    },
+    "2023": {
+     "shinsei": 955,
+     "kyakka": 140,
+     "torisage": 46
+    },
+    "2024": {
+     "shinsei": 982,
+     "kyakka": 104,
+     "torisage": 39
+    }
+   },
+   "hogo_nin": 7233,
+   "hogo_ritsu": 9.2,
+   "jinko": 786196,
+   "excluded": []
+  },
+  {
+   "level": "中核市",
+   "shinsei": 938,
+   "torisage": 65,
+   "kyakka": 82,
+   "kaishi_setai": 789,
+   "kaishi_nin": 1013,
+   "mishori": 28,
+   "haishi_setai": 718,
+   "haishi_nin": 867,
+   "name": "倉敷市",
+   "hist": {
+    "2019": {
+     "shinsei": 791,
+     "kyakka": 51,
+     "torisage": 78
+    },
+    "2020": {
+     "shinsei": 822,
+     "kyakka": 42,
+     "torisage": 108
+    },
+    "2021": {
+     "shinsei": 747,
+     "kyakka": 64,
+     "torisage": 76
+    },
+    "2022": {
+     "shinsei": 934,
+     "kyakka": 88,
+     "torisage": 71
+    },
+    "2023": {
+     "shinsei": 920,
+     "kyakka": 93,
+     "torisage": 70
+    },
+    "2024": {
+     "shinsei": 938,
+     "kyakka": 82,
+     "torisage": 65
+    }
+   },
+   "hogo_nin": 7142,
+   "hogo_ritsu": 15.3,
+   "jinko": 466797,
+   "pref": "岡山県"
+  },
+  {
+   "level": "中核市",
+   "shinsei": 804,
+   "torisage": 23,
+   "kyakka": 20,
+   "kaishi_setai": 756,
+   "kaishi_nin": 956,
+   "mishori": 32,
+   "haishi_setai": 734,
+   "haishi_nin": 855,
+   "name": "八尾市",
+   "hist": {
+    "2019": {
+     "shinsei": 742,
+     "kyakka": 8,
+     "torisage": 21
+    },
+    "2020": {
+     "shinsei": 766,
+     "kyakka": 6,
+     "torisage": 30
+    },
+    "2021": {
+     "shinsei": 771,
+     "kyakka": 10,
+     "torisage": 21
+    },
+    "2022": {
+     "shinsei": 807,
+     "kyakka": 25,
+     "torisage": 15
+    },
+    "2023": {
+     "shinsei": 866,
+     "kyakka": 21,
+     "torisage": 30
+    },
+    "2024": {
+     "shinsei": 804,
+     "kyakka": 20,
+     "torisage": 23
+    }
+   },
+   "hogo_nin": 7927,
+   "hogo_ritsu": 30.6,
+   "jinko": 259052,
+   "pref": "大阪府"
+  },
+  {
+   "level": "中核市",
+   "shinsei": 369,
+   "torisage": 9,
+   "kyakka": 35,
+   "kaishi_setai": 333,
+   "kaishi_nin": 404,
+   "mishori": 9,
+   "haishi_setai": 331,
+   "haishi_nin": 372,
+   "name": "八戸市",
+   "hist": {
+    "2019": {
+     "shinsei": 299,
+     "kyakka": 22,
+     "torisage": 7
+    },
+    "2020": {
+     "shinsei": 309,
+     "kyakka": 34,
+     "torisage": 5
+    },
+    "2021": {
+     "shinsei": 303,
+     "kyakka": 25,
+     "torisage": 14
+    },
+    "2022": {
+     "shinsei": 336,
+     "kyakka": 35,
+     "torisage": 12
+    },
+    "2023": {
+     "shinsei": 363,
+     "kyakka": 36,
+     "torisage": 29
+    },
+    "2024": {
+     "shinsei": 369,
+     "kyakka": 35,
+     "torisage": 9
+    }
+   },
+   "hogo_nin": 3865,
+   "hogo_ritsu": 18.1,
+   "jinko": 213536,
+   "pref": "青森県"
+  },
+  {
+   "level": "中核市",
+   "shinsei": 1387,
+   "torisage": 28,
+   "kyakka": 49,
+   "kaishi_setai": 1296,
+   "kaishi_nin": 1609,
+   "mishori": 38,
+   "haishi_setai": 1053,
+   "haishi_nin": 1254,
+   "name": "八王子市",
+   "hist": {
+    "2019": {
+     "shinsei": 810,
+     "kyakka": 32,
+     "torisage": 15
+    },
+    "2020": {
+     "shinsei": 833,
+     "kyakka": 35,
+     "torisage": 12
+    },
+    "2021": {
+     "shinsei": 1041,
+     "kyakka": 45,
+     "torisage": 17
+    },
+    "2022": {
+     "shinsei": 1203,
+     "kyakka": 56,
+     "torisage": 11
+    },
+    "2023": {
+     "shinsei": 1260,
+     "kyakka": 44,
+     "torisage": 16
+    },
+    "2024": {
+     "shinsei": 1387,
+     "kyakka": 49,
+     "torisage": 28
+    }
+   },
+   "hogo_nin": 10546,
+   "hogo_ritsu": 18.8,
+   "jinko": 560957,
+   "pref": "東京都"
+  },
+  {
+   "level": "都道府県",
+   "shinsei": 2495,
+   "torisage": 131,
+   "kyakka": 234,
+   "kaishi_setai": 2135,
+   "kaishi_nin": 2803,
+   "mishori": 127,
+   "haishi_setai": 2054,
+   "haishi_nin": 2461,
+   "name": "兵庫県",
+   "hist": {
+    "2019": {
+     "shinsei": 2077,
+     "kyakka": 189,
+     "torisage": 107
+    },
+    "2020": {
+     "shinsei": 2104,
+     "kyakka": 152,
+     "torisage": 123
+    },
+    "2021": {
+     "shinsei": 2092,
+     "kyakka": 207,
+     "torisage": 119
+    },
+    "2022": {
+     "shinsei": 2259,
+     "kyakka": 191,
+     "torisage": 116
+    },
+    "2023": {
+     "shinsei": 2271,
+     "kyakka": 212,
+     "torisage": 109
+    },
+    "2024": {
+     "shinsei": 2495,
+     "kyakka": 234,
+     "torisage": 131
+    }
+   },
+   "hogo_nin": 18002,
+   "hogo_ritsu": 8.6,
+   "jinko": 2093256,
+   "excluded": [
+    "姫路市",
+    "尼崎市",
+    "明石市",
+    "神戸市",
+    "西宮市"
+   ]
+  },
+  {
+   "level": "中核市",
+   "shinsei": 1085,
+   "torisage": 28,
+   "kyakka": 67,
+   "kaishi_setai": 981,
+   "kaishi_nin": 1206,
+   "mishori": 43,
+   "haishi_setai": 1086,
+   "haishi_nin": 1218,
+   "name": "函館市",
+   "hist": {
+    "2019": {
+     "shinsei": 1154,
+     "kyakka": 69,
+     "torisage": 44
+    },
+    "2020": {
+     "shinsei": 1093,
+     "kyakka": 70,
+     "torisage": 48
+    },
+    "2021": {
+     "shinsei": 1020,
+     "kyakka": 87,
+     "torisage": 30
+    },
+    "2022": {
+     "shinsei": 1129,
+     "kyakka": 80,
+     "torisage": 28
+    },
+    "2023": {
+     "shinsei": 1132,
+     "kyakka": 101,
+     "torisage": 31
+    },
+    "2024": {
+     "shinsei": 1085,
+     "kyakka": 67,
+     "torisage": 28
+    }
+   },
+   "hogo_nin": 10750,
+   "hogo_ritsu": 45.3,
+   "jinko": 237307,
+   "pref": "北海道"
+  },
+  {
+   "level": "中核市",
+   "shinsei": 525,
+   "torisage": 27,
+   "kyakka": 37,
+   "kaishi_setai": 448,
+   "kaishi_nin": 521,
+   "mishori": 25,
+   "haishi_setai": 478,
+   "haishi_nin": 537,
+   "name": "前橋市",
+   "hist": {
+    "2019": {
+     "shinsei": 494,
+     "kyakka": 30,
+     "torisage": 22
+    },
+    "2020": {
+     "shinsei": 402,
+     "kyakka": 16,
+     "torisage": 29
+    },
+    "2021": {
+     "shinsei": 495,
+     "kyakka": 31,
+     "torisage": 24
+    },
+    "2022": {
+     "shinsei": 547,
+     "kyakka": 29,
+     "torisage": 21
+    },
+    "2023": {
+     "shinsei": 507,
+     "kyakka": 28,
+     "torisage": 26
+    },
+    "2024": {
+     "shinsei": 525,
+     "kyakka": 37,
+     "torisage": 27
+    }
+   },
+   "hogo_nin": 4186,
+   "hogo_ritsu": 12.7,
+   "jinko": 329606,
+   "pref": "群馬県"
+  },
+  {
+   "level": "指定都市",
+   "shinsei": 2226,
+   "torisage": 60,
+   "kyakka": 138,
+   "kaishi_setai": 2116,
+   "kaishi_nin": 2688,
+   "mishori": 95,
+   "haishi_setai": 2273,
+   "haishi_nin": 2596,
+   "name": "北九州市",
+   "hist": {
+    "2019": {
+     "shinsei": 2076,
+     "kyakka": 131,
+     "torisage": 182
+    },
+    "2020": {
+     "shinsei": 1849,
+     "kyakka": 113,
+     "torisage": 61
+    },
+    "2021": {
+     "shinsei": 1926,
+     "kyakka": 143,
+     "torisage": 39
+    },
+    "2022": {
+     "shinsei": 2208,
+     "kyakka": 133,
+     "torisage": 50
+    },
+    "2023": {
+     "shinsei": 2166,
+     "kyakka": 141,
+     "torisage": 52
+    },
+    "2024": {
+     "shinsei": 2226,
+     "kyakka": 138,
+     "torisage": 60
+    }
+   },
+   "hogo_nin": 21868,
+   "hogo_ritsu": 24.1,
+   "jinko": 907386,
+   "pref": "福岡県"
+  },
+  {
+   "level": "都道府県",
+   "shinsei": 5661,
+   "torisage": 170,
+   "kyakka": 556,
+   "kaishi_setai": 4941,
+   "kaishi_nin": 6278,
+   "mishori": 367,
+   "haishi_setai": 5644,
+   "haishi_nin": 6712,
+   "name": "北海道",
+   "hist": {
+    "2019": {
+     "shinsei": 5362,
+     "kyakka": 314,
+     "torisage": 251
+    },
+    "2020": {
+     "shinsei": 5057,
+     "kyakka": 359,
+     "torisage": 269
+    },
+    "2021": {
+     "shinsei": 5303,
+     "kyakka": 455,
+     "torisage": 261
+    },
+    "2022": {
+     "shinsei": 5590,
+     "kyakka": 429,
+     "torisage": 215
+    },
+    "2023": {
+     "shinsei": 5665,
+     "kyakka": 507,
+     "torisage": 210
+    },
+    "2024": {
+     "shinsei": 5661,
+     "kyakka": 556,
+     "torisage": 170
+    }
+   },
+   "hogo_nin": 55113,
+   "hogo_ritsu": 21.9,
+   "jinko": 2516575,
+   "excluded": [
+    "函館市",
+    "旭川市",
+    "札幌市"
+   ]
+  },
+  {
+   "level": "指定都市",
+   "shinsei": 3599,
+   "torisage": 174,
+   "kyakka": 286,
+   "kaishi_setai": 3141,
+   "kaishi_nin": 3628,
+   "mishori": 208,
+   "haishi_setai": 3195,
+   "haishi_nin": 3564,
+   "name": "千葉市",
+   "hist": {
+    "2019": {
+     "shinsei": 3583,
+     "kyakka": 296,
+     "torisage": 170
+    },
+    "2020": {
+     "shinsei": 3852,
+     "kyakka": 299,
+     "torisage": 189
+    },
+    "2021": {
+     "shinsei": 3739,
+     "kyakka": 320,
+     "torisage": 181
+    },
+    "2022": {
+     "shinsei": 3587,
+     "kyakka": 293,
+     "torisage": 191
+    },
+    "2023": {
+     "shinsei": 3512,
+     "kyakka": 312,
+     "torisage": 170
+    },
+    "2024": {
+     "shinsei": 3599,
+     "kyakka": 286,
+     "torisage": 174
+    }
+   },
+   "hogo_nin": 21332,
+   "hogo_ritsu": 21.7,
+   "jinko": 983041,
+   "pref": "千葉県"
+  },
+  {
+   "level": "都道府県",
+   "shinsei": 7876,
+   "torisage": 436,
+   "kyakka": 816,
+   "kaishi_setai": 6598,
+   "kaishi_nin": 8181,
+   "mishori": 425,
+   "haishi_setai": 6255,
+   "haishi_nin": 7404,
+   "name": "千葉県",
+   "hist": {
+    "2019": {
+     "shinsei": 6469,
+     "kyakka": 522,
+     "torisage": 459
+    },
+    "2020": {
+     "shinsei": 7312,
+     "kyakka": 571,
+     "torisage": 504
+    },
+    "2021": {
+     "shinsei": 7215,
+     "kyakka": 550,
+     "torisage": 518
+    },
+    "2022": {
+     "shinsei": 7449,
+     "kyakka": 615,
+     "torisage": 489
+    },
+    "2023": {
+     "shinsei": 7365,
+     "kyakka": 588,
+     "torisage": 476
+    },
+    "2024": {
+     "shinsei": 7876,
+     "kyakka": 816,
+     "torisage": 436
+    }
+   },
+   "hogo_nin": 54433,
+   "hogo_ritsu": 13.0,
+   "jinko": 4187154,
+   "excluded": [
+    "千葉市",
+    "柏市",
+    "船橋市"
+   ]
+  },
+  {
+   "level": "指定都市",
+   "shinsei": 7547,
+   "torisage": 296,
+   "kyakka": 420,
+   "kaishi_setai": 6861,
+   "kaishi_nin": 8228,
+   "mishori": 207,
+   "haishi_setai": 6792,
+   "haishi_nin": 7787,
+   "name": "名古屋市",
+   "hist": {
+    "2019": {
+     "shinsei": 6768,
+     "kyakka": 267,
+     "torisage": 191
+    },
+    "2020": {
+     "shinsei": 6899,
+     "kyakka": 231,
+     "torisage": 219
+    },
+    "2021": {
+     "shinsei": 6513,
+     "kyakka": 281,
+     "torisage": 209
+    },
+    "2022": {
+     "shinsei": 7013,
+     "kyakka": 337,
+     "torisage": 283
+    },
+    "2023": {
+     "shinsei": 7325,
+     "kyakka": 350,
+     "torisage": 287
+    },
+    "2024": {
+     "shinsei": 7547,
+     "kyakka": 420,
+     "torisage": 296
+    }
+   },
+   "hogo_nin": 46486,
+   "hogo_ritsu": 19.9,
+   "jinko": 2335980,
+   "pref": "愛知県"
+  },
+  {
+   "level": "中核市",
+   "shinsei": 609,
+   "torisage": 26,
+   "kyakka": 56,
+   "kaishi_setai": 538,
+   "kaishi_nin": 656,
+   "mishori": 6,
+   "haishi_setai": 593,
+   "haishi_nin": 695,
+   "name": "吹田市",
+   "hist": {
+    "2020": {
+     "shinsei": 558,
+     "kyakka": 40,
+     "torisage": 30
+    },
+    "2021": {
+     "shinsei": 530,
+     "kyakka": 36,
+     "torisage": 30
+    },
+    "2022": {
+     "shinsei": 629,
+     "kyakka": 50,
+     "torisage": 31
+    },
+    "2023": {
+     "shinsei": 674,
+     "kyakka": 49,
+     "torisage": 30
+    },
+    "2024": {
+     "shinsei": 609,
+     "kyakka": 56,
+     "torisage": 26
+    }
+   },
+   "hogo_nin": 5656,
+   "hogo_ritsu": 14.7,
+   "jinko": 384762,
+   "pref": "大阪府"
+  },
+  {
+   "level": "中核市",
+   "shinsei": 298,
+   "torisage": 11,
+   "kyakka": 30,
+   "kaishi_setai": 257,
+   "kaishi_nin": 318,
+   "mishori": 8,
+   "haishi_setai": 304,
+   "haishi_nin": 348,
+   "name": "呉市",
+   "hist": {
+    "2019": {
+     "shinsei": 293,
+     "kyakka": 27,
+     "torisage": 27
+    },
+    "2020": {
+     "shinsei": 276,
+     "kyakka": 13,
+     "torisage": 20
+    },
+    "2021": {
+     "shinsei": 252,
+     "kyakka": 10,
+     "torisage": 13
+    },
+    "2022": {
+     "shinsei": 310,
+     "kyakka": 17,
+     "torisage": 11
+    },
+    "2023": {
+     "shinsei": 324,
+     "kyakka": 32,
+     "torisage": 14
+    },
+    "2024": {
+     "shinsei": 298,
+     "kyakka": 30,
+     "torisage": 11
+    }
+   },
+   "hogo_nin": 3175,
+   "hogo_ritsu": 15.7,
+   "jinko": 202229,
+   "pref": "広島県"
+  },
+  {
+   "level": "中核市",
+   "shinsei": 958,
+   "torisage": 10,
+   "kyakka": 61,
+   "kaishi_setai": 882,
+   "kaishi_nin": 1074,
+   "mishori": 20,
+   "haishi_setai": 915,
+   "haishi_nin": 1042,
+   "name": "和歌山市",
+   "hist": {
+    "2019": {
+     "shinsei": 796,
+     "kyakka": 35,
+     "torisage": 100
+    },
+    "2020": {
+     "shinsei": 846,
+     "kyakka": 24,
+     "torisage": 38
+    },
+    "2021": {
+     "shinsei": 803,
+     "kyakka": 35,
+     "torisage": 18
+    },
+    "2022": {
+     "shinsei": 935,
+     "kyakka": 41,
+     "torisage": 27
+    },
+    "2023": {
+     "shinsei": 1005,
+     "kyakka": 57,
+     "torisage": 23
+    },
+    "2024": {
+     "shinsei": 958,
+     "kyakka": 61,
+     "torisage": 10
+    }
+   },
+   "hogo_nin": 8777,
+   "hogo_ritsu": 25.4,
+   "jinko": 345551,
+   "pref": "和歌山県"
+  },
+  {
+   "level": "都道府県",
+   "shinsei": 841,
+   "torisage": 20,
+   "kyakka": 109,
+   "kaishi_setai": 717,
+   "kaishi_nin": 894,
+   "mishori": 27,
+   "haishi_setai": 703,
+   "haishi_nin": 811,
+   "name": "和歌山県",
+   "hist": {
+    "2019": {
+     "shinsei": 673,
+     "kyakka": 52,
+     "torisage": 37
+    },
+    "2020": {
+     "shinsei": 663,
+     "kyakka": 61,
+     "torisage": 31
+    },
+    "2021": {
+     "shinsei": 678,
+     "kyakka": 77,
+     "torisage": 30
+    },
+    "2022": {
+     "shinsei": 685,
+     "kyakka": 63,
+     "torisage": 18
+    },
+    "2023": {
+     "shinsei": 834,
+     "kyakka": 89,
+     "torisage": 22
+    },
+    "2024": {
+     "shinsei": 841,
+     "kyakka": 109,
+     "torisage": 20
+    }
+   },
+   "hogo_nin": 5667,
+   "hogo_ritsu": 10.6,
+   "jinko": 534623,
+   "excluded": [
+    "和歌山市"
+   ]
+  },
+  {
+   "level": "都道府県",
+   "shinsei": 8458,
+   "torisage": 512,
+   "kyakka": 430,
+   "kaishi_setai": 7506,
+   "kaishi_nin": 9223,
+   "mishori": 563,
+   "haishi_setai": 6876,
+   "haishi_nin": 8024,
+   "name": "埼玉県",
+   "hist": {
+    "2019": {
+     "shinsei": 6415,
+     "kyakka": 324,
+     "torisage": 408
+    },
+    "2020": {
+     "shinsei": 7007,
+     "kyakka": 342,
+     "torisage": 508
+    },
+    "2021": {
+     "shinsei": 7092,
+     "kyakka": 401,
+     "torisage": 535
+    },
+    "2022": {
+     "shinsei": 8151,
+     "kyakka": 440,
+     "torisage": 531
+    },
+    "2023": {
+     "shinsei": 8185,
+     "kyakka": 418,
+     "torisage": 533
+    },
+    "2024": {
+     "shinsei": 8458,
+     "kyakka": 430,
+     "torisage": 512
+    }
+   },
+   "hogo_nin": 59216,
+   "hogo_ritsu": 12.7,
+   "jinko": 4662677,
+   "excluded": [
+    "さいたま市",
+    "川口市",
+    "川越市",
+    "越谷市"
+   ]
+  },
+  {
+   "level": "指定都市",
+   "shinsei": 3153,
+   "torisage": 77,
+   "kyakka": 173,
+   "kaishi_setai": 2906,
+   "kaishi_nin": 3559,
+   "mishori": 119,
+   "haishi_setai": 2922,
+   "haishi_nin": 3523,
+   "name": "堺市",
+   "hist": {
+    "2019": {
+     "shinsei": 2644,
+     "kyakka": 101,
+     "torisage": 92
+    },
+    "2020": {
+     "shinsei": 2643,
+     "kyakka": 128,
+     "torisage": 91
+    },
+    "2021": {
+     "shinsei": 2664,
+     "kyakka": 153,
+     "torisage": 85
+    },
+    "2022": {
+     "shinsei": 2910,
+     "kyakka": 131,
+     "torisage": 65
+    },
+    "2023": {
+     "shinsei": 2989,
+     "kyakka": 176,
+     "torisage": 65
+    },
+    "2024": {
+     "shinsei": 3153,
+     "kyakka": 173,
+     "torisage": 77
+    }
+   },
+   "hogo_nin": 24206,
+   "hogo_ritsu": 30.0,
+   "jinko": 806867,
+   "pref": "大阪府"
+  },
+  {
+   "level": "中核市",
+   "shinsei": 846,
+   "torisage": 64,
+   "kyakka": 27,
+   "kaishi_setai": 760,
+   "kaishi_nin": 921,
+   "mishori": 30,
+   "haishi_setai": 809,
+   "haishi_nin": 938,
+   "name": "大分市",
+   "hist": {
+    "2019": {
+     "shinsei": 770,
+     "kyakka": 45,
+     "torisage": 42
+    },
+    "2020": {
+     "shinsei": 752,
+     "kyakka": 39,
+     "torisage": 52
+    },
+    "2021": {
+     "shinsei": 751,
+     "kyakka": 41,
+     "torisage": 54
+    },
+    "2022": {
+     "shinsei": 835,
+     "kyakka": 41,
+     "torisage": 87
+    },
+    "2023": {
+     "shinsei": 816,
+     "kyakka": 36,
+     "torisage": 74
+    },
+    "2024": {
+     "shinsei": 846,
+     "kyakka": 27,
+     "torisage": 64
+    }
+   },
+   "hogo_nin": 8033,
+   "hogo_ritsu": 17.1,
+   "jinko": 469766,
+   "pref": "大分県"
+  },
+  {
+   "level": "都道府県",
+   "shinsei": 1259,
+   "torisage": 69,
+   "kyakka": 127,
+   "kaishi_setai": 1060,
+   "kaishi_nin": 1329,
+   "mishori": 81,
+   "haishi_setai": 1214,
+   "haishi_nin": 1461,
+   "name": "大分県",
+   "hist": {
+    "2019": {
+     "shinsei": 1162,
+     "kyakka": 111,
+     "torisage": 74
+    },
+    "2020": {
+     "shinsei": 1017,
+     "kyakka": 109,
+     "torisage": 84
+    },
+    "2021": {
+     "shinsei": 1178,
+     "kyakka": 125,
+     "torisage": 81
+    },
+    "2022": {
+     "shinsei": 1128,
+     "kyakka": 94,
+     "torisage": 84
+    },
+    "2023": {
+     "shinsei": 1201,
+     "kyakka": 109,
+     "torisage": 71
+    },
+    "2024": {
+     "shinsei": 1259,
+     "kyakka": 127,
+     "torisage": 69
+    }
+   },
+   "hogo_nin": 10043,
+   "hogo_ritsu": 16.4,
+   "jinko": 612378,
+   "excluded": [
+    "大分市"
+   ]
+  },
+  {
+   "level": "中核市",
+   "shinsei": 448,
+   "torisage": 25,
+   "kyakka": 25,
+   "kaishi_setai": 393,
+   "kaishi_nin": 512,
+   "mishori": 22,
+   "haishi_setai": 403,
+   "haishi_nin": 489,
+   "name": "大津市",
+   "hist": {
+    "2019": {
+     "shinsei": 349,
+     "kyakka": 19,
+     "torisage": 20
+    },
+    "2020": {
+     "shinsei": 388,
+     "kyakka": 14,
+     "torisage": 25
+    },
+    "2021": {
+     "shinsei": 436,
+     "kyakka": 32,
+     "torisage": 24
+    },
+    "2022": {
+     "shinsei": 485,
+     "kyakka": 22,
+     "torisage": 37
+    },
+    "2023": {
+     "shinsei": 474,
+     "kyakka": 22,
+     "torisage": 33
+    },
+    "2024": {
+     "shinsei": 448,
+     "kyakka": 25,
+     "torisage": 25
+    }
+   },
+   "hogo_nin": 4132,
+   "hogo_ritsu": 12.0,
+   "jinko": 344333,
+   "pref": "滋賀県"
+  },
+  {
+   "level": "指定都市",
+   "shinsei": 18121,
+   "torisage": 803,
+   "kyakka": 845,
+   "kaishi_setai": 17394,
+   "kaishi_nin": 19593,
+   "mishori": 304,
+   "haishi_setai": 17539,
+   "haishi_nin": 19204,
+   "name": "大阪市",
+   "hist": {
+    "2019": {
+     "shinsei": 15731,
+     "kyakka": 834,
+     "torisage": 707
+    },
+    "2020": {
+     "shinsei": 15897,
+     "kyakka": 825,
+     "torisage": 727
+    },
+    "2021": {
+     "shinsei": 15911,
+     "kyakka": 767,
+     "torisage": 754
+    },
+    "2022": {
+     "shinsei": 17724,
+     "kyakka": 861,
+     "torisage": 870
+    },
+    "2023": {
+     "shinsei": 17384,
+     "kyakka": 836,
+     "torisage": 809
+    },
+    "2024": {
+     "shinsei": 18121,
+     "kyakka": 845,
+     "torisage": 803
+    }
+   },
+   "hogo_nin": 128926,
+   "hogo_ritsu": 46.2,
+   "jinko": 2790606,
+   "pref": "大阪府"
+  },
+  {
+   "level": "都道府県",
+   "shinsei": 7098,
+   "torisage": 217,
+   "kyakka": 469,
+   "kaishi_setai": 6402,
+   "kaishi_nin": 7907,
+   "mishori": 264,
+   "haishi_setai": 6232,
+   "haishi_nin": 7444,
+   "name": "大阪府",
+   "hist": {
+    "2019": {
+     "shinsei": 6023,
+     "kyakka": 333,
+     "torisage": 273
+    },
+    "2020": {
+     "shinsei": 5316,
+     "kyakka": 300,
+     "torisage": 269
+    },
+    "2021": {
+     "shinsei": 5447,
+     "kyakka": 301,
+     "torisage": 251
+    },
+    "2022": {
+     "shinsei": 6102,
+     "kyakka": 384,
+     "torisage": 218
+    },
+    "2023": {
+     "shinsei": 6776,
+     "kyakka": 442,
+     "torisage": 243
+    },
+    "2024": {
+     "shinsei": 7098,
+     "kyakka": 469,
+     "torisage": 217
+    }
+   },
+   "hogo_nin": 51459,
+   "hogo_ritsu": 19.3,
+   "jinko": 2666269,
+   "excluded": [
+    "八尾市",
+    "吹田市",
+    "堺市",
+    "大阪市",
+    "寝屋川市",
+    "東大阪市",
+    "枚方市",
+    "豊中市",
+    "高槻市"
+   ]
+  },
+  {
+   "level": "中核市",
+   "shinsei": 536,
+   "torisage": 13,
+   "kyakka": 37,
+   "kaishi_setai": 494,
+   "kaishi_nin": 633,
+   "mishori": 118,
+   "haishi_setai": 530,
+   "haishi_nin": 641,
+   "name": "奈良市",
+   "hist": {
+    "2019": {
+     "shinsei": 480,
+     "kyakka": 24,
+     "torisage": 17
+    },
+    "2020": {
+     "shinsei": 537,
+     "kyakka": 31,
+     "torisage": 22
+    },
+    "2021": {
+     "shinsei": 507,
+     "kyakka": 25,
+     "torisage": 29
+    },
+    "2022": {
+     "shinsei": 522,
+     "kyakka": 18,
+     "torisage": 30
+    },
+    "2023": {
+     "shinsei": 543,
+     "kyakka": 34,
+     "torisage": 21
+    },
+    "2024": {
+     "shinsei": 536,
+     "kyakka": 37,
+     "torisage": 13
+    }
+   },
+   "hogo_nin": 6854,
+   "hogo_ritsu": 19.7,
+   "jinko": 347919,
+   "pref": "奈良県"
+  },
+  {
+   "level": "都道府県",
+   "shinsei": 1246,
+   "torisage": 30,
+   "kyakka": 152,
+   "kaishi_setai": 1058,
+   "kaishi_nin": 1356,
+   "mishori": 64,
+   "haishi_setai": 1054,
+   "haishi_nin": 1257,
+   "name": "奈良県",
+   "hist": {
+    "2019": {
+     "shinsei": 930,
+     "kyakka": 114,
+     "torisage": 63
+    },
+    "2020": {
+     "shinsei": 899,
+     "kyakka": 101,
+     "torisage": 47
+    },
+    "2021": {
+     "shinsei": 945,
+     "kyakka": 111,
+     "torisage": 32
+    },
+    "2022": {
+     "shinsei": 1021,
+     "kyakka": 92,
+     "torisage": 41
+    },
+    "2023": {
+     "shinsei": 1167,
+     "kyakka": 126,
+     "torisage": 40
+    },
+    "2024": {
+     "shinsei": 1246,
+     "kyakka": 152,
+     "torisage": 30
+    }
+   },
+   "hogo_nin": 10980,
+   "hogo_ritsu": 11.7,
+   "jinko": 938462,
+   "excluded": [
+    "奈良市"
+   ]
+  },
+  {
+   "level": "中核市",
+   "shinsei": 862,
+   "torisage": 21,
+   "kyakka": 31,
+   "kaishi_setai": 811,
+   "kaishi_nin": 981,
+   "mishori": 10,
+   "haishi_setai": 778,
+   "haishi_nin": 888,
+   "name": "姫路市",
+   "hist": {
+    "2019": {
+     "shinsei": 697,
+     "kyakka": 36,
+     "torisage": 17
+    },
+    "2020": {
+     "shinsei": 690,
+     "kyakka": 31,
+     "torisage": 24
+    },
+    "2021": {
+     "shinsei": 693,
+     "kyakka": 35,
+     "torisage": 25
+    },
+    "2022": {
+     "shinsei": 824,
+     "kyakka": 33,
+     "torisage": 21
+    },
+    "2023": {
+     "shinsei": 872,
+     "kyakka": 36,
+     "torisage": 29
+    },
+    "2024": {
+     "shinsei": 862,
+     "kyakka": 31,
+     "torisage": 21
+    }
+   },
+   "hogo_nin": 8202,
+   "hogo_ritsu": 15.8,
+   "jinko": 519114,
+   "pref": "兵庫県"
+  },
+  {
+   "level": "中核市",
+   "shinsei": 752,
+   "torisage": 18,
+   "kyakka": 27,
+   "kaishi_setai": 707,
+   "kaishi_nin": 842,
+   "mishori": 112,
+   "haishi_setai": 787,
+   "haishi_nin": 867,
+   "name": "宇都宮市",
+   "hist": {
+    "2019": {
+     "shinsei": 714,
+     "kyakka": 17,
+     "torisage": 9
+    },
+    "2020": {
+     "shinsei": 753,
+     "kyakka": 32,
+     "torisage": 23
+    },
+    "2021": {
+     "shinsei": 749,
+     "kyakka": 34,
+     "torisage": 26
+    },
+    "2022": {
+     "shinsei": 779,
+     "kyakka": 37,
+     "torisage": 19
+    },
+    "2023": {
+     "shinsei": 749,
+     "kyakka": 25,
+     "torisage": 9
+    },
+    "2024": {
+     "shinsei": 752,
+     "kyakka": 27,
+     "torisage": 18
+    }
+   },
+   "hogo_nin": 8192,
+   "hogo_ritsu": 16.0,
+   "jinko": 512000,
+   "pref": "栃木県"
+  },
+  {
+   "level": "都道府県",
+   "shinsei": 1926,
+   "torisage": 94,
+   "kyakka": 225,
+   "kaishi_setai": 1614,
+   "kaishi_nin": 2135,
+   "mishori": 74,
+   "haishi_setai": 1304,
+   "haishi_nin": 1554,
+   "name": "宮城県",
+   "hist": {
+    "2019": {
+     "shinsei": 1530,
+     "kyakka": 170,
+     "torisage": 97
+    },
+    "2020": {
+     "shinsei": 1493,
+     "kyakka": 158,
+     "torisage": 96
+    },
+    "2021": {
+     "shinsei": 1545,
+     "kyakka": 165,
+     "torisage": 95
+    },
+    "2022": {
+     "shinsei": 1542,
+     "kyakka": 122,
+     "torisage": 98
+    },
+    "2023": {
+     "shinsei": 1806,
+     "kyakka": 198,
+     "torisage": 93
+    },
+    "2024": {
+     "shinsei": 1926,
+     "kyakka": 225,
+     "torisage": 94
+    }
+   },
+   "hogo_nin": 11876,
+   "hogo_ritsu": 10.3,
+   "jinko": 1153010,
+   "excluded": [
+    "仙台市"
+   ]
+  },
+  {
+   "level": "中核市",
+   "shinsei": 951,
+   "torisage": 29,
+   "kyakka": 77,
+   "kaishi_setai": 843,
+   "kaishi_nin": 1033,
+   "mishori": 29,
+   "haishi_setai": 876,
+   "haishi_nin": 1016,
+   "name": "宮崎市",
+   "hist": {
+    "2019": {
+     "shinsei": 835,
+     "kyakka": 46,
+     "torisage": 27
+    },
+    "2020": {
+     "shinsei": 839,
+     "kyakka": 33,
+     "torisage": 35
+    },
+    "2021": {
+     "shinsei": 725,
+     "kyakka": 47,
+     "torisage": 29
+    },
+    "2022": {
+     "shinsei": 767,
+     "kyakka": 34,
+     "torisage": 20
+    },
+    "2023": {
+     "shinsei": 910,
+     "kyakka": 64,
+     "torisage": 44
+    },
+    "2024": {
+     "shinsei": 951,
+     "kyakka": 77,
+     "torisage": 29
+    }
+   },
+   "hogo_nin": 8100,
+   "hogo_ritsu": 20.5,
+   "jinko": 395122,
+   "pref": "宮崎県"
+  },
+  {
+   "level": "都道府県",
+   "shinsei": 1344,
+   "torisage": 99,
+   "kyakka": 126,
+   "kaishi_setai": 1149,
+   "kaishi_nin": 1476,
+   "mishori": 65,
+   "haishi_setai": 1194,
+   "haishi_nin": 1454,
+   "name": "宮崎県",
+   "hist": {
+    "2019": {
+     "shinsei": 1141,
+     "kyakka": 68,
+     "torisage": 75
+    },
+    "2020": {
+     "shinsei": 1054,
+     "kyakka": 87,
+     "torisage": 103
+    },
+    "2021": {
+     "shinsei": 1158,
+     "kyakka": 135,
+     "torisage": 96
+    },
+    "2022": {
+     "shinsei": 1175,
+     "kyakka": 104,
+     "torisage": 87
+    },
+    "2023": {
+     "shinsei": 1277,
+     "kyakka": 115,
+     "torisage": 89
+    },
+    "2024": {
+     "shinsei": 1344,
+     "kyakka": 126,
+     "torisage": 99
+    }
+   },
+   "hogo_nin": 8507,
+   "hogo_ritsu": 13.3,
+   "jinko": 639624,
+   "excluded": [
+    "宮崎市"
+   ]
+  },
+  {
+   "level": "中核市",
+   "shinsei": 484,
+   "torisage": 15,
+   "kyakka": 54,
+   "kaishi_setai": 414,
+   "kaishi_nin": 482,
+   "mishori": 17,
+   "haishi_setai": 362,
+   "haishi_nin": 405,
+   "name": "富山市",
+   "hist": {
+    "2019": {
+     "shinsei": 380,
+     "kyakka": 45,
+     "torisage": 17
+    },
+    "2020": {
+     "shinsei": 472,
+     "kyakka": 50,
+     "torisage": 22
+    },
+    "2021": {
+     "shinsei": 446,
+     "kyakka": 38,
+     "torisage": 28
+    },
+    "2022": {
+     "shinsei": 487,
+     "kyakka": 56,
+     "torisage": 20
+    },
+    "2023": {
+     "shinsei": 451,
+     "kyakka": 55,
+     "torisage": 17
+    },
+    "2024": {
+     "shinsei": 484,
+     "kyakka": 54,
+     "torisage": 15
+    }
+   },
+   "hogo_nin": 2716,
+   "hogo_ritsu": 6.7,
+   "jinko": 405373,
+   "pref": "富山県"
+  },
+  {
+   "level": "都道府県",
+   "shinsei": 316,
+   "torisage": 11,
+   "kyakka": 30,
+   "kaishi_setai": 274,
+   "kaishi_nin": 329,
+   "mishori": 16,
+   "haishi_setai": 236,
+   "haishi_nin": 256,
+   "name": "富山県",
+   "hist": {
+    "2019": {
+     "shinsei": 243,
+     "kyakka": 32,
+     "torisage": 4
+    },
+    "2020": {
+     "shinsei": 288,
+     "kyakka": 34,
+     "torisage": 10
+    },
+    "2021": {
+     "shinsei": 298,
+     "kyakka": 35,
+     "torisage": 11
+    },
+    "2022": {
+     "shinsei": 292,
+     "kyakka": 37,
+     "torisage": 10
+    },
+    "2023": {
+     "shinsei": 265,
+     "kyakka": 21,
+     "torisage": 8
+    },
+    "2024": {
+     "shinsei": 316,
+     "kyakka": 30,
+     "torisage": 11
+    }
+   },
+   "hogo_nin": 1577,
+   "hogo_ritsu": 2.7,
+   "jinko": 584074,
+   "excluded": [
+    "富山市"
+   ]
+  },
+  {
+   "level": "中核市",
+   "shinsei": 751,
+   "torisage": 21,
+   "kyakka": 13,
+   "kaishi_setai": 725,
+   "kaishi_nin": 922,
+   "mishori": 20,
+   "haishi_setai": 704,
+   "haishi_nin": 831,
+   "name": "寝屋川市",
+   "hist": {
+    "2019": {
+     "shinsei": 606,
+     "kyakka": 20,
+     "torisage": 10
+    },
+    "2020": {
+     "shinsei": 600,
+     "kyakka": 11,
+     "torisage": 10
+    },
+    "2021": {
+     "shinsei": 731,
+     "kyakka": 17,
+     "torisage": 16
+    },
+    "2022": {
+     "shinsei": 784,
+     "kyakka": 25,
+     "torisage": 19
+    },
+    "2023": {
+     "shinsei": 794,
+     "kyakka": 15,
+     "torisage": 14
+    },
+    "2024": {
+     "shinsei": 751,
+     "kyakka": 13,
+     "torisage": 21
+    }
+   },
+   "hogo_nin": 7520,
+   "hogo_ritsu": 33.5,
+   "jinko": 224478,
+   "pref": "大阪府"
+  },
+  {
+   "level": "中核市",
+   "shinsei": 1608,
+   "torisage": 36,
+   "kyakka": 61,
+   "kaishi_setai": 1519,
+   "kaishi_nin": 1886,
+   "mishori": 31,
+   "haishi_setai": 1614,
+   "haishi_nin": 1889,
+   "name": "尼崎市",
+   "hist": {
+    "2019": {
+     "shinsei": 1472,
+     "kyakka": 53,
+     "torisage": 56
+    },
+    "2020": {
+     "shinsei": 1407,
+     "kyakka": 56,
+     "torisage": 53
+    },
+    "2021": {
+     "shinsei": 1445,
+     "kyakka": 51,
+     "torisage": 56
+    },
+    "2022": {
+     "shinsei": 1575,
+     "kyakka": 58,
+     "torisage": 61
+    },
+    "2023": {
+     "shinsei": 1656,
+     "kyakka": 64,
+     "torisage": 33
+    },
+    "2024": {
+     "shinsei": 1608,
+     "kyakka": 61,
+     "torisage": 36
+    }
+   },
+   "hogo_nin": 16647,
+   "hogo_ritsu": 36.7,
+   "jinko": 453597,
+   "pref": "兵庫県"
+  },
+  {
+   "level": "都道府県",
+   "shinsei": 1416,
+   "torisage": 71,
+   "kyakka": 188,
+   "kaishi_setai": 1159,
+   "kaishi_nin": 1491,
+   "mishori": 41,
+   "haishi_setai": 1171,
+   "haishi_nin": 1380,
+   "name": "山口県",
+   "hist": {
+    "2019": {
+     "shinsei": 1048,
+     "kyakka": 91,
+     "torisage": 60
+    },
+    "2020": {
+     "shinsei": 1105,
+     "kyakka": 110,
+     "torisage": 66
+    },
+    "2021": {
+     "shinsei": 1109,
+     "kyakka": 135,
+     "torisage": 49
+    },
+    "2022": {
+     "shinsei": 1238,
+     "kyakka": 154,
+     "torisage": 50
+    },
+    "2023": {
+     "shinsei": 1272,
+     "kyakka": 186,
+     "torisage": 38
+    },
+    "2024": {
+     "shinsei": 1416,
+     "kyakka": 188,
+     "torisage": 71
+    }
+   },
+   "hogo_nin": 9896,
+   "hogo_ritsu": 9.5,
+   "jinko": 1041684,
+   "excluded": [
+    "下関市"
+   ]
+  },
+  {
+   "level": "中核市",
+   "shinsei": 263,
+   "torisage": 13,
+   "kyakka": 33,
+   "kaishi_setai": 217,
+   "kaishi_nin": 254,
+   "mishori": 33,
+   "haishi_setai": 244,
+   "haishi_nin": 263,
+   "name": "山形市",
+   "hist": {
+    "2019": {
+     "shinsei": 295,
+     "kyakka": 28,
+     "torisage": 12
+    },
+    "2020": {
+     "shinsei": 264,
+     "kyakka": 29,
+     "torisage": 16
+    },
+    "2021": {
+     "shinsei": 291,
+     "kyakka": 33,
+     "torisage": 21
+    },
+    "2022": {
+     "shinsei": 298,
+     "kyakka": 41,
+     "torisage": 11
+    },
+    "2023": {
+     "shinsei": 290,
+     "kyakka": 59,
+     "torisage": 10
+    },
+    "2024": {
+     "shinsei": 263,
+     "kyakka": 33,
+     "torisage": 13
+    }
+   },
+   "hogo_nin": 2106,
+   "hogo_ritsu": 8.8,
+   "jinko": 239318,
+   "pref": "山形県"
+  },
+  {
+   "level": "都道府県",
+   "shinsei": 877,
+   "torisage": 31,
+   "kyakka": 134,
+   "kaishi_setai": 717,
+   "kaishi_nin": 859,
+   "mishori": 33,
+   "haishi_setai": 781,
+   "haishi_nin": 880,
+   "name": "山形県",
+   "hist": {
+    "2019": {
+     "shinsei": 846,
+     "kyakka": 141,
+     "torisage": 32
+    },
+    "2020": {
+     "shinsei": 830,
+     "kyakka": 120,
+     "torisage": 30
+    },
+    "2021": {
+     "shinsei": 860,
+     "kyakka": 126,
+     "torisage": 34
+    },
+    "2022": {
+     "shinsei": 815,
+     "kyakka": 128,
+     "torisage": 21
+    },
+    "2023": {
+     "shinsei": 855,
+     "kyakka": 125,
+     "torisage": 24
+    },
+    "2024": {
+     "shinsei": 877,
+     "kyakka": 134,
+     "torisage": 31
+    }
+   },
+   "hogo_nin": 5524,
+   "hogo_ritsu": 7.2,
+   "jinko": 767222,
+   "excluded": [
+    "山形市"
+   ]
+  },
+  {
+   "level": "都道府県",
+   "shinsei": 660,
+   "torisage": 21,
+   "kyakka": 72,
+   "kaishi_setai": 564,
+   "kaishi_nin": 697,
+   "mishori": 22,
+   "haishi_setai": 511,
+   "haishi_nin": 589,
+   "name": "山梨県",
+   "hist": {
+    "2019": {
+     "shinsei": 554,
+     "kyakka": 57,
+     "torisage": 9
+    },
+    "2020": {
+     "shinsei": 628,
+     "kyakka": 48,
+     "torisage": 17
+    },
+    "2021": {
+     "shinsei": 566,
+     "kyakka": 73,
+     "torisage": 28
+    },
+    "2022": {
+     "shinsei": 571,
+     "kyakka": 40,
+     "torisage": 29
+    },
+    "2023": {
+     "shinsei": 623,
+     "kyakka": 81,
+     "torisage": 26
+    },
+    "2024": {
+     "shinsei": 660,
+     "kyakka": 72,
+     "torisage": 21
+    }
+   },
+   "hogo_nin": 4232,
+   "hogo_ritsu": 7.0,
+   "jinko": 604571,
+   "excluded": [
+    "甲府市"
+   ]
+  },
+  {
+   "level": "中核市",
+   "shinsei": 605,
+   "torisage": 12,
+   "kyakka": 14,
+   "kaishi_setai": 581,
+   "kaishi_nin": 692,
+   "mishori": 33,
+   "haishi_setai": 544,
+   "haishi_nin": 602,
+   "name": "岐阜市",
+   "hist": {
+    "2019": {
+     "shinsei": 533,
+     "kyakka": 13,
+     "torisage": 24
+    },
+    "2020": {
+     "shinsei": 455,
+     "kyakka": 6,
+     "torisage": 24
+    },
+    "2021": {
+     "shinsei": 371,
+     "kyakka": 12,
+     "torisage": 15
+    },
+    "2022": {
+     "shinsei": 440,
+     "kyakka": 7,
+     "torisage": 8
+    },
+    "2023": {
+     "shinsei": 517,
+     "kyakka": 5,
+     "torisage": 8
+    },
+    "2024": {
+     "shinsei": 605,
+     "kyakka": 14,
+     "torisage": 12
+    }
+   },
+   "hogo_nin": 5764,
+   "hogo_ritsu": 14.6,
+   "jinko": 394795,
+   "pref": "岐阜県"
+  },
+  {
+   "level": "都道府県",
+   "shinsei": 1180,
+   "torisage": 35,
+   "kyakka": 106,
+   "kaishi_setai": 1035,
+   "kaishi_nin": 1280,
+   "mishori": 35,
+   "haishi_setai": 838,
+   "haishi_nin": 972,
+   "name": "岐阜県",
+   "hist": {
+    "2019": {
+     "shinsei": 797,
+     "kyakka": 64,
+     "torisage": 39
+    },
+    "2020": {
+     "shinsei": 889,
+     "kyakka": 73,
+     "torisage": 64
+    },
+    "2021": {
+     "shinsei": 881,
+     "kyakka": 84,
+     "torisage": 58
+    },
+    "2022": {
+     "shinsei": 955,
+     "kyakka": 96,
+     "torisage": 36
+    },
+    "2023": {
+     "shinsei": 1021,
+     "kyakka": 99,
+     "torisage": 29
+    },
+    "2024": {
+     "shinsei": 1180,
+     "kyakka": 106,
+     "torisage": 35
+    }
+   },
+   "hogo_nin": 6103,
+   "hogo_ritsu": 4.0,
+   "jinko": 1525750,
+   "excluded": [
+    "岐阜市"
+   ]
+  },
+  {
+   "level": "指定都市",
+   "shinsei": 1700,
+   "torisage": 89,
+   "kyakka": 121,
+   "kaishi_setai": 1474,
+   "kaishi_nin": 1808,
+   "mishori": 66,
+   "haishi_setai": 1448,
+   "haishi_nin": 1763,
+   "name": "岡山市",
+   "hist": {
+    "2019": {
+     "shinsei": 1347,
+     "kyakka": 88,
+     "torisage": 90
+    },
+    "2020": {
+     "shinsei": 1411,
+     "kyakka": 108,
+     "torisage": 107
+    },
+    "2021": {
+     "shinsei": 1560,
+     "kyakka": 123,
+     "torisage": 86
+    },
+    "2022": {
+     "shinsei": 1559,
+     "kyakka": 134,
+     "torisage": 68
+    },
+    "2023": {
+     "shinsei": 1599,
+     "kyakka": 124,
+     "torisage": 75
+    },
+    "2024": {
+     "shinsei": 1700,
+     "kyakka": 121,
+     "torisage": 89
+    }
+   },
+   "hogo_nin": 12498,
+   "hogo_ritsu": 17.5,
+   "jinko": 714171,
+   "pref": "岡山県"
+  },
+  {
+   "level": "都道府県",
+   "shinsei": 675,
+   "torisage": 32,
+   "kyakka": 108,
+   "kaishi_setai": 540,
+   "kaishi_nin": 699,
+   "mishori": 14,
+   "haishi_setai": 713,
+   "haishi_nin": 914,
+   "name": "岡山県",
+   "hist": {
+    "2019": {
+     "shinsei": 632,
+     "kyakka": 90,
+     "torisage": 30
+    },
+    "2020": {
+     "shinsei": 550,
+     "kyakka": 95,
+     "torisage": 45
+    },
+    "2021": {
+     "shinsei": 609,
+     "kyakka": 92,
+     "torisage": 34
+    },
+    "2022": {
+     "shinsei": 578,
+     "kyakka": 70,
+     "torisage": 41
+    },
+    "2023": {
+     "shinsei": 626,
+     "kyakka": 80,
+     "torisage": 44
+    },
+    "2024": {
+     "shinsei": 675,
+     "kyakka": 108,
+     "torisage": 32
+    }
+   },
+   "hogo_nin": 3744,
+   "hogo_ritsu": 5.7,
+   "jinko": 656842,
+   "excluded": [
+    "倉敷市",
+    "岡山市"
+   ]
+  },
+  {
+   "level": "中核市",
+   "shinsei": 510,
+   "torisage": 12,
+   "kyakka": 25,
+   "kaishi_setai": 471,
+   "kaishi_nin": 583,
+   "mishori": 24,
+   "haishi_setai": 328,
+   "haishi_nin": 406,
+   "name": "岡崎市",
+   "hist": {
+    "2019": {
+     "shinsei": 281,
+     "kyakka": 15,
+     "torisage": 24
+    },
+    "2020": {
+     "shinsei": 408,
+     "kyakka": 32,
+     "torisage": 25
+    },
+    "2021": {
+     "shinsei": 346,
+     "kyakka": 16,
+     "torisage": 39
+    },
+    "2022": {
+     "shinsei": 452,
+     "kyakka": 23,
+     "torisage": 24
+    },
+    "2023": {
+     "shinsei": 439,
+     "kyakka": 24,
+     "torisage": 19
+    },
+    "2024": {
+     "shinsei": 510,
+     "kyakka": 25,
+     "torisage": 12
+    }
+   },
+   "hogo_nin": 2688,
+   "hogo_ritsu": 7.0,
+   "jinko": 384000,
+   "pref": "愛知県"
+  },
+  {
+   "level": "都道府県",
+   "shinsei": 1464,
+   "torisage": 81,
+   "kyakka": 296,
+   "kaishi_setai": 1071,
+   "kaishi_nin": 1358,
+   "mishori": 60,
+   "haishi_setai": 1005,
+   "haishi_nin": 1201,
+   "name": "岩手県",
+   "hist": {
+    "2019": {
+     "shinsei": 1089,
+     "kyakka": 182,
+     "torisage": 58
+    },
+    "2020": {
+     "shinsei": 1058,
+     "kyakka": 162,
+     "torisage": 46
+    },
+    "2021": {
+     "shinsei": 1170,
+     "kyakka": 217,
+     "torisage": 68
+    },
+    "2022": {
+     "shinsei": 1217,
+     "kyakka": 219,
+     "torisage": 76
+    },
+    "2023": {
+     "shinsei": 1242,
+     "kyakka": 232,
+     "torisage": 67
+    },
+    "2024": {
+     "shinsei": 1464,
+     "kyakka": 296,
+     "torisage": 81
+    }
+   },
+   "hogo_nin": 7811,
+   "hogo_ritsu": 9.0,
+   "jinko": 867889,
+   "excluded": [
+    "盛岡市"
+   ]
+  },
+  {
+   "level": "都道府県",
+   "shinsei": 427,
+   "torisage": 17,
+   "kyakka": 69,
+   "kaishi_setai": 341,
+   "kaishi_nin": 435,
+   "mishori": 19,
+   "haishi_setai": 394,
+   "haishi_nin": 461,
+   "name": "島根県",
+   "hist": {
+    "2019": {
+     "shinsei": 390,
+     "kyakka": 51,
+     "torisage": 19
+    },
+    "2020": {
+     "shinsei": 382,
+     "kyakka": 54,
+     "torisage": 16
+    },
+    "2021": {
+     "shinsei": 389,
+     "kyakka": 63,
+     "torisage": 13
+    },
+    "2022": {
+     "shinsei": 397,
+     "kyakka": 69,
+     "torisage": 17
+    },
+    "2023": {
+     "shinsei": 436,
+     "kyakka": 89,
+     "torisage": 10
+    },
+    "2024": {
+     "shinsei": 427,
+     "kyakka": 69,
+     "torisage": 17
+    }
+   },
+   "hogo_nin": 2668,
+   "hogo_ritsu": 6.0,
+   "jinko": 444667,
+   "excluded": [
+    "松江市"
+   ]
+  },
+  {
+   "level": "中核市",
+   "shinsei": 1325,
+   "torisage": 67,
+   "kyakka": 87,
+   "kaishi_setai": 1188,
+   "kaishi_nin": 1468,
+   "mishori": 10,
+   "haishi_setai": 1193,
+   "haishi_nin": 1351,
+   "name": "川口市",
+   "hist": {
+    "2019": {
+     "shinsei": 1071,
+     "kyakka": 31,
+     "torisage": 27
+    },
+    "2020": {
+     "shinsei": 1070,
+     "kyakka": 28,
+     "torisage": 32
+    },
+    "2021": {
+     "shinsei": 1119,
+     "kyakka": 45,
+     "torisage": 41
+    },
+    "2022": {
+     "shinsei": 1331,
+     "kyakka": 42,
+     "torisage": 61
+    },
+    "2023": {
+     "shinsei": 1240,
+     "kyakka": 57,
+     "torisage": 55
+    },
+    "2024": {
+     "shinsei": 1325,
+     "kyakka": 87,
+     "torisage": 67
+    }
+   },
+   "hogo_nin": 11719,
+   "hogo_ritsu": 19.3,
+   "jinko": 607202,
+   "pref": "埼玉県"
+  },
+  {
+   "level": "指定都市",
+   "shinsei": 3488,
+   "torisage": 94,
+   "kyakka": 319,
+   "kaishi_setai": 3120,
+   "kaishi_nin": 3742,
+   "mishori": 102,
+   "haishi_setai": 3526,
+   "haishi_nin": 4053,
+   "name": "川崎市",
+   "hist": {
+    "2019": {
+     "shinsei": 3499,
+     "kyakka": 252,
+     "torisage": 119
+    },
+    "2020": {
+     "shinsei": 3537,
+     "kyakka": 215,
+     "torisage": 140
+    },
+    "2021": {
+     "shinsei": 3473,
+     "kyakka": 287,
+     "torisage": 171
+    },
+    "2022": {
+     "shinsei": 3556,
+     "kyakka": 277,
+     "torisage": 140
+    },
+    "2023": {
+     "shinsei": 3716,
+     "kyakka": 315,
+     "torisage": 133
+    },
+    "2024": {
+     "shinsei": 3488,
+     "kyakka": 319,
+     "torisage": 94
+    }
+   },
+   "hogo_nin": 27645,
+   "hogo_ritsu": 17.8,
+   "jinko": 1553090,
+   "pref": "神奈川県"
+  },
+  {
+   "level": "中核市",
+   "shinsei": 570,
+   "torisage": 26,
+   "kyakka": 30,
+   "kaishi_setai": 524,
+   "kaishi_nin": 624,
+   "mishori": 22,
+   "haishi_setai": 485,
+   "haishi_nin": 544,
+   "name": "川越市",
+   "hist": {
+    "2019": {
+     "shinsei": 473,
+     "kyakka": 28,
+     "torisage": 40
+    },
+    "2020": {
+     "shinsei": 512,
+     "kyakka": 29,
+     "torisage": 35
+    },
+    "2021": {
+     "shinsei": 364,
+     "kyakka": 18,
+     "torisage": 27
+    },
+    "2022": {
+     "shinsei": 401,
+     "kyakka": 24,
+     "torisage": 23
+    },
+    "2023": {
+     "shinsei": 462,
+     "kyakka": 39,
+     "torisage": 26
+    },
+    "2024": {
+     "shinsei": 570,
+     "kyakka": 30,
+     "torisage": 26
+    }
+   },
+   "hogo_nin": 4183,
+   "hogo_ritsu": 11.8,
+   "jinko": 354492,
+   "pref": "埼玉県"
+  },
+  {
+   "level": "指定都市",
+   "shinsei": 2764,
+   "torisage": 85,
+   "kyakka": 247,
+   "kaishi_setai": 2459,
+   "kaishi_nin": 3002,
+   "mishori": 64,
+   "haishi_setai": 2637,
+   "haishi_nin": 3160,
+   "name": "広島市",
+   "hist": {
+    "2019": {
+     "shinsei": 2504,
+     "kyakka": 207,
+     "torisage": 100
+    },
+    "2020": {
+     "shinsei": 2535,
+     "kyakka": 205,
+     "torisage": 112
+    },
+    "2021": {
+     "shinsei": 2548,
+     "kyakka": 218,
+     "torisage": 118
+    },
+    "2022": {
+     "shinsei": 2603,
+     "kyakka": 190,
+     "torisage": 102
+    },
+    "2023": {
+     "shinsei": 2724,
+     "kyakka": 210,
+     "torisage": 85
+    },
+    "2024": {
+     "shinsei": 2764,
+     "kyakka": 247,
+     "torisage": 85
+    }
+   },
+   "hogo_nin": 22518,
+   "hogo_ritsu": 19.1,
+   "jinko": 1178953,
+   "pref": "広島県"
+  },
+  {
+   "level": "都道府県",
+   "shinsei": 1002,
+   "torisage": 37,
+   "kyakka": 90,
+   "kaishi_setai": 872,
+   "kaishi_nin": 1161,
+   "mishori": 32,
+   "haishi_setai": 877,
+   "haishi_nin": 1105,
+   "name": "広島県",
+   "hist": {
+    "2019": {
+     "shinsei": 878,
+     "kyakka": 98,
+     "torisage": 38
+    },
+    "2020": {
+     "shinsei": 831,
+     "kyakka": 68,
+     "torisage": 47
+    },
+    "2021": {
+     "shinsei": 921,
+     "kyakka": 90,
+     "torisage": 44
+    },
+    "2022": {
+     "shinsei": 985,
+     "kyakka": 72,
+     "torisage": 30
+    },
+    "2023": {
+     "shinsei": 949,
+     "kyakka": 82,
+     "torisage": 33
+    },
+    "2024": {
+     "shinsei": 1002,
+     "kyakka": 90,
+     "torisage": 37
+    }
+   },
+   "hogo_nin": 7172,
+   "hogo_ritsu": 8.1,
+   "jinko": 885432,
+   "excluded": [
+    "呉市",
+    "広島市",
+    "福山市"
+   ]
+  },
+  {
+   "level": "都道府県",
+   "shinsei": 1172,
+   "torisage": 46,
+   "kyakka": 125,
+   "kaishi_setai": 1012,
+   "kaishi_nin": 1322,
+   "mishori": 57,
+   "haishi_setai": 1247,
+   "haishi_nin": 1453,
+   "name": "徳島県",
+   "hist": {
+    "2019": {
+     "shinsei": 1084,
+     "kyakka": 95,
+     "torisage": 51
+    },
+    "2020": {
+     "shinsei": 1073,
+     "kyakka": 97,
+     "torisage": 40
+    },
+    "2021": {
+     "shinsei": 1120,
+     "kyakka": 64,
+     "torisage": 38
+    },
+    "2022": {
+     "shinsei": 1108,
+     "kyakka": 98,
+     "torisage": 39
+    },
+    "2023": {
+     "shinsei": 1111,
+     "kyakka": 103,
+     "torisage": 42
+    },
+    "2024": {
+     "shinsei": 1172,
+     "kyakka": 125,
+     "torisage": 46
+    }
+   },
+   "hogo_nin": 12141,
+   "hogo_ritsu": 17.7,
+   "jinko": 685932,
+   "excluded": []
+  },
+  {
+   "level": "都道府県",
+   "shinsei": 1162,
+   "torisage": 45,
+   "kyakka": 197,
+   "kaishi_setai": 937,
+   "kaishi_nin": 1153,
+   "mishori": 36,
+   "haishi_setai": 1013,
+   "haishi_nin": 1158,
+   "name": "愛媛県",
+   "hist": {
+    "2019": {
+     "shinsei": 1004,
+     "kyakka": 126,
+     "torisage": 42
+    },
+    "2020": {
+     "shinsei": 964,
+     "kyakka": 140,
+     "torisage": 27
+    },
+    "2021": {
+     "shinsei": 1043,
+     "kyakka": 161,
+     "torisage": 33
+    },
+    "2022": {
+     "shinsei": 1034,
+     "kyakka": 148,
+     "torisage": 17
+    },
+    "2023": {
+     "shinsei": 1060,
+     "kyakka": 165,
+     "torisage": 27
+    },
+    "2024": {
+     "shinsei": 1162,
+     "kyakka": 197,
+     "torisage": 45
+    }
+   },
+   "hogo_nin": 8262,
+   "hogo_ritsu": 10.6,
+   "jinko": 779434,
+   "excluded": [
+    "松山市"
+   ]
+  },
+  {
+   "level": "都道府県",
+   "shinsei": 3696,
+   "torisage": 192,
+   "kyakka": 289,
+   "kaishi_setai": 3205,
+   "kaishi_nin": 4092,
+   "mishori": 147,
+   "haishi_setai": 2895,
+   "haishi_nin": 3471,
+   "name": "愛知県",
+   "hist": {
+    "2019": {
+     "shinsei": 2920,
+     "kyakka": 178,
+     "torisage": 118
+    },
+    "2020": {
+     "shinsei": 3227,
+     "kyakka": 188,
+     "torisage": 176
+    },
+    "2021": {
+     "shinsei": 2737,
+     "kyakka": 211,
+     "torisage": 123
+    },
+    "2022": {
+     "shinsei": 3189,
+     "kyakka": 253,
+     "torisage": 134
+    },
+    "2023": {
+     "shinsei": 3539,
+     "kyakka": 269,
+     "torisage": 176
+    },
+    "2024": {
+     "shinsei": 3696,
+     "kyakka": 289,
+     "torisage": 192
+    }
+   },
+   "hogo_nin": 20102,
+   "hogo_ritsu": 5.6,
+   "jinko": 3589643,
+   "excluded": [
+    "一宮市",
+    "名古屋市",
+    "岡崎市",
+    "豊橋市",
+    "豊田市"
+   ]
+  },
+  {
+   "level": "指定都市",
+   "shinsei": 1548,
+   "torisage": 47,
+   "kyakka": 327,
+   "kaishi_setai": 1169,
+   "kaishi_nin": 1448,
+   "mishori": 51,
+   "haishi_setai": 1186,
+   "haishi_nin": 1375,
+   "name": "新潟市",
+   "hist": {
+    "2019": {
+     "shinsei": 1322,
+     "kyakka": 177,
+     "torisage": 49
+    },
+    "2020": {
+     "shinsei": 1370,
+     "kyakka": 186,
+     "torisage": 53
+    },
+    "2021": {
+     "shinsei": 1422,
+     "kyakka": 235,
+     "torisage": 50
+    },
+    "2022": {
+     "shinsei": 1454,
+     "kyakka": 246,
+     "torisage": 53
+    },
+    "2023": {
+     "shinsei": 1465,
+     "kyakka": 257,
+     "torisage": 50
+    },
+    "2024": {
+     "shinsei": 1548,
+     "kyakka": 327,
+     "torisage": 47
+    }
+   },
+   "hogo_nin": 11780,
+   "hogo_ritsu": 15.4,
+   "jinko": 764935,
+   "pref": "新潟県"
+  },
+  {
+   "level": "都道府県",
+   "shinsei": 1375,
+   "torisage": 35,
+   "kyakka": 183,
+   "kaishi_setai": 1159,
+   "kaishi_nin": 1449,
+   "mishori": 42,
+   "haishi_setai": 1160,
+   "haishi_nin": 1379,
+   "name": "新潟県",
+   "hist": {
+    "2019": {
+     "shinsei": 1203,
+     "kyakka": 136,
+     "torisage": 49
+    },
+    "2020": {
+     "shinsei": 1194,
+     "kyakka": 129,
+     "torisage": 38
+    },
+    "2021": {
+     "shinsei": 1247,
+     "kyakka": 160,
+     "torisage": 38
+    },
+    "2022": {
+     "shinsei": 1351,
+     "kyakka": 164,
+     "torisage": 36
+    },
+    "2023": {
+     "shinsei": 1290,
+     "kyakka": 164,
+     "torisage": 37
+    },
+    "2024": {
+     "shinsei": 1375,
+     "kyakka": 183,
+     "torisage": 35
+    }
+   },
+   "hogo_nin": 8947,
+   "hogo_ritsu": 6.7,
+   "jinko": 1335373,
+   "excluded": [
+    "新潟市"
+   ]
+  },
+  {
+   "level": "中核市",
+   "shinsei": 1078,
+   "torisage": 28,
+   "kyakka": 46,
+   "kaishi_setai": 1003,
+   "kaishi_nin": 1240,
+   "mishori": 22,
+   "haishi_setai": 1008,
+   "haishi_nin": 1140,
+   "name": "旭川市",
+   "hist": {
+    "2019": {
+     "shinsei": 1010,
+     "kyakka": 21,
+     "torisage": 49
+    },
+    "2020": {
+     "shinsei": 950,
+     "kyakka": 25,
+     "torisage": 43
+    },
+    "2021": {
+     "shinsei": 929,
+     "kyakka": 32,
+     "torisage": 36
+    },
+    "2022": {
+     "shinsei": 903,
+     "kyakka": 30,
+     "torisage": 25
+    },
+    "2023": {
+     "shinsei": 1001,
+     "kyakka": 43,
+     "torisage": 31
+    },
+    "2024": {
+     "shinsei": 1078,
+     "kyakka": 46,
+     "torisage": 28
+    }
+   },
+   "hogo_nin": 11390,
+   "hogo_ritsu": 35.9,
+   "jinko": 317270,
+   "pref": "北海道"
+  },
+  {
+   "level": "中核市",
+   "shinsei": 510,
+   "torisage": 23,
+   "kyakka": 46,
+   "kaishi_setai": 446,
+   "kaishi_nin": 586,
+   "mishori": 14,
+   "haishi_setai": 481,
+   "haishi_nin": 607,
+   "name": "明石市",
+   "hist": {
+    "2019": {
+     "shinsei": 443,
+     "kyakka": 9,
+     "torisage": 23
+    },
+    "2020": {
+     "shinsei": 477,
+     "kyakka": 17,
+     "torisage": 39
+    },
+    "2021": {
+     "shinsei": 476,
+     "kyakka": 22,
+     "torisage": 23
+    },
+    "2022": {
+     "shinsei": 501,
+     "kyakka": 26,
+     "torisage": 17
+    },
+    "2023": {
+     "shinsei": 504,
+     "kyakka": 30,
+     "torisage": 15
+    },
+    "2024": {
+     "shinsei": 510,
+     "kyakka": 46,
+     "torisage": 23
+    }
+   },
+   "hogo_nin": 5063,
+   "hogo_ritsu": 16.5,
+   "jinko": 306848,
+   "pref": "兵庫県"
+  },
+  {
+   "level": "指定都市",
+   "shinsei": 9255,
+   "torisage": 260,
+   "kyakka": 521,
+   "kaishi_setai": 8458,
+   "kaishi_nin": 10106,
+   "mishori": 310,
+   "haishi_setai": 8307,
+   "haishi_nin": 9709,
+   "name": "札幌市",
+   "hist": {
+    "2019": {
+     "shinsei": 7922,
+     "kyakka": 357,
+     "torisage": 282
+    },
+    "2020": {
+     "shinsei": 8272,
+     "kyakka": 305,
+     "torisage": 304
+    },
+    "2021": {
+     "shinsei": 8099,
+     "kyakka": 395,
+     "torisage": 283
+    },
+    "2022": {
+     "shinsei": 8848,
+     "kyakka": 441,
+     "torisage": 297
+    },
+    "2023": {
+     "shinsei": 9220,
+     "kyakka": 436,
+     "torisage": 266
+    },
+    "2024": {
+     "shinsei": 9255,
+     "kyakka": 521,
+     "torisage": 260
+    }
+   },
+   "hogo_nin": 71203,
+   "hogo_ritsu": 36.2,
+   "jinko": 1966934,
+   "pref": "北海道"
+  },
+  {
+   "level": "都道府県",
+   "shinsei": 27908,
+   "torisage": 704,
+   "kyakka": 1319,
+   "kaishi_setai": 26111,
+   "kaishi_nin": 30851,
+   "mishori": 1331,
+   "haishi_setai": 28154,
+   "haishi_nin": 31540,
+   "name": "東京都",
+   "hist": {
+    "2019": {
+     "shinsei": 26211,
+     "kyakka": 834,
+     "torisage": 548
+    },
+    "2020": {
+     "shinsei": 27294,
+     "kyakka": 921,
+     "torisage": 616
+    },
+    "2021": {
+     "shinsei": 26737,
+     "kyakka": 1059,
+     "torisage": 653
+    },
+    "2022": {
+     "shinsei": 27644,
+     "kyakka": 1106,
+     "torisage": 651
+    },
+    "2023": {
+     "shinsei": 27944,
+     "kyakka": 1109,
+     "torisage": 731
+    },
+    "2024": {
+     "shinsei": 27908,
+     "kyakka": 1319,
+     "torisage": 704
+    }
+   },
+   "hogo_nin": 262698,
+   "hogo_ritsu": 19.3,
+   "jinko": 13611295,
+   "excluded": [
+    "八王子市"
+   ]
+  },
+  {
+   "level": "中核市",
+   "shinsei": 1726,
+   "torisage": 22,
+   "kyakka": 47,
+   "kaishi_setai": 1677,
+   "kaishi_nin": 2019,
+   "mishori": 39,
+   "haishi_setai": 1705,
+   "haishi_nin": 1983,
+   "name": "東大阪市",
+   "hist": {
+    "2019": {
+     "shinsei": 1482,
+     "kyakka": 57,
+     "torisage": 60
+    },
+    "2020": {
+     "shinsei": 1376,
+     "kyakka": 47,
+     "torisage": 61
+    },
+    "2021": {
+     "shinsei": 1344,
+     "kyakka": 46,
+     "torisage": 63
+    },
+    "2022": {
+     "shinsei": 1423,
+     "kyakka": 40,
+     "torisage": 33
+    },
+    "2023": {
+     "shinsei": 1585,
+     "kyakka": 51,
+     "torisage": 36
+    },
+    "2024": {
+     "shinsei": 1726,
+     "kyakka": 47,
+     "torisage": 22
+    }
+   },
+   "hogo_nin": 16152,
+   "hogo_ritsu": 33.3,
+   "jinko": 485045,
+   "pref": "大阪府"
+  },
+  {
+   "level": "中核市",
+   "shinsei": 1016,
+   "torisage": 17,
+   "kyakka": 64,
+   "kaishi_setai": 938,
+   "kaishi_nin": 1144,
+   "mishori": 31,
+   "haishi_setai": 1055,
+   "haishi_nin": 1219,
+   "name": "松山市",
+   "hist": {
+    "2019": {
+     "shinsei": 896,
+     "kyakka": 24,
+     "torisage": 37
+    },
+    "2020": {
+     "shinsei": 788,
+     "kyakka": 35,
+     "torisage": 26
+    },
+    "2021": {
+     "shinsei": 872,
+     "kyakka": 33,
+     "torisage": 44
+    },
+    "2022": {
+     "shinsei": 1039,
+     "kyakka": 50,
+     "torisage": 28
+    },
+    "2023": {
+     "shinsei": 971,
+     "kyakka": 52,
+     "torisage": 15
+    },
+    "2024": {
+     "shinsei": 1016,
+     "kyakka": 64,
+     "torisage": 17
+    }
+   },
+   "hogo_nin": 11123,
+   "hogo_ritsu": 22.3,
+   "jinko": 498789,
+   "pref": "愛媛県"
+  },
+  {
+   "level": "中核市",
+   "shinsei": 292,
+   "torisage": 24,
+   "kyakka": 43,
+   "kaishi_setai": 224,
+   "kaishi_nin": 278,
+   "mishori": 7,
+   "haishi_setai": 291,
+   "haishi_nin": 343,
+   "name": "松本市",
+   "hist": {
+    "2021": {
+     "shinsei": 309,
+     "kyakka": 31,
+     "torisage": 24
+    },
+    "2022": {
+     "shinsei": 373,
+     "kyakka": 44,
+     "torisage": 26
+    },
+    "2023": {
+     "shinsei": 326,
+     "kyakka": 41,
+     "torisage": 25
+    },
+    "2024": {
+     "shinsei": 292,
+     "kyakka": 43,
+     "torisage": 24
+    }
+   },
+   "hogo_nin": 1742,
+   "hogo_ritsu": 7.3,
+   "jinko": 238630,
+   "pref": "長野県"
+  },
+  {
+   "level": "中核市",
+   "shinsei": 320,
+   "torisage": 0,
+   "kyakka": 31,
+   "kaishi_setai": 305,
+   "kaishi_nin": 368,
+   "mishori": 17,
+   "haishi_setai": 277,
+   "haishi_nin": 335,
+   "name": "松江市",
+   "hist": {
+    "2019": {
+     "shinsei": 276,
+     "kyakka": 22,
+     "torisage": 9
+    },
+    "2020": {
+     "shinsei": 308,
+     "kyakka": 21,
+     "torisage": 5
+    },
+    "2021": {
+     "shinsei": 271,
+     "kyakka": 27,
+     "torisage": 10
+    },
+    "2022": {
+     "shinsei": 312,
+     "kyakka": 17,
+     "torisage": 7
+    },
+    "2023": {
+     "shinsei": 285,
+     "kyakka": 12,
+     "torisage": 5
+    },
+    "2024": {
+     "shinsei": 320,
+     "kyakka": 31,
+     "torisage": 0
+    }
+   },
+   "hogo_nin": 2645,
+   "hogo_ritsu": 13.4,
+   "jinko": 197388,
+   "pref": "島根県"
+  },
+  {
+   "level": "中核市",
+   "shinsei": 870,
+   "torisage": 31,
+   "kyakka": 34,
+   "kaishi_setai": 827,
+   "kaishi_nin": 1060,
+   "mishori": 27,
+   "haishi_setai": 776,
+   "haishi_nin": 944,
+   "name": "枚方市",
+   "hist": {
+    "2019": {
+     "shinsei": 635,
+     "kyakka": 48,
+     "torisage": 29
+    },
+    "2020": {
+     "shinsei": 648,
+     "kyakka": 28,
+     "torisage": 34
+    },
+    "2021": {
+     "shinsei": 752,
+     "kyakka": 32,
+     "torisage": 40
+    },
+    "2022": {
+     "shinsei": 833,
+     "kyakka": 33,
+     "torisage": 43
+    },
+    "2023": {
+     "shinsei": 860,
+     "kyakka": 34,
+     "torisage": 35
+    },
+    "2024": {
+     "shinsei": 870,
+     "kyakka": 34,
+     "torisage": 31
+    }
+   },
+   "hogo_nin": 7545,
+   "hogo_ritsu": 19.3,
+   "jinko": 390933,
+   "pref": "大阪府"
+  },
+  {
+   "level": "中核市",
+   "shinsei": 730,
+   "torisage": 38,
+   "kyakka": 53,
+   "kaishi_setai": 656,
+   "kaishi_nin": 800,
+   "mishori": 28,
+   "haishi_setai": 457,
+   "haishi_nin": 532,
+   "name": "柏市",
+   "hist": {
+    "2019": {
+     "shinsei": 623,
+     "kyakka": 34,
+     "torisage": 35
+    },
+    "2020": {
+     "shinsei": 641,
+     "kyakka": 39,
+     "torisage": 43
+    },
+    "2021": {
+     "shinsei": 681,
+     "kyakka": 49,
+     "torisage": 43
+    },
+    "2022": {
+     "shinsei": 691,
+     "kyakka": 41,
+     "torisage": 42
+    },
+    "2023": {
+     "shinsei": 701,
+     "kyakka": 41,
+     "torisage": 68
+    },
+    "2024": {
+     "shinsei": 730,
+     "kyakka": 53,
+     "torisage": 38
+    }
+   },
+   "hogo_nin": 5174,
+   "hogo_ritsu": 11.9,
+   "jinko": 434790,
+   "pref": "千葉県"
+  },
+  {
+   "level": "都道府県",
+   "shinsei": 1800,
+   "torisage": 83,
+   "kyakka": 165,
+   "kaishi_setai": 1551,
+   "kaishi_nin": 1951,
+   "mishori": 76,
+   "haishi_setai": 1391,
+   "haishi_nin": 1559,
+   "name": "栃木県",
+   "hist": {
+    "2019": {
+     "shinsei": 1395,
+     "kyakka": 120,
+     "torisage": 91
+    },
+    "2020": {
+     "shinsei": 1443,
+     "kyakka": 121,
+     "torisage": 87
+    },
+    "2021": {
+     "shinsei": 1466,
+     "kyakka": 146,
+     "torisage": 72
+    },
+    "2022": {
+     "shinsei": 1520,
+     "kyakka": 152,
+     "torisage": 91
+    },
+    "2023": {
+     "shinsei": 1675,
+     "kyakka": 145,
+     "torisage": 80
+    },
+    "2024": {
+     "shinsei": 1800,
+     "kyakka": 165,
+     "torisage": 83
+    }
+   },
+   "hogo_nin": 11717,
+   "hogo_ritsu": 8.5,
+   "jinko": 1378471,
+   "excluded": [
+    "宇都宮市"
+   ]
+  },
+  {
+   "level": "指定都市",
+   "shinsei": 11653,
+   "torisage": 589,
+   "kyakka": 1187,
+   "kaishi_setai": 9837,
+   "kaishi_nin": 11765,
+   "mishori": 476,
+   "haishi_setai": 9910,
+   "haishi_nin": 11588,
+   "name": "横浜市",
+   "hist": {
+    "2019": {
+     "shinsei": 8664,
+     "kyakka": 500,
+     "torisage": 474
+    },
+    "2020": {
+     "shinsei": 9154,
+     "kyakka": 525,
+     "torisage": 574
+    },
+    "2021": {
+     "shinsei": 9641,
+     "kyakka": 798,
+     "torisage": 652
+    },
+    "2022": {
+     "shinsei": 10381,
+     "kyakka": 1003,
+     "torisage": 768
+    },
+    "2023": {
+     "shinsei": 10835,
+     "kyakka": 1043,
+     "torisage": 682
+    },
+    "2024": {
+     "shinsei": 11653,
+     "kyakka": 1187,
+     "torisage": 589
+    }
+   },
+   "hogo_nin": 68589,
+   "hogo_ritsu": 18.2,
+   "jinko": 3768626,
+   "pref": "神奈川県"
+  },
+  {
+   "level": "中核市",
+   "shinsei": 679,
+   "torisage": 18,
+   "kyakka": 84,
+   "kaishi_setai": 598,
+   "kaishi_nin": 747,
+   "mishori": 13,
+   "haishi_setai": 580,
+   "haishi_nin": 653,
+   "name": "横須賀市",
+   "hist": {
+    "2019": {
+     "shinsei": 520,
+     "kyakka": 63,
+     "torisage": 16
+    },
+    "2020": {
+     "shinsei": 671,
+     "kyakka": 78,
+     "torisage": 19
+    },
+    "2021": {
+     "shinsei": 682,
+     "kyakka": 87,
+     "torisage": 42
+    },
+    "2022": {
+     "shinsei": 684,
+     "kyakka": 70,
+     "torisage": 24
+    },
+    "2023": {
+     "shinsei": 689,
+     "kyakka": 77,
+     "torisage": 25
+    },
+    "2024": {
+     "shinsei": 679,
+     "kyakka": 84,
+     "torisage": 18
+    }
+   },
+   "hogo_nin": 5584,
+   "hogo_ritsu": 15.0,
+   "jinko": 372267,
+   "pref": "神奈川県"
+  },
+  {
+   "level": "中核市",
+   "shinsei": 622,
+   "torisage": 11,
+   "kyakka": 59,
+   "kaishi_setai": 553,
+   "kaishi_nin": 697,
+   "mishori": 229,
+   "haishi_setai": 589,
+   "haishi_nin": 723,
+   "name": "水戸市",
+   "hist": {
+    "2020": {
+     "shinsei": 580,
+     "kyakka": 43,
+     "torisage": 33
+    },
+    "2021": {
+     "shinsei": 553,
+     "kyakka": 39,
+     "torisage": 13
+    },
+    "2022": {
+     "shinsei": 530,
+     "kyakka": 46,
+     "torisage": 27
+    },
+    "2023": {
+     "shinsei": 588,
+     "kyakka": 50,
+     "torisage": 14
+    },
+    "2024": {
+     "shinsei": 622,
+     "kyakka": 59,
+     "torisage": 11
+    }
+   },
+   "hogo_nin": 5168,
+   "hogo_ritsu": 19.4,
+   "jinko": 266392,
+   "pref": "茨城県"
+  },
+  {
+   "level": "都道府県",
+   "shinsei": 3980,
+   "torisage": 236,
+   "kyakka": 635,
+   "kaishi_setai": 3080,
+   "kaishi_nin": 3787,
+   "mishori": 187,
+   "haishi_setai": 3026,
+   "haishi_nin": 3584,
+   "name": "沖縄県",
+   "hist": {
+    "2019": {
+     "shinsei": 3292,
+     "kyakka": 471,
+     "torisage": 249
+    },
+    "2020": {
+     "shinsei": 3507,
+     "kyakka": 441,
+     "torisage": 310
+    },
+    "2021": {
+     "shinsei": 3686,
+     "kyakka": 448,
+     "torisage": 302
+    },
+    "2022": {
+     "shinsei": 3820,
+     "kyakka": 508,
+     "torisage": 289
+    },
+    "2023": {
+     "shinsei": 3865,
+     "kyakka": 552,
+     "torisage": 290
+    },
+    "2024": {
+     "shinsei": 3980,
+     "kyakka": 635,
+     "torisage": 236
+    }
+   },
+   "hogo_nin": 26321,
+   "hogo_ritsu": 22.8,
+   "jinko": 1154430,
+   "excluded": [
+    "那覇市"
+   ]
+  },
+  {
+   "level": "指定都市",
+   "shinsei": 904,
+   "torisage": 8,
+   "kyakka": 56,
+   "kaishi_setai": 852,
+   "kaishi_nin": 1027,
+   "mishori": 38,
+   "haishi_setai": 833,
+   "haishi_nin": 935,
+   "name": "浜松市",
+   "hist": {
+    "2019": {
+     "shinsei": 999,
+     "kyakka": 53,
+     "torisage": 57
+    },
+    "2020": {
+     "shinsei": 974,
+     "kyakka": 43,
+     "torisage": 47
+    },
+    "2021": {
+     "shinsei": 966,
+     "kyakka": 42,
+     "torisage": 35
+    },
+    "2022": {
+     "shinsei": 1016,
+     "kyakka": 45,
+     "torisage": 37
+    },
+    "2023": {
+     "shinsei": 955,
+     "kyakka": 61,
+     "torisage": 22
+    },
+    "2024": {
+     "shinsei": 904,
+     "kyakka": 56,
+     "torisage": 8
+    }
+   },
+   "hogo_nin": 7246,
+   "hogo_ritsu": 9.3,
+   "jinko": 779140,
+   "pref": "静岡県"
+  },
+  {
+   "level": "都道府県",
+   "shinsei": 1154,
+   "torisage": 64,
+   "kyakka": 141,
+   "kaishi_setai": 948,
+   "kaishi_nin": 1257,
+   "mishori": 53,
+   "haishi_setai": 970,
+   "haishi_nin": 1201,
+   "name": "滋賀県",
+   "hist": {
+    "2019": {
+     "shinsei": 1008,
+     "kyakka": 92,
+     "torisage": 105
+    },
+    "2020": {
+     "shinsei": 953,
+     "kyakka": 83,
+     "torisage": 72
+    },
+    "2021": {
+     "shinsei": 956,
+     "kyakka": 114,
+     "torisage": 54
+    },
+    "2022": {
+     "shinsei": 1084,
+     "kyakka": 142,
+     "torisage": 53
+    },
+    "2023": {
+     "shinsei": 1195,
+     "kyakka": 167,
+     "torisage": 42
+    },
+    "2024": {
+     "shinsei": 1154,
+     "kyakka": 141,
+     "torisage": 64
+    }
+   },
+   "hogo_nin": 7207,
+   "hogo_ritsu": 6.8,
+   "jinko": 1059853,
+   "excluded": [
+    "大津市"
+   ]
+  },
+  {
+   "level": "指定都市",
+   "shinsei": 2298,
+   "torisage": 165,
+   "kyakka": 123,
+   "kaishi_setai": 2022,
+   "kaishi_nin": 2408,
+   "mishori": 178,
+   "haishi_setai": 2086,
+   "haishi_nin": 2465,
+   "name": "熊本市",
+   "hist": {
+    "2019": {
+     "shinsei": 2106,
+     "kyakka": 112,
+     "torisage": 175
+    },
+    "2020": {
+     "shinsei": 2055,
+     "kyakka": 160,
+     "torisage": 180
+    },
+    "2021": {
+     "shinsei": 2097,
+     "kyakka": 146,
+     "torisage": 170
+    },
+    "2022": {
+     "shinsei": 2154,
+     "kyakka": 99,
+     "torisage": 174
+    },
+    "2023": {
+     "shinsei": 2048,
+     "kyakka": 91,
+     "torisage": 165
+    },
+    "2024": {
+     "shinsei": 2298,
+     "kyakka": 123,
+     "torisage": 165
+    }
+   },
+   "hogo_nin": 14621,
+   "hogo_ritsu": 19.8,
+   "jinko": 738434,
+   "pref": "熊本県"
+  },
+  {
+   "level": "都道府県",
+   "shinsei": 1650,
+   "torisage": 114,
+   "kyakka": 163,
+   "kaishi_setai": 1382,
+   "kaishi_nin": 1803,
+   "mishori": 71,
+   "haishi_setai": 1365,
+   "haishi_nin": 1703,
+   "name": "熊本県",
+   "hist": {
+    "2019": {
+     "shinsei": 1376,
+     "kyakka": 119,
+     "torisage": 114
+    },
+    "2020": {
+     "shinsei": 1312,
+     "kyakka": 124,
+     "torisage": 115
+    },
+    "2021": {
+     "shinsei": 1334,
+     "kyakka": 116,
+     "torisage": 100
+    },
+    "2022": {
+     "shinsei": 1428,
+     "kyakka": 118,
+     "torisage": 128
+    },
+    "2023": {
+     "shinsei": 1541,
+     "kyakka": 146,
+     "torisage": 132
+    },
+    "2024": {
+     "shinsei": 1650,
+     "kyakka": 163,
+     "torisage": 114
+    }
+   },
+   "hogo_nin": 9126,
+   "hogo_ritsu": 9.5,
+   "jinko": 960632,
+   "excluded": [
+    "熊本市"
+   ]
+  },
+  {
+   "level": "中核市",
+   "shinsei": 342,
+   "torisage": 4,
+   "kyakka": 11,
+   "kaishi_setai": 324,
+   "kaishi_nin": 377,
+   "mishori": 9,
+   "haishi_setai": 306,
+   "haishi_nin": 329,
+   "name": "甲府市",
+   "hist": {
+    "2019": {
+     "shinsei": 256,
+     "kyakka": 4,
+     "torisage": 0
+    },
+    "2020": {
+     "shinsei": 323,
+     "kyakka": 4,
+     "torisage": 5
+    },
+    "2021": {
+     "shinsei": 271,
+     "kyakka": 1,
+     "torisage": 4
+    },
+    "2022": {
+     "shinsei": 285,
+     "kyakka": 6,
+     "torisage": 2
+    },
+    "2023": {
+     "shinsei": 278,
+     "kyakka": 8,
+     "torisage": 1
+    },
+    "2024": {
+     "shinsei": 342,
+     "kyakka": 11,
+     "torisage": 4
+    }
+   },
+   "hogo_nin": 2755,
+   "hogo_ritsu": 15.0,
+   "jinko": 183667,
+   "pref": "山梨県"
+  },
+  {
+   "level": "中核市",
+   "shinsei": 574,
+   "torisage": 15,
+   "kyakka": 28,
+   "kaishi_setai": 531,
+   "kaishi_nin": 669,
+   "mishori": 21,
+   "haishi_setai": 503,
+   "haishi_nin": 577,
+   "name": "盛岡市",
+   "hist": {
+    "2019": {
+     "shinsei": 495,
+     "kyakka": 13,
+     "torisage": 16
+    },
+    "2020": {
+     "shinsei": 449,
+     "kyakka": 5,
+     "torisage": 10
+    },
+    "2021": {
+     "shinsei": 515,
+     "kyakka": 23,
+     "torisage": 16
+    },
+    "2022": {
+     "shinsei": 562,
+     "kyakka": 37,
+     "torisage": 10
+    },
+    "2023": {
+     "shinsei": 548,
+     "kyakka": 23,
+     "torisage": 15
+    },
+    "2024": {
+     "shinsei": 574,
+     "kyakka": 28,
+     "torisage": 15
+    }
+   },
+   "hogo_nin": 4894,
+   "hogo_ritsu": 17.5,
+   "jinko": 279657,
+   "pref": "岩手県"
+  },
+  {
+   "level": "指定都市",
+   "shinsei": 1767,
+   "torisage": 62,
+   "kyakka": 56,
+   "kaishi_setai": 1663,
+   "kaishi_nin": 2043,
+   "mishori": 32,
+   "haishi_setai": 1543,
+   "haishi_nin": 1855,
+   "name": "相模原市",
+   "hist": {
+    "2019": {
+     "shinsei": 1422,
+     "kyakka": 36,
+     "torisage": 75
+    },
+    "2020": {
+     "shinsei": 1673,
+     "kyakka": 48,
+     "torisage": 88
+    },
+    "2021": {
+     "shinsei": 1645,
+     "kyakka": 48,
+     "torisage": 72
+    },
+    "2022": {
+     "shinsei": 1742,
+     "kyakka": 66,
+     "torisage": 92
+    },
+    "2023": {
+     "shinsei": 1758,
+     "kyakka": 84,
+     "torisage": 89
+    },
+    "2024": {
+     "shinsei": 1767,
+     "kyakka": 56,
+     "torisage": 62
+    }
+   },
+   "hogo_nin": 14196,
+   "hogo_ritsu": 19.6,
+   "jinko": 724286,
+   "pref": "神奈川県"
+  },
+  {
+   "level": "都道府県",
+   "shinsei": 382,
+   "torisage": 12,
+   "kyakka": 25,
+   "kaishi_setai": 344,
+   "kaishi_nin": 410,
+   "mishori": 16,
+   "haishi_setai": 440,
+   "haishi_nin": 493,
+   "name": "石川県",
+   "hist": {
+    "2019": {
+     "shinsei": 341,
+     "kyakka": 35,
+     "torisage": 10
+    },
+    "2020": {
+     "shinsei": 382,
+     "kyakka": 30,
+     "torisage": 11
+    },
+    "2021": {
+     "shinsei": 402,
+     "kyakka": 34,
+     "torisage": 11
+    },
+    "2022": {
+     "shinsei": 402,
+     "kyakka": 46,
+     "torisage": 8
+    },
+    "2023": {
+     "shinsei": 447,
+     "kyakka": 46,
+     "torisage": 7
+    },
+    "2024": {
+     "shinsei": 382,
+     "kyakka": 25,
+     "torisage": 12
+    }
+   },
+   "hogo_nin": 2870,
+   "hogo_ritsu": 4.5,
+   "jinko": 637778,
+   "excluded": [
+    "金沢市"
+   ]
+  },
+  {
+   "level": "都道府県",
+   "shinsei": 5444,
+   "torisage": 316,
+   "kyakka": 465,
+   "kaishi_setai": 4705,
+   "kaishi_nin": 5822,
+   "mishori": 199,
+   "haishi_setai": 4483,
+   "haishi_nin": 5207,
+   "name": "神奈川県",
+   "hist": {
+    "2019": {
+     "shinsei": 4487,
+     "kyakka": 273,
+     "torisage": 249
+    },
+    "2020": {
+     "shinsei": 4845,
+     "kyakka": 329,
+     "torisage": 317
+    },
+    "2021": {
+     "shinsei": 4778,
+     "kyakka": 384,
+     "torisage": 299
+    },
+    "2022": {
+     "shinsei": 5145,
+     "kyakka": 378,
+     "torisage": 284
+    },
+    "2023": {
+     "shinsei": 5476,
+     "kyakka": 418,
+     "torisage": 276
+    },
+    "2024": {
+     "shinsei": 5444,
+     "kyakka": 465,
+     "torisage": 316
+    }
+   },
+   "hogo_nin": 36727,
+   "hogo_ritsu": 13.1,
+   "jinko": 2803588,
+   "excluded": [
+    "川崎市",
+    "横浜市",
+    "横須賀市",
+    "相模原市"
+   ]
+  },
+  {
+   "level": "指定都市",
+   "shinsei": 4420,
+   "torisage": 103,
+   "kyakka": 684,
+   "kaishi_setai": 3676,
+   "kaishi_nin": 4617,
+   "mishori": 184,
+   "haishi_setai": 4122,
+   "haishi_nin": 4906,
+   "name": "神戸市",
+   "hist": {
+    "2019": {
+     "shinsei": 4198,
+     "kyakka": 488,
+     "torisage": 126
+    },
+    "2020": {
+     "shinsei": 4170,
+     "kyakka": 531,
+     "torisage": 153
+    },
+    "2021": {
+     "shinsei": 4003,
+     "kyakka": 569,
+     "torisage": 119
+    },
+    "2022": {
+     "shinsei": 4340,
+     "kyakka": 593,
+     "torisage": 127
+    },
+    "2023": {
+     "shinsei": 4403,
+     "kyakka": 612,
+     "torisage": 121
+    },
+    "2024": {
+     "shinsei": 4420,
+     "kyakka": 684,
+     "torisage": 103
+    }
+   },
+   "hogo_nin": 41628,
+   "hogo_ritsu": 27.9,
+   "jinko": 1492043,
+   "pref": "兵庫県"
+  },
+  {
+   "level": "中核市",
+   "shinsei": 338,
+   "torisage": 8,
+   "kyakka": 34,
+   "kaishi_setai": 296,
+   "kaishi_nin": 339,
+   "mishori": 6,
+   "haishi_setai": 319,
+   "haishi_nin": 345,
+   "name": "福井市",
+   "hist": {
+    "2019": {
+     "shinsei": 332,
+     "kyakka": 43,
+     "torisage": 17
+    },
+    "2020": {
+     "shinsei": 313,
+     "kyakka": 38,
+     "torisage": 8
+    },
+    "2021": {
+     "shinsei": 346,
+     "kyakka": 32,
+     "torisage": 15
+    },
+    "2022": {
+     "shinsei": 384,
+     "kyakka": 55,
+     "torisage": 18
+    },
+    "2023": {
+     "shinsei": 360,
+     "kyakka": 39,
+     "torisage": 6
+    },
+    "2024": {
+     "shinsei": 338,
+     "kyakka": 34,
+     "torisage": 8
+    }
+   },
+   "hogo_nin": 2626,
+   "hogo_ritsu": 10.3,
+   "jinko": 254951,
+   "pref": "福井県"
+  },
+  {
+   "level": "都道府県",
+   "shinsei": 292,
+   "torisage": 8,
+   "kyakka": 51,
+   "kaishi_setai": 231,
+   "kaishi_nin": 266,
+   "mishori": 10,
+   "haishi_setai": 213,
+   "haishi_nin": 239,
+   "name": "福井県",
+   "hist": {
+    "2019": {
+     "shinsei": 235,
+     "kyakka": 37,
+     "torisage": 15
+    },
+    "2020": {
+     "shinsei": 276,
+     "kyakka": 62,
+     "torisage": 20
+    },
+    "2021": {
+     "shinsei": 271,
+     "kyakka": 39,
+     "torisage": 15
+    },
+    "2022": {
+     "shinsei": 298,
+     "kyakka": 53,
+     "torisage": 14
+    },
+    "2023": {
+     "shinsei": 261,
+     "kyakka": 36,
+     "torisage": 13
+    },
+    "2024": {
+     "shinsei": 292,
+     "kyakka": 51,
+     "torisage": 8
+    }
+   },
+   "hogo_nin": 1641,
+   "hogo_ritsu": 3.4,
+   "jinko": 482647,
+   "excluded": [
+    "福井市"
+   ]
+  },
+  {
+   "level": "中核市",
+   "shinsei": 661,
+   "torisage": 40,
+   "kyakka": 37,
+   "kaishi_setai": 581,
+   "kaishi_nin": 777,
+   "mishori": 26,
+   "haishi_setai": 620,
+   "haishi_nin": 757,
+   "name": "福山市",
+   "hist": {
+    "2019": {
+     "shinsei": 551,
+     "kyakka": 34,
+     "torisage": 32
+    },
+    "2020": {
+     "shinsei": 565,
+     "kyakka": 27,
+     "torisage": 33
+    },
+    "2021": {
+     "shinsei": 536,
+     "kyakka": 35,
+     "torisage": 34
+    },
+    "2022": {
+     "shinsei": 599,
+     "kyakka": 26,
+     "torisage": 41
+    },
+    "2023": {
+     "shinsei": 681,
+     "kyakka": 35,
+     "torisage": 27
+    },
+    "2024": {
+     "shinsei": 661,
+     "kyakka": 37,
+     "torisage": 40
+    }
+   },
+   "hogo_nin": 5925,
+   "hogo_ritsu": 13.2,
+   "jinko": 448864,
+   "pref": "広島県"
+  },
+  {
+   "level": "指定都市",
+   "shinsei": 5808,
+   "torisage": 223,
+   "kyakka": 335,
+   "kaishi_setai": 5156,
+   "kaishi_nin": 6202,
+   "mishori": 1807,
+   "haishi_setai": 5226,
+   "haishi_nin": 6039,
+   "name": "福岡市",
+   "hist": {
+    "2019": {
+     "shinsei": 4894,
+     "kyakka": 260,
+     "torisage": 219
+    },
+    "2020": {
+     "shinsei": 4929,
+     "kyakka": 297,
+     "torisage": 236
+    },
+    "2021": {
+     "shinsei": 5126,
+     "kyakka": 331,
+     "torisage": 222
+    },
+    "2022": {
+     "shinsei": 5564,
+     "kyakka": 327,
+     "torisage": 236
+    },
+    "2023": {
+     "shinsei": 5599,
+     "kyakka": 337,
+     "torisage": 210
+    },
+    "2024": {
+     "shinsei": 5808,
+     "kyakka": 335,
+     "torisage": 223
+    }
+   },
+   "hogo_nin": 42317,
+   "hogo_ritsu": 25.5,
+   "jinko": 1659490,
+   "pref": "福岡県"
+  },
+  {
+   "level": "都道府県",
+   "shinsei": 4948,
+   "torisage": 365,
+   "kyakka": 646,
+   "kaishi_setai": 3888,
+   "kaishi_nin": 5250,
+   "mishori": 311,
+   "haishi_setai": 4409,
+   "haishi_nin": 5511,
+   "name": "福岡県",
+   "hist": {
+    "2019": {
+     "shinsei": 4034,
+     "kyakka": 355,
+     "torisage": 433
+    },
+    "2020": {
+     "shinsei": 4331,
+     "kyakka": 368,
+     "torisage": 446
+    },
+    "2021": {
+     "shinsei": 4322,
+     "kyakka": 481,
+     "torisage": 365
+    },
+    "2022": {
+     "shinsei": 4682,
+     "kyakka": 522,
+     "torisage": 378
+    },
+    "2023": {
+     "shinsei": 4789,
+     "kyakka": 542,
+     "torisage": 346
+    },
+    "2024": {
+     "shinsei": 4948,
+     "kyakka": 646,
+     "torisage": 365
+    }
+   },
+   "hogo_nin": 46931,
+   "hogo_ritsu": 21.1,
+   "jinko": 2224218,
+   "excluded": [
+    "久留米市",
+    "北九州市",
+    "福岡市"
+   ]
+  },
+  {
+   "level": "中核市",
+   "shinsei": 513,
+   "torisage": 20,
+   "kyakka": 21,
+   "kaishi_setai": 454,
+   "kaishi_nin": 544,
+   "mishori": 27,
+   "haishi_setai": 423,
+   "haishi_nin": 480,
+   "name": "福島市",
+   "hist": {
+    "2019": {
+     "shinsei": 386,
+     "kyakka": 11,
+     "torisage": 12
+    },
+    "2020": {
+     "shinsei": 408,
+     "kyakka": 19,
+     "torisage": 28
+    },
+    "2021": {
+     "shinsei": 458,
+     "kyakka": 16,
+     "torisage": 16
+    },
+    "2022": {
+     "shinsei": 461,
+     "kyakka": 27,
+     "torisage": 32
+    },
+    "2023": {
+     "shinsei": 523,
+     "kyakka": 19,
+     "torisage": 25
+    },
+    "2024": {
+     "shinsei": 513,
+     "kyakka": 21,
+     "torisage": 20
+    }
+   },
+   "hogo_nin": 3241,
+   "hogo_ritsu": 11.9,
+   "jinko": 272353,
+   "pref": "福島県"
+  },
+  {
+   "level": "都道府県",
+   "shinsei": 1215,
+   "torisage": 72,
+   "kyakka": 148,
+   "kaishi_setai": 985,
+   "kaishi_nin": 1213,
+   "mishori": 48,
+   "haishi_setai": 935,
+   "haishi_nin": 1094,
+   "name": "福島県",
+   "hist": {
+    "2019": {
+     "shinsei": 952,
+     "kyakka": 108,
+     "torisage": 46
+    },
+    "2020": {
+     "shinsei": 942,
+     "kyakka": 107,
+     "torisage": 66
+    },
+    "2021": {
+     "shinsei": 994,
+     "kyakka": 135,
+     "torisage": 88
+    },
+    "2022": {
+     "shinsei": 1055,
+     "kyakka": 115,
+     "torisage": 63
+    },
+    "2023": {
+     "shinsei": 1024,
+     "kyakka": 106,
+     "torisage": 61
+    },
+    "2024": {
+     "shinsei": 1215,
+     "kyakka": 148,
+     "torisage": 72
+    }
+   },
+   "hogo_nin": 6509,
+   "hogo_ritsu": 7.8,
+   "jinko": 834487,
+   "excluded": [
+    "いわき市",
+    "福島市",
+    "郡山市"
+   ]
+  },
+  {
+   "level": "中核市",
+   "shinsei": 544,
+   "torisage": 59,
+   "kyakka": 59,
+   "kaishi_setai": 429,
+   "kaishi_nin": 521,
+   "mishori": 11,
+   "haishi_setai": 543,
+   "haishi_nin": 600,
+   "name": "秋田市",
+   "hist": {
+    "2019": {
+     "shinsei": 505,
+     "kyakka": 21,
+     "torisage": 64
+    },
+    "2020": {
+     "shinsei": 490,
+     "kyakka": 24,
+     "torisage": 58
+    },
+    "2021": {
+     "shinsei": 531,
+     "kyakka": 36,
+     "torisage": 57
+    },
+    "2022": {
+     "shinsei": 573,
+     "kyakka": 58,
+     "torisage": 48
+    },
+    "2023": {
+     "shinsei": 639,
+     "kyakka": 70,
+     "torisage": 58
+    },
+    "2024": {
+     "shinsei": 544,
+     "kyakka": 59,
+     "torisage": 59
+    }
+   },
+   "hogo_nin": 5201,
+   "hogo_ritsu": 17.6,
+   "jinko": 295511,
+   "pref": "秋田県"
+  },
+  {
+   "level": "都道府県",
+   "shinsei": 1159,
+   "torisage": 42,
+   "kyakka": 271,
+   "kaishi_setai": 845,
+   "kaishi_nin": 1082,
+   "mishori": 35,
+   "haishi_setai": 942,
+   "haishi_nin": 1143,
+   "name": "秋田県",
+   "hist": {
+    "2019": {
+     "shinsei": 1016,
+     "kyakka": 188,
+     "torisage": 80
+    },
+    "2020": {
+     "shinsei": 907,
+     "kyakka": 199,
+     "torisage": 46
+    },
+    "2021": {
+     "shinsei": 992,
+     "kyakka": 267,
+     "torisage": 47
+    },
+    "2022": {
+     "shinsei": 991,
+     "kyakka": 217,
+     "torisage": 36
+    },
+    "2023": {
+     "shinsei": 1087,
+     "kyakka": 255,
+     "torisage": 29
+    },
+    "2024": {
+     "shinsei": 1159,
+     "kyakka": 271,
+     "torisage": 42
+    }
+   },
+   "hogo_nin": 7470,
+   "hogo_ritsu": 12.4,
+   "jinko": 602419,
+   "excluded": [
+    "秋田市"
+   ]
+  },
+  {
+   "level": "都道府県",
+   "shinsei": 1509,
+   "torisage": 56,
+   "kyakka": 142,
+   "kaishi_setai": 1310,
+   "kaishi_nin": 1601,
+   "mishori": 50,
+   "haishi_setai": 994,
+   "haishi_nin": 1100,
+   "name": "群馬県",
+   "hist": {
+    "2019": {
+     "shinsei": 946,
+     "kyakka": 120,
+     "torisage": 33
+    },
+    "2020": {
+     "shinsei": 1003,
+     "kyakka": 120,
+     "torisage": 45
+    },
+    "2021": {
+     "shinsei": 970,
+     "kyakka": 88,
+     "torisage": 48
+    },
+    "2022": {
+     "shinsei": 1107,
+     "kyakka": 109,
+     "torisage": 30
+    },
+    "2023": {
+     "shinsei": 1263,
+     "kyakka": 140,
+     "torisage": 39
+    },
+    "2024": {
+     "shinsei": 1509,
+     "kyakka": 142,
+     "torisage": 56
+    }
+   },
+   "hogo_nin": 7948,
+   "hogo_ritsu": 6.7,
+   "jinko": 1186269,
+   "excluded": [
+    "前橋市",
+    "高崎市"
+   ]
+  },
+  {
+   "level": "中核市",
+   "shinsei": 1177,
+   "torisage": 135,
+   "kyakka": 198,
+   "kaishi_setai": 858,
+   "kaishi_nin": 1085,
+   "mishori": 18,
+   "haishi_setai": 886,
+   "haishi_nin": 1066,
+   "name": "船橋市",
+   "hist": {
+    "2019": {
+     "shinsei": 1257,
+     "kyakka": 156,
+     "torisage": 214
+    },
+    "2020": {
+     "shinsei": 1154,
+     "kyakka": 107,
+     "torisage": 194
+    },
+    "2021": {
+     "shinsei": 1250,
+     "kyakka": 129,
+     "torisage": 179
+    },
+    "2022": {
+     "shinsei": 1174,
+     "kyakka": 116,
+     "torisage": 186
+    },
+    "2023": {
+     "shinsei": 1195,
+     "kyakka": 157,
+     "torisage": 165
+    },
+    "2024": {
+     "shinsei": 1177,
+     "kyakka": 198,
+     "torisage": 135
+    }
+   },
+   "hogo_nin": 9297,
+   "hogo_ritsu": 14.3,
+   "jinko": 650140,
+   "pref": "千葉県"
+  },
+  {
+   "level": "都道府県",
+   "shinsei": 3652,
+   "torisage": 171,
+   "kyakka": 406,
+   "kaishi_setai": 3060,
+   "kaishi_nin": 3757,
+   "mishori": 188,
+   "haishi_setai": 2963,
+   "haishi_nin": 3379,
+   "name": "茨城県",
+   "hist": {
+    "2019": {
+     "shinsei": 3541,
+     "kyakka": 298,
+     "torisage": 175
+    },
+    "2020": {
+     "shinsei": 3135,
+     "kyakka": 291,
+     "torisage": 198
+    },
+    "2021": {
+     "shinsei": 3392,
+     "kyakka": 374,
+     "torisage": 184
+    },
+    "2022": {
+     "shinsei": 3459,
+     "kyakka": 344,
+     "torisage": 157
+    },
+    "2023": {
+     "shinsei": 3712,
+     "kyakka": 392,
+     "torisage": 187
+    },
+    "2024": {
+     "shinsei": 3652,
+     "kyakka": 406,
+     "torisage": 171
+    }
+   },
+   "hogo_nin": 24061,
+   "hogo_ritsu": 9.5,
+   "jinko": 2532737,
+   "excluded": [
+    "水戸市"
+   ]
+  },
+  {
+   "level": "中核市",
+   "shinsei": 582,
+   "torisage": 16,
+   "kyakka": 22,
+   "kaishi_setai": 546,
+   "kaishi_nin": 729,
+   "mishori": 17,
+   "haishi_setai": 607,
+   "haishi_nin": 717,
+   "name": "西宮市",
+   "hist": {
+    "2019": {
+     "shinsei": 536,
+     "kyakka": 14,
+     "torisage": 16
+    },
+    "2020": {
+     "shinsei": 589,
+     "kyakka": 17,
+     "torisage": 14
+    },
+    "2021": {
+     "shinsei": 573,
+     "kyakka": 20,
+     "torisage": 19
+    },
+    "2022": {
+     "shinsei": 667,
+     "kyakka": 18,
+     "torisage": 20
+    },
+    "2023": {
+     "shinsei": 616,
+     "kyakka": 20,
+     "torisage": 21
+    },
+    "2024": {
+     "shinsei": 582,
+     "kyakka": 22,
+     "torisage": 16
+    }
+   },
+   "hogo_nin": 7752,
+   "hogo_ritsu": 16.1,
+   "jinko": 481491,
+   "pref": "兵庫県"
+  },
+  {
+   "level": "中核市",
+   "shinsei": 858,
+   "torisage": 11,
+   "kyakka": 36,
+   "kaishi_setai": 800,
+   "kaishi_nin": 1015,
+   "mishori": 43,
+   "haishi_setai": 971,
+   "haishi_nin": 1124,
+   "name": "豊中市",
+   "hist": {
+    "2019": {
+     "shinsei": 747,
+     "kyakka": 39,
+     "torisage": 14
+    },
+    "2020": {
+     "shinsei": 742,
+     "kyakka": 23,
+     "torisage": 18
+    },
+    "2021": {
+     "shinsei": 717,
+     "kyakka": 19,
+     "torisage": 16
+    },
+    "2022": {
+     "shinsei": 895,
+     "kyakka": 21,
+     "torisage": 22
+    },
+    "2023": {
+     "shinsei": 893,
+     "kyakka": 27,
+     "torisage": 15
+    },
+    "2024": {
+     "shinsei": 858,
+     "kyakka": 36,
+     "torisage": 11
+    }
+   },
+   "hogo_nin": 9423,
+   "hogo_ritsu": 23.7,
+   "jinko": 397595,
+   "pref": "大阪府"
+  },
+  {
+   "level": "中核市",
+   "shinsei": 461,
+   "torisage": 31,
+   "kyakka": 41,
+   "kaishi_setai": 397,
+   "kaishi_nin": 498,
+   "mishori": 15,
+   "haishi_setai": 370,
+   "haishi_nin": 438,
+   "name": "豊橋市",
+   "hist": {
+    "2019": {
+     "shinsei": 227,
+     "kyakka": 12,
+     "torisage": 4
+    },
+    "2020": {
+     "shinsei": 261,
+     "kyakka": 28,
+     "torisage": 9
+    },
+    "2021": {
+     "shinsei": 381,
+     "kyakka": 24,
+     "torisage": 12
+    },
+    "2022": {
+     "shinsei": 460,
+     "kyakka": 23,
+     "torisage": 7
+    },
+    "2023": {
+     "shinsei": 481,
+     "kyakka": 21,
+     "torisage": 22
+    },
+    "2024": {
+     "shinsei": 461,
+     "kyakka": 41,
+     "torisage": 31
+    }
+   },
+   "hogo_nin": 2742,
+   "hogo_ritsu": 7.6,
+   "jinko": 360789,
+   "pref": "愛知県"
+  },
+  {
+   "level": "中核市",
+   "shinsei": 308,
+   "torisage": 13,
+   "kyakka": 17,
+   "kaishi_setai": 282,
+   "kaishi_nin": 349,
+   "mishori": 9,
+   "haishi_setai": 261,
+   "haishi_nin": 313,
+   "name": "豊田市",
+   "hist": {
+    "2019": {
+     "shinsei": 253,
+     "kyakka": 8,
+     "torisage": 4
+    },
+    "2020": {
+     "shinsei": 361,
+     "kyakka": 12,
+     "torisage": 16
+    },
+    "2021": {
+     "shinsei": 290,
+     "kyakka": 17,
+     "torisage": 11
+    },
+    "2022": {
+     "shinsei": 291,
+     "kyakka": 24,
+     "torisage": 10
+    },
+    "2023": {
+     "shinsei": 317,
+     "kyakka": 15,
+     "torisage": 10
+    },
+    "2024": {
+     "shinsei": 308,
+     "kyakka": 17,
+     "torisage": 13
+    }
+   },
+   "hogo_nin": 2288,
+   "hogo_ritsu": 5.5,
+   "jinko": 416000,
+   "pref": "愛知県"
+  },
+  {
+   "level": "中核市",
+   "shinsei": 502,
+   "torisage": 13,
+   "kyakka": 17,
+   "kaishi_setai": 478,
+   "kaishi_nin": 589,
+   "mishori": 73,
+   "haishi_setai": 438,
+   "haishi_nin": 528,
+   "name": "越谷市",
+   "hist": {
+    "2019": {
+     "shinsei": 536,
+     "kyakka": 8,
+     "torisage": 16
+    },
+    "2020": {
+     "shinsei": 445,
+     "kyakka": 9,
+     "torisage": 19
+    },
+    "2021": {
+     "shinsei": 462,
+     "kyakka": 9,
+     "torisage": 23
+    },
+    "2022": {
+     "shinsei": 469,
+     "kyakka": 8,
+     "torisage": 19
+    },
+    "2023": {
+     "shinsei": 488,
+     "kyakka": 12,
+     "torisage": 18
+    },
+    "2024": {
+     "shinsei": 502,
+     "kyakka": 17,
+     "torisage": 13
+    }
+   },
+   "hogo_nin": 4470,
+   "hogo_ritsu": 13.2,
+   "jinko": 338636,
+   "pref": "埼玉県"
+  },
+  {
+   "level": "中核市",
+   "shinsei": 1676,
+   "torisage": 146,
+   "kyakka": 99,
+   "kaishi_setai": 1397,
+   "kaishi_nin": 1676,
+   "mishori": 189,
+   "haishi_setai": 1357,
+   "haishi_nin": 1545,
+   "name": "那覇市",
+   "hist": {
+    "2019": {
+     "shinsei": 1278,
+     "kyakka": 68,
+     "torisage": 98
+    },
+    "2020": {
+     "shinsei": 1319,
+     "kyakka": 78,
+     "torisage": 126
+    },
+    "2021": {
+     "shinsei": 1400,
+     "kyakka": 68,
+     "torisage": 123
+    },
+    "2022": {
+     "shinsei": 1543,
+     "kyakka": 72,
+     "torisage": 135
+    },
+    "2023": {
+     "shinsei": 1559,
+     "kyakka": 70,
+     "torisage": 156
+    },
+    "2024": {
+     "shinsei": 1676,
+     "kyakka": 99,
+     "torisage": 146
+    }
+   },
+   "hogo_nin": 13550,
+   "hogo_ritsu": 43.7,
+   "jinko": 310069,
+   "pref": "沖縄県"
+  },
+  {
+   "level": "中核市",
+   "shinsei": 499,
+   "torisage": 17,
+   "kyakka": 27,
+   "kaishi_setai": 447,
+   "kaishi_nin": 541,
+   "mishori": 19,
+   "haishi_setai": 379,
+   "haishi_nin": 437,
+   "name": "郡山市",
+   "hist": {
+    "2019": {
+     "shinsei": 376,
+     "kyakka": 21,
+     "torisage": 20
+    },
+    "2020": {
+     "shinsei": 446,
+     "kyakka": 21,
+     "torisage": 15
+    },
+    "2021": {
+     "shinsei": 428,
+     "kyakka": 21,
+     "torisage": 24
+    },
+    "2022": {
+     "shinsei": 428,
+     "kyakka": 18,
+     "torisage": 17
+    },
+    "2023": {
+     "shinsei": 444,
+     "kyakka": 17,
+     "torisage": 16
+    },
+    "2024": {
+     "shinsei": 499,
+     "kyakka": 27,
+     "torisage": 17
+    }
+   },
+   "hogo_nin": 3403,
+   "hogo_ritsu": 10.7,
+   "jinko": 318037,
+   "pref": "福島県"
+  },
+  {
+   "level": "中核市",
+   "shinsei": 476,
+   "torisage": 9,
+   "kyakka": 17,
+   "kaishi_setai": 439,
+   "kaishi_nin": 502,
+   "mishori": 31,
+   "haishi_setai": 431,
+   "haishi_nin": 480,
+   "name": "金沢市",
+   "hist": {
+    "2019": {
+     "shinsei": 375,
+     "kyakka": 20,
+     "torisage": 18
+    },
+    "2020": {
+     "shinsei": 355,
+     "kyakka": 16,
+     "torisage": 8
+    },
+    "2021": {
+     "shinsei": 432,
+     "kyakka": 22,
+     "torisage": 11
+    },
+    "2022": {
+     "shinsei": 476,
+     "kyakka": 27,
+     "torisage": 3
+    },
+    "2023": {
+     "shinsei": 468,
+     "kyakka": 22,
+     "torisage": 11
+    },
+    "2024": {
+     "shinsei": 476,
+     "kyakka": 17,
+     "torisage": 9
+    }
+   },
+   "hogo_nin": 4211,
+   "hogo_ritsu": 9.2,
+   "jinko": 457717,
+   "pref": "石川県"
+  },
+  {
+   "level": "中核市",
+   "shinsei": 847,
+   "torisage": 64,
+   "kyakka": 28,
+   "kaishi_setai": 749,
+   "kaishi_nin": 959,
+   "mishori": 62,
+   "haishi_setai": 857,
+   "haishi_nin": 1070,
+   "name": "長崎市",
+   "hist": {
+    "2019": {
+     "shinsei": 823,
+     "kyakka": 12,
+     "torisage": 54
+    },
+    "2020": {
+     "shinsei": 750,
+     "kyakka": 22,
+     "torisage": 48
+    },
+    "2021": {
+     "shinsei": 705,
+     "kyakka": 17,
+     "torisage": 41
+    },
+    "2022": {
+     "shinsei": 806,
+     "kyakka": 23,
+     "torisage": 51
+    },
+    "2023": {
+     "shinsei": 770,
+     "kyakka": 20,
+     "torisage": 65
+    },
+    "2024": {
+     "shinsei": 847,
+     "kyakka": 28,
+     "torisage": 64
+    }
+   },
+   "hogo_nin": 11410,
+   "hogo_ritsu": 29.4,
+   "jinko": 388095,
+   "pref": "長崎県"
+  },
+  {
+   "level": "都道府県",
+   "shinsei": 1184,
+   "torisage": 88,
+   "kyakka": 146,
+   "kaishi_setai": 960,
+   "kaishi_nin": 1218,
+   "mishori": 52,
+   "haishi_setai": 1039,
+   "haishi_nin": 1256,
+   "name": "長崎県",
+   "hist": {
+    "2019": {
+     "shinsei": 1025,
+     "kyakka": 148,
+     "torisage": 82
+    },
+    "2020": {
+     "shinsei": 982,
+     "kyakka": 112,
+     "torisage": 99
+    },
+    "2021": {
+     "shinsei": 1111,
+     "kyakka": 111,
+     "torisage": 106
+    },
+    "2022": {
+     "shinsei": 1150,
+     "kyakka": 173,
+     "torisage": 107
+    },
+    "2023": {
+     "shinsei": 1041,
+     "kyakka": 138,
+     "torisage": 101
+    },
+    "2024": {
+     "shinsei": 1184,
+     "kyakka": 146,
+     "torisage": 88
+    }
+   },
+   "hogo_nin": 9028,
+   "hogo_ritsu": 14.3,
+   "jinko": 631329,
+   "excluded": [
+    "佐世保市",
+    "長崎市"
+   ]
+  },
+  {
+   "level": "中核市",
+   "shinsei": 318,
+   "torisage": 5,
+   "kyakka": 25,
+   "kaishi_setai": 289,
+   "kaishi_nin": 335,
+   "mishori": 7,
+   "haishi_setai": 363,
+   "haishi_nin": 413,
+   "name": "長野市",
+   "hist": {
+    "2019": {
+     "shinsei": 342,
+     "kyakka": 5,
+     "torisage": 11
+    },
+    "2020": {
+     "shinsei": 386,
+     "kyakka": 4,
+     "torisage": 18
+    },
+    "2021": {
+     "shinsei": 362,
+     "kyakka": 13,
+     "torisage": 15
+    },
+    "2022": {
+     "shinsei": 350,
+     "kyakka": 13,
+     "torisage": 9
+    },
+    "2023": {
+     "shinsei": 347,
+     "kyakka": 21,
+     "torisage": 12
+    },
+    "2024": {
+     "shinsei": 318,
+     "kyakka": 25,
+     "torisage": 5
+    }
+   },
+   "hogo_nin": 3078,
+   "hogo_ritsu": 8.5,
+   "jinko": 362118,
+   "pref": "長野県"
+  },
+  {
+   "level": "都道府県",
+   "shinsei": 1074,
+   "torisage": 42,
+   "kyakka": 148,
+   "kaishi_setai": 881,
+   "kaishi_nin": 1071,
+   "mishori": 34,
+   "haishi_setai": 869,
+   "haishi_nin": 1006,
+   "name": "長野県",
+   "hist": {
+    "2019": {
+     "shinsei": 1158,
+     "kyakka": 95,
+     "torisage": 82
+    },
+    "2020": {
+     "shinsei": 1341,
+     "kyakka": 151,
+     "torisage": 107
+    },
+    "2021": {
+     "shinsei": 936,
+     "kyakka": 91,
+     "torisage": 65
+    },
+    "2022": {
+     "shinsei": 905,
+     "kyakka": 95,
+     "torisage": 43
+    },
+    "2023": {
+     "shinsei": 982,
+     "kyakka": 111,
+     "torisage": 60
+    },
+    "2024": {
+     "shinsei": 1074,
+     "kyakka": 148,
+     "torisage": 42
+    }
+   },
+   "hogo_nin": 5910,
+   "hogo_ritsu": 4.3,
+   "jinko": 1374419,
+   "excluded": [
+    "松本市",
+    "長野市"
+   ]
+  },
+  {
+   "level": "中核市",
+   "shinsei": 720,
+   "torisage": 45,
+   "kyakka": 125,
+   "kaishi_setai": 537,
+   "kaishi_nin": 656,
+   "mishori": 31,
+   "haishi_setai": 660,
+   "haishi_nin": 737,
+   "name": "青森市",
+   "hist": {
+    "2019": {
+     "shinsei": 756,
+     "kyakka": 95,
+     "torisage": 95
+    },
+    "2020": {
+     "shinsei": 727,
+     "kyakka": 101,
+     "torisage": 88
+    },
+    "2021": {
+     "shinsei": 714,
+     "kyakka": 109,
+     "torisage": 78
+    },
+    "2022": {
+     "shinsei": 758,
+     "kyakka": 174,
+     "torisage": 48
+    },
+    "2023": {
+     "shinsei": 742,
+     "kyakka": 157,
+     "torisage": 51
+    },
+    "2024": {
+     "shinsei": 720,
+     "kyakka": 125,
+     "torisage": 45
+    }
+   },
+   "hogo_nin": 7731,
+   "hogo_ritsu": 29.7,
+   "jinko": 260303,
+   "pref": "青森県"
+  },
+  {
+   "level": "都道府県",
+   "shinsei": 2159,
+   "torisage": 89,
+   "kyakka": 462,
+   "kaishi_setai": 1582,
+   "kaishi_nin": 1853,
+   "mishori": 104,
+   "haishi_setai": 1590,
+   "haishi_nin": 1723,
+   "name": "青森県",
+   "hist": {
+    "2019": {
+     "shinsei": 1905,
+     "kyakka": 375,
+     "torisage": 131
+    },
+    "2020": {
+     "shinsei": 1757,
+     "kyakka": 350,
+     "torisage": 103
+    },
+    "2021": {
+     "shinsei": 1772,
+     "kyakka": 372,
+     "torisage": 109
+    },
+    "2022": {
+     "shinsei": 1991,
+     "kyakka": 449,
+     "torisage": 103
+    },
+    "2023": {
+     "shinsei": 2098,
+     "kyakka": 459,
+     "torisage": 96
+    },
+    "2024": {
+     "shinsei": 2159,
+     "kyakka": 462,
+     "torisage": 89
+    }
+   },
+   "hogo_nin": 15359,
+   "hogo_ritsu": 22.2,
+   "jinko": 691847,
+   "excluded": [
+    "八戸市",
+    "青森市"
+   ]
+  },
+  {
+   "level": "指定都市",
+   "shinsei": 1597,
+   "torisage": 66,
+   "kyakka": 313,
+   "kaishi_setai": 1198,
+   "kaishi_nin": 1451,
+   "mishori": 506,
+   "haishi_setai": 1203,
+   "haishi_nin": 1419,
+   "name": "静岡市",
+   "hist": {
+    "2019": {
+     "shinsei": 1194,
+     "kyakka": 105,
+     "torisage": 45
+    },
+    "2020": {
+     "shinsei": 1311,
+     "kyakka": 136,
+     "torisage": 67
+    },
+    "2021": {
+     "shinsei": 1289,
+     "kyakka": 209,
+     "torisage": 62
+    },
+    "2022": {
+     "shinsei": 1538,
+     "kyakka": 319,
+     "torisage": 61
+    },
+    "2023": {
+     "shinsei": 1513,
+     "kyakka": 287,
+     "torisage": 41
+    },
+    "2024": {
+     "shinsei": 1597,
+     "kyakka": 313,
+     "torisage": 66
+    }
+   },
+   "hogo_nin": 9492,
+   "hogo_ritsu": 14.1,
+   "jinko": 673191,
+   "pref": "静岡県"
+  },
+  {
+   "level": "都道府県",
+   "shinsei": 2542,
+   "torisage": 103,
+   "kyakka": 219,
+   "kaishi_setai": 2214,
+   "kaishi_nin": 2699,
+   "mishori": 118,
+   "haishi_setai": 2192,
+   "haishi_nin": 2563,
+   "name": "静岡県",
+   "hist": {
+    "2019": {
+     "shinsei": 2164,
+     "kyakka": 183,
+     "torisage": 84
+    },
+    "2020": {
+     "shinsei": 2384,
+     "kyakka": 199,
+     "torisage": 110
+    },
+    "2021": {
+     "shinsei": 2401,
+     "kyakka": 226,
+     "torisage": 89
+    },
+    "2022": {
+     "shinsei": 2452,
+     "kyakka": 203,
+     "torisage": 82
+    },
+    "2023": {
+     "shinsei": 2398,
+     "kyakka": 207,
+     "torisage": 105
+    },
+    "2024": {
+     "shinsei": 2542,
+     "kyakka": 219,
+     "torisage": 103
+    }
+   },
+   "hogo_nin": 16001,
+   "hogo_ritsu": 7.7,
+   "jinko": 2078052,
+   "excluded": [
+    "浜松市",
+    "静岡市"
+   ]
+  },
+  {
+   "level": "都道府県",
+   "shinsei": 574,
+   "torisage": 28,
+   "kyakka": 84,
+   "kaishi_setai": 467,
+   "kaishi_nin": 575,
+   "mishori": 17,
+   "haishi_setai": 473,
+   "haishi_nin": 542,
+   "name": "香川県",
+   "hist": {
+    "2019": {
+     "shinsei": 487,
+     "kyakka": 41,
+     "torisage": 28
+    },
+    "2020": {
+     "shinsei": 510,
+     "kyakka": 41,
+     "torisage": 31
+    },
+    "2021": {
+     "shinsei": 519,
+     "kyakka": 43,
+     "torisage": 37
+    },
+    "2022": {
+     "shinsei": 502,
+     "kyakka": 67,
+     "torisage": 16
+    },
+    "2023": {
+     "shinsei": 510,
+     "kyakka": 86,
+     "torisage": 23
+    },
+    "2024": {
+     "shinsei": 574,
+     "kyakka": 84,
+     "torisage": 28
+    }
+   },
+   "hogo_nin": 3754,
+   "hogo_ritsu": 7.4,
+   "jinko": 507297,
+   "excluded": [
+    "高松市"
+   ]
+  },
+  {
+   "level": "中核市",
+   "shinsei": 497,
+   "torisage": 21,
+   "kyakka": 25,
+   "kaishi_setai": 452,
+   "kaishi_nin": 517,
+   "mishori": 13,
+   "haishi_setai": 389,
+   "haishi_nin": 415,
+   "name": "高崎市",
+   "hist": {
+    "2019": {
+     "shinsei": 378,
+     "kyakka": 27,
+     "torisage": 16
+    },
+    "2020": {
+     "shinsei": 376,
+     "kyakka": 24,
+     "torisage": 12
+    },
+    "2021": {
+     "shinsei": 405,
+     "kyakka": 18,
+     "torisage": 23
+    },
+    "2022": {
+     "shinsei": 447,
+     "kyakka": 20,
+     "torisage": 14
+    },
+    "2023": {
+     "shinsei": 492,
+     "kyakka": 17,
+     "torisage": 23
+    },
+    "2024": {
+     "shinsei": 497,
+     "kyakka": 25,
+     "torisage": 21
+    }
+   },
+   "hogo_nin": 3552,
+   "hogo_ritsu": 9.7,
+   "jinko": 366186,
+   "pref": "群馬県"
+  },
+  {
+   "level": "中核市",
+   "shinsei": 703,
+   "torisage": 18,
+   "kyakka": 37,
+   "kaishi_setai": 656,
+   "kaishi_nin": 840,
+   "mishori": 68,
+   "haishi_setai": 615,
+   "haishi_nin": 714,
+   "name": "高松市",
+   "hist": {
+    "2019": {
+     "shinsei": 598,
+     "kyakka": 36,
+     "torisage": 27
+    },
+    "2020": {
+     "shinsei": 605,
+     "kyakka": 49,
+     "torisage": 19
+    },
+    "2021": {
+     "shinsei": 641,
+     "kyakka": 34,
+     "torisage": 24
+    },
+    "2022": {
+     "shinsei": 685,
+     "kyakka": 39,
+     "torisage": 25
+    },
+    "2023": {
+     "shinsei": 633,
+     "kyakka": 36,
+     "torisage": 20
+    },
+    "2024": {
+     "shinsei": 703,
+     "kyakka": 37,
+     "torisage": 18
+    }
+   },
+   "hogo_nin": 6273,
+   "hogo_ritsu": 15.3,
+   "jinko": 410000,
+   "pref": "香川県"
+  },
+  {
+   "level": "中核市",
+   "shinsei": 588,
+   "torisage": 26,
+   "kyakka": 29,
+   "kaishi_setai": 534,
+   "kaishi_nin": 710,
+   "mishori": 16,
+   "haishi_setai": 524,
+   "haishi_nin": 655,
+   "name": "高槻市",
+   "hist": {
+    "2019": {
+     "shinsei": 470,
+     "kyakka": 20,
+     "torisage": 18
+    },
+    "2020": {
+     "shinsei": 487,
+     "kyakka": 26,
+     "torisage": 24
+    },
+    "2021": {
+     "shinsei": 490,
+     "kyakka": 23,
+     "torisage": 21
+    },
+    "2022": {
+     "shinsei": 492,
+     "kyakka": 30,
+     "torisage": 16
+    },
+    "2023": {
+     "shinsei": 555,
+     "kyakka": 38,
+     "torisage": 25
+    },
+    "2024": {
+     "shinsei": 588,
+     "kyakka": 29,
+     "torisage": 26
+    }
+   },
+   "hogo_nin": 5635,
+   "hogo_ritsu": 16.3,
+   "jinko": 345706,
+   "pref": "大阪府"
+  },
+  {
+   "level": "中核市",
+   "shinsei": 995,
+   "torisage": 34,
+   "kyakka": 95,
+   "kaishi_setai": 883,
+   "kaishi_nin": 1067,
+   "mishori": 26,
+   "haishi_setai": 997,
+   "haishi_nin": 1152,
+   "name": "高知市",
+   "hist": {
+    "2019": {
+     "shinsei": 914,
+     "kyakka": 95,
+     "torisage": 68
+    },
+    "2020": {
+     "shinsei": 784,
+     "kyakka": 86,
+     "torisage": 47
+    },
+    "2021": {
+     "shinsei": 807,
+     "kyakka": 104,
+     "torisage": 61
+    },
+    "2022": {
+     "shinsei": 1049,
+     "kyakka": 124,
+     "torisage": 42
+    },
+    "2023": {
+     "shinsei": 965,
+     "kyakka": 79,
+     "torisage": 27
+    },
+    "2024": {
+     "shinsei": 995,
+     "kyakka": 95,
+     "torisage": 34
+    }
+   },
+   "hogo_nin": 10461,
+   "hogo_ritsu": 33.3,
+   "jinko": 314144,
+   "pref": "高知県"
+  },
+  {
+   "level": "都道府県",
+   "shinsei": 1065,
+   "torisage": 62,
+   "kyakka": 234,
+   "kaishi_setai": 758,
+   "kaishi_nin": 1012,
+   "mishori": 29,
+   "haishi_setai": 836,
+   "haishi_nin": 984,
+   "name": "高知県",
+   "hist": {
+    "2019": {
+     "shinsei": 957,
+     "kyakka": 170,
+     "torisage": 92
+    },
+    "2020": {
+     "shinsei": 861,
+     "kyakka": 183,
+     "torisage": 64
+    },
+    "2021": {
+     "shinsei": 949,
+     "kyakka": 243,
+     "torisage": 42
+    },
+    "2022": {
+     "shinsei": 997,
+     "kyakka": 219,
+     "torisage": 65
+    },
+    "2023": {
+     "shinsei": 898,
+     "kyakka": 197,
+     "torisage": 56
+    },
+    "2024": {
+     "shinsei": 1065,
+     "kyakka": 234,
+     "torisage": 62
+    }
+   },
+   "hogo_nin": 6290,
+   "hogo_ritsu": 18.4,
+   "jinko": 341848,
+   "excluded": [
+    "高知市"
+   ]
+  },
+  {
+   "level": "中核市",
+   "shinsei": 299,
+   "torisage": 18,
+   "kyakka": 42,
+   "kaishi_setai": 239,
+   "kaishi_nin": 333,
+   "mishori": 10,
+   "haishi_setai": 260,
+   "haishi_nin": 342,
+   "name": "鳥取市",
+   "hist": {
+    "2019": {
+     "shinsei": 275,
+     "kyakka": 26,
+     "torisage": 23
+    },
+    "2020": {
+     "shinsei": 260,
+     "kyakka": 24,
+     "torisage": 24
+    },
+    "2021": {
+     "shinsei": 266,
+     "kyakka": 32,
+     "torisage": 26
+    },
+    "2022": {
+     "shinsei": 251,
+     "kyakka": 26,
+     "torisage": 12
+    },
+    "2023": {
+     "shinsei": 307,
+     "kyakka": 36,
+     "torisage": 22
+    },
+    "2024": {
+     "shinsei": 299,
+     "kyakka": 42,
+     "torisage": 18
+    }
+   },
+   "hogo_nin": 2700,
+   "hogo_ritsu": 14.8,
+   "jinko": 182432,
+   "pref": "鳥取県"
+  },
+  {
+   "level": "都道府県",
+   "shinsei": 632,
+   "torisage": 30,
+   "kyakka": 124,
+   "kaishi_setai": 463,
+   "kaishi_nin": 591,
+   "mishori": 32,
+   "haishi_setai": 478,
+   "haishi_nin": 571,
+   "name": "鳥取県",
+   "hist": {
+    "2019": {
+     "shinsei": 583,
+     "kyakka": 102,
+     "torisage": 32
+    },
+    "2020": {
+     "shinsei": 541,
+     "kyakka": 126,
+     "torisage": 36
+    },
+    "2021": {
+     "shinsei": 591,
+     "kyakka": 111,
+     "torisage": 39
+    },
+    "2022": {
+     "shinsei": 579,
+     "kyakka": 108,
+     "torisage": 37
+    },
+    "2023": {
+     "shinsei": 576,
+     "kyakka": 108,
+     "torisage": 40
+    },
+    "2024": {
+     "shinsei": 632,
+     "kyakka": 124,
+     "torisage": 30
+    }
+   },
+   "hogo_nin": 3656,
+   "hogo_ritsu": 10.5,
+   "jinko": 348190,
+   "excluded": [
+    "鳥取市"
+   ]
+  },
+  {
+   "level": "中核市",
+   "shinsei": 1278,
+   "torisage": 64,
+   "kyakka": 31,
+   "kaishi_setai": 1182,
+   "kaishi_nin": 1546,
+   "mishori": 165,
+   "haishi_setai": 1241,
+   "haishi_nin": 1491,
+   "name": "鹿児島市",
+   "hist": {
+    "2019": {
+     "shinsei": 1201,
+     "kyakka": 36,
+     "torisage": 81
+    },
+    "2020": {
+     "shinsei": 1195,
+     "kyakka": 36,
+     "torisage": 55
+    },
+    "2021": {
+     "shinsei": 1182,
+     "kyakka": 37,
+     "torisage": 56
+    },
+    "2022": {
+     "shinsei": 1237,
+     "kyakka": 49,
+     "torisage": 60
+    },
+    "2023": {
+     "shinsei": 1153,
+     "kyakka": 49,
+     "torisage": 45
+    },
+    "2024": {
+     "shinsei": 1278,
+     "kyakka": 31,
+     "torisage": 64
+    }
+   },
+   "hogo_nin": 14562,
+   "hogo_ritsu": 25.0,
+   "jinko": 582480,
+   "pref": "鹿児島県"
+  },
+  {
+   "level": "都道府県",
+   "shinsei": 1756,
+   "torisage": 156,
+   "kyakka": 178,
+   "kaishi_setai": 1413,
+   "kaishi_nin": 1865,
+   "mishori": 113,
+   "haishi_setai": 1654,
+   "haishi_nin": 2042,
+   "name": "鹿児島県",
+   "hist": {
+    "2019": {
+     "shinsei": 1679,
+     "kyakka": 133,
+     "torisage": 147
+    },
+    "2020": {
+     "shinsei": 1564,
+     "kyakka": 164,
+     "torisage": 125
+    },
+    "2021": {
+     "shinsei": 1654,
+     "kyakka": 141,
+     "torisage": 120
+    },
+    "2022": {
+     "shinsei": 1736,
+     "kyakka": 170,
+     "torisage": 156
+    },
+    "2023": {
+     "shinsei": 1722,
+     "kyakka": 187,
+     "torisage": 143
+    },
+    "2024": {
+     "shinsei": 1756,
+     "kyakka": 178,
+     "torisage": 156
+    }
+   },
+   "hogo_nin": 13726,
+   "hogo_ritsu": 14.5,
+   "jinko": 946621,
+   "excluded": [
+    "鹿児島市"
+   ]
+  }
+ ]
+}
