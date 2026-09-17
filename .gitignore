@@ -19,3 +19,8 @@ tools/__pycache__/
 # PDFから再生成できる（node scripts/kawasaki-fetch.mjs → python scripts/kawasaki-parse.py）。
 # 都営と同じ扱い＝公開するのは検算ゲートを通した生成物だけにする。
 data/kawasaki-bairitsu.json
+
+# 静岡市・横浜市の応募状況表PDFを読み取った生の中間ファイル。
+# PDFから再生成できる（*-fetch.mjs → *-parse.py）。川崎・都営と同じ扱い。
+data/shizuoka-bairitsu.json
+data/yokohama-bairitsu.json
