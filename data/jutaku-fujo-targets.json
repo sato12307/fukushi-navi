@@ -48,7 +48,7 @@
    "level": "都道府県",
    "pref": "北海道",
    "status": "B",
-   "note": "3e8c9b32.pdf:限度額の表が見つからない; 63a7de45.html:限度額の表が見つからない; 7b67e8ca.pdf:本文に「住宅扶助」も「住居確保給付金」も無い; c3138aa9.html:限度額の表が見つからない; facb884e.html:限度額の表が見つからない",
+   "note": "3e8c9b32.pdf:限度額の表が見つからない; 63a7de45.html:限度額の表が見つからない; 7b67e8ca.pdf:限度額の表が見つからない; c3138aa9.html:限度額の表が見つからない; facb884e.html:限度額の表が見つからない",
    "checked": "2026-09-17",
    "urls": [
     "https://www.pref.hokkaido.lg.jp/hf/feg/hog/hogoanai1.html",
@@ -61,10 +61,13 @@
    "name": "千葉県",
    "level": "都道府県",
    "pref": "千葉県",
-   "status": "未調査",
-   "note": null,
-   "checked": null,
-   "urls": [],
+   "status": "B",
+   "note": "046e900b.html:限度額の表が見つからない; 1cd374f7.pdf:限度額の表が見つからない; 357263cc.pdf:生活保護の書類ではない",
+   "checked": "2026-09-17",
+   "urls": [
+    "https://www.pref.chiba.lg.jp/kenshidou/shien/book/seikatsuhogo.html",
+    "https://www.pref.chiba.lg.jp/kenshidou/shien/book/documents/18seikatsuhogo.pdf"
+   ],
    "picked": null
   },
   {
@@ -124,7 +127,7 @@
    "level": "都道府県",
    "pref": "宮城県",
    "status": "B",
-   "note": "13430301.html:本文に「住宅扶助」も「住居確保給付金」も無い; 8000554e.html:本文に「住宅扶助」も「住居確保給付金」も無い; feddbc8d.html:本文に「住宅扶助」も「住居確保給付金」も無い",
+   "note": "13430301.html:限度額の表が見つからない; 8000554e.html:限度額の表が見つからない; feddbc8d.html:限度額の表が見つからない",
    "checked": "2026-09-17",
    "urls": [
     "https://www.pref.miyagi.jp/soshiki/ks-health/seiho03.html",
@@ -276,11 +279,13 @@
    "name": "東京都",
    "level": "都道府県",
    "pref": "東京都",
-   "status": "未調査",
+   "status": "A",
    "note": null,
-   "checked": null,
-   "urls": [],
-   "picked": null
+   "checked": "2026-09-17",
+   "urls": [
+    "https://www.fukushi.metro.tokyo.lg.jp/documents/d/fukushi/jyutakuminaoshi"
+   ],
+   "picked": "https://www.fukushi.metro.tokyo.lg.jp/documents/d/fukushi/jyutakuminaoshi"
   },
   {
    "name": "栃木県",
@@ -377,7 +382,7 @@
    "level": "都道府県",
    "pref": "秋田県",
    "status": "B",
-   "note": "1d9875d3.pdf:限度額の表が見つからない; 730356b8.html:本文に「住宅扶助」も「住居確保給付金」も無い; 974bebdc.pdf:限度額の表が見つからない; c331f7ef.pdf:限度額の表が見つからない",
+   "note": "1d9875d3.pdf:限度額の表が見つからない; 730356b8.html:限度額の表が見つからない; 974bebdc.pdf:限度額の表が見つからない; c331f7ef.pdf:限度額の表が見つからない",
    "checked": "2026-09-17",
    "urls": [
     "https://www.pref.akita.lg.jp/pages/archive/293",
@@ -503,10 +508,14 @@
    "name": "京都市",
    "level": "指定都市",
    "pref": "京都府",
-   "status": "未調査",
-   "note": null,
-   "checked": null,
-   "urls": [],
+   "status": "B",
+   "note": "81e0a681.pdf:生活保護の書類ではない; 91a4b745.html:限度額の表が見つからない; d8fc451a.pdf:限度額の表が見つからない",
+   "checked": "2026-09-17",
+   "urls": [
+    "https://www.city.kyoto.lg.jp/hokenfukushi/cmsfiles/contents/0000344/344816/0710_kijun.pdf",
+    "https://www.city.kyoto.lg.jp/hokenfukushi/page/0000149325.html",
+    "https://www.city.kyoto.lg.jp/hokenfukushi/cmsfiles/contents/0000005/5320/0508jyukyuu.pdf"
+   ],
    "picked": null
   },
   {
@@ -543,10 +552,14 @@
    "name": "名古屋市",
    "level": "指定都市",
    "pref": "愛知県",
-   "status": "未調査",
-   "note": null,
-   "checked": null,
-   "urls": [],
+   "status": "B",
+   "note": "04074de2.html:限度額の表が見つからない; 194f23a1.html:限度額の表が見つからない; 23b4f6a1.html:限度額の表が見つからない; 2c114380.pdf:限度額の表が見つからない; 7f2fd065.html:限度額の表が見つからない",
+   "checked": "2026-09-17",
+   "urls": [
+    "https://www.city.nagoya.jp/kenkofukushi/page/0000128510.html",
+    "https://www.city.nagoya.jp/_res/projects/default_project/_page_/001/016/734/317seikatuhogo.pdf",
+    "https://www.city.nagoya.jp/kenkofukushi/fukushi/1051323/1016734.html"
+   ],
    "picked": null
   },
   {
@@ -615,22 +628,27 @@
    "name": "札幌市",
    "level": "指定都市",
    "pref": "北海道",
-   "status": "B",
-   "note": "キャッシュが無い（fetch がまだ）",
+   "status": "A",
+   "note": null,
    "checked": "2026-09-17",
    "urls": [
-    "https://www.city.sapporo.jp/fukushi-guide/documents/seikatsuhogo-r8-4-kijunn.pdf"
+    "https://www.city.sapporo.jp/fukushi-guide/documents/seikatsuhogo-r8-4-kijunn.pdf",
+    "https://www.city.sapporo.jp/fukushi-guide/seikatuhogo.html"
    ],
-   "picked": null
+   "picked": "https://www.city.sapporo.jp/fukushi-guide/documents/seikatsuhogo-r8-7-kijunn_1.pdf"
   },
   {
    "name": "横浜市",
    "level": "指定都市",
    "pref": "神奈川県",
-   "status": "未調査",
-   "note": null,
-   "checked": null,
-   "urls": [],
+   "status": "B",
+   "note": "4f7963fc.pdf:限度額の表が見つからない; 68ae8a58.pdf:生活保護の書類ではない; 713ed5a7.pdf:限度額の表が見つからない; bd61ebc0.pdf:限度額の表が見つからない; f316ec05.html:限度額の表が見つからない",
+   "checked": "2026-09-17",
+   "urls": [
+    "https://www.city.yokohama.lg.jp/kenko-iryo-fukushi/fukushi-kaigo/seikatsu/seikatsuhogo/hogo.files/Seiho_Shiori_A4_2025.pdf",
+    "https://www.city.yokohama.lg.jp/kenko-iryo-fukushi/fukushi-kaigo/seikatsu/jiritsu/jukyokakuho.files/jyukaku_yachin_20250401.pdf",
+    "https://www.city.yokohama.lg.jp/kenko-iryo-fukushi/fukushi-kaigo/seikatsu/seikatsuhogo/hogo.html"
+   ],
    "picked": null
   },
   {
@@ -680,10 +698,14 @@
    "name": "福岡市",
    "level": "指定都市",
    "pref": "福岡県",
-   "status": "未調査",
-   "note": null,
-   "checked": null,
-   "urls": [],
+   "status": "B",
+   "note": "4c0d0ee7.pdf:限度額の表が見つからない; 52d9aa94.pdf:限度額の表が見つからない; 74b9a0fa.pdf:限度額の表が見つからない; 9417d270.html:限度額の表が見つからない; b0f3d5a3.html:限度額の表が見つからない; ca607ada.pdf:生活保護の書類ではない; d3f62c3d.pdf:限度額の表が見つからない; eaa2eee0.h",
+   "checked": "2026-09-17",
+   "urls": [
+    "https://www.city.fukuoka.lg.jp/fukushi/seikatujiritu/health/jyukyokakuhokyuhukin_3_2.html",
+    "https://www.city.fukuoka.lg.jp/fukushi/hogo/health/dairinoufu.html",
+    "https://www.city.fukuoka.lg.jp/fukushi/hogo/health/001.html"
+   ],
    "picked": null
   },
   {
@@ -1011,7 +1033,7 @@
    "level": "中核市",
    "pref": "愛媛県",
    "status": "B",
-   "note": "209aa694.html:本文に「住宅扶助」も「住居確保給付金」も無い; 6f83455a.html:限度額の表が見つからない; 9a62a504.html:本文に「住宅扶助」も「住居確保給付金」も無い; acabaf84.html:限度額の表が見つからない",
+   "note": "209aa694.html:限度額の表が見つからない; 6f83455a.html:限度額の表が見つからない; 9a62a504.html:限度額の表が見つからない; acabaf84.html:限度額の表が見つからない",
    "checked": "2026-09-17",
    "urls": [
     "https://www.city.matsuyama.ehime.jp/kurashi/fukushi/shakai/hogo/naiyou/index.html",

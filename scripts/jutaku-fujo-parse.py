@@ -82,13 +82,41 @@ def strip_html(s):
     return re.sub(r"[\r\n]+", " ", s)
 
 
+PDF_YTOL = 3.5  # 同じ行とみなす縦のブレ幅（pt）
+
+
+def pdf_lines(path):
+    """PDFの表を「行」に組み直す。
+
+    ★get_text() の素の順序で読むと1件も取れない（札幌市・東京都で実際にそうなった）。
+      表を読み取り順で吐くので、金額が**列ごとに縦に並んで**出てくる。
+      ∴ 単語の座標を取って **y でまとめ、x で並べ直す**。[[layout-extraction-row-drift]]
+      丸めると行の境目で割れるので、しきい値（PDF_YTOL）で束ねる。
+    """
+    import fitz  # PyMuPDF（pdftotext は日本語を落とす環境がある）
+
+    out = []
+    d = fitz.open(path)
+    for pg in d:
+        words = pg.get_text("words")  # (x0, y0, x1, y1, word, block, line, word_no)
+        if not words:
+            continue
+        rows = []
+        for w in sorted(words, key=lambda w: (w[1], w[0])):
+            for r in rows:
+                if abs(r[0] - w[1]) <= PDF_YTOL:
+                    r[1].append(w)
+                    break
+            else:
+                rows.append([w[1], [w]])
+        for _, ws in rows:
+            out.append(" ".join(x[4] for x in sorted(ws, key=lambda x: x[0])))
+    return "\x02".join(out)
+
+
 def read_file(path):
     if path.endswith(".pdf"):
-        import fitz  # PyMuPDF（pdftotext は日本語を落とす環境がある）
-
-        d = fitz.open(path)
-        # PDFは1行がそのまま表の行。改行を行の区切り（\x02）に置き換えてHTMLと同じ扱いにする。
-        return "\x02".join(pg.get_text().replace("\n", "\x02") for pg in d)
+        return pdf_lines(path)
     raw = open(path, "rb").read()
     for enc in ("utf-8", "cp932", "euc_jp"):
         try:
@@ -127,10 +155,69 @@ def runs(line):
             c = seq[:5]
             if (all(c[k] <= c[k + 1] for k in range(4))
                     and c[0] >= c[1] * 0.6
-                    and TANSHIN_LO <= c[0] <= TANSHIN_HI):
+                    and TANSHIN_LO <= c[0] <= TANSHIN_HI
+                    and all(v % 100 == 0 for v in c)):  # 限度額は必ず100円単位
                 out.append(c)
         i = j
     return out
+
+
+NIN = re.compile(r"(?:^|\s)(\d{1,2})\s*人(以上)?")
+BARE = re.compile(r"(?<![(（\d])(\d{1,3}(?:,\d{3})+)(?![)）])")
+
+
+def vertical(lines):
+    """縦並びの早見表を読む。
+
+    札幌市のような1枚ものの基準額表は、住宅扶助が
+        1人 36,000 以内 46,000 以内
+        2人 43,000 以内 50,000 以内
+        …
+        7人以上 56,000 以内 65,000 以内
+    と **世帯人員ごとに1行** で並ぶ（横1行に5つ、ではない）。
+
+    ★同じ紙に第2類・期末一時扶助・逓減率も「◯人 …」の形で載っているので、
+      そのまま拾うと別の表が混ざる。落とし方＝
+        ・**かっこ付きの数字は採らない**（第2類・逓減率はすべて括弧つき）
+        ・行の最初の裸の数字だけ採る（2列目は特別基準＝1.3倍なので採らない）
+        ・単身が20,000〜60,000（期末一時扶助の13,850などはここで落ちる）
+    """
+    # ★「◯人」の行は1枚の紙に何組もある（第2類・期末一時扶助・逓減率・被服費…）。
+    #   最初に見つけた1つを採ると、まるで別の表の数字が住宅扶助として通ってしまう
+    #   （千葉県で第2類基準額 27,790… を拾って実際に通った）。
+    #   ∴ 人員ごとに **候補を全部ためて**、条件を満たす組み合わせを探す。
+    got = {}
+    for l in lines:
+        for m in NIN.finditer(l):
+            n = int(m.group(1))
+            if not 1 <= n <= 7:
+                continue
+            key = 7 if m.group(2) or n >= 7 else n
+            b = BARE.search(l[m.end():])
+            if not b:
+                continue
+            v = int(b.group(1).replace(",", ""))
+            if LO <= v <= HI and v % 100 == 0:  # 限度額は必ず100円単位。第2類(27,790)はここで落ちる
+                got.setdefault(key, []).append(v)
+    need = [1, 2, 3, 6, 7]  # 1人 / 2人 / 3〜5人 / 6人 / 7人以上
+    if not all(k in got for k in need):
+        return []
+    for c0 in sorted(set(got[1])):
+        if not TANSHIN_LO <= c0 <= TANSHIN_HI:
+            continue
+        chain = [c0]
+        for k in need[1:]:
+            nxt = [v for v in sorted(set(got[k])) if v >= chain[-1]]
+            if not nxt:
+                break
+            chain.append(nxt[0])
+        if len(chain) != 5:
+            continue
+        # 7人以上は単身のおおむね1.5倍前後（実測: 東京都1.56 / 埼玉県1.56 / 札幌市1.56）。
+        # ここを外れる組み合わせは、別々の表の数字を寄せ集めている。
+        if 1.2 <= chain[4] / chain[0] <= 2.0:
+            return [chain]
+    return []
 
 
 def parse_text(text):
@@ -138,8 +225,12 @@ def parse_text(text):
     # 住居確保給付金の支給上限額は、生活困窮者自立支援法施行規則により
     # **生活保護の住宅扶助特別基準額と同額**。額を出していない自治体でも
     # 住居確保給付金の案内には載せていることが多いので、こちらも入口にする。
-    if not ("住宅扶助" in text or "住居確保給付金" in text):
-        return [], "本文に「住宅扶助」も「住居確保給付金」も無い"
+    # ★「住宅扶助」を必須にすると、1枚ものの基準額表が落ちる。
+    #   見出しを縦書きにしている紙があり（札幌市）、住/宅/扶/助 が別々の行に散って
+    #   文字列としてはどこにも現れない。∴ 入口は「生活保護」まで緩め、
+    #   本当の絞り込みは数字の性質（100円単位・単調・単身2万〜6万・7人以上が1.2〜2.0倍）に任せる。
+    if not ("住宅扶助" in text or "住居確保給付金" in text or "生活保護" in text):
+        return [], "生活保護の書類ではない"
     lines = [re.sub(r"[\x01\s]+", " ", l).strip() for l in text.split("\x02")]
     lines = [l for l in lines if l]
     # 級地の見出しだけが1行になっている作りがある（見出しの行と数字の行が分かれた表）。
@@ -161,6 +252,10 @@ def parse_text(text):
             cur = lab
         for c in runs(line):
             rows.append({"kyuchi": lab or cur, "yen": c})
+    # 横1行に5つ並ぶ形で取れなかったときだけ、縦並びの早見表として読み直す
+    if not rows:
+        for c in vertical(merged):
+            rows.append({"kyuchi": None, "yen": c})
     # 同じ級地は最初の1つだけ（ページ下部の経過措置の表を拾わないため）
     seen = set()
     uniq = []
