@@ -22,6 +22,9 @@ const sleep = (ms) => new Promise((r) => setTimeout(r, ms))
 async function wsUrl () { for (let i = 0; i < 100; i++) { try { const r = await fetch(`http://127.0.0.1:${port}/json/version`); if (r.ok) return (await r.json()).webSocketDebuggerUrl } catch {} await sleep(100) } throw new Error('no devtools') }
 function rpc (ws) { let id = 0; const w = new Map(); const ev = []; ws.addEventListener('message', (e) => { const m = JSON.parse(e.data); if (m.id && w.has(m.id)) { const { resolve, reject } = w.get(m.id); w.delete(m.id); m.error ? reject(new Error(JSON.stringify(m.error))) : resolve(m.result) } else if (m.method) ev.push(m) }); return { send (method, params, sessionId) { const msg = { id: ++id, method, params: params || {} }; if (sessionId) msg.sessionId = sessionId; return new Promise((res, rej) => { w.set(msg.id, { resolve: res, reject: rej }); ws.send(JSON.stringify(msg)) }) }, async waitFor (m, ms = 20000) { const t0 = Date.now(); while (Date.now() - t0 < ms) { const i = ev.findIndex((e) => e.method === m); if (i >= 0) return ev.splice(i, 1)[0]; await sleep(30) } return null } } }
 
+// 買うボタンが許される深さ（画面数・320x800）。数字はメッセージにも出すので必ずここ1か所から。
+const MAX_SCREENS = 6.0
+
 const files = fs.readdirSync('articles').filter((f) => /^toei-/.test(f)).sort()
 const bad = []
 try {
@@ -52,7 +55,7 @@ try {
           return { h: Math.round(t.getBoundingClientRect().height / rows), rows }
         }).filter((x) => x.h > 230)
         return {
-          w: de.scrollWidth, cw: de.clientWidth,
+          w: de.scrollWidth, cw: de.clientWidth, vh: window.innerHeight,
           over, tall,
           cards: document.querySelectorAll('.offer[data-offer="toei"]').length,
           buy: document.querySelectorAll('[data-buy]').length,
@@ -60,6 +63,9 @@ try {
           title: document.title,
           tables: document.querySelectorAll('table').length,
           jsonld: [...document.querySelectorAll('script[type="application/ld+json"]')].map((s) => { try { JSON.parse(s.textContent); return 'ok' } catch (e) { return 'NG' } }),
+          // 売り場の深さ。画面の何枚目にあるか＝押せる位置にあるかどうか。
+          btnTop: (() => { const b = document.querySelector('.offer .buyrow'); return b ? Math.round(b.getBoundingClientRect().top + window.scrollY) : null })(),
+          jump: document.querySelectorAll('a[href="#offer-toei"]').length,
         }
       })()`,
     }, sessionId)).result.value
@@ -70,6 +76,15 @@ try {
     if (r.cards !== 1) msg.push(`売り場カード${r.cards}個`)
     if (r.buy !== 1) msg.push(`買うボタン${r.buy}個`)
     if (r.jsonld.includes('NG')) msg.push('JSON-LDが壊れている')
+    // ★売り場が押せる位置にあるか（2026-09-17 追加）
+    //   09-08 に「5.4画面にある時点で埋め込んだ意味がほぼ消える」と判定したのに、
+    //   48本を生成したとき買うボタンが 6.2画面目（390x844）に戻っていた。
+    //   ここは中身を足すと黙って深くなるので、機械で見張る。
+    //   320x800 での実測（直した直後）＝区市町ページ 5.0〜5.2画面・区分ページ 4.2〜4.6画面。
+    //   線は 6.0画面。これを超えたら、カードの中身か手前の節を削ること。
+    if (r.btnTop == null) msg.push('買うボタンの行（.buyrow）が無い')
+    else if (r.btnTop / r.vh > MAX_SCREENS) msg.push(`買うボタンが深すぎる ${(r.btnTop / r.vh).toFixed(1)}画面（線は${MAX_SCREENS}）`)
+    if (!r.jump) msg.push('冒頭に売り場への案内（#offer-toei へのリンク）が無い')
     if (!r.title.includes('フクシル')) msg.push('titleが変')
     if (msg.length) bad.push(`${f}: ${msg.join(' / ')}`)
   }

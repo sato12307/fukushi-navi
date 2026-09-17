@@ -33,7 +33,7 @@
 import fs from 'node:fs'
 import path from 'node:path'
 import { page, esc, SITE } from './shogai-kojo-page.mjs'
-import { offerToeiLeaf } from './offer-block.mjs'
+import { offerToeiLeaf, TOEI_PRICE } from './offer-block.mjs'
 import {
   ROOT, MIN_N, SUKI, MIN_CITY, JIKO, READ_AT, SRC, ROUNDS, rows, houses, enough,
   med, r1, mode, CITIES, F, RANGE, era, hasNum,
@@ -195,6 +195,16 @@ const near = (s) => {
   return around.map((x) => `<a href="toei-${x.slug}.html">${esc(x.city)}</a>`).join(' ／ ')
 }
 
+// ★冒頭の要約のすぐ下に置く1行の案内（2026-09-17）。
+//   実測で、売り場カードは3.7画面目・買うボタンは6.2画面目にあった。カードを上げるだけでは
+//   「無料の答えより先に売り込みが来る」形になるので、**存在だけを0.9画面の位置で知らせて、
+//   本体はページの中ほどに置く**という分け方にした。
+//   ★新しい class を作らない。既存の .callout.note と .btn-primary だけで組む
+//     （定義済みかスコープ付きかを確かめる手間と、cssの版番号の付け直しを避ける）。
+const JUMP = `  <div class="callout note">
+    <p><span class="tag">有料の一覧</span>このページの相場は全部無料です。そのうえで<strong>住宅名を1つに決める</strong>ところまで要るなら、定期募集${F.rounds}回を名寄せして「毎回すいている申込先」を住宅名つきで並べた一覧（<strong>${TOEI_PRICE}円</strong>・買い切り）があります。<a href="#offer-toei">中身と値段を見る →</a></p>
+  </div>`
+
 // 売り場のカード（全ページ共通・offer-block.mjs が正典）
 const OFFER = `  <p class="offer-lead">上の相場で「どのあたりが空いているか」までは分かります。申込書に書けるのは基本的に1回につき1つなので、最後は住宅名を1つに決めることになります。そこだけは住宅ごとの実測が要ります。</p>
 ${offerToeiLeaf({ up: '../' })}`
@@ -259,6 +269,8 @@ ${tbl('<th>募集回</th><th class="num">観測できた募集</th><th class="nu
     <p><span class="tag">数字だけ</span>${esc(s.city)}で観測できた募集は<strong>${num(s.rows.length)}件</strong>（都内${RANK.get(s.city)}番目）。倍率の中央値は<strong>${s.med}倍</strong>で、${MIN_N}件以上観測できた申込先は${num(s.enough.length)}件で、そのうち${JIKO}を除いた${num(s.ippan.length)}件のうち<strong>${s.suki.length}件</strong>が${SUKI}倍未満でした。${hasZero ? `誰も申し込まなかった募集は<strong>${s.zero}件（のべ${s.zeroKoho}戸）・${s.zHouses.length}住宅</strong>で、都全体${num(ZERO_ALL)}件の<strong>${pct(s.zero, ZERO_ALL)}%</strong>にあたります。もっとも多いのは<strong>${esc(topZero.name)}（${topZero.n}回）</strong>です。` : `${esc(s.city)}では、誰も申し込まなかった募集は確認できませんでした。`}</p>
   </div>
 
+${JUMP}
+
   <h2 id="waku">① まず「どの区分で出すか」で倍率が変わる</h2>
   <p>住宅を選ぶ前に、ここを確かめてください。${RANGE}の全${num(F.rows)}件を募集区分ごとに分けると、<strong>${esc(WAKU_LEAD.lo.short)}の中央値${WAKU_LEAD.lo.med}倍に対して${esc(WAKU_LEAD.hi.short)}は${WAKU_LEAD.hi.med}倍</strong>で、<strong>${WAKU_LEAD.ratio}倍</strong>ひらいています。都全体の数字です。</p>
 ${catTable(CAT_ALL)}
@@ -268,11 +280,11 @@ ${catTable(CAT_ALL)}
     <p><span class="tag">次の定期募集は${NEXT_LABEL}</span>この回に出るのは<strong>${NEXT_CATS.map((c) => esc(c.short)).join('・')}</strong>です。${tanshinNext ? '' : '<strong>単身者向・シルバーピア・単身車いす向はこの回には出ません</strong>（2月・8月の回です）。'}日程は開催の2週間〜1か月前にJKK東京が公表します。確定した日程は<a href="../calendar/">フクシルの予定表</a>に載せています（カレンダーアプリに購読できます）。</p>
   </div>
 
+${OFFER}
+
 ${s.cats.length > 1 ? `  <h3>${esc(s.city)}だけで見た募集区分</h3>
   <p class="note">${esc(s.city)}で観測できた${num(s.rows.length)}件の内訳です。件数の少ない区分は数字が動きやすいので、上の都全体の表と併せて読んでください。</p>
 ${catTable(s.cats, { withWhen: false })}` : ''}
-
-${OFFER}
 
   <h2 id="suki">② ${esc(s.city)}で倍率が低かった申込先${s.suki.length ? `（${s.suki.length}件）` : ''}</h2>
 ${secSuki}
@@ -396,10 +408,14 @@ const wakuIndex = () => {
     <p><span class="tag">数字だけ</span>${WAKU_LEAD.lo.short} <strong>${WAKU_LEAD.lo.med}倍</strong>（申込者ゼロ${pct(WAKU_LEAD.lo.zero, WAKU_LEAD.lo.n)}%）／ ${WAKU_LEAD.hi.short} <strong>${WAKU_LEAD.hi.med}倍</strong>（申込者ゼロ${pct(WAKU_LEAD.hi.zero, WAKU_LEAD.hi.n)}%）。次の定期募集は<strong>${NEXT_LABEL}</strong>で、出るのは${NEXT_CATS.map((c) => esc(c.short)).join('・')}です。</p>
   </div>
 
+${JUMP}
+
   <h2 id="ichiran">① 募集区分ごとの倍率</h2>
   <p>${RANGE}に観測できた${num(F.rows)}件を、募集区分ごとに分けた実測です。倍率の低い順。</p>
 ${catTable(CAT_ALL)}
   <p class="note">「申込者ゼロ」は、申込者数と倍率がともに0と読めた募集の割合です。${THIN.length ? `${THIN.map((c) => esc(c.short)).join('・')}は観測できた件数が少ない（${THIN.map((c) => `${c.short} ${c.n}件`).join('・')}）ので、個別のページは作っていません。` : ''}</p>
+
+${OFFER}
 
   <h2 id="kai">② 自分の区分の募集は年2回しかない</h2>
   <p>定期募集は例年2月・5月・8月・11月の年4回ですが、<strong>回ごとに出る区分が決まっています</strong>。${RANGE}の${F.rounds}回ではこうなっていました。</p>
@@ -409,8 +425,6 @@ ${tbl('<th>募集の月</th><th>出た募集区分</th>', BY_MONTH.map((x) => ` 
   <div class="callout note">
     <p><span class="tag">次の定期募集は${NEXT_LABEL}</span>過去${F.rounds}回と同じであれば、この回に出るのは<strong>${NEXT_CATS.map((c) => esc(c.short)).join('・')}</strong>です。${tanshinNext ? '' : '<strong>単身者向・シルバーピア・単身者用車いす使用者向はこの回には出ません。</strong>'}日程と対象住宅は開催の2週間〜1か月前にJKK東京が公表します。確定した日程は<a href="../calendar/">フクシルの予定表</a>に載せています（カレンダーアプリに購読できます）。<strong>ここに書いた「次の回に出る区分」は過去${F.rounds}回の実測からの見込みで、JKK東京が公表したものではありません。</strong></p>
   </div>
-
-${OFFER}
 
   <h2 id="kubun">③ 区分ごとの中身</h2>
 ${WAKUS.map((w) => `  <h3><a href="toei-waku-${w.slug}.html">${esc(w.short)}</a>（${num(w.n)}件・中央値${w.med}倍）</h3>
@@ -471,6 +485,8 @@ const wakuPage = (w) => {
   <div class="callout point">
     <p><span class="tag">数字だけ</span>中央値 <strong>${w.med}倍</strong>（都営住宅ぜんたいは${F.allMed}倍）。申込者ゼロの募集は<strong>${pct(w.zero, w.n)}%</strong>。${MIN_N}件以上観測できた申込先${num(w.houses.length)}件のうち<strong>${w.suki.length}件</strong>が${SUKI}倍未満でした。次の定期募集（${NEXT_LABEL}）に${inNext ? '<strong>この区分は出ます</strong>' : '<strong>この区分は出ません</strong>'}。</p>
   </div>
+
+${JUMP}
 
   <h2 id="hikaku">① ほかの区分と比べる</h2>
   <p>同じ都営住宅でも、区分がちがえば倍率はまったく別物です。</p>

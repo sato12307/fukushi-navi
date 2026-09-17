@@ -66,6 +66,16 @@ export function offerToei({ up = '../' } = {}) {
 //   人が降りているのは記事のほうで、そこから別URLの売り場へ跳ばす設計が落ちている段だった。
 //   ∴ 記事のページに売り場そのもの（実物の冒頭・値段・買うボタン）を置く。跳ばす段を無くす。
 //
+// ★2026-09-17 買うボタンを抜粋と長い注記より前に出した
+//   390x844で実測したところ、買うボタンが**6.2画面目**にあった。09-08に「5.4画面にある時点で
+//   埋め込んだ意味がほぼ消える」と判定して直したのに、同じ深さに戻っていた。
+//   内訳＝値段からボタンまで2,000px。うち**抜粋は416pxだけ**で、残りは注記（住環境データの
+//   出典説明など780px）がボタンの直前を埋めていた。
+//   ∴ 順番を「値段 → 中身 → 買う前に要る注意 → ボタン → 実物の抜粋 → 長い注記」に。
+//   ★買う前に要る注意（戻らない場合がある・東京都だけ・目安である）はボタンより前に残す。
+//     後ろへ回してよいのは、出典や読み方の説明など**買う判断に要らない長い注記**だけ。
+//   ★抜粋を後ろにしても隠したことにはならない（同じカードの中で、すぐ下に見える）。
+//
 // ★中身の決まり（[[paywall-teaser-note-style]]）
 //   ・抜粋は実物（.dist/packs/*.html ・ .dist/toei-pack.html）をそのまま切る。宣伝用に書き直さない。
 //   ・切った先の本文はこのHTMLに入れない（ソースを見ても続きは出てこない）。
@@ -163,10 +173,10 @@ export function offerPackLeaf({ code = '', name = '', peek = 'rank', up = '../' 
   <li>確定申告済みなら更正の請求・未申告なら還付申告、それぞれの<strong>必要書類と出し方</strong></li>
   <li>窓口での<strong>持ち物のチェックリスト</strong>と、「過去◯年分も」と伝えるべき理由</li>
   </ul>
-${peekBox('手順書の冒頭（抜粋）', inner)}
   <p class="fine">先に確認してください：この控除で税金が戻るのは、<strong>親御さん本人が税を納めている</strong>か、<strong>あなたが親御さんを扶養親族として申告している</strong>場合です。どちらにも当てはまらないと、控除する税金がないため戻るお金はありません。</p>
 ${chooser}
   <p class="buyrow"><button type="button" class="btn-primary" data-buy>${PACK_PRICE}円で手順書を受け取る</button> <span class="buymsg" role="status"></span></p>
+${peekBox('手順書の冒頭（抜粋）', inner)}
   <p class="fine"><strong>買わなくても手続きはできます。</strong>迷ったら先に<a href="${up}shogai-kojo/">自治体別の一覧</a>で、自分の街の基準だけ確かめてください。制度の説明は<a href="${up}articles/shogaisha-kojo-tax.html">こちらの記事</a>で全部無料です。</p>
   <p class="fine">クレジットカード決済（Stripe）。カード情報は当方を経由しません。お支払い後すぐダウンロードできます。<a href="${up}pack/">売り場のページ</a>／<a href="${up}tokushoho/">特定商取引法に基づく表記</a>／<a href="${up}kiyaku/">利用規約</a></p>
   </div>`
@@ -185,11 +195,11 @@ export function offerToeiLeaf({ up = '../' } = {}) {
   <li>申込者ゼロが出た申込先と<strong>その回数</strong></li>
   <li>観測できた<strong>全申込先の索引</strong>（区市町・住宅名・募集区分・倍率の中央値／最低／最高・観測件数・エレベーター・建てられた年・住宅名と同じ名前の町丁目の世帯数と住宅侵入の件数）</li>
   </ul>
-${peekBox('一覧の冒頭（抜粋）', TOEI_PEEK)}
-  <p class="fine">${TOEI_PEEK_NOTE}</p>
   <p class="fine">先に確認してください：これは<strong>過去の実測から作った目安</strong>で、次の募集の倍率を約束するものではありません。募集される住宅は回ごとに変わります。申込資格（都内在住・収入基準など）は東京都・JKK東京の募集案内でご確認ください。<strong>対象は東京都の都営住宅だけ</strong>で、他の道府県の公営住宅は入っていません。</p>
   <p class="buyrow"><button type="button" class="btn-primary" data-buy>${TOEI_PRICE}円で一覧を受け取る</button> <span class="buymsg" role="status"></span></p>
   <p class="fine"><strong>買わなくても申し込みはできます。</strong>区市町ごとの相場は<a href="${up}toei/">無料の一覧</a>で全部公開しています。</p>
+${peekBox('一覧の冒頭（抜粋）', TOEI_PEEK)}
+  <p class="fine">${TOEI_PEEK_NOTE}</p>
   <p class="fine">クレジットカード決済（Stripe）。カード情報は当方を経由しません。お支払い後すぐダウンロードできます。<a href="${up}tokushoho/">特定商取引法に基づく表記</a>／<a href="${up}kiyaku/">利用規約</a></p>
   </div>`
 }
