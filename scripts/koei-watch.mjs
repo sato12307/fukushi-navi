@@ -11,6 +11,7 @@
 //                いま公開されている回は**ゼロ**（令和8年9月の回は中止）。
 //     ・名古屋市 … 第2回の募集が始まった時点で、第1回のページが404。
 //     ・堺市 … かろうじて2回ぶん（令和7年11月・令和8年5月）が残っていて確保できた。
+//     ・京都市 … C判定から格上げ。粒度は十分だが、過去5回はすべて404で最新1回だけ生きていた。
 //   ∴ 過去は取り返せない。**これから出るものを落とさない**ことだけが残った仕事。
 //
 // ★この器の約束
@@ -61,14 +62,30 @@ const WATCH = [
     note: '定期募集は5月・9月・1月ごろ。令和7年1月のサイト刷新で過去の結果は消えた。次の回から拾う',
   },
   {
+    city: '京都市', slug: 'kyoto',
+    // ★C判定から格上げ（2026-09-17）。粒度は川崎・静岡と同等（住宅名称・募集戸数・
+    //   抽選対象者数・抽選倍率）だが、**回ごとのページが消える**。実測で過去5回はすべて404、
+    //   生きていたのは最新1回だけだった。∴ 出た回をその場で拾うしかない。
+    // ★倍率が載るのは houdou.pdf（報道発表資料）。kekka.pdf は抽選番号表なので中身が違う。
+    //   どちらも落として、選り分けは koei-triage.py に任せる。
+    pages: [
+      'https://www.city.kyoto.lg.jp/menu1/category/12-7-0-0-0-0-0-0-0-0.html',
+      'https://www.city.kyoto.lg.jp/tokei/page/0000356570.html',
+    ],
+    note: '公開抽選結果が回ごとの報道発表ページに出る。年3〜4回。過去回は消える（実測で5回とも404）',
+  },
+  {
     city: '大阪市', slug: 'osaka',
     // ★入口は回ごとに別ページになる（0000658723 は令和7年度第1次）。
     //   ∴ 回ごとのページを直に見ずに、募集の親ページと公社の窓口を見て、
     //   そこから張られたPDFを拾う。初回に指定した 0000005271 は既に404だった。
     pages: [
-      'https://www.city.osaka.lg.jp/toshiseibi/page/0000658723.html',
+      // ★回ごとのページ（0000658723 など）は入れない。回が変われば404になり、
+      //   **恒久的な誤警報**になって「見に行けなかった」という本物の合図が埋もれる。
+      //   入口には「回が変わっても残るページ」だけを置くこと。
       'https://www.city.osaka.lg.jp/toshiseibi/page/0000444314.html',
       'https://www.osaka-jk.or.jp/shiei/',
+      'https://www.osaka-jk.or.jp/shiei_iframe',
     ],
     note: '応募状況表は回ごとの別ページに出る。以前の調査は Web Archive の保存版を使っていた＝本家からは消える',
   },
@@ -104,14 +121,24 @@ for (const w of WATCH) {
     let html
     try { html = await get(page) } catch (e) { broken.push(`${w.city} ${page}: ${e.message}`); continue }
     reachable++
+    // ★<base href> があればそれを基準にする。見ないと相対パスの解決先を間違える。
+    //   実測：京都市のページは /tokei/page/xxx.html にあるが <base href=".../tokei/"> が
+    //   置いてあり、href="./cmsfiles/..." の正解は /tokei/cmsfiles/... のほう。
+    //   基準を間違えると404になり、**リンクは見えているのに1本も落とせない**（実際にそうなった）。
+    const baseTag = /<base[^>]+href="([^"]+)"/i.exec(html)
+    const base = baseTag ? new URL(baseTag[1], page).href : page
     const pdfs = [...new Set([...html.matchAll(/href="([^"]+\.pdf)"/gi)].map((m) => {
-      try { return new URL(m[1], page).href } catch { return null }
+      try { return new URL(m[1], base).href } catch { return null }
     }).filter(Boolean))]
     for (const u of pdfs) {
       await sleep(1200)
       let buf
-      try { buf = await get(u, true) } catch { continue }
-      if (!isPdf(buf)) continue
+      // ★落とせなかったPDFを黙って飛ばさない。「リンクは見えているのに取れない」は
+      //   入口の作りが変わった合図で、放っておくと静かに何も拾わなくなる。
+      //   実際、京都で <base href> を見落として全部404になっていたのに、
+      //   飛ばしていたせいで「今日は何も無かった」に見えていた。
+      try { buf = await get(u, true) } catch (e) { broken.push(`${w.city} ${u}: ${e.message}`); continue }
+      if (!isPdf(buf)) { broken.push(`${w.city} ${u}: PDFではないものが返ってきた`); continue }
       const h = sha1(buf)
       if (seen[h]) { found.push({ url: u, sha1: h, already: true }); continue }
       const name = `${new Date(Date.now() + 9 * 3600e3).toISOString().slice(0, 10)}_${h}.pdf`

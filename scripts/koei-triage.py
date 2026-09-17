@@ -28,7 +28,7 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 CACHE = os.path.join(ROOT, ".cache")
 KEEP_ONLY = "--keep" in sys.argv
 # 見張りが拾ってくる市（過去回が消える市）。取り方が別にある市はここに入れない。
-SLUGS = ["sakai", "nagoya", "kumamoto", "osaka"]
+SLUGS = ["sakai", "nagoya", "kumamoto", "osaka", "kyoto"]
 
 WORD = re.compile(r"倍率|応募状況|申込受付結果|抽選結果|応募者数|申込者数")
 # 「◯戸 ◯人」や「1.5」のような数字が並ぶ行。表があるかどうかの目安。
