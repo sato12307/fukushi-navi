@@ -69,15 +69,25 @@
 .tbl-ctl input, .tbl-ctl select { padding: 6px 8px; border: 1px solid var(--line); border-radius: 6px; font-size: 1rem; max-width: 100%; }
 #jt, .rank-table, #trend { width: 100%; border-collapse: collapse; font-size: .9rem; }
 /* 既定の min-width:520px は9列の表には狭すぎて、320px幅で数字が潰れる。
-   列数に合わせて広げ、枠の中で横にスクロールさせる。 */
-#jt { min-width: 780px; }
+   ★ただし本文の幅は --maxw:760px（内側は726px）しかない。780pxにすると
+     右端の「未処理」列がちょうど枠の外に出て、机上では気づけない（実際に隠れた）。
+     本文に収まる700pxにして、狭い画面でだけ横スクロールさせる。 */
+#jt { min-width: 700px; }
 .rank-table { min-width: 620px; }
 #trend { min-width: 560px; }
 #jt th, #jt td, .rank-table th, .rank-table td, #trend th, #trend td { border-bottom: 1px solid var(--line); padding: 6px 7px; }
+/* 9列ある表なので、既定の padding だと横910pxに収まらず右端の列が隠れる。 */
+#jt { font-size: .85rem; }
+#jt th, #jt td { padding: 5px 6px; }
+/* 自治体名の列が広がると右端の「未処理」が枠からはみ出す。名前だけ折り返しを許して幅を抑える。 */
+#jt tbody th, #jt thead th:first-child { white-space: normal; width: 128px; }
+#jt tbody td:first-of-type { white-space: nowrap; }  /* 種別＝「都道府県」を2行に割らない */
 /* 129行をそのまま流すと縦21,000pxになり、下の章まで誰も辿り着かない。
    枠の中でスクロールさせる。見出しは枠に対して sticky なので固定されたまま残る。 */
 #jt-wrap { max-height: 72vh; overflow: auto; border: 1px solid var(--line); border-radius: 8px; }
-#jt thead th { position: sticky; top: 0; z-index: 1; background: var(--soft); cursor: pointer; white-space: nowrap; font-size: .82rem; box-shadow: 0 1px 0 var(--line); }
+/* ★共通CSSの thead th は 濃い地に白文字。ここで背景だけ薄い色に変えると
+   文字が白のまま残って読めなくなる（実際に真っ白で出た）。地の色は共通のまま使う。 */
+#jt thead th { position: sticky; top: 0; z-index: 1; background: var(--brand); color: #fff; cursor: pointer; white-space: nowrap; font-size: .82rem; line-height: 1.35; }
 #jt caption { caption-side: top; text-align: left; padding: 8px 7px; font-size: .84rem; color: var(--sub); }
 #jt thead th.sorted::after { content: " \25BC"; font-size: .7em; }
 #jt thead th.sorted.asc::after { content: " \25B2"; }
@@ -166,10 +176,10 @@
       <th data-k="s" class="n">申請<br>件数</th>
       <th data-k="kr" class="n">却下率</th>
       <th data-k="tr" class="n">取下げ率</th>
-      <th data-k="o" class="n">保護開始<br>世帯数</th>
-      <th data-k="sp" class="n">申請<br>(人口千対)</th>
-      <th data-k="hr" class="n">保護率<br>(人口千対)</th>
-      <th data-k="m" class="n">年度末<br>未処理</th>
+      <th data-k="o" class="n">開始<br>世帯数</th>
+      <th data-k="sp" class="n">申請<br>千対</th>
+      <th data-k="hr" class="n">保護率<br>千対</th>
+      <th data-k="m" class="n">未処理<br>年度末</th>
     </tr></thead>
     <tbody id="jtb"></tbody>
   </table>
@@ -260,7 +270,7 @@
 
   <h2>⑥ 却下されたときにできること</h2>
   <ul>
-    <li><strong>審査請求</strong>：却下の通知書を受け取った日の翌日から<strong>3か月以内</strong>に、<strong>都道府県知事あて</strong>に審査請求ができます（生活保護法第64条・行政不服審査法）。書式は自由で、費用はかかりません。福祉事務所ではなく都道府県・指定都市の担当に出します。</li>
+    <li><strong>審査請求</strong>：却下の通知書を受け取った日の翌日から<strong>3か月以内</strong>に、<strong>都道府県知事あて</strong>に審査請求ができます（生活保護法第64条・行政不服審査法第18条）。市・区の福祉事務所が出した却下でも、宛先は市ではなく<strong>その上の都道府県</strong>です（政令市・中核市の処分も同じ）。書式は自由で、費用はかかりません。</li>
     <li><strong>再申請はいつでもできる</strong>：申請権に回数制限はありません。収入が減った・貯金が尽きた・病気になったなど<strong>事情が変われば、何度でも出せます</strong>。</li>
     <li><strong>通知書をもらう</strong>：却下は必ず<strong>書面</strong>で通知されます。口頭で「無理です」と言われただけなら、それは却下処分ではありません。申請書を出し、書面で結果を受け取るところまでが手続きです。</li>
     <li><strong>決定の期限</strong>：申請から原則<strong>14日以内</strong>（調査に時間がかかる場合は最長30日）に通知が来ます。この表の「年度末未処理」は、年度をまたいで審査中だった件数です。</li>

@@ -86,7 +86,10 @@ def num(v):
     if isinstance(v, (int, float)):
         return int(v)
     s = str(v).replace(",", "").strip()
-    if s in ("-", "‐", "−", "…", "･･･"):
+    # 「・」＝該当なし（指定都市・中核市の行には郡部が無い。島根県のように郡部の
+    # 申請が0件の県にも入る）。「-」も0件。どちらも0として足してよいことは、
+    # 全国行＝内訳の合計 が6年度ぶん一致することで確かめている（main の検算）。
+    if s in ("-", "‐", "−", "・", "…", "･･･"):
         return None
     try:
         return int(float(s))
