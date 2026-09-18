@@ -18,9 +18,18 @@
   ・**倍率は読まない**。申込数 ÷ 募集戸数 で出す（ずれる列を相手にしない）
   ・住宅名が取り出せない回は「0件」にせず、理由つきで台帳に残す
 
-★区の見出しは「① 【葵区】」のように書かれる。行に区が入っていないので、
-  見出しから引き継ぐ。引き継ぎが効いていないと**全部が最初の区に化ける**ので、
-  区ごとの件数を必ず出して目で確かめること。
+★区は**行の左端に1文字で入っている**（葵／駿／清。縦書きなので「駿河」「清水」の
+  2文字目は次の行に落ちる）。見出しの【葵区】は飾りで、区分の節（【事故部屋】など）では
+  節の中に3区が混ざる。2026-09-18 の見直しまで見出しからの引き継ぎだけで区を決めていたため、
+  **区分の節の行（全体の28%）が全部「清水区」に化けていた**（最後に出た区の見出しが清水区
+  だったため）。∴ 区は行の左端から取り、取れない行だけ見出しから引き継ぐ。
+  区ごとの件数を必ず出して目で確かめること（3区の偏りが実態と合っているか）。
+
+★見出しには区だけでなく**募集区分**も来る（2026-09-18 の見直しで発見）。
+  【車いす】【シルバーハウジング】【子育て支援】【子育て支援期限あり／期限なし】【事故部屋】。
+  これを拾っていなかったため、**申込みの条件がまるで違う住戸が同じ申込先に混ざっていた**。
+  いちばん効くのが【事故部屋】で、ここは事情があって必ず空く。一般の募集と混ぜると、
+  その団地が「毎回すいている」に化ける。区分ごとの件数も必ず目で確かめること。
 """
 import json
 import os
@@ -44,6 +53,11 @@ YTOL = 9.0
 
 JP = re.compile(r"[ぁ-んァ-ヶ一-龥]")
 KU = re.compile(r"[【\[]?\s*(葵区|駿河区|清水区)\s*[】\]]?")
+# 募集区分の見出し。区の見出しと同じ【】で書かれるので、区でないほうを拾う。
+CAT = re.compile(r"[【\[]\s*([^】\]]{2,20})\s*[】\]]")
+CAT_SKIP = ("葵区", "駿河区", "清水区")
+# 行の左端に置かれる区の1文字（縦書きの1文字目）。
+KU1 = {u"葵": u"葵区", u"駿": u"駿河区", u"清": u"清水区"}
 INT = re.compile(r"^[0-9][0-9,]*$")
 MADORI = re.compile(r"^[0-9]?[A-Z]{1,4}$")
 SKIP = re.compile(r"募集戸数|申込数|倍率は|団地名|空部屋|間取り|以下のとおり|静岡市営住宅")
@@ -68,6 +82,7 @@ def cluster(words):
 def parse(pdf, round_key):
     rows, noname = [], []
     ku = ""
+    cat = ""      # 募集区分。見出しが出るまでは「一般」（区分の見出しが無い節＝通常の空家募集）
     names_seen = 0
     doc = fitz.open(pdf)
     try:
@@ -80,6 +95,12 @@ def parse(pdf, round_key):
                 m = KU.search(joined)
                 if m and len(joined) <= 12:
                     ku = m.group(1)
+                    cat = ""          # 区の見出しに戻ったら区分は通常へ戻る
+                    continue
+                # 募集区分の見出し。データ行に【】は出ないので、見出しかどうかは括弧で決まる。
+                mc = CAT.search(joined)
+                if mc and mc.group(1).replace(" ", "") not in CAT_SKIP and len(joined) <= 30:
+                    cat = mc.group(1).replace(" ", "")
                     continue
                 if SKIP.search(joined):
                     continue
@@ -89,6 +110,8 @@ def parse(pdf, round_key):
                 #   「純粋な整数の並び」で決める＝ints[0]が団地番号、末尾2つが募集戸数と申込数。
                 #   階数（5階）と倍率（4.0）は整数ではないので、この数え方に混ざらない。
                 norm = [unicodedata.normalize("NFKC", w) for w in ws]
+                # ★区は行の左端の1文字から取る。見出しからの引き継ぎは保険。
+                row_ku = KU1.get(norm[0], "") if norm else ""
                 ii = [i for i, w in enumerate(norm) if INT.match(w)]
                 if len(ii) < 3:
                     continue
@@ -119,7 +142,8 @@ def parse(pdf, round_key):
                 names_seen += 1
                 rows.append({
                     "round": round_key,
-                    "ku": ku,
+                    "ku": row_ku or ku,
+                    "cat": cat or u"一般",
                     "name": name,
                     "madori": madori,
                     "kai": kai,
@@ -175,6 +199,11 @@ def main():
     for r in rows:
         kus[r["ku"] or "（区なし）"] += 1
     print("  区ごとの行数: %s" % " / ".join("%s %d" % (k, v) for k, v in sorted(kus.items(), key=lambda x: -x[1])))
+    cats = defaultdict(int)
+    for r in rows:
+        cats[r["cat"]] += 1
+    print("  募集区分ごとの行数: %s"
+          % " / ".join("%s %d" % (k, v) for k, v in sorted(cats.items(), key=lambda x: -x[1])))
     nn = sum(l.get("noName", {}).get("rows", 0) for l in used)
     if nn:
         print("  団地名が取れなかった行 %d件（集計に入れていない）" % nn)
