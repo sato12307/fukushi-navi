@@ -48,9 +48,17 @@ for (const key of KEYS) {
   const C = CITIES[key]
   const before = rounds(key)
   let warn = ''
+  let fetchFailed = false
   try {
     process.stdout.write(`${C.city}：取りに行く… `)
-    run('node', [`scripts/${key}-fetch.mjs`])
+    // ★取りに行けなかった（出典側が変わった）と、読めない回があっただけ、は別の話。
+    //   一緒にすると、出典が消えても「一部の回が使えなかった」に見えて気づけない。
+    try {
+      run('node', [`scripts/${key}-fetch.mjs`])
+    } catch (e) {
+      fetchFailed = true
+      throw e
+    }
     run('python', [`scripts/${key}-parse.py`])
   } catch (e) {
     // ★終了コードが0でない＝失敗、とは限らない。川崎の読み取り機は「使えない回が
@@ -60,13 +68,18 @@ for (const key of KEYS) {
     warn = String(e.message || e).split('\n')[0].slice(0, 120)
   }
   const after = rounds(key)
-  if (!after) {
-    // ★取れなかった市があっても他を止めない。出典側が落ちているだけのこともある。
-    broke.push(`${C.city}: ${warn || '読める回が1つも無い'}`)
-    console.log('取り込みでこけた')
+  // ★取れなかった市があっても他を止めない。出典側が落ちているだけのこともある。
+  if (fetchFailed) {
+    broke.push(`${C.city}: 取りに行けなかった（入口が変わった可能性）— ${warn}`)
+    console.log('取りに行けなかった')
     continue
   }
-  if (warn) console.log(`（一部の回は使えなかった：${warn}）`)
+  if (!after) {
+    broke.push(`${C.city}: 読める回が1つも無い — ${warn}`)
+    console.log('読み取りでこけた')
+    continue
+  }
+  if (warn) console.log(`（使えない回があった。使える回は書き出せている：${warn}）`)
   console.log(after > before ? `募集回 ${before} → ${after}（+${after - before}）` : `募集回 ${after}（増えていない）`)
   if (after > before) grew.push({ key, city: C.city, before, after })
 }

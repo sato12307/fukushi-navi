@@ -81,12 +81,23 @@ for (const key of keys) {
   const skipped = F.skippedRounds.length
     ? `使えなかった${F.skippedRounds.length}回（${F.skippedRounds.map(WA).join('・')}）は、PDFから住宅名を取り出せませんでした。`
     : ''
-  const checked = F.matched
-    ? `読み取りは公表表の合計と突き合わせています。<strong>${F.matched}回は合計まで一致</strong>${F.explained ? `、残り${F.explained}回の差は<strong>住宅名がPDFに入っていない行（合計${F.noNameRows}件・${F.noNameKoho}戸）</strong>でちょうど説明がつきます。その行は住宅が分からないので集計に入れていません` : ''}。`
-    : (F.noNameRows ? `住宅名がPDFに入っていない行が${F.noNameRows}件あり、住宅が分からないので集計に入れていません。` : '')
+  // ★突き合わせの中身は市によって違う。ひとつの文で書くと嘘になる（実際になった）。
+  //   川崎  … 公表の合計と突き合わせ、差は「住宅名がPDFに入っていない行」の戸数で説明。
+  //   相模原… 同じく公表の合計だが、差は「申込住宅不明」の**人数**（戸ではない）。
+  //   神戸  … **公表の合計そのものが無い**。資料の中の別の列どうしで辻褄を合わせている。
+  //   ∴ 文面の型は CITIES の check に書く。既定は川崎の型。
+  const nn = C.check || {}
+  const nnLabel = nn.noNameLabel || '住宅名がPDFに入っていない行'
+  const nnUnit = nn.noNameUnit || '戸'
+  const checked = nn.text ? nn.text(F)
+    : F.matched || F.explained
+      ? `読み取りは公表表の合計と突き合わせています。<strong>${F.matched}回は合計まで一致</strong>${F.explained ? `、残り${F.explained}回の差は<strong>${nnLabel}（合計${F.noNameRows}件・${F.noNameKoho}${nnUnit}）</strong>でちょうど説明がつきます。そこは住宅が分からないので集計に入れていません` : ''}。`
+      : (F.noNameRows ? `${nnLabel}が${F.noNameRows}件あり、住宅が分からないので集計に入れていません。` : '')
   const LIMITS = `  <li>出典＝${esc(SRC_NAME)}（${RANGE}）。読み取り日 ${READ_AT}。<a href="${INDEX_URL}" rel="nofollow">回ごとの公表ページ</a>は${esc(C.city)}（または指定管理者）が公開しています。</li>
   <li>市が公開している${F.allRounds ? `<strong>${F.allRounds}回</strong>のうち、` : ''}<strong>${F.rounds}回</strong>を使っています。${skipped}</li>
-${checked ? `  <li>${checked}</li>\n` : ''}  <li>倍率は公表表の倍率の列を読まず、<strong>応募者数÷募集戸数</strong>で当方が計算しています（公表表では倍率が住宅名の行からずれて出るため）。</li>
+${checked ? `  <li>${checked}</li>\n` : ''}  <li>${C.calcNote || '倍率は公表表の倍率の列を読まず、<strong>応募者数÷募集戸数</strong>で当方が計算しています。公表列をそのまま読むと、レイアウトが崩れた回に住宅名と倍率の対応がずれて入ることがあり、件数を数えても気づけないためです。'}</li>
+${C.thin ? `  <li>${C.thin}</li>
+` : ''}
   <li>「観測」の単位は募集件数で、募集回の数ではありません。同じ回に同じ住宅で複数の区分・住戸が募集されることがあり、その1件ずつを数えています。</li>
   <li>${esc(C.note)}</li>
   <li>本資料は公表表の転載・改変ではなく、公表された数値から当方が計算した指標（中央値・最低・最高・件数）を、当方の区分で並べたものです。</li>

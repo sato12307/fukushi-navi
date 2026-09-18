@@ -19,7 +19,6 @@ u"""sagamihara-parse.py — 相模原市営住宅「入居者募集結果（応�
 
 ★倍率は公表列を読まず 応募者数÷募集戸数 で当方が計算する（艦隊の共通の決め事）。
 """
-import collections
 import json
 import os
 import re
@@ -34,7 +33,6 @@ OUT = os.path.join(ROOT, "data", "sagamihara-bairitsu.json")
 CHECK = "--check" in sys.argv
 INDEX = "https://www.city.sagamihara.kanagawa.jp/kurashi/1026489/sumai/1026509/1007952.html"
 
-YBIN = 5.0
 NUM = re.compile(r"^[0-9][0-9,]*(?:\.[0-9]+)?$")
 # 見出しの語 → 欄の名前。表の中でこの語が並ぶ行を見出し行とする。
 HEADS = {u"住宅名": "name", u"住戸タイプ": "type", u"募集戸数": "koho",
