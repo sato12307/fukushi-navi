@@ -280,8 +280,24 @@ def vertical(lines):
     return []
 
 
+MANEN = re.compile(r"(\d{1,3}(?:\.\d{1,2})?)\s*万\s*円")
+
+
+def yen_notation(s):
+    """「3.6万円」を「36,000円」に直す。
+
+    ★福岡市は金額を万円で書いている（「1人 基準額9.2万円+家賃額(上限3.6万円)」）。
+      カンマ区切りの数字しか見ていないと1件も拾えない。
+      北九州市のように万円と円が混在する面もあるので、先に万円を円へ揃えておく。
+    """
+    def rep(m):
+        v = int(round(float(m.group(1)) * 10000))
+        return f"{v:,}円"
+    return MANEN.sub(rep, s)
+
+
 def parse_text(text):
-    text = z2h(text)
+    text = yen_notation(z2h(text))
     # 住居確保給付金の支給上限額は、生活困窮者自立支援法施行規則により
     # **生活保護の住宅扶助特別基準額と同額**。額を出していない自治体でも
     # 住居確保給付金の案内には載せていることが多いので、こちらも入口にする。

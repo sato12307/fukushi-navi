@@ -199,10 +199,12 @@
    "name": "岡山県",
    "level": "都道府県",
    "pref": "岡山県",
-   "status": "未調査",
-   "note": null,
-   "checked": null,
-   "urls": [],
+   "status": "B",
+   "note": "70f8fabb.html:生活保護の書類ではない; 8aca2aab.html:生活保護の書類ではない; 96169370.pdf:限度額の表が見つからない; afb054ee.html:生活保護の書類ではない; d5b724df.html:限度額の表が見つからない; f7393542.html:生活保護の書類ではない",
+   "checked": "2026-09-18",
+   "urls": [
+    "https://www.pref.okayama.jp/page/detail-54694.html"
+   ],
    "picked": null
   },
   {
@@ -578,11 +580,14 @@
    "name": "堺市",
    "level": "指定都市",
    "pref": "大阪府",
-   "status": "未調査",
+   "status": "A",
    "note": null,
-   "checked": null,
-   "urls": [],
-   "picked": null
+   "checked": "2026-09-18",
+   "urls": [
+    "https://www.city.sakai.lg.jp/kenko/fukushikaigo/seikatsuhogo/jyuukyokakuho_yatinhojo.html",
+    "https://www.city.sakai.lg.jp/kenko/fukushikaigo/seikatsuhogo/jyuukyokakuho.html"
+   ],
+   "picked": "https://www.city.sakai.lg.jp/kenko/fukushikaigo/seikatsuhogo/jyuukyokakuho_yatinhojo.html"
   },
   {
    "name": "大阪市",
@@ -600,11 +605,13 @@
    "name": "岡山市",
    "level": "指定都市",
    "pref": "岡山県",
-   "status": "未調査",
+   "status": "A",
    "note": null,
-   "checked": null,
-   "urls": [],
-   "picked": null
+   "checked": "2026-09-18",
+   "urls": [
+    "https://www.city.okayama.jp/kurashi/0000003601.html"
+   ],
+   "picked": "https://www.city.okayama.jp/kurashi/0000082213.html"
   },
   {
    "name": "川崎市",
@@ -634,10 +641,15 @@
    "name": "新潟市",
    "level": "指定都市",
    "pref": "新潟県",
-   "status": "未調査",
-   "note": null,
-   "checked": null,
-   "urls": [],
+   "status": "B",
+   "note": "43ed43f0.pdf:生活保護の書類ではない; 4a605b33.html:限度額の表が見つからない; dabd82f6.html:限度額の表が見つからない; e450a2f1.html:生活保護の書類ではない",
+   "checked": "2026-09-18",
+   "urls": [
+    "https://www.city.niigata.lg.jp/iryo/kenfuku/konkyusyashien/konkyusyashien.files/Pamphlet.pdf",
+    "https://www.city.niigata.lg.jp/iryo/kenfuku/konkyusyashien/konkyusyashien.files/Leaflet.pdf",
+    "https://www.city.niigata.lg.jp/iryo/kenfuku/konkyusyashien/index.html",
+    "https://www.4894.call.city.niigata.jp/Faq/B0300504"
+   ],
    "picked": null
   },
   {
@@ -672,30 +684,36 @@
    "name": "浜松市",
    "level": "指定都市",
    "pref": "静岡県",
-   "status": "未調査",
+   "status": "A",
    "note": null,
-   "checked": null,
-   "urls": [],
-   "picked": null
+   "checked": "2026-09-18",
+   "urls": [
+    "https://www.city.hamamatsu.shizuoka.jp/fukushisomu/jyuukyokakuho.html"
+   ],
+   "picked": "https://www.city.hamamatsu.shizuoka.jp/fukushisomu/jyuukyokakuho.html"
   },
   {
    "name": "熊本市",
    "level": "指定都市",
    "pref": "熊本県",
-   "status": "未調査",
+   "status": "A",
    "note": null,
-   "checked": null,
-   "urls": [],
-   "picked": null
+   "checked": "2026-09-18",
+   "urls": [
+    "https://www.city.kumamoto.jp/kiji00327837/index.html"
+   ],
+   "picked": "https://www.city.kumamoto.jp/kiji00327837/index.html"
   },
   {
    "name": "相模原市",
    "level": "指定都市",
    "pref": "神奈川県",
-   "status": "未調査",
-   "note": null,
-   "checked": null,
-   "urls": [],
+   "status": "B",
+   "note": "3306230f.html:限度額の表が見つからない",
+   "checked": "2026-09-18",
+   "urls": [
+    "https://www.city.sagamihara.kanagawa.jp/kosodate/fukushi/1026642/1006553/1024112.html"
+   ],
    "picked": null
   },
   {
@@ -715,24 +733,27 @@
    "name": "福岡市",
    "level": "指定都市",
    "pref": "福岡県",
-   "status": "B",
-   "note": "4c0d0ee7.pdf:限度額の表が見つからない; 52d9aa94.pdf:限度額の表が見つからない; 74b9a0fa.pdf:限度額の表が見つからない; 9417d270.html:限度額の表が見つからない; b0f3d5a3.html:限度額の表が見つからない; ca607ada.pdf:生活保護の書類ではない; d3f62c3d.pdf:限度額の表が見つからない; eaa2eee0.h",
+   "status": "A",
+   "note": null,
    "checked": "2026-09-17",
    "urls": [
     "https://www.city.fukuoka.lg.jp/fukushi/seikatujiritu/health/jyukyokakuhokyuhukin_3_2.html",
     "https://www.city.fukuoka.lg.jp/fukushi/hogo/health/dairinoufu.html",
     "https://www.city.fukuoka.lg.jp/fukushi/hogo/health/001.html"
    ],
-   "picked": null
+   "picked": "https://www.city.fukuoka.lg.jp/fukushi/seikatujiritu/health/jyukyokakuhokyuhukin_3_2.html"
   },
   {
    "name": "静岡市",
    "level": "指定都市",
    "pref": "静岡県",
-   "status": "未調査",
-   "note": null,
-   "checked": null,
-   "urls": [],
+   "status": "B",
+   "note": "5591446f.html:限度額の表が見つからない; a88c27a5.html:限度額の表が見つからない; f3eef828.html:限度額の表が見つからない",
+   "checked": "2026-09-18",
+   "urls": [
+    "https://www.city.shizuoka.lg.jp/s3865/s003046.html",
+    "https://www.city.shizuoka.lg.jp/000_003064.html"
+   ],
    "picked": null
   },
   {
@@ -1049,14 +1070,14 @@
    "name": "松山市",
    "level": "中核市",
    "pref": "愛媛県",
-   "status": "B",
-   "note": "209aa694.html:限度額の表が見つからない; 6f83455a.html:限度額の表が見つからない; 9a62a504.html:限度額の表が見つからない; acabaf84.html:限度額の表が見つからない",
+   "status": "A",
+   "note": null,
    "checked": "2026-09-17",
    "urls": [
     "https://www.city.matsuyama.ehime.jp/kurashi/fukushi/shakai/hogo/naiyou/index.html",
     "https://www.city.matsuyama.ehime.jp/kurashi/fukushi/shakai/ziritsushien/zyuukyo/jyukyokakuho2.html"
    ],
-   "picked": null
+   "picked": "https://www.city.matsuyama.ehime.jp/kurashi/fukushi/shakai/ziritsushien/zyuukyo/jyukyokakuho2.html"
   },
   {
    "name": "松本市",
