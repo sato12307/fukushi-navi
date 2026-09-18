@@ -15,6 +15,7 @@
 //   出典（警視庁・CC BY 4.0）を抜粋の枠の外に必ず添える（TOEI_PEEK_NOTE）。抜粋の中は資料そのままなので書き足さない。
 //   「4件以上」「5倍未満」「16回」も資料と同じ定数から受け取る（TOEI_FACTS）。手で書くと資料を作り直したときにずれる。
 import { TOEI_PEEK, TOEI_PEEK_NOTE, TOEI_FACTS } from './toei-peek.mjs'
+import { peekBox } from './peek-box.mjs'
 
 export const PACK_PRICE = 500
 export const TOEI_PRICE = 500
@@ -191,13 +192,7 @@ const PACK_PEEK = {
 //   いまは scripts/toei-nerai.mjs が資料と同じ見出し・同じ行から scripts/toei-peek.mjs を書き、
 //   資料の本文と突き合わせてから出す。資料を作り直したら node scripts/stamp-offers.mjs で記事へ貼り直す。
 
-// 抜粋の枠。かすませるのは「ここで切れている」という印で、隠しているのではない。
-const peekBox = (label, inner) => `  <p class="peek-lead">説明だけでは分からないと思うので、<strong>実物の冒頭をそのまま</strong>出します。宣伝用に書き直したものではありません。</p>
-  <div class="peek" aria-label="${label}">
-${inner}
-  </div>
-  <p class="peekcut"><span>抜粋はここまで</span></p>
-  <p class="fine">かすんでいるのは「ここで切れている」という印です。<strong>この先の本文はこのページに入っていません</strong>（ソースを見ても続きは出てきません）。</p>`
+// 抜粋の枠は scripts/peek-box.mjs（/toei/ の売り場ページからも使うので切り出した）。
 
 /**
  * 記事の中に置く売り場（障害者控除の手順書）。

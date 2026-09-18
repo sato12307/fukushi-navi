@@ -15,6 +15,7 @@
 import fs from 'node:fs'
 import path from 'node:path'
 import { page, esc, SITE } from './shogai-kojo-page.mjs'
+import { peekBox } from './peek-box.mjs'
 import {
   ROOT,
   PRICE,
@@ -194,6 +195,7 @@ ${cutBlocks}
   <p><button id="buy" class="btn-primary" type="button">${PRICE}円で一覧を受け取る</button></p>
   <p id="msg" class="note"></p>
   <p class="fine"><strong>買わなくても申し込みはできます。</strong>上の相場だけでも、どのあたりを狙うかは決められます。</p>
+<!-- TOEI:PEEK -->
   </div>
 
   <div class="callout warn"><p><span class="tag">先に読んでください</span>
@@ -407,6 +409,25 @@ const TOEI_PEEK = `${peekBody}\n${peekNext}`
 // ★2026-09-13(2) 抜粋の表には住宅侵入の件数が載る。記事には「率ではない・所在地と一致しない場合がある・0件の意味・出典」が
 //   どこにも無かったので、記事の抜粋の枠の外に添える（抜粋の中は資料そのままにするため、枠の中には書き足さない）。
 const PEEK_NOTE = `抜粋の表の右端は、住宅名と同じ名前の町丁目の数字です（姉妹サイト<a href="${esc(ENV.site)}/">住環境データ東京</a>が町丁目ごとに集計）。住宅侵入は${WIN_TXT}の<strong>件数そのもので、率ではありません</strong>（世帯の多い町ほど大きく出ます）。<strong>建物の所在地がその町丁目と一致しない場合があります</strong>。「（町全体・2つの丁目）」のように書いたものは、住宅名が町の名前までしか一致しなかったときの、町全体の合計です（丁目が${TOWN_MAX_CHOME}つ以下で、世帯が${num(TOWN_MAX_SETAI)}未満の町だけ）。「数字なし」は、町が広いか、同じ区に同じ名前の町丁目が2つ以上あって決められないため、数字を付けていないという意味です（同じ名前の町丁目が見つからないものは「—」）。0件は被害がなかったという意味ではありません（警察に届出があって初めて数えられます）。出典＝警視庁「区市町村の町丁別、罪種別及び手口別認知件数」（東京都オープンデータ・<a href="https://creativecommons.org/licenses/by/4.0/deed.ja" rel="license">CC BY 4.0</a>）、総務省統計局「令和2年国勢調査 小地域集計」（世帯数）。当サイトが住宅名と突き合わせて加工したもので、警視庁・総務省統計局が作成したものではありません。`
+// ── /toei/ の売り場にも同じ抜粋を差し込む（2026-09-18）────────────────────────
+//   記事のカード（offer-block.mjs の offerToeiLeaf）には最初から入っていたのに、
+//   **売り場ページ本体だけ入っていなかった**。値段と中身の箇条書きだけで、実物を
+//   1行も見せずに500円のボタンを出していた。/pack/（障害者控除）には最初からある。
+//   ★ページの文字列はもう組み終わっているので、差し込み口を置いて後から入れる
+//     （抜粋を作るのに必要な区市町の集計が、ページを組んだあとでないと出ないため）。
+//   ★買うボタンの下に置く。上に積むとボタンが画面の下へ流れる（2026-09-17に実測して
+//     「値段 → 中身 → 注意 → ボタン → 抜粋」の順に決めてある）。[[deploy-gate-after-generators]]
+{
+  const at = pending.findIndex(([rel]) => rel === 'toei/index.html')
+  if (at < 0) die('/toei/ のページが見つかりません（差し込み口を置く先が無い）。')
+  const mark = '<!-- TOEI:PEEK -->'
+  if (!pending[at][1].includes(mark)) die('/toei/ に抜粋の差し込み口がありません。')
+  // 抜粋の表の右端は住宅侵入の件数。率ではないことなどを枠の外に必ず添える（記事と同じ扱い）。
+  const box = `${peekBox('一覧の冒頭（抜粋）', TOEI_PEEK)}
+  <p class="fine">${PEEK_NOTE}</p>`
+  pending[at][1] = pending[at][1].replace(mark, box)
+}
+
 const tpl = (s) => s.replace(/\\/g, '\\\\').replace(/`/g, '\\`').replace(/\$\{/g, '\\${')
 write('scripts/toei-peek.mjs', `// 自動生成：scripts/toei-nerai.mjs が .dist/toei-pack.html と同じ行から書く。手で直さない。
 // 有料資料の2章の冒頭。表は上${PEEK_ROWS}行で切っている。記事への貼り付けは scripts/stamp-offers.mjs。
