@@ -38,7 +38,8 @@ const WAREKI = (y) => (y - 2018 === 1 ? '令和元年度' : `令和${y - 2018}�
 const num = (n) => Number(n).toLocaleString('ja-JP')
 const p1 = (x) => (Math.round(x * 10) / 10).toFixed(1)
 const p2 = (x) => (Math.round(x * 100) / 100).toFixed(2)
-const TODAY = new Date().toISOString().slice(0, 10)
+// ★toISOString() はUTC。日本時間の朝は前日の日付になる。JSTに直す。
+const TODAY = new Date(Date.now() + 9 * 3600 * 1000).toISOString().slice(0, 10)
 
 // ---- 指標をつける ----
 const rows = D.rows.map((r) => ({

@@ -6,22 +6,24 @@
 <link rel="icon" href="/favicon.ico" sizes="any">
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
-<title>生活保護はいくらもらえる？自動計算シミュレーター【2026年度・12都市対応】｜フクシル</title>
-<meta name="description" content="生活保護の支給額（最低生活費）を、厚生労働省の令和8年度基準の計算式そのままで自動計算。世帯全員の年齢×お住まいの級地から第1類・第2類・特例加算・経過的加算・障害者加算・母子加算まで積み上げ、東京・大阪・名古屋など12都市の家賃上限（住宅扶助）も反映。働いた収入がある場合の差額支給も概算できます。">
+<title>生活保護はいくらもらえる？自動計算シミュレーター【2026年度・全国対応】｜フクシル</title>
+<meta name="description" content="生活保護の支給額（最低生活費）を、厚生労働省の令和8年度基準の計算式そのままで自動計算。世帯全員の年齢×お住まいの級地から第1類・第2類・特例加算・経過的加算・障害者加算・母子加算まで積み上げ、級地は全国1,747市区町村ぶん収録。家賃上限（住宅扶助）は公表が確認できた地域だけ自動で入ります。働いた収入がある場合の差額支給も概算できます。">
 <link rel="canonical" href="https://fukushiru.com/articles/seikatsuhogo-keisanki.html">
 <meta property="og:type" content="article">
-<meta property="og:title" content="生活保護はいくらもらえる？自動計算シミュレーター【2026年度・12都市対応】">
-<meta property="og:description" content="厚労省の令和8年度基準の計算式そのままで最低生活費を自動計算。12都市の家賃上限も反映、働いた収入がある場合の差額支給も概算。">
+<meta property="og:title" content="生活保護はいくらもらえる？自動計算シミュレーター【2026年度・全国対応】">
+<meta property="og:description" content="厚労省の令和8年度基準の計算式そのままで最低生活費を自動計算。全国の級地に対応。働いた収入がある場合の差額支給も概算。">
 <meta property="og:site_name" content="フクシル">
 <meta property="og:url" content="https://fukushiru.com/articles/seikatsuhogo-keisanki.html">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="stylesheet" href="../assets/style.css?v=20260908a">
+<!-- 地域の台帳。keep.js(defer)がURLから条件を戻すより前に配列が要るので、defer にしない -->
+<script src="../assets/seiho-area.js?v=20260919a"></script>
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@type": "Article",
-  "headline": "生活保護はいくらもらえる？自動計算シミュレーター【2026年度・12都市対応】",
-  "description": "生活保護の最低生活費を厚生労働省の令和8年度基準（第1類・第2類・逓減率・特例加算・経過的加算・各種加算）どおりに自動計算し、12都市の住宅扶助上限と収入認定まで反映するシミュレーター。",
+  "headline": "生活保護はいくらもらえる？自動計算シミュレーター【2026年度・全国対応】",
+  "description": "生活保護の最低生活費を厚生労働省の令和8年度基準（第1類・第2類・逓減率・特例加算・経過的加算・各種加算）どおりに自動計算し、全国1,747市区町村の級地と、公表が確認できた地域の住宅扶助上限、収入認定まで反映するシミュレーター。",
   "inLanguage": "ja",
   "datePublished": "2026-08-03",
   "dateModified": "2026-09-17",
@@ -88,6 +90,7 @@
     <nav class="site-nav" aria-label="主要">
       <a href="../index.html">トップ</a>
       <a href="seikatsuhogo-shinsei-jichitai.html">自治体別の却下率</a>
+      <a href="seikatsuhogo-jisshitsu.html">実質の比較</a>
       <a href="juminzei-hikazei-check.html">住民税非課税</a>
       <a href="kougaku-ryouyouhi-2026.html">高額療養費</a>
       <a href="koei-jutaku-bairitsu.html">公営住宅</a>
@@ -102,7 +105,7 @@
   <h1>生活保護はいくらもらえる？<br>自動計算シミュレーター【2026年度】</h1>
   <p class="updated">最終更新：2026-09-17 ／ 厚生労働省「生活扶助基準額の算出方法（令和8年4月）」の計算式・基準額をそのまま実装。すべて<strong>概算</strong>です</p>
 
-  <p class="lead">生活保護の金額は「一律いくら」ではなく、<strong>世帯全員の年齢 × 世帯人数 × 住んでいる地域（級地）</strong>で1円単位まで決まる積み上げ式です。このページは厚生労働省が公表している<strong>令和8年度の基準額表と計算式をそのまま実装</strong>し、ネットの記事にありがちな「ざっくり目安」ではなく、<strong>福祉事務所と同じロジック</strong>で最低生活費を計算します。家賃（住宅扶助）は12都市の上限額に対応。働いた収入がある場合の<strong>差額支給</strong>も概算できます。</p>
+  <p class="lead">生活保護の金額は「一律いくら」ではなく、<strong>世帯全員の年齢 × 世帯人数 × 住んでいる地域（級地）</strong>で1円単位まで決まる積み上げ式です。このページは厚生労働省が公表している<strong>令和8年度の基準額表と計算式をそのまま実装</strong>し、ネットの記事にありがちな「ざっくり目安」ではなく、<strong>福祉事務所と同じロジック</strong>で最低生活費を計算します。<strong>級地は全国1,747市区町村ぶん</strong>収録しているので、町や村でも選べます。家賃の上限（住宅扶助）は、公表を確認できた<strong>237市区町村</strong>で自動的に入ります（人口でみると約4割）。働いた収入がある場合の<strong>差額支給</strong>も概算できます。</p>
 
   <div class="callout point">
     <p><span class="tag">2026年10月から増額へ</span>生活扶助に上乗せされている<strong>特例加算</strong>は現在1人あたり月1,500円ですが、<strong>2026年10月から月2,500円に引き上げられる方針</strong>が示されています（世帯人数×1,000円の増額）。このページは改定後に数値を更新します。</p>
@@ -112,7 +115,7 @@
     <p><span class="tag">新着</span>金額のつぎに気になるのは「そもそも通るのか」だと思います。厚生労働省の統計から、<a href="seikatsuhogo-shinsei-jichitai.html"><strong>都道府県・指定都市・中核市129機関の却下率</strong></a>を一覧にしました。令和6年度の全国平均は8.28%ですが、自治体では1.7%〜23.4%とひらいています。</p>
   </div>
 
-  <h2>① まず結論：単身なら月いくら？【12都市 早見表】</h2>
+  <h2>① まず結論：単身なら月いくら？【主要12都市 早見表】</h2>
   <p>20〜40歳・単身・家賃が上限額の場合の目安です。生活費（生活扶助）は全国6段階の<strong>級地</strong>で決まり、家賃の上限（住宅扶助）は市ごとに違います。<strong>同じ生活保護でも住む街で月2万円近く変わる</strong>のがわかります。</p>
 
   <div class="table-wrap">
@@ -192,23 +195,11 @@
   <div class="calc" role="group" aria-label="生活保護の支給額計算機">
     <h4>最低生活費 計算機（令和8年度基準）</h4>
     <div class="row">
-      <label>お住まいの市（級地と家賃上限を自動設定）</label>
-      <select id="g-city">
-        <option value="tokyo">東京23区（1級地-1）</option>
-        <option value="kawasaki">川崎市（1級地-1）</option>
-        <option value="yokohama">横浜市（1級地-1）</option>
-        <option value="saitama">さいたま市（1級地-1）</option>
-        <option value="chiba">千葉市（1級地-2）</option>
-        <option value="kyoto">京都市（1級地-1）</option>
-        <option value="osaka" selected>大阪市（1級地-1）</option>
-        <option value="kobe">神戸市（1級地-1）</option>
-        <option value="nagoya">名古屋市（1級地-1）</option>
-        <option value="sendai">仙台市（1級地-2）</option>
-        <option value="sapporo">札幌市（1級地-2）</option>
-        <option value="fukuoka">福岡市（1級地-2）</option>
-        <option value="other">その他の市町村（級地を自分で選ぶ）</option>
-      </select>
+      <label for="g-pref">お住まいの地域</label>
+      <select id="g-pref" aria-label="都道府県"></select>
+      <select id="g-muni" aria-label="市区町村"></select>
     </div>
+    <p class="mini-note" id="g-area-note"></p>
     <div class="row" id="g-kyuchi-row" style="display:none">
       <label for="g-kyuchi">級地</label>
       <select id="g-kyuchi">
@@ -219,7 +210,12 @@
         <option value="4">3級地-1</option>
         <option value="5">3級地-2（町村部）</option>
       </select>
-      <span class="mini-note">お住まいの市町村の級地は市役所サイトか福祉事務所で確認できます</span>
+      <span class="mini-note">地域の一覧が読み込めないときだけ、ここで級地を選んでください</span>
+    </div>
+    <div class="row" id="g-rentcap-row" style="display:none">
+      <label for="g-rentcap">家賃の上限（住宅扶助）</label>
+      <input id="g-rentcap" type="number" min="0" step="100" placeholder="円">
+      <span class="mini-note">この地域の上限額は当サイトで確認できていません。福祉事務所で聞いた額を入れると計算に反映します</span>
     </div>
     <div class="row" style="align-items:flex-start">
       <label style="padding-top:6px">世帯全員の年齢</label>
@@ -310,7 +306,7 @@
   </ul>
 
   <div class="callout note">
-    <p><span class="tag">あわせて読みたい</span>申請が通るかどうかが気になる方は<a href="seikatsuhogo-shinsei-jichitai.html">自治体別の却下率</a>へ。家賃を下げて生活を安定させるなら<a href="koei-jutaku-bairitsu.html">公営住宅の倍率データ</a>と<a href="koei-hairiyasui.html">入りやすい人の条件</a>も参考に。生活保護までは必要ないけれど税負担を軽くしたい方は<a href="juminzei-hikazei-check.html">住民税非課税の判定シミュレーター</a>、医療費が心配な方は<a href="kougaku-ryouyouhi-2026.html">高額療養費の計算機（2026年8月改正対応）</a>へ。障害のある方は<a href="shogai-nenkin-keisanki.html">障害年金の計算機</a>もどうぞ。</p>
+    <p><span class="tag">あわせて読みたい</span>同じ金額でも地域によって実際に買える量は違います。<a href="seikatsuhogo-jisshitsu.html">物価と電気代で割り戻した実質の比較</a>もどうぞ（電気代の地域差は<a href="https://hatsudenbench.com/denkidai/">発電ベンチ</a>の集計）。申請が通るかどうかが気になる方は<a href="seikatsuhogo-shinsei-jichitai.html">自治体別の却下率</a>へ。家賃を下げて生活を安定させるなら<a href="koei-jutaku-bairitsu.html">公営住宅の倍率データ</a>と<a href="koei-hairiyasui.html">入りやすい人の条件</a>も参考に。生活保護までは必要ないけれど税負担を軽くしたい方は<a href="juminzei-hikazei-check.html">住民税非課税の判定シミュレーター</a>、医療費が心配な方は<a href="kougaku-ryouyouhi-2026.html">高額療養費の計算機（2026年8月改正対応）</a>へ。障害のある方は<a href="shogai-nenkin-keisanki.html">障害年金の計算機</a>もどうぞ。</p>
   </div>
 
   <h2>コメント（体験・自治体ごとの運用の情報交換）</h2>
@@ -378,22 +374,13 @@ var SHOGAI = { g12: [27460, 25540, 23620], g3: [18300, 17020, 15750] };
 var BOSHI = { c1: [18800, 17400, 16100], c2: [23600, 21800, 20200], c3p: [2900, 2700, 2500] };
 var JIDO_YOIKU = 10190; // 児童養育加算（児童1人につき）
 var KYOIKU = { e: 3400, j: 5300, h: 7300 }; // 教育扶助（小/中）・高等学校等就学費
-// 都市データ: 級地index / 住宅扶助上限（単身, 2人以上）※各市公表の基準額
-var CITIES = {
-  tokyo:    { k: 0, rent1: 53700, rent2: 64000, name: "東京23区" },
-  kawasaki: { k: 0, rent1: 53700, rent2: 64000, name: "川崎市" },
-  yokohama: { k: 0, rent1: 52000, rent2: 62000, name: "横浜市" },
-  saitama:  { k: 0, rent1: 45000, rent2: 54000, name: "さいたま市" },
-  chiba:    { k: 1, rent1: 41000, rent2: 49000, name: "千葉市" },  // 千葉市の公表値（46,000は千葉県の1級地の額で、市の額ではない）
-  kyoto:    { k: 0, rent1: 40000, rent2: 48000, name: "京都市" },
-  osaka:    { k: 0, rent1: 40000, rent2: 48000, name: "大阪市" },
-  kobe:     { k: 0, rent1: 40000, rent2: 48000, name: "神戸市" },
-  nagoya:   { k: 0, rent1: 37000, rent2: 44000, name: "名古屋市" },
-  sendai:   { k: 1, rent1: 37000, rent2: 44000, name: "仙台市" },
-  sapporo:  { k: 1, rent1: 36000, rent2: 43000, name: "札幌市" },
-  fukuoka:  { k: 1, rent1: 36000, rent2: 43000, name: "福岡市" },
-  other:    { k: 0, rent1: 53700, rent2: 64000, name: "その他" }
-};
+// ====== 地域（級地と家賃上限）======
+// 全国1,747市区町村ぶんの台帳は assets/seiho-area.js（自動生成）。
+//   ・級地は厚労省の級地区分（全市町村ぶんある）
+//   ・家賃上限は実施機関（都道府県・指定都市・中核市）が公表しているぶんだけ。
+//     ★確認できていない地域は **推定しない**。「未確認」と出して、利用者が入れられるようにする。
+var AREA = null;                     // window.SEIHO_AREA（読み込み後に入る）
+var CUR = { k: 0, rent: null, name: '', src: null };   // いま選ばれている地域
 
 function yen(n){ return Math.round(n).toLocaleString('ja-JP') + '円'; }
 function ageIdx(age){ for (var i=0;i<K1.length;i++){ if (age <= K1[i].max) return i; } return K1.length-1; }
@@ -402,7 +389,6 @@ var seikatsuTotal = 0; // ③で使う
 (function(){
   var list = document.getElementById('m-list');
   var addBtn = document.getElementById('m-add');
-  var citySel = document.getElementById('g-city');
   var kyuchiRow = document.getElementById('g-kyuchi-row');
   var kyuchiSel = document.getElementById('g-kyuchi');
   var rentIn = document.getElementById('g-rent');
@@ -432,9 +418,7 @@ var seikatsuTotal = 0; // ③で使う
   addMember(35); // 初期値: 35歳単身
 
   function calc(){
-    var city = CITIES[citySel.value];
-    var k = citySel.value === 'other' ? parseInt(kyuchiSel.value, 10) : city.k;
-    kyuchiRow.style.display = citySel.value === 'other' ? '' : 'none';
+    var k = AREA ? CUR.k : parseInt(kyuchiSel.value, 10);
     var kg = k < 2 ? 0 : (k < 4 ? 1 : 2); // 級地グループ(1/2/3級地)
 
     var ages = [].map.call(list.querySelectorAll('select'), function(s){ return parseInt(s.value, 10); });
@@ -469,10 +453,14 @@ var seikatsuTotal = 0; // ③で使う
     // 教育扶助
     var kyoiku = parseInt(se.value,10)*KYOIKU.e + parseInt(sj.value,10)*KYOIKU.j + parseInt(sh.value,10)*KYOIKU.h;
 
-    // 住宅扶助
-    var rentCap = n === 1 ? city.rent1 : city.rent2;
+    // 住宅扶助。台帳の額は [1人, 2人, 3〜5人, 6人, 7人以上]。
+    // 6人・7人以上が空の自治体があるので、その手前の段で止める（勝手に伸ばさない）。
+    var band = n === 1 ? 0 : n === 2 ? 1 : n <= 5 ? 2 : n === 6 ? 3 : 4;
+    var rentCap = null;
+    if (CUR.rent) { for (var bi = band; bi >= 0; bi--) { if (CUR.rent[bi]) { rentCap = CUR.rent[bi]; break; } } }
+    if (rentCap === null) { var manual = parseInt(document.getElementById('g-rentcap').value, 10); if (!isNaN(manual) && manual > 0) rentCap = manual; }
     var rent = parseInt(rentIn.value, 10);
-    var jutaku = (isNaN(rent) || rent <= 0) ? 0 : Math.min(rent, rentCap);
+    var jutaku = (isNaN(rent) || rent <= 0) ? 0 : (rentCap === null ? rent : Math.min(rent, rentCap));
 
     var total = seikatsu + kasan + kyoiku + jutaku;
     seikatsuTotal = total;
@@ -483,14 +471,74 @@ var seikatsuTotal = 0; // ③で使う
       + '＋特例加算' + yen(tokurei) + '）'
       + (kasanParts.length ? '＋' + kasanParts.join('＋') : '')
       + (kyoiku ? '＋教育扶助等' + yen(kyoiku) : '')
-      + (jutaku ? '＋住宅扶助' + yen(jutaku) + '（' + city.name + 'の上限' + yen(rentCap) + '）' : '＋住宅扶助0円（家賃未入力）')
+      + (jutaku
+          ? '＋住宅扶助' + yen(jutaku) + (rentCap === null ? '（この地域の上限は未確認。家賃をそのまま足しています）' : '（' + CUR.name + 'の上限' + yen(rentCap) + '）')
+          : '＋住宅扶助0円（家賃未入力）')
       + '。冬季加算・一時扶助は別途。医療費は医療扶助で自己負担ゼロ。';
     document.dispatchEvent(new Event('seikatsu-updated'));
   }
 
-  [citySel, kyuchiSel, rentIn, shogaiSel, singleSel, se, sj, sh].forEach(function(e){
+  // ── 地域の選択（全国1,747市区町村）
+  var prefSel = document.getElementById('g-pref');
+  var muniSel = document.getElementById('g-muni');
+  var areaNote = document.getElementById('g-area-note');
+  var rentcapRow = document.getElementById('g-rentcap-row');
+  var rentcapIn = document.getElementById('g-rentcap');
+
+  function fillPrefs(){
+    AREA = window.SEIHO_AREA || null;
+    if (!AREA){
+      // 台帳が読めないときは、級地を自分で選ぶ古い形に戻す（計算自体は続けられる）
+      prefSel.parentNode.style.display = 'none';
+      kyuchiRow.style.display = '';
+      areaNote.textContent = '地域の一覧を読み込めませんでした。級地を選んでください。';
+      return;
+    }
+    Object.keys(AREA.p).forEach(function(pn){
+      var o = document.createElement('option'); o.value = pn; o.textContent = pn; prefSel.appendChild(o);
+    });
+    prefSel.value = '大阪府';
+    fillMunis();
+  }
+  function fillMunis(){
+    muniSel.innerHTML = '';
+    (AREA.p[prefSel.value] || []).forEach(function(row, i){
+      var o = document.createElement('option'); o.value = i; o.textContent = row[0]; muniSel.appendChild(o);
+    });
+    var list = AREA.p[prefSel.value] || [];
+    var def = 0;
+    for (var i = 0; i < list.length; i++) if (list[i][2] >= 0) { def = i; break; }
+    muniSel.value = def;
+    applyArea();
+  }
+  function applyArea(){
+    var row = (AREA.p[prefSel.value] || [])[parseInt(muniSel.value, 10)];
+    if (!row) return;
+    CUR.k = row[1];
+    CUR.name = row[0];
+    CUR.rent = row[2] >= 0 ? AREA.r[row[2]] : null;
+    CUR.src = row[3] >= 0 ? AREA.s[row[3]] : null;
+    rentcapRow.style.display = CUR.rent ? 'none' : '';
+    if (CUR.rent){
+      areaNote.innerHTML = '<strong>' + row[0] + '</strong>は<strong>' + AREA.k[row[1]] + '</strong>。'
+        + '家賃の上限（単身）は<strong>' + yen(CUR.rent[0]) + '</strong>'
+        + (CUR.src && CUR.src.o ? '（' + CUR.src.o + 'の公表値）' : '') + '。';
+    } else {
+      areaNote.innerHTML = '<strong>' + row[0] + '</strong>は<strong>' + AREA.k[row[1]] + '</strong>。'
+        + '<strong>家賃の上限（住宅扶助）はまだ確認できていません。</strong>'
+        + '上限額は都道府県・指定都市・中核市ごとに国が定めていて、Webに出していない自治体があります。'
+        + '福祉事務所で聞いた額を下に入れると計算に反映します。';
+    }
+    calc();
+  }
+  prefSel.addEventListener('change', fillMunis);
+  muniSel.addEventListener('change', applyArea);
+  rentcapIn.addEventListener('input', calc);
+
+  [kyuchiSel, rentIn, shogaiSel, singleSel, se, sj, sh].forEach(function(e){
     e.addEventListener('input', calc); e.addEventListener('change', calc);
   });
+  fillPrefs();   // 台帳は同期で読んであるので、ここで並べ切ってしまう
   calc();
 })();
 
