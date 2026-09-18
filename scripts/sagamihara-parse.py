@@ -48,6 +48,19 @@ NO_VAL = re.compile(r"^[0-9]{3,6}$")
 #   ○▲■△×★は資料の凡例の印（エレベーターや階数の目印）で、区分の一部ではない。
 #   揃えないと同じ区分が別ものとして数えられ、「毎回すいている」の判定が割れる。
 CAT_MARK = re.compile(u"[○〇▲■△×★◎●]")
+# ★印の意味は資料の凡例に書いてある（2026-09-17 実地で確認）。
+#   〇 … 子育て世帯の優遇措置の対象住宅
+#   ■ … エレベーターがない住宅の1階
+#   ▲ … エレベーターがない住宅の2階
+#   ∴ 印は**区分ではなく間取りに付く**ので、区分からは落とす。
+#   ただし〇は落としきってはいけない。**申込みの条件が違う**うえ、倍率が大きく違う
+#   （実測：〇の中央値2.0倍に対し無印7.0倍）。混ぜると、優遇枠で空いていた住戸が
+#   「この団地・この間取りは毎回すいている」に化ける。→ 申込先の鍵に入れる。
+#   ★〇(U+3007) と ○(U+25CB) の2文字が混ざって使われている。見た目で区別できない。
+KOSODATE = re.compile(u"[○〇]")
+# ■▲（エレベーターなしの1階／2階）は鍵に入れない。実測で中央値が 8.0／6.0／無印7.0 と
+# ほとんど動かず、分けても申込先が細るだけだったため。この「効かなかった」も面に書く。
+EVMARK = re.compile(u"[■▲]")
 CAT_ALIAS = [
     (re.compile(u"^高齢者単身"), u"高齢者単身者向"),
     (re.compile(u"^一般単身"), u"一般単身者向"),
@@ -68,6 +81,17 @@ def category(t):
         if pat.match(head):
             return name
     return head or u"（区分なし）"
+
+
+def kosodate(t):
+    return u"子育て優遇" if KOSODATE.search(unicodedata.normalize("NFKC", t or "")) else u""
+
+
+def evmark(t):
+    m = EVMARK.search(unicodedata.normalize("NFKC", t or ""))
+    if not m:
+        return u""
+    return u"EVなし1階" if m.group(0) == u"■" else u"EVなし2階"
 
 
 def madori(t):
@@ -180,6 +204,7 @@ def read_round(path):
             rows.append({
                 "name": name, "type": g("type"),
                 "cat": category(g("type")), "madori": madori(g("type")),
+                "kosodate": kosodate(g("type")), "ev": evmark(g("type")),
                 "koho": k, "moushikomi": m,
                 "bairitsu": round(m / float(k), 3),   # ★公表の倍率列は読まない
             })

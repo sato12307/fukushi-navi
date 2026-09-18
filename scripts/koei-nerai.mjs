@@ -96,7 +96,7 @@ for (const key of keys) {
   const LIMITS = `  <li>出典＝${esc(SRC_NAME)}（${RANGE}）。読み取り日 ${READ_AT}。<a href="${INDEX_URL}" rel="nofollow">回ごとの公表ページ</a>は${esc(C.city)}（または指定管理者）が公開しています。</li>
   <li>市が公開している${F.allRounds ? `<strong>${F.allRounds}回</strong>のうち、` : ''}<strong>${F.rounds}回</strong>を使っています。${skipped}</li>
 ${checked ? `  <li>${checked}</li>\n` : ''}  <li>${C.calcNote || '倍率は公表表の倍率の列を読まず、<strong>応募者数÷募集戸数</strong>で当方が計算しています。公表列をそのまま読むと、レイアウトが崩れた回に住宅名と倍率の対応がずれて入ることがあり、件数を数えても気づけないためです。'}</li>
-${C.thin ? `  <li>${C.thin}</li>
+${C.thin ? `  <li>${C.thin(F)}</li>
 ` : ''}
   <li>「観測」の単位は募集件数で、募集回の数ではありません。同じ回に同じ住宅で複数の区分・住戸が募集されることがあり、その1件ずつを数えています。</li>
   <li>${esc(C.note)}</li>
