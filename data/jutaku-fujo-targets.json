@@ -36,14 +36,21 @@
    "name": "佐賀県",
    "level": "都道府県",
    "pref": "佐賀県",
-   "status": "未調査",
-   "note": null,
-   "checked": null,
+   "status": "B",
+   "note": "2d8c886c.html:限度額の表が見つからない; ba6c167e.pdf:生活保護の書類ではない",
+   "checked": "2026-09-18",
    "urls": [],
    "picked": null,
    "kyuchi_groups": [
     "2級地",
     "3級地"
+   ],
+   "helpers": [
+    {
+     "kyuchi": "3級地",
+     "city": "鳥栖市",
+     "url": "https://www.city.tosu.lg.jp/soshiki/8/2364.html"
+    }
    ]
   },
   {
@@ -236,13 +243,27 @@
    "name": "山形県",
    "level": "都道府県",
    "pref": "山形県",
-   "status": "未調査",
-   "note": null,
-   "checked": null,
-   "urls": [],
+   "status": "B",
+   "note": "0ac6f3bd.html:限度額の表が見つからない; 46b244bc.html:限度額の表が見つからない; baf049fb.html:限度額の表が見つからない",
+   "checked": "2026-09-18",
+   "urls": [
+    "https://www.pref.yamagata.jp/090014/kenfuku/fukushi/seikatsuhogo/jiritsushien.html"
+   ],
    "picked": null,
    "kyuchi_groups": [
     "3級地"
+   ],
+   "helpers": [
+    {
+     "kyuchi": "3級地",
+     "city": "米沢市",
+     "url": "https://www.city.yonezawa.yamagata.jp/5207.html"
+    },
+    {
+     "kyuchi": "3級地",
+     "city": "米沢市",
+     "url": "https://www.city.yonezawa.yamagata.jp/2807.html"
+    }
    ]
   },
   {
@@ -519,13 +540,20 @@
    "name": "福島県",
    "level": "都道府県",
    "pref": "福島県",
-   "status": "未調査",
-   "note": null,
-   "checked": null,
+   "status": "B",
+   "note": "1fe7d797.html:限度額の表が見つからない; fc5ac76e.pdf:生活保護の書類ではない",
+   "checked": "2026-09-18",
    "urls": [],
    "picked": null,
    "kyuchi_groups": [
     "3級地"
+   ],
+   "helpers": [
+    {
+     "kyuchi": "3級地",
+     "city": "会津若松市",
+     "url": "https://www.city.aizuwakamatsu.fukushima.jp/docs/2018062900020/"
+    }
    ]
   },
   {
@@ -1798,10 +1826,14 @@
    "name": "鳥取市",
    "level": "中核市",
    "pref": "鳥取県",
-   "status": "未調査",
-   "note": null,
-   "checked": null,
-   "urls": [],
+   "status": "B",
+   "note": "11b8932e.html:生活保護の書類ではない; 170338d7.html:限度額の表が見つからない; 1d293786.html:生活保護の書類ではない; 229fa786.html:生活保護の書類ではない; 2c64b542.html:限度額の表が見つからない; 5d90a755.html:生活保護の書類ではない; 5da60ce7.html:生活保護の書類ではない; 6ead4cec.",
+   "checked": "2026-09-18",
+   "urls": [
+    "https://www.city.tottori.lg.jp/www/contents/1589510587369/index.html",
+    "https://www.city.tottori.lg.jp/",
+    "https://www.city.tottori.lg.jp/page/4624.html"
+   ],
    "picked": null,
    "kyuchi_groups": [
     "2級地"

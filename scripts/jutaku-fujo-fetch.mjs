@@ -89,20 +89,31 @@ const grab = async (t, u) => {
 //   （自治体サイト全体のクロールになってしまう）。
 const DEEP_MAX = 8
 const DEEP_WORD = /住宅扶助|住居確保|基準額|基準表|しおり|保護費|扶助費/
-const deepLinks = (html, base) => {
+// ★検索で拾ったURLは自治体サイトの模様替えで **よく404 になる**（鳥取市・米沢市で実際に全滅）。
+//   サイトの入口（トップや福祉の目次）は変わらないので、そこから2段たどれる道も用意する。
+//   1段目は目次をたどるための広めの語、2段目は上の DEEP_WORD。
+//   ★1段では足りない。トップ→「くらし」→「生活困窮者自立支援」→ 住居確保給付金 と
+//     3階層あるのがふつうなので、目次をたどる語は **2段目まで** 使う。
+//     1ページあたり6本に絞って、最大 6+36=42ページで止める（サイト全体のクロールにしない）。
+const NAV_MAX = 6
+const NAV_WORD = /生活困窮|住居確保|生活保護|自立支援|福祉|くらし|暮らし|生活支援|しおり/
+const MAX_DEPTH = 2
+const deepLinks = (html, base, depth = 0) => {
   const out = []
+  const word = depth <= 1 ? NAV_WORD : DEEP_WORD
+  const cap = depth <= 1 ? NAV_MAX : DEEP_MAX
   for (const m of html.matchAll(/<a\s[^>]*href="([^"#]+)"[^>]*>([\s\S]{0,120}?)<\/a>/gi)) {
     const href = m[1]
     const text = m[2].replace(/<[^>]+>/g, '').replace(/\s+/g, '')
     if (/^(mailto:|javascript:)/i.test(href)) continue
     const isPdf = /\.pdf(\?|$)/i.test(href)
-    if (!isPdf && !DEEP_WORD.test(text)) continue
+    if (!isPdf && !word.test(text)) continue
     try {
       const u = new URL(href, base).toString()
       if (!/^https?:/.test(u)) continue
       if (!out.includes(u)) out.push(u)
     } catch { /* 壊れたhrefは飛ばす */ }
-    if (out.length >= DEEP_MAX) break
+    if (out.length >= cap) break
   }
   return out
 }
@@ -127,8 +138,8 @@ const main = async () => {
       if (!FORCE && have) {
         skip++
         // 既に落としてあるHTMLからも、まだ辿っていないリンクは拾う
-        if (depth === 0 && have.endsWith('.html')) {
-          for (const l of deepLinks(fs.readFileSync(have, 'utf8'), u)) queue.push([l, 1])
+        if (depth < MAX_DEPTH && have.endsWith('.html')) {
+          for (const l of deepLinks(fs.readFileSync(have, 'utf8'), u, depth)) queue.push([l, depth + 1, hky])
         }
         continue
       }
@@ -137,9 +148,9 @@ const main = async () => {
         if (hky) hmap[path.basename(dest)] = hky
         console.log(`ok    ${t.name.padEnd(8)} ${isPdf ? 'pdf ' : 'html'} ${String(size).padStart(8)}バイト  ${depth ? '└ ' : ''}${u}`)
         ok++
-        if (!isPdf && depth === 0) {
+        if (!isPdf && depth < MAX_DEPTH) {
           // 深追いした先も、元が helper ならその級地を引き継ぐ
-          for (const l of deepLinks(fs.readFileSync(dest, 'utf8'), u)) queue.push([l, 1, hky])
+          for (const l of deepLinks(fs.readFileSync(dest, 'utf8'), u, depth)) queue.push([l, depth + 1, hky])
         }
       } catch (e) {
         console.log(`NG    ${t.name.padEnd(8)} ${e.message}  ${depth ? '└ ' : ''}${u}`)

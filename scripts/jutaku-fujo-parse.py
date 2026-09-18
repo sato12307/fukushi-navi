@@ -417,7 +417,8 @@ def main():
     for t in L["targets"]:
         if ONLY and t["name"] != ONLY:
             continue
-        if not t.get("urls"):
+        # helpers だけの機関（県が出しておらず、県内の市から取るもの）も対象にする
+        if not t.get("urls") and not t.get("helpers"):
             t["status"] = "未調査"
             stat["未調査"] += 1
             continue
