@@ -363,7 +363,14 @@ def parse_org(name, verbose=False):
     up = os.path.join(d, "urls.json")
     if os.path.exists(up):
         umap = json.load(open(up, encoding="utf-8"))
+    # helpers.json ＝ 県が金額を出していないとき、県内の市のページから取ったもの。
+    # そのファイルの級地はこちらで分かっているので、読めた行にその級地を付ける。
+    hmap = {}
+    hp = os.path.join(d, "helpers.json")
+    if os.path.exists(hp):
+        hmap = json.load(open(hp, encoding="utf-8"))
     best, best_url, notes = None, None, []
+    pool = {}   # 級地 -> 行（県内の市から集めたぶん）
     for f in sorted(glob(os.path.join(d, "*.html")) + glob(os.path.join(d, "*.pdf"))):
         try:
             rows, err = parse_text(read_file(f))
@@ -375,12 +382,25 @@ def parse_org(name, verbose=False):
         if not rows:
             notes.append(f"{base}:{err}")
             continue
+        if base in hmap:
+            # 市のページには級地が書いていない。こちらが知っている級地を付ける。
+            for r in rows:
+                r["kyuchi"] = hmap[base]
+                r["via"] = umap.get(base)
         bad = order_check(rows)
         if bad:
             notes.append(f"{base}:級地の大小が逆転({bad[0]})")
             continue
+        if base in hmap:
+            # helper は級地ごとに1本ずつ。合成して県の表にする。
+            pool[hmap[base]] = rows[0]
+            continue
         if best is None or len(rows) > len(best):
             best, best_url = rows, umap.get(base)
+    if pool:
+        merged = [dict(v, kyuchi=k) for k, v in sorted(pool.items())]
+        if best is None or len(merged) > len(best):
+            return merged, "県内の市の公表ページから（各行の via を参照）", None
     if best is None:
         return None, None, "; ".join(notes)[:200] or "候補が無い"
     return best, best_url, None
@@ -406,8 +426,16 @@ def main():
         #   「どの級地の額か分からない数字」を県の値として置くことになる
         #   （北海道で振興局のページから 25,000… を拾って実際にそうなった）。
         #   指定都市・中核市は級地が1つなので無記名でよい。
+        # ★県内の級地が1種類しかない県なら、級地の記載が無くても一意に決まる
+        #   （青森県は県内の市町村がすべて3級地。16県がこれに当たる）。
+        #   2種類以上ある県で級地の記載が無い表は、どの級地の額か決められないので採らない。
+        groups = t.get("kyuchi_groups") or []
         if rows and t["level"] == "都道府県" and any(not r["kyuchi"] for r in rows):
-            rows, err = None, "級地の書いていない表しか取れていない（県内に複数の級地があるので特定できない）"
+            if len(groups) == 1 and len(rows) == 1:
+                rows[0]["kyuchi"] = groups[0]
+            else:
+                rows, err = None, (f"級地の書いていない表しか取れていない"
+                                   f"（この県は{'・'.join(groups)}の{len(groups)}種類があるので特定できない）")
         if not rows:
             t["status"] = "B"
             t["note"] = err

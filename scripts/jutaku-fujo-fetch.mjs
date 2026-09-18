@@ -108,16 +108,19 @@ const deepLinks = (html, base) => {
 }
 
 const main = async () => {
-  const list = L.targets.filter((t) => t.urls.length && (!ONLY || t.name === ONLY))
+  const list = L.targets.filter((t) => (t.urls.length || (t.helpers || []).length) && (!ONLY || t.name === ONLY))
   if (!list.length) { console.log('候補URLの入った機関がまだ無い。--todo で穴を見る。'); return }
   let ok = 0
   let ng = 0
   let skip = 0
   for (const t of list) {
-    const queue = [...t.urls.map((u) => [u, 0])]
+    // helpers＝県が金額を出していないときに、県内の市のページから取るための候補。
+    // どのファイルがどの級地のものかを helpers.json に残し、parse がそれを見て級地を付ける。
+    const hmap = {}
+    const queue = [...t.urls.map((u) => [u, 0]), ...(t.helpers || []).map((h) => [h.url, 0, h.kyuchi])]
     const seen = new Set()
     while (queue.length) {
-      const [u, depth] = queue.shift()
+      const [u, depth, hky] = queue.shift()
       if (seen.has(u)) continue
       seen.add(u)
       const have = already(t, u)
@@ -131,10 +134,12 @@ const main = async () => {
       }
       try {
         const { dest, size, isPdf } = await grab(t, u)
+        if (hky) hmap[path.basename(dest)] = hky
         console.log(`ok    ${t.name.padEnd(8)} ${isPdf ? 'pdf ' : 'html'} ${String(size).padStart(8)}バイト  ${depth ? '└ ' : ''}${u}`)
         ok++
         if (!isPdf && depth === 0) {
-          for (const l of deepLinks(fs.readFileSync(dest, 'utf8'), u)) queue.push([l, 1])
+          // 深追いした先も、元が helper ならその級地を引き継ぐ
+          for (const l of deepLinks(fs.readFileSync(dest, 'utf8'), u)) queue.push([l, 1, hky])
         }
       } catch (e) {
         console.log(`NG    ${t.name.padEnd(8)} ${e.message}  ${depth ? '└ ' : ''}${u}`)
@@ -143,6 +148,11 @@ const main = async () => {
       await sleep(1200)
     }
     t.checked = new Date().toISOString().slice(0, 10)
+    if (Object.keys(hmap).length) {
+      const hp = path.join(slot(t), 'helpers.json')
+      const prev = fs.existsSync(hp) ? JSON.parse(fs.readFileSync(hp, 'utf8')) : {}
+      fs.writeFileSync(hp, JSON.stringify({ ...prev, ...hmap }, null, 1))
+    }
   }
   fs.writeFileSync(LEDGER, JSON.stringify(L, null, 1) + '\n')
   console.log(`\n取得 ${ok} / 失敗 ${ng} / 既にある ${skip}`)

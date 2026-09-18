@@ -39,6 +39,23 @@
     }
    ]
   },
+  "岩手県": {
+   "level": "都道府県",
+   "pref": "岩手県",
+   "source": "https://www.pref.iwate.jp/morioka/hoken/fukushi/1029783.html",
+   "rows": [
+    {
+     "kyuchi": "3級地",
+     "yen": [
+      31000,
+      37000,
+      40000,
+      null,
+      null
+     ]
+    }
+   ]
+  },
   "東京都": {
    "level": "都道府県",
    "pref": "東京都",
@@ -72,6 +89,41 @@
       53200,
       57000,
       63800
+     ]
+    }
+   ]
+  },
+  "秋田県": {
+   "level": "都道府県",
+   "pref": "秋田県",
+   "source": "県内の市の公表ページから（各行の via を参照）",
+   "rows": [
+    {
+     "kyuchi": "3級地",
+     "yen": [
+      35000,
+      42000,
+      46000,
+      49000,
+      55000
+     ],
+     "via": "https://www.city.noshiro.lg.jp/kurashi/fukushi/17529"
+    }
+   ]
+  },
+  "青森県": {
+   "level": "都道府県",
+   "pref": "青森県",
+   "source": "https://www.pref.aomori.lg.jp/soshiki/kenko/kkenkofu/jukyokakuho.html",
+   "rows": [
+    {
+     "kyuchi": "3級地",
+     "yen": [
+      30000,
+      36000,
+      39000,
+      null,
+      null
      ]
     }
    ]

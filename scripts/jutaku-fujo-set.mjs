@@ -15,6 +15,31 @@ const L = JSON.parse(fs.readFileSync(P, 'utf8'))
 const byName = new Map(L.targets.map((t) => [t.name, t]))
 const args = process.argv.slice(2)
 
+// --via <県名> <級地> <市名>=<URL...>
+//   県が金額を公表していないとき、**県内の市のページ**から取る。
+//   住宅扶助の額は「実施機関 × 級地（1/2/3の3段階）」で決まるので、
+//   その市の級地が分かっていれば、県のその級地の欄に入れてよい。
+//   市の級地は data/kyuchi.json（級地マスタ）で引く。
+if (args[0] === '--via') {
+  const [, pref, kyuchi, rest] = args
+  const i = rest.indexOf('=')
+  const city = rest.slice(0, i).trim()
+  const urls = rest.slice(i + 1).trim().split(/\s+/).filter(Boolean)
+  const t = byName.get(pref)
+  if (!t) { console.error(`台帳に無い機関名: ${pref}`); process.exit(1) }
+  const ky = JSON.parse(fs.readFileSync(path.join(ROOT, 'data', 'kyuchi.json'), 'utf8')).rows
+  const got = ky[`${pref}|${city}`] || '3級地-2'   // 一覧に無い市町村はすべて3級地-2
+  if (!got.startsWith(kyuchi)) {
+    console.error(`${pref}${city} は ${got}。${kyuchi} の欄には入れられない。`)
+    process.exit(1)
+  }
+  t.helpers = t.helpers || []
+  for (const u of urls) if (!t.helpers.some((h) => h.url === u)) t.helpers.push({ kyuchi, city, url: u })
+  fs.writeFileSync(P, JSON.stringify(L, null, 1) + String.fromCharCode(10))
+  console.log(`${pref} の ${kyuchi} を ${city}（${got}）から取る候補を ${urls.length} 本足した`)
+  process.exit(0)
+}
+
 if (args[0] === '--clear') {
   for (const name of args.slice(1)) {
     const t = byName.get(name)

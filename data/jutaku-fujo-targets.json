@@ -1,5 +1,5 @@
 {
- "note": "生活保護の住宅扶助（家賃・間代等）の限度額を公表している実施機関の台帳。限度額を決めるのは都道府県・指定都市・中核市の129機関だけで、市町村ごとには決まらない（町村部は都道府県が定める）。129機関の顔ぶれは被保護者調査 第18表と同一なので、data/hogo-shinsei.json から起こしている。 URLは候補を複数持ち、parse が読めたものを picked に記録する。",
+ "note": "生活保護の住宅扶助（家賃・間代等）の限度額を公表している実施機関の台帳。限度額を決めるのは都道府県・指定都市・中核市の129機関だけで、市町村ごとには決まらない（町村部は都道府県が定める）。129機関の顔ぶれは被保護者調査 第18表と同一なので、data/hogo-shinsei.json から起こしている。 URLは候補を複数持ち、parse が読めたものを picked に記録する。 kyuchi_groups=その機関が持つべき級地（1/2/3の3段階）。data/kyuchi.json から機械で出したもの。",
  "gate": "A=候補のどれかから［1人/2人/3〜5人/6人/7人以上］の額が読めた、B=候補は取れたが額の表が見つからない、C=候補が1本も取れない",
  "updated": "2026-09-17",
  "targets": [
@@ -11,7 +11,11 @@
    "note": null,
    "checked": null,
    "urls": [],
-   "picked": null
+   "picked": null,
+   "kyuchi_groups": [
+    "2級地",
+    "3級地"
+   ]
   },
   {
    "name": "京都府",
@@ -21,7 +25,12 @@
    "note": null,
    "checked": null,
    "urls": [],
-   "picked": null
+   "picked": null,
+   "kyuchi_groups": [
+    "1級地",
+    "2級地",
+    "3級地"
+   ]
   },
   {
    "name": "佐賀県",
@@ -31,7 +40,11 @@
    "note": null,
    "checked": null,
    "urls": [],
-   "picked": null
+   "picked": null,
+   "kyuchi_groups": [
+    "2級地",
+    "3級地"
+   ]
   },
   {
    "name": "兵庫県",
@@ -41,21 +54,31 @@
    "note": null,
    "checked": null,
    "urls": [],
-   "picked": null
+   "picked": null,
+   "kyuchi_groups": [
+    "1級地",
+    "2級地",
+    "3級地"
+   ]
   },
   {
    "name": "北海道",
    "level": "都道府県",
    "pref": "北海道",
    "status": "B",
-   "note": "級地の書いていない表しか取れていない（県内に複数の級地があるので特定できない）",
+   "note": "級地の書いていない表しか取れていない（この県は1級地・2級地・3級地の3種類があるので特定できない）",
    "checked": "2026-09-17",
    "urls": [
     "https://www.pref.hokkaido.lg.jp/hf/feg/hog/hogoanai1.html",
     "https://www.rumoi.pref.hokkaido.lg.jp/hk/syf/129011.html",
     "https://www.tokachi.pref.hokkaido.lg.jp/hk/syf/seikatuhogo.html"
    ],
-   "picked": null
+   "picked": null,
+   "kyuchi_groups": [
+    "1級地",
+    "2級地",
+    "3級地"
+   ]
   },
   {
    "name": "千葉県",
@@ -68,7 +91,12 @@
     "https://www.pref.chiba.lg.jp/kenshidou/shien/book/seikatsuhogo.html",
     "https://www.pref.chiba.lg.jp/kenshidou/shien/book/documents/18seikatsuhogo.pdf"
    ],
-   "picked": null
+   "picked": null,
+   "kyuchi_groups": [
+    "1級地",
+    "2級地",
+    "3級地"
+   ]
   },
   {
    "name": "和歌山県",
@@ -78,7 +106,10 @@
    "note": null,
    "checked": null,
    "urls": [],
-   "picked": null
+   "picked": null,
+   "kyuchi_groups": [
+    "3級地"
+   ]
   },
   {
    "name": "埼玉県",
@@ -90,7 +121,12 @@
    "urls": [
     "https://www.pref.saitama.lg.jp/a0602/seihozenpan/910-20091209-89.html"
    ],
-   "picked": "https://www.pref.saitama.lg.jp/a0602/seihozenpan/910-20091209-89.html"
+   "picked": "https://www.pref.saitama.lg.jp/a0602/seihozenpan/910-20091209-89.html",
+   "kyuchi_groups": [
+    "1級地",
+    "2級地",
+    "3級地"
+   ]
   },
   {
    "name": "大分県",
@@ -100,7 +136,11 @@
    "note": null,
    "checked": null,
    "urls": [],
-   "picked": null
+   "picked": null,
+   "kyuchi_groups": [
+    "2級地",
+    "3級地"
+   ]
   },
   {
    "name": "大阪府",
@@ -110,7 +150,12 @@
    "note": null,
    "checked": null,
    "urls": [],
-   "picked": null
+   "picked": null,
+   "kyuchi_groups": [
+    "1級地",
+    "2級地",
+    "3級地"
+   ]
   },
   {
    "name": "奈良県",
@@ -120,7 +165,11 @@
    "note": null,
    "checked": null,
    "urls": [],
-   "picked": null
+   "picked": null,
+   "kyuchi_groups": [
+    "2級地",
+    "3級地"
+   ]
   },
   {
    "name": "宮城県",
@@ -133,17 +182,27 @@
     "https://www.pref.miyagi.jp/soshiki/ks-health/seiho03.html",
     "https://www.pref.miyagi.jp/soshiki/syahuku/jyoho5-2.html"
    ],
-   "picked": null
+   "picked": null,
+   "kyuchi_groups": [
+    "2級地",
+    "3級地"
+   ]
   },
   {
    "name": "宮崎県",
    "level": "都道府県",
    "pref": "宮崎県",
-   "status": "未調査",
-   "note": null,
-   "checked": null,
-   "urls": [],
-   "picked": null
+   "status": "B",
+   "note": "キャッシュが無い（fetch がまだ）",
+   "checked": "2026-09-18",
+   "urls": [
+    "http://www.pref.miyazaki.lg.jp/mina-terasu/juukyokakuho.html",
+    "https://www.pref.miyazaki.lg.jp/mina-terasu/juukyokakuho.html"
+   ],
+   "picked": null,
+   "kyuchi_groups": [
+    "3級地"
+   ]
   },
   {
    "name": "富山県",
@@ -153,7 +212,11 @@
    "note": null,
    "checked": null,
    "urls": [],
-   "picked": null
+   "picked": null,
+   "kyuchi_groups": [
+    "2級地",
+    "3級地"
+   ]
   },
   {
    "name": "山口県",
@@ -163,7 +226,11 @@
    "note": null,
    "checked": null,
    "urls": [],
-   "picked": null
+   "picked": null,
+   "kyuchi_groups": [
+    "2級地",
+    "3級地"
+   ]
   },
   {
    "name": "山形県",
@@ -173,7 +240,10 @@
    "note": null,
    "checked": null,
    "urls": [],
-   "picked": null
+   "picked": null,
+   "kyuchi_groups": [
+    "3級地"
+   ]
   },
   {
    "name": "山梨県",
@@ -183,7 +253,10 @@
    "note": null,
    "checked": null,
    "urls": [],
-   "picked": null
+   "picked": null,
+   "kyuchi_groups": [
+    "3級地"
+   ]
   },
   {
    "name": "岐阜県",
@@ -193,7 +266,11 @@
    "note": null,
    "checked": null,
    "urls": [],
-   "picked": null
+   "picked": null,
+   "kyuchi_groups": [
+    "2級地",
+    "3級地"
+   ]
   },
   {
    "name": "岡山県",
@@ -205,17 +282,26 @@
    "urls": [
     "https://www.pref.okayama.jp/page/detail-54694.html"
    ],
-   "picked": null
+   "picked": null,
+   "kyuchi_groups": [
+    "2級地",
+    "3級地"
+   ]
   },
   {
    "name": "岩手県",
    "level": "都道府県",
    "pref": "岩手県",
-   "status": "未調査",
+   "status": "A",
    "note": null,
-   "checked": null,
-   "urls": [],
-   "picked": null
+   "checked": "2026-09-18",
+   "urls": [
+    "https://www.pref.iwate.jp/morioka/hoken/fukushi/1029783.html"
+   ],
+   "picked": "https://www.pref.iwate.jp/morioka/hoken/fukushi/1029783.html",
+   "kyuchi_groups": [
+    "3級地"
+   ]
   },
   {
    "name": "島根県",
@@ -225,7 +311,10 @@
    "note": null,
    "checked": null,
    "urls": [],
-   "picked": null
+   "picked": null,
+   "kyuchi_groups": [
+    "3級地"
+   ]
   },
   {
    "name": "広島県",
@@ -235,7 +324,11 @@
    "note": null,
    "checked": null,
    "urls": [],
-   "picked": null
+   "picked": null,
+   "kyuchi_groups": [
+    "2級地",
+    "3級地"
+   ]
   },
   {
    "name": "徳島県",
@@ -245,7 +338,11 @@
    "note": null,
    "checked": null,
    "urls": [],
-   "picked": null
+   "picked": null,
+   "kyuchi_groups": [
+    "2級地",
+    "3級地"
+   ]
   },
   {
    "name": "愛媛県",
@@ -255,7 +352,10 @@
    "note": null,
    "checked": null,
    "urls": [],
-   "picked": null
+   "picked": null,
+   "kyuchi_groups": [
+    "3級地"
+   ]
   },
   {
    "name": "愛知県",
@@ -265,7 +365,11 @@
    "note": null,
    "checked": null,
    "urls": [],
-   "picked": null
+   "picked": null,
+   "kyuchi_groups": [
+    "2級地",
+    "3級地"
+   ]
   },
   {
    "name": "新潟県",
@@ -275,7 +379,11 @@
    "note": null,
    "checked": null,
    "urls": [],
-   "picked": null
+   "picked": null,
+   "kyuchi_groups": [
+    "2級地",
+    "3級地"
+   ]
   },
   {
    "name": "東京都",
@@ -287,7 +395,12 @@
    "urls": [
     "https://www.fukushi.metro.tokyo.lg.jp/documents/d/fukushi/jyutakuminaoshi"
    ],
-   "picked": "https://www.fukushi.metro.tokyo.lg.jp/documents/d/fukushi/jyutakuminaoshi"
+   "picked": "https://www.fukushi.metro.tokyo.lg.jp/documents/d/fukushi/jyutakuminaoshi",
+   "kyuchi_groups": [
+    "1級地",
+    "2級地",
+    "3級地"
+   ]
   },
   {
    "name": "栃木県",
@@ -297,7 +410,11 @@
    "note": null,
    "checked": null,
    "urls": [],
-   "picked": null
+   "picked": null,
+   "kyuchi_groups": [
+    "2級地",
+    "3級地"
+   ]
   },
   {
    "name": "沖縄県",
@@ -307,7 +424,10 @@
    "note": null,
    "checked": null,
    "urls": [],
-   "picked": null
+   "picked": null,
+   "kyuchi_groups": [
+    "3級地"
+   ]
   },
   {
    "name": "滋賀県",
@@ -317,7 +437,11 @@
    "note": null,
    "checked": null,
    "urls": [],
-   "picked": null
+   "picked": null,
+   "kyuchi_groups": [
+    "2級地",
+    "3級地"
+   ]
   },
   {
    "name": "熊本県",
@@ -327,7 +451,11 @@
    "note": null,
    "checked": null,
    "urls": [],
-   "picked": null
+   "picked": null,
+   "kyuchi_groups": [
+    "2級地",
+    "3級地"
+   ]
   },
   {
    "name": "石川県",
@@ -337,7 +465,11 @@
    "note": null,
    "checked": null,
    "urls": [],
-   "picked": null
+   "picked": null,
+   "kyuchi_groups": [
+    "2級地",
+    "3級地"
+   ]
   },
   {
    "name": "神奈川県",
@@ -347,7 +479,12 @@
    "note": null,
    "checked": null,
    "urls": [],
-   "picked": null
+   "picked": null,
+   "kyuchi_groups": [
+    "1級地",
+    "2級地",
+    "3級地"
+   ]
   },
   {
    "name": "福井県",
@@ -357,7 +494,10 @@
    "note": null,
    "checked": null,
    "urls": [],
-   "picked": null
+   "picked": null,
+   "kyuchi_groups": [
+    "3級地"
+   ]
   },
   {
    "name": "福岡県",
@@ -369,7 +509,11 @@
    "urls": [
     "https://www.pref.fukuoka.lg.jp/contents/jyukyokakuho.html"
    ],
-   "picked": null
+   "picked": null,
+   "kyuchi_groups": [
+    "2級地",
+    "3級地"
+   ]
   },
   {
    "name": "福島県",
@@ -379,21 +523,34 @@
    "note": null,
    "checked": null,
    "urls": [],
-   "picked": null
+   "picked": null,
+   "kyuchi_groups": [
+    "3級地"
+   ]
   },
   {
    "name": "秋田県",
    "level": "都道府県",
    "pref": "秋田県",
-   "status": "B",
-   "note": "1d9875d3.pdf:限度額の表が見つからない; 730356b8.html:限度額の表が見つからない; 974bebdc.pdf:限度額の表が見つからない; c331f7ef.pdf:限度額の表が見つからない",
-   "checked": "2026-09-17",
+   "status": "A",
+   "note": null,
+   "checked": "2026-09-18",
    "urls": [
     "https://www.pref.akita.lg.jp/pages/archive/293",
     "https://www.pref.akita.lg.jp/uploads/public/archive_0000000293_00/02-1_%EF%BC%88%E5%8F%97%E7%B5%A6%E8%80%85%E7%94%A8%EF%BC%89%E5%85%A8%E6%96%87.pdf",
     "https://www.pref.akita.lg.jp/uploads/public/archive_0000000293_00/3_%E4%BF%9D%E8%AD%B7%E3%81%AE%E3%81%97%E3%81%8A%E3%82%8A%EF%BC%88%E7%94%B3%E8%AB%8B%E8%80%85%E7%94%A8%EF%BC%89.pdf"
    ],
-   "picked": null
+   "picked": "県内の市の公表ページから（各行の via を参照）",
+   "helpers": [
+    {
+     "kyuchi": "3級地",
+     "city": "能代市",
+     "url": "https://www.city.noshiro.lg.jp/kurashi/fukushi/17529"
+    }
+   ],
+   "kyuchi_groups": [
+    "3級地"
+   ]
   },
   {
    "name": "群馬県",
@@ -403,7 +560,11 @@
    "note": null,
    "checked": null,
    "urls": [],
-   "picked": null
+   "picked": null,
+   "kyuchi_groups": [
+    "2級地",
+    "3級地"
+   ]
   },
   {
    "name": "茨城県",
@@ -413,7 +574,11 @@
    "note": null,
    "checked": null,
    "urls": [],
-   "picked": null
+   "picked": null,
+   "kyuchi_groups": [
+    "2級地",
+    "3級地"
+   ]
   },
   {
    "name": "長崎県",
@@ -423,7 +588,11 @@
    "note": null,
    "checked": null,
    "urls": [],
-   "picked": null
+   "picked": null,
+   "kyuchi_groups": [
+    "2級地",
+    "3級地"
+   ]
   },
   {
    "name": "長野県",
@@ -433,20 +602,28 @@
    "note": null,
    "checked": null,
    "urls": [],
-   "picked": null
+   "picked": null,
+   "kyuchi_groups": [
+    "2級地",
+    "3級地"
+   ]
   },
   {
    "name": "青森県",
    "level": "都道府県",
    "pref": "青森県",
-   "status": "B",
-   "note": "c8a34c55.html:限度額の表が見つからない; cbb7fd81.html:限度額の表が見つからない",
-   "checked": "2026-09-17",
+   "status": "A",
+   "note": null,
+   "checked": "2026-09-18",
    "urls": [
     "https://www.pref.aomori.lg.jp/soshiki/kenko/se-fukushi/2008-0627-1527-425.html",
-    "https://www.pref.aomori.lg.jp/soshiki/kenmin/sa-fukushi/hogo.html"
+    "https://www.pref.aomori.lg.jp/soshiki/kenmin/sa-fukushi/hogo.html",
+    "https://www.pref.aomori.lg.jp/soshiki/kenko/kkenkofu/jukyokakuho.html"
    ],
-   "picked": null
+   "picked": "https://www.pref.aomori.lg.jp/soshiki/kenko/kkenkofu/jukyokakuho.html",
+   "kyuchi_groups": [
+    "3級地"
+   ]
   },
   {
    "name": "静岡県",
@@ -456,7 +633,11 @@
    "note": null,
    "checked": null,
    "urls": [],
-   "picked": null
+   "picked": null,
+   "kyuchi_groups": [
+    "2級地",
+    "3級地"
+   ]
   },
   {
    "name": "香川県",
@@ -466,7 +647,10 @@
    "note": null,
    "checked": null,
    "urls": [],
-   "picked": null
+   "picked": null,
+   "kyuchi_groups": [
+    "3級地"
+   ]
   },
   {
    "name": "高知県",
@@ -476,7 +660,10 @@
    "note": null,
    "checked": null,
    "urls": [],
-   "picked": null
+   "picked": null,
+   "kyuchi_groups": [
+    "3級地"
+   ]
   },
   {
    "name": "鳥取県",
@@ -486,7 +673,10 @@
    "note": null,
    "checked": null,
    "urls": [],
-   "picked": null
+   "picked": null,
+   "kyuchi_groups": [
+    "3級地"
+   ]
   },
   {
    "name": "鹿児島県",
@@ -496,7 +686,10 @@
    "note": null,
    "checked": null,
    "urls": [],
-   "picked": null
+   "picked": null,
+   "kyuchi_groups": [
+    "3級地"
+   ]
   },
   {
    "name": "さいたま市",
@@ -509,7 +702,10 @@
     "https://www.city.saitama.lg.jp/002/003/002/p088576_d/fil/jukyokakuhokyuhukinshiori.pdf",
     "https://www.city.saitama.lg.jp/002/003/002/p072573.html"
    ],
-   "picked": "https://www.city.saitama.lg.jp/002/003/002/p072573_d/fil/youshiki2-1.pdf"
+   "picked": "https://www.city.saitama.lg.jp/002/003/002/p072573_d/fil/youshiki2-1.pdf",
+   "kyuchi_groups": [
+    "1級地"
+   ]
   },
   {
    "name": "京都市",
@@ -523,7 +719,10 @@
     "https://www.city.kyoto.lg.jp/hokenfukushi/page/0000149325.html",
     "https://www.city.kyoto.lg.jp/hokenfukushi/cmsfiles/contents/0000005/5320/0508jyukyuu.pdf"
    ],
-   "picked": "https://www.city.kyoto.lg.jp/hokenfukushi/page/0000149325.html"
+   "picked": "https://www.city.kyoto.lg.jp/hokenfukushi/page/0000149325.html",
+   "kyuchi_groups": [
+    "1級地"
+   ]
   },
   {
    "name": "仙台市",
@@ -535,7 +734,10 @@
    "urls": [
     "https://www.city.sendai.jp/hogoshien/kurashi/tetsuzuki/sekatsu/sekatsu/jukyokakuhokyufukin.html"
    ],
-   "picked": "https://www.city.sendai.jp/hogoshien/kurashi/tetsuzuki/sekatsu/sekatsu/jukyokakuhokyufukin.html"
+   "picked": "https://www.city.sendai.jp/hogoshien/kurashi/tetsuzuki/sekatsu/sekatsu/jukyokakuhokyufukin.html",
+   "kyuchi_groups": [
+    "1級地"
+   ]
   },
   {
    "name": "北九州市",
@@ -547,7 +749,10 @@
    "urls": [
     "https://www.city.kitakyushu.lg.jp/contents/924_11335.html"
    ],
-   "picked": "https://www.city.kitakyushu.lg.jp/contents/924_11335.html"
+   "picked": "https://www.city.kitakyushu.lg.jp/contents/924_11335.html",
+   "kyuchi_groups": [
+    "1級地"
+   ]
   },
   {
    "name": "千葉市",
@@ -560,7 +765,10 @@
     "https://www.city.chiba.jp/hokenfukushi/hogo/jyukyokakuhokyuhukinn.html",
     "https://www.city.chiba.jp/hokenfukushi/hogo/documents/jukyo-goannai-reiwa5nen4gastu-syusei.pdf"
    ],
-   "picked": "https://www.city.chiba.jp/hokenfukushi/hogo/jyukyokakuhokyuhukinn.html"
+   "picked": "https://www.city.chiba.jp/hokenfukushi/hogo/jyukyokakuhokyuhukinn.html",
+   "kyuchi_groups": [
+    "1級地"
+   ]
   },
   {
    "name": "名古屋市",
@@ -574,7 +782,10 @@
     "https://www.city.nagoya.jp/_res/projects/default_project/_page_/001/016/734/317seikatuhogo.pdf",
     "https://www.city.nagoya.jp/kenkofukushi/fukushi/1051323/1016734.html"
    ],
-   "picked": "https://www.city.nagoya.jp/kenkofukushi/page/0000128510.html"
+   "picked": "https://www.city.nagoya.jp/kenkofukushi/page/0000128510.html",
+   "kyuchi_groups": [
+    "1級地"
+   ]
   },
   {
    "name": "堺市",
@@ -587,7 +798,10 @@
     "https://www.city.sakai.lg.jp/kenko/fukushikaigo/seikatsuhogo/jyuukyokakuho_yatinhojo.html",
     "https://www.city.sakai.lg.jp/kenko/fukushikaigo/seikatsuhogo/jyuukyokakuho.html"
    ],
-   "picked": "https://www.city.sakai.lg.jp/kenko/fukushikaigo/seikatsuhogo/jyuukyokakuho_yatinhojo.html"
+   "picked": "https://www.city.sakai.lg.jp/kenko/fukushikaigo/seikatsuhogo/jyuukyokakuho_yatinhojo.html",
+   "kyuchi_groups": [
+    "1級地"
+   ]
   },
   {
    "name": "大阪市",
@@ -599,7 +813,10 @@
    "urls": [
     "https://www.city.osaka.lg.jp/fukushi/page/0000086902.html"
    ],
-   "picked": "https://www.city.osaka.lg.jp/fukushi/page/0000086902.html"
+   "picked": "https://www.city.osaka.lg.jp/fukushi/page/0000086902.html",
+   "kyuchi_groups": [
+    "1級地"
+   ]
   },
   {
    "name": "岡山市",
@@ -611,7 +828,10 @@
    "urls": [
     "https://www.city.okayama.jp/kurashi/0000003601.html"
    ],
-   "picked": "https://www.city.okayama.jp/kurashi/0000082213.html"
+   "picked": "https://www.city.okayama.jp/kurashi/0000082213.html",
+   "kyuchi_groups": [
+    "1級地"
+   ]
   },
   {
    "name": "川崎市",
@@ -623,7 +843,10 @@
    "urls": [
     "https://www.city.kawasaki.jp/350/page/0000048949.html"
    ],
-   "picked": "https://www.city.kawasaki.jp/350/page/0000175384.html"
+   "picked": "https://www.city.kawasaki.jp/350/page/0000175384.html",
+   "kyuchi_groups": [
+    "1級地"
+   ]
   },
   {
    "name": "広島市",
@@ -635,7 +858,10 @@
    "urls": [
     "https://www.city.hiroshima.lg.jp/living/fukushi-kaigo/1021239/1021956.html"
    ],
-   "picked": "https://www.city.hiroshima.lg.jp/living/fukushi-kaigo/1021239/1021956.html"
+   "picked": "https://www.city.hiroshima.lg.jp/living/fukushi-kaigo/1021239/1021956.html",
+   "kyuchi_groups": [
+    "1級地"
+   ]
   },
   {
    "name": "新潟市",
@@ -650,7 +876,10 @@
     "https://www.city.niigata.lg.jp/iryo/kenfuku/konkyusyashien/index.html",
     "https://www.4894.call.city.niigata.jp/Faq/B0300504"
    ],
-   "picked": null
+   "picked": null,
+   "kyuchi_groups": [
+    "2級地"
+   ]
   },
   {
    "name": "札幌市",
@@ -663,7 +892,10 @@
     "https://www.city.sapporo.jp/fukushi-guide/documents/seikatsuhogo-r8-4-kijunn.pdf",
     "https://www.city.sapporo.jp/fukushi-guide/seikatuhogo.html"
    ],
-   "picked": "https://www.city.sapporo.jp/fukushi-guide/documents/seikatsuhogo-r8-7-kijunn_1.pdf"
+   "picked": "https://www.city.sapporo.jp/fukushi-guide/documents/seikatsuhogo-r8-7-kijunn_1.pdf",
+   "kyuchi_groups": [
+    "1級地"
+   ]
   },
   {
    "name": "横浜市",
@@ -678,7 +910,10 @@
     "https://www.city.yokohama.lg.jp/kenko-iryo-fukushi/fukushi-kaigo/seikatsu/seikatsuhogo/hogo.html",
     "https://www.city.yokohama.lg.jp/kenko-iryo-fukushi/fukushi-kaigo/seikatsu/jiritsu/jukyokakuho.html"
    ],
-   "picked": "https://www.city.yokohama.lg.jp/kenko-iryo-fukushi/fukushi-kaigo/seikatsu/jiritsu/jukyokakuho.html"
+   "picked": "https://www.city.yokohama.lg.jp/kenko-iryo-fukushi/fukushi-kaigo/seikatsu/jiritsu/jukyokakuho.html",
+   "kyuchi_groups": [
+    "1級地"
+   ]
   },
   {
    "name": "浜松市",
@@ -690,7 +925,10 @@
    "urls": [
     "https://www.city.hamamatsu.shizuoka.jp/fukushisomu/jyuukyokakuho.html"
    ],
-   "picked": "https://www.city.hamamatsu.shizuoka.jp/fukushisomu/jyuukyokakuho.html"
+   "picked": "https://www.city.hamamatsu.shizuoka.jp/fukushisomu/jyuukyokakuho.html",
+   "kyuchi_groups": [
+    "2級地"
+   ]
   },
   {
    "name": "熊本市",
@@ -702,7 +940,10 @@
    "urls": [
     "https://www.city.kumamoto.jp/kiji00327837/index.html"
    ],
-   "picked": "https://www.city.kumamoto.jp/kiji00327837/index.html"
+   "picked": "https://www.city.kumamoto.jp/kiji00327837/index.html",
+   "kyuchi_groups": [
+    "2級地"
+   ]
   },
   {
    "name": "相模原市",
@@ -714,7 +955,10 @@
    "urls": [
     "https://www.city.sagamihara.kanagawa.jp/kosodate/fukushi/1026642/1006553/1024112.html"
    ],
-   "picked": null
+   "picked": null,
+   "kyuchi_groups": [
+    "1級地"
+   ]
   },
   {
    "name": "神戸市",
@@ -727,7 +971,10 @@
     "https://www.city.kobe.lg.jp/documents/4788/03_jyukakupanfu.pdf",
     "https://www.city.kobe.lg.jp/a38463/kenko/chiikifukushi/sekatsukonkyusha/jukyokakuho.html"
    ],
-   "picked": "https://www.city.kobe.lg.jp/a38463/kenko/chiikifukushi/sekatsukonkyusha/jukyokakuho.html"
+   "picked": "https://www.city.kobe.lg.jp/a38463/kenko/chiikifukushi/sekatsukonkyusha/jukyokakuho.html",
+   "kyuchi_groups": [
+    "1級地"
+   ]
   },
   {
    "name": "福岡市",
@@ -741,7 +988,10 @@
     "https://www.city.fukuoka.lg.jp/fukushi/hogo/health/dairinoufu.html",
     "https://www.city.fukuoka.lg.jp/fukushi/hogo/health/001.html"
    ],
-   "picked": "https://www.city.fukuoka.lg.jp/fukushi/seikatujiritu/health/jyukyokakuhokyuhukin_3_2.html"
+   "picked": "https://www.city.fukuoka.lg.jp/fukushi/seikatujiritu/health/jyukyokakuhokyuhukin_3_2.html",
+   "kyuchi_groups": [
+    "1級地"
+   ]
   },
   {
    "name": "静岡市",
@@ -754,7 +1004,10 @@
     "https://www.city.shizuoka.lg.jp/s3865/s003046.html",
     "https://www.city.shizuoka.lg.jp/000_003064.html"
    ],
-   "picked": null
+   "picked": null,
+   "kyuchi_groups": [
+    "2級地"
+   ]
   },
   {
    "name": "いわき市",
@@ -764,7 +1017,10 @@
    "note": null,
    "checked": null,
    "urls": [],
-   "picked": null
+   "picked": null,
+   "kyuchi_groups": [
+    "3級地"
+   ]
   },
   {
    "name": "一宮市",
@@ -774,7 +1030,10 @@
    "note": null,
    "checked": null,
    "urls": [],
-   "picked": null
+   "picked": null,
+   "kyuchi_groups": [
+    "2級地"
+   ]
   },
   {
    "name": "下関市",
@@ -784,7 +1043,10 @@
    "note": null,
    "checked": null,
    "urls": [],
-   "picked": null
+   "picked": null,
+   "kyuchi_groups": [
+    "2級地"
+   ]
   },
   {
    "name": "久留米市",
@@ -794,7 +1056,10 @@
    "note": null,
    "checked": null,
    "urls": [],
-   "picked": null
+   "picked": null,
+   "kyuchi_groups": [
+    "2級地"
+   ]
   },
   {
    "name": "佐世保市",
@@ -804,7 +1069,10 @@
    "note": null,
    "checked": null,
    "urls": [],
-   "picked": null
+   "picked": null,
+   "kyuchi_groups": [
+    "2級地"
+   ]
   },
   {
    "name": "倉敷市",
@@ -814,7 +1082,10 @@
    "note": null,
    "checked": null,
    "urls": [],
-   "picked": null
+   "picked": null,
+   "kyuchi_groups": [
+    "1級地"
+   ]
   },
   {
    "name": "八尾市",
@@ -824,7 +1095,10 @@
    "note": null,
    "checked": null,
    "urls": [],
-   "picked": null
+   "picked": null,
+   "kyuchi_groups": [
+    "1級地"
+   ]
   },
   {
    "name": "八戸市",
@@ -834,7 +1108,10 @@
    "note": null,
    "checked": null,
    "urls": [],
-   "picked": null
+   "picked": null,
+   "kyuchi_groups": [
+    "3級地"
+   ]
   },
   {
    "name": "八王子市",
@@ -844,7 +1121,10 @@
    "note": null,
    "checked": null,
    "urls": [],
-   "picked": null
+   "picked": null,
+   "kyuchi_groups": [
+    "1級地"
+   ]
   },
   {
    "name": "函館市",
@@ -854,7 +1134,10 @@
    "note": null,
    "checked": null,
    "urls": [],
-   "picked": null
+   "picked": null,
+   "kyuchi_groups": [
+    "2級地"
+   ]
   },
   {
    "name": "前橋市",
@@ -864,7 +1147,10 @@
    "note": null,
    "checked": null,
    "urls": [],
-   "picked": null
+   "picked": null,
+   "kyuchi_groups": [
+    "2級地"
+   ]
   },
   {
    "name": "吹田市",
@@ -874,7 +1160,10 @@
    "note": null,
    "checked": null,
    "urls": [],
-   "picked": null
+   "picked": null,
+   "kyuchi_groups": [
+    "1級地"
+   ]
   },
   {
    "name": "呉市",
@@ -884,7 +1173,10 @@
    "note": null,
    "checked": null,
    "urls": [],
-   "picked": null
+   "picked": null,
+   "kyuchi_groups": [
+    "1級地"
+   ]
   },
   {
    "name": "和歌山市",
@@ -894,7 +1186,10 @@
    "note": null,
    "checked": null,
    "urls": [],
-   "picked": null
+   "picked": null,
+   "kyuchi_groups": [
+    "2級地"
+   ]
   },
   {
    "name": "大分市",
@@ -904,7 +1199,10 @@
    "note": null,
    "checked": null,
    "urls": [],
-   "picked": null
+   "picked": null,
+   "kyuchi_groups": [
+    "2級地"
+   ]
   },
   {
    "name": "大津市",
@@ -914,7 +1212,10 @@
    "note": null,
    "checked": null,
    "urls": [],
-   "picked": null
+   "picked": null,
+   "kyuchi_groups": [
+    "1級地"
+   ]
   },
   {
    "name": "奈良市",
@@ -924,7 +1225,10 @@
    "note": null,
    "checked": null,
    "urls": [],
-   "picked": null
+   "picked": null,
+   "kyuchi_groups": [
+    "2級地"
+   ]
   },
   {
    "name": "姫路市",
@@ -934,7 +1238,10 @@
    "note": null,
    "checked": null,
    "urls": [],
-   "picked": null
+   "picked": null,
+   "kyuchi_groups": [
+    "1級地"
+   ]
   },
   {
    "name": "宇都宮市",
@@ -944,7 +1251,10 @@
    "note": null,
    "checked": null,
    "urls": [],
-   "picked": null
+   "picked": null,
+   "kyuchi_groups": [
+    "2級地"
+   ]
   },
   {
    "name": "宮崎市",
@@ -954,7 +1264,10 @@
    "note": null,
    "checked": null,
    "urls": [],
-   "picked": null
+   "picked": null,
+   "kyuchi_groups": [
+    "2級地"
+   ]
   },
   {
    "name": "富山市",
@@ -964,7 +1277,10 @@
    "note": null,
    "checked": null,
    "urls": [],
-   "picked": null
+   "picked": null,
+   "kyuchi_groups": [
+    "2級地"
+   ]
   },
   {
    "name": "寝屋川市",
@@ -974,7 +1290,10 @@
    "note": null,
    "checked": null,
    "urls": [],
-   "picked": null
+   "picked": null,
+   "kyuchi_groups": [
+    "1級地"
+   ]
   },
   {
    "name": "尼崎市",
@@ -984,7 +1303,10 @@
    "note": null,
    "checked": null,
    "urls": [],
-   "picked": null
+   "picked": null,
+   "kyuchi_groups": [
+    "1級地"
+   ]
   },
   {
    "name": "山形市",
@@ -994,7 +1316,10 @@
    "note": null,
    "checked": null,
    "urls": [],
-   "picked": null
+   "picked": null,
+   "kyuchi_groups": [
+    "2級地"
+   ]
   },
   {
    "name": "岐阜市",
@@ -1004,7 +1329,10 @@
    "note": null,
    "checked": null,
    "urls": [],
-   "picked": null
+   "picked": null,
+   "kyuchi_groups": [
+    "2級地"
+   ]
   },
   {
    "name": "岡崎市",
@@ -1014,7 +1342,10 @@
    "note": null,
    "checked": null,
    "urls": [],
-   "picked": null
+   "picked": null,
+   "kyuchi_groups": [
+    "2級地"
+   ]
   },
   {
    "name": "川口市",
@@ -1024,7 +1355,10 @@
    "note": null,
    "checked": null,
    "urls": [],
-   "picked": null
+   "picked": null,
+   "kyuchi_groups": [
+    "1級地"
+   ]
   },
   {
    "name": "川越市",
@@ -1034,7 +1368,10 @@
    "note": null,
    "checked": null,
    "urls": [],
-   "picked": null
+   "picked": null,
+   "kyuchi_groups": [
+    "2級地"
+   ]
   },
   {
    "name": "旭川市",
@@ -1044,7 +1381,10 @@
    "note": null,
    "checked": null,
    "urls": [],
-   "picked": null
+   "picked": null,
+   "kyuchi_groups": [
+    "2級地"
+   ]
   },
   {
    "name": "明石市",
@@ -1054,7 +1394,10 @@
    "note": null,
    "checked": null,
    "urls": [],
-   "picked": null
+   "picked": null,
+   "kyuchi_groups": [
+    "1級地"
+   ]
   },
   {
    "name": "東大阪市",
@@ -1064,7 +1407,10 @@
    "note": null,
    "checked": null,
    "urls": [],
-   "picked": null
+   "picked": null,
+   "kyuchi_groups": [
+    "1級地"
+   ]
   },
   {
    "name": "松山市",
@@ -1077,7 +1423,10 @@
     "https://www.city.matsuyama.ehime.jp/kurashi/fukushi/shakai/hogo/naiyou/index.html",
     "https://www.city.matsuyama.ehime.jp/kurashi/fukushi/shakai/ziritsushien/zyuukyo/jyukyokakuho2.html"
    ],
-   "picked": "https://www.city.matsuyama.ehime.jp/kurashi/fukushi/shakai/ziritsushien/zyuukyo/jyukyokakuho2.html"
+   "picked": "https://www.city.matsuyama.ehime.jp/kurashi/fukushi/shakai/ziritsushien/zyuukyo/jyukyokakuho2.html",
+   "kyuchi_groups": [
+    "2級地"
+   ]
   },
   {
    "name": "松本市",
@@ -1087,7 +1436,10 @@
    "note": null,
    "checked": null,
    "urls": [],
-   "picked": null
+   "picked": null,
+   "kyuchi_groups": [
+    "2級地"
+   ]
   },
   {
    "name": "松江市",
@@ -1097,7 +1449,10 @@
    "note": null,
    "checked": null,
    "urls": [],
-   "picked": null
+   "picked": null,
+   "kyuchi_groups": [
+    "2級地"
+   ]
   },
   {
    "name": "枚方市",
@@ -1107,7 +1462,10 @@
    "note": null,
    "checked": null,
    "urls": [],
-   "picked": null
+   "picked": null,
+   "kyuchi_groups": [
+    "1級地"
+   ]
   },
   {
    "name": "柏市",
@@ -1117,7 +1475,10 @@
    "note": null,
    "checked": null,
    "urls": [],
-   "picked": null
+   "picked": null,
+   "kyuchi_groups": [
+    "2級地"
+   ]
   },
   {
    "name": "横須賀市",
@@ -1127,7 +1488,10 @@
    "note": null,
    "checked": null,
    "urls": [],
-   "picked": null
+   "picked": null,
+   "kyuchi_groups": [
+    "1級地"
+   ]
   },
   {
    "name": "水戸市",
@@ -1137,7 +1501,10 @@
    "note": null,
    "checked": null,
    "urls": [],
-   "picked": null
+   "picked": null,
+   "kyuchi_groups": [
+    "2級地"
+   ]
   },
   {
    "name": "甲府市",
@@ -1147,7 +1514,10 @@
    "note": null,
    "checked": null,
    "urls": [],
-   "picked": null
+   "picked": null,
+   "kyuchi_groups": [
+    "2級地"
+   ]
   },
   {
    "name": "盛岡市",
@@ -1157,7 +1527,10 @@
    "note": null,
    "checked": null,
    "urls": [],
-   "picked": null
+   "picked": null,
+   "kyuchi_groups": [
+    "2級地"
+   ]
   },
   {
    "name": "福井市",
@@ -1167,7 +1540,10 @@
    "note": null,
    "checked": null,
    "urls": [],
-   "picked": null
+   "picked": null,
+   "kyuchi_groups": [
+    "2級地"
+   ]
   },
   {
    "name": "福山市",
@@ -1177,7 +1553,10 @@
    "note": null,
    "checked": null,
    "urls": [],
-   "picked": null
+   "picked": null,
+   "kyuchi_groups": [
+    "1級地"
+   ]
   },
   {
    "name": "福島市",
@@ -1187,7 +1566,10 @@
    "note": null,
    "checked": null,
    "urls": [],
-   "picked": null
+   "picked": null,
+   "kyuchi_groups": [
+    "2級地"
+   ]
   },
   {
    "name": "秋田市",
@@ -1199,7 +1581,10 @@
    "urls": [
     "https://www.city.akita.lg.jp/kurashi/okomarinokata/1006020/1025008.html"
    ],
-   "picked": null
+   "picked": null,
+   "kyuchi_groups": [
+    "2級地"
+   ]
   },
   {
    "name": "船橋市",
@@ -1209,7 +1594,10 @@
    "note": null,
    "checked": null,
    "urls": [],
-   "picked": null
+   "picked": null,
+   "kyuchi_groups": [
+    "1級地"
+   ]
   },
   {
    "name": "西宮市",
@@ -1219,7 +1607,10 @@
    "note": null,
    "checked": null,
    "urls": [],
-   "picked": null
+   "picked": null,
+   "kyuchi_groups": [
+    "1級地"
+   ]
   },
   {
    "name": "豊中市",
@@ -1229,7 +1620,10 @@
    "note": null,
    "checked": null,
    "urls": [],
-   "picked": null
+   "picked": null,
+   "kyuchi_groups": [
+    "1級地"
+   ]
   },
   {
    "name": "豊橋市",
@@ -1239,7 +1633,10 @@
    "note": null,
    "checked": null,
    "urls": [],
-   "picked": null
+   "picked": null,
+   "kyuchi_groups": [
+    "2級地"
+   ]
   },
   {
    "name": "豊田市",
@@ -1249,7 +1646,10 @@
    "note": null,
    "checked": null,
    "urls": [],
-   "picked": null
+   "picked": null,
+   "kyuchi_groups": [
+    "2級地"
+   ]
   },
   {
    "name": "越谷市",
@@ -1259,7 +1659,10 @@
    "note": null,
    "checked": null,
    "urls": [],
-   "picked": null
+   "picked": null,
+   "kyuchi_groups": [
+    "2級地"
+   ]
   },
   {
    "name": "那覇市",
@@ -1269,7 +1672,10 @@
    "note": null,
    "checked": null,
    "urls": [],
-   "picked": null
+   "picked": null,
+   "kyuchi_groups": [
+    "2級地"
+   ]
   },
   {
    "name": "郡山市",
@@ -1279,7 +1685,10 @@
    "note": null,
    "checked": null,
    "urls": [],
-   "picked": null
+   "picked": null,
+   "kyuchi_groups": [
+    "3級地"
+   ]
   },
   {
    "name": "金沢市",
@@ -1289,7 +1698,10 @@
    "note": null,
    "checked": null,
    "urls": [],
-   "picked": null
+   "picked": null,
+   "kyuchi_groups": [
+    "2級地"
+   ]
   },
   {
    "name": "長崎市",
@@ -1299,7 +1711,10 @@
    "note": null,
    "checked": null,
    "urls": [],
-   "picked": null
+   "picked": null,
+   "kyuchi_groups": [
+    "2級地"
+   ]
   },
   {
    "name": "長野市",
@@ -1309,7 +1724,10 @@
    "note": null,
    "checked": null,
    "urls": [],
-   "picked": null
+   "picked": null,
+   "kyuchi_groups": [
+    "2級地"
+   ]
   },
   {
    "name": "青森市",
@@ -1319,7 +1737,10 @@
    "note": null,
    "checked": null,
    "urls": [],
-   "picked": null
+   "picked": null,
+   "kyuchi_groups": [
+    "2級地"
+   ]
   },
   {
    "name": "高崎市",
@@ -1329,7 +1750,10 @@
    "note": null,
    "checked": null,
    "urls": [],
-   "picked": null
+   "picked": null,
+   "kyuchi_groups": [
+    "2級地"
+   ]
   },
   {
    "name": "高松市",
@@ -1339,7 +1763,10 @@
    "note": null,
    "checked": null,
    "urls": [],
-   "picked": null
+   "picked": null,
+   "kyuchi_groups": [
+    "2級地"
+   ]
   },
   {
    "name": "高槻市",
@@ -1349,7 +1776,10 @@
    "note": null,
    "checked": null,
    "urls": [],
-   "picked": null
+   "picked": null,
+   "kyuchi_groups": [
+    "1級地"
+   ]
   },
   {
    "name": "高知市",
@@ -1359,7 +1789,10 @@
    "note": null,
    "checked": null,
    "urls": [],
-   "picked": null
+   "picked": null,
+   "kyuchi_groups": [
+    "2級地"
+   ]
   },
   {
    "name": "鳥取市",
@@ -1369,7 +1802,10 @@
    "note": null,
    "checked": null,
    "urls": [],
-   "picked": null
+   "picked": null,
+   "kyuchi_groups": [
+    "2級地"
+   ]
   },
   {
    "name": "鹿児島市",
@@ -1379,7 +1815,10 @@
    "note": null,
    "checked": null,
    "urls": [],
-   "picked": null
+   "picked": null,
+   "kyuchi_groups": [
+    "2級地"
+   ]
   }
  ]
 }
