@@ -211,6 +211,7 @@ ${cutBlocks}
 
   <p class="price"><b>${PRICE}円</b><span>買い切り・税込。HTMLファイル1つ、印刷可</span></p>
   <p><button id="buy" class="btn-primary" type="button">${PRICE}円で一覧を受け取る</button></p>
+  <p class="fine">クレジットカード決済（Stripe）。カード情報は当方を経由しません。Apple Pay・Google Pay にも対応しています（お使いの端末が対応している場合）。PayPay は近日対応予定です。お支払い後すぐダウンロードできます。<a href="../tokushoho/">特定商取引法に基づく表記</a>／<a href="../kiyaku/">利用規約</a></p>
   <p id="msg" class="note"></p>
   <p class="fine"><strong>買わなくても申し込みはできます。</strong>上の相場だけでも、どのあたりを狙うかは決められます。</p>
 <!-- TOEI:PEEK -->

@@ -63,7 +63,7 @@ export function offerKoeiSell({ facts: f, peek, up = '../../' } = {}) {
   <p class="buyrow"><button type="button" class="btn-primary" data-buy>${f.price}円で一覧を受け取る</button> <span class="buymsg" role="status"></span></p>
   <p class="fine"><strong>買わなくても申し込みはできます。</strong>${f.axis}ごとの相場と混んでいる申込先の実名は、上に全部出しています。</p>
 ${peek ? peekBox('一覧の冒頭（抜粋）', peek) : ''}
-  <p class="fine">クレジットカード決済（Stripe）。カード情報は当方を経由しません。お支払い後すぐダウンロードできます。<a href="${up}tokushoho/">特定商取引法に基づく表記</a>／<a href="${up}kiyaku/">利用規約</a></p>
+  <p class="fine">クレジットカード決済（Stripe）。カード情報は当方を経由しません。Apple Pay・Google Pay にも対応しています（お使いの端末が対応している場合）。PayPay は近日対応予定です。お支払い後すぐダウンロードできます。<a href="${up}tokushoho/">特定商取引法に基づく表記</a>／<a href="${up}kiyaku/">利用規約</a></p>
   </div>`
 }
 

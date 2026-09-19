@@ -17,6 +17,7 @@ import fs from 'node:fs'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { page, esc, SITE } from './shogai-kojo-page.mjs'
+import { kanryoScript } from './kanryo-script.mjs'
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..')
 const DATA = path.join(ROOT, 'data', 'shogai-kojo')
@@ -155,7 +156,7 @@ write('pack/index.html', page({
   </select></p>
   <p style="margin-top:1rem"><button id="buy" class="btn-primary">${PRICE}円で手順書を受け取る</button>
   <span id="msg" style="margin-left:.8rem"></span></p>
-  <p class="fine">クレジットカード決済（Stripe）。カード情報は当方を経由しません。お支払い後すぐダウンロードできます。<strong>買わなくても手続きはできます</strong>——無料で読める範囲は上のとおりです。</p>
+  <p class="fine">クレジットカード決済（Stripe）。カード情報は当方を経由しません。Apple Pay・Google Pay にも対応しています（お使いの端末が対応している場合）。PayPay は近日対応予定です。お支払い後すぐダウンロードできます。<strong>買わなくても手続きはできます</strong>——無料で読める範囲は上のとおりです。</p>
   </div>
 
   <div class="callout warn"><p><span class="tag">先に確認してください</span>
@@ -203,14 +204,7 @@ write('pack/kanryo/index.html', page({
   <p class="note">開けない・内容が説明と違う・二重に決済された場合は、購入から14日以内に <a href="mailto:${SELLER.mail}">${SELLER.mail}</a> までご連絡ください。全額を返金します。
   領収書はStripeから届くメールでご確認いただけます。</p>
   <p class="related"><a href="../../shogai-kojo/">→ 全国の認定基準を比べる（無料）</a></p>
-<script>
-(function(){
-  var sid=new URLSearchParams(location.search).get('session_id');
-  var a=document.getElementById('dl'), msg=document.getElementById('msg');
-  if(!sid){ a.style.display='none'; msg.textContent='購入の情報が見つかりません。購入後に表示されたURLからお越しください。'; return; }
-  a.href='/api/pack?session_id='+encodeURIComponent(sid);
-})();
-</script>
+<script>${kanryoScript({ label: 'パックをダウンロード（HTML）' })}</script>
 `,
 }))
 
@@ -235,7 +229,7 @@ write('tokushoho/index.html', page({
   <tr><th>メールアドレス</th><td>${esc(SELLER.mail)}</td></tr>
   <tr><th>販売価格</th><td>${PRICE}円（消費税込み）</td></tr>
   <tr><th>商品代金以外の必要料金</th><td>ありません。通信料はお客様のご負担となります。</td></tr>
-  <tr><th>お支払い方法</th><td>クレジットカード（Stripe による決済）</td></tr>
+  <tr><th>お支払い方法</th><td>クレジットカード（Stripe による決済）。Apple Pay・Google Pay を含みます。</td></tr>
   <tr><th>お支払い時期</th><td>ご注文時にお支払いが確定します。</td></tr>
   <tr><th>引渡し時期</th><td>お支払いの完了後、ただちにダウンロードいただけます。</td></tr>
   <tr><th>返品・キャンセル</th><td>デジタルデータの性質上、ダウンロード後のお客様都合による返品・返金はお受けできません。<br>ただし<strong>ファイルが開けない場合、内容が説明と著しく異なる場合、二重に決済された場合</strong>は、購入から14日以内にメールでご連絡ください。全額を返金いたします。</td></tr>
