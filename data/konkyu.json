@@ -1,0 +1,9681 @@
+{
+ "jisshi": {
+  "jichitai": 787,
+  "ritsu": 87.0
+ },
+ "source": {
+  "name": "厚生労働省「生活困窮者自立支援制度支援状況調査」自治体別集計表",
+  "url": "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/0000092189.html",
+  "note": "都道府県（管内の一般市・町村ぶん）・指定都市・中核市。年度累計。"
+ },
+ "columns": {
+  "soudan": "新規相談受付件数",
+  "soudan100k": "新規相談・10万人あたり",
+  "plan": "プラン作成件数",
+  "plan100k": "プラン作成・10万人あたり",
+  "shien": "就労支援対象者数",
+  "shien100k": "就労支援対象・10万人あたり",
+  "jukyo": "住居確保給付金",
+  "ichiji": "一時生活支援",
+  "kakei": "家計改善支援",
+  "junbi": "就労準備支援",
+  "kunren": "就労訓練事業",
+  "jshuro": "自立相談支援機関による就労支援",
+  "kashitsuke": "生活福祉資金貸付",
+  "seiho": "生保受給者等就労自立促進",
+  "shurosha": "就労者数",
+  "shurosha_p": "就労者数うちプラン作成者分",
+  "zoshu": "増収者数",
+  "zoshu_p": "増収者数うちプラン作成者分"
+ },
+ "latest_year": 2024,
+ "years": [
+  2017,
+  2018,
+  2019,
+  2020,
+  2021,
+  2022,
+  2023,
+  2024
+ ],
+ "national": {
+  "2017": {
+   "soudan": 229685,
+   "plan": 71293,
+   "shien": 31912,
+   "jukyo": 5539,
+   "ichiji": 17155,
+   "kakei": 9466,
+   "junbi": 3146,
+   "kunren": 389,
+   "jshuro": 28173,
+   "kashitsuke": 4454,
+   "seiho": 14745,
+   "shurosha": 25332,
+   "shurosha_p": 17958,
+   "zoshu": 6390,
+   "zoshu_p": 4414,
+   "pop": 128066211,
+   "kikan": 115
+  },
+  "2018": {
+   "soudan": 237665,
+   "plan": 77265,
+   "shien": 33969,
+   "jukyo": 5283,
+   "ichiji": 16641,
+   "kakei": 11722,
+   "junbi": 4082,
+   "kunren": 488,
+   "jshuro": 31162,
+   "kashitsuke": 4225,
+   "seiho": 16466,
+   "shurosha": 25001,
+   "shurosha_p": 16333,
+   "zoshu": 9031,
+   "zoshu_p": 5079,
+   "pop": 127907086,
+   "kikan": 121
+  },
+  "2019": {
+   "soudan": 248398,
+   "plan": 79429,
+   "shien": 35431,
+   "jukyo": 5310,
+   "ichiji": 15273,
+   "kakei": 14091,
+   "junbi": 4621,
+   "kunren": 531,
+   "jshuro": 32181,
+   "kashitsuke": 3934,
+   "seiho": 17379,
+   "shurosha": 25212,
+   "shurosha_p": 16717,
+   "zoshu": 8650,
+   "zoshu_p": 4890,
+   "pop": 127707259,
+   "kikan": 125
+  },
+  "2020": {
+   "soudan": 786163,
+   "plan": 139060,
+   "shien": 76100,
+   "jukyo": 46574,
+   "ichiji": 12266,
+   "kakei": 18973,
+   "junbi": 4695,
+   "kunren": 340,
+   "jshuro": 56431,
+   "kashitsuke": 47364,
+   "seiho": 27110,
+   "shurosha": 20659,
+   "shurosha_p": 14502,
+   "zoshu": 11902,
+   "zoshu_p": 5924,
+   "pop": 127443563,
+   "kikan": 127
+  },
+  "2021": {
+   "soudan": 555779,
+   "plan": 146719,
+   "shien": 79365,
+   "jukyo": 45919,
+   "ichiji": 10918,
+   "kakei": 20692,
+   "junbi": 4463,
+   "kunren": 304,
+   "jshuro": 58384,
+   "kashitsuke": 55448,
+   "seiho": 24861,
+   "shurosha": 23100,
+   "shurosha_p": 17633,
+   "zoshu": 18052,
+   "zoshu_p": 9887,
+   "pop": 126654244,
+   "kikan": 129
+  },
+  "2022": {
+   "soudan": 353095,
+   "plan": 100457,
+   "shien": 57720,
+   "jukyo": 27057,
+   "ichiji": 10877,
+   "kakei": 16859,
+   "junbi": 4819,
+   "kunren": 265,
+   "jshuro": 45430,
+   "kashitsuke": 15230,
+   "seiho": 19216,
+   "shurosha": 21286,
+   "shurosha_p": 16619,
+   "zoshu": 13783,
+   "zoshu_p": 8376,
+   "pop": 125927902,
+   "kikan": 129
+  },
+  "2023": {
+   "soudan": 293455,
+   "plan": 93282,
+   "shien": 45141,
+   "jukyo": 14246,
+   "ichiji": 11341,
+   "kakei": 18977,
+   "junbi": 5314,
+   "kunren": 283,
+   "jshuro": 39527,
+   "kashitsuke": 7764,
+   "seiho": 16710,
+   "shurosha": 20212,
+   "shurosha_p": 16194,
+   "zoshu": 10597,
+   "zoshu_p": 6617,
+   "pop": 125416877,
+   "kikan": 129
+  },
+  "2024": {
+   "soudan": 302828,
+   "plan": 89492,
+   "shien": 41050,
+   "jukyo": 8980,
+   "ichiji": 11323,
+   "kakei": 20573,
+   "junbi": 5435,
+   "kunren": 299,
+   "jshuro": 33942,
+   "kashitsuke": 5530,
+   "seiho": 16878,
+   "shurosha": 18643,
+   "shurosha_p": 14931,
+   "zoshu": 8919,
+   "zoshu_p": 5217,
+   "pop": 124885175,
+   "kikan": 129
+  }
+ },
+ "rows": [
+  {
+   "name": "いわき市",
+   "level": "中核市",
+   "pref": "福島県",
+   "pop": 306714,
+   "soudan": 334,
+   "soudan100k": 9.1,
+   "plan": 145,
+   "plan100k": 3.9,
+   "shien": 56,
+   "shien100k": 1.5,
+   "jukyo": 14,
+   "ichiji": 19,
+   "kakei": 2,
+   "junbi": 1,
+   "kunren": 0,
+   "jshuro": 64,
+   "kashitsuke": 3,
+   "seiho": 36,
+   "shurosha": 87,
+   "shurosha_p": 58,
+   "zoshu": 6,
+   "zoshu_p": 4,
+   "hist": {
+    "2017": {
+     "pop": 331920,
+     "soudan": 321,
+     "plan": 50,
+     "kakei": 0,
+     "jukyo": 19
+    },
+    "2018": {
+     "pop": 329938,
+     "soudan": 258,
+     "plan": 83,
+     "kakei": 0,
+     "jukyo": 15
+    },
+    "2019": {
+     "pop": 327090,
+     "soudan": 250,
+     "plan": 69,
+     "kakei": 2,
+     "jukyo": 8
+    },
+    "2020": {
+     "pop": 324246,
+     "soudan": 1091,
+     "plan": 118,
+     "kakei": 1,
+     "jukyo": 50
+    },
+    "2021": {
+     "pop": 324246,
+     "soudan": 1495,
+     "plan": 121,
+     "kakei": 2,
+     "jukyo": 57
+    },
+    "2022": {
+     "pop": 314913,
+     "soudan": 584,
+     "plan": 100,
+     "kakei": 1,
+     "jukyo": 38
+    },
+    "2023": {
+     "pop": 310890,
+     "soudan": 329,
+     "plan": 91,
+     "kakei": 0,
+     "jukyo": 21
+    }
+   }
+  },
+  {
+   "name": "さいたま市",
+   "level": "指定都市",
+   "pref": "埼玉県",
+   "pop": 1345012,
+   "soudan": 3895,
+   "soudan100k": 24.1,
+   "plan": 855,
+   "plan100k": 5.3,
+   "shien": 592,
+   "shien100k": 3.7,
+   "jukyo": 158,
+   "ichiji": 56,
+   "kakei": 163,
+   "junbi": 12,
+   "kunren": 0,
+   "jshuro": 540,
+   "kashitsuke": 18,
+   "seiho": 401,
+   "shurosha": 256,
+   "shurosha_p": 241,
+   "zoshu": 103,
+   "zoshu_p": 91,
+   "hist": {
+    "2017": {
+     "pop": 1270476,
+     "soudan": 1080,
+     "plan": 416,
+     "kakei": 85,
+     "jukyo": 56
+    },
+    "2018": {
+     "pop": 1281414,
+     "soudan": 1231,
+     "plan": 495,
+     "kakei": 66,
+     "jukyo": 59
+    },
+    "2019": {
+     "pop": 1292016,
+     "soudan": 1436,
+     "plan": 520,
+     "kakei": 66,
+     "jukyo": 71
+    },
+    "2020": {
+     "pop": 1302256,
+     "soudan": 8353,
+     "plan": 1003,
+     "kakei": 87,
+     "jukyo": 532
+    },
+    "2021": {
+     "pop": 1302256,
+     "soudan": 7115,
+     "plan": 962,
+     "kakei": 131,
+     "jukyo": 434
+    },
+    "2022": {
+     "pop": 1332226,
+     "soudan": 4301,
+     "plan": 1044,
+     "kakei": 134,
+     "jukyo": 440
+    },
+    "2023": {
+     "pop": 1339333,
+     "soudan": 3674,
+     "plan": 978,
+     "kakei": 183,
+     "jukyo": 238
+    }
+   }
+  },
+  {
+   "name": "一宮市",
+   "level": "中核市",
+   "pref": "愛知県",
+   "pop": 378496,
+   "soudan": 647,
+   "soudan100k": 14.2,
+   "plan": 130,
+   "plan100k": 2.9,
+   "shien": 109,
+   "shien100k": 2.4,
+   "jukyo": 30,
+   "ichiji": 9,
+   "kakei": 11,
+   "junbi": 6,
+   "kunren": 0,
+   "jshuro": 99,
+   "kashitsuke": 0,
+   "seiho": 38,
+   "shurosha": 54,
+   "shurosha_p": 54,
+   "zoshu": 2,
+   "zoshu_p": 2,
+   "hist": {
+    "2021": {
+     "pop": 384233,
+     "soudan": 1201,
+     "plan": 277,
+     "kakei": 9,
+     "jukyo": 207
+    },
+    "2022": {
+     "pop": 382349,
+     "soudan": 584,
+     "plan": 143,
+     "kakei": 8,
+     "jukyo": 62
+    },
+    "2023": {
+     "pop": 380201,
+     "soudan": 465,
+     "plan": 126,
+     "kakei": 9,
+     "jukyo": 44
+    }
+   }
+  },
+  {
+   "name": "三重県",
+   "level": "都道府県",
+   "pref": null,
+   "pop": 1757527,
+   "soudan": 3851,
+   "soudan100k": 18.3,
+   "plan": 1031,
+   "plan100k": 4.9,
+   "shien": 363,
+   "shien100k": 1.7,
+   "jukyo": 72,
+   "ichiji": 1,
+   "kakei": 294,
+   "junbi": 80,
+   "kunren": 1,
+   "jshuro": 328,
+   "kashitsuke": 112,
+   "seiho": 179,
+   "shurosha": 170,
+   "shurosha_p": 132,
+   "zoshu": 55,
+   "zoshu_p": 30,
+   "hist": {
+    "2017": {
+     "pop": 1850028,
+     "soudan": 3583,
+     "plan": 523,
+     "kakei": 160,
+     "jukyo": 60
+    },
+    "2018": {
+     "pop": 1841753,
+     "soudan": 3369,
+     "plan": 561,
+     "kakei": 176,
+     "jukyo": 43
+    },
+    "2019": {
+     "pop": 1834269,
+     "soudan": 2928,
+     "plan": 611,
+     "kakei": 144,
+     "jukyo": 38
+    },
+    "2020": {
+     "pop": 1824637,
+     "soudan": 9266,
+     "plan": 1130,
+     "kakei": 119,
+     "jukyo": 189
+    },
+    "2021": {
+     "pop": 1800756,
+     "soudan": 5719,
+     "plan": 1502,
+     "kakei": 155,
+     "jukyo": 227
+    },
+    "2022": {
+     "pop": 1784968,
+     "soudan": 3895,
+     "plan": 847,
+     "kakei": 179,
+     "jukyo": 130
+    },
+    "2023": {
+     "pop": 1772427,
+     "soudan": 3535,
+     "plan": 916,
+     "kakei": 209,
+     "jukyo": 89
+    }
+   }
+  },
+  {
+   "name": "下関市",
+   "level": "中核市",
+   "pref": "山口県",
+   "pop": 247000,
+   "soudan": 713,
+   "soudan100k": 24.1,
+   "plan": 49,
+   "plan100k": 1.7,
+   "shien": 14,
+   "shien100k": 0.5,
+   "jukyo": 2,
+   "ichiji": 2,
+   "kakei": 8,
+   "junbi": 12,
+   "kunren": 0,
+   "jshuro": 30,
+   "kashitsuke": 16,
+   "seiho": 9,
+   "shurosha": 11,
+   "shurosha_p": 9,
+   "zoshu": 6,
+   "zoshu_p": 3,
+   "hist": {
+    "2017": {
+     "pop": 272360,
+     "soudan": 577,
+     "plan": 39,
+     "kakei": 8,
+     "jukyo": 1
+    },
+    "2018": {
+     "pop": 269486,
+     "soudan": 557,
+     "plan": 60,
+     "kakei": 15,
+     "jukyo": 4
+    },
+    "2019": {
+     "pop": 266429,
+     "soudan": 623,
+     "plan": 80,
+     "kakei": 8,
+     "jukyo": 3
+    },
+    "2020": {
+     "pop": 263573,
+     "soudan": 2986,
+     "plan": 294,
+     "kakei": 2,
+     "jukyo": 25
+    },
+    "2021": {
+     "pop": 263573,
+     "soudan": 1555,
+     "plan": 56,
+     "kakei": 7,
+     "jukyo": 7
+    },
+    "2022": {
+     "pop": 253996,
+     "soudan": 919,
+     "plan": 94,
+     "kakei": 10,
+     "jukyo": 8
+    },
+    "2023": {
+     "pop": 250645,
+     "soudan": 603,
+     "plan": 56,
+     "kakei": 8,
+     "jukyo": 4
+    }
+   }
+  },
+  {
+   "name": "久留米市",
+   "level": "中核市",
+   "pref": "福岡県",
+   "pop": 301517,
+   "soudan": 1181,
+   "soudan100k": 32.6,
+   "plan": 896,
+   "plan100k": 24.8,
+   "shien": 390,
+   "shien100k": 10.8,
+   "jukyo": 67,
+   "ichiji": 19,
+   "kakei": 743,
+   "junbi": 15,
+   "kunren": 0,
+   "jshuro": 401,
+   "kashitsuke": 16,
+   "seiho": 174,
+   "shurosha": 151,
+   "shurosha_p": 121,
+   "zoshu": 113,
+   "zoshu_p": 54,
+   "hist": {
+    "2017": {
+     "pop": 306700,
+     "soudan": 887,
+     "plan": 513,
+     "kakei": 347,
+     "jukyo": 21
+    },
+    "2018": {
+     "pop": 306800,
+     "soudan": 1020,
+     "plan": 659,
+     "kakei": 479,
+     "jukyo": 19
+    },
+    "2019": {
+     "pop": 306461,
+     "soudan": 1120,
+     "plan": 793,
+     "kakei": 551,
+     "jukyo": 35
+    },
+    "2020": {
+     "pop": 306112,
+     "soudan": 2790,
+     "plan": 886,
+     "kakei": 747,
+     "jukyo": 196
+    },
+    "2021": {
+     "pop": 306112,
+     "soudan": 2044,
+     "plan": 1051,
+     "kakei": 933,
+     "jukyo": 140
+    },
+    "2022": {
+     "pop": 303052,
+     "soudan": 1484,
+     "plan": 646,
+     "kakei": 539,
+     "jukyo": 56
+    },
+    "2023": {
+     "pop": 302383,
+     "soudan": 1119,
+     "plan": 940,
+     "kakei": 732,
+     "jukyo": 89
+    }
+   }
+  },
+  {
+   "name": "京都市",
+   "level": "指定都市",
+   "pref": "京都府",
+   "pop": 1379529,
+   "soudan": 2235,
+   "soudan100k": 13.5,
+   "plan": 762,
+   "plan100k": 4.6,
+   "shien": 417,
+   "shien100k": 2.5,
+   "jukyo": 136,
+   "ichiji": 244,
+   "kakei": 60,
+   "junbi": 49,
+   "kunren": 0,
+   "jshuro": 212,
+   "kashitsuke": 9,
+   "seiho": 227,
+   "shurosha": 144,
+   "shurosha_p": 133,
+   "zoshu": 99,
+   "zoshu_p": 82,
+   "hist": {
+    "2017": {
+     "pop": 1419549,
+     "soudan": 866,
+     "plan": 364,
+     "kakei": 0,
+     "jukyo": 24
+    },
+    "2018": {
+     "pop": 1418340,
+     "soudan": 857,
+     "plan": 267,
+     "kakei": 0,
+     "jukyo": 17
+    },
+    "2019": {
+     "pop": 1415775,
+     "soudan": 889,
+     "plan": 289,
+     "kakei": 0,
+     "jukyo": 44
+    },
+    "2020": {
+     "pop": 1412570,
+     "soudan": 2794,
+     "plan": 1598,
+     "kakei": 2,
+     "jukyo": 1215
+    },
+    "2021": {
+     "pop": 1412570,
+     "soudan": 3653,
+     "plan": 2670,
+     "kakei": 4,
+     "jukyo": 2201
+    },
+    "2022": {
+     "pop": 1388807,
+     "soudan": 2814,
+     "plan": 959,
+     "kakei": 3,
+     "jukyo": 539
+    },
+    "2023": {
+     "pop": 1385190,
+     "soudan": 1858,
+     "plan": 679,
+     "kakei": 38,
+     "jukyo": 200
+    }
+   }
+  },
+  {
+   "name": "京都府",
+   "level": "都道府県",
+   "pref": null,
+   "pop": 1108546,
+   "soudan": 2530,
+   "soudan100k": 19.0,
+   "plan": 777,
+   "plan100k": 5.8,
+   "shien": 242,
+   "shien100k": 1.8,
+   "jukyo": 52,
+   "ichiji": 40,
+   "kakei": 162,
+   "junbi": 78,
+   "kunren": 0,
+   "jshuro": 206,
+   "kashitsuke": 40,
+   "seiho": 54,
+   "shurosha": 102,
+   "shurosha_p": 67,
+   "zoshu": 64,
+   "zoshu_p": 24,
+   "hist": {
+    "2017": {
+     "pop": 1155293,
+     "soudan": 1746,
+     "plan": 564,
+     "kakei": 72,
+     "jukyo": 26
+    },
+    "2018": {
+     "pop": 1151070,
+     "soudan": 1696,
+     "plan": 557,
+     "kakei": 125,
+     "jukyo": 11
+    },
+    "2019": {
+     "pop": 1147377,
+     "soudan": 1758,
+     "plan": 593,
+     "kakei": 150,
+     "jukyo": 16
+    },
+    "2020": {
+     "pop": 1142498,
+     "soudan": 7147,
+     "plan": 1633,
+     "kakei": 127,
+     "jukyo": 493
+    },
+    "2021": {
+     "pop": 1118039,
+     "soudan": 4422,
+     "plan": 1909,
+     "kakei": 131,
+     "jukyo": 417
+    },
+    "2022": {
+     "pop": 1122687,
+     "soudan": 3528,
+     "plan": 1077,
+     "kakei": 133,
+     "jukyo": 186
+    },
+    "2023": {
+     "pop": 1116079,
+     "soudan": 2522,
+     "plan": 837,
+     "kakei": 161,
+     "jukyo": 71
+    }
+   }
+  },
+  {
+   "name": "仙台市",
+   "level": "指定都市",
+   "pref": "宮城県",
+   "pop": 1066362,
+   "soudan": 2831,
+   "soudan100k": 22.1,
+   "plan": 1930,
+   "plan100k": 15.1,
+   "shien": 457,
+   "shien100k": 3.6,
+   "jukyo": 160,
+   "ichiji": 119,
+   "kakei": 61,
+   "junbi": 20,
+   "kunren": 0,
+   "jshuro": 56,
+   "kashitsuke": 0,
+   "seiho": 27,
+   "shurosha": 96,
+   "shurosha_p": 66,
+   "zoshu": 18,
+   "zoshu_p": 11,
+   "hist": {
+    "2017": {
+     "pop": 1056503,
+     "soudan": 3188,
+     "plan": 1718,
+     "kakei": 0,
+     "jukyo": 28
+    },
+    "2018": {
+     "pop": 1058517,
+     "soudan": 3615,
+     "plan": 1876,
+     "kakei": 0,
+     "jukyo": 32
+    },
+    "2019": {
+     "pop": 1060545,
+     "soudan": 3078,
+     "plan": 1782,
+     "kakei": 0,
+     "jukyo": 43
+    },
+    "2020": {
+     "pop": 1062585,
+     "soudan": 5815,
+     "plan": 3681,
+     "kakei": 53,
+     "jukyo": 738
+    },
+    "2021": {
+     "pop": 1062585,
+     "soudan": 5953,
+     "plan": 4735,
+     "kakei": 43,
+     "jukyo": 932
+    },
+    "2022": {
+     "pop": 1065365,
+     "soudan": 3318,
+     "plan": 2773,
+     "kakei": 56,
+     "jukyo": 767
+    },
+    "2023": {
+     "pop": 1067486,
+     "soudan": 3195,
+     "plan": 2377,
+     "kakei": 59,
+     "jukyo": 485
+    }
+   }
+  },
+  {
+   "name": "佐世保市",
+   "level": "中核市",
+   "pref": "長崎県",
+   "pop": 236906,
+   "soudan": 740,
+   "soudan100k": 26.0,
+   "plan": 196,
+   "plan100k": 6.9,
+   "shien": 54,
+   "shien100k": 1.9,
+   "jukyo": 25,
+   "ichiji": 0,
+   "kakei": 0,
+   "junbi": 0,
+   "kunren": 1,
+   "jshuro": 29,
+   "kashitsuke": 6,
+   "seiho": 31,
+   "shurosha": 23,
+   "shurosha_p": 21,
+   "zoshu": 10,
+   "zoshu_p": 4,
+   "hist": {
+    "2017": {
+     "pop": 258466,
+     "soudan": 748,
+     "plan": 115,
+     "kakei": 0,
+     "jukyo": 12
+    },
+    "2018": {
+     "pop": 256520,
+     "soudan": 660,
+     "plan": 103,
+     "kakei": 0,
+     "jukyo": 9
+    },
+    "2019": {
+     "pop": 254386,
+     "soudan": 714,
+     "plan": 223,
+     "kakei": 0,
+     "jukyo": 11
+    },
+    "2020": {
+     "pop": 252370,
+     "soudan": 1714,
+     "plan": 422,
+     "kakei": 0,
+     "jukyo": 277
+    },
+    "2021": {
+     "pop": 252370,
+     "soudan": 1681,
+     "plan": 355,
+     "kakei": 0,
+     "jukyo": 243
+    },
+    "2022": {
+     "pop": 243074,
+     "soudan": 755,
+     "plan": 214,
+     "kakei": 0,
+     "jukyo": 126
+    },
+    "2023": {
+     "pop": 240473,
+     "soudan": 755,
+     "plan": 172,
+     "kakei": 0,
+     "jukyo": 15
+    }
+   }
+  },
+  {
+   "name": "佐賀県",
+   "level": "都道府県",
+   "pref": null,
+   "pop": 801051,
+   "soudan": 2058,
+   "soudan100k": 21.4,
+   "plan": 898,
+   "plan100k": 9.3,
+   "shien": 237,
+   "shien100k": 2.5,
+   "jukyo": 23,
+   "ichiji": 2,
+   "kakei": 507,
+   "junbi": 58,
+   "kunren": 3,
+   "jshuro": 166,
+   "kashitsuke": 12,
+   "seiho": 71,
+   "shurosha": 167,
+   "shurosha_p": 90,
+   "zoshu": 83,
+   "zoshu_p": 28,
+   "hist": {
+    "2017": {
+     "pop": 842457,
+     "soudan": 1535,
+     "plan": 523,
+     "kakei": 123,
+     "jukyo": 19
+    },
+    "2018": {
+     "pop": 837977,
+     "soudan": 1478,
+     "plan": 488,
+     "kakei": 94,
+     "jukyo": 21
+    },
+    "2019": {
+     "pop": 833272,
+     "soudan": 1579,
+     "plan": 493,
+     "kakei": 175,
+     "jukyo": 22
+    },
+    "2020": {
+     "pop": 828781,
+     "soudan": 3257,
+     "plan": 912,
+     "kakei": 623,
+     "jukyo": 115
+    },
+    "2021": {
+     "pop": 818251,
+     "soudan": 2749,
+     "plan": 901,
+     "kakei": 673,
+     "jukyo": 69
+    },
+    "2022": {
+     "pop": 812193,
+     "soudan": 2147,
+     "plan": 697,
+     "kakei": 318,
+     "jukyo": 70
+    },
+    "2023": {
+     "pop": 806877,
+     "soudan": 1927,
+     "plan": 778,
+     "kakei": 405,
+     "jukyo": 27
+    }
+   }
+  },
+  {
+   "name": "倉敷市",
+   "level": "中核市",
+   "pref": "岡山県",
+   "pop": 475914,
+   "soudan": 4116,
+   "soudan100k": 72.1,
+   "plan": 1941,
+   "plan100k": 34.0,
+   "shien": 1105,
+   "shien100k": 19.3,
+   "jukyo": 15,
+   "ichiji": 3,
+   "kakei": 72,
+   "junbi": 33,
+   "kunren": 0,
+   "jshuro": 1074,
+   "kashitsuke": 164,
+   "seiho": 126,
+   "shurosha": 434,
+   "shurosha_p": 395,
+   "zoshu": 1225,
+   "zoshu_p": 770,
+   "hist": {
+    "2017": {
+     "pop": 483970,
+     "soudan": 1198,
+     "plan": 602,
+     "kakei": 58,
+     "jukyo": 30
+    },
+    "2018": {
+     "pop": 484174,
+     "soudan": 1537,
+     "plan": 774,
+     "kakei": 83,
+     "jukyo": 21
+    },
+    "2019": {
+     "pop": 483901,
+     "soudan": 1997,
+     "plan": 1243,
+     "kakei": 109,
+     "jukyo": 37
+    },
+    "2020": {
+     "pop": 482541,
+     "soudan": 6132,
+     "plan": 2186,
+     "kakei": 78,
+     "jukyo": 794
+    },
+    "2021": {
+     "pop": 482541,
+     "soudan": 12841,
+     "plan": 3906,
+     "kakei": 79,
+     "jukyo": 652
+    },
+    "2022": {
+     "pop": 479861,
+     "soudan": 11935,
+     "plan": 3919,
+     "kakei": 60,
+     "jukyo": 363
+    },
+    "2023": {
+     "pop": 477799,
+     "soudan": 6729,
+     "plan": 3971,
+     "kakei": 63,
+     "jukyo": 82
+    }
+   }
+  },
+  {
+   "name": "八尾市",
+   "level": "中核市",
+   "pref": "大阪府",
+   "pop": 260752,
+   "soudan": 785,
+   "soudan100k": 25.1,
+   "plan": 183,
+   "plan100k": 5.8,
+   "shien": 76,
+   "shien100k": 2.4,
+   "jukyo": 8,
+   "ichiji": 2,
+   "kakei": 36,
+   "junbi": 1,
+   "kunren": 2,
+   "jshuro": 80,
+   "kashitsuke": 5,
+   "seiho": 24,
+   "shurosha": 36,
+   "shurosha_p": 35,
+   "zoshu": 13,
+   "zoshu_p": 6,
+   "hist": {
+    "2018": {
+     "pop": 268457,
+     "soudan": 486,
+     "plan": 125,
+     "kakei": 0,
+     "jukyo": 13
+    },
+    "2019": {
+     "pop": 267642,
+     "soudan": 415,
+     "plan": 197,
+     "kakei": 0,
+     "jukyo": 11
+    },
+    "2020": {
+     "pop": 266943,
+     "soudan": 602,
+     "plan": 121,
+     "kakei": 0,
+     "jukyo": 18
+    },
+    "2021": {
+     "pop": 266943,
+     "soudan": 513,
+     "plan": 241,
+     "kakei": 28,
+     "jukyo": 145
+    },
+    "2022": {
+     "pop": 263693,
+     "soudan": 409,
+     "plan": 132,
+     "kakei": 6,
+     "jukyo": 83
+    },
+    "2023": {
+     "pop": 261998,
+     "soudan": 564,
+     "plan": 122,
+     "kakei": 20,
+     "jukyo": 10
+    }
+   }
+  },
+  {
+   "name": "八戸市",
+   "level": "中核市",
+   "pref": "青森県",
+   "pop": 218182,
+   "soudan": 522,
+   "soudan100k": 19.9,
+   "plan": 94,
+   "plan100k": 3.6,
+   "shien": 62,
+   "shien100k": 2.4,
+   "jukyo": 7,
+   "ichiji": 0,
+   "kakei": 7,
+   "junbi": 0,
+   "kunren": 0,
+   "jshuro": 82,
+   "kashitsuke": 2,
+   "seiho": 57,
+   "shurosha": 35,
+   "shurosha_p": 34,
+   "zoshu": 2,
+   "zoshu_p": 1,
+   "hist": {
+    "2017": {
+     "pop": 235878,
+     "soudan": 429,
+     "plan": 124,
+     "kakei": 13,
+     "jukyo": 6
+    },
+    "2018": {
+     "pop": 234189,
+     "soudan": 434,
+     "plan": 148,
+     "kakei": 16,
+     "jukyo": 12
+    },
+    "2019": {
+     "pop": 232361,
+     "soudan": 474,
+     "plan": 116,
+     "kakei": 7,
+     "jukyo": 7
+    },
+    "2020": {
+     "pop": 230042,
+     "soudan": 1168,
+     "plan": 214,
+     "kakei": 3,
+     "jukyo": 46
+    },
+    "2021": {
+     "pop": 230042,
+     "soudan": 699,
+     "plan": 160,
+     "kakei": 0,
+     "jukyo": 42
+    },
+    "2022": {
+     "pop": 223434,
+     "soudan": 660,
+     "plan": 112,
+     "kakei": 4,
+     "jukyo": 30
+    },
+    "2023": {
+     "pop": 221229,
+     "soudan": 494,
+     "plan": 104,
+     "kakei": 7,
+     "jukyo": 24
+    }
+   }
+  },
+  {
+   "name": "八王子市",
+   "level": "中核市",
+   "pref": "東京都",
+   "pop": 560692,
+   "soudan": 3411,
+   "soudan100k": 50.7,
+   "plan": 376,
+   "plan100k": 5.6,
+   "shien": 318,
+   "shien100k": 4.7,
+   "jukyo": 48,
+   "ichiji": 0,
+   "kakei": 59,
+   "junbi": 14,
+   "kunren": 1,
+   "jshuro": 297,
+   "kashitsuke": 1,
+   "seiho": 162,
+   "shurosha": 149,
+   "shurosha_p": 145,
+   "zoshu": 25,
+   "zoshu_p": 22,
+   "hist": {
+    "2017": {
+     "pop": 562795,
+     "soudan": 1322,
+     "plan": 292,
+     "kakei": 42,
+     "jukyo": 19
+    },
+    "2018": {
+     "pop": 563228,
+     "soudan": 1525,
+     "plan": 455,
+     "kakei": 98,
+     "jukyo": 42
+    },
+    "2019": {
+     "pop": 563178,
+     "soudan": 1722,
+     "plan": 490,
+     "kakei": 76,
+     "jukyo": 32
+    },
+    "2020": {
+     "pop": 562460,
+     "soudan": 2235,
+     "plan": 459,
+     "kakei": 34,
+     "jukyo": 14
+    },
+    "2021": {
+     "pop": 562460,
+     "soudan": 2712,
+     "plan": 907,
+     "kakei": 38,
+     "jukyo": 430
+    },
+    "2022": {
+     "pop": 561758,
+     "soudan": 2947,
+     "plan": 665,
+     "kakei": 56,
+     "jukyo": 210
+    },
+    "2023": {
+     "pop": 562145,
+     "soudan": 3418,
+     "plan": 436,
+     "kakei": 14,
+     "jukyo": 128
+    }
+   }
+  },
+  {
+   "name": "兵庫県",
+   "level": "都道府県",
+   "pref": null,
+   "pop": 2153154,
+   "soudan": 4207,
+   "soudan100k": 16.3,
+   "plan": 730,
+   "plan100k": 2.8,
+   "shien": 417,
+   "shien100k": 1.6,
+   "jukyo": 88,
+   "ichiji": 70,
+   "kakei": 63,
+   "junbi": 198,
+   "kunren": 17,
+   "jshuro": 190,
+   "kashitsuke": 20,
+   "seiho": 72,
+   "shurosha": 164,
+   "shurosha_p": 127,
+   "zoshu": 71,
+   "zoshu_p": 44,
+   "hist": {
+    "2017": {
+     "pop": 2582908,
+     "soudan": 3946,
+     "plan": 639,
+     "kakei": 16,
+     "jukyo": 79
+    },
+    "2018": {
+     "pop": 2272543,
+     "soudan": 3411,
+     "plan": 705,
+     "kakei": 17,
+     "jukyo": 42
+    },
+    "2019": {
+     "pop": 2259134,
+     "soudan": 3760,
+     "plan": 800,
+     "kakei": 60,
+     "jukyo": 46
+    },
+    "2020": {
+     "pop": 2243988,
+     "soudan": 11280,
+     "plan": 1031,
+     "kakei": 30,
+     "jukyo": 469
+    },
+    "2021": {
+     "pop": 2196997,
+     "soudan": 7435,
+     "plan": 969,
+     "kakei": 44,
+     "jukyo": 396
+    },
+    "2022": {
+     "pop": 2191653,
+     "soudan": 4186,
+     "plan": 771,
+     "kakei": 84,
+     "jukyo": 206
+    },
+    "2023": {
+     "pop": 2173396,
+     "soudan": 3645,
+     "plan": 660,
+     "kakei": 69,
+     "jukyo": 95
+    }
+   }
+  },
+  {
+   "name": "函館市",
+   "level": "中核市",
+   "pref": "北海道",
+   "pop": 240218,
+   "soudan": 870,
+   "soudan100k": 30.2,
+   "plan": 562,
+   "plan100k": 19.5,
+   "shien": 132,
+   "shien100k": 4.6,
+   "jukyo": 7,
+   "ichiji": 0,
+   "kakei": 0,
+   "junbi": 11,
+   "kunren": 0,
+   "jshuro": 141,
+   "kashitsuke": 0,
+   "seiho": 38,
+   "shurosha": 68,
+   "shurosha_p": 49,
+   "zoshu": 23,
+   "zoshu_p": 9,
+   "hist": {
+    "2017": {
+     "pop": 268617,
+     "soudan": 235,
+     "plan": 37,
+     "kakei": 0,
+     "jukyo": 14
+    },
+    "2018": {
+     "pop": 265503,
+     "soudan": 207,
+     "plan": 63,
+     "kakei": 0,
+     "jukyo": 28
+    },
+    "2019": {
+     "pop": 262519,
+     "soudan": 297,
+     "plan": 95,
+     "kakei": 0,
+     "jukyo": 22
+    },
+    "2020": {
+     "pop": 258948,
+     "soudan": 1567,
+     "plan": 101,
+     "kakei": 0,
+     "jukyo": 36
+    },
+    "2021": {
+     "pop": 258948,
+     "soudan": 1148,
+     "plan": 45,
+     "kakei": 0,
+     "jukyo": 32
+    },
+    "2022": {
+     "pop": 248106,
+     "soudan": 766,
+     "plan": 208,
+     "kakei": 0,
+     "jukyo": 38
+    },
+    "2023": {
+     "pop": 244431,
+     "soudan": 735,
+     "plan": 367,
+     "kakei": 0,
+     "jukyo": 12
+    }
+   }
+  },
+  {
+   "name": "前橋市",
+   "level": "中核市",
+   "pref": "群馬県",
+   "pop": 329860,
+   "soudan": 600,
+   "soudan100k": 15.2,
+   "plan": 154,
+   "plan100k": 3.9,
+   "shien": 87,
+   "shien100k": 2.2,
+   "jukyo": 19,
+   "ichiji": 26,
+   "kakei": 16,
+   "junbi": 8,
+   "kunren": 2,
+   "jshuro": 79,
+   "kashitsuke": 1,
+   "seiho": 58,
+   "shurosha": 26,
+   "shurosha_p": 25,
+   "zoshu": 16,
+   "zoshu_p": 12,
+   "hist": {
+    "2017": {
+     "pop": 339366,
+     "soudan": 673,
+     "plan": 157,
+     "kakei": 13,
+     "jukyo": 7
+    },
+    "2018": {
+     "pop": 338916,
+     "soudan": 636,
+     "plan": 100,
+     "kakei": 25,
+     "jukyo": 4
+    },
+    "2019": {
+     "pop": 338226,
+     "soudan": 593,
+     "plan": 131,
+     "kakei": 18,
+     "jukyo": 6
+    },
+    "2020": {
+     "pop": 337502,
+     "soudan": 714,
+     "plan": 228,
+     "kakei": 7,
+     "jukyo": 53
+    },
+    "2021": {
+     "pop": 337502,
+     "soudan": 865,
+     "plan": 196,
+     "kakei": 5,
+     "jukyo": 76
+    },
+    "2022": {
+     "pop": 333263,
+     "soudan": 577,
+     "plan": 158,
+     "kakei": 20,
+     "jukyo": 54
+    },
+    "2023": {
+     "pop": 331771,
+     "soudan": 499,
+     "plan": 117,
+     "kakei": 21,
+     "jukyo": 17
+    }
+   }
+  },
+  {
+   "name": "北九州市",
+   "level": "指定都市",
+   "pref": "福岡県",
+   "pop": 921241,
+   "soudan": 2625,
+   "soudan100k": 23.7,
+   "plan": 980,
+   "plan100k": 8.9,
+   "shien": 479,
+   "shien100k": 4.3,
+   "jukyo": 198,
+   "ichiji": 8,
+   "kakei": 690,
+   "junbi": 22,
+   "kunren": 0,
+   "jshuro": 133,
+   "kashitsuke": 27,
+   "seiho": 284,
+   "shurosha": 163,
+   "shurosha_p": 124,
+   "zoshu": 73,
+   "zoshu_p": 35,
+   "hist": {
+    "2017": {
+     "pop": 971608,
+     "soudan": 1765,
+     "plan": 673,
+     "kakei": 469,
+     "jukyo": 95
+    },
+    "2018": {
+     "pop": 966628,
+     "soudan": 1660,
+     "plan": 812,
+     "kakei": 633,
+     "jukyo": 72
+    },
+    "2019": {
+     "pop": 961024,
+     "soudan": 1860,
+     "plan": 913,
+     "kakei": 706,
+     "jukyo": 66
+    },
+    "2020": {
+     "pop": 955935,
+     "soudan": 8654,
+     "plan": 1107,
+     "kakei": 747,
+     "jukyo": 295
+    },
+    "2021": {
+     "pop": 955935,
+     "soudan": 5324,
+     "plan": 888,
+     "kakei": 497,
+     "jukyo": 312
+    },
+    "2022": {
+     "pop": 936586,
+     "soudan": 2693,
+     "plan": 720,
+     "kakei": 459,
+     "jukyo": 188
+    },
+    "2023": {
+     "pop": 929396,
+     "soudan": 2389,
+     "plan": 880,
+     "kakei": 705,
+     "jukyo": 122
+    }
+   }
+  },
+  {
+   "name": "北海道",
+   "level": "都道府県",
+   "pref": null,
+   "pop": 2576401,
+   "soudan": 5818,
+   "soudan100k": 18.8,
+   "plan": 1258,
+   "plan100k": 4.1,
+   "shien": 592,
+   "shien100k": 1.9,
+   "jukyo": 74,
+   "ichiji": 38,
+   "kakei": 422,
+   "junbi": 281,
+   "kunren": 1,
+   "jshuro": 552,
+   "kashitsuke": 45,
+   "seiho": 68,
+   "shurosha": 310,
+   "shurosha_p": 165,
+   "zoshu": 156,
+   "zoshu_p": 84,
+   "hist": {
+    "2017": {
+     "pop": 2845473,
+     "soudan": 4514,
+     "plan": 1053,
+     "kakei": 143,
+     "jukyo": 37
+    },
+    "2018": {
+     "pop": 2814962,
+     "soudan": 4421,
+     "plan": 1044,
+     "kakei": 116,
+     "jukyo": 47
+    },
+    "2019": {
+     "pop": 2784461,
+     "soudan": 4547,
+     "plan": 1077,
+     "kakei": 115,
+     "jukyo": 34
+    },
+    "2020": {
+     "pop": 2752616,
+     "soudan": 10190,
+     "plan": 1925,
+     "kakei": 152,
+     "jukyo": 394
+    },
+    "2021": {
+     "pop": 2676935,
+     "soudan": 9391,
+     "plan": 2235,
+     "kakei": 149,
+     "jukyo": 467
+    },
+    "2022": {
+     "pop": 2646953,
+     "soudan": 5917,
+     "plan": 1327,
+     "kakei": 237,
+     "jukyo": 246
+    },
+    "2023": {
+     "pop": 2611784,
+     "soudan": 5254,
+     "plan": 1216,
+     "kakei": 374,
+     "jukyo": 108
+    }
+   }
+  },
+  {
+   "name": "千葉市",
+   "level": "指定都市",
+   "pref": "千葉県",
+   "pop": 978899,
+   "soudan": 3854,
+   "soudan100k": 32.8,
+   "plan": 1425,
+   "plan100k": 12.1,
+   "shien": 685,
+   "shien100k": 5.8,
+   "jukyo": 228,
+   "ichiji": 23,
+   "kakei": 650,
+   "junbi": 148,
+   "kunren": 3,
+   "jshuro": 600,
+   "kashitsuke": 25,
+   "seiho": 453,
+   "shurosha": 181,
+   "shurosha_p": 158,
+   "zoshu": 169,
+   "zoshu_p": 105,
+   "hist": {
+    "2017": {
+     "pop": 964424,
+     "soudan": 1203,
+     "plan": 586,
+     "kakei": 140,
+     "jukyo": 158
+    },
+    "2018": {
+     "pop": 965607,
+     "soudan": 1728,
+     "plan": 675,
+     "kakei": 183,
+     "jukyo": 111
+    },
+    "2019": {
+     "pop": 967832,
+     "soudan": 2310,
+     "plan": 987,
+     "kakei": 300,
+     "jukyo": 124
+    },
+    "2020": {
+     "pop": 970049,
+     "soudan": 6912,
+     "plan": 1605,
+     "kakei": 347,
+     "jukyo": 760
+    },
+    "2021": {
+     "pop": 970049,
+     "soudan": 5389,
+     "plan": 2019,
+     "kakei": 344,
+     "jukyo": 1170
+    },
+    "2022": {
+     "pop": 976328,
+     "soudan": 3530,
+     "plan": 1431,
+     "kakei": 408,
+     "jukyo": 543
+    },
+    "2023": {
+     "pop": 977016,
+     "soudan": 3652,
+     "plan": 1313,
+     "kakei": 506,
+     "jukyo": 277
+    }
+   }
+  },
+  {
+   "name": "千葉県",
+   "level": "都道府県",
+   "pref": null,
+   "pop": 4247399,
+   "soudan": 9747,
+   "soudan100k": 19.1,
+   "plan": 2329,
+   "plan100k": 4.6,
+   "shien": 1211,
+   "shien100k": 2.4,
+   "jukyo": 270,
+   "ichiji": 27,
+   "kakei": 571,
+   "junbi": 238,
+   "kunren": 21,
+   "jshuro": 1290,
+   "kashitsuke": 287,
+   "seiho": 452,
+   "shurosha": 671,
+   "shurosha_p": 473,
+   "zoshu": 279,
+   "zoshu_p": 133,
+   "hist": {
+    "2017": {
+     "pop": 4265665,
+     "soudan": 7336,
+     "plan": 2188,
+     "kakei": 484,
+     "jukyo": 198
+    },
+    "2018": {
+     "pop": 4274368,
+     "soudan": 7631,
+     "plan": 2695,
+     "kakei": 562,
+     "jukyo": 186
+    },
+    "2019": {
+     "pop": 4279210,
+     "soudan": 7951,
+     "plan": 2748,
+     "kakei": 695,
+     "jukyo": 200
+    },
+    "2020": {
+     "pop": 4281515,
+     "soudan": 23585,
+     "plan": 3904,
+     "kakei": 492,
+     "jukyo": 1831
+    },
+    "2021": {
+     "pop": 4293222,
+     "soudan": 14532,
+     "plan": 4357,
+     "kakei": 516,
+     "jukyo": 2116
+    },
+    "2022": {
+     "pop": 4257562,
+     "soudan": 9948,
+     "plan": 3230,
+     "kakei": 547,
+     "jukyo": 870
+    },
+    "2023": {
+     "pop": 4252289,
+     "soudan": 9255,
+     "plan": 2701,
+     "kakei": 562,
+     "jukyo": 407
+    }
+   }
+  },
+  {
+   "name": "名古屋市",
+   "level": "指定都市",
+   "pref": "愛知県",
+   "pop": 2297745,
+   "soudan": 5427,
+   "soudan100k": 19.7,
+   "plan": 1174,
+   "plan100k": 4.3,
+   "shien": 998,
+   "shien100k": 3.6,
+   "jukyo": 293,
+   "ichiji": 435,
+   "kakei": 153,
+   "junbi": 75,
+   "kunren": 18,
+   "jshuro": 1038,
+   "kashitsuke": 13,
+   "seiho": 306,
+   "shurosha": 337,
+   "shurosha_p": 318,
+   "zoshu": 100,
+   "zoshu_p": 82,
+   "hist": {
+    "2017": {
+     "pop": 2269444,
+     "soudan": 4957,
+     "plan": 791,
+     "kakei": 149,
+     "jukyo": 105
+    },
+    "2018": {
+     "pop": 2279194,
+     "soudan": 5029,
+     "plan": 1293,
+     "kakei": 192,
+     "jukyo": 156
+    },
+    "2019": {
+     "pop": 2288240,
+     "soudan": 5813,
+     "plan": 1445,
+     "kakei": 218,
+     "jukyo": 193
+    },
+    "2020": {
+     "pop": 2294362,
+     "soudan": 20879,
+     "plan": 1301,
+     "kakei": 132,
+     "jukyo": 122
+    },
+    "2021": {
+     "pop": 2294362,
+     "soudan": 13301,
+     "plan": 1142,
+     "kakei": 184,
+     "jukyo": 156
+    },
+    "2022": {
+     "pop": 2293437,
+     "soudan": 6984,
+     "plan": 1015,
+     "kakei": 175,
+     "jukyo": 126
+    },
+    "2023": {
+     "pop": 2294854,
+     "soudan": 4591,
+     "plan": 970,
+     "kakei": 213,
+     "jukyo": 101
+    }
+   }
+  },
+  {
+   "name": "吹田市",
+   "level": "中核市",
+   "pref": "大阪府",
+   "pop": 382681,
+   "soudan": 617,
+   "soudan100k": 13.4,
+   "plan": 119,
+   "plan100k": 2.6,
+   "shien": 54,
+   "shien100k": 1.2,
+   "jukyo": 29,
+   "ichiji": 23,
+   "kakei": 12,
+   "junbi": 2,
+   "kunren": 1,
+   "jshuro": 52,
+   "kashitsuke": 2,
+   "seiho": 19,
+   "shurosha": 33,
+   "shurosha_p": 27,
+   "zoshu": 2,
+   "zoshu_p": 2,
+   "hist": {
+    "2020": {
+     "pop": 371715,
+     "soudan": 1338,
+     "plan": 107,
+     "kakei": 0,
+     "jukyo": 52
+    },
+    "2021": {
+     "pop": 371715,
+     "soudan": 863,
+     "plan": 125,
+     "kakei": 0,
+     "jukyo": 82
+    },
+    "2022": {
+     "pop": 378869,
+     "soudan": 629,
+     "plan": 110,
+     "kakei": 0,
+     "jukyo": 53
+    },
+    "2023": {
+     "pop": 381316,
+     "soudan": 642,
+     "plan": 113,
+     "kakei": 11,
+     "jukyo": 21
+    }
+   }
+  },
+  {
+   "name": "呉市",
+   "level": "中核市",
+   "pref": "広島県",
+   "pop": 205349,
+   "soudan": 1043,
+   "soudan100k": 42.3,
+   "plan": 166,
+   "plan100k": 6.7,
+   "shien": 65,
+   "shien100k": 2.6,
+   "jukyo": 10,
+   "ichiji": 0,
+   "kakei": 96,
+   "junbi": 24,
+   "kunren": 1,
+   "jshuro": 21,
+   "kashitsuke": 1,
+   "seiho": 44,
+   "shurosha": 16,
+   "shurosha_p": 15,
+   "zoshu": 13,
+   "zoshu_p": 9,
+   "hist": {
+    "2017": {
+     "pop": 232925,
+     "soudan": 909,
+     "plan": 45,
+     "kakei": 0,
+     "jukyo": 19
+    },
+    "2018": {
+     "pop": 231008,
+     "soudan": 815,
+     "plan": 59,
+     "kakei": 0,
+     "jukyo": 13
+    },
+    "2019": {
+     "pop": 227965,
+     "soudan": 745,
+     "plan": 89,
+     "kakei": 0,
+     "jukyo": 10
+    },
+    "2020": {
+     "pop": 224922,
+     "soudan": 1396,
+     "plan": 106,
+     "kakei": 0,
+     "jukyo": 59
+    },
+    "2021": {
+     "pop": 224922,
+     "soudan": 1236,
+     "plan": 113,
+     "kakei": 23,
+     "jukyo": 25
+    },
+    "2022": {
+     "pop": 213008,
+     "soudan": 807,
+     "plan": 93,
+     "kakei": 28,
+     "jukyo": 16
+    },
+    "2023": {
+     "pop": 209241,
+     "soudan": 935,
+     "plan": 138,
+     "kakei": 77,
+     "jukyo": 13
+    }
+   }
+  },
+  {
+   "name": "和歌山市",
+   "level": "中核市",
+   "pref": "和歌山県",
+   "pop": 356472,
+   "soudan": 289,
+   "soudan100k": 6.8,
+   "plan": 31,
+   "plan100k": 0.7,
+   "shien": 23,
+   "shien100k": 0.5,
+   "jukyo": 18,
+   "ichiji": 0,
+   "kakei": 1,
+   "junbi": 0,
+   "kunren": 0,
+   "jshuro": 26,
+   "kashitsuke": 6,
+   "seiho": 21,
+   "shurosha": 7,
+   "shurosha_p": 5,
+   "zoshu": 7,
+   "zoshu_p": 2,
+   "hist": {
+    "2017": {
+     "pop": 375269,
+     "soudan": 359,
+     "plan": 46,
+     "kakei": 0,
+     "jukyo": 0
+    },
+    "2018": {
+     "pop": 373074,
+     "soudan": 397,
+     "plan": 37,
+     "kakei": 0,
+     "jukyo": 1
+    },
+    "2019": {
+     "pop": 371042,
+     "soudan": 480,
+     "plan": 29,
+     "kakei": 0,
+     "jukyo": 1
+    },
+    "2020": {
+     "pop": 368835,
+     "soudan": 2828,
+     "plan": 45,
+     "kakei": 0,
+     "jukyo": 23
+    },
+    "2021": {
+     "pop": 368835,
+     "soudan": 1951,
+     "plan": 6,
+     "kakei": 0,
+     "jukyo": 2
+    },
+    "2022": {
+     "pop": 362662,
+     "soudan": 416,
+     "plan": 14,
+     "kakei": 0,
+     "jukyo": 7
+    },
+    "2023": {
+     "pop": 359654,
+     "soudan": 189,
+     "plan": 18,
+     "kakei": 0,
+     "jukyo": 5
+    }
+   }
+  },
+  {
+   "name": "和歌山県",
+   "level": "都道府県",
+   "pref": null,
+   "pop": 556825,
+   "soudan": 829,
+   "soudan100k": 12.4,
+   "plan": 172,
+   "plan100k": 2.6,
+   "shien": 100,
+   "shien100k": 1.5,
+   "jukyo": 25,
+   "ichiji": 5,
+   "kakei": 15,
+   "junbi": 17,
+   "kunren": 0,
+   "jshuro": 78,
+   "kashitsuke": 46,
+   "seiho": 8,
+   "shurosha": 21,
+   "shurosha_p": 12,
+   "zoshu": 14,
+   "zoshu_p": 6,
+   "hist": {
+    "2017": {
+     "pop": 619048,
+     "soudan": 796,
+     "plan": 151,
+     "kakei": 19,
+     "jukyo": 10
+    },
+    "2018": {
+     "pop": 611615,
+     "soudan": 824,
+     "plan": 178,
+     "kakei": 22,
+     "jukyo": 2
+    },
+    "2019": {
+     "pop": 604032,
+     "soudan": 706,
+     "plan": 107,
+     "kakei": 10,
+     "jukyo": 6
+    },
+    "2020": {
+     "pop": 595763,
+     "soudan": 2874,
+     "plan": 712,
+     "kakei": 18,
+     "jukyo": 71
+    },
+    "2021": {
+     "pop": 575915,
+     "soudan": 2155,
+     "plan": 527,
+     "kakei": 15,
+     "jukyo": 60
+    },
+    "2022": {
+     "pop": 572422,
+     "soudan": 914,
+     "plan": 250,
+     "kakei": 17,
+     "jukyo": 41
+    },
+    "2023": {
+     "pop": 564815,
+     "soudan": 757,
+     "plan": 143,
+     "kakei": 14,
+     "jukyo": 14
+    }
+   }
+  },
+  {
+   "name": "埼玉県",
+   "level": "都道府県",
+   "pref": null,
+   "pop": 4731533,
+   "soudan": 12750,
+   "soudan100k": 22.5,
+   "plan": 2933,
+   "plan100k": 5.2,
+   "shien": 1628,
+   "shien100k": 2.9,
+   "jukyo": 423,
+   "ichiji": 14,
+   "kakei": 419,
+   "junbi": 288,
+   "kunren": 0,
+   "jshuro": 1436,
+   "kashitsuke": 278,
+   "seiho": 914,
+   "shurosha": 802,
+   "shurosha_p": 687,
+   "zoshu": 244,
+   "zoshu_p": 163,
+   "hist": {
+    "2017": {
+     "pop": 5366149,
+     "soudan": 9713,
+     "plan": 2611,
+     "kakei": 374,
+     "jukyo": 315
+    },
+    "2018": {
+     "pop": 4776088,
+     "soudan": 9886,
+     "plan": 2692,
+     "kakei": 307,
+     "jukyo": 220
+    },
+    "2019": {
+     "pop": 4777650,
+     "soudan": 10412,
+     "plan": 2929,
+     "kakei": 356,
+     "jukyo": 229
+    },
+    "2020": {
+     "pop": 4775134,
+     "soudan": 30636,
+     "plan": 4703,
+     "kakei": 256,
+     "jukyo": 1589
+    },
+    "2021": {
+     "pop": 4791695,
+     "soudan": 21530,
+     "plan": 4330,
+     "kakei": 293,
+     "jukyo": 1194
+    },
+    "2022": {
+     "pop": 4749795,
+     "soudan": 14275,
+     "plan": 2940,
+     "kakei": 343,
+     "jukyo": 764
+    },
+    "2023": {
+     "pop": 4739938,
+     "soudan": 12759,
+     "plan": 2721,
+     "kakei": 405,
+     "jukyo": 472
+    }
+   }
+  },
+  {
+   "name": "堺市",
+   "level": "指定都市",
+   "pref": "大阪府",
+   "pop": 817041,
+   "soudan": 1617,
+   "soudan100k": 16.5,
+   "plan": 608,
+   "plan100k": 6.2,
+   "shien": 329,
+   "shien100k": 3.4,
+   "jukyo": 68,
+   "ichiji": 38,
+   "kakei": 5,
+   "junbi": 34,
+   "kunren": 0,
+   "jshuro": 177,
+   "kashitsuke": 71,
+   "seiho": 22,
+   "shurosha": 119,
+   "shurosha_p": 99,
+   "zoshu": 45,
+   "zoshu_p": 22,
+   "hist": {
+    "2017": {
+     "pop": 845960,
+     "soudan": 1962,
+     "plan": 351,
+     "kakei": 0,
+     "jukyo": 32
+    },
+    "2018": {
+     "pop": 844030,
+     "soudan": 1900,
+     "plan": 330,
+     "kakei": 0,
+     "jukyo": 21
+    },
+    "2019": {
+     "pop": 840622,
+     "soudan": 1862,
+     "plan": 293,
+     "kakei": 0,
+     "jukyo": 27
+    },
+    "2020": {
+     "pop": 837773,
+     "soudan": 12821,
+     "plan": 2241,
+     "kakei": 12,
+     "jukyo": 81
+    },
+    "2021": {
+     "pop": 837773,
+     "soudan": 4055,
+     "plan": 1294,
+     "kakei": 6,
+     "jukyo": 32
+    },
+    "2022": {
+     "pop": 826158,
+     "soudan": 2256,
+     "plan": 796,
+     "kakei": 22,
+     "jukyo": 462
+    },
+    "2023": {
+     "pop": 821428,
+     "soudan": 1798,
+     "plan": 607,
+     "kakei": 15,
+     "jukyo": 102
+    }
+   }
+  },
+  {
+   "name": "大分市",
+   "level": "中核市",
+   "pref": "大分県",
+   "pop": 474665,
+   "soudan": 1402,
+   "soudan100k": 24.6,
+   "plan": 319,
+   "plan100k": 5.6,
+   "shien": 72,
+   "shien100k": 1.3,
+   "jukyo": 14,
+   "ichiji": 0,
+   "kakei": 73,
+   "junbi": 11,
+   "kunren": 1,
+   "jshuro": 67,
+   "kashitsuke": 42,
+   "seiho": 34,
+   "shurosha": 47,
+   "shurosha_p": 29,
+   "zoshu": 44,
+   "zoshu_p": 9,
+   "hist": {
+    "2017": {
+     "pop": 479340,
+     "soudan": 755,
+     "plan": 63,
+     "kakei": 16,
+     "jukyo": 7
+    },
+    "2018": {
+     "pop": 479726,
+     "soudan": 956,
+     "plan": 205,
+     "kakei": 27,
+     "jukyo": 1
+    },
+    "2019": {
+     "pop": 479557,
+     "soudan": 1234,
+     "plan": 171,
+     "kakei": 29,
+     "jukyo": 11
+    },
+    "2020": {
+     "pop": 479097,
+     "soudan": 6333,
+     "plan": 270,
+     "kakei": 51,
+     "jukyo": 133
+    },
+    "2021": {
+     "pop": 479097,
+     "soudan": 5465,
+     "plan": 372,
+     "kakei": 38,
+     "jukyo": 235
+    },
+    "2022": {
+     "pop": 477584,
+     "soudan": 1722,
+     "plan": 395,
+     "kakei": 52,
+     "jukyo": 152
+    },
+    "2023": {
+     "pop": 476556,
+     "soudan": 1261,
+     "plan": 299,
+     "kakei": 59,
+     "jukyo": 35
+    }
+   }
+  },
+  {
+   "name": "大分県",
+   "level": "都道府県",
+   "pref": null,
+   "pop": 638162,
+   "soudan": 1822,
+   "soudan100k": 23.8,
+   "plan": 237,
+   "plan100k": 3.1,
+   "shien": 85,
+   "shien100k": 1.1,
+   "jukyo": 12,
+   "ichiji": 8,
+   "kakei": 97,
+   "junbi": 26,
+   "kunren": 2,
+   "jshuro": 50,
+   "kashitsuke": 40,
+   "seiho": 30,
+   "shurosha": 39,
+   "shurosha_p": 26,
+   "zoshu": 34,
+   "zoshu_p": 13,
+   "hist": {
+    "2017": {
+     "pop": 704621,
+     "soudan": 1461,
+     "plan": 192,
+     "kakei": 43,
+     "jukyo": 3
+    },
+    "2018": {
+     "pop": 697165,
+     "soudan": 1416,
+     "plan": 187,
+     "kakei": 57,
+     "jukyo": 1
+    },
+    "2019": {
+     "pop": 689601,
+     "soudan": 1644,
+     "plan": 215,
+     "kakei": 96,
+     "jukyo": 4
+    },
+    "2020": {
+     "pop": 681121,
+     "soudan": 5663,
+     "plan": 236,
+     "kakei": 56,
+     "jukyo": 39
+    },
+    "2021": {
+     "pop": 662687,
+     "soudan": 3292,
+     "plan": 229,
+     "kakei": 75,
+     "jukyo": 37
+    },
+    "2022": {
+     "pop": 653556,
+     "soudan": 2081,
+     "plan": 231,
+     "kakei": 91,
+     "jukyo": 24
+    },
+    "2023": {
+     "pop": 646969,
+     "soudan": 1867,
+     "plan": 218,
+     "kakei": 91,
+     "jukyo": 7
+    }
+   }
+  },
+  {
+   "name": "大津市",
+   "level": "中核市",
+   "pref": "滋賀県",
+   "pop": 343916,
+   "soudan": 871,
+   "soudan100k": 21.1,
+   "plan": 352,
+   "plan100k": 8.5,
+   "shien": 252,
+   "shien100k": 6.1,
+   "jukyo": 133,
+   "ichiji": 0,
+   "kakei": 43,
+   "junbi": 5,
+   "kunren": 0,
+   "jshuro": 149,
+   "kashitsuke": 9,
+   "seiho": 129,
+   "shurosha": 82,
+   "shurosha_p": 67,
+   "zoshu": 48,
+   "zoshu_p": 34,
+   "hist": {
+    "2017": {
+     "pop": 342434,
+     "soudan": 516,
+     "plan": 179,
+     "kakei": 0,
+     "jukyo": 50
+    },
+    "2018": {
+     "pop": 342532,
+     "soudan": 524,
+     "plan": 151,
+     "kakei": 0,
+     "jukyo": 36
+    },
+    "2019": {
+     "pop": 342460,
+     "soudan": 626,
+     "plan": 182,
+     "kakei": 0,
+     "jukyo": 31
+    },
+    "2020": {
+     "pop": 342950,
+     "soudan": 2957,
+     "plan": 245,
+     "kakei": 0,
+     "jukyo": 71
+    },
+    "2021": {
+     "pop": 342950,
+     "soudan": 1618,
+     "plan": 220,
+     "kakei": 14,
+     "jukyo": 26
+    },
+    "2022": {
+     "pop": 344247,
+     "soudan": 1056,
+     "plan": 226,
+     "kakei": 43,
+     "jukyo": 21
+    },
+    "2023": {
+     "pop": 344552,
+     "soudan": 766,
+     "plan": 217,
+     "kakei": 31,
+     "jukyo": 15
+    }
+   }
+  },
+  {
+   "name": "大阪市",
+   "level": "指定都市",
+   "pref": "大阪府",
+   "pop": 2757642,
+   "soudan": 17876,
+   "soudan100k": 54.0,
+   "plan": 8436,
+   "plan100k": 25.5,
+   "shien": 1179,
+   "shien100k": 3.6,
+   "jukyo": 256,
+   "ichiji": 5413,
+   "kakei": 190,
+   "junbi": 31,
+   "kunren": 30,
+   "jshuro": 801,
+   "kashitsuke": 378,
+   "seiho": 584,
+   "shurosha": 577,
+   "shurosha_p": 412,
+   "zoshu": 306,
+   "zoshu_p": 170,
+   "hist": {
+    "2017": {
+     "pop": 2681555,
+     "soudan": 18635,
+     "plan": 12493,
+     "kakei": 142,
+     "jukyo": 79
+    },
+    "2018": {
+     "pop": 2691425,
+     "soudan": 18201,
+     "plan": 11702,
+     "kakei": 134,
+     "jukyo": 96
+    },
+    "2019": {
+     "pop": 2702432,
+     "soudan": 17531,
+     "plan": 10554,
+     "kakei": 97,
+     "jukyo": 88
+    },
+    "2020": {
+     "pop": 2714484,
+     "soudan": 24385,
+     "plan": 7813,
+     "kakei": 38,
+     "jukyo": 627
+    },
+    "2021": {
+     "pop": 2714484,
+     "soudan": 20867,
+     "plan": 8362,
+     "kakei": 35,
+     "jukyo": 1644
+    },
+    "2022": {
+     "pop": 2732197,
+     "soudan": 19030,
+     "plan": 8109,
+     "kakei": 35,
+     "jukyo": 1165
+    },
+    "2023": {
+     "pop": 2741587,
+     "soudan": 18269,
+     "plan": 8577,
+     "kakei": 93,
+     "jukyo": 398
+    }
+   }
+  },
+  {
+   "name": "大阪府",
+   "level": "都道府県",
+   "pref": null,
+   "pop": 2705289,
+   "soudan": 7223,
+   "soudan100k": 22.2,
+   "plan": 1872,
+   "plan100k": 5.8,
+   "shien": 996,
+   "shien100k": 3.1,
+   "jukyo": 171,
+   "ichiji": 153,
+   "kakei": 353,
+   "junbi": 205,
+   "kunren": 12,
+   "jshuro": 780,
+   "kashitsuke": 180,
+   "seiho": 290,
+   "shurosha": 489,
+   "shurosha_p": 378,
+   "zoshu": 189,
+   "zoshu_p": 95,
+   "hist": {
+    "2017": {
+     "pop": 3676956,
+     "soudan": 7218,
+     "plan": 1764,
+     "kakei": 122,
+     "jukyo": 185
+    },
+    "2018": {
+     "pop": 3400433,
+     "soudan": 6596,
+     "plan": 1909,
+     "kakei": 168,
+     "jukyo": 166
+    },
+    "2019": {
+     "pop": 3154578,
+     "soudan": 6659,
+     "plan": 1877,
+     "kakei": 202,
+     "jukyo": 139
+    },
+    "2020": {
+     "pop": 2772714,
+     "soudan": 26964,
+     "plan": 2905,
+     "kakei": 198,
+     "jukyo": 1302
+    },
+    "2021": {
+     "pop": 2763248,
+     "soudan": 17360,
+     "plan": 2738,
+     "kakei": 219,
+     "jukyo": 786
+    },
+    "2022": {
+     "pop": 2732102,
+     "soudan": 9988,
+     "plan": 2214,
+     "kakei": 263,
+     "jukyo": 569
+    },
+    "2023": {
+     "pop": 2717934,
+     "soudan": 7563,
+     "plan": 1817,
+     "kakei": 305,
+     "jukyo": 219
+    }
+   }
+  },
+  {
+   "name": "奈良市",
+   "level": "中核市",
+   "pref": "奈良県",
+   "pop": 349385,
+   "soudan": 485,
+   "soudan100k": 11.6,
+   "plan": 425,
+   "plan100k": 10.1,
+   "shien": 235,
+   "shien100k": 5.6,
+   "jukyo": 5,
+   "ichiji": 0,
+   "kakei": 124,
+   "junbi": 17,
+   "kunren": 0,
+   "jshuro": 217,
+   "kashitsuke": 0,
+   "seiho": 99,
+   "shurosha": 73,
+   "shurosha_p": 69,
+   "zoshu": 12,
+   "zoshu_p": 10,
+   "hist": {
+    "2017": {
+     "pop": 362074,
+     "soudan": 521,
+     "plan": 186,
+     "kakei": 0,
+     "jukyo": 2
+    },
+    "2018": {
+     "pop": 360459,
+     "soudan": 274,
+     "plan": 249,
+     "kakei": 0,
+     "jukyo": 15
+    },
+    "2019": {
+     "pop": 358896,
+     "soudan": 332,
+     "plan": 181,
+     "kakei": 0,
+     "jukyo": 5
+    },
+    "2020": {
+     "pop": 357171,
+     "soudan": 1864,
+     "plan": 247,
+     "kakei": 3,
+     "jukyo": 59
+    },
+    "2021": {
+     "pop": 357171,
+     "soudan": 481,
+     "plan": 375,
+     "kakei": 0,
+     "jukyo": 88
+    },
+    "2022": {
+     "pop": 353158,
+     "soudan": 751,
+     "plan": 454,
+     "kakei": 4,
+     "jukyo": 144
+    },
+    "2023": {
+     "pop": 351418,
+     "soudan": 537,
+     "plan": 449,
+     "kakei": 95,
+     "jukyo": 24
+    }
+   }
+  },
+  {
+   "name": "奈良県",
+   "level": "都道府県",
+   "pref": null,
+   "pop": 965822,
+   "soudan": 1134,
+   "soudan100k": 9.8,
+   "plan": 188,
+   "plan100k": 1.6,
+   "shien": 111,
+   "shien100k": 1.0,
+   "jukyo": 29,
+   "ichiji": 0,
+   "kakei": 29,
+   "junbi": 31,
+   "kunren": 1,
+   "jshuro": 99,
+   "kashitsuke": 24,
+   "seiho": 43,
+   "shurosha": 87,
+   "shurosha_p": 63,
+   "zoshu": 22,
+   "zoshu_p": 9,
+   "hist": {
+    "2017": {
+     "pop": 1025744,
+     "soudan": 1390,
+     "plan": 450,
+     "kakei": 46,
+     "jukyo": 50
+    },
+    "2018": {
+     "pop": 1019722,
+     "soudan": 1427,
+     "plan": 483,
+     "kakei": 46,
+     "jukyo": 48
+    },
+    "2019": {
+     "pop": 1012804,
+     "soudan": 1407,
+     "plan": 401,
+     "kakei": 47,
+     "jukyo": 38
+    },
+    "2020": {
+     "pop": 1005610,
+     "soudan": 3663,
+     "plan": 916,
+     "kakei": 31,
+     "jukyo": 329
+    },
+    "2021": {
+     "pop": 987781,
+     "soudan": 2708,
+     "plan": 616,
+     "kakei": 13,
+     "jukyo": 184
+    },
+    "2022": {
+     "pop": 982220,
+     "soudan": 1242,
+     "plan": 234,
+     "kakei": 17,
+     "jukyo": 83
+    },
+    "2023": {
+     "pop": 973967,
+     "soudan": 1138,
+     "plan": 169,
+     "kakei": 20,
+     "jukyo": 56
+    }
+   }
+  },
+  {
+   "name": "姫路市",
+   "level": "中核市",
+   "pref": "兵庫県",
+   "pop": 525884,
+   "soudan": 956,
+   "soudan100k": 15.1,
+   "plan": 303,
+   "plan100k": 4.8,
+   "shien": 230,
+   "shien100k": 3.6,
+   "jukyo": 59,
+   "ichiji": 21,
+   "kakei": 14,
+   "junbi": 14,
+   "kunren": 2,
+   "jshuro": 254,
+   "kashitsuke": 76,
+   "seiho": 246,
+   "shurosha": 99,
+   "shurosha_p": 90,
+   "zoshu": 20,
+   "zoshu_p": 15,
+   "hist": {
+    "2017": {
+     "pop": 541497,
+     "soudan": 583,
+     "plan": 169,
+     "kakei": 8,
+     "jukyo": 3
+    },
+    "2018": {
+     "pop": 540000,
+     "soudan": 592,
+     "plan": 271,
+     "kakei": 30,
+     "jukyo": 3
+    },
+    "2019": {
+     "pop": 538488,
+     "soudan": 621,
+     "plan": 261,
+     "kakei": 18,
+     "jukyo": 4
+    },
+    "2020": {
+     "pop": 537101,
+     "soudan": 798,
+     "plan": 321,
+     "kakei": 5,
+     "jukyo": 99
+    },
+    "2021": {
+     "pop": 537101,
+     "soudan": 1121,
+     "plan": 367,
+     "kakei": 9,
+     "jukyo": 182
+    },
+    "2022": {
+     "pop": 530877,
+     "soudan": 1011,
+     "plan": 322,
+     "kakei": 10,
+     "jukyo": 132
+    },
+    "2023": {
+     "pop": 528459,
+     "soudan": 1092,
+     "plan": 284,
+     "kakei": 15,
+     "jukyo": 74
+    }
+   }
+  },
+  {
+   "name": "宇都宮市",
+   "level": "中核市",
+   "pref": "栃木県",
+   "pop": 515831,
+   "soudan": 1661,
+   "soudan100k": 26.8,
+   "plan": 381,
+   "plan100k": 6.2,
+   "shien": 103,
+   "shien100k": 1.7,
+   "jukyo": 42,
+   "ichiji": 0,
+   "kakei": 0,
+   "junbi": 7,
+   "kunren": 2,
+   "jshuro": 102,
+   "kashitsuke": 4,
+   "seiho": 101,
+   "shurosha": 64,
+   "shurosha_p": 47,
+   "zoshu": 12,
+   "zoshu_p": 10,
+   "hist": {
+    "2017": {
+     "pop": 521820,
+     "soudan": 816,
+     "plan": 436,
+     "kakei": 0,
+     "jukyo": 5
+    },
+    "2018": {
+     "pop": 522262,
+     "soudan": 763,
+     "plan": 472,
+     "kakei": 0,
+     "jukyo": 9
+    },
+    "2019": {
+     "pop": 522938,
+     "soudan": 861,
+     "plan": 427,
+     "kakei": 4,
+     "jukyo": 16
+    },
+    "2020": {
+     "pop": 522688,
+     "soudan": 4836,
+     "plan": 429,
+     "kakei": 2,
+     "jukyo": 201
+    },
+    "2021": {
+     "pop": 522688,
+     "soudan": 2314,
+     "plan": 566,
+     "kakei": 2,
+     "jukyo": 395
+    },
+    "2022": {
+     "pop": 519136,
+     "soudan": 1750,
+     "plan": 396,
+     "kakei": 0,
+     "jukyo": 51
+    },
+    "2023": {
+     "pop": 517497,
+     "soudan": 674,
+     "plan": 302,
+     "kakei": 0,
+     "jukyo": 48
+    }
+   }
+  },
+  {
+   "name": "宮城県",
+   "level": "都道府県",
+   "pref": null,
+   "pop": 1176027,
+   "soudan": 3957,
+   "soudan100k": 28.0,
+   "plan": 1904,
+   "plan100k": 13.5,
+   "shien": 543,
+   "shien100k": 3.8,
+   "jukyo": 83,
+   "ichiji": 28,
+   "kakei": 150,
+   "junbi": 125,
+   "kunren": 0,
+   "jshuro": 370,
+   "kashitsuke": 98,
+   "seiho": 50,
+   "shurosha": 310,
+   "shurosha_p": 211,
+   "zoshu": 126,
+   "zoshu_p": 41,
+   "hist": {
+    "2017": {
+     "pop": 1267963,
+     "soudan": 2561,
+     "plan": 938,
+     "kakei": 8,
+     "jukyo": 30
+    },
+    "2018": {
+     "pop": 1260921,
+     "soudan": 2741,
+     "plan": 1232,
+     "kakei": 54,
+     "jukyo": 26
+    },
+    "2019": {
+     "pop": 1251535,
+     "soudan": 3181,
+     "plan": 1418,
+     "kakei": 70,
+     "jukyo": 24
+    },
+    "2020": {
+     "pop": 1240513,
+     "soudan": 5610,
+     "plan": 2674,
+     "kakei": 88,
+     "jukyo": 647
+    },
+    "2021": {
+     "pop": 1219521,
+     "soudan": 5704,
+     "plan": 3487,
+     "kakei": 91,
+     "jukyo": 374
+    },
+    "2022": {
+     "pop": 1202990,
+     "soudan": 4492,
+     "plan": 2816,
+     "kakei": 114,
+     "jukyo": 305
+    },
+    "2023": {
+     "pop": 1189986,
+     "soudan": 3945,
+     "plan": 1864,
+     "kakei": 122,
+     "jukyo": 93
+    }
+   }
+  },
+  {
+   "name": "宮崎市",
+   "level": "中核市",
+   "pref": "宮崎県",
+   "pop": 397406,
+   "soudan": 1179,
+   "soudan100k": 24.7,
+   "plan": 156,
+   "plan100k": 3.3,
+   "shien": 93,
+   "shien100k": 2.0,
+   "jukyo": 39,
+   "ichiji": 1,
+   "kakei": 49,
+   "junbi": 2,
+   "kunren": 2,
+   "jshuro": 92,
+   "kashitsuke": 7,
+   "seiho": 14,
+   "shurosha": 40,
+   "shurosha_p": 34,
+   "zoshu": 26,
+   "zoshu_p": 17,
+   "hist": {
+    "2017": {
+     "pop": 405681,
+     "soudan": 799,
+     "plan": 163,
+     "kakei": 0,
+     "jukyo": 42
+    },
+    "2018": {
+     "pop": 404375,
+     "soudan": 771,
+     "plan": 177,
+     "kakei": 0,
+     "jukyo": 18
+    },
+    "2019": {
+     "pop": 404017,
+     "soudan": 728,
+     "plan": 135,
+     "kakei": 0,
+     "jukyo": 18
+    },
+    "2020": {
+     "pop": 403238,
+     "soudan": 4770,
+     "plan": 87,
+     "kakei": 13,
+     "jukyo": 23
+    },
+    "2021": {
+     "pop": 403238,
+     "soudan": 3289,
+     "plan": 119,
+     "kakei": 33,
+     "jukyo": 20
+    },
+    "2022": {
+     "pop": 400918,
+     "soudan": 1077,
+     "plan": 61,
+     "kakei": 12,
+     "jukyo": 5
+    },
+    "2023": {
+     "pop": 399576,
+     "soudan": 908,
+     "plan": 99,
+     "kakei": 27,
+     "jukyo": 24
+    }
+   }
+  },
+  {
+   "name": "宮崎県",
+   "level": "都道府県",
+   "pref": null,
+   "pop": 661304,
+   "soudan": 952,
+   "soudan100k": 12.0,
+   "plan": 235,
+   "plan100k": 3.0,
+   "shien": 138,
+   "shien100k": 1.7,
+   "jukyo": 26,
+   "ichiji": 0,
+   "kakei": 88,
+   "junbi": 5,
+   "kunren": 0,
+   "jshuro": 40,
+   "kashitsuke": 20,
+   "seiho": 79,
+   "shurosha": 50,
+   "shurosha_p": 43,
+   "zoshu": 31,
+   "zoshu_p": 26,
+   "hist": {
+    "2017": {
+     "pop": 722397,
+     "soudan": 874,
+     "plan": 173,
+     "kakei": 7,
+     "jukyo": 16
+    },
+    "2018": {
+     "pop": 715169,
+     "soudan": 1009,
+     "plan": 181,
+     "kakei": 19,
+     "jukyo": 9
+    },
+    "2019": {
+     "pop": 707991,
+     "soudan": 1093,
+     "plan": 147,
+     "kakei": 14,
+     "jukyo": 5
+    },
+    "2020": {
+     "pop": 700517,
+     "soudan": 3018,
+     "plan": 273,
+     "kakei": 62,
+     "jukyo": 35
+    },
+    "2021": {
+     "pop": 684134,
+     "soudan": 2372,
+     "plan": 274,
+     "kakei": 86,
+     "jukyo": 49
+    },
+    "2022": {
+     "pop": 677395,
+     "soudan": 1299,
+     "plan": 182,
+     "kakei": 21,
+     "jukyo": 39
+    },
+    "2023": {
+     "pop": 669262,
+     "soudan": 890,
+     "plan": 199,
+     "kakei": 56,
+     "jukyo": 33
+    }
+   }
+  },
+  {
+   "name": "富山市",
+   "level": "中核市",
+   "pref": "富山県",
+   "pop": 406483,
+   "soudan": 490,
+   "soudan100k": 10.0,
+   "plan": 74,
+   "plan100k": 1.5,
+   "shien": 28,
+   "shien100k": 0.6,
+   "jukyo": 14,
+   "ichiji": 0,
+   "kakei": 6,
+   "junbi": 2,
+   "kunren": 0,
+   "jshuro": 2,
+   "kashitsuke": 49,
+   "seiho": 0,
+   "shurosha": 0,
+   "shurosha_p": 0,
+   "zoshu": 0,
+   "zoshu_p": 0,
+   "hist": {
+    "2017": {
+     "pop": 419123,
+     "soudan": 251,
+     "plan": 31,
+     "kakei": 10,
+     "jukyo": 1
+    },
+    "2018": {
+     "pop": 418304,
+     "soudan": 232,
+     "plan": 15,
+     "kakei": 1,
+     "jukyo": 2
+    },
+    "2019": {
+     "pop": 418045,
+     "soudan": 226,
+     "plan": 29,
+     "kakei": 3,
+     "jukyo": 7
+    },
+    "2020": {
+     "pop": 417234,
+     "soudan": 281,
+     "plan": 49,
+     "kakei": 1,
+     "jukyo": 44
+    },
+    "2021": {
+     "pop": 417234,
+     "soudan": 254,
+     "plan": 56,
+     "kakei": 6,
+     "jukyo": 30
+    },
+    "2022": {
+     "pop": 411222,
+     "soudan": 440,
+     "plan": 76,
+     "kakei": 0,
+     "jukyo": 25
+    },
+    "2023": {
+     "pop": 409075,
+     "soudan": 653,
+     "plan": 125,
+     "kakei": 2,
+     "jukyo": 22
+    }
+   }
+  },
+  {
+   "name": "富山県",
+   "level": "都道府県",
+   "pref": null,
+   "pop": 612521,
+   "soudan": 356,
+   "soudan100k": 4.8,
+   "plan": 91,
+   "plan100k": 1.2,
+   "shien": 51,
+   "shien100k": 0.7,
+   "jukyo": 12,
+   "ichiji": 14,
+   "kakei": 31,
+   "junbi": 6,
+   "kunren": 0,
+   "jshuro": 28,
+   "kashitsuke": 11,
+   "seiho": 29,
+   "shurosha": 35,
+   "shurosha_p": 28,
+   "zoshu": 16,
+   "zoshu_p": 7,
+   "hist": {
+    "2017": {
+     "pop": 661037,
+     "soudan": 501,
+     "plan": 111,
+     "kakei": 15,
+     "jukyo": 7
+    },
+    "2018": {
+     "pop": 656401,
+     "soudan": 462,
+     "plan": 139,
+     "kakei": 28,
+     "jukyo": 2
+    },
+    "2019": {
+     "pop": 651467,
+     "soudan": 428,
+     "plan": 109,
+     "kakei": 9,
+     "jukyo": 4
+    },
+    "2020": {
+     "pop": 646059,
+     "soudan": 1090,
+     "plan": 187,
+     "kakei": 10,
+     "jukyo": 35
+    },
+    "2021": {
+     "pop": 630479,
+     "soudan": 755,
+     "plan": 108,
+     "kakei": 14,
+     "jukyo": 18
+    },
+    "2022": {
+     "pop": 626097,
+     "soudan": 585,
+     "plan": 88,
+     "kakei": 11,
+     "jukyo": 24
+    },
+    "2023": {
+     "pop": 619365,
+     "soudan": 477,
+     "plan": 113,
+     "kakei": 26,
+     "jukyo": 19
+    }
+   }
+  },
+  {
+   "name": "寝屋川市",
+   "level": "中核市",
+   "pref": "大阪府",
+   "pop": 225735,
+   "soudan": 743,
+   "soudan100k": 27.4,
+   "plan": 480,
+   "plan100k": 17.7,
+   "shien": 185,
+   "shien100k": 6.8,
+   "jukyo": 35,
+   "ichiji": 13,
+   "kakei": 2,
+   "junbi": 21,
+   "kunren": 2,
+   "jshuro": 424,
+   "kashitsuke": 35,
+   "seiho": 51,
+   "shurosha": 29,
+   "shurosha_p": 22,
+   "zoshu": 8,
+   "zoshu_p": 2,
+   "hist": {
+    "2019": {
+     "pop": 235705,
+     "soudan": 418,
+     "plan": 214,
+     "kakei": 20,
+     "jukyo": 10
+    },
+    "2020": {
+     "pop": 233484,
+     "soudan": 1949,
+     "plan": 120,
+     "kakei": 2,
+     "jukyo": 13
+    },
+    "2021": {
+     "pop": 233484,
+     "soudan": 1474,
+     "plan": 79,
+     "kakei": 3,
+     "jukyo": 9
+    },
+    "2022": {
+     "pop": 229177,
+     "soudan": 713,
+     "plan": 224,
+     "kakei": 3,
+     "jukyo": 85
+    },
+    "2023": {
+     "pop": 227544,
+     "soudan": 653,
+     "plan": 254,
+     "kakei": 6,
+     "jukyo": 32
+    }
+   }
+  },
+  {
+   "name": "尼崎市",
+   "level": "中核市",
+   "pref": "兵庫県",
+   "pop": 458046,
+   "soudan": 1446,
+   "soudan100k": 26.3,
+   "plan": 203,
+   "plan100k": 3.7,
+   "shien": 180,
+   "shien100k": 3.3,
+   "jukyo": 48,
+   "ichiji": 0,
+   "kakei": 27,
+   "junbi": 12,
+   "kunren": 0,
+   "jshuro": 171,
+   "kashitsuke": 2,
+   "seiho": 109,
+   "shurosha": 81,
+   "shurosha_p": 63,
+   "zoshu": 13,
+   "zoshu_p": 11,
+   "hist": {
+    "2017": {
+     "pop": 463940,
+     "soudan": 816,
+     "plan": 149,
+     "kakei": 0,
+     "jukyo": 34
+    },
+    "2018": {
+     "pop": 463160,
+     "soudan": 1034,
+     "plan": 160,
+     "kakei": 0,
+     "jukyo": 21
+    },
+    "2019": {
+     "pop": 462744,
+     "soudan": 1075,
+     "plan": 166,
+     "kakei": 0,
+     "jukyo": 23
+    },
+    "2020": {
+     "pop": 463186,
+     "soudan": 6454,
+     "plan": 368,
+     "kakei": 0,
+     "jukyo": 192
+    },
+    "2021": {
+     "pop": 463186,
+     "soudan": 3918,
+     "plan": 171,
+     "kakei": 0,
+     "jukyo": 62
+    },
+    "2022": {
+     "pop": 460148,
+     "soudan": 1846,
+     "plan": 142,
+     "kakei": 0,
+     "jukyo": 21
+    },
+    "2023": {
+     "pop": 458895,
+     "soudan": 1377,
+     "plan": 179,
+     "kakei": 0,
+     "jukyo": 40
+    }
+   }
+  },
+  {
+   "name": "山口県",
+   "level": "都道府県",
+   "pref": null,
+   "pop": 1063109,
+   "soudan": 1805,
+   "soudan100k": 14.1,
+   "plan": 422,
+   "plan100k": 3.3,
+   "shien": 210,
+   "shien100k": 1.6,
+   "jukyo": 36,
+   "ichiji": 27,
+   "kakei": 172,
+   "junbi": 34,
+   "kunren": 2,
+   "jshuro": 197,
+   "kashitsuke": 57,
+   "seiho": 165,
+   "shurosha": 115,
+   "shurosha_p": 97,
+   "zoshu": 46,
+   "zoshu_p": 27,
+   "hist": {
+    "2017": {
+     "pop": 1147421,
+     "soudan": 1531,
+     "plan": 506,
+     "kakei": 75,
+     "jukyo": 59
+    },
+    "2018": {
+     "pop": 1139102,
+     "soudan": 1559,
+     "plan": 497,
+     "kakei": 122,
+     "jukyo": 42
+    },
+    "2019": {
+     "pop": 1129768,
+     "soudan": 1830,
+     "plan": 491,
+     "kakei": 152,
+     "jukyo": 26
+    },
+    "2020": {
+     "pop": 1119506,
+     "soudan": 4368,
+     "plan": 1165,
+     "kakei": 157,
+     "jukyo": 208
+    },
+    "2021": {
+     "pop": 1092571,
+     "soudan": 3098,
+     "plan": 1254,
+     "kakei": 169,
+     "jukyo": 191
+    },
+    "2022": {
+     "pop": 1086462,
+     "soudan": 1939,
+     "plan": 549,
+     "kakei": 179,
+     "jukyo": 97
+    },
+    "2023": {
+     "pop": 1075573,
+     "soudan": 1741,
+     "plan": 481,
+     "kakei": 200,
+     "jukyo": 34
+    }
+   }
+  },
+  {
+   "name": "山形市",
+   "level": "中核市",
+   "pref": "山形県",
+   "pop": 238293,
+   "soudan": 747,
+   "soudan100k": 26.1,
+   "plan": 138,
+   "plan100k": 4.8,
+   "shien": 58,
+   "shien100k": 2.0,
+   "jukyo": 14,
+   "ichiji": 0,
+   "kakei": 133,
+   "junbi": 5,
+   "kunren": 1,
+   "jshuro": 46,
+   "kashitsuke": 6,
+   "seiho": 18,
+   "shurosha": 20,
+   "shurosha_p": 17,
+   "zoshu": 19,
+   "zoshu_p": 14,
+   "hist": {
+    "2019": {
+     "pop": 248024,
+     "soudan": 1005,
+     "plan": 179,
+     "kakei": 144,
+     "jukyo": 2
+    },
+    "2020": {
+     "pop": 246904,
+     "soudan": 2360,
+     "plan": 207,
+     "kakei": 189,
+     "jukyo": 108
+    },
+    "2021": {
+     "pop": 246904,
+     "soudan": 1297,
+     "plan": 139,
+     "kakei": 119,
+     "jukyo": 41
+    },
+    "2022": {
+     "pop": 242284,
+     "soudan": 958,
+     "plan": 109,
+     "kakei": 86,
+     "jukyo": 44
+    },
+    "2023": {
+     "pop": 240441,
+     "soudan": 753,
+     "plan": 123,
+     "kakei": 113,
+     "jukyo": 17
+    }
+   }
+  },
+  {
+   "name": "山形県",
+   "level": "都道府県",
+   "pref": null,
+   "pop": 789216,
+   "soudan": 1329,
+   "soudan100k": 14.0,
+   "plan": 222,
+   "plan100k": 2.3,
+   "shien": 120,
+   "shien100k": 1.3,
+   "jukyo": 16,
+   "ichiji": 0,
+   "kakei": 7,
+   "junbi": 37,
+   "kunren": 0,
+   "jshuro": 80,
+   "kashitsuke": 32,
+   "seiho": 50,
+   "shurosha": 95,
+   "shurosha_p": 50,
+   "zoshu": 35,
+   "zoshu_p": 13,
+   "hist": {
+    "2017": {
+     "pop": 1129560,
+     "soudan": 1924,
+     "plan": 437,
+     "kakei": 23,
+     "jukyo": 36
+    },
+    "2018": {
+     "pop": 1118468,
+     "soudan": 2219,
+     "plan": 491,
+     "kakei": 132,
+     "jukyo": 39
+    },
+    "2019": {
+     "pop": 858960,
+     "soudan": 1345,
+     "plan": 308,
+     "kakei": 9,
+     "jukyo": 30
+    },
+    "2020": {
+     "pop": 848479,
+     "soudan": 3304,
+     "plan": 401,
+     "kakei": 1,
+     "jukyo": 114
+    },
+    "2021": {
+     "pop": 823113,
+     "soudan": 2091,
+     "plan": 310,
+     "kakei": 7,
+     "jukyo": 91
+    },
+    "2022": {
+     "pop": 814398,
+     "soudan": 1502,
+     "plan": 242,
+     "kakei": 7,
+     "jukyo": 56
+    },
+    "2023": {
+     "pop": 801955,
+     "soudan": 1390,
+     "plan": 216,
+     "kakei": 5,
+     "jukyo": 26
+    }
+   }
+  },
+  {
+   "name": "山梨県",
+   "level": "都道府県",
+   "pref": null,
+   "pop": 621542,
+   "soudan": 1035,
+   "soudan100k": 13.9,
+   "plan": 320,
+   "plan100k": 4.3,
+   "shien": 162,
+   "shien100k": 2.2,
+   "jukyo": 15,
+   "ichiji": 20,
+   "kakei": 34,
+   "junbi": 27,
+   "kunren": 2,
+   "jshuro": 95,
+   "kashitsuke": 8,
+   "seiho": 90,
+   "shurosha": 91,
+   "shurosha_p": 67,
+   "zoshu": 41,
+   "zoshu_p": 26,
+   "hist": {
+    "2017": {
+     "pop": 849784,
+     "soudan": 1140,
+     "plan": 382,
+     "kakei": 33,
+     "jukyo": 82
+    },
+    "2018": {
+     "pop": 844717,
+     "soudan": 1148,
+     "plan": 455,
+     "kakei": 19,
+     "jukyo": 45
+    },
+    "2019": {
+     "pop": 648701,
+     "soudan": 988,
+     "plan": 314,
+     "kakei": 21,
+     "jukyo": 15
+    },
+    "2020": {
+     "pop": 643995,
+     "soudan": 3070,
+     "plan": 494,
+     "kakei": 20,
+     "jukyo": 84
+    },
+    "2021": {
+     "pop": 632320,
+     "soudan": 2117,
+     "plan": 435,
+     "kakei": 17,
+     "jukyo": 101
+    },
+    "2022": {
+     "pop": 630091,
+     "soudan": 2370,
+     "plan": 388,
+     "kakei": 18,
+     "jukyo": 50
+    },
+    "2023": {
+     "pop": 626222,
+     "soudan": 977,
+     "plan": 362,
+     "kakei": 25,
+     "jukyo": 26
+    }
+   }
+  },
+  {
+   "name": "岐阜市",
+   "level": "中核市",
+   "pref": "岐阜県",
+   "pop": 400937,
+   "soudan": 611,
+   "soudan100k": 12.7,
+   "plan": 111,
+   "plan100k": 2.3,
+   "shien": 60,
+   "shien100k": 1.2,
+   "jukyo": 6,
+   "ichiji": 0,
+   "kakei": 47,
+   "junbi": 1,
+   "kunren": 1,
+   "jshuro": 59,
+   "kashitsuke": 7,
+   "seiho": 26,
+   "shurosha": 17,
+   "shurosha_p": 17,
+   "zoshu": 17,
+   "zoshu_p": 11,
+   "hist": {
+    "2017": {
+     "pop": 413995,
+     "soudan": 564,
+     "plan": 93,
+     "kakei": 14,
+     "jukyo": 7
+    },
+    "2018": {
+     "pop": 413111,
+     "soudan": 498,
+     "plan": 159,
+     "kakei": 30,
+     "jukyo": 11
+    },
+    "2019": {
+     "pop": 411554,
+     "soudan": 453,
+     "plan": 123,
+     "kakei": 16,
+     "jukyo": 17
+    },
+    "2020": {
+     "pop": 409900,
+     "soudan": 2096,
+     "plan": 154,
+     "kakei": 27,
+     "jukyo": 69
+    },
+    "2021": {
+     "pop": 409900,
+     "soudan": 1467,
+     "plan": 169,
+     "kakei": 30,
+     "jukyo": 53
+    },
+    "2022": {
+     "pop": 404304,
+     "soudan": 735,
+     "plan": 108,
+     "kakei": 31,
+     "jukyo": 29
+    },
+    "2023": {
+     "pop": 402400,
+     "soudan": 658,
+     "plan": 92,
+     "kakei": 37,
+     "jukyo": 15
+    }
+   }
+  },
+  {
+   "name": "岐阜県",
+   "level": "都道府県",
+   "pref": null,
+   "pop": 1566925,
+   "soudan": 2260,
+   "soudan100k": 12.0,
+   "plan": 798,
+   "plan100k": 4.2,
+   "shien": 250,
+   "shien100k": 1.3,
+   "jukyo": 48,
+   "ichiji": 7,
+   "kakei": 337,
+   "junbi": 83,
+   "kunren": 4,
+   "jshuro": 360,
+   "kashitsuke": 18,
+   "seiho": 53,
+   "shurosha": 77,
+   "shurosha_p": 49,
+   "zoshu": 91,
+   "zoshu_p": 37,
+   "hist": {
+    "2017": {
+     "pop": 1662200,
+     "soudan": 1829,
+     "plan": 743,
+     "kakei": 219,
+     "jukyo": 34
+    },
+    "2018": {
+     "pop": 1653155,
+     "soudan": 1984,
+     "plan": 898,
+     "kakei": 312,
+     "jukyo": 33
+    },
+    "2019": {
+     "pop": 1642795,
+     "soudan": 1784,
+     "plan": 852,
+     "kakei": 264,
+     "jukyo": 26
+    },
+    "2020": {
+     "pop": 1634214,
+     "soudan": 5780,
+     "plan": 1115,
+     "kakei": 323,
+     "jukyo": 300
+    },
+    "2021": {
+     "pop": 1606968,
+     "soudan": 3797,
+     "plan": 1010,
+     "kakei": 299,
+     "jukyo": 235
+    },
+    "2022": {
+     "pop": 1592378,
+     "soudan": 2486,
+     "plan": 753,
+     "kakei": 272,
+     "jukyo": 117
+    },
+    "2023": {
+     "pop": 1579894,
+     "soudan": 2333,
+     "plan": 771,
+     "kakei": 285,
+     "jukyo": 90
+    }
+   }
+  },
+  {
+   "name": "岡山市",
+   "level": "指定都市",
+   "pref": "岡山県",
+   "pop": 698671,
+   "soudan": 2442,
+   "soudan100k": 29.1,
+   "plan": 1388,
+   "plan100k": 16.6,
+   "shien": 408,
+   "shien100k": 4.9,
+   "jukyo": 32,
+   "ichiji": 102,
+   "kakei": 584,
+   "junbi": 84,
+   "kunren": 0,
+   "jshuro": 332,
+   "kashitsuke": 5,
+   "seiho": 109,
+   "shurosha": 274,
+   "shurosha_p": 227,
+   "zoshu": 91,
+   "zoshu_p": 37,
+   "hist": {
+    "2017": {
+     "pop": 707615,
+     "soudan": 1213,
+     "plan": 629,
+     "kakei": 75,
+     "jukyo": 10
+    },
+    "2018": {
+     "pop": 708652,
+     "soudan": 1264,
+     "plan": 586,
+     "kakei": 162,
+     "jukyo": 14
+    },
+    "2019": {
+     "pop": 709188,
+     "soudan": 1231,
+     "plan": 707,
+     "kakei": 202,
+     "jukyo": 36
+    },
+    "2020": {
+     "pop": 709241,
+     "soudan": 5042,
+     "plan": 959,
+     "kakei": 304,
+     "jukyo": 274
+    },
+    "2021": {
+     "pop": 709241,
+     "soudan": 3792,
+     "plan": 1131,
+     "kakei": 312,
+     "jukyo": 524
+    },
+    "2022": {
+     "pop": 704487,
+     "soudan": 1659,
+     "plan": 892,
+     "kakei": 329,
+     "jukyo": 275
+    },
+    "2023": {
+     "pop": 702020,
+     "soudan": 2433,
+     "plan": 1467,
+     "kakei": 664,
+     "jukyo": 81
+    }
+   }
+  },
+  {
+   "name": "岡山県",
+   "level": "都道府県",
+   "pref": null,
+   "pop": 676540,
+   "soudan": 1006,
+   "soudan100k": 12.4,
+   "plan": 218,
+   "plan100k": 2.7,
+   "shien": 107,
+   "shien100k": 1.3,
+   "jukyo": 6,
+   "ichiji": 1,
+   "kakei": 102,
+   "junbi": 4,
+   "kunren": 2,
+   "jshuro": 47,
+   "kashitsuke": 6,
+   "seiho": 20,
+   "shurosha": 71,
+   "shurosha_p": 38,
+   "zoshu": 22,
+   "zoshu_p": 11,
+   "hist": {
+    "2017": {
+     "pop": 742196,
+     "soudan": 909,
+     "plan": 292,
+     "kakei": 50,
+     "jukyo": 4
+    },
+    "2018": {
+     "pop": 734806,
+     "soudan": 922,
+     "plan": 269,
+     "kakei": 65,
+     "jukyo": 5
+    },
+    "2019": {
+     "pop": 727530,
+     "soudan": 973,
+     "plan": 306,
+     "kakei": 94,
+     "jukyo": 7
+    },
+    "2020": {
+     "pop": 719940,
+     "soudan": 3020,
+     "plan": 409,
+     "kakei": 135,
+     "jukyo": 67
+    },
+    "2021": {
+     "pop": 702092,
+     "soudan": 2374,
+     "plan": 455,
+     "kakei": 181,
+     "jukyo": 53
+    },
+    "2022": {
+     "pop": 694932,
+     "soudan": 1356,
+     "plan": 286,
+     "kakei": 124,
+     "jukyo": 18
+    },
+    "2023": {
+     "pop": 685659,
+     "soudan": 951,
+     "plan": 238,
+     "kakei": 132,
+     "jukyo": 7
+    }
+   }
+  },
+  {
+   "name": "岡崎市",
+   "level": "中核市",
+   "pref": "愛知県",
+   "pop": 383915,
+   "soudan": 662,
+   "soudan100k": 14.4,
+   "plan": 256,
+   "plan100k": 5.6,
+   "shien": 195,
+   "shien100k": 4.2,
+   "jukyo": 63,
+   "ichiji": 90,
+   "kakei": 15,
+   "junbi": 17,
+   "kunren": 0,
+   "jshuro": 70,
+   "kashitsuke": 1,
+   "seiho": 31,
+   "shurosha": 39,
+   "shurosha_p": 36,
+   "zoshu": 44,
+   "zoshu_p": 35,
+   "hist": {
+    "2017": {
+     "pop": 382784,
+     "soudan": 842,
+     "plan": 103,
+     "kakei": 0,
+     "jukyo": 59
+    },
+    "2018": {
+     "pop": 384659,
+     "soudan": 906,
+     "plan": 112,
+     "kakei": 0,
+     "jukyo": 32
+    },
+    "2019": {
+     "pop": 386763,
+     "soudan": 882,
+     "plan": 164,
+     "kakei": 0,
+     "jukyo": 37
+    },
+    "2020": {
+     "pop": 387842,
+     "soudan": 2053,
+     "plan": 231,
+     "kakei": 0,
+     "jukyo": 141
+    },
+    "2021": {
+     "pop": 387842,
+     "soudan": 1384,
+     "plan": 397,
+     "kakei": 11,
+     "jukyo": 254
+    },
+    "2022": {
+     "pop": 385355,
+     "soudan": 906,
+     "plan": 306,
+     "kakei": 13,
+     "jukyo": 138
+    },
+    "2023": {
+     "pop": 384422,
+     "soudan": 604,
+     "plan": 233,
+     "kakei": 10,
+     "jukyo": 61
+    }
+   }
+  },
+  {
+   "name": "岩手県",
+   "level": "都道府県",
+   "pref": null,
+   "pop": 892063,
+   "soudan": 2402,
+   "soudan100k": 22.4,
+   "plan": 659,
+   "plan100k": 6.2,
+   "shien": 200,
+   "shien100k": 1.9,
+   "jukyo": 17,
+   "ichiji": 2,
+   "kakei": 157,
+   "junbi": 93,
+   "kunren": 1,
+   "jshuro": 117,
+   "kashitsuke": 72,
+   "seiho": 49,
+   "shurosha": 90,
+   "shurosha_p": 56,
+   "zoshu": 91,
+   "zoshu_p": 38,
+   "hist": {
+    "2017": {
+     "pop": 995364,
+     "soudan": 2019,
+     "plan": 610,
+     "kakei": 92,
+     "jukyo": 15
+    },
+    "2018": {
+     "pop": 984476,
+     "soudan": 2294,
+     "plan": 624,
+     "kakei": 103,
+     "jukyo": 18
+    },
+    "2019": {
+     "pop": 972470,
+     "soudan": 2188,
+     "plan": 582,
+     "kakei": 128,
+     "jukyo": 16
+    },
+    "2020": {
+     "pop": 960006,
+     "soudan": 3480,
+     "plan": 694,
+     "kakei": 142,
+     "jukyo": 96
+    },
+    "2021": {
+     "pop": 931069,
+     "soudan": 3104,
+     "plan": 752,
+     "kakei": 128,
+     "jukyo": 43
+    },
+    "2022": {
+     "pop": 921209,
+     "soudan": 2585,
+     "plan": 618,
+     "kakei": 135,
+     "jukyo": 42
+    },
+    "2023": {
+     "pop": 906710,
+     "soudan": 2480,
+     "plan": 662,
+     "kakei": 140,
+     "jukyo": 25
+    }
+   }
+  },
+  {
+   "name": "島根県",
+   "level": "都道府県",
+   "pref": null,
+   "pop": 454603,
+   "soudan": 1045,
+   "soudan100k": 19.2,
+   "plan": 314,
+   "plan100k": 5.8,
+   "shien": 76,
+   "shien100k": 1.4,
+   "jukyo": 3,
+   "ichiji": 2,
+   "kakei": 169,
+   "junbi": 55,
+   "kunren": 3,
+   "jshuro": 36,
+   "kashitsuke": 63,
+   "seiho": 6,
+   "shurosha": 53,
+   "shurosha_p": 21,
+   "zoshu": 31,
+   "zoshu_p": 10,
+   "hist": {
+    "2017": {
+     "pop": 701394,
+     "soudan": 936,
+     "plan": 258,
+     "kakei": 75,
+     "jukyo": 3
+    },
+    "2018": {
+     "pop": 491979,
+     "soudan": 869,
+     "plan": 238,
+     "kakei": 101,
+     "jukyo": 4
+    },
+    "2019": {
+     "pop": 487438,
+     "soudan": 1043,
+     "plan": 259,
+     "kakei": 126,
+     "jukyo": 1
+    },
+    "2020": {
+     "pop": 483220,
+     "soudan": 2322,
+     "plan": 296,
+     "kakei": 144,
+     "jukyo": 18
+    },
+    "2021": {
+     "pop": 470073,
+     "soudan": 1698,
+     "plan": 337,
+     "kakei": 187,
+     "jukyo": 18
+    },
+    "2022": {
+     "pop": 466899,
+     "soudan": 1131,
+     "plan": 314,
+     "kakei": 170,
+     "jukyo": 12
+    },
+    "2023": {
+     "pop": 460966,
+     "soudan": 957,
+     "plan": 312,
+     "kakei": 168,
+     "jukyo": 5
+    }
+   }
+  },
+  {
+   "name": "川口市",
+   "level": "中核市",
+   "pref": "埼玉県",
+   "pop": 606315,
+   "soudan": 956,
+   "soudan100k": 13.1,
+   "plan": 107,
+   "plan100k": 1.5,
+   "shien": 105,
+   "shien100k": 1.4,
+   "jukyo": 49,
+   "ichiji": 0,
+   "kakei": 0,
+   "junbi": 0,
+   "kunren": 0,
+   "jshuro": 65,
+   "kashitsuke": 0,
+   "seiho": 105,
+   "shurosha": 45,
+   "shurosha_p": 45,
+   "zoshu": 36,
+   "zoshu_p": 36,
+   "hist": {
+    "2018": {
+     "pop": 595495,
+     "soudan": 814,
+     "plan": 161,
+     "kakei": 0,
+     "jukyo": 33
+    },
+    "2019": {
+     "pop": 600050,
+     "soudan": 829,
+     "plan": 152,
+     "kakei": 0,
+     "jukyo": 45
+    },
+    "2020": {
+     "pop": 603838,
+     "soudan": 1287,
+     "plan": 163,
+     "kakei": 0,
+     "jukyo": 54
+    },
+    "2021": {
+     "pop": 603838,
+     "soudan": 898,
+     "plan": 109,
+     "kakei": 0,
+     "jukyo": 20
+    },
+    "2022": {
+     "pop": 605545,
+     "soudan": 969,
+     "plan": 136,
+     "kakei": 0,
+     "jukyo": 26
+    },
+    "2023": {
+     "pop": 604715,
+     "soudan": 979,
+     "plan": 136,
+     "kakei": 0,
+     "jukyo": 61
+    }
+   }
+  },
+  {
+   "name": "川崎市",
+   "level": "指定都市",
+   "pref": "神奈川県",
+   "pop": 1529136,
+   "soudan": 3203,
+   "soudan100k": 17.5,
+   "plan": 919,
+   "plan100k": 5.0,
+   "shien": 530,
+   "shien100k": 2.9,
+   "jukyo": 122,
+   "ichiji": 464,
+   "kakei": 174,
+   "junbi": 3,
+   "kunren": 0,
+   "jshuro": 535,
+   "kashitsuke": 2,
+   "seiho": 135,
+   "shurosha": 235,
+   "shurosha_p": 219,
+   "zoshu": 52,
+   "zoshu_p": 38,
+   "hist": {
+    "2017": {
+     "pop": 1459768,
+     "soudan": 2614,
+     "plan": 1168,
+     "kakei": 0,
+     "jukyo": 80
+    },
+    "2018": {
+     "pop": 1474167,
+     "soudan": 2615,
+     "plan": 1034,
+     "kakei": 0,
+     "jukyo": 75
+    },
+    "2019": {
+     "pop": 1488031,
+     "soudan": 2667,
+     "plan": 1089,
+     "kakei": 147,
+     "jukyo": 147
+    },
+    "2020": {
+     "pop": 1500460,
+     "soudan": 10039,
+     "plan": 689,
+     "kakei": 45,
+     "jukyo": 13
+    },
+    "2021": {
+     "pop": 1500460,
+     "soudan": 7063,
+     "plan": 921,
+     "kakei": 195,
+     "jukyo": 99
+    },
+    "2022": {
+     "pop": 1522390,
+     "soudan": 3648,
+     "plan": 2068,
+     "kakei": 262,
+     "jukyo": 1105
+    },
+    "2023": {
+     "pop": 1524026,
+     "soudan": 3529,
+     "plan": 3702,
+     "kakei": 192,
+     "jukyo": 2112
+    }
+   }
+  },
+  {
+   "name": "川越市",
+   "level": "中核市",
+   "pref": "埼玉県",
+   "pop": 352717,
+   "soudan": 662,
+   "soudan100k": 15.6,
+   "plan": 190,
+   "plan100k": 4.5,
+   "shien": 120,
+   "shien100k": 2.8,
+   "jukyo": 20,
+   "ichiji": 4,
+   "kakei": 75,
+   "junbi": 4,
+   "kunren": 0,
+   "jshuro": 126,
+   "kashitsuke": 0,
+   "seiho": 11,
+   "shurosha": 91,
+   "shurosha_p": 69,
+   "zoshu": 5,
+   "zoshu_p": 5,
+   "hist": {
+    "2017": {
+     "pop": 350223,
+     "soudan": 747,
+     "plan": 289,
+     "kakei": 92,
+     "jukyo": 19
+    },
+    "2018": {
+     "pop": 351654,
+     "soudan": 722,
+     "plan": 179,
+     "kakei": 68,
+     "jukyo": 5
+    },
+    "2019": {
+     "pop": 352433,
+     "soudan": 687,
+     "plan": 133,
+     "kakei": 44,
+     "jukyo": 9
+    },
+    "2020": {
+     "pop": 353115,
+     "soudan": 2091,
+     "plan": 127,
+     "kakei": 13,
+     "jukyo": 79
+    },
+    "2021": {
+     "pop": 353115,
+     "soudan": 991,
+     "plan": 133,
+     "kakei": 25,
+     "jukyo": 81
+    },
+    "2022": {
+     "pop": 353235,
+     "soudan": 771,
+     "plan": 177,
+     "kakei": 45,
+     "jukyo": 71
+    },
+    "2023": {
+     "pop": 353183,
+     "soudan": 631,
+     "plan": 188,
+     "kakei": 55,
+     "jukyo": 18
+    }
+   }
+  },
+  {
+   "name": "広島市",
+   "level": "指定都市",
+   "pref": "広島県",
+   "pop": 1178773,
+   "soudan": 3185,
+   "soudan100k": 22.5,
+   "plan": 1278,
+   "plan100k": 9.0,
+   "shien": 552,
+   "shien100k": 3.9,
+   "jukyo": 79,
+   "ichiji": 91,
+   "kakei": 161,
+   "junbi": 7,
+   "kunren": 0,
+   "jshuro": 768,
+   "kashitsuke": 1,
+   "seiho": 136,
+   "shurosha": 168,
+   "shurosha_p": 143,
+   "zoshu": 99,
+   "zoshu_p": 63,
+   "hist": {
+    "2017": {
+     "pop": 1191030,
+     "soudan": 2045,
+     "plan": 796,
+     "kakei": 75,
+     "jukyo": 54
+    },
+    "2018": {
+     "pop": 1193857,
+     "soudan": 2664,
+     "plan": 832,
+     "kakei": 103,
+     "jukyo": 37
+    },
+    "2019": {
+     "pop": 1195327,
+     "soudan": 2740,
+     "plan": 1173,
+     "kakei": 143,
+     "jukyo": 35
+    },
+    "2020": {
+     "pop": 1196138,
+     "soudan": 8831,
+     "plan": 1122,
+     "kakei": 136,
+     "jukyo": 101
+    },
+    "2021": {
+     "pop": 1196138,
+     "soudan": 5285,
+     "plan": 1303,
+     "kakei": 132,
+     "jukyo": 296
+    },
+    "2022": {
+     "pop": 1189149,
+     "soudan": 3464,
+     "plan": 1218,
+     "kakei": 177,
+     "jukyo": 125
+    },
+    "2023": {
+     "pop": 1184731,
+     "soudan": 2826,
+     "plan": 1320,
+     "kakei": 183,
+     "jukyo": 169
+    }
+   }
+  },
+  {
+   "name": "広島県",
+   "level": "都道府県",
+   "pref": null,
+   "pop": 908226,
+   "soudan": 2048,
+   "soudan100k": 18.8,
+   "plan": 507,
+   "plan100k": 4.7,
+   "shien": 211,
+   "shien100k": 1.9,
+   "jukyo": 35,
+   "ichiji": 25,
+   "kakei": 209,
+   "junbi": 70,
+   "kunren": 7,
+   "jshuro": 174,
+   "kashitsuke": 36,
+   "seiho": 26,
+   "shurosha": 113,
+   "shurosha_p": 83,
+   "zoshu": 51,
+   "zoshu_p": 25,
+   "hist": {
+    "2017": {
+     "pop": 967282,
+     "soudan": 1889,
+     "plan": 304,
+     "kakei": 40,
+     "jukyo": 15
+    },
+    "2018": {
+     "pop": 961265,
+     "soudan": 1748,
+     "plan": 276,
+     "kakei": 86,
+     "jukyo": 16
+    },
+    "2019": {
+     "pop": 954768,
+     "soudan": 1749,
+     "plan": 275,
+     "kakei": 105,
+     "jukyo": 5
+    },
+    "2020": {
+     "pop": 947612,
+     "soudan": 4443,
+     "plan": 445,
+     "kakei": 126,
+     "jukyo": 97
+    },
+    "2021": {
+     "pop": 921457,
+     "soudan": 3069,
+     "plan": 432,
+     "kakei": 127,
+     "jukyo": 78
+    },
+    "2022": {
+     "pop": 923206,
+     "soudan": 2244,
+     "plan": 430,
+     "kakei": 159,
+     "jukyo": 51
+    },
+    "2023": {
+     "pop": 915967,
+     "soudan": 2185,
+     "plan": 508,
+     "kakei": 181,
+     "jukyo": 32
+    }
+   }
+  },
+  {
+   "name": "徳島県",
+   "level": "都道府県",
+   "pref": null,
+   "pop": 710012,
+   "soudan": 1107,
+   "soudan100k": 13.0,
+   "plan": 461,
+   "plan100k": 5.4,
+   "shien": 102,
+   "shien100k": 1.2,
+   "jukyo": 18,
+   "ichiji": 0,
+   "kakei": 145,
+   "junbi": 52,
+   "kunren": 0,
+   "jshuro": 85,
+   "kashitsuke": 53,
+   "seiho": 38,
+   "shurosha": 58,
+   "shurosha_p": 22,
+   "zoshu": 49,
+   "zoshu_p": 9,
+   "hist": {
+    "2017": {
+     "pop": 770057,
+     "soudan": 1001,
+     "plan": 476,
+     "kakei": 195,
+     "jukyo": 7
+    },
+    "2018": {
+     "pop": 764213,
+     "soudan": 1081,
+     "plan": 437,
+     "kakei": 132,
+     "jukyo": 2
+    },
+    "2019": {
+     "pop": 757377,
+     "soudan": 1078,
+     "plan": 550,
+     "kakei": 222,
+     "jukyo": 4
+    },
+    "2020": {
+     "pop": 750519,
+     "soudan": 1913,
+     "plan": 688,
+     "kakei": 282,
+     "jukyo": 45
+    },
+    "2021": {
+     "pop": 735070,
+     "soudan": 1567,
+     "plan": 1002,
+     "kakei": 231,
+     "jukyo": 65
+    },
+    "2022": {
+     "pop": 726729,
+     "soudan": 929,
+     "plan": 497,
+     "kakei": 121,
+     "jukyo": 69
+    },
+    "2023": {
+     "pop": 718879,
+     "soudan": 894,
+     "plan": 393,
+     "kakei": 117,
+     "jukyo": 12
+    }
+   }
+  },
+  {
+   "name": "愛媛県",
+   "level": "都道府県",
+   "pref": null,
+   "pop": 812067,
+   "soudan": 1681,
+   "soudan100k": 17.3,
+   "plan": 270,
+   "plan100k": 2.8,
+   "shien": 87,
+   "shien100k": 0.9,
+   "jukyo": 15,
+   "ichiji": 6,
+   "kakei": 95,
+   "junbi": 25,
+   "kunren": 0,
+   "jshuro": 37,
+   "kashitsuke": 23,
+   "seiho": 39,
+   "shurosha": 62,
+   "shurosha_p": 32,
+   "zoshu": 30,
+   "zoshu_p": 9,
+   "hist": {
+    "2017": {
+     "pop": 898940,
+     "soudan": 1250,
+     "plan": 227,
+     "kakei": 13,
+     "jukyo": 1
+    },
+    "2018": {
+     "pop": 889443,
+     "soudan": 1258,
+     "plan": 172,
+     "kakei": 11,
+     "jukyo": 1
+    },
+    "2019": {
+     "pop": 879462,
+     "soudan": 1302,
+     "plan": 175,
+     "kakei": 21,
+     "jukyo": 1
+    },
+    "2020": {
+     "pop": 868534,
+     "soudan": 3863,
+     "plan": 806,
+     "kakei": 24,
+     "jukyo": 103
+    },
+    "2021": {
+     "pop": 843116,
+     "soudan": 2526,
+     "plan": 552,
+     "kakei": 18,
+     "jukyo": 73
+    },
+    "2022": {
+     "pop": 834328,
+     "soudan": 2094,
+     "plan": 281,
+     "kakei": 54,
+     "jukyo": 41
+    },
+    "2023": {
+     "pop": 823320,
+     "soudan": 1628,
+     "plan": 243,
+     "kakei": 59,
+     "jukyo": 8
+    }
+   }
+  },
+  {
+   "name": "愛知県",
+   "level": "都道府県",
+   "pref": null,
+   "pop": 3655657,
+   "soudan": 5978,
+   "soudan100k": 13.6,
+   "plan": 1039,
+   "plan100k": 2.4,
+   "shien": 689,
+   "shien100k": 1.6,
+   "jukyo": 207,
+   "ichiji": 87,
+   "kakei": 145,
+   "junbi": 127,
+   "kunren": 0,
+   "jshuro": 367,
+   "kashitsuke": 74,
+   "seiho": 308,
+   "shurosha": 354,
+   "shurosha_p": 278,
+   "zoshu": 130,
+   "zoshu_p": 94,
+   "hist": {
+    "2017": {
+     "pop": 4056352,
+     "soudan": 5057,
+     "plan": 905,
+     "kakei": 105,
+     "jukyo": 141
+    },
+    "2018": {
+     "pop": 4066265,
+     "soudan": 5206,
+     "plan": 895,
+     "kakei": 114,
+     "jukyo": 134
+    },
+    "2019": {
+     "pop": 4074104,
+     "soudan": 5424,
+     "plan": 994,
+     "kakei": 132,
+     "jukyo": 130
+    },
+    "2020": {
+     "pop": 4080047,
+     "soudan": 14087,
+     "plan": 1957,
+     "kakei": 104,
+     "jukyo": 938
+    },
+    "2021": {
+     "pop": 3689377,
+     "soudan": 10346,
+     "plan": 2239,
+     "kakei": 112,
+     "jukyo": 628
+    },
+    "2022": {
+     "pop": 3675525,
+     "soudan": 6464,
+     "plan": 1423,
+     "kakei": 134,
+     "jukyo": 426
+    },
+    "2023": {
+     "pop": 3665033,
+     "soudan": 5443,
+     "plan": 971,
+     "kakei": 145,
+     "jukyo": 265
+    }
+   }
+  },
+  {
+   "name": "新潟市",
+   "level": "指定都市",
+   "pref": "新潟県",
+   "pop": 767565,
+   "soudan": 856,
+   "soudan100k": 9.3,
+   "plan": 626,
+   "plan100k": 6.8,
+   "shien": 265,
+   "shien100k": 2.9,
+   "jukyo": 47,
+   "ichiji": 89,
+   "kakei": 127,
+   "junbi": 11,
+   "kunren": 0,
+   "jshuro": 252,
+   "kashitsuke": 3,
+   "seiho": 202,
+   "shurosha": 87,
+   "shurosha_p": 76,
+   "zoshu": 61,
+   "zoshu_p": 53,
+   "hist": {
+    "2017": {
+     "pop": 802936,
+     "soudan": 943,
+     "plan": 528,
+     "kakei": 0,
+     "jukyo": 48
+    },
+    "2018": {
+     "pop": 800112,
+     "soudan": 876,
+     "plan": 607,
+     "kakei": 0,
+     "jukyo": 25
+    },
+    "2019": {
+     "pop": 796773,
+     "soudan": 850,
+     "plan": 543,
+     "kakei": 92,
+     "jukyo": 28
+    },
+    "2020": {
+     "pop": 792868,
+     "soudan": 2076,
+     "plan": 1079,
+     "kakei": 138,
+     "jukyo": 560
+    },
+    "2021": {
+     "pop": 792868,
+     "soudan": 2290,
+     "plan": 872,
+     "kakei": 133,
+     "jukyo": 347
+    },
+    "2022": {
+     "pop": 779613,
+     "soudan": 1581,
+     "plan": 834,
+     "kakei": 119,
+     "jukyo": 250
+    },
+    "2023": {
+     "pop": 773914,
+     "soudan": 944,
+     "plan": 684,
+     "kakei": 125,
+     "jukyo": 94
+    }
+   }
+  },
+  {
+   "name": "新潟県",
+   "level": "都道府県",
+   "pref": null,
+   "pop": 1370107,
+   "soudan": 2167,
+   "soudan100k": 13.2,
+   "plan": 566,
+   "plan100k": 3.4,
+   "shien": 172,
+   "shien100k": 1.0,
+   "jukyo": 32,
+   "ichiji": 5,
+   "kakei": 228,
+   "junbi": 51,
+   "kunren": 0,
+   "jshuro": 95,
+   "kashitsuke": 9,
+   "seiho": 67,
+   "shurosha": 80,
+   "shurosha_p": 53,
+   "zoshu": 80,
+   "zoshu_p": 38,
+   "hist": {
+    "2017": {
+     "pop": 1516499,
+     "soudan": 2183,
+     "plan": 709,
+     "kakei": 269,
+     "jukyo": 15
+    },
+    "2018": {
+     "pop": 1500811,
+     "soudan": 2207,
+     "plan": 656,
+     "kakei": 255,
+     "jukyo": 12
+    },
+    "2019": {
+     "pop": 1484518,
+     "soudan": 2227,
+     "plan": 470,
+     "kakei": 166,
+     "jukyo": 7
+    },
+    "2020": {
+     "pop": 1466441,
+     "soudan": 3552,
+     "plan": 609,
+     "kakei": 188,
+     "jukyo": 79
+    },
+    "2021": {
+     "pop": 1420485,
+     "soudan": 2897,
+     "plan": 719,
+     "kakei": 191,
+     "jukyo": 146
+    },
+    "2022": {
+     "pop": 1408856,
+     "soudan": 2217,
+     "plan": 619,
+     "kakei": 246,
+     "jukyo": 99
+    },
+    "2023": {
+     "pop": 1389994,
+     "soudan": 2021,
+     "plan": 553,
+     "kakei": 220,
+     "jukyo": 35
+    }
+   }
+  },
+  {
+   "name": "旭川市",
+   "level": "中核市",
+   "pref": "北海道",
+   "pop": 320436,
+   "soudan": 527,
+   "soudan100k": 13.7,
+   "plan": 195,
+   "plan100k": 5.1,
+   "shien": 75,
+   "shien100k": 2.0,
+   "jukyo": 14,
+   "ichiji": 7,
+   "kakei": 58,
+   "junbi": 1,
+   "kunren": 4,
+   "jshuro": 77,
+   "kashitsuke": 2,
+   "seiho": 41,
+   "shurosha": 44,
+   "shurosha_p": 35,
+   "zoshu": 11,
+   "zoshu_p": 4,
+   "hist": {
+    "2017": {
+     "pop": 345288,
+     "soudan": 450,
+     "plan": 188,
+     "kakei": 0,
+     "jukyo": 7
+    },
+    "2018": {
+     "pop": 342848,
+     "soudan": 445,
+     "plan": 242,
+     "kakei": 0,
+     "jukyo": 11
+    },
+    "2019": {
+     "pop": 340211,
+     "soudan": 501,
+     "plan": 234,
+     "kakei": 0,
+     "jukyo": 7
+    },
+    "2020": {
+     "pop": 337392,
+     "soudan": 808,
+     "plan": 570,
+     "kakei": 452,
+     "jukyo": 13
+    },
+    "2021": {
+     "pop": 337392,
+     "soudan": 942,
+     "plan": 834,
+     "kakei": 745,
+     "jukyo": 14
+    },
+    "2022": {
+     "pop": 327960,
+     "soudan": 396,
+     "plan": 88,
+     "kakei": 16,
+     "jukyo": 22
+    },
+    "2023": {
+     "pop": 324186,
+     "soudan": 495,
+     "plan": 142,
+     "kakei": 26,
+     "jukyo": 12
+    }
+   }
+  },
+  {
+   "name": "明石市",
+   "level": "中核市",
+   "pref": "兵庫県",
+   "pop": 306760,
+   "soudan": 317,
+   "soudan100k": 8.6,
+   "plan": 75,
+   "plan100k": 2.0,
+   "shien": 32,
+   "shien100k": 0.9,
+   "jukyo": 12,
+   "ichiji": 8,
+   "kakei": 3,
+   "junbi": 6,
+   "kunren": 0,
+   "jshuro": 34,
+   "kashitsuke": 0,
+   "seiho": 27,
+   "shurosha": 15,
+   "shurosha_p": 10,
+   "zoshu": 7,
+   "zoshu_p": 5,
+   "hist": {
+    "2018": {
+     "pop": 298799,
+     "soudan": 309,
+     "plan": 47,
+     "kakei": 5,
+     "jukyo": 1
+    },
+    "2019": {
+     "pop": 301182,
+     "soudan": 265,
+     "plan": 80,
+     "kakei": 16,
+     "jukyo": 3
+    },
+    "2020": {
+     "pop": 303129,
+     "soudan": 481,
+     "plan": 51,
+     "kakei": 2,
+     "jukyo": 10
+    },
+    "2021": {
+     "pop": 303129,
+     "soudan": 446,
+     "plan": 67,
+     "kakei": 4,
+     "jukyo": 28
+    },
+    "2022": {
+     "pop": 304906,
+     "soudan": 301,
+     "plan": 85,
+     "kakei": 9,
+     "jukyo": 36
+    },
+    "2023": {
+     "pop": 305404,
+     "soudan": 282,
+     "plan": 76,
+     "kakei": 8,
+     "jukyo": 29
+    }
+   }
+  },
+  {
+   "name": "札幌市",
+   "level": "指定都市",
+   "pref": "北海道",
+   "pop": 1956928,
+   "soudan": 5218,
+   "soudan100k": 22.2,
+   "plan": 1606,
+   "plan100k": 6.8,
+   "shien": 692,
+   "shien100k": 2.9,
+   "jukyo": 269,
+   "ichiji": 272,
+   "kakei": 178,
+   "junbi": 14,
+   "kunren": 5,
+   "jshuro": 690,
+   "kashitsuke": 19,
+   "seiho": 138,
+   "shurosha": 412,
+   "shurosha_p": 329,
+   "zoshu": 82,
+   "zoshu_p": 45,
+   "hist": {
+    "2017": {
+     "pop": 1941832,
+     "soudan": 3386,
+     "plan": 1401,
+     "kakei": 0,
+     "jukyo": 66
+    },
+    "2018": {
+     "pop": 1947494,
+     "soudan": 3591,
+     "plan": 1264,
+     "kakei": 0,
+     "jukyo": 72
+    },
+    "2019": {
+     "pop": 1952348,
+     "soudan": 3502,
+     "plan": 1152,
+     "kakei": 34,
+     "jukyo": 48
+    },
+    "2020": {
+     "pop": 1955457,
+     "soudan": 13499,
+     "plan": 1151,
+     "kakei": 31,
+     "jukyo": 625
+    },
+    "2021": {
+     "pop": 1955457,
+     "soudan": 15672,
+     "plan": 1368,
+     "kakei": 62,
+     "jukyo": 915
+    },
+    "2022": {
+     "pop": 1960668,
+     "soudan": 11746,
+     "plan": 1262,
+     "kakei": 102,
+     "jukyo": 626
+    },
+    "2023": {
+     "pop": 1959512,
+     "soudan": 6261,
+     "plan": 1655,
+     "kakei": 156,
+     "jukyo": 433
+    }
+   }
+  },
+  {
+   "name": "東京都",
+   "level": "都道府県",
+   "pref": null,
+   "pop": 13351210,
+   "soudan": 39221,
+   "soudan100k": 24.5,
+   "plan": 10224,
+   "plan100k": 6.4,
+   "shien": 5886,
+   "shien100k": 3.7,
+   "jukyo": 1432,
+   "ichiji": 1098,
+   "kakei": 2741,
+   "junbi": 716,
+   "kunren": 24,
+   "jshuro": 4523,
+   "kashitsuke": 274,
+   "seiho": 2262,
+   "shurosha": 2660,
+   "shurosha_p": 2364,
+   "zoshu": 938,
+   "zoshu_p": 658,
+   "hist": {
+    "2017": {
+     "pop": 12852554,
+     "soudan": 24888,
+     "plan": 7207,
+     "kakei": 1044,
+     "jukyo": 873
+    },
+    "2018": {
+     "pop": 12966825,
+     "soudan": 27719,
+     "plan": 8192,
+     "kakei": 1253,
+     "jukyo": 1138
+    },
+    "2019": {
+     "pop": 13074168,
+     "soudan": 29812,
+     "plan": 8567,
+     "kakei": 1786,
+     "jukyo": 1124
+    },
+    "2020": {
+     "pop": 13178272,
+     "soudan": 104375,
+     "plan": 15030,
+     "kakei": 1940,
+     "jukyo": 9356
+    },
+    "2021": {
+     "pop": 13281065,
+     "soudan": 55901,
+     "plan": 15960,
+     "kakei": 1894,
+     "jukyo": 10053
+    },
+    "2022": {
+     "pop": 13233175,
+     "soudan": 44904,
+     "plan": 10988,
+     "kakei": 2175,
+     "jukyo": 4335
+    },
+    "2023": {
+     "pop": 13279520,
+     "soudan": 35782,
+     "plan": 9594,
+     "kakei": 2455,
+     "jukyo": 2231
+    }
+   }
+  },
+  {
+   "name": "東大阪市",
+   "level": "中核市",
+   "pref": "大阪府",
+   "pop": 478539,
+   "soudan": 1184,
+   "soudan100k": 20.6,
+   "plan": 315,
+   "plan100k": 5.5,
+   "shien": 231,
+   "shien100k": 4.0,
+   "jukyo": 38,
+   "ichiji": 4,
+   "kakei": 16,
+   "junbi": 2,
+   "kunren": 2,
+   "jshuro": 136,
+   "kashitsuke": 9,
+   "seiho": 47,
+   "shurosha": 85,
+   "shurosha_p": 85,
+   "zoshu": 39,
+   "zoshu_p": 37,
+   "hist": {
+    "2017": {
+     "pop": 496659,
+     "soudan": 805,
+     "plan": 342,
+     "kakei": 48,
+     "jukyo": 52
+    },
+    "2018": {
+     "pop": 493922,
+     "soudan": 874,
+     "plan": 352,
+     "kakei": 70,
+     "jukyo": 50
+    },
+    "2019": {
+     "pop": 491939,
+     "soudan": 986,
+     "plan": 406,
+     "kakei": 73,
+     "jukyo": 31
+    },
+    "2020": {
+     "pop": 490217,
+     "soudan": 2802,
+     "plan": 867,
+     "kakei": 56,
+     "jukyo": 483
+    },
+    "2021": {
+     "pop": 490217,
+     "soudan": 3219,
+     "plan": 2050,
+     "kakei": 39,
+     "jukyo": 399
+    },
+    "2022": {
+     "pop": 482133,
+     "soudan": 1903,
+     "plan": 883,
+     "kakei": 22,
+     "jukyo": 191
+    },
+    "2023": {
+     "pop": 480137,
+     "soudan": 1166,
+     "plan": 421,
+     "kakei": 17,
+     "jukyo": 58
+    }
+   }
+  },
+  {
+   "name": "松山市",
+   "level": "中核市",
+   "pref": "愛媛県",
+   "pop": 500231,
+   "soudan": 680,
+   "soudan100k": 11.3,
+   "plan": 81,
+   "plan100k": 1.3,
+   "shien": 65,
+   "shien100k": 1.1,
+   "jukyo": 15,
+   "ichiji": 6,
+   "kakei": 4,
+   "junbi": 1,
+   "kunren": 0,
+   "jshuro": 67,
+   "kashitsuke": 10,
+   "seiho": 64,
+   "shurosha": 57,
+   "shurosha_p": 53,
+   "zoshu": 1,
+   "zoshu_p": 1,
+   "hist": {
+    "2017": {
+     "pop": 517057,
+     "soudan": 851,
+     "plan": 123,
+     "kakei": 0,
+     "jukyo": 18
+    },
+    "2018": {
+     "pop": 515882,
+     "soudan": 811,
+     "plan": 201,
+     "kakei": 0,
+     "jukyo": 24
+    },
+    "2019": {
+     "pop": 514877,
+     "soudan": 838,
+     "plan": 207,
+     "kakei": 0,
+     "jukyo": 19
+    },
+    "2020": {
+     "pop": 513227,
+     "soudan": 4329,
+     "plan": 348,
+     "kakei": 0,
+     "jukyo": 258
+    },
+    "2021": {
+     "pop": 513227,
+     "soudan": 3374,
+     "plan": 185,
+     "kakei": 0,
+     "jukyo": 91
+    },
+    "2022": {
+     "pop": 507211,
+     "soudan": 811,
+     "plan": 140,
+     "kakei": 0,
+     "jukyo": 62
+    },
+    "2023": {
+     "pop": 503865,
+     "soudan": 751,
+     "plan": 101,
+     "kakei": 0,
+     "jukyo": 23
+    }
+   }
+  },
+  {
+   "name": "松本市",
+   "level": "中核市",
+   "pref": "長野県",
+   "pop": 235475,
+   "soudan": 608,
+   "soudan100k": 21.5,
+   "plan": 119,
+   "plan100k": 4.2,
+   "shien": 54,
+   "shien100k": 1.9,
+   "jukyo": 3,
+   "ichiji": 7,
+   "kakei": 31,
+   "junbi": 3,
+   "kunren": 0,
+   "jshuro": 54,
+   "kashitsuke": 14,
+   "seiho": 45,
+   "shurosha": 35,
+   "shurosha_p": 22,
+   "zoshu": 1,
+   "zoshu_p": 0,
+   "hist": {
+    "2021": {
+     "pop": 237970,
+     "soudan": 1376,
+     "plan": 167,
+     "kakei": 15,
+     "jukyo": 48
+    },
+    "2022": {
+     "pop": 236968,
+     "soudan": 806,
+     "plan": 154,
+     "kakei": 25,
+     "jukyo": 36
+    },
+    "2023": {
+     "pop": 236447,
+     "soudan": 527,
+     "plan": 158,
+     "kakei": 39,
+     "jukyo": 4
+    }
+   }
+  },
+  {
+   "name": "松江市",
+   "level": "中核市",
+   "pref": "島根県",
+   "pop": 196021,
+   "soudan": 521,
+   "soudan100k": 22.1,
+   "plan": 54,
+   "plan100k": 2.3,
+   "shien": 21,
+   "shien100k": 0.9,
+   "jukyo": 15,
+   "ichiji": 9,
+   "kakei": 13,
+   "junbi": 10,
+   "kunren": 4,
+   "jshuro": 21,
+   "kashitsuke": 13,
+   "seiho": 15,
+   "shurosha": 22,
+   "shurosha_p": 18,
+   "zoshu": 19,
+   "zoshu_p": 7,
+   "hist": {
+    "2018": {
+     "pop": 204403,
+     "soudan": 331,
+     "plan": 92,
+     "kakei": 23,
+     "jukyo": 5
+    },
+    "2019": {
+     "pop": 203787,
+     "soudan": 389,
+     "plan": 95,
+     "kakei": 31,
+     "jukyo": 4
+    },
+    "2020": {
+     "pop": 202906,
+     "soudan": 1169,
+     "plan": 218,
+     "kakei": 35,
+     "jukyo": 101
+    },
+    "2021": {
+     "pop": 202906,
+     "soudan": 595,
+     "plan": 127,
+     "kakei": 28,
+     "jukyo": 47
+    },
+    "2022": {
+     "pop": 199432,
+     "soudan": 483,
+     "plan": 114,
+     "kakei": 33,
+     "jukyo": 27
+    },
+    "2023": {
+     "pop": 197843,
+     "soudan": 427,
+     "plan": 85,
+     "kakei": 14,
+     "jukyo": 21
+    }
+   }
+  },
+  {
+   "name": "枚方市",
+   "level": "中核市",
+   "pref": "大阪府",
+   "pop": 394221,
+   "soudan": 557,
+   "soudan100k": 11.8,
+   "plan": 100,
+   "plan100k": 2.1,
+   "shien": 60,
+   "shien100k": 1.3,
+   "jukyo": 12,
+   "ichiji": 31,
+   "kakei": 9,
+   "junbi": 9,
+   "kunren": 0,
+   "jshuro": 51,
+   "kashitsuke": 0,
+   "seiho": 24,
+   "shurosha": 18,
+   "shurosha_p": 18,
+   "zoshu": 7,
+   "zoshu_p": 6,
+   "hist": {
+    "2017": {
+     "pop": 406133,
+     "soudan": 476,
+     "plan": 73,
+     "kakei": 0,
+     "jukyo": 3
+    },
+    "2018": {
+     "pop": 404963,
+     "soudan": 536,
+     "plan": 97,
+     "kakei": 6,
+     "jukyo": 6
+    },
+    "2019": {
+     "pop": 403989,
+     "soudan": 465,
+     "plan": 94,
+     "kakei": 1,
+     "jukyo": 8
+    },
+    "2020": {
+     "pop": 402579,
+     "soudan": 1568,
+     "plan": 124,
+     "kakei": 0,
+     "jukyo": 54
+    },
+    "2021": {
+     "pop": 402579,
+     "soudan": 489,
+     "plan": 263,
+     "kakei": 10,
+     "jukyo": 155
+    },
+    "2022": {
+     "pop": 397681,
+     "soudan": 516,
+     "plan": 254,
+     "kakei": 12,
+     "jukyo": 152
+    },
+    "2023": {
+     "pop": 396252,
+     "soudan": 558,
+     "plan": 135,
+     "kakei": 17,
+     "jukyo": 20
+    }
+   }
+  },
+  {
+   "name": "柏市",
+   "level": "中核市",
+   "pref": "千葉県",
+   "pop": 435529,
+   "soudan": 905,
+   "soudan100k": 17.3,
+   "plan": 336,
+   "plan100k": 6.4,
+   "shien": 147,
+   "shien100k": 2.8,
+   "jukyo": 36,
+   "ichiji": 29,
+   "kakei": 139,
+   "junbi": 78,
+   "kunren": 0,
+   "jshuro": 81,
+   "kashitsuke": 20,
+   "seiho": 78,
+   "shurosha": 52,
+   "shurosha_p": 40,
+   "zoshu": 13,
+   "zoshu_p": 8,
+   "hist": {
+    "2017": {
+     "pop": 409001,
+     "soudan": 608,
+     "plan": 191,
+     "kakei": 84,
+     "jukyo": 6
+    },
+    "2018": {
+     "pop": 412690,
+     "soudan": 636,
+     "plan": 258,
+     "kakei": 76,
+     "jukyo": 16
+    },
+    "2019": {
+     "pop": 416433,
+     "soudan": 548,
+     "plan": 226,
+     "kakei": 43,
+     "jukyo": 27
+    },
+    "2020": {
+     "pop": 420028,
+     "soudan": 871,
+     "plan": 296,
+     "kakei": 43,
+     "jukyo": 145
+    },
+    "2021": {
+     "pop": 420028,
+     "soudan": 745,
+     "plan": 509,
+     "kakei": 57,
+     "jukyo": 369
+    },
+    "2022": {
+     "pop": 431267,
+     "soudan": 1001,
+     "plan": 434,
+     "kakei": 123,
+     "jukyo": 207
+    },
+    "2023": {
+     "pop": 433733,
+     "soudan": 944,
+     "plan": 302,
+     "kakei": 131,
+     "jukyo": 49
+    }
+   }
+  },
+  {
+   "name": "栃木県",
+   "level": "都道府県",
+   "pref": null,
+   "pop": 1400956,
+   "soudan": 2785,
+   "soudan100k": 16.6,
+   "plan": 231,
+   "plan100k": 1.4,
+   "shien": 171,
+   "shien100k": 1.0,
+   "jukyo": 39,
+   "ichiji": 1,
+   "kakei": 78,
+   "junbi": 16,
+   "kunren": 10,
+   "jshuro": 152,
+   "kashitsuke": 30,
+   "seiho": 110,
+   "shurosha": 135,
+   "shurosha_p": 59,
+   "zoshu": 35,
+   "zoshu_p": 25,
+   "hist": {
+    "2017": {
+     "pop": 1477044,
+     "soudan": 1932,
+     "plan": 322,
+     "kakei": 36,
+     "jukyo": 47
+    },
+    "2018": {
+     "pop": 1469335,
+     "soudan": 1916,
+     "plan": 287,
+     "kakei": 28,
+     "jukyo": 12
+    },
+    "2019": {
+     "pop": 1462800,
+     "soudan": 1952,
+     "plan": 296,
+     "kakei": 27,
+     "jukyo": 18
+    },
+    "2020": {
+     "pop": 1453433,
+     "soudan": 4362,
+     "plan": 423,
+     "kakei": 44,
+     "jukyo": 89
+    },
+    "2021": {
+     "pop": 1432714,
+     "soudan": 3154,
+     "plan": 425,
+     "kakei": 60,
+     "jukyo": 84
+    },
+    "2022": {
+     "pop": 1423358,
+     "soudan": 2368,
+     "plan": 326,
+     "kakei": 54,
+     "jukyo": 108
+    },
+    "2023": {
+     "pop": 1411937,
+     "soudan": 2547,
+     "plan": 243,
+     "kakei": 48,
+     "jukyo": 56
+    }
+   }
+  },
+  {
+   "name": "横浜市",
+   "level": "指定都市",
+   "pref": "神奈川県",
+   "pop": 3752969,
+   "soudan": 8803,
+   "soudan100k": 19.5,
+   "plan": 4464,
+   "plan100k": 9.9,
+   "shien": 3040,
+   "shien100k": 6.8,
+   "jukyo": 315,
+   "ichiji": 594,
+   "kakei": 637,
+   "junbi": 45,
+   "kunren": 16,
+   "jshuro": 2702,
+   "kashitsuke": 18,
+   "seiho": 1847,
+   "shurosha": 1068,
+   "shurosha_p": 1010,
+   "zoshu": 267,
+   "zoshu_p": 221,
+   "hist": {
+    "2017": {
+     "pop": 3729357,
+     "soudan": 5790,
+     "plan": 3016,
+     "kakei": 604,
+     "jukyo": 74
+    },
+    "2018": {
+     "pop": 3735843,
+     "soudan": 7025,
+     "plan": 3259,
+     "kakei": 666,
+     "jukyo": 108
+    },
+    "2019": {
+     "pop": 3737845,
+     "soudan": 7865,
+     "plan": 3301,
+     "kakei": 594,
+     "jukyo": 154
+    },
+    "2020": {
+     "pop": 3745796,
+     "soudan": 27856,
+     "plan": 16163,
+     "kakei": 425,
+     "jukyo": 5732
+    },
+    "2021": {
+     "pop": 3745796,
+     "soudan": 17451,
+     "plan": 14564,
+     "kakei": 474,
+     "jukyo": 2955
+    },
+    "2022": {
+     "pop": 3755793,
+     "soudan": 10642,
+     "plan": 4941,
+     "kakei": 535,
+     "jukyo": 1261
+    },
+    "2023": {
+     "pop": 3753645,
+     "soudan": 8953,
+     "plan": 4267,
+     "kakei": 686,
+     "jukyo": 421
+    }
+   }
+  },
+  {
+   "name": "横須賀市",
+   "level": "中核市",
+   "pref": "神奈川県",
+   "pop": 383488,
+   "soudan": 395,
+   "soudan100k": 8.6,
+   "plan": 99,
+   "plan100k": 2.2,
+   "shien": 84,
+   "shien100k": 1.8,
+   "jukyo": 23,
+   "ichiji": 0,
+   "kakei": 11,
+   "junbi": 6,
+   "kunren": 1,
+   "jshuro": 78,
+   "kashitsuke": 0,
+   "seiho": 0,
+   "shurosha": 46,
+   "shurosha_p": 45,
+   "zoshu": 2,
+   "zoshu_p": 1,
+   "hist": {
+    "2017": {
+     "pop": 414664,
+     "soudan": 1286,
+     "plan": 325,
+     "kakei": 321,
+     "jukyo": 5
+    },
+    "2018": {
+     "pop": 412026,
+     "soudan": 1206,
+     "plan": 347,
+     "kakei": 312,
+     "jukyo": 4
+    },
+    "2019": {
+     "pop": 408739,
+     "soudan": 1011,
+     "plan": 405,
+     "kakei": 350,
+     "jukyo": 12
+    },
+    "2020": {
+     "pop": 405244,
+     "soudan": 2178,
+     "plan": 535,
+     "kakei": 356,
+     "jukyo": 116
+    },
+    "2021": {
+     "pop": 405244,
+     "soudan": 1402,
+     "plan": 233,
+     "kakei": 18,
+     "jukyo": 161
+    },
+    "2022": {
+     "pop": 392817,
+     "soudan": 498,
+     "plan": 159,
+     "kakei": 13,
+     "jukyo": 99
+    },
+    "2023": {
+     "pop": 388197,
+     "soudan": 385,
+     "plan": 124,
+     "kakei": 14,
+     "jukyo": 50
+    }
+   }
+  },
+  {
+   "name": "水戸市",
+   "level": "中核市",
+   "pref": "茨城県",
+   "pop": 268843,
+   "soudan": 525,
+   "soudan100k": 16.3,
+   "plan": 27,
+   "plan100k": 0.8,
+   "shien": 25,
+   "shien100k": 0.8,
+   "jukyo": 6,
+   "ichiji": 8,
+   "kakei": 6,
+   "junbi": 6,
+   "kunren": 0,
+   "jshuro": 12,
+   "kashitsuke": 0,
+   "seiho": 9,
+   "shurosha": 11,
+   "shurosha_p": 11,
+   "zoshu": 0,
+   "zoshu_p": 0,
+   "hist": {
+    "2020": {
+     "pop": 272485,
+     "soudan": 349,
+     "plan": 25,
+     "kakei": 0,
+     "jukyo": 21
+    },
+    "2021": {
+     "pop": 272485,
+     "soudan": 266,
+     "plan": 48,
+     "kakei": 0,
+     "jukyo": 46
+    },
+    "2022": {
+     "pop": 271156,
+     "soudan": 570,
+     "plan": 44,
+     "kakei": 4,
+     "jukyo": 39
+    },
+    "2023": {
+     "pop": 270010,
+     "soudan": 601,
+     "plan": 22,
+     "kakei": 7,
+     "jukyo": 11
+    }
+   }
+  },
+  {
+   "name": "沖縄県",
+   "level": "都道府県",
+   "pref": null,
+   "pop": 1170184,
+   "soudan": 4136,
+   "soudan100k": 29.5,
+   "plan": 1382,
+   "plan100k": 9.8,
+   "shien": 833,
+   "shien100k": 5.9,
+   "jukyo": 197,
+   "ichiji": 164,
+   "kakei": 306,
+   "junbi": 97,
+   "kunren": 15,
+   "jshuro": 795,
+   "kashitsuke": 67,
+   "seiho": 389,
+   "shurosha": 390,
+   "shurosha_p": 333,
+   "zoshu": 136,
+   "zoshu_p": 81,
+   "hist": {
+    "2017": {
+     "pop": 1137062,
+     "soudan": 3110,
+     "plan": 1112,
+     "kakei": 116,
+     "jukyo": 210
+    },
+    "2018": {
+     "pop": 1142914,
+     "soudan": 2758,
+     "plan": 1185,
+     "kakei": 146,
+     "jukyo": 215
+    },
+    "2019": {
+     "pop": 1148246,
+     "soudan": 2995,
+     "plan": 1160,
+     "kakei": 176,
+     "jukyo": 131
+    },
+    "2020": {
+     "pop": 1153554,
+     "soudan": 19522,
+     "plan": 2854,
+     "kakei": 136,
+     "jukyo": 1552
+    },
+    "2021": {
+     "pop": 1162860,
+     "soudan": 17004,
+     "plan": 3833,
+     "kakei": 190,
+     "jukyo": 2395
+    },
+    "2022": {
+     "pop": 1167331,
+     "soudan": 5305,
+     "plan": 2161,
+     "kakei": 204,
+     "jukyo": 1240
+    },
+    "2023": {
+     "pop": 1168496,
+     "soudan": 3655,
+     "plan": 1312,
+     "kakei": 314,
+     "jukyo": 333
+    }
+   }
+  },
+  {
+   "name": "浜松市",
+   "level": "指定都市",
+   "pref": "静岡県",
+   "pop": 788985,
+   "soudan": 1107,
+   "soudan100k": 11.7,
+   "plan": 212,
+   "plan100k": 2.2,
+   "shien": 137,
+   "shien100k": 1.4,
+   "jukyo": 60,
+   "ichiji": 13,
+   "kakei": 34,
+   "junbi": 14,
+   "kunren": 0,
+   "jshuro": 127,
+   "kashitsuke": 4,
+   "seiho": 13,
+   "shurosha": 96,
+   "shurosha_p": 81,
+   "zoshu": 21,
+   "zoshu_p": 13,
+   "hist": {
+    "2017": {
+     "pop": 809027,
+     "soudan": 1278,
+     "plan": 110,
+     "kakei": 0,
+     "jukyo": 10
+    },
+    "2018": {
+     "pop": 807893,
+     "soudan": 1145,
+     "plan": 156,
+     "kakei": 0,
+     "jukyo": 11
+    },
+    "2019": {
+     "pop": 807013,
+     "soudan": 1480,
+     "plan": 245,
+     "kakei": 19,
+     "jukyo": 22
+    },
+    "2020": {
+     "pop": 804780,
+     "soudan": 4995,
+     "plan": 475,
+     "kakei": 41,
+     "jukyo": 300
+    },
+    "2021": {
+     "pop": 804780,
+     "soudan": 3387,
+     "plan": 592,
+     "kakei": 42,
+     "jukyo": 462
+    },
+    "2022": {
+     "pop": 795771,
+     "soudan": 1283,
+     "plan": 324,
+     "kakei": 37,
+     "jukyo": 171
+    },
+    "2023": {
+     "pop": 792704,
+     "soudan": 897,
+     "plan": 201,
+     "kakei": 33,
+     "jukyo": 53
+    }
+   }
+  },
+  {
+   "name": "滋賀県",
+   "level": "都道府県",
+   "pref": null,
+   "pop": 1066618,
+   "soudan": 2361,
+   "soudan100k": 18.4,
+   "plan": 650,
+   "plan100k": 5.1,
+   "shien": 357,
+   "shien100k": 2.8,
+   "jukyo": 74,
+   "ichiji": 15,
+   "kakei": 233,
+   "junbi": 45,
+   "kunren": 0,
+   "jshuro": 311,
+   "kashitsuke": 81,
+   "seiho": 172,
+   "shurosha": 160,
+   "shurosha_p": 130,
+   "zoshu": 47,
+   "zoshu_p": 22,
+   "hist": {
+    "2017": {
+     "pop": 1077429,
+     "soudan": 1647,
+     "plan": 615,
+     "kakei": 282,
+     "jukyo": 43
+    },
+    "2018": {
+     "pop": 1077728,
+     "soudan": 1827,
+     "plan": 719,
+     "kakei": 276,
+     "jukyo": 27
+    },
+    "2019": {
+     "pop": 1077175,
+     "soudan": 2037,
+     "plan": 758,
+     "kakei": 290,
+     "jukyo": 23
+    },
+    "2020": {
+     "pop": 1077130,
+     "soudan": 9613,
+     "plan": 3080,
+     "kakei": 668,
+     "jukyo": 353
+    },
+    "2021": {
+     "pop": 1075936,
+     "soudan": 5050,
+     "plan": 1921,
+     "kakei": 532,
+     "jukyo": 221
+    },
+    "2022": {
+     "pop": 1070975,
+     "soudan": 2560,
+     "plan": 849,
+     "kakei": 356,
+     "jukyo": 158
+    },
+    "2023": {
+     "pop": 1069437,
+     "soudan": 2078,
+     "plan": 637,
+     "kakei": 225,
+     "jukyo": 65
+    }
+   }
+  },
+  {
+   "name": "熊本市",
+   "level": "指定都市",
+   "pref": "熊本県",
+   "pop": 731722,
+   "soudan": 1372,
+   "soudan100k": 15.6,
+   "plan": 343,
+   "plan100k": 3.9,
+   "shien": 235,
+   "shien100k": 2.7,
+   "jukyo": 25,
+   "ichiji": 39,
+   "kakei": 181,
+   "junbi": 39,
+   "kunren": 0,
+   "jshuro": 181,
+   "kashitsuke": 3,
+   "seiho": 134,
+   "shurosha": 57,
+   "shurosha_p": 49,
+   "zoshu": 30,
+   "zoshu_p": 23,
+   "hist": {
+    "2017": {
+     "pop": 735234,
+     "soudan": 441,
+     "plan": 194,
+     "kakei": 41,
+     "jukyo": 5
+    },
+    "2018": {
+     "pop": 733844,
+     "soudan": 484,
+     "plan": 185,
+     "kakei": 35,
+     "jukyo": 7
+    },
+    "2019": {
+     "pop": 734317,
+     "soudan": 523,
+     "plan": 157,
+     "kakei": 47,
+     "jukyo": 5
+    },
+    "2020": {
+     "pop": 734105,
+     "soudan": 5236,
+     "plan": 2378,
+     "kakei": 43,
+     "jukyo": 2148
+    },
+    "2021": {
+     "pop": 734105,
+     "soudan": 3894,
+     "plan": 936,
+     "kakei": 90,
+     "jukyo": 739
+    },
+    "2022": {
+     "pop": 731722,
+     "soudan": 1657,
+     "plan": 454,
+     "kakei": 75,
+     "jukyo": 263
+    },
+    "2023": {
+     "pop": 731476,
+     "soudan": 1329,
+     "plan": 227,
+     "kakei": 55,
+     "jukyo": 28
+    }
+   }
+  },
+  {
+   "name": "熊本県",
+   "level": "都道府県",
+   "pref": null,
+   "pop": 996376,
+   "soudan": 2690,
+   "soudan100k": 22.5,
+   "plan": 986,
+   "plan100k": 8.2,
+   "shien": 353,
+   "shien100k": 3.0,
+   "jukyo": 58,
+   "ichiji": 30,
+   "kakei": 708,
+   "junbi": 77,
+   "kunren": 0,
+   "jshuro": 264,
+   "kashitsuke": 40,
+   "seiho": 123,
+   "shurosha": 167,
+   "shurosha_p": 114,
+   "zoshu": 157,
+   "zoshu_p": 68,
+   "hist": {
+    "2017": {
+     "pop": 1075109,
+     "soudan": 2060,
+     "plan": 745,
+     "kakei": 379,
+     "jukyo": 21
+    },
+    "2018": {
+     "pop": 1064305,
+     "soudan": 2368,
+     "plan": 852,
+     "kakei": 522,
+     "jukyo": 26
+    },
+    "2019": {
+     "pop": 1054867,
+     "soudan": 2382,
+     "plan": 860,
+     "kakei": 467,
+     "jukyo": 32
+    },
+    "2020": {
+     "pop": 1045974,
+     "soudan": 4674,
+     "plan": 1336,
+     "kakei": 872,
+     "jukyo": 276
+    },
+    "2021": {
+     "pop": 1024710,
+     "soudan": 4234,
+     "plan": 1427,
+     "kakei": 933,
+     "jukyo": 194
+    },
+    "2022": {
+     "pop": 1015791,
+     "soudan": 2913,
+     "plan": 1060,
+     "kakei": 685,
+     "jukyo": 128
+    },
+    "2023": {
+     "pop": 1006470,
+     "soudan": 2527,
+     "plan": 907,
+     "kakei": 612,
+     "jukyo": 53
+    }
+   }
+  },
+  {
+   "name": "甲府市",
+   "level": "中核市",
+   "pref": "山梨県",
+   "pop": 184827,
+   "soudan": 169,
+   "soudan100k": 7.6,
+   "plan": 83,
+   "plan100k": 3.7,
+   "shien": 75,
+   "shien100k": 3.4,
+   "jukyo": 47,
+   "ichiji": 23,
+   "kakei": 11,
+   "junbi": 0,
+   "kunren": 0,
+   "jshuro": 1,
+   "kashitsuke": 10,
+   "seiho": 7,
+   "shurosha": 16,
+   "shurosha_p": 15,
+   "zoshu": 16,
+   "zoshu_p": 16,
+   "hist": {
+    "2019": {
+     "pop": 190122,
+     "soudan": 221,
+     "plan": 76,
+     "kakei": 17,
+     "jukyo": 21
+    },
+    "2020": {
+     "pop": 188774,
+     "soudan": 501,
+     "plan": 68,
+     "kakei": 3,
+     "jukyo": 53
+    },
+    "2021": {
+     "pop": 188774,
+     "soudan": 366,
+     "plan": 200,
+     "kakei": 2,
+     "jukyo": 170
+    },
+    "2022": {
+     "pop": 186249,
+     "soudan": 359,
+     "plan": 205,
+     "kakei": 14,
+     "jukyo": 162
+    },
+    "2023": {
+     "pop": 186393,
+     "soudan": 229,
+     "plan": 91,
+     "kakei": 4,
+     "jukyo": 63
+    }
+   }
+  },
+  {
+   "name": "盛岡市",
+   "level": "中核市",
+   "pref": "岩手県",
+   "pop": 280286,
+   "soudan": 1004,
+   "soudan100k": 29.9,
+   "plan": 112,
+   "plan100k": 3.3,
+   "shien": 75,
+   "shien100k": 2.2,
+   "jukyo": 18,
+   "ichiji": 0,
+   "kakei": 51,
+   "junbi": 20,
+   "kunren": 0,
+   "jshuro": 84,
+   "kashitsuke": 12,
+   "seiho": 53,
+   "shurosha": 40,
+   "shurosha_p": 34,
+   "zoshu": 8,
+   "zoshu_p": 4,
+   "hist": {
+    "2017": {
+     "pop": 294106,
+     "soudan": 440,
+     "plan": 86,
+     "kakei": 0,
+     "jukyo": 15
+    },
+    "2018": {
+     "pop": 292795,
+     "soudan": 390,
+     "plan": 61,
+     "kakei": 0,
+     "jukyo": 10
+    },
+    "2019": {
+     "pop": 291859,
+     "soudan": 628,
+     "plan": 108,
+     "kakei": 54,
+     "jukyo": 29
+    },
+    "2020": {
+     "pop": 290136,
+     "soudan": 1359,
+     "plan": 130,
+     "kakei": 61,
+     "jukyo": 40
+    },
+    "2021": {
+     "pop": 290136,
+     "soudan": 1152,
+     "plan": 150,
+     "kakei": 37,
+     "jukyo": 55
+    },
+    "2022": {
+     "pop": 285270,
+     "soudan": 1066,
+     "plan": 112,
+     "kakei": 28,
+     "jukyo": 39
+    },
+    "2023": {
+     "pop": 282960,
+     "soudan": 954,
+     "plan": 124,
+     "kakei": 53,
+     "jukyo": 24
+    }
+   }
+  },
+  {
+   "name": "相模原市",
+   "level": "指定都市",
+   "pref": "神奈川県",
+   "pop": 717861,
+   "soudan": 1036,
+   "soudan100k": 12.0,
+   "plan": 198,
+   "plan100k": 2.3,
+   "shien": 157,
+   "shien100k": 1.8,
+   "jukyo": 46,
+   "ichiji": 13,
+   "kakei": 15,
+   "junbi": 26,
+   "kunren": 17,
+   "jshuro": 123,
+   "kashitsuke": 1,
+   "seiho": 84,
+   "shurosha": 64,
+   "shurosha_p": 57,
+   "zoshu": 13,
+   "zoshu_p": 11,
+   "hist": {
+    "2017": {
+     "pop": 716643,
+     "soudan": 3146,
+     "plan": 230,
+     "kakei": 1,
+     "jukyo": 57
+    },
+    "2018": {
+     "pop": 716981,
+     "soudan": 523,
+     "plan": 216,
+     "kakei": 3,
+     "jukyo": 53
+    },
+    "2019": {
+     "pop": 718192,
+     "soudan": 618,
+     "plan": 219,
+     "kakei": 3,
+     "jukyo": 50
+    },
+    "2020": {
+     "pop": 718367,
+     "soudan": 1094,
+     "plan": 272,
+     "kakei": 0,
+     "jukyo": 189
+    },
+    "2021": {
+     "pop": 718367,
+     "soudan": 1099,
+     "plan": 339,
+     "kakei": 3,
+     "jukyo": 243
+    },
+    "2022": {
+     "pop": 719112,
+     "soudan": 1242,
+     "plan": 485,
+     "kakei": 7,
+     "jukyo": 363
+    },
+    "2023": {
+     "pop": 719118,
+     "soudan": 927,
+     "plan": 200,
+     "kakei": 5,
+     "jukyo": 75
+    }
+   }
+  },
+  {
+   "name": "石川県",
+   "level": "都道府県",
+   "pref": null,
+   "pop": 664230,
+   "soudan": 960,
+   "soudan100k": 12.0,
+   "plan": 208,
+   "plan100k": 2.6,
+   "shien": 94,
+   "shien100k": 1.2,
+   "jukyo": 32,
+   "ichiji": 0,
+   "kakei": 60,
+   "junbi": 17,
+   "kunren": 1,
+   "jshuro": 96,
+   "kashitsuke": 54,
+   "seiho": 47,
+   "shurosha": 70,
+   "shurosha_p": 47,
+   "zoshu": 49,
+   "zoshu_p": 20,
+   "hist": {
+    "2017": {
+     "pop": 702686,
+     "soudan": 715,
+     "plan": 165,
+     "kakei": 0,
+     "jukyo": 25
+    },
+    "2018": {
+     "pop": 699130,
+     "soudan": 704,
+     "plan": 161,
+     "kakei": 7,
+     "jukyo": 20
+    },
+    "2019": {
+     "pop": 695982,
+     "soudan": 693,
+     "plan": 155,
+     "kakei": 13,
+     "jukyo": 19
+    },
+    "2020": {
+     "pop": 692294,
+     "soudan": 2527,
+     "plan": 222,
+     "kakei": 16,
+     "jukyo": 99
+    },
+    "2021": {
+     "pop": 679002,
+     "soudan": 1642,
+     "plan": 220,
+     "kakei": 35,
+     "jukyo": 92
+    },
+    "2022": {
+     "pop": 675799,
+     "soudan": 922,
+     "plan": 191,
+     "kakei": 37,
+     "jukyo": 60
+    },
+    "2023": {
+     "pop": 670122,
+     "soudan": 1055,
+     "plan": 194,
+     "kakei": 56,
+     "jukyo": 26
+    }
+   }
+  },
+  {
+   "name": "神奈川県",
+   "level": "都道府県",
+   "pref": null,
+   "pop": 2825234,
+   "soudan": 6366,
+   "soudan100k": 18.8,
+   "plan": 1651,
+   "plan100k": 4.9,
+   "shien": 530,
+   "shien100k": 1.6,
+   "jukyo": 126,
+   "ichiji": 29,
+   "kakei": 288,
+   "junbi": 114,
+   "kunren": 4,
+   "jshuro": 250,
+   "kashitsuke": 84,
+   "seiho": 189,
+   "shurosha": 215,
+   "shurosha_p": 166,
+   "zoshu": 137,
+   "zoshu_p": 75,
+   "hist": {
+    "2017": {
+     "pop": 2815719,
+     "soudan": 3987,
+     "plan": 694,
+     "kakei": 95,
+     "jukyo": 98
+    },
+    "2018": {
+     "pop": 2816372,
+     "soudan": 4289,
+     "plan": 957,
+     "kakei": 140,
+     "jukyo": 91
+    },
+    "2019": {
+     "pop": 2818467,
+     "soudan": 5037,
+     "plan": 1274,
+     "kakei": 249,
+     "jukyo": 70
+    },
+    "2020": {
+     "pop": 2819654,
+     "soudan": 16644,
+     "plan": 2373,
+     "kakei": 494,
+     "jukyo": 691
+    },
+    "2021": {
+     "pop": 2850378,
+     "soudan": 11015,
+     "plan": 1882,
+     "kakei": 368,
+     "jukyo": 362
+    },
+    "2022": {
+     "pop": 2825098,
+     "soudan": 6442,
+     "plan": 1500,
+     "kakei": 281,
+     "jukyo": 314
+    },
+    "2023": {
+     "pop": 2827017,
+     "soudan": 6150,
+     "plan": 1432,
+     "kakei": 289,
+     "jukyo": 190
+    }
+   }
+  },
+  {
+   "name": "神戸市",
+   "level": "指定都市",
+   "pref": "兵庫県",
+   "pop": 1500425,
+   "soudan": 3557,
+   "soudan100k": 19.8,
+   "plan": 816,
+   "plan100k": 4.5,
+   "shien": 517,
+   "shien100k": 2.9,
+   "jukyo": 151,
+   "ichiji": 61,
+   "kakei": 223,
+   "junbi": 19,
+   "kunren": 0,
+   "jshuro": 468,
+   "kashitsuke": 18,
+   "seiho": 359,
+   "shurosha": 210,
+   "shurosha_p": 191,
+   "zoshu": 84,
+   "zoshu_p": 65,
+   "hist": {
+    "2017": {
+     "pop": 1547850,
+     "soudan": 3410,
+     "plan": 715,
+     "kakei": 110,
+     "jukyo": 142
+    },
+    "2018": {
+     "pop": 1546255,
+     "soudan": 2657,
+     "plan": 772,
+     "kakei": 145,
+     "jukyo": 153
+    },
+    "2019": {
+     "pop": 1542935,
+     "soudan": 2835,
+     "plan": 756,
+     "kakei": 163,
+     "jukyo": 129
+    },
+    "2020": {
+     "pop": 1538025,
+     "soudan": 17779,
+     "plan": 772,
+     "kakei": 135,
+     "jukyo": 268
+    },
+    "2021": {
+     "pop": 1538025,
+     "soudan": 10549,
+     "plan": 911,
+     "kakei": 134,
+     "jukyo": 427
+    },
+    "2022": {
+     "pop": 1517627,
+     "soudan": 3989,
+     "plan": 824,
+     "kakei": 164,
+     "jukyo": 334
+    },
+    "2023": {
+     "pop": 1510917,
+     "soudan": 3411,
+     "plan": 676,
+     "kakei": 161,
+     "jukyo": 155
+    }
+   }
+  },
+  {
+   "name": "福井市",
+   "level": "中核市",
+   "pref": "福井県",
+   "pop": 255949,
+   "soudan": 605,
+   "soudan100k": 19.7,
+   "plan": 39,
+   "plan100k": 1.3,
+   "shien": 20,
+   "shien100k": 0.7,
+   "jukyo": 10,
+   "ichiji": 0,
+   "kakei": 7,
+   "junbi": 1,
+   "kunren": 0,
+   "jshuro": 21,
+   "kashitsuke": 0,
+   "seiho": 17,
+   "shurosha": 12,
+   "shurosha_p": 11,
+   "zoshu": 6,
+   "zoshu_p": 3,
+   "hist": {
+    "2019": {
+     "pop": 265260,
+     "soudan": 227,
+     "plan": 19,
+     "kakei": 0,
+     "jukyo": 9
+    },
+    "2020": {
+     "pop": 264356,
+     "soudan": 992,
+     "plan": 20,
+     "kakei": 0,
+     "jukyo": 14
+    },
+    "2021": {
+     "pop": 264356,
+     "soudan": 875,
+     "plan": 6,
+     "kakei": 1,
+     "jukyo": 3
+    },
+    "2022": {
+     "pop": 259642,
+     "soudan": 606,
+     "plan": 3,
+     "kakei": 2,
+     "jukyo": 0
+    },
+    "2023": {
+     "pop": 257941,
+     "soudan": 538,
+     "plan": 39,
+     "kakei": 5,
+     "jukyo": 28
+    }
+   }
+  },
+  {
+   "name": "福井県",
+   "level": "都道府県",
+   "pref": null,
+   "pop": 496441,
+   "soudan": 788,
+   "soudan100k": 13.2,
+   "plan": 239,
+   "plan100k": 4.0,
+   "shien": 92,
+   "shien100k": 1.5,
+   "jukyo": 19,
+   "ichiji": 20,
+   "kakei": 78,
+   "junbi": 39,
+   "kunren": 0,
+   "jshuro": 67,
+   "kashitsuke": 16,
+   "seiho": 39,
+   "shurosha": 51,
+   "shurosha_p": 25,
+   "zoshu": 34,
+   "zoshu_p": 12,
+   "hist": {
+    "2017": {
+     "pop": 799220,
+     "soudan": 904,
+     "plan": 272,
+     "kakei": 23,
+     "jukyo": 15
+    },
+    "2018": {
+     "pop": 794433,
+     "soudan": 921,
+     "plan": 285,
+     "kakei": 30,
+     "jukyo": 25
+    },
+    "2019": {
+     "pop": 525498,
+     "soudan": 788,
+     "plan": 322,
+     "kakei": 102,
+     "jukyo": 7
+    },
+    "2020": {
+     "pop": 522147,
+     "soudan": 1416,
+     "plan": 502,
+     "kakei": 121,
+     "jukyo": 85
+    },
+    "2021": {
+     "pop": 510240,
+     "soudan": 1336,
+     "plan": 432,
+     "kakei": 106,
+     "jukyo": 58
+    },
+    "2022": {
+     "pop": 507919,
+     "soudan": 835,
+     "plan": 295,
+     "kakei": 79,
+     "jukyo": 44
+    },
+    "2023": {
+     "pop": 501836,
+     "soudan": 739,
+     "plan": 289,
+     "kakei": 77,
+     "jukyo": 45
+    }
+   }
+  },
+  {
+   "name": "福山市",
+   "level": "中核市",
+   "pref": "広島県",
+   "pop": 458192,
+   "soudan": 562,
+   "soudan100k": 10.2,
+   "plan": 75,
+   "plan100k": 1.4,
+   "shien": 32,
+   "shien100k": 0.6,
+   "jukyo": 11,
+   "ichiji": 0,
+   "kakei": 15,
+   "junbi": 2,
+   "kunren": 0,
+   "jshuro": 2,
+   "kashitsuke": 3,
+   "seiho": 26,
+   "shurosha": 19,
+   "shurosha_p": 18,
+   "zoshu": 12,
+   "zoshu_p": 10,
+   "hist": {
+    "2017": {
+     "pop": 471974,
+     "soudan": 561,
+     "plan": 88,
+     "kakei": 0,
+     "jukyo": 20
+    },
+    "2018": {
+     "pop": 471345,
+     "soudan": 558,
+     "plan": 84,
+     "kakei": 0,
+     "jukyo": 10
+    },
+    "2019": {
+     "pop": 470786,
+     "soudan": 648,
+     "plan": 87,
+     "kakei": 0,
+     "jukyo": 18
+    },
+    "2020": {
+     "pop": 469960,
+     "soudan": 1618,
+     "plan": 142,
+     "kakei": 3,
+     "jukyo": 85
+    },
+    "2021": {
+     "pop": 469960,
+     "soudan": 1318,
+     "plan": 112,
+     "kakei": 8,
+     "jukyo": 62
+    },
+    "2022": {
+     "pop": 463324,
+     "soudan": 573,
+     "plan": 91,
+     "kakei": 13,
+     "jukyo": 32
+    },
+    "2023": {
+     "pop": 460684,
+     "soudan": 505,
+     "plan": 131,
+     "kakei": 18,
+     "jukyo": 22
+    }
+   }
+  },
+  {
+   "name": "福岡市",
+   "level": "指定都市",
+   "pref": "福岡県",
+   "pop": 1593919,
+   "soudan": 3623,
+   "soudan100k": 18.9,
+   "plan": 857,
+   "plan100k": 4.5,
+   "shien": 547,
+   "shien100k": 2.9,
+   "jukyo": 293,
+   "ichiji": 454,
+   "kakei": 0,
+   "junbi": 6,
+   "kunren": 2,
+   "jshuro": 236,
+   "kashitsuke": 3,
+   "seiho": 60,
+   "shurosha": 127,
+   "shurosha_p": 105,
+   "zoshu": 89,
+   "zoshu_p": 86,
+   "hist": {
+    "2017": {
+     "pop": 1500955,
+     "soudan": 2473,
+     "plan": 719,
+     "kakei": 0,
+     "jukyo": 75
+    },
+    "2018": {
+     "pop": 1514924,
+     "soudan": 2921,
+     "plan": 781,
+     "kakei": 0,
+     "jukyo": 57
+    },
+    "2019": {
+     "pop": 1529040,
+     "soudan": 2906,
+     "plan": 828,
+     "kakei": 0,
+     "jukyo": 58
+    },
+    "2020": {
+     "pop": 1540923,
+     "soudan": 18350,
+     "plan": 629,
+     "kakei": 0,
+     "jukyo": 74
+    },
+    "2021": {
+     "pop": 1540923,
+     "soudan": 10797,
+     "plan": 611,
+     "kakei": 0,
+     "jukyo": 76
+    },
+    "2022": {
+     "pop": 1568265,
+     "soudan": 4021,
+     "plan": 1040,
+     "kakei": 0,
+     "jukyo": 474
+    },
+    "2023": {
+     "pop": 1581398,
+     "soudan": 3446,
+     "plan": 1001,
+     "kakei": 0,
+     "jukyo": 386
+    }
+   }
+  },
+  {
+   "name": "福岡県",
+   "level": "都道府県",
+   "pref": null,
+   "pop": 2278702,
+   "soudan": 7028,
+   "soudan100k": 25.7,
+   "plan": 3080,
+   "plan100k": 11.3,
+   "shien": 1152,
+   "shien100k": 4.2,
+   "jukyo": 119,
+   "ichiji": 21,
+   "kakei": 2086,
+   "junbi": 243,
+   "kunren": 2,
+   "jshuro": 1009,
+   "kashitsuke": 189,
+   "seiho": 289,
+   "shurosha": 580,
+   "shurosha_p": 452,
+   "zoshu": 507,
+   "zoshu_p": 182,
+   "hist": {
+    "2017": {
+     "pop": 2343185,
+     "soudan": 5290,
+     "plan": 1414,
+     "kakei": 859,
+     "jukyo": 70
+    },
+    "2018": {
+     "pop": 2338037,
+     "soudan": 5941,
+     "plan": 1659,
+     "kakei": 1089,
+     "jukyo": 63
+    },
+    "2019": {
+     "pop": 2334248,
+     "soudan": 6075,
+     "plan": 1865,
+     "kakei": 1251,
+     "jukyo": 61
+    },
+    "2020": {
+     "pop": 2328335,
+     "soudan": 16515,
+     "plan": 4900,
+     "kakei": 3202,
+     "jukyo": 757
+    },
+    "2021": {
+     "pop": 2321289,
+     "soudan": 11873,
+     "plan": 5591,
+     "kakei": 4035,
+     "jukyo": 491
+    },
+    "2022": {
+     "pop": 2300604,
+     "soudan": 6951,
+     "plan": 3218,
+     "kakei": 2166,
+     "jukyo": 448
+    },
+    "2023": {
+     "pop": 2291744,
+     "soudan": 6242,
+     "plan": 2978,
+     "kakei": 2060,
+     "jukyo": 193
+    }
+   }
+  },
+  {
+   "name": "福島市",
+   "level": "中核市",
+   "pref": "福島県",
+   "pop": 267924,
+   "soudan": 871,
+   "soudan100k": 27.1,
+   "plan": 49,
+   "plan100k": 1.5,
+   "shien": 12,
+   "shien100k": 0.4,
+   "jukyo": 9,
+   "ichiji": 0,
+   "kakei": 34,
+   "junbi": 3,
+   "kunren": 0,
+   "jshuro": 12,
+   "kashitsuke": 0,
+   "seiho": 12,
+   "shurosha": 5,
+   "shurosha_p": 5,
+   "zoshu": 3,
+   "zoshu_p": 3,
+   "hist": {
+    "2018": {
+     "pop": 283493,
+     "soudan": 717,
+     "plan": 31,
+     "kakei": 0,
+     "jukyo": 17
+    },
+    "2019": {
+     "pop": 281458,
+     "soudan": 693,
+     "plan": 38,
+     "kakei": 14,
+     "jukyo": 11
+    },
+    "2020": {
+     "pop": 279307,
+     "soudan": 971,
+     "plan": 123,
+     "kakei": 10,
+     "jukyo": 108
+    },
+    "2021": {
+     "pop": 279307,
+     "soudan": 891,
+     "plan": 176,
+     "kakei": 23,
+     "jukyo": 132
+    },
+    "2022": {
+     "pop": 273348,
+     "soudan": 869,
+     "plan": 134,
+     "kakei": 24,
+     "jukyo": 102
+    },
+    "2023": {
+     "pop": 270744,
+     "soudan": 807,
+     "plan": 47,
+     "kakei": 27,
+     "jukyo": 15
+    }
+   }
+  },
+  {
+   "name": "福島県",
+   "level": "都道府県",
+   "pref": null,
+   "pop": 905426,
+   "soudan": 1635,
+   "soudan100k": 15.0,
+   "plan": 452,
+   "plan100k": 4.2,
+   "shien": 255,
+   "shien100k": 2.3,
+   "jukyo": 42,
+   "ichiji": 33,
+   "kakei": 45,
+   "junbi": 29,
+   "kunren": 5,
+   "jshuro": 254,
+   "kashitsuke": 42,
+   "seiho": 153,
+   "shurosha": 153,
+   "shurosha_p": 118,
+   "zoshu": 56,
+   "zoshu_p": 28,
+   "hist": {
+    "2017": {
+     "pop": 1294472,
+     "soudan": 2304,
+     "plan": 521,
+     "kakei": 18,
+     "jukyo": 78
+    },
+    "2018": {
+     "pop": 998277,
+     "soudan": 1559,
+     "plan": 552,
+     "kakei": 40,
+     "jukyo": 31
+    },
+    "2019": {
+     "pop": 985449,
+     "soudan": 1543,
+     "plan": 525,
+     "kakei": 50,
+     "jukyo": 25
+    },
+    "2020": {
+     "pop": 973391,
+     "soudan": 3989,
+     "plan": 1293,
+     "kakei": 124,
+     "jukyo": 233
+    },
+    "2021": {
+     "pop": 935115,
+     "soudan": 3743,
+     "plan": 1998,
+     "kakei": 270,
+     "jukyo": 172
+    },
+    "2022": {
+     "pop": 933281,
+     "soudan": 1945,
+     "plan": 733,
+     "kakei": 59,
+     "jukyo": 83
+    },
+    "2023": {
+     "pop": 919461,
+     "soudan": 1496,
+     "plan": 423,
+     "kakei": 48,
+     "jukyo": 40
+    }
+   }
+  },
+  {
+   "name": "秋田市",
+   "level": "中核市",
+   "pref": "秋田県",
+   "pop": 297316,
+   "soudan": 406,
+   "soudan100k": 11.4,
+   "plan": 66,
+   "plan100k": 1.8,
+   "shien": 33,
+   "shien100k": 0.9,
+   "jukyo": 25,
+   "ichiji": 0,
+   "kakei": 3,
+   "junbi": 5,
+   "kunren": 0,
+   "jshuro": 36,
+   "kashitsuke": 5,
+   "seiho": 9,
+   "shurosha": 10,
+   "shurosha_p": 10,
+   "zoshu": 5,
+   "zoshu_p": 2,
+   "hist": {
+    "2017": {
+     "pop": 317104,
+     "soudan": 441,
+     "plan": 127,
+     "kakei": 12,
+     "jukyo": 12
+    },
+    "2018": {
+     "pop": 314869,
+     "soudan": 449,
+     "plan": 114,
+     "kakei": 14,
+     "jukyo": 8
+    },
+    "2019": {
+     "pop": 312374,
+     "soudan": 407,
+     "plan": 105,
+     "kakei": 11,
+     "jukyo": 12
+    },
+    "2020": {
+     "pop": 309654,
+     "soudan": 596,
+     "plan": 83,
+     "kakei": 5,
+     "jukyo": 40
+    },
+    "2021": {
+     "pop": 309654,
+     "soudan": 747,
+     "plan": 126,
+     "kakei": 8,
+     "jukyo": 82
+    },
+    "2022": {
+     "pop": 303122,
+     "soudan": 528,
+     "plan": 104,
+     "kakei": 2,
+     "jukyo": 74
+    },
+    "2023": {
+     "pop": 300470,
+     "soudan": 403,
+     "plan": 75,
+     "kakei": 5,
+     "jukyo": 23
+    }
+   }
+  },
+  {
+   "name": "秋田県",
+   "level": "都道府県",
+   "pref": null,
+   "pop": 627304,
+   "soudan": 1368,
+   "soudan100k": 18.2,
+   "plan": 153,
+   "plan100k": 2.0,
+   "shien": 73,
+   "shien100k": 1.0,
+   "jukyo": 5,
+   "ichiji": 0,
+   "kakei": 32,
+   "junbi": 17,
+   "kunren": 0,
+   "jshuro": 75,
+   "kashitsuke": 15,
+   "seiho": 44,
+   "shurosha": 60,
+   "shurosha_p": 46,
+   "zoshu": 18,
+   "zoshu_p": 10,
+   "hist": {
+    "2017": {
+     "pop": 725911,
+     "soudan": 1165,
+     "plan": 265,
+     "kakei": 33,
+     "jukyo": 3
+    },
+    "2018": {
+     "pop": 714327,
+     "soudan": 1351,
+     "plan": 238,
+     "kakei": 45,
+     "jukyo": 2
+    },
+    "2019": {
+     "pop": 702683,
+     "soudan": 1454,
+     "plan": 232,
+     "kakei": 45,
+     "jukyo": 4
+    },
+    "2020": {
+     "pop": 690569,
+     "soudan": 2088,
+     "plan": 226,
+     "kakei": 40,
+     "jukyo": 35
+    },
+    "2021": {
+     "pop": 661950,
+     "soudan": 1890,
+     "plan": 251,
+     "kakei": 44,
+     "jukyo": 33
+    },
+    "2022": {
+     "pop": 653714,
+     "soudan": 1559,
+     "plan": 175,
+     "kakei": 38,
+     "jukyo": 15
+    },
+    "2023": {
+     "pop": 640551,
+     "soudan": 1445,
+     "plan": 168,
+     "kakei": 44,
+     "jukyo": 5
+    }
+   }
+  },
+  {
+   "name": "群馬県",
+   "level": "都道府県",
+   "pref": null,
+   "pop": 1221511,
+   "soudan": 2005,
+   "soudan100k": 13.7,
+   "plan": 408,
+   "plan100k": 2.8,
+   "shien": 228,
+   "shien100k": 1.6,
+   "jukyo": 93,
+   "ichiji": 8,
+   "kakei": 49,
+   "junbi": 19,
+   "kunren": 0,
+   "jshuro": 141,
+   "kashitsuke": 74,
+   "seiho": 104,
+   "shurosha": 106,
+   "shurosha_p": 57,
+   "zoshu": 59,
+   "zoshu_p": 32,
+   "hist": {
+    "2017": {
+     "pop": 1290463,
+     "soudan": 1223,
+     "plan": 185,
+     "kakei": 6,
+     "jukyo": 64
+    },
+    "2018": {
+     "pop": 1284104,
+     "soudan": 1337,
+     "plan": 195,
+     "kakei": 1,
+     "jukyo": 60
+    },
+    "2019": {
+     "pop": 1277815,
+     "soudan": 1346,
+     "plan": 189,
+     "kakei": 0,
+     "jukyo": 54
+    },
+    "2020": {
+     "pop": 1269532,
+     "soudan": 6258,
+     "plan": 239,
+     "kakei": 3,
+     "jukyo": 138
+    },
+    "2021": {
+     "pop": 1246515,
+     "soudan": 4529,
+     "plan": 365,
+     "kakei": 8,
+     "jukyo": 207
+    },
+    "2022": {
+     "pop": 1239598,
+     "soudan": 2163,
+     "plan": 303,
+     "kakei": 22,
+     "jukyo": 151
+    },
+    "2023": {
+     "pop": 1229891,
+     "soudan": 1956,
+     "plan": 385,
+     "kakei": 38,
+     "jukyo": 102
+    }
+   }
+  },
+  {
+   "name": "船橋市",
+   "level": "中核市",
+   "pref": "千葉県",
+   "pop": 648331,
+   "soudan": 1552,
+   "soudan100k": 19.9,
+   "plan": 147,
+   "plan100k": 1.9,
+   "shien": 100,
+   "shien100k": 1.3,
+   "jukyo": 21,
+   "ichiji": 9,
+   "kakei": 40,
+   "junbi": 10,
+   "kunren": 0,
+   "jshuro": 89,
+   "kashitsuke": 4,
+   "seiho": 65,
+   "shurosha": 94,
+   "shurosha_p": 51,
+   "zoshu": 18,
+   "zoshu_p": 11,
+   "hist": {
+    "2017": {
+     "pop": 626809,
+     "soudan": 872,
+     "plan": 126,
+     "kakei": 49,
+     "jukyo": 18
+    },
+    "2018": {
+     "pop": 630937,
+     "soudan": 1221,
+     "plan": 86,
+     "kakei": 13,
+     "jukyo": 23
+    },
+    "2019": {
+     "pop": 635517,
+     "soudan": 1237,
+     "plan": 119,
+     "kakei": 32,
+     "jukyo": 25
+    },
+    "2020": {
+     "pop": 639598,
+     "soudan": 2123,
+     "plan": 115,
+     "kakei": 15,
+     "jukyo": 37
+    },
+    "2021": {
+     "pop": 639598,
+     "soudan": 1677,
+     "plan": 129,
+     "kakei": 20,
+     "jukyo": 36
+    },
+    "2022": {
+     "pop": 645718,
+     "soudan": 1556,
+     "plan": 78,
+     "kakei": 14,
+     "jukyo": 10
+    },
+    "2023": {
+     "pop": 647037,
+     "soudan": 1539,
+     "plan": 103,
+     "kakei": 25,
+     "jukyo": 23
+    }
+   }
+  },
+  {
+   "name": "茨城県",
+   "level": "都道府県",
+   "pref": null,
+   "pop": 2596847,
+   "soudan": 4840,
+   "soudan100k": 15.5,
+   "plan": 646,
+   "plan100k": 2.1,
+   "shien": 470,
+   "shien100k": 1.5,
+   "jukyo": 141,
+   "ichiji": 47,
+   "kakei": 144,
+   "junbi": 41,
+   "kunren": 2,
+   "jshuro": 358,
+   "kashitsuke": 55,
+   "seiho": 150,
+   "shurosha": 200,
+   "shurosha_p": 141,
+   "zoshu": 69,
+   "zoshu_p": 54,
+   "hist": {
+    "2017": {
+     "pop": 2970231,
+     "soudan": 2897,
+     "plan": 475,
+     "kakei": 41,
+     "jukyo": 152
+    },
+    "2018": {
+     "pop": 2960458,
+     "soudan": 2893,
+     "plan": 498,
+     "kakei": 46,
+     "jukyo": 130
+    },
+    "2019": {
+     "pop": 2951087,
+     "soudan": 3074,
+     "plan": 450,
+     "kakei": 87,
+     "jukyo": 85
+    },
+    "2020": {
+     "pop": 2663699,
+     "soudan": 11253,
+     "plan": 3790,
+     "kakei": 220,
+     "jukyo": 447
+    },
+    "2021": {
+     "pop": 2635193,
+     "soudan": 9139,
+     "plan": 3178,
+     "kakei": 446,
+     "jukyo": 638
+    },
+    "2022": {
+     "pop": 2619221,
+     "soudan": 4918,
+     "plan": 1170,
+     "kakei": 287,
+     "jukyo": 393
+    },
+    "2023": {
+     "pop": 2609798,
+     "soudan": 3923,
+     "plan": 668,
+     "kakei": 165,
+     "jukyo": 165
+    }
+   }
+  },
+  {
+   "name": "西宮市",
+   "level": "中核市",
+   "pref": "兵庫県",
+   "pop": 482594,
+   "soudan": 752,
+   "soudan100k": 13.0,
+   "plan": 190,
+   "plan100k": 3.3,
+   "shien": 51,
+   "shien100k": 0.9,
+   "jukyo": 5,
+   "ichiji": 0,
+   "kakei": 49,
+   "junbi": 13,
+   "kunren": 0,
+   "jshuro": 59,
+   "kashitsuke": 6,
+   "seiho": 1,
+   "shurosha": 41,
+   "shurosha_p": 28,
+   "zoshu": 7,
+   "zoshu_p": 2,
+   "hist": {
+    "2017": {
+     "pop": 484892,
+     "soudan": 273,
+     "plan": 43,
+     "kakei": 0,
+     "jukyo": 11
+    },
+    "2018": {
+     "pop": 485788,
+     "soudan": 356,
+     "plan": 75,
+     "kakei": 0,
+     "jukyo": 12
+    },
+    "2019": {
+     "pop": 485225,
+     "soudan": 537,
+     "plan": 79,
+     "kakei": 0,
+     "jukyo": 19
+    },
+    "2020": {
+     "pop": 485189,
+     "soudan": 4210,
+     "plan": 152,
+     "kakei": 0,
+     "jukyo": 73
+    },
+    "2021": {
+     "pop": 485189,
+     "soudan": 2206,
+     "plan": 301,
+     "kakei": 0,
+     "jukyo": 229
+    },
+    "2022": {
+     "pop": 483394,
+     "soudan": 974,
+     "plan": 272,
+     "kakei": 0,
+     "jukyo": 147
+    },
+    "2023": {
+     "pop": 482796,
+     "soudan": 769,
+     "plan": 174,
+     "kakei": 0,
+     "jukyo": 41
+    }
+   }
+  },
+  {
+   "name": "豊中市",
+   "level": "中核市",
+   "pref": "大阪府",
+   "pop": 406836,
+   "soudan": 1762,
+   "soudan100k": 36.1,
+   "plan": 1461,
+   "plan100k": 29.9,
+   "shien": 180,
+   "shien100k": 3.7,
+   "jukyo": 27,
+   "ichiji": 1,
+   "kakei": 49,
+   "junbi": 20,
+   "kunren": 7,
+   "jshuro": 238,
+   "kashitsuke": 1122,
+   "seiho": 30,
+   "shurosha": 112,
+   "shurosha_p": 81,
+   "zoshu": 110,
+   "zoshu_p": 21,
+   "hist": {
+    "2017": {
+     "pop": 403030,
+     "soudan": 1434,
+     "plan": 627,
+     "kakei": 28,
+     "jukyo": 7
+    },
+    "2018": {
+     "pop": 403991,
+     "soudan": 1550,
+     "plan": 618,
+     "kakei": 22,
+     "jukyo": 12
+    },
+    "2019": {
+     "pop": 405974,
+     "soudan": 1445,
+     "plan": 602,
+     "kakei": 39,
+     "jukyo": 8
+    },
+    "2020": {
+     "pop": 406593,
+     "soudan": 6828,
+     "plan": 570,
+     "kakei": 23,
+     "jukyo": 90
+    },
+    "2021": {
+     "pop": 406593,
+     "soudan": 3735,
+     "plan": 1459,
+     "kakei": 12,
+     "jukyo": 142
+    },
+    "2022": {
+     "pop": 408802,
+     "soudan": 2025,
+     "plan": 1190,
+     "kakei": 12,
+     "jukyo": 73
+    },
+    "2023": {
+     "pop": 407695,
+     "soudan": 1935,
+     "plan": 1789,
+     "kakei": 20,
+     "jukyo": 53
+    }
+   }
+  },
+  {
+   "name": "豊橋市",
+   "level": "中核市",
+   "pref": "愛知県",
+   "pop": 368686,
+   "soudan": 911,
+   "soudan100k": 20.6,
+   "plan": 121,
+   "plan100k": 2.7,
+   "shien": 109,
+   "shien100k": 2.5,
+   "jukyo": 23,
+   "ichiji": 42,
+   "kakei": 13,
+   "junbi": 0,
+   "kunren": 0,
+   "jshuro": 106,
+   "kashitsuke": 1,
+   "seiho": 60,
+   "shurosha": 67,
+   "shurosha_p": 67,
+   "zoshu": 11,
+   "zoshu_p": 11,
+   "hist": {
+    "2017": {
+     "pop": 378485,
+     "soudan": 987,
+     "plan": 102,
+     "kakei": 0,
+     "jukyo": 9
+    },
+    "2018": {
+     "pop": 378018,
+     "soudan": 1027,
+     "plan": 119,
+     "kakei": 0,
+     "jukyo": 2
+    },
+    "2019": {
+     "pop": 377561,
+     "soudan": 934,
+     "plan": 108,
+     "kakei": 1,
+     "jukyo": 0
+    },
+    "2020": {
+     "pop": 377303,
+     "soudan": 1241,
+     "plan": 222,
+     "kakei": 0,
+     "jukyo": 91
+    },
+    "2021": {
+     "pop": 377303,
+     "soudan": 749,
+     "plan": 183,
+     "kakei": 6,
+     "jukyo": 74
+    },
+    "2022": {
+     "pop": 372604,
+     "soudan": 754,
+     "plan": 179,
+     "kakei": 0,
+     "jukyo": 67
+    },
+    "2023": {
+     "pop": 370761,
+     "soudan": 779,
+     "plan": 154,
+     "kakei": 12,
+     "jukyo": 40
+    }
+   }
+  },
+  {
+   "name": "豊田市",
+   "level": "中核市",
+   "pref": "愛知県",
+   "pop": 416383,
+   "soudan": 797,
+   "soudan100k": 16.0,
+   "plan": 131,
+   "plan100k": 2.6,
+   "shien": 63,
+   "shien100k": 1.3,
+   "jukyo": 26,
+   "ichiji": 5,
+   "kakei": 110,
+   "junbi": 0,
+   "kunren": 0,
+   "jshuro": 53,
+   "kashitsuke": 4,
+   "seiho": 9,
+   "shurosha": 22,
+   "shurosha_p": 20,
+   "zoshu": 8,
+   "zoshu_p": 6,
+   "hist": {
+    "2017": {
+     "pop": 422571,
+     "soudan": 425,
+     "plan": 85,
+     "kakei": 58,
+     "jukyo": 1
+    },
+    "2018": {
+     "pop": 424095,
+     "soudan": 465,
+     "plan": 155,
+     "kakei": 95,
+     "jukyo": 4
+    },
+    "2019": {
+     "pop": 425172,
+     "soudan": 608,
+     "plan": 273,
+     "kakei": 192,
+     "jukyo": 9
+    },
+    "2020": {
+     "pop": 425755,
+     "soudan": 3840,
+     "plan": 618,
+     "kakei": 564,
+     "jukyo": 368
+    },
+    "2021": {
+     "pop": 425755,
+     "soudan": 1975,
+     "plan": 294,
+     "kakei": 279,
+     "jukyo": 137
+    },
+    "2022": {
+     "pop": 419249,
+     "soudan": 1030,
+     "plan": 180,
+     "kakei": 151,
+     "jukyo": 7
+    },
+    "2023": {
+     "pop": 417432,
+     "soudan": 750,
+     "plan": 152,
+     "kakei": 126,
+     "jukyo": 11
+    }
+   }
+  },
+  {
+   "name": "越谷市",
+   "level": "中核市",
+   "pref": "埼玉県",
+   "pop": 343062,
+   "soudan": 605,
+   "soudan100k": 14.7,
+   "plan": 94,
+   "plan100k": 2.3,
+   "shien": 66,
+   "shien100k": 1.6,
+   "jukyo": 2,
+   "ichiji": 0,
+   "kakei": 31,
+   "junbi": 14,
+   "kunren": 0,
+   "jshuro": 62,
+   "kashitsuke": 0,
+   "seiho": 46,
+   "shurosha": 95,
+   "shurosha_p": 41,
+   "zoshu": 5,
+   "zoshu_p": 3,
+   "hist": {
+    "2017": {
+     "pop": 336565,
+     "soudan": 269,
+     "plan": 97,
+     "kakei": 24,
+     "jukyo": 15
+    },
+    "2018": {
+     "pop": 339156,
+     "soudan": 435,
+     "plan": 97,
+     "kakei": 36,
+     "jukyo": 6
+    },
+    "2019": {
+     "pop": 340862,
+     "soudan": 430,
+     "plan": 77,
+     "kakei": 24,
+     "jukyo": 8
+    },
+    "2020": {
+     "pop": 342945,
+     "soudan": 2036,
+     "plan": 122,
+     "kakei": 28,
+     "jukyo": 68
+    },
+    "2021": {
+     "pop": 342945,
+     "soudan": 1071,
+     "plan": 119,
+     "kakei": 30,
+     "jukyo": 61
+    },
+    "2022": {
+     "pop": 345047,
+     "soudan": 503,
+     "plan": 107,
+     "kakei": 29,
+     "jukyo": 49
+    },
+    "2023": {
+     "pop": 343866,
+     "soudan": 483,
+     "plan": 76,
+     "kakei": 9,
+     "jukyo": 6
+    }
+   }
+  },
+  {
+   "name": "那覇市",
+   "level": "中核市",
+   "pref": "沖縄県",
+   "pop": 315485,
+   "soudan": 1353,
+   "soudan100k": 35.7,
+   "plan": 473,
+   "plan100k": 12.5,
+   "shien": 250,
+   "shien100k": 6.6,
+   "jukyo": 78,
+   "ichiji": 31,
+   "kakei": 66,
+   "junbi": 17,
+   "kunren": 0,
+   "jshuro": 248,
+   "kashitsuke": 30,
+   "seiho": 118,
+   "shurosha": 104,
+   "shurosha_p": 91,
+   "zoshu": 41,
+   "zoshu_p": 30,
+   "hist": {
+    "2017": {
+     "pop": 324169,
+     "soudan": 1076,
+     "plan": 452,
+     "kakei": 0,
+     "jukyo": 71
+    },
+    "2018": {
+     "pop": 324157,
+     "soudan": 1032,
+     "plan": 509,
+     "kakei": 0,
+     "jukyo": 39
+    },
+    "2019": {
+     "pop": 323290,
+     "soudan": 1035,
+     "plan": 406,
+     "kakei": 0,
+     "jukyo": 48
+    },
+    "2020": {
+     "pop": 322624,
+     "soudan": 7988,
+     "plan": 447,
+     "kakei": 0,
+     "jukyo": 229
+    },
+    "2021": {
+     "pop": 322624,
+     "soudan": 6884,
+     "plan": 708,
+     "kakei": 0,
+     "jukyo": 561
+    },
+    "2022": {
+     "pop": 318339,
+     "soudan": 1643,
+     "plan": 623,
+     "kakei": 0,
+     "jukyo": 396
+    },
+    "2023": {
+     "pop": 317030,
+     "soudan": 1470,
+     "plan": 534,
+     "kakei": 0,
+     "jukyo": 159
+    }
+   }
+  },
+  {
+   "name": "郡山市",
+   "level": "中核市",
+   "pref": "福島県",
+   "pop": 315155,
+   "soudan": 387,
+   "soudan100k": 10.2,
+   "plan": 72,
+   "plan100k": 1.9,
+   "shien": 72,
+   "shien100k": 1.9,
+   "jukyo": 11,
+   "ichiji": 0,
+   "kakei": 5,
+   "junbi": 6,
+   "kunren": 0,
+   "jshuro": 56,
+   "kashitsuke": 2,
+   "seiho": 56,
+   "shurosha": 27,
+   "shurosha_p": 27,
+   "zoshu": 5,
+   "zoshu_p": 5,
+   "hist": {
+    "2017": {
+     "pop": 327307,
+     "soudan": 672,
+     "plan": 66,
+     "kakei": 1,
+     "jukyo": 6
+    },
+    "2018": {
+     "pop": 326851,
+     "soudan": 664,
+     "plan": 75,
+     "kakei": 3,
+     "jukyo": 5
+    },
+    "2019": {
+     "pop": 325683,
+     "soudan": 498,
+     "plan": 73,
+     "kakei": 6,
+     "jukyo": 4
+    },
+    "2020": {
+     "pop": 324109,
+     "soudan": 1780,
+     "plan": 99,
+     "kakei": 5,
+     "jukyo": 28
+    },
+    "2021": {
+     "pop": 324109,
+     "soudan": 1391,
+     "plan": 57,
+     "kakei": 2,
+     "jukyo": 25
+    },
+    "2022": {
+     "pop": 319702,
+     "soudan": 807,
+     "plan": 56,
+     "kakei": 0,
+     "jukyo": 23
+    },
+    "2023": {
+     "pop": 317486,
+     "soudan": 498,
+     "plan": 51,
+     "kakei": 5,
+     "jukyo": 14
+    }
+   }
+  },
+  {
+   "name": "金沢市",
+   "level": "中核市",
+   "pref": "石川県",
+   "pop": 444996,
+   "soudan": 1215,
+   "soudan100k": 22.8,
+   "plan": 118,
+   "plan100k": 2.2,
+   "shien": 50,
+   "shien100k": 0.9,
+   "jukyo": 45,
+   "ichiji": 0,
+   "kakei": 32,
+   "junbi": 7,
+   "kunren": 0,
+   "jshuro": 64,
+   "kashitsuke": 17,
+   "seiho": 7,
+   "shurosha": 25,
+   "shurosha_p": 22,
+   "zoshu": 18,
+   "zoshu_p": 10,
+   "hist": {
+    "2017": {
+     "pop": 454356,
+     "soudan": 653,
+     "plan": 76,
+     "kakei": 0,
+     "jukyo": 31
+    },
+    "2018": {
+     "pop": 454497,
+     "soudan": 577,
+     "plan": 77,
+     "kakei": 0,
+     "jukyo": 20
+    },
+    "2019": {
+     "pop": 454416,
+     "soudan": 723,
+     "plan": 90,
+     "kakei": 0,
+     "jukyo": 19
+    },
+    "2020": {
+     "pop": 453654,
+     "soudan": 1013,
+     "plan": 54,
+     "kakei": 2,
+     "jukyo": 15
+    },
+    "2021": {
+     "pop": 453654,
+     "soudan": 609,
+     "plan": 41,
+     "kakei": 8,
+     "jukyo": 5
+    },
+    "2022": {
+     "pop": 448702,
+     "soudan": 987,
+     "plan": 56,
+     "kakei": 22,
+     "jukyo": 14
+    },
+    "2023": {
+     "pop": 447181,
+     "soudan": 1151,
+     "plan": 95,
+     "kakei": 23,
+     "jukyo": 42
+    }
+   }
+  },
+  {
+   "name": "長崎市",
+   "level": "中核市",
+   "pref": "長崎県",
+   "pop": 395843,
+   "soudan": 1077,
+   "soudan100k": 22.7,
+   "plan": 170,
+   "plan100k": 3.6,
+   "shien": 99,
+   "shien100k": 2.1,
+   "jukyo": 41,
+   "ichiji": 0,
+   "kakei": 9,
+   "junbi": 3,
+   "kunren": 0,
+   "jshuro": 93,
+   "kashitsuke": 1,
+   "seiho": 72,
+   "shurosha": 32,
+   "shurosha_p": 25,
+   "zoshu": 12,
+   "zoshu_p": 10,
+   "hist": {
+    "2017": {
+     "pop": 435525,
+     "soudan": 765,
+     "plan": 123,
+     "kakei": 6,
+     "jukyo": 53
+    },
+    "2018": {
+     "pop": 432088,
+     "soudan": 809,
+     "plan": 123,
+     "kakei": 12,
+     "jukyo": 58
+    },
+    "2019": {
+     "pop": 426631,
+     "soudan": 854,
+     "plan": 105,
+     "kakei": 8,
+     "jukyo": 34
+    },
+    "2020": {
+     "pop": 421799,
+     "soudan": 2277,
+     "plan": 99,
+     "kakei": 21,
+     "jukyo": 17
+    },
+    "2021": {
+     "pop": 421799,
+     "soudan": 1747,
+     "plan": 237,
+     "kakei": 18,
+     "jukyo": 153
+    },
+    "2022": {
+     "pop": 406116,
+     "soudan": 1124,
+     "plan": 276,
+     "kakei": 26,
+     "jukyo": 169
+    },
+    "2023": {
+     "pop": 401195,
+     "soudan": 964,
+     "plan": 216,
+     "kakei": 29,
+     "jukyo": 81
+    }
+   }
+  },
+  {
+   "name": "長崎県",
+   "level": "都道府県",
+   "pref": null,
+   "pop": 657245,
+   "soudan": 1527,
+   "soudan100k": 19.4,
+   "plan": 821,
+   "plan100k": 10.4,
+   "shien": 220,
+   "shien100k": 2.8,
+   "jukyo": 19,
+   "ichiji": 2,
+   "kakei": 402,
+   "junbi": 51,
+   "kunren": 0,
+   "jshuro": 174,
+   "kashitsuke": 5,
+   "seiho": 140,
+   "shurosha": 79,
+   "shurosha_p": 55,
+   "zoshu": 71,
+   "zoshu_p": 23,
+   "hist": {
+    "2017": {
+     "pop": 710112,
+     "soudan": 1884,
+     "plan": 917,
+     "kakei": 52,
+     "jukyo": 87
+    },
+    "2018": {
+     "pop": 704342,
+     "soudan": 2075,
+     "plan": 1237,
+     "kakei": 118,
+     "jukyo": 58
+    },
+    "2019": {
+     "pop": 697986,
+     "soudan": 1962,
+     "plan": 1210,
+     "kakei": 176,
+     "jukyo": 65
+    },
+    "2020": {
+     "pop": 691222,
+     "soudan": 3355,
+     "plan": 1456,
+     "kakei": 315,
+     "jukyo": 213
+    },
+    "2021": {
+     "pop": 661854,
+     "soudan": 2932,
+     "plan": 1518,
+     "kakei": 404,
+     "jukyo": 158
+    },
+    "2022": {
+     "pop": 670865,
+     "soudan": 1681,
+     "plan": 1002,
+     "kakei": 384,
+     "jukyo": 103
+    },
+    "2023": {
+     "pop": 664392,
+     "soudan": 1507,
+     "plan": 926,
+     "kakei": 505,
+     "jukyo": 37
+    }
+   }
+  },
+  {
+   "name": "長野市",
+   "level": "中核市",
+   "pref": "長野県",
+   "pop": 365572,
+   "soudan": 783,
+   "soudan100k": 17.8,
+   "plan": 292,
+   "plan100k": 6.7,
+   "shien": 121,
+   "shien100k": 2.8,
+   "jukyo": 17,
+   "ichiji": 15,
+   "kakei": 28,
+   "junbi": 1,
+   "kunren": 10,
+   "jshuro": 109,
+   "kashitsuke": 7,
+   "seiho": 83,
+   "shurosha": 41,
+   "shurosha_p": 35,
+   "zoshu": 34,
+   "zoshu_p": 28,
+   "hist": {
+    "2017": {
+     "pop": 383512,
+     "soudan": 389,
+     "plan": 167,
+     "kakei": 23,
+     "jukyo": 6
+    },
+    "2018": {
+     "pop": 382001,
+     "soudan": 543,
+     "plan": 339,
+     "kakei": 53,
+     "jukyo": 16
+    },
+    "2019": {
+     "pop": 380459,
+     "soudan": 650,
+     "plan": 290,
+     "kakei": 58,
+     "jukyo": 15
+    },
+    "2020": {
+     "pop": 378025,
+     "soudan": 1229,
+     "plan": 710,
+     "kakei": 39,
+     "jukyo": 282
+    },
+    "2021": {
+     "pop": 378025,
+     "soudan": 891,
+     "plan": 681,
+     "kakei": 48,
+     "jukyo": 177
+    },
+    "2022": {
+     "pop": 371651,
+     "soudan": 886,
+     "plan": 389,
+     "kakei": 43,
+     "jukyo": 108
+    },
+    "2023": {
+     "pop": 368785,
+     "soudan": 654,
+     "plan": 328,
+     "kakei": 30,
+     "jukyo": 21
+    }
+   }
+  },
+  {
+   "name": "長野県",
+   "level": "都道府県",
+   "pref": null,
+   "pop": 1427088,
+   "soudan": 2741,
+   "soudan100k": 16.0,
+   "plan": 1115,
+   "plan100k": 6.5,
+   "shien": 515,
+   "shien100k": 3.0,
+   "jukyo": 54,
+   "ichiji": 24,
+   "kakei": 234,
+   "junbi": 75,
+   "kunren": 1,
+   "jshuro": 484,
+   "kashitsuke": 90,
+   "seiho": 216,
+   "shurosha": 250,
+   "shurosha_p": 177,
+   "zoshu": 104,
+   "zoshu_p": 54,
+   "hist": {
+    "2017": {
+     "pop": 1754154,
+     "soudan": 2727,
+     "plan": 1200,
+     "kakei": 198,
+     "jukyo": 60
+    },
+    "2018": {
+     "pop": 1744063,
+     "soudan": 2788,
+     "plan": 1198,
+     "kakei": 198,
+     "jukyo": 38
+    },
+    "2019": {
+     "pop": 1733681,
+     "soudan": 2977,
+     "plan": 1310,
+     "kakei": 261,
+     "jukyo": 71
+    },
+    "2020": {
+     "pop": 1723866,
+     "soudan": 7283,
+     "plan": 1792,
+     "kakei": 230,
+     "jukyo": 439
+    },
+    "2021": {
+     "pop": 1456224,
+     "soudan": 4346,
+     "plan": 1439,
+     "kakei": 195,
+     "jukyo": 231
+    },
+    "2022": {
+     "pop": 1448351,
+     "soudan": 2887,
+     "plan": 1083,
+     "kakei": 153,
+     "jukyo": 170
+    },
+    "2023": {
+     "pop": 1438566,
+     "soudan": 2456,
+     "plan": 1027,
+     "kakei": 199,
+     "jukyo": 61
+    }
+   }
+  },
+  {
+   "name": "青森市",
+   "level": "中核市",
+   "pref": "青森県",
+   "pop": 267520,
+   "soudan": 458,
+   "soudan100k": 14.3,
+   "plan": 33,
+   "plan100k": 1.0,
+   "shien": 32,
+   "shien100k": 1.0,
+   "jukyo": 26,
+   "ichiji": 0,
+   "kakei": 0,
+   "junbi": 0,
+   "kunren": 2,
+   "jshuro": 32,
+   "kashitsuke": 0,
+   "seiho": 4,
+   "shurosha": 20,
+   "shurosha_p": 20,
+   "zoshu": 7,
+   "zoshu_p": 7,
+   "hist": {
+    "2017": {
+     "pop": 293066,
+     "soudan": 453,
+     "plan": 15,
+     "kakei": 0,
+     "jukyo": 5
+    },
+    "2018": {
+     "pop": 290137,
+     "soudan": 569,
+     "plan": 49,
+     "kakei": 0,
+     "jukyo": 7
+    },
+    "2019": {
+     "pop": 287574,
+     "soudan": 548,
+     "plan": 54,
+     "kakei": 0,
+     "jukyo": 9
+    },
+    "2020": {
+     "pop": 284531,
+     "soudan": 1974,
+     "plan": 107,
+     "kakei": 0,
+     "jukyo": 67
+    },
+    "2021": {
+     "pop": 284531,
+     "soudan": 1129,
+     "plan": 136,
+     "kakei": 0,
+     "jukyo": 105
+    },
+    "2022": {
+     "pop": 275099,
+     "soudan": 618,
+     "plan": 69,
+     "kakei": 0,
+     "jukyo": 58
+    },
+    "2023": {
+     "pop": 271544,
+     "soudan": 453,
+     "plan": 45,
+     "kakei": 0,
+     "jukyo": 36
+    }
+   }
+  },
+  {
+   "name": "青森県",
+   "level": "都道府県",
+   "pref": null,
+   "pop": 719876,
+   "soudan": 1134,
+   "soudan100k": 13.1,
+   "plan": 824,
+   "plan100k": 9.5,
+   "shien": 253,
+   "shien100k": 2.9,
+   "jukyo": 13,
+   "ichiji": 0,
+   "kakei": 292,
+   "junbi": 25,
+   "kunren": 5,
+   "jshuro": 209,
+   "kashitsuke": 12,
+   "seiho": 121,
+   "shurosha": 125,
+   "shurosha_p": 85,
+   "zoshu": 66,
+   "zoshu_p": 30,
+   "hist": {
+    "2017": {
+     "pop": 809521,
+     "soudan": 1248,
+     "plan": 472,
+     "kakei": 17,
+     "jukyo": 8
+    },
+    "2018": {
+     "pop": 799535,
+     "soudan": 1338,
+     "plan": 519,
+     "kakei": 100,
+     "jukyo": 4
+    },
+    "2019": {
+     "pop": 788772,
+     "soudan": 1087,
+     "plan": 567,
+     "kakei": 152,
+     "jukyo": 18
+    },
+    "2020": {
+     "pop": 778136,
+     "soudan": 2053,
+     "plan": 763,
+     "kakei": 111,
+     "jukyo": 202
+    },
+    "2021": {
+     "pop": 745494,
+     "soudan": 1990,
+     "plan": 819,
+     "kakei": 159,
+     "jukyo": 132
+    },
+    "2022": {
+     "pop": 744548,
+     "soudan": 1461,
+     "plan": 642,
+     "kakei": 182,
+     "jukyo": 54
+    },
+    "2023": {
+     "pop": 732724,
+     "soudan": 1158,
+     "plan": 700,
+     "kakei": 218,
+     "jukyo": 19
+    }
+   }
+  },
+  {
+   "name": "静岡市",
+   "level": "指定都市",
+   "pref": "静岡県",
+   "pop": 677736,
+   "soudan": 1405,
+   "soudan100k": 17.3,
+   "plan": 265,
+   "plan100k": 3.3,
+   "shien": 103,
+   "shien100k": 1.3,
+   "jukyo": 15,
+   "ichiji": 82,
+   "kakei": 24,
+   "junbi": 7,
+   "kunren": 1,
+   "jshuro": 35,
+   "kashitsuke": 8,
+   "seiho": 72,
+   "shurosha": 64,
+   "shurosha_p": 44,
+   "zoshu": 14,
+   "zoshu_p": 5,
+   "hist": {
+    "2017": {
+     "pop": 712184,
+     "soudan": 1320,
+     "plan": 182,
+     "kakei": 0,
+     "jukyo": 13
+    },
+    "2018": {
+     "pop": 709041,
+     "soudan": 1275,
+     "plan": 223,
+     "kakei": 0,
+     "jukyo": 14
+    },
+    "2019": {
+     "pop": 706287,
+     "soudan": 1418,
+     "plan": 225,
+     "kakei": 0,
+     "jukyo": 18
+    },
+    "2020": {
+     "pop": 702395,
+     "soudan": 4693,
+     "plan": 309,
+     "kakei": 20,
+     "jukyo": 49
+    },
+    "2021": {
+     "pop": 702395,
+     "soudan": 2670,
+     "plan": 269,
+     "kakei": 11,
+     "jukyo": 49
+    },
+    "2022": {
+     "pop": 689079,
+     "soudan": 1748,
+     "plan": 198,
+     "kakei": 11,
+     "jukyo": 17
+    },
+    "2023": {
+     "pop": 683739,
+     "soudan": 1366,
+     "plan": 240,
+     "kakei": 28,
+     "jukyo": 23
+    }
+   }
+  },
+  {
+   "name": "静岡県",
+   "level": "都道府県",
+   "pref": null,
+   "pop": 2139748,
+   "soudan": 4857,
+   "soudan100k": 18.9,
+   "plan": 1243,
+   "plan100k": 4.8,
+   "shien": 634,
+   "shien100k": 2.5,
+   "jukyo": 145,
+   "ichiji": 115,
+   "kakei": 391,
+   "junbi": 148,
+   "kunren": 6,
+   "jshuro": 570,
+   "kashitsuke": 98,
+   "seiho": 194,
+   "shurosha": 373,
+   "shurosha_p": 288,
+   "zoshu": 129,
+   "zoshu_p": 74,
+   "hist": {
+    "2017": {
+     "pop": 2249408,
+     "soudan": 3713,
+     "plan": 843,
+     "kakei": 98,
+     "jukyo": 179
+    },
+    "2018": {
+     "pop": 2239931,
+     "soudan": 3744,
+     "plan": 963,
+     "kakei": 138,
+     "jukyo": 150
+    },
+    "2019": {
+     "pop": 2229715,
+     "soudan": 4311,
+     "plan": 981,
+     "kakei": 157,
+     "jukyo": 109
+    },
+    "2020": {
+     "pop": 2219362,
+     "soudan": 13279,
+     "plan": 1915,
+     "kakei": 354,
+     "jukyo": 848
+    },
+    "2021": {
+     "pop": 2179160,
+     "soudan": 9368,
+     "plan": 1661,
+     "kakei": 525,
+     "jukyo": 455
+    },
+    "2022": {
+     "pop": 2173525,
+     "soudan": 5888,
+     "plan": 1298,
+     "kakei": 350,
+     "jukyo": 263
+    },
+    "2023": {
+     "pop": 2157330,
+     "soudan": 5359,
+     "plan": 1659,
+     "kakei": 484,
+     "jukyo": 195
+    }
+   }
+  },
+  {
+   "name": "香川県",
+   "level": "都道府県",
+   "pref": null,
+   "pop": 528846,
+   "soudan": 905,
+   "soudan100k": 14.3,
+   "plan": 208,
+   "plan100k": 3.3,
+   "shien": 94,
+   "shien100k": 1.5,
+   "jukyo": 15,
+   "ichiji": 1,
+   "kakei": 66,
+   "junbi": 53,
+   "kunren": 0,
+   "jshuro": 37,
+   "kashitsuke": 34,
+   "seiho": 45,
+   "shurosha": 33,
+   "shurosha_p": 22,
+   "zoshu": 34,
+   "zoshu_p": 28,
+   "hist": {
+    "2017": {
+     "pop": 572722,
+     "soudan": 702,
+     "plan": 187,
+     "kakei": 41,
+     "jukyo": 4
+    },
+    "2018": {
+     "pop": 568569,
+     "soudan": 734,
+     "plan": 179,
+     "kakei": 35,
+     "jukyo": 4
+    },
+    "2019": {
+     "pop": 564016,
+     "soudan": 751,
+     "plan": 168,
+     "kakei": 31,
+     "jukyo": 3
+    },
+    "2020": {
+     "pop": 559040,
+     "soudan": 2054,
+     "plan": 240,
+     "kakei": 53,
+     "jukyo": 48
+    },
+    "2021": {
+     "pop": 545626,
+     "soudan": 1835,
+     "plan": 214,
+     "kakei": 54,
+     "jukyo": 33
+    },
+    "2022": {
+     "pop": 540471,
+     "soudan": 1158,
+     "plan": 221,
+     "kakei": 43,
+     "jukyo": 33
+    },
+    "2023": {
+     "pop": 534363,
+     "soudan": 1072,
+     "plan": 202,
+     "kakei": 48,
+     "jukyo": 16
+    }
+   }
+  },
+  {
+   "name": "高崎市",
+   "level": "中核市",
+   "pref": "群馬県",
+   "pop": 367861,
+   "soudan": 475,
+   "soudan100k": 10.8,
+   "plan": 93,
+   "plan100k": 2.1,
+   "shien": 93,
+   "shien100k": 2.1,
+   "jukyo": 27,
+   "ichiji": 0,
+   "kakei": 0,
+   "junbi": 0,
+   "kunren": 0,
+   "jshuro": 92,
+   "kashitsuke": 5,
+   "seiho": 91,
+   "shurosha": 45,
+   "shurosha_p": 43,
+   "zoshu": 7,
+   "zoshu_p": 6,
+   "hist": {
+    "2017": {
+     "pop": 375491,
+     "soudan": 506,
+     "plan": 112,
+     "kakei": 0,
+     "jukyo": 20
+    },
+    "2018": {
+     "pop": 375255,
+     "soudan": 608,
+     "plan": 133,
+     "kakei": 0,
+     "jukyo": 21
+    },
+    "2019": {
+     "pop": 374543,
+     "soudan": 471,
+     "plan": 72,
+     "kakei": 0,
+     "jukyo": 23
+    },
+    "2020": {
+     "pop": 374168,
+     "soudan": 2126,
+     "plan": 108,
+     "kakei": 0,
+     "jukyo": 63
+    },
+    "2021": {
+     "pop": 374168,
+     "soudan": 1288,
+     "plan": 140,
+     "kakei": 0,
+     "jukyo": 55
+    },
+    "2022": {
+     "pop": 370806,
+     "soudan": 674,
+     "plan": 90,
+     "kakei": 0,
+     "jukyo": 34
+    },
+    "2023": {
+     "pop": 369314,
+     "soudan": 544,
+     "plan": 108,
+     "kakei": 0,
+     "jukyo": 38
+    }
+   }
+  },
+  {
+   "name": "高松市",
+   "level": "中核市",
+   "pref": "香川県",
+   "pop": 419739,
+   "soudan": 927,
+   "soudan100k": 18.4,
+   "plan": 230,
+   "plan100k": 4.6,
+   "shien": 109,
+   "shien100k": 2.2,
+   "jukyo": 10,
+   "ichiji": 0,
+   "kakei": 104,
+   "junbi": 0,
+   "kunren": 0,
+   "jshuro": 114,
+   "kashitsuke": 27,
+   "seiho": 90,
+   "shurosha": 65,
+   "shurosha_p": 57,
+   "zoshu": 20,
+   "zoshu_p": 11,
+   "hist": {
+    "2017": {
+     "pop": 429451,
+     "soudan": 592,
+     "plan": 89,
+     "kakei": 0,
+     "jukyo": 9
+    },
+    "2018": {
+     "pop": 429242,
+     "soudan": 606,
+     "plan": 93,
+     "kakei": 0,
+     "jukyo": 14
+    },
+    "2019": {
+     "pop": 429189,
+     "soudan": 697,
+     "plan": 134,
+     "kakei": 0,
+     "jukyo": 13
+    },
+    "2020": {
+     "pop": 428296,
+     "soudan": 597,
+     "plan": 162,
+     "kakei": 0,
+     "jukyo": 74
+    },
+    "2021": {
+     "pop": 428296,
+     "soudan": 809,
+     "plan": 211,
+     "kakei": 9,
+     "jukyo": 73
+    },
+    "2022": {
+     "pop": 424414,
+     "soudan": 1122,
+     "plan": 203,
+     "kakei": 41,
+     "jukyo": 37
+    },
+    "2023": {
+     "pop": 422424,
+     "soudan": 1062,
+     "plan": 406,
+     "kakei": 90,
+     "jukyo": 13
+    }
+   }
+  },
+  {
+   "name": "高槻市",
+   "level": "中核市",
+   "pref": "大阪府",
+   "pop": 346972,
+   "soudan": 747,
+   "soudan100k": 17.9,
+   "plan": 112,
+   "plan100k": 2.7,
+   "shien": 70,
+   "shien100k": 1.7,
+   "jukyo": 6,
+   "ichiji": 18,
+   "kakei": 6,
+   "junbi": 9,
+   "kunren": 0,
+   "jshuro": 68,
+   "kashitsuke": 31,
+   "seiho": 67,
+   "shurosha": 42,
+   "shurosha_p": 34,
+   "zoshu": 8,
+   "zoshu_p": 5,
+   "hist": {
+    "2017": {
+     "pop": 355209,
+     "soudan": 712,
+     "plan": 135,
+     "kakei": 0,
+     "jukyo": 4
+    },
+    "2018": {
+     "pop": 354216,
+     "soudan": 708,
+     "plan": 132,
+     "kakei": 0,
+     "jukyo": 2
+    },
+    "2019": {
+     "pop": 353563,
+     "soudan": 746,
+     "plan": 144,
+     "kakei": 6,
+     "jukyo": 4
+    },
+    "2020": {
+     "pop": 352496,
+     "soudan": 2666,
+     "plan": 188,
+     "kakei": 12,
+     "jukyo": 21
+    },
+    "2021": {
+     "pop": 352496,
+     "soudan": 2760,
+     "plan": 223,
+     "kakei": 12,
+     "jukyo": 72
+    },
+    "2022": {
+     "pop": 349941,
+     "soudan": 1203,
+     "plan": 188,
+     "kakei": 6,
+     "jukyo": 55
+    },
+    "2023": {
+     "pop": 348530,
+     "soudan": 649,
+     "plan": 124,
+     "kakei": 3,
+     "jukyo": 16
+    }
+   }
+  },
+  {
+   "name": "高知市",
+   "level": "中核市",
+   "pref": "高知県",
+   "pop": 316410,
+   "soudan": 732,
+   "soudan100k": 19.3,
+   "plan": 119,
+   "plan100k": 3.1,
+   "shien": 32,
+   "shien100k": 0.8,
+   "jukyo": 7,
+   "ichiji": 13,
+   "kakei": 48,
+   "junbi": 17,
+   "kunren": 2,
+   "jshuro": 26,
+   "kashitsuke": 0,
+   "seiho": 6,
+   "shurosha": 12,
+   "shurosha_p": 7,
+   "zoshu": 5,
+   "zoshu_p": 2,
+   "hist": {
+    "2017": {
+     "pop": 336052,
+     "soudan": 663,
+     "plan": 216,
+     "kakei": 3,
+     "jukyo": 9
+    },
+    "2018": {
+     "pop": 334049,
+     "soudan": 699,
+     "plan": 256,
+     "kakei": 75,
+     "jukyo": 12
+    },
+    "2019": {
+     "pop": 332276,
+     "soudan": 731,
+     "plan": 189,
+     "kakei": 40,
+     "jukyo": 9
+    },
+    "2020": {
+     "pop": 330167,
+     "soudan": 1384,
+     "plan": 232,
+     "kakei": 34,
+     "jukyo": 81
+    },
+    "2021": {
+     "pop": 330167,
+     "soudan": 708,
+     "plan": 182,
+     "kakei": 44,
+     "jukyo": 27
+    },
+    "2022": {
+     "pop": 322526,
+     "soudan": 739,
+     "plan": 139,
+     "kakei": 42,
+     "jukyo": 26
+    },
+    "2023": {
+     "pop": 319724,
+     "soudan": 584,
+     "plan": 100,
+     "kakei": 31,
+     "jukyo": 15
+    }
+   }
+  },
+  {
+   "name": "高知県",
+   "level": "都道府県",
+   "pref": null,
+   "pop": 359213,
+   "soudan": 1138,
+   "soudan100k": 26.4,
+   "plan": 295,
+   "plan100k": 6.8,
+   "shien": 67,
+   "shien100k": 1.6,
+   "jukyo": 2,
+   "ichiji": 0,
+   "kakei": 100,
+   "junbi": 32,
+   "kunren": 2,
+   "jshuro": 34,
+   "kashitsuke": 71,
+   "seiho": 6,
+   "shurosha": 45,
+   "shurosha_p": 20,
+   "zoshu": 40,
+   "zoshu_p": 5,
+   "hist": {
+    "2017": {
+     "pop": 404007,
+     "soudan": 1484,
+     "plan": 85,
+     "kakei": 22,
+     "jukyo": 2
+    },
+    "2018": {
+     "pop": 398486,
+     "soudan": 1582,
+     "plan": 202,
+     "kakei": 71,
+     "jukyo": 2
+    },
+    "2019": {
+     "pop": 393013,
+     "soudan": 1382,
+     "plan": 256,
+     "kakei": 109,
+     "jukyo": 2
+    },
+    "2020": {
+     "pop": 387313,
+     "soudan": 3515,
+     "plan": 482,
+     "kakei": 123,
+     "jukyo": 35
+    },
+    "2021": {
+     "pop": 371364,
+     "soudan": 2470,
+     "plan": 596,
+     "kakei": 130,
+     "jukyo": 58
+    },
+    "2022": {
+     "pop": 370843,
+     "soudan": 1561,
+     "plan": 540,
+     "kakei": 144,
+     "jukyo": 22
+    },
+    "2023": {
+     "pop": 365240,
+     "soudan": 1280,
+     "plan": 373,
+     "kakei": 90,
+     "jukyo": 5
+    }
+   }
+  },
+  {
+   "name": "鳥取市",
+   "level": "中核市",
+   "pref": "鳥取県",
+   "pop": 181203,
+   "soudan": 334,
+   "soudan100k": 15.4,
+   "plan": 70,
+   "plan100k": 3.2,
+   "shien": 50,
+   "shien100k": 2.3,
+   "jukyo": 11,
+   "ichiji": 3,
+   "kakei": 10,
+   "junbi": 12,
+   "kunren": 0,
+   "jshuro": 0,
+   "kashitsuke": 13,
+   "seiho": 31,
+   "shurosha": 22,
+   "shurosha_p": 17,
+   "zoshu": 10,
+   "zoshu_p": 9,
+   "hist": {
+    "2018": {
+     "pop": 190960,
+     "soudan": 303,
+     "plan": 37,
+     "kakei": 0,
+     "jukyo": 1
+    },
+    "2019": {
+     "pop": 189799,
+     "soudan": 277,
+     "plan": 54,
+     "kakei": 0,
+     "jukyo": 7
+    },
+    "2020": {
+     "pop": 188286,
+     "soudan": 656,
+     "plan": 103,
+     "kakei": 3,
+     "jukyo": 56
+    },
+    "2021": {
+     "pop": 188286,
+     "soudan": 656,
+     "plan": 256,
+     "kakei": 2,
+     "jukyo": 195
+    },
+    "2022": {
+     "pop": 184557,
+     "soudan": 335,
+     "plan": 164,
+     "kakei": 3,
+     "jukyo": 106
+    },
+    "2023": {
+     "pop": 183269,
+     "soudan": 342,
+     "plan": 93,
+     "kakei": 5,
+     "jukyo": 26
+    }
+   }
+  },
+  {
+   "name": "鳥取県",
+   "level": "都道府県",
+   "pref": null,
+   "pop": 359004,
+   "soudan": 942,
+   "soudan100k": 21.9,
+   "plan": 316,
+   "plan100k": 7.3,
+   "shien": 127,
+   "shien100k": 2.9,
+   "jukyo": 38,
+   "ichiji": 0,
+   "kakei": 74,
+   "junbi": 30,
+   "kunren": 0,
+   "jshuro": 74,
+   "kashitsuke": 49,
+   "seiho": 51,
+   "shurosha": 51,
+   "shurosha_p": 35,
+   "zoshu": 37,
+   "zoshu_p": 21,
+   "hist": {
+    "2017": {
+     "pop": 579309,
+     "soudan": 1017,
+     "plan": 335,
+     "kakei": 46,
+     "jukyo": 30
+    },
+    "2018": {
+     "pop": 384304,
+     "soudan": 737,
+     "plan": 266,
+     "kakei": 54,
+     "jukyo": 18
+    },
+    "2019": {
+     "pop": 381025,
+     "soudan": 776,
+     "plan": 240,
+     "kakei": 33,
+     "jukyo": 25
+    },
+    "2020": {
+     "pop": 377766,
+     "soudan": 2870,
+     "plan": 793,
+     "kakei": 57,
+     "jukyo": 44
+    },
+    "2021": {
+     "pop": 368673,
+     "soudan": 1620,
+     "plan": 1034,
+     "kakei": 37,
+     "jukyo": 23
+    },
+    "2022": {
+     "pop": 367249,
+     "soudan": 1075,
+     "plan": 284,
+     "kakei": 35,
+     "jukyo": 19
+    },
+    "2023": {
+     "pop": 363289,
+     "soudan": 830,
+     "plan": 289,
+     "kakei": 45,
+     "jukyo": 85
+    }
+   }
+  },
+  {
+   "name": "鹿児島市",
+   "level": "中核市",
+   "pref": "鹿児島県",
+   "pop": 595042,
+   "soudan": 627,
+   "soudan100k": 8.8,
+   "plan": 107,
+   "plan100k": 1.5,
+   "shien": 46,
+   "shien100k": 0.6,
+   "jukyo": 23,
+   "ichiji": 0,
+   "kakei": 0,
+   "junbi": 0,
+   "kunren": 0,
+   "jshuro": 23,
+   "kashitsuke": 0,
+   "seiho": 25,
+   "shurosha": 34,
+   "shurosha_p": 31,
+   "zoshu": 1,
+   "zoshu_p": 0,
+   "hist": {
+    "2017": {
+     "pop": 607382,
+     "soudan": 557,
+     "plan": 54,
+     "kakei": 0,
+     "jukyo": 6
+    },
+    "2018": {
+     "pop": 606706,
+     "soudan": 568,
+     "plan": 145,
+     "kakei": 0,
+     "jukyo": 8
+    },
+    "2019": {
+     "pop": 605506,
+     "soudan": 598,
+     "plan": 180,
+     "kakei": 0,
+     "jukyo": 9
+    },
+    "2020": {
+     "pop": 604631,
+     "soudan": 5072,
+     "plan": 87,
+     "kakei": 0,
+     "jukyo": 41
+    },
+    "2021": {
+     "pop": 604631,
+     "soudan": 3177,
+     "plan": 29,
+     "kakei": 0,
+     "jukyo": 12
+    },
+    "2022": {
+     "pop": 600318,
+     "soudan": 1234,
+     "plan": 24,
+     "kakei": 0,
+     "jukyo": 7
+    },
+    "2023": {
+     "pop": 597834,
+     "soudan": 578,
+     "plan": 35,
+     "kakei": 0,
+     "jukyo": 22
+    }
+   }
+  },
+  {
+   "name": "鹿児島県",
+   "level": "都道府県",
+   "pref": null,
+   "pop": 981319,
+   "soudan": 2068,
+   "soudan100k": 17.6,
+   "plan": 372,
+   "plan100k": 3.2,
+   "shien": 132,
+   "shien100k": 1.1,
+   "jukyo": 18,
+   "ichiji": 22,
+   "kakei": 173,
+   "junbi": 64,
+   "kunren": 0,
+   "jshuro": 138,
+   "kashitsuke": 31,
+   "seiho": 45,
+   "shurosha": 85,
+   "shurosha_p": 42,
+   "zoshu": 55,
+   "zoshu_p": 24,
+   "hist": {
+    "2017": {
+     "pop": 1072120,
+     "soudan": 2147,
+     "plan": 444,
+     "kakei": 70,
+     "jukyo": 16
+    },
+    "2018": {
+     "pop": 1061297,
+     "soudan": 2341,
+     "plan": 576,
+     "kakei": 133,
+     "jukyo": 13
+    },
+    "2019": {
+     "pop": 1050382,
+     "soudan": 2313,
+     "plan": 464,
+     "kakei": 150,
+     "jukyo": 13
+    },
+    "2020": {
+     "pop": 1038806,
+     "soudan": 4648,
+     "plan": 684,
+     "kakei": 256,
+     "jukyo": 73
+    },
+    "2021": {
+     "pop": 1013219,
+     "soudan": 3854,
+     "plan": 917,
+     "kakei": 395,
+     "jukyo": 63
+    },
+    "2022": {
+     "pop": 1005101,
+     "soudan": 2502,
+     "plan": 700,
+     "kakei": 261,
+     "jukyo": 33
+    },
+    "2023": {
+     "pop": 993865,
+     "soudan": 2118,
+     "plan": 386,
+     "kakei": 156,
+     "jukyo": 16
+    }
+   }
+  }
+ ],
+ "warnings": [
+  "2015年度: 18列の行が1つも取れない（列数が違う年度）",
+  "2016年度: 18列の行が1つも取れない（列数が違う年度）"
+ ]
+}

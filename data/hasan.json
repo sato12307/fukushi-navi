@@ -1,0 +1,1537 @@
+{
+ "source": {
+  "shiho": "最高裁判所「司法統計年報 1.民事・行政編」第4表（民事・行政事件数―事件の種類及び新受、既済、未済―全地方裁判所及び地方裁判所別）",
+  "shiho_url": "https://www.courts.go.jp/toukei_siryou/shihotokei_nenpo/index.html",
+  "bar": "日本弁護士連合会「弁護士会別会員数」",
+  "bar_url": "https://www.nichibenren.or.jp/jfba_info/membership/about.html",
+  "pop": "人口・被保護人員は厚生労働省「被保護者調査」第9表からの逆算（0.5%ほどの丸め誤差を含む）",
+  "note": "年は暦年（1〜12月）。年度ではない。数字は新受件数。破産には法人が含まれる。"
+ },
+ "latest_year": 2025,
+ "years": [
+  2021,
+  2022,
+  2023,
+  2024,
+  2025
+ ],
+ "bar_asof": "2026-09-01",
+ "bar_total": 48057,
+ "national": {
+  "2021": {
+   "hasan": 73457,
+   "saisei": 10509,
+   "kyuyo": 740,
+   "shizen": null
+  },
+  "2022": {
+   "hasan": 70602,
+   "saisei": 8982,
+   "kyuyo": 782,
+   "shizen": null
+  },
+  "2023": {
+   "hasan": 78215,
+   "saisei": 8766,
+   "kyuyo": 674,
+   "shizen": {
+    "sou": 78215,
+    "shizen": 70745,
+    "shizen_jiko": 70589,
+    "hojin": 7470
+   }
+  },
+  "2024": {
+   "hasan": 85115,
+   "saisei": 9898,
+   "kyuyo": 626,
+   "shizen": null
+  },
+  "2025": {
+   "hasan": 92059,
+   "saisei": 10753,
+   "kyuyo": 662,
+   "shizen": {
+    "sou": 92059,
+    "shizen": 83255,
+    "shizen_jiko": 83100,
+    "hojin": 8804
+   }
+  }
+ },
+ "corr": {
+  "hasan_hogo": 0.6401611719009364,
+  "hasan_bengoshi": 0.27501623552885857,
+  "saisei_hogo": 0.024252626596900348,
+  "saisei_bengoshi": -0.30868439671598213,
+  "share_hogo": -0.6171820574312779,
+  "share_bengoshi": -0.5087819218882417,
+  "bengoshi_hogo": 0.2885717715564851,
+  "hasan_bengoshi_partial": 0.12274184964426979
+ },
+ "rows": [
+  {
+   "pref": "三重県",
+   "pop": 1710110,
+   "bengoshi": 204,
+   "hogo_nin": 15562,
+   "hasan": 958,
+   "saisei": 168,
+   "kyuyo": 8,
+   "hist": {
+    "2021": {
+     "hasan": 775,
+     "saisei": 165
+    },
+    "2022": {
+     "hasan": 781,
+     "saisei": 145
+    },
+    "2023": {
+     "hasan": 895,
+     "saisei": 150
+    },
+    "2024": {
+     "hasan": 989,
+     "saisei": 145
+    },
+    "2025": {
+     "hasan": 958,
+     "saisei": 176
+    }
+   }
+  },
+  {
+   "pref": "京都府",
+   "pop": 2523960,
+   "bengoshi": 894,
+   "hogo_nin": 52124,
+   "hasan": 1895,
+   "saisei": 173,
+   "kyuyo": 19,
+   "hist": {
+    "2021": {
+     "hasan": 1321,
+     "saisei": 182
+    },
+    "2022": {
+     "hasan": 1461,
+     "saisei": 183
+    },
+    "2023": {
+     "hasan": 1570,
+     "saisei": 171
+    },
+    "2024": {
+     "hasan": 1711,
+     "saisei": 206
+    },
+    "2025": {
+     "hasan": 1895,
+     "saisei": 192
+    }
+   }
+  },
+  {
+   "pref": "佐賀県",
+   "pop": 786196,
+   "bengoshi": 111,
+   "hogo_nin": 7233,
+   "hasan": 700,
+   "saisei": 101,
+   "kyuyo": 7,
+   "hist": {
+    "2021": {
+     "hasan": 517,
+     "saisei": 107
+    },
+    "2022": {
+     "hasan": 489,
+     "saisei": 95
+    },
+    "2023": {
+     "hasan": 546,
+     "saisei": 72
+    },
+    "2024": {
+     "hasan": 617,
+     "saisei": 84
+    },
+    "2025": {
+     "hasan": 700,
+     "saisei": 108
+    }
+   }
+  },
+  {
+   "pref": "兵庫県",
+   "pop": 5346349,
+   "bengoshi": 1059,
+   "hogo_nin": 97294,
+   "hasan": 3754,
+   "saisei": 567,
+   "kyuyo": 25,
+   "hist": {
+    "2021": {
+     "hasan": 3041,
+     "saisei": 539
+    },
+    "2022": {
+     "hasan": 2952,
+     "saisei": 453
+    },
+    "2023": {
+     "hasan": 3410,
+     "saisei": 515
+    },
+    "2024": {
+     "hasan": 3631,
+     "saisei": 551
+    },
+    "2025": {
+     "hasan": 3754,
+     "saisei": 592
+    }
+   }
+  },
+  {
+   "pref": "北海道",
+   "pop": 5038086,
+   "bengoshi": 1099,
+   "hogo_nin": 148456,
+   "hasan": 5112,
+   "saisei": 605,
+   "kyuyo": 28,
+   "hist": {
+    "2021": {
+     "hasan": 4118,
+     "saisei": 632
+    },
+    "2022": {
+     "hasan": 3972,
+     "saisei": 532
+    },
+    "2023": {
+     "hasan": 4191,
+     "saisei": 486
+    },
+    "2024": {
+     "hasan": 4642,
+     "saisei": 540
+    },
+    "2025": {
+     "hasan": 5112,
+     "saisei": 633
+    }
+   }
+  },
+  {
+   "pref": "千葉県",
+   "pop": 6255125,
+   "bengoshi": 934,
+   "hogo_nin": 90236,
+   "hasan": 4484,
+   "saisei": 546,
+   "kyuyo": 20,
+   "hist": {
+    "2021": {
+     "hasan": 3796,
+     "saisei": 659
+    },
+    "2022": {
+     "hasan": 3616,
+     "saisei": 548
+    },
+    "2023": {
+     "hasan": 3759,
+     "saisei": 482
+    },
+    "2024": {
+     "hasan": 3944,
+     "saisei": 496
+    },
+    "2025": {
+     "hasan": 4484,
+     "saisei": 566
+    }
+   }
+  },
+  {
+   "pref": "和歌山県",
+   "pop": 880174,
+   "bengoshi": 147,
+   "hogo_nin": 14444,
+   "hasan": 576,
+   "saisei": 77,
+   "kyuyo": 7,
+   "hist": {
+    "2021": {
+     "hasan": 480,
+     "saisei": 63
+    },
+    "2022": {
+     "hasan": 478,
+     "saisei": 66
+    },
+    "2023": {
+     "hasan": 505,
+     "saisei": 73
+    },
+    "2024": {
+     "hasan": 487,
+     "saisei": 79
+    },
+    "2025": {
+     "hasan": 576,
+     "saisei": 84
+    }
+   }
+  },
+  {
+   "pref": "埼玉県",
+   "pop": 7313436,
+   "bengoshi": 1007,
+   "hogo_nin": 98494,
+   "hasan": 4822,
+   "saisei": 519,
+   "kyuyo": 43,
+   "hist": {
+    "2021": {
+     "hasan": 4063,
+     "saisei": 592
+    },
+    "2022": {
+     "hasan": 3691,
+     "saisei": 519
+    },
+    "2023": {
+     "hasan": 4067,
+     "saisei": 490
+    },
+    "2024": {
+     "hasan": 4311,
+     "saisei": 576
+    },
+    "2025": {
+     "hasan": 4822,
+     "saisei": 562
+    }
+   }
+  },
+  {
+   "pref": "大分県",
+   "pop": 1082144,
+   "bengoshi": 159,
+   "hogo_nin": 18076,
+   "hasan": 945,
+   "saisei": 99,
+   "kyuyo": 11,
+   "hist": {
+    "2021": {
+     "hasan": 662,
+     "saisei": 96
+    },
+    "2022": {
+     "hasan": 707,
+     "saisei": 75
+    },
+    "2023": {
+     "hasan": 796,
+     "saisei": 74
+    },
+    "2024": {
+     "hasan": 889,
+     "saisei": 74
+    },
+    "2025": {
+     "hasan": 945,
+     "saisei": 110
+    }
+   }
+  },
+  {
+   "pref": "大阪府",
+   "pop": 8751313,
+   "bengoshi": 5243,
+   "hogo_nin": 264449,
+   "hasan": 8775,
+   "saisei": 814,
+   "kyuyo": 52,
+   "hist": {
+    "2021": {
+     "hasan": 7063,
+     "saisei": 833
+    },
+    "2022": {
+     "hasan": 6704,
+     "saisei": 805
+    },
+    "2023": {
+     "hasan": 7689,
+     "saisei": 782
+    },
+    "2024": {
+     "hasan": 8099,
+     "saisei": 888
+    },
+    "2025": {
+     "hasan": 8775,
+     "saisei": 866
+    }
+   }
+  },
+  {
+   "pref": "奈良県",
+   "pop": 1286381,
+   "bengoshi": 200,
+   "hogo_nin": 17834,
+   "hasan": 813,
+   "saisei": 94,
+   "kyuyo": 8,
+   "hist": {
+    "2021": {
+     "hasan": 625,
+     "saisei": 109
+    },
+    "2022": {
+     "hasan": 629,
+     "saisei": 96
+    },
+    "2023": {
+     "hasan": 781,
+     "saisei": 106
+    },
+    "2024": {
+     "hasan": 810,
+     "saisei": 102
+    },
+    "2025": {
+     "hasan": 813,
+     "saisei": 102
+    }
+   }
+  },
+  {
+   "pref": "宮城県",
+   "pop": 2249067,
+   "bengoshi": 494,
+   "hogo_nin": 31057,
+   "hasan": 2166,
+   "saisei": 238,
+   "kyuyo": 18,
+   "hist": {
+    "2021": {
+     "hasan": 1618,
+     "saisei": 275
+    },
+    "2022": {
+     "hasan": 1485,
+     "saisei": 222
+    },
+    "2023": {
+     "hasan": 1732,
+     "saisei": 182
+    },
+    "2024": {
+     "hasan": 1897,
+     "saisei": 231
+    },
+    "2025": {
+     "hasan": 2166,
+     "saisei": 256
+    }
+   }
+  },
+  {
+   "pref": "宮崎県",
+   "pop": 1034746,
+   "bengoshi": 137,
+   "hogo_nin": 16607,
+   "hasan": 1053,
+   "saisei": 89,
+   "kyuyo": 4,
+   "hist": {
+    "2021": {
+     "hasan": 758,
+     "saisei": 102
+    },
+    "2022": {
+     "hasan": 694,
+     "saisei": 74
+    },
+    "2023": {
+     "hasan": 806,
+     "saisei": 64
+    },
+    "2024": {
+     "hasan": 979,
+     "saisei": 96
+    },
+    "2025": {
+     "hasan": 1053,
+     "saisei": 93
+    }
+   }
+  },
+  {
+   "pref": "富山県",
+   "pop": 989447,
+   "bengoshi": 127,
+   "hogo_nin": 4293,
+   "hasan": 447,
+   "saisei": 82,
+   "kyuyo": 4,
+   "hist": {
+    "2021": {
+     "hasan": 360,
+     "saisei": 90
+    },
+    "2022": {
+     "hasan": 376,
+     "saisei": 65
+    },
+    "2023": {
+     "hasan": 439,
+     "saisei": 62
+    },
+    "2024": {
+     "hasan": 425,
+     "saisei": 85
+    },
+    "2025": {
+     "hasan": 447,
+     "saisei": 86
+    }
+   }
+  },
+  {
+   "pref": "山口県",
+   "pop": 1283003,
+   "bengoshi": 181,
+   "hogo_nin": 13371,
+   "hasan": 764,
+   "saisei": 118,
+   "kyuyo": 8,
+   "hist": {
+    "2021": {
+     "hasan": 579,
+     "saisei": 98
+    },
+    "2022": {
+     "hasan": 558,
+     "saisei": 93
+    },
+    "2023": {
+     "hasan": 678,
+     "saisei": 109
+    },
+    "2024": {
+     "hasan": 809,
+     "saisei": 138
+    },
+    "2025": {
+     "hasan": 764,
+     "saisei": 126
+    }
+   }
+  },
+  {
+   "pref": "山形県",
+   "pop": 1006540,
+   "bengoshi": 101,
+   "hogo_nin": 7630,
+   "hasan": 613,
+   "saisei": 88,
+   "kyuyo": 4,
+   "hist": {
+    "2021": {
+     "hasan": 478,
+     "saisei": 69
+    },
+    "2022": {
+     "hasan": 469,
+     "saisei": 65
+    },
+    "2023": {
+     "hasan": 478,
+     "saisei": 74
+    },
+    "2024": {
+     "hasan": 572,
+     "saisei": 92
+    },
+    "2025": {
+     "hasan": 613,
+     "saisei": 92
+    }
+   }
+  },
+  {
+   "pref": "山梨県",
+   "pop": 788238,
+   "bengoshi": 124,
+   "hogo_nin": 6987,
+   "hasan": 480,
+   "saisei": 61,
+   "kyuyo": 5,
+   "hist": {
+    "2021": {
+     "hasan": 395,
+     "saisei": 60
+    },
+    "2022": {
+     "hasan": 412,
+     "saisei": 51
+    },
+    "2023": {
+     "hasan": 384,
+     "saisei": 38
+    },
+    "2024": {
+     "hasan": 456,
+     "saisei": 61
+    },
+    "2025": {
+     "hasan": 480,
+     "saisei": 66
+    }
+   }
+  },
+  {
+   "pref": "岐阜県",
+   "pop": 1920545,
+   "bengoshi": 217,
+   "hogo_nin": 11867,
+   "hasan": 1040,
+   "saisei": 174,
+   "kyuyo": 5,
+   "hist": {
+    "2021": {
+     "hasan": 801,
+     "saisei": 144
+    },
+    "2022": {
+     "hasan": 803,
+     "saisei": 142
+    },
+    "2023": {
+     "hasan": 931,
+     "saisei": 123
+    },
+    "2024": {
+     "hasan": 933,
+     "saisei": 163
+    },
+    "2025": {
+     "hasan": 1040,
+     "saisei": 179
+    }
+   }
+  },
+  {
+   "pref": "岡山県",
+   "pop": 1837810,
+   "bengoshi": 397,
+   "hogo_nin": 23384,
+   "hasan": 1363,
+   "saisei": 208,
+   "kyuyo": 16,
+   "hist": {
+    "2021": {
+     "hasan": 975,
+     "saisei": 184
+    },
+    "2022": {
+     "hasan": 940,
+     "saisei": 157
+    },
+    "2023": {
+     "hasan": 1079,
+     "saisei": 152
+    },
+    "2024": {
+     "hasan": 1303,
+     "saisei": 210
+    },
+    "2025": {
+     "hasan": 1363,
+     "saisei": 224
+    }
+   }
+  },
+  {
+   "pref": "岩手県",
+   "pop": 1147546,
+   "bengoshi": 111,
+   "hogo_nin": 12705,
+   "hasan": 1048,
+   "saisei": 148,
+   "kyuyo": 10,
+   "hist": {
+    "2021": {
+     "hasan": 759,
+     "saisei": 141
+    },
+    "2022": {
+     "hasan": 713,
+     "saisei": 107
+    },
+    "2023": {
+     "hasan": 824,
+     "saisei": 105
+    },
+    "2024": {
+     "hasan": 934,
+     "saisei": 110
+    },
+    "2025": {
+     "hasan": 1048,
+     "saisei": 158
+    }
+   }
+  },
+  {
+   "pref": "島根県",
+   "pop": 642055,
+   "bengoshi": 78,
+   "hogo_nin": 5313,
+   "hasan": 354,
+   "saisei": 56,
+   "kyuyo": 0,
+   "hist": {
+    "2021": {
+     "hasan": 352,
+     "saisei": 39
+    },
+    "2022": {
+     "hasan": 284,
+     "saisei": 37
+    },
+    "2023": {
+     "hasan": 364,
+     "saisei": 43
+    },
+    "2024": {
+     "hasan": 366,
+     "saisei": 48
+    },
+    "2025": {
+     "hasan": 354,
+     "saisei": 56
+    }
+   }
+  },
+  {
+   "pref": "広島県",
+   "pop": 2715478,
+   "bengoshi": 633,
+   "hogo_nin": 38790,
+   "hasan": 2044,
+   "saisei": 234,
+   "kyuyo": 23,
+   "hist": {
+    "2021": {
+     "hasan": 1461,
+     "saisei": 181
+    },
+    "2022": {
+     "hasan": 1497,
+     "saisei": 185
+    },
+    "2023": {
+     "hasan": 1656,
+     "saisei": 171
+    },
+    "2024": {
+     "hasan": 1883,
+     "saisei": 170
+    },
+    "2025": {
+     "hasan": 2044,
+     "saisei": 257
+    }
+   }
+  },
+  {
+   "pref": "徳島県",
+   "pop": 685932,
+   "bengoshi": 95,
+   "hogo_nin": 12141,
+   "hasan": 470,
+   "saisei": 57,
+   "kyuyo": 3,
+   "hist": {
+    "2021": {
+     "hasan": 353,
+     "saisei": 70
+    },
+    "2022": {
+     "hasan": 363,
+     "saisei": 66
+    },
+    "2023": {
+     "hasan": 381,
+     "saisei": 74
+    },
+    "2024": {
+     "hasan": 428,
+     "saisei": 64
+    },
+    "2025": {
+     "hasan": 470,
+     "saisei": 60
+    }
+   }
+  },
+  {
+   "pref": "愛媛県",
+   "pop": 1278223,
+   "bengoshi": 169,
+   "hogo_nin": 19385,
+   "hasan": 733,
+   "saisei": 106,
+   "kyuyo": 7,
+   "hist": {
+    "2021": {
+     "hasan": 689,
+     "saisei": 103
+    },
+    "2022": {
+     "hasan": 565,
+     "saisei": 75
+    },
+    "2023": {
+     "hasan": 661,
+     "saisei": 117
+    },
+    "2024": {
+     "hasan": 682,
+     "saisei": 86
+    },
+    "2025": {
+     "hasan": 733,
+     "saisei": 113
+    }
+   }
+  },
+  {
+   "pref": "愛知県",
+   "pop": 7463483,
+   "bengoshi": 2224,
+   "hogo_nin": 78039,
+   "hasan": 4831,
+   "saisei": 632,
+   "kyuyo": 20,
+   "hist": {
+    "2021": {
+     "hasan": 3419,
+     "saisei": 637
+    },
+    "2022": {
+     "hasan": 3299,
+     "saisei": 555
+    },
+    "2023": {
+     "hasan": 3877,
+     "saisei": 592
+    },
+    "2024": {
+     "hasan": 4483,
+     "saisei": 611
+    },
+    "2025": {
+     "hasan": 4831,
+     "saisei": 652
+    }
+   }
+  },
+  {
+   "pref": "新潟県",
+   "pop": 2100308,
+   "bengoshi": 290,
+   "hogo_nin": 20727,
+   "hasan": 1258,
+   "saisei": 224,
+   "kyuyo": 11,
+   "hist": {
+    "2021": {
+     "hasan": 859,
+     "saisei": 165
+    },
+    "2022": {
+     "hasan": 882,
+     "saisei": 175
+    },
+    "2023": {
+     "hasan": 952,
+     "saisei": 145
+    },
+    "2024": {
+     "hasan": 1058,
+     "saisei": 166
+    },
+    "2025": {
+     "hasan": 1258,
+     "saisei": 235
+    }
+   }
+  },
+  {
+   "pref": "東京都",
+   "pop": 14172252,
+   "bengoshi": 24382,
+   "hogo_nin": 273244,
+   "hasan": 11941,
+   "saisei": 773,
+   "kyuyo": 62,
+   "hist": {
+    "2021": {
+     "hasan": 9839,
+     "saisei": 954
+    },
+    "2022": {
+     "hasan": 9334,
+     "saisei": 798
+    },
+    "2023": {
+     "hasan": 10393,
+     "saisei": 759
+    },
+    "2024": {
+     "hasan": 11184,
+     "saisei": 783
+    },
+    "2025": {
+     "hasan": 11941,
+     "saisei": 835
+    }
+   }
+  },
+  {
+   "pref": "栃木県",
+   "pop": 1890471,
+   "bengoshi": 235,
+   "hogo_nin": 19909,
+   "hasan": 1289,
+   "saisei": 208,
+   "kyuyo": 13,
+   "hist": {
+    "2021": {
+     "hasan": 986,
+     "saisei": 165
+    },
+    "2022": {
+     "hasan": 980,
+     "saisei": 137
+    },
+    "2023": {
+     "hasan": 1104,
+     "saisei": 147
+    },
+    "2024": {
+     "hasan": 1202,
+     "saisei": 199
+    },
+    "2025": {
+     "hasan": 1289,
+     "saisei": 221
+    }
+   }
+  },
+  {
+   "pref": "沖縄県",
+   "pop": 1464499,
+   "bengoshi": 301,
+   "hogo_nin": 39871,
+   "hasan": 1005,
+   "saisei": 90,
+   "kyuyo": 9,
+   "hist": {
+    "2021": {
+     "hasan": 802,
+     "saisei": 89
+    },
+    "2022": {
+     "hasan": 777,
+     "saisei": 72
+    },
+    "2023": {
+     "hasan": 854,
+     "saisei": 78
+    },
+    "2024": {
+     "hasan": 942,
+     "saisei": 96
+    },
+    "2025": {
+     "hasan": 1005,
+     "saisei": 99
+    }
+   }
+  },
+  {
+   "pref": "滋賀県",
+   "pop": 1404186,
+   "bengoshi": 178,
+   "hogo_nin": 11339,
+   "hasan": 799,
+   "saisei": 134,
+   "kyuyo": 8,
+   "hist": {
+    "2021": {
+     "hasan": 609,
+     "saisei": 118
+    },
+    "2022": {
+     "hasan": 595,
+     "saisei": 94
+    },
+    "2023": {
+     "hasan": 738,
+     "saisei": 114
+    },
+    "2024": {
+     "hasan": 844,
+     "saisei": 133
+    },
+    "2025": {
+     "hasan": 799,
+     "saisei": 142
+    }
+   }
+  },
+  {
+   "pref": "熊本県",
+   "pop": 1699066,
+   "bengoshi": 292,
+   "hogo_nin": 23747,
+   "hasan": 1225,
+   "saisei": 126,
+   "kyuyo": 13,
+   "hist": {
+    "2021": {
+     "hasan": 945,
+     "saisei": 134
+    },
+    "2022": {
+     "hasan": 892,
+     "saisei": 86
+    },
+    "2023": {
+     "hasan": 1036,
+     "saisei": 119
+    },
+    "2024": {
+     "hasan": 1162,
+     "saisei": 143
+    },
+    "2025": {
+     "hasan": 1225,
+     "saisei": 139
+    }
+   }
+  },
+  {
+   "pref": "石川県",
+   "pop": 1095495,
+   "bengoshi": 187,
+   "hogo_nin": 7081,
+   "hasan": 502,
+   "saisei": 72,
+   "kyuyo": 4,
+   "hist": {
+    "2021": {
+     "hasan": 485,
+     "saisei": 78
+    },
+    "2022": {
+     "hasan": 462,
+     "saisei": 82
+    },
+    "2023": {
+     "hasan": 494,
+     "saisei": 64
+    },
+    "2024": {
+     "hasan": 525,
+     "saisei": 60
+    },
+    "2025": {
+     "hasan": 502,
+     "saisei": 76
+    }
+   }
+  },
+  {
+   "pref": "神奈川県",
+   "pop": 9221857,
+   "bengoshi": 1849,
+   "hogo_nin": 152741,
+   "hasan": 6301,
+   "saisei": 573,
+   "kyuyo": 40,
+   "hist": {
+    "2021": {
+     "hasan": 5583,
+     "saisei": 829
+    },
+    "2022": {
+     "hasan": 5062,
+     "saisei": 716
+    },
+    "2023": {
+     "hasan": 5489,
+     "saisei": 651
+    },
+    "2024": {
+     "hasan": 5798,
+     "saisei": 607
+    },
+    "2025": {
+     "hasan": 6301,
+     "saisei": 613
+    }
+   }
+  },
+  {
+   "pref": "福井県",
+   "pop": 737598,
+   "bengoshi": 119,
+   "hogo_nin": 4267,
+   "hasan": 425,
+   "saisei": 79,
+   "kyuyo": 4,
+   "hist": {
+    "2021": {
+     "hasan": 316,
+     "saisei": 72
+    },
+    "2022": {
+     "hasan": 303,
+     "saisei": 61
+    },
+    "2023": {
+     "hasan": 360,
+     "saisei": 45
+    },
+    "2024": {
+     "hasan": 376,
+     "saisei": 80
+    },
+    "2025": {
+     "hasan": 425,
+     "saisei": 83
+    }
+   }
+  },
+  {
+   "pref": "福岡県",
+   "pop": 5091974,
+   "bengoshi": 1512,
+   "hogo_nin": 117615,
+   "hasan": 4684,
+   "saisei": 678,
+   "kyuyo": 26,
+   "hist": {
+    "2021": {
+     "hasan": 3657,
+     "saisei": 802
+    },
+    "2022": {
+     "hasan": 3706,
+     "saisei": 661
+    },
+    "2023": {
+     "hasan": 3808,
+     "saisei": 595
+    },
+    "2024": {
+     "hasan": 4284,
+     "saisei": 673
+    },
+    "2025": {
+     "hasan": 4684,
+     "saisei": 704
+    }
+   }
+  },
+  {
+   "pref": "福島県",
+   "pop": 1741569,
+   "bengoshi": 192,
+   "hogo_nin": 17365,
+   "hasan": 1091,
+   "saisei": 145,
+   "kyuyo": 16,
+   "hist": {
+    "2021": {
+     "hasan": 752,
+     "saisei": 126
+    },
+    "2022": {
+     "hasan": 773,
+     "saisei": 108
+    },
+    "2023": {
+     "hasan": 835,
+     "saisei": 119
+    },
+    "2024": {
+     "hasan": 979,
+     "saisei": 151
+    },
+    "2025": {
+     "hasan": 1091,
+     "saisei": 161
+    }
+   }
+  },
+  {
+   "pref": "秋田県",
+   "pop": 897930,
+   "bengoshi": 75,
+   "hogo_nin": 12671,
+   "hasan": 651,
+   "saisei": 82,
+   "kyuyo": 11,
+   "hist": {
+    "2021": {
+     "hasan": 495,
+     "saisei": 81
+    },
+    "2022": {
+     "hasan": 501,
+     "saisei": 71
+    },
+    "2023": {
+     "hasan": 515,
+     "saisei": 53
+    },
+    "2024": {
+     "hasan": 622,
+     "saisei": 99
+    },
+    "2025": {
+     "hasan": 651,
+     "saisei": 93
+    }
+   }
+  },
+  {
+   "pref": "群馬県",
+   "pop": 1882061,
+   "bengoshi": 330,
+   "hogo_nin": 15686,
+   "hasan": 1150,
+   "saisei": 180,
+   "kyuyo": 8,
+   "hist": {
+    "2021": {
+     "hasan": 894,
+     "saisei": 156
+    },
+    "2022": {
+     "hasan": 796,
+     "saisei": 152
+    },
+    "2023": {
+     "hasan": 954,
+     "saisei": 121
+    },
+    "2024": {
+     "hasan": 1022,
+     "saisei": 183
+    },
+    "2025": {
+     "hasan": 1150,
+     "saisei": 188
+    }
+   }
+  },
+  {
+   "pref": "茨城県",
+   "pop": 2799129,
+   "bengoshi": 301,
+   "hogo_nin": 29229,
+   "hasan": 1626,
+   "saisei": 267,
+   "kyuyo": 18,
+   "hist": {
+    "2021": {
+     "hasan": 1319,
+     "saisei": 221
+    },
+    "2022": {
+     "hasan": 1251,
+     "saisei": 192
+    },
+    "2023": {
+     "hasan": 1363,
+     "saisei": 193
+    },
+    "2024": {
+     "hasan": 1497,
+     "saisei": 208
+    },
+    "2025": {
+     "hasan": 1626,
+     "saisei": 285
+    }
+   }
+  },
+  {
+   "pref": "長崎県",
+   "pop": 1253673,
+   "bengoshi": 156,
+   "hogo_nin": 24959,
+   "hasan": 801,
+   "saisei": 135,
+   "kyuyo": 3,
+   "hist": {
+    "2021": {
+     "hasan": 796,
+     "saisei": 126
+    },
+    "2022": {
+     "hasan": 727,
+     "saisei": 104
+    },
+    "2023": {
+     "hasan": 721,
+     "saisei": 90
+    },
+    "2024": {
+     "hasan": 863,
+     "saisei": 108
+    },
+    "2025": {
+     "hasan": 801,
+     "saisei": 138
+    }
+   }
+  },
+  {
+   "pref": "長野県",
+   "pop": 1975167,
+   "bengoshi": 277,
+   "hogo_nin": 10730,
+   "hasan": 1088,
+   "saisei": 173,
+   "kyuyo": 7,
+   "hist": {
+    "2021": {
+     "hasan": 846,
+     "saisei": 144
+    },
+    "2022": {
+     "hasan": 836,
+     "saisei": 137
+    },
+    "2023": {
+     "hasan": 928,
+     "saisei": 139
+    },
+    "2024": {
+     "hasan": 917,
+     "saisei": 147
+    },
+    "2025": {
+     "hasan": 1088,
+     "saisei": 180
+    }
+   }
+  },
+  {
+   "pref": "青森県",
+   "pop": 1165686,
+   "bengoshi": 107,
+   "hogo_nin": 26955,
+   "hasan": 998,
+   "saisei": 132,
+   "kyuyo": 8,
+   "hist": {
+    "2021": {
+     "hasan": 727,
+     "saisei": 126
+    },
+    "2022": {
+     "hasan": 738,
+     "saisei": 90
+    },
+    "2023": {
+     "hasan": 797,
+     "saisei": 119
+    },
+    "2024": {
+     "hasan": 902,
+     "saisei": 116
+    },
+    "2025": {
+     "hasan": 998,
+     "saisei": 140
+    }
+   }
+  },
+  {
+   "pref": "静岡県",
+   "pop": 3530383,
+   "bengoshi": 536,
+   "hogo_nin": 32739,
+   "hasan": 2188,
+   "saisei": 288,
+   "kyuyo": 17,
+   "hist": {
+    "2021": {
+     "hasan": 1932,
+     "saisei": 354
+    },
+    "2022": {
+     "hasan": 1874,
+     "saisei": 291
+    },
+    "2023": {
+     "hasan": 2014,
+     "saisei": 271
+    },
+    "2024": {
+     "hasan": 2163,
+     "saisei": 334
+    },
+    "2025": {
+     "hasan": 2188,
+     "saisei": 305
+    }
+   }
+  },
+  {
+   "pref": "香川県",
+   "pop": 917297,
+   "bengoshi": 196,
+   "hogo_nin": 10027,
+   "hasan": 694,
+   "saisei": 90,
+   "kyuyo": 7,
+   "hist": {
+    "2021": {
+     "hasan": 482,
+     "saisei": 88
+    },
+    "2022": {
+     "hasan": 454,
+     "saisei": 91
+    },
+    "2023": {
+     "hasan": 531,
+     "saisei": 67
+    },
+    "2024": {
+     "hasan": 620,
+     "saisei": 84
+    },
+    "2025": {
+     "hasan": 694,
+     "saisei": 97
+    }
+   }
+  },
+  {
+   "pref": "高知県",
+   "pop": 655992,
+   "bengoshi": 89,
+   "hogo_nin": 16751,
+   "hasan": 456,
+   "saisei": 52,
+   "kyuyo": 5,
+   "hist": {
+    "2021": {
+     "hasan": 416,
+     "saisei": 45
+    },
+    "2022": {
+     "hasan": 382,
+     "saisei": 50
+    },
+    "2023": {
+     "hasan": 430,
+     "saisei": 60
+    },
+    "2024": {
+     "hasan": 458,
+     "saisei": 49
+    },
+    "2025": {
+     "hasan": 456,
+     "saisei": 57
+    }
+   }
+  },
+  {
+   "pref": "鳥取県",
+   "pop": 530622,
+   "bengoshi": 76,
+   "hogo_nin": 6356,
+   "hasan": 420,
+   "saisei": 58,
+   "kyuyo": 4,
+   "hist": {
+    "2021": {
+     "hasan": 288,
+     "saisei": 65
+    },
+    "2022": {
+     "hasan": 316,
+     "saisei": 70
+    },
+    "2023": {
+     "hasan": 339,
+     "saisei": 55
+    },
+    "2024": {
+     "hasan": 397,
+     "saisei": 65
+    },
+    "2025": {
+     "hasan": 420,
+     "saisei": 62
+    }
+   }
+  },
+  {
+   "pref": "鹿児島県",
+   "pop": 1529101,
+   "bengoshi": 232,
+   "hogo_nin": 28288,
+   "hasan": 1227,
+   "saisei": 140,
+   "kyuyo": 13,
+   "hist": {
+    "2021": {
+     "hasan": 971,
+     "saisei": 141
+    },
+    "2022": {
+     "hasan": 1023,
+     "saisei": 115
+    },
+    "2023": {
+     "hasan": 1061,
+     "saisei": 129
+    },
+    "2024": {
+     "hasan": 1020,
+     "saisei": 134
+    },
+    "2025": {
+     "hasan": 1227,
+     "saisei": 153
+    }
+   }
+  }
+ ],
+ "warnings": [
+  "shiho-2020.xlsx: 第4表のシートが無い",
+  "2021年: 第105表から数字の行を見つけられない",
+  "2022年: 第105表が無い（自然人の割合は出せない）",
+  "2024年: 第105表が無い（自然人の割合は出せない）"
+ ]
+}

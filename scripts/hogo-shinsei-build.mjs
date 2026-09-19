@@ -450,7 +450,7 @@ ${rankRows(trHi.slice(0, 12), 'tr')}
     <li><strong>再申請はいつでもできる</strong>：申請権に回数制限はありません。収入が減った・貯金が尽きた・病気になったなど<strong>事情が変われば、何度でも出せます</strong>。</li>
     <li><strong>通知書をもらう</strong>：却下は必ず<strong>書面</strong>で通知されます。口頭で「無理です」と言われただけなら、それは却下処分ではありません。申請書を出し、書面で結果を受け取るところまでが手続きです。</li>
     <li><strong>決定の期限</strong>：申請から原則<strong>14日以内</strong>（調査に時間がかかる場合は最長30日）に通知が来ます。この表の「年度末未処理」は、年度をまたいで審査中だった件数です。</li>
-    <li><strong>ひとりで行かない</strong>：お住まいの地域の生活困窮者自立支援の相談窓口、法テラス、支援団体に同行を頼めます。</li>
+    <li><strong>ひとりで行かない</strong>：お住まいの地域の生活困窮者自立支援の相談窓口、法テラス、支援団体に同行を頼めます。その窓口が<a href="shakkin-kakei-soudan.html">どれだけ動いているかは自治体別に集計しました</a>。</li>
   </ul>
 
   <h2>⑦ この数字の限界（大事なところ）</h2>
@@ -464,7 +464,7 @@ ${rankRows(trHi.slice(0, 12), 'tr')}
   </ul>
 
   <div class="callout note">
-    <p><span class="tag">あわせて読みたい</span>実際にいくら受け取れるかは<a href="seikatsuhogo-keisanki.html">生活保護の支給額シミュレーター</a>で。家賃を下げて立て直すなら<a href="koei-jutaku-bairitsu.html">公営住宅の倍率データ</a>と<a href="koei-hairiyasui.html">入りやすい人の条件</a>、生活保護までは必要ない方は<a href="juminzei-hikazei-check.html">住民税非課税の判定</a>と<a href="kougaku-ryouyouhi-2026.html">高額療養費の計算機</a>もどうぞ。</p>
+    <p><span class="tag">あわせて読みたい</span>生活保護の前に使える窓口として<a href="shakkin-kakei-soudan.html">借金と家計の無料相談（自治体別の実績）</a>があります。実際にいくら受け取れるかは<a href="seikatsuhogo-keisanki.html">生活保護の支給額シミュレーター</a>で。家賃を下げて立て直すなら<a href="koei-jutaku-bairitsu.html">公営住宅の倍率データ</a>と<a href="koei-hairiyasui.html">入りやすい人の条件</a>、生活保護までは必要ない方は<a href="juminzei-hikazei-check.html">住民税非課税の判定</a>と<a href="kougaku-ryouyouhi-2026.html">高額療養費の計算機</a>もどうぞ。</p>
   </div>
 
   <h2>コメント（自治体ごとの運用の情報交換）</h2>
