@@ -16,6 +16,7 @@ import fs from 'node:fs'
 import path from 'node:path'
 import { page, esc, SITE } from './shogai-kojo-page.mjs'
 import { peekBox } from './peek-box.mjs'
+import { kanryoScript } from './kanryo-script.mjs'
 import {
   ROOT,
   PRICE,
@@ -61,6 +62,9 @@ import {
   enough,
   suki,
   sukiIppan,
+  AGE_MED,
+  gold,
+  sukiOff,
   buread,
   konde,
   ALL_MED,
@@ -183,11 +187,25 @@ ${cutBlocks}
   <div class="offer">
   <p>申込書に書けるのは基本的に<strong>1回につき1つ</strong>です。相場が分かっても、最後は住宅名を1つ選ぶことになります。
   そこを決めるための一覧を用意しました。</p>
+  <div class="callout warn"><p><span class="tag">先に知っておいてください</span>
+  <strong>倍率が低い申込先だけを並べると、空いている理由がそのまま集まります。</strong>
+  実際に数えると、毎回すいている${num(F.sukiIppan)}件のうち<strong>${F.sukiOffPct}%（${num(F.sukiOff)}件）は、エレベーターが無いか、築${F.ageMed}年より古い</strong>住宅でした。
+  エレベーターがある割合は<strong>すいている側${F.sukiEvPct}%に対して混んでいる側${F.kondeEvPct}%</strong>、
+  多摩の市町村が占める割合は<strong>すいている側${F.sukiTamaPct}%に対して混んでいる側${F.kondeTamaPct}%</strong>。
+  安く見える申込先は、設備と立地のどちらかを引き受けているということです。</p></div>
+
+  <p>そこで一覧は、<strong>当たりやすさだけでなく住みやすさの条件も満たすものを先に</strong>並べました。</p>
   <ul>
-  <li><strong>毎回すいている申込先 ${num(F.sukiIppan)}件</strong>（病死等があった住宅を除く）。${MIN_N}件以上観測できて、倍率の中央値が${SUKI}倍未満だったものだけ。<strong>1回だけ空いた住宅は入れていません</strong>——ここが自分で集計すると一番外しやすいところです。</li>
+  <li><strong>当たりやすさと住みやすさが両方そろう申込先 ${num(F.gold)}件</strong>。
+    倍率の中央値が${SUKI}倍未満で、<strong>エレベーターがあり</strong>、<strong>築${F.ageMed}年以下</strong>（観測できた${num(F.enough)}件の中央値）のものです。
+    ${F.goldCities}の区市町にまたがり、倍率の中央値${F.goldMed}倍・築年数の中央値${F.goldAgeMed}年。
+    ${MIN_N}件以上観測できたものだけなので、<strong>1回だけ空いた住宅は入っていません</strong>——ここが自分で集計すると一番外しやすいところです。</li>
+  <li><strong>すいてはいるが、条件を承知のうえで選ぶ申込先 ${num(F.sukiOff)}件</strong>を別掲。
+    悪い住宅という意味ではありません（1階を選べるなら階段は問題になりませんし、古い住宅は都心に多く立地では有利なことがあります）。
+    <strong>何を引き受けるのかが分かったうえで選べるように</strong>分けています。</li>
   <li><strong>回によって当たりやすさが大きく動く申込先 ${F.buread}件</strong>。最高と最低が${BURE}倍以上ひらいた住宅です。住宅を変えるのではなく<strong>出す回を変える</strong>ほうが効く相手が分かります。</li>
   <li><strong>申込者ゼロが出た申込先 ${F.zeroHouses}件</strong>と、その回数。</li>
-  <li>観測できた<strong>${num(F.enough)}件すべての索引</strong>（区市町・住宅名・募集区分・倍率の中央値／最低／最高・観測件数・エレベーター・建てられた年・住宅名と同じ名前の町丁目の世帯数と住宅侵入の件数）。</li>
+  <li>観測できた<strong>${num(F.enough)}件すべての索引</strong>（区市町・住宅名・募集区分・倍率の中央値／最低／最高・観測件数・エレベーター・建てられた年と築年数・住宅名と同じ名前の町丁目の世帯数と住宅侵入の件数）。</li>
   <li>「${JIKO}」${F.suki - F.sukiIppan}件は<strong>別掲</strong>。すいている側にはこの区分が集まるので、知らずに選ぶことがないよう分けました。</li>
   </ul>
 
@@ -258,31 +276,49 @@ write('toei/kanryo/index.html', page({
   <p class="note">開けない・内容が説明と違う・二重に決済された場合は、購入から14日以内に <a href="mailto:contact@fukushiru.com">contact@fukushiru.com</a> までご連絡ください。全額を返金します。
   領収書はStripeから届くメールでご確認いただけます。</p>
   <p class="related"><a href="../../articles/koei-tokyo.html">→ 都営住宅の倍率と申込のしくみ（無料）</a></p>
-<script>
-(function(){
-  var sid=new URLSearchParams(location.search).get('session_id');
-  var a=document.getElementById('dl'), msg=document.getElementById('msg');
-  if(!sid){ a.style.display='none'; msg.textContent='購入の情報が見つかりません。購入後に表示されたURLからお越しください。'; return; }
-  a.href='/api/pack?session_id='+encodeURIComponent(sid);
-})();
-</script>
+<script>${kanryoScript({ label: '一覧をダウンロード（HTML）' })}</script>
 `,
 }))
 
 // ── 有料資料 .dist/toei-pack.html ────────────────────────────────────────────
 // ★公表表の再現はしない。出すのは当方が計算した指標だけ。
-const hrow = (h) => `<tr><td>${esc(h.city)}</td><td>${esc(h.name)}</td><td>${esc(h.cat)}</td><td class="num">${r1(h.med)}</td><td class="num">${r1(h.min)}</td><td class="num">${r1(h.max)}</td><td class="num">${h.n}</td><td class="num">${h.zero || ''}</td><td>${esc(h.ev)}</td><td>${esc(h.era)}</td><td>${envCell(h.env, false)}</td></tr>`
-const TH = `<th>区市町</th><th>住宅</th><th>募集区分</th><th class="num">中央値</th><th class="num">最低</th><th class="num">最高</th><th class="num">観測</th><th class="num">申込0</th><th>EV</th><th>建築</th><th>同じ名前の町丁目（世帯・住宅侵入 ${WIN_TXT}）</th>`
+// ★列の並びは「決めるのに要る順」。2026-09-19 に EV と建てられた年を中央値の直後へ動かした。
+//   それまで最低・最高・観測・申込0 の後ろにあり、抜粋でも本文でも**横に切れて見えなかった**。
+//   この資料が答える問いは「当たりやすくて、住めるのはどれか」なので、その2つを先に出す。
+const hrow = (h) => `<tr><td>${esc(h.city)}</td><td>${esc(h.name)}</td><td>${esc(h.cat)}</td><td class="num">${r1(h.med)}</td><td>${esc(h.ev)}</td><td>${esc(h.era)}${h.age != null ? `（築${h.age}年）` : ''}</td><td class="num">${r1(h.min)}</td><td class="num">${r1(h.max)}</td><td class="num">${h.n}</td><td class="num">${h.zero || ''}</td><td>${envCell(h.env, false)}</td></tr>`
+const TH = `<th>区市町</th><th>住宅</th><th>募集区分</th><th class="num">中央値</th><th>EV</th><th>建てられた年</th><th class="num">最低</th><th class="num">最高</th><th class="num">観測</th><th class="num">申込0</th><th>同じ名前の町丁目（世帯・住宅侵入 ${WIN_TXT}）</th>`
 const table = (list) => `<table class="grid"><thead><tr>${TH}</tr></thead><tbody>
 ${list.map(hrow).join('\n')}
 </tbody></table>`
-// 2章の見出しと前置き。記事に貼る抜粋（下の TOEI_PEEK）も同じ文字列から作る。
-const SEC2_TITLE = `2. 毎回すいている申込先（病死等があった住宅を除く・${num(F.sukiIppan)}件）`
-const SEC2_LEAD = `${MIN_N}件以上観測できて、倍率の<strong>中央値</strong>が${SUKI}倍未満だったものだけを載せています。中央値で切っているので、<strong>1回だけたまたま空いた住宅は入りません</strong>。区市町ごと、倍率の低い順。`
-const sukiCities = [...new Set(sukiIppan.map((h) => h.city))].sort().map((city) => ({
-  city, list: sukiIppan.filter((h) => h.city === city).sort((a, b) => a.med - b.med),
+// ── 2章＝黄金比（2026-09-19 に差し替え）──────────────────────────────────────
+// ★なぜ差し替えたか
+//   それまでの2章は「毎回すいている申込先」を倍率の低い順に並べただけだった。
+//   倍率だけで切ると**空いている理由**がそのまま集まる。実測（この資料の母数そのもの）:
+//     すいている側 … EV有 70% / 多摩の市町村 50%
+//     混んでいる側 … EV有 92% / 多摩の市町村 18%
+//   すいている側の約6割は「EVが無い」か「築年数が中央値より古い」。
+//   ∴ 当たりやすさだけでなく、住みやすさの条件を満たすものを**先に**出す。
+//   （数字は F から引く。ここに書いた値は説明用で、本文には出さない）
+// ★3つの条件しか使わない。増やすと、なぜその住宅が選ばれたのか読者が検算できなくなる。
+//   ①中央値が SUKI 倍未満 ②エレベーター有 ③築年数が申込先の中央値以下
+// ★立地は点数にしない。どこが良いかは読む人が決めること。区市町で引けるようにするだけ。
+// 記事に貼る抜粋（下の TOEI_PEEK）も同じ文字列から作る。
+const SEC2_TITLE = `2. 当たりやすさと住みやすさが両方そろう申込先（${num(F.gold)}件）`
+const SEC2_LEAD = `倍率の<strong>中央値が${SUKI}倍未満</strong>で、かつ<strong>エレベーターがあり</strong>、<strong>築年数が${F.ageMed}年以下</strong>（観測できた${num(F.enough)}件の中央値）の申込先です。${MIN_N}件以上観測できたものだけなので、<strong>1回だけたまたま空いた住宅は入りません</strong>。${F.goldCities}の区市町にまたがり、倍率の中央値は${F.goldMed}倍、築年数の中央値は${F.goldAgeMed}年です。区市町ごと、倍率の低い順。`
+const goldCities = [...new Set(gold.map((h) => h.city))].sort().map((city) => ({
+  city, list: gold.filter((h) => h.city === city).sort((a, b) => a.med - b.med),
 }))
-const sukiByCity = sukiCities.map((c) => `<h3>${esc(c.city)}（${c.list.length}件）</h3>\n${table(c.list)}`).join('\n\n')
+const goldByCity = goldCities.map((c) => `<h3>${esc(c.city)}（${c.list.length}件）</h3>\n${table(c.list)}`).join('\n\n')
+
+
+// 3章＝すいてはいるが、条件を承知のうえで選ぶ側。捨てずに別掲する（安いのは事実なので）。
+const SEC3_TITLE = `3. すいてはいるが、条件を承知のうえで選ぶ申込先（${num(F.sukiOff)}件）`
+const SEC3_LEAD = `中央値は${SUKI}倍未満ですが、<strong>エレベーターが無い</strong>か、<strong>築${F.ageMed}年より古い</strong>ものです。すいている${num(F.sukiIppan)}件のうち<strong>${F.sukiOffPct}%</strong>がここに入ります。<strong>悪い住宅という意味ではありません</strong>——1階を選べるなら階段は問題になりませんし、古い住宅は都心に多く立地では有利なことがあります（築50年を超える住宅の倍率がかえって高いのはそのためです）。<strong>何を引き受けるのかが分かったうえで選べるように</strong>、2章と分けました。`
+const offCities = [...new Set(sukiOff.map((h) => h.city))].sort().map((city) => ({
+  city, list: sukiOff.filter((h) => h.city === city).sort((a, b) => a.med - b.med),
+}))
+const offByCity = offCities.map((c) => `<h3>${esc(c.city)}（${c.list.length}件）</h3>\n${table(c.list)}`).join('\n\n')
+
 
 const packHtml = `<!DOCTYPE html>
 <html lang="ja"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
@@ -337,34 +373,40 @@ td.num,th.num{text-align:right;font-variant-numeric:tabular-nums}
 <h2>${SEC2_TITLE}</h2>
 <p>${SEC2_LEAD}</p>
 <div class="wrap">
-${sukiByCity}
+${goldByCity}
 </div>
 
-<h2>3. 回によって当たりやすさが動く申込先（${F.buread}件）</h2>
+<h2>${SEC3_TITLE}</h2>
+<p>${SEC3_LEAD}</p>
+<div class="wrap">
+${offByCity}
+</div>
+
+<h2>4. 回によって当たりやすさが動く申込先（${F.buread}件）</h2>
 <p>最高と最低が${BURE}倍以上ひらいた住宅です。この相手には「住宅を変える」より<strong>「出す回を変える」</strong>ほうが効きます。
 最低の欄が実際に起きた一番すいていた回の倍率です。</p>
 <div class="wrap">
 ${table(buread.slice().sort((a, b) => (b.max / b.min) - (a.max / a.min)))}
 </div>
 
-<h2>4. ${JIKO}（別掲・${suki.length - sukiIppan.length}件）</h2>
+<h2>5. ${JIKO}（別掲・${suki.length - sukiIppan.length}件）</h2>
 <p>すいている住宅にはこの区分が混ざります。知らずに選ぶことがないよう分けました。
 家賃が減額される場合があり、条件を承知のうえで選ぶ人には現実的な選択肢です。詳しい条件は募集案内をご確認ください。</p>
 <div class="wrap">
 ${table(suki.filter((h) => h.jiko))}
 </div>
 
-<h2>5. 条件を1つ変えたときの効き目</h2>
+<h2>6. 条件を1つ変えたときの効き目</h2>
 <p>募集${num(F.rows)}件を条件ごとに分けた倍率の中央値です。何をあきらめると何倍ぶん軽くなるかの目安。その条件が読み取れなかった行は、その表からだけ外しています。</p>
 ${cuts.map((c) => `<h3>${esc(c.label)}</h3>\n<p class="note">${cutNote(c)}</p>\n<div class="wrap"><table class="grid"><thead><tr><th>${esc(c.label)}</th><th class="num">募集件数</th><th class="num">倍率の中央値</th></tr></thead><tbody>\n${c.groups.map((g) => `<tr><td>${esc(g.k)}</td><td class="num">${num(g.n)}</td><td class="num">${r1(g.med)}倍</td></tr>`).join('\n')}\n</tbody></table></div>`).join('\n')}
 
-<h2>6. 観測できた申込先の索引（${num(F.enough)}件）</h2>
+<h2>7. 観測できた申込先の索引（${num(F.enough)}件）</h2>
 <p>中央値の低い順。上の各章に出ていない申込先もここには載っています。</p>
 <div class="wrap">
 ${table(enough)}
 </div>
 
-<h2>7. 出典と限界</h2>
+<h2>8. 出典と限界</h2>
 <ul>
 <li>出典＝${SRC}（${RANGE}の定期募集${F.rounds}回）。読み取り日 ${READ_AT}。</li>
 <li>PDFは回ごとに列の作りが違い、機械での読み取りは全${num(raw.rows.length)}行すべてを正しく復元できません。<strong>行頭に区市町が明記されていた${num(F.rowsHead)}行</strong>と、下に書いた方法で<strong>住宅名から区を確定できた${num(F.rowsLedger)}行</strong>の、合わせて${num(F.rows)}行を使っています。ここに出ていない住宅も多くあります。<strong>「載っていない＝空いていない」ではありません。</strong></li>
@@ -387,24 +429,49 @@ write('.dist/toei-pack.html', packHtml)
 //     下で資料の本文と突き合わせる。記事の見た目に合わせて変えるのは見出しの要素（h2/h3 → h4.pk）と
 //     表の外枠だけ（資料の表は折り返さないので、抜粋の表も折り返さない）。文字と数字は変えない。
 //   ★ここでは記事に貼らない。貼るのは scripts/stamp-offers.mjs（記事の目印の間だけを差し替える係）。
-const PEEK_ROWS = 3
-const [peekCity, nextCity] = sukiCities
-if (!peekCity || !nextCity) die('抜粋を作れません：すいている申込先のある区市町が2つ未満です。')
+// ★2026-09-19 抜粋を厚くした。3行では何が入っているか分からず、出し惜しみに見える。
+//   note 型の見本は冒頭をそのまま読ませる。ここも2章の書き出しと最初の区市町を丸ごと出し、
+//   続く区市町の見出しを並べて「この厚みで全部ある」ことを見せる。
+//   一番おいしい所（すいている側の何割が条件で外れるか）は無料ページ側に置いてある。
+const PEEK_ROWS = 12
+const PEEK_NEXT = 3
+// ★区市町は名前順なので、先頭が2件しかない区市町のことがある（実際に三鷹市2件だった）。
+//   「冒頭12行」と決め打ちすると抜粋が2行になり、厚くしたつもりで薄くなる。
+//   ∴ **資料の並びのまま上から取り、行数が PEEK_ROWS に届くまで区市町をまたぐ**。
+//   ここを「件数の多い区市町を先に」にはしない。資料の並びと違うものを
+//   「実物の冒頭」と称することになるため。
+const peekCities = []
+{
+  let n = 0
+  for (const c of goldCities) {
+    if (n >= PEEK_ROWS) break
+    peekCities.push(c)
+    n += c.list.length
+  }
+}
+const restCities = goldCities.slice(peekCities.length)
+if (!peekCities.length || restCities.length < PEEK_NEXT) die('抜粋を作れません：黄金比の申込先がある区市町が足りません。')
 const peekBody = `    <h4 class="pk">${SEC2_TITLE}</h4>
     <p>${SEC2_LEAD}</p>
-    <h4 class="pk">${esc(peekCity.city)}（${peekCity.list.length}件）</h4>
+${peekCities.map((c) => `    <h4 class="pk">${esc(c.city)}（${c.list.length}件）</h4>
     <div class="table-wrap"><table style="white-space:nowrap">
     <thead><tr>${TH}</tr></thead>
     <tbody>
-${peekCity.list.slice(0, PEEK_ROWS).map((h) => `    ${hrow(h)}`).join('\n')}
-    </tbody></table></div>`
-const peekNext = `    <h4 class="pk">${esc(nextCity.city)}（${nextCity.list.length}件）</h4>`
-const TOEI_PEEK = `${peekBody}\n${peekNext}`
+${c.list.map((h) => `    ${hrow(h)}`).join('\n')}
+    </tbody></table></div>`).join('\n')}`
+// 続きの区市町は見出しだけ。★1つの文字列にまとめない——資料では見出しと見出しの間に表が
+//   入るので、つなげた文字列は資料の本文と一致せず、下の突き合わせが必ず落ちる。
+const peekNextList = restCities.slice(0, PEEK_NEXT).map((c) => `    <h4 class="pk">${esc(c.city)}（${c.list.length}件）</h4>`)
+const TOEI_PEEK = [peekBody, ...peekNextList].join('\n')
 {
   // タグを外した文字の並びが、資料の本文にそのまま入っていること（書き直しが混ざっていないこと）。
   const flat = (s) => s.replace(/<[^>]+>/g, '').replace(/\s+/g, '')
   const packFlat = flat(packHtml)
-  if (!packFlat.includes(flat(peekBody)) || !packFlat.includes(flat(peekNext))) die('抜粋が有料資料の本文と一致しません（抜粋の作り方を確認）。')
+  if (!packFlat.includes(flat(peekBody))) die('抜粋の本体が有料資料の本文と一致しません（抜粋の作り方を確認）。')
+  // 見出しは1本ずつ確かめる。まとめて確かめると、資料では間に表が挟まるので必ず落ちる。
+  for (const h of peekNextList) {
+    if (!packFlat.includes(flat(h))) die(`抜粋の見出しが有料資料の本文にありません: ${flat(h)}`)
+  }
 }
 // ★2026-09-13(2) 抜粋の表には住宅侵入の件数が載る。記事には「率ではない・所在地と一致しない場合がある・0件の意味・出典」が
 //   どこにも無かったので、記事の抜粋の枠の外に添える（抜粋の中は資料そのままにするため、枠の中には書き足さない）。
@@ -430,13 +497,19 @@ const PEEK_NOTE = `抜粋の表の右端は、住宅名と同じ名前の町丁�
 
 const tpl = (s) => s.replace(/\\/g, '\\\\').replace(/`/g, '\\`').replace(/\$\{/g, '\\${')
 write('scripts/toei-peek.mjs', `// 自動生成：scripts/toei-nerai.mjs が .dist/toei-pack.html と同じ行から書く。手で直さない。
-// 有料資料の2章の冒頭。表は上${PEEK_ROWS}行で切っている。記事への貼り付けは scripts/stamp-offers.mjs。
+// 有料資料の2章の冒頭。行数が${PEEK_ROWS}に届くまで区市町をまたいで丸ごと出し、続く${PEEK_NEXT}件は見出しだけ。
+// 記事への貼り付けは scripts/stamp-offers.mjs。
 // 資料＝${RANGE}の定期募集${F.rounds}回・読み取り日 ${READ_AT}
 export const TOEI_PEEK = \`${tpl(TOEI_PEEK)}\`
+// ★関所（scripts/toei-put-pack.mjs）が資料の本文と突き合わせるための内訳。
+//   本体と見出しは資料の中で離れて出る（見出しと見出しの間に表が挟まる）ので、
+//   つなげた文字列では一致しない。**分けたまま渡す**。2か所で組み直すとずれる。
+export const TOEI_PEEK_BODY = \`${tpl(peekBody)}\`
+export const TOEI_PEEK_NEXT = ${JSON.stringify(peekNextList)}
 // 抜粋の表の右端（住環境の数字）に添える注記。記事では抜粋の枠の外に置く（scripts/offer-block.mjs）。
 export const TOEI_PEEK_NOTE = \`${tpl(PEEK_NOTE)}\`
 // 売り場カードの文言に使う数（資料と同じ定数）：観測の下限（募集件数）・すいているの線（倍率）・募集回の数
-export const TOEI_FACTS = ${JSON.stringify({ minN: MIN_N, suki: SUKI, rounds: F.rounds })}
+export const TOEI_FACTS = ${JSON.stringify({ minN: MIN_N, suki: SUKI, rounds: F.rounds, gold: F.gold, sukiOff: F.sukiOff, sukiOffPct: F.sukiOffPct, ageMed: F.ageMed })}
 `)
 
 // ── トップページ（index.html・手書き）の /toei/ の案内カード ─────────────────────
@@ -488,7 +561,7 @@ console.log(`  行頭に区市町あり ${LEDGER.head}行のうち町丁目名�
   const lv = (list, l) => list.filter((e) => e && e.level === l).length
   const envs = [...byName.values()]
   const idx = enough.map((h) => h.env)
-  console.log(`  抜粋 scripts/toei-peek.mjs（2章 ${peekCity.city}の上${PEEK_ROWS}行）／トップのカード・sitemap: ${pending.map(([rel]) => rel).filter((rel) => rel === 'index.html' || rel === 'sitemap.xml').join('・') || '変更なし'}`)
+  console.log(`  抜粋 scripts/toei-peek.mjs（2章の ${peekCities.map((c) => c.city).join("・")}＝${peekCities.reduce((n, c) => n + c.list.length, 0)}行＋見出し${PEEK_NEXT}件）／トップのカード・sitemap: ${pending.map(([rel]) => rel).filter((rel) => rel === 'index.html' || rel === 'sitemap.xml').join('・') || '変更なし'}`)
   console.log(`  条件別の表の母数: ${cuts.map((c) => `${c.label} ${c.base}`).join('／')}・建築の年が混ざる ${F.eraMixed}件`)
   console.log(`  次に: node scripts/stamp-offers.mjs（記事12本の抜粋を貼り直す）。KV へは scripts/toei-put-pack.mjs（入れる前に資料・/toei/・トップ・記事を突き合わせる）`)
   console.log(`  住環境の数字: 索引${F.enough}件中 ${F.envEnough}件（頭の区市町名を外して ${enough.filter((h) => hasNum(h.env) && h.env.stem).length}・町丁目 ${lv(idx, 'area')}・町全体 ${lv(idx, 'town')}）・数字なし（町が広い ${lv(idx, 'wide')}・決められない ${lv(idx, 'ambiguous')}・見つからない ${idx.filter((e) => !e).length}）／区×住宅名 ${byName.size}件中 ${envs.filter(hasNum).length}件（町丁目 ${lv(envs, 'area')}・町全体 ${lv(envs, 'town')}・町が広い ${lv(envs, 'wide')}・決められない ${lv(envs, 'ambiguous')}）／無料ページの表 ${konde.slice(0, 10).filter((h) => hasNum(h.env)).length}/10`)

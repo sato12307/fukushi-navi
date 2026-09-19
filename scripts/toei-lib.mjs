@@ -279,9 +279,50 @@ const houses = [...by.entries()].map(([k, v]) => {
   }
 }).sort((a, b) => a.med - b.med || b.n - a.n)
 
+// ── 築年数と「住みやすさ」の格付け（2026-09-19）────────────────────────────
+// ★なぜ足したか
+//   商品が「倍率の低い順」だけで選ばせていた。倍率だけで切ると、**空いている理由**が
+//   そのまま集まる。実測（この資料の母数そのもので計算）:
+//     いま出している「毎回すいている」595件 … EV有 70% / 多摩の市町村 50%
+//     逆に混んでいる側          547件 … EV有 92% / 多摩の市町村 18%
+//   ∴ 買った人の約半分が「EV無 または 築46年以上」を見せられていた。
+//   倍率が低いこと自体は事実だが、それだけを並べるのは芸が無いうえに不親切。
+//
+// ★築年数と倍率の関係は**単調ではない**（ここが肝）。行ベースの中央値:
+//     築0-9年 7.0倍 / 10-19年 10.0倍 / 20-29年 9.0倍 /
+//     30-39年 2.5倍 / 40-49年 1.5倍 / **50年以上 7.3倍**
+//   古いほど空くのではなく、**築50年超は都心に多いので立地が効いて高い**
+//   （渋谷区の築中央56年・大田区55年・品川区56年）。
+//   ∴「築年数が浅い＝人気」と単純化して書かない。相関も r=-0.10 しかない。
+//   いちばん効く単独の条件は**エレベーター**（EV有6.0倍 ↔ EV無1.3倍・r=+0.31）。
+const NOW = new Date(Date.now() + 9 * 3600 * 1000).getFullYear()
+const GENGO = { 昭和: 1925, 平成: 1988, 令和: 2018 }
+const eraYear = (e) => {
+  const m = String(e || '').match(/^(昭和|平成|令和)(\d+)$/)
+  return m ? GENGO[m[1]] + Number(m[2]) : null
+}
+for (const h of houses) {
+  h.builtY = eraYear(h.era)
+  h.age = h.builtY ? NOW - h.builtY : null
+}
+
 const enough = houses.filter((h) => h.n >= MIN_N)
 const suki = enough.filter((h) => h.med < SUKI)
 const sukiIppan = suki.filter((h) => !h.jiko)
+
+// 築年数の中央値は**申込先ベース**で取る（行ベースだと募集回数の多い住宅に引っ張られる）。
+const AGE_MED = med(enough.filter((h) => h.age != null).map((h) => h.age))
+// 黄金比＝「当たりやすさ」と「住みやすさ」の両方。ここで使う条件は3つだけ。
+//   ① 倍率の中央値が SUKI 倍未満（毎回すいている）
+//   ② エレベーターが有る（単独でいちばん効く条件）
+//   ③ 築年数が申込先の中央値以下
+// ★立地は点数にしない。どこが良いかは読む人が決めることで、こちらが順位を付けるものではない。
+//   代わりに区市町で引けるようにして、安く見える申込先が多摩に偏っていることを数字で書く。
+const isGold = (h) => h.med < SUKI && h.ev === '有' && h.age != null && h.age <= AGE_MED
+for (const h of houses) h.gold = isGold(h)
+const gold = sukiIppan.filter((h) => h.gold)
+// 黄金比から外れる側＝EVが無い、または築年数が中央値より古い。ここが買った人の落とし穴。
+const sukiOff = sukiIppan.filter((h) => !h.gold)
 const buread = enough.filter((h) => h.min > 0 && h.max >= h.min * BURE)
 const konde = enough.filter((h) => !h.jiko).slice().sort((a, b) => b.med - a.med)
 const ALL_MED = med(enough.map((h) => h.med))
@@ -338,6 +379,21 @@ const F = {
   envWide: enough.filter((h) => h.env && h.env.level === 'wide').length,
   envAmb: enough.filter((h) => h.env && h.env.level === 'ambiguous').length,
   eraMixed: enough.filter((h) => h.eras > 1).length,
+  // 黄金比まわり。本文に直書きすると回が増えたときに古くなるので、ここから引く。
+  ageMed: AGE_MED,
+  gold: gold.length,
+  sukiOff: sukiOff.length,
+  sukiOffPct: Math.round((sukiOff.length / sukiIppan.length) * 100),
+  // 偏りの実測（本文の「こう偏る」の根拠。負けている側も同じ式で出す）
+  sukiEvPct: Math.round((sukiIppan.filter((h) => h.ev === '有').length / sukiIppan.length) * 100),
+  kondeEvPct: Math.round((konde.filter((h) => h.med >= SUKI && h.ev === '有').length
+    / konde.filter((h) => h.med >= SUKI).length) * 100),
+  sukiTamaPct: Math.round((sukiIppan.filter((h) => /(市|町|村)$/.test(h.city)).length / sukiIppan.length) * 100),
+  kondeTamaPct: Math.round((konde.filter((h) => h.med >= SUKI && /(市|町|村)$/.test(h.city)).length
+    / konde.filter((h) => h.med >= SUKI).length) * 100),
+  goldMed: r1(med(gold.map((h) => h.med))),
+  goldAgeMed: med(gold.filter((h) => h.age != null).map((h) => h.age)),
+  goldCities: new Set(gold.map((h) => h.city)).size,
 }
 const era = (r) => `${r.slice(0, 4)}年${Number(r.slice(5))}月`
 const RANGE = `${era(F.from)}〜${era(F.to)}`
@@ -387,6 +443,11 @@ export {
   enough,
   suki,
   sukiIppan,
+  AGE_MED,
+  eraYear,
+  isGold,
+  gold,
+  sukiOff,
   buread,
   konde,
   ALL_MED,

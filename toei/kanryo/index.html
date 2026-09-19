@@ -51,12 +51,51 @@
   領収書はStripeから届くメールでご確認いただけます。</p>
   <p class="related"><a href="../../articles/koei-tokyo.html">→ 都営住宅の倍率と申込のしくみ（無料）</a></p>
 <script>
-(function(){
-  var sid=new URLSearchParams(location.search).get('session_id');
-  var a=document.getElementById('dl'), msg=document.getElementById('msg');
-  if(!sid){ a.style.display='none'; msg.textContent='購入の情報が見つかりません。購入後に表示されたURLからお越しください。'; return; }
-  a.href='/api/pack?session_id='+encodeURIComponent(sid);
-})();
+(function () {
+  var sid = new URLSearchParams(location.search).get('session_id')
+  var a = document.getElementById('dl')
+  var m = document.getElementById('msg')
+  if (!a) return
+  if (!m) { m = document.createElement('p'); m.id = 'msg'; m.className = 'fine'; a.parentNode.insertBefore(m, a.nextSibling) }
+  var show = function (t) { m.textContent = t }
+  var hide = function () { a.style.display = 'none' }
+  var api = function (q) { return '/api/pack?session_id=' + encodeURIComponent(sid) + q }
+
+  if (!sid) { hide(); show('購入の情報が見つかりません。購入後に表示されたURLからお越しください。'); return }
+
+  hide()
+  show('購入を確認しています…')
+  var tries = 0
+  var ask = function () {
+    tries++
+    fetch(api('&check=1'), { cache: 'no-store' })
+      .then(function (r) { return r.json().catch(function () { return { ok: false } }) })
+      .then(function (d) {
+        if (d && d.ok) {
+          a.href = api('')
+          a.textContent = '一覧をダウンロード（HTML）'
+          a.style.display = ''
+          show('')
+          return
+        }
+        // 受領の確認待ち（PayPay など別画面から戻る方法で起きる）。数回だけ聞き直す。
+        if (d && d.retry && tries < 6) {
+          show('お支払いの確認を待っています…（' + tries + '回目）')
+          setTimeout(ask, 3000)
+          return
+        }
+        show((d && d.error) || '購入の確認ができませんでした。お手数ですが contact@fukushiru.com までご連絡ください（この画面のURLを添えていただけると早いです）。')
+      })
+      .catch(function () {
+        if (tries < 3) { setTimeout(ask, 3000); return }
+        // 通信そのものが通らないときは、直リンクだけでも出す（落とせる人を止めない）。
+        a.href = api('')
+        a.style.display = ''
+        show('確認の通信に失敗しました。上のボタンをお試しください。開けない場合は contact@fukushiru.com までご連絡ください。')
+      })
+  }
+  ask()
+})()
 </script>
 
   </div>

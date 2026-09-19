@@ -82,7 +82,7 @@ export function jumpPack() {
 }
 export function jumpToei() {
   return `  <div class="callout note">
-    <p><span class="tag">有料の一覧</span>このページの相場は全部無料です。そのうえで<strong>住宅名を1つに決める</strong>ところまで要るなら、定期募集${TOEI_FACTS.rounds}回を名寄せして「毎回すいている申込先」を住宅名つきで並べた一覧（<strong>${TOEI_PRICE}円</strong>・買い切り）があります。<a href="/toei/">中身と値段を見る →</a></p>
+    <p><span class="tag">有料の一覧</span>このページの相場は全部無料です。そのうえで<strong>住宅名を1つに決める</strong>ところまで要るなら、定期募集${TOEI_FACTS.rounds}回を名寄せして<strong>当たりやすさと住みやすさが両方そろう申込先${TOEI_FACTS.gold}件</strong>を住宅名つきで並べた一覧（<strong>${TOEI_PRICE}円</strong>・買い切り）があります。<a href="/toei/">中身と値段を見る →</a></p>
   </div>`
 }
 
@@ -229,7 +229,7 @@ export function offerPackLeaf({ code = '', name = '', peek = 'rank', up = '../' 
 /** 記事の中に置く売り場（都営住宅 申込先えらび）。up＝ルートへの相対 */
 export function offerToeiLeaf({ up = '../' } = {}) {
   return `  <div class="offer-link" id="offer-toei">
-  <p>申込書に書けるのは基本的に1回につき1つです。相場が分かっても、最後は住宅名を1つ選ぶことになります。定期募集${TOEI_FACTS.rounds}回を住宅と募集区分ごとに名寄せして「毎回すいている申込先」を中央値で選り分けた<a href="${up}toei/"><strong>住宅名つきの一覧（${TOEI_PRICE}円・買い切り）</strong>があります</a>。</p>
+  <p>申込書に書けるのは基本的に1回につき1つです。相場が分かっても、最後は住宅名を1つ選ぶことになります。ただし<strong>倍率が低い住宅だけを並べると、空いている理由がそのまま集まります</strong>（毎回すいている住宅の約6割は、エレベーターが無いか築${TOEI_FACTS.ageMed}年より古い）。定期募集${TOEI_FACTS.rounds}回を住宅と募集区分ごとに名寄せし、<strong>当たりやすさと住みやすさが両方そろう申込先${TOEI_FACTS.gold}件</strong>を先に並べた<a href="${up}toei/"><strong>住宅名つきの一覧（${TOEI_PRICE}円・買い切り）</strong>があります</a>。</p>
   <p class="fine"><strong>買わなくても申し込みはできます。</strong>区市町ごとの相場は<a href="${up}toei/">無料の一覧</a>で全部公開しています。</p>
   </div>`
 }

@@ -12,7 +12,7 @@ import path from 'node:path'
 import zlib from 'node:zlib'
 import { execFileSync } from 'node:child_process'
 import { fileURLToPath } from 'node:url'
-import { TOEI_PEEK, TOEI_PEEK_NOTE } from './toei-peek.mjs'
+import { TOEI_PEEK, TOEI_PEEK_NOTE, TOEI_PEEK_BODY, TOEI_PEEK_NEXT } from './toei-peek.mjs'
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..')
 const WORKER = path.resolve(ROOT, '..', 'fukushiru-pay')
@@ -33,32 +33,43 @@ const html = fs.readFileSync(src)
 {
   const packS = html.toString('utf8')
   const bad = []
-  const m2 = /病死等があった住宅を除く・([\d,]+)件）/.exec(packS)
+  // ★2026-09-19 2章を「黄金比」に差し替え、旧2章は3章へ落とした。章番号も1つずつ繰り下がっている。
+  //   見出しの文言で拾っているので、章の順番を変えるときはここも必ず直す。
+  const m2 = /当たりやすさと住みやすさが両方そろう申込先（([\d,]+)件）/.exec(packS)
+  const m3 = /条件を承知のうえで選ぶ申込先（([\d,]+)件）/.exec(packS)
   const m6 = /観測できた申込先の索引（([\d,]+)件）/.exec(packS)
   const read = (rel) => fs.readFileSync(path.join(ROOT, rel), 'utf8').replace(/\r\n/g, '\n')
   const flat = (s) => s.replace(/<[^>]+>/g, '').replace(/\s+/g, '')
-  if (!m2 || !m6) bad.push('有料資料の2章・6章の見出しが読めない')
+  if (!m2 || !m3 || !m6) bad.push('有料資料の2章・3章・索引の見出しが読めない')
   else {
     const free = read('toei/index.html')
-    if (!free.includes(`毎回すいている申込先 ${m2[1]}件`)) bad.push(`/toei/ の説明が資料の2章（${m2[1]}件）と違う`)
+    if (!free.includes(`当たりやすさと住みやすさが両方そろう申込先 ${m2[1]}件`)) bad.push(`/toei/ の説明が資料の2章（${m2[1]}件）と違う`)
+    if (!free.includes(`条件を承知のうえで選ぶ申込先 ${m3[1]}件`)) bad.push(`/toei/ の説明が資料の3章（${m3[1]}件）と違う`)
     if (!free.includes(`${m6[1]}件すべての索引`)) bad.push(`/toei/ の説明が資料の索引（${m6[1]}件）と違う`)
     if (!read('index.html').includes(`${m6[1]}件の申込先`)) bad.push(`トップの案内カードが資料の索引（${m6[1]}件）と違う`)
-    if (!TOEI_PEEK.includes(`除く・${m2[1]}件）`)) bad.push('scripts/toei-peek.mjs が資料と違う（node scripts/toei-nerai.mjs を回し直す）')
-    if (!flat(packS).includes(flat(TOEI_PEEK.slice(0, TOEI_PEEK.lastIndexOf('<h4'))))) bad.push('抜粋の文字が資料の本文に見つからない')
-    // ★選び方を目印コメントから「実際に都営の売り場が入っているか」へ（2026-09-17）。
-    //   目印を付けるのは手書き記事へ貼る scripts/stamp-offers.mjs だけで、
-    //   scripts/toei-machi.mjs が生成する54本には目印が無い。コメントで選ぶと
-    //   **生成した54本が関所を素通りし、古い抜粋のまま「実物の冒頭」を名乗る**。
-    //   実測：抜粋の入った記事55本のうち、目印があるのは1本だけだった。
+    if (!TOEI_PEEK.includes(`両方そろう申込先（${m2[1]}件）`)) bad.push('scripts/toei-peek.mjs が資料と違う（node scripts/toei-nerai.mjs を回し直す）')
+    // ★本体と「続きの区市町の見出し」を分けて確かめる。資料では見出しと見出しの間に表が挟まるので、
+    //   つなげた1本の文字列は資料の本文と一致しない（まとめて確かめると必ず落ちる）。
+    //   分け方は生成側（scripts/toei-nerai.mjs）が書き出したものをそのまま使う。組み直さない。
+    if (!flat(packS).includes(flat(TOEI_PEEK_BODY))) bad.push('抜粋の本体が資料の本文に見つからない')
+    for (const h of TOEI_PEEK_NEXT) {
+      if (!flat(packS).includes(flat(h))) bad.push(`抜粋の見出しが資料の本文に見つからない: ${flat(h)}`)
+    }
+    if (!TOEI_PEEK.includes(TOEI_PEEK_BODY)) bad.push('抜粋の本体と全体が食い違う（node scripts/toei-nerai.mjs を回し直す）')
+    // ★2026-09-19 抜粋の置き場所が変わった。コミット 7d96f35 で記事の購入カードを撤去し、
+    //   抜粋は売り場 /toei/ にだけ置く形になった（記事はリンクだけ）。
+    //   それなのにこの関所は記事の中の data-offer="toei" を数え続けていて、
+    //   **その日から「都営の売り場が入った記事が0本」で落ち、KVに入れられない状態**だった。
+    //   ∴ 抜粋は /toei/ で確かめ、記事は「リンクの文言が資料と合っているか」だけ見る。
+    if (!free.includes(TOEI_PEEK)) bad.push('/toei/ の抜粋が資料と違う（node scripts/toei-nerai.mjs を回し直す）')
+    if (!free.includes(TOEI_PEEK_NOTE)) bad.push('/toei/ の抜粋の下に住環境の数字の注記が無い')
+    // 記事に残っているのはリンクだけ。件数が古いまま残ると、押した先と数が食い違う。
     const arts = fs.readdirSync(path.join(ROOT, 'articles')).filter((f) => f.endsWith('.html'))
-      .filter((f) => read(`articles/${f}`).includes('data-offer="toei"'))
-    const stale = arts.filter((f) => !read(`articles/${f}`).includes(TOEI_PEEK))
-    if (!arts.length) bad.push('都営の売り場が入った記事が0本')
-    if (stale.length) bad.push(`記事の抜粋が資料と違う ${stale.length}本（node scripts/stamp-offers.mjs）：${stale.join(', ')}`)
-    // 抜粋の表には住宅侵入の件数が載る。率ではない・所在地と一致しない場合がある・出典の注記が枠の外に無い記事は出さない。
-    const noNote = arts.filter((f) => !read(`articles/${f}`).includes(TOEI_PEEK_NOTE))
-    if (noNote.length) bad.push(`記事の抜粋の下に住環境の数字の注記が無い ${noNote.length}本（node scripts/stamp-offers.mjs）：${noNote.join(', ')}`)
-    if (!bad.length) console.log(`突き合わせ OK：資料（2章 ${m2[1]}件・索引 ${m6[1]}件）＝/toei/＝トップのカード＝記事${arts.length}本の抜粋`)
+      .filter((f) => read(`articles/${f}`).includes('<!-- offer:toei -->'))
+    if (!arts.length) bad.push('都営への案内が入った記事が0本（node scripts/stamp-offers.mjs）')
+    const stale = arts.filter((f) => !read(`articles/${f}`).includes(`申込先${m2[1]}件`))
+    if (stale.length) bad.push(`記事の案内が資料の2章（${m2[1]}件）と違う ${stale.length}本（node scripts/stamp-offers.mjs）：${stale.join(', ')}`)
+    if (!bad.length) console.log(`突き合わせ OK：資料（2章 ${m2[1]}件・3章 ${m3[1]}件・索引 ${m6[1]}件）＝/toei/＝トップのカード＝記事${arts.length}本の案内`)
   }
   if (bad.length) { console.error('KV に入れません：\n- ' + bad.join('\n- ')); process.exit(1) }
   if (process.argv.includes('--check')) process.exit(0)
