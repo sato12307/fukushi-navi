@@ -135,7 +135,7 @@ ${peekList.slice(0, PEEK_ROWS).map((h) => `    ${hrow(h)}`).join('\n')}
     <p><span class="tag">数字だけ</span>観測できた募集は<strong>${num(F.rows)}件</strong>、申込先で<strong>${num(F.all)}件</strong>。${MIN_N}件以上観測できた<strong>${num(F.enough)}件</strong>の倍率の中央値は<strong>${F.allMed}倍</strong>で、<strong>${F.suki}件（${F.sukiPct}%）</strong>が${SUKI}倍未満でした。申込者ゼロの募集は<strong>${num(F.zeroRows)}件・${F.zeroHouses}住宅</strong>で出ています。</p>
   </div>
 
-${jumpKoei(facts)}
+${jumpKoei({ ...facts, up: '../' })}
 
   <h2 id="axis">① まず「${esc(C.axis.label)}」で倍率が変わる（無料）</h2>
   <p>個々の住宅を選ぶ前に、ここを確かめてください。${RANGE}の全${num(F.rows)}件を${esc(C.axis.label)}ごとに分けると、<strong>${esc(LO.label)}の中央値${LO.med}倍に対して${esc(HI.label)}は${HI.med}倍</strong>で、<strong>${RATIO}倍</strong>ひらいています。申込先が${MIN_GROUP}件以上ある${esc(C.axis.label)}だけを倍率の低い順に並べました。</p>

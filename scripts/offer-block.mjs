@@ -36,6 +36,9 @@ const esc = (s) => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replac
 //   文面はここ1か所。市ごとに違うのは「市名・回数・軸の呼び名・件数」だけなので、
 //   生成器（scripts/koei-nerai.mjs）が数えた実数を facts で渡してもらう。
 //   ★ここに市ごとの if を増やさない。増えたら facts に欄を足す。
+// ★up は「そのページからルートまで」の相対。2026-09-19 まで市の無料ページ（/<市>/）から
+//   up 無しで呼んでいて、リンクが /<市>/<市>/moushikomisaki/ になり**404だった**。
+//   買う導線そのものが切れていたので、呼ぶ側は必ず up を渡すこと。
 export function jumpKoei(f) {
   return `  <div class="callout note">
     <p><span class="tag">有料の一覧</span>このページの相場は全部無料です。そのうえで<strong>申込先を1つに決める</strong>ところまで要るなら、定期募集${f.rounds}回を名寄せして「毎回すいている申込先」を並べた一覧（<strong>${f.price}円</strong>・買い切り）があります。<a href="${f.up || ''}${f.key}/moushikomisaki/">中身と値段を見る →</a></p>
