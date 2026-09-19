@@ -60,6 +60,17 @@
   //       画面（700〜800px）にどうやっても3割は入らない。読まれている面が「見られていない」になる。
   //   (2) 見えたかどうかが0のまま返ってくると「誰も見ていない＝需要なし」と読み違える。
   //       判定材料そのものが動いているかを、こちらで確かめられる書き方にしておく。
+  // ★2026-09-19 売り場を独自ページへ戻した（ユーザー裁定）。
+  //   data-sell="1" が付いたカードは「独自の売り場ページの本体」なので、
+  //   スクロールで数える seen / read / pick ではなく、**着いた時点で view を1回**撃つ。
+  //   記事に埋めたバナーはもう存在しないので、seen 系が立つのはここ以外に無い。
+  var sellCards = []
+  for (var si = 0; si < cards.length; si++) if (cards[si].getAttribute('data-sell')) sellCards.push(cards[si])
+  for (var sj = 0; sj < sellCards.length; sj++) {
+    var sk = sellCards[sj].getAttribute('data-offer')
+    if (P[sk]) ev(sk + '_view')
+  }
+
   var fired = {}
   var dwell = {}
   function fire(kind, stage) {
@@ -89,7 +100,7 @@
     var rest = 0
     for (var i = 0; i < cards.length; i++) {
       var k = cards[i].getAttribute('data-offer')
-      if (!P[k]) continue
+      if (!P[k] || cards[i].getAttribute('data-sell')) continue   /* 売り場ページは view で数える */
       if (!fired[k + ':seen'] && shown(cards[i], vh) >= 60) fire(k, 'seen')
       if (!fired[k + ':read']) {
         // 購入ボタンの行まで来たか。行が無いカード（旧型の案内）はカード下端で代用する。

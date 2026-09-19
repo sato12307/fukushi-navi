@@ -38,13 +38,14 @@ const esc = (s) => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replac
 //   ★ここに市ごとの if を増やさない。増えたら facts に欄を足す。
 export function jumpKoei(f) {
   return `  <div class="callout note">
-    <p><span class="tag">有料の一覧</span>このページの相場は全部無料です。そのうえで<strong>申込先を1つに決める</strong>ところまで要るなら、定期募集${f.rounds}回を名寄せして「毎回すいている申込先」を並べた一覧（<strong>${f.price}円</strong>・買い切り）があります。<a href="#offer-${f.key}">中身と値段を見る →</a></p>
+    <p><span class="tag">有料の一覧</span>このページの相場は全部無料です。そのうえで<strong>申込先を1つに決める</strong>ところまで要るなら、定期募集${f.rounds}回を名寄せして「毎回すいている申込先」を並べた一覧（<strong>${f.price}円</strong>・買い切り）があります。<a href="${f.up || ''}${f.key}/moushikomisaki/">中身と値段を見る →</a></p>
   </div>`
 }
 
 /** 政令市の申込先えらび。facts＝生成器が数えた実数、peek＝実物の冒頭（資料と同じ行から切る） */
-export function offerKoeiLeaf({ facts: f, peek, up = '../' } = {}) {
-  return `  <div class="offer" id="offer-${f.key}" data-offer="${f.key}">
+/** 市ごとの売り場ページ（/<市>/moushikomisaki/）に置く本体。購入ボタンはここにしか無い。 */
+export function offerKoeiSell({ facts: f, peek, up = '../../' } = {}) {
+  return `  <div class="offer" id="offer-${f.key}" data-offer="${f.key}" data-sell="1">
   <span class="kicker">申込先を1つに決めるなら</span>
   <h3>${f.city}営住宅で「毎回すいている申込先」の一覧</h3>
   <p class="price"><b>${f.price}円</b><span>買い切り・税込。HTMLファイル1つ、印刷可</span></p>
@@ -63,14 +64,22 @@ ${peek ? peekBox('一覧の冒頭（抜粋）', peek) : ''}
   </div>`
 }
 
+/** 市の無料ページに置く案内。★2026-09-19 からリンクだけ（購入ボタンは売り場にしかない）。 */
+export function offerKoeiLeaf({ facts: f, up = '../' } = {}) {
+  return `  <div class="offer-link" id="offer-${f.key}">
+  <p>ここまでが無料で読めるところです。このページで分かるのは「どの${f.axis}が空きやすいか」まで。<strong>1回だけ空いた住宅と、いつ見ても空いている住宅は区別できません</strong>。定期募集${f.rounds}回を申込先ごとに名寄せして中央値で選り分けた<a href="${up}${f.key}/moushikomisaki/"><strong>申込先ごとの一覧（${f.price}円・買い切り）</strong>があります</a>。</p>
+  <p class="fine"><strong>買わなくても申し込みはできます。</strong>${f.axis}ごとの相場と混んでいる申込先の実名は、上に全部出しています。</p>
+  </div>`
+}
+
 export function jumpPack() {
   return `  <div class="callout note">
-    <p><span class="tag">有料の手順書</span>制度の説明とお住まいの市区町村の基準は、このサイトで全部無料で読めます。そのうえで<strong>認定書をもらって過去5年分を取り戻すところまで</strong>進めるなら、手順書（<strong>${PACK_PRICE}円</strong>・買い切り）があります。<a href="#offer-pack">中身と値段を見る →</a></p>
+    <p><span class="tag">有料の手順書</span>制度の説明とお住まいの市区町村の基準は、このサイトで全部無料で読めます。そのうえで<strong>認定書をもらって過去5年分を取り戻すところまで</strong>進めるなら、手順書（<strong>${PACK_PRICE}円</strong>・買い切り）があります。<a href="/pack/">中身と値段を見る →</a></p>
   </div>`
 }
 export function jumpToei() {
   return `  <div class="callout note">
-    <p><span class="tag">有料の一覧</span>このページの相場は全部無料です。そのうえで<strong>住宅名を1つに決める</strong>ところまで要るなら、定期募集${TOEI_FACTS.rounds}回を名寄せして「毎回すいている申込先」を住宅名つきで並べた一覧（<strong>${TOEI_PRICE}円</strong>・買い切り）があります。<a href="#offer-toei">中身と値段を見る →</a></p>
+    <p><span class="tag">有料の一覧</span>このページの相場は全部無料です。そのうえで<strong>住宅名を1つに決める</strong>ところまで要るなら、定期募集${TOEI_FACTS.rounds}回を名寄せして「毎回すいている申込先」を住宅名つきで並べた一覧（<strong>${TOEI_PRICE}円</strong>・買い切り）があります。<a href="/toei/">中身と値段を見る →</a></p>
   </div>`
 }
 
@@ -201,52 +210,24 @@ const PACK_PEEK = {
  *  peek … 'rank' | 'shisan' | 'nintei' | 'torimodosu'（記事に合う節を選ぶ）
  *  up   … ルートへの相対
  */
+// ★2026-09-19 ユーザー裁定＝【売り場は独自ページだけ。記事にバナーを置かない】
+//   09-08 に記事へ埋めた購入カードを戻した。買うボタンは /pack/ /toei/ と市ごとの売り場にしかない。
+//   理由は厳密な効果測定＝埋め込みだと「売り場に着いた」段が存在せず、カードが画面に入っただけ
+//   （*_offer_seen）と、買う気で売り場に来た人を同じ列に入れることになる。
+//   記事に残すのはリンクだけ。押されたら to_pack / to_toei が立ち、着いたら pack_view / toei_view が立つ。
 export function offerPackLeaf({ code = '', name = '', peek = 'rank', up = '../' } = {}) {
   const whose = name ? `${esc(name)}の基準に合わせて` : 'お住まいの市区町村の基準に合わせて'
-  const m = name ? esc(name) : 'お住まいの市区町村'
-  const inner = (PACK_PEEK[peek] || PACK_PEEK.rank)(m)
-  const chooser = code
-    ? ''
-    : `  <p><label for="munsel-pack"><strong>お住まいの市区町村を選んでください</strong></label></p>
-  <p><select id="munsel-pack" class="munsel" data-munsel><option value="">— 読み込み中 —</option></select></p>`
-  return `  <div class="offer" id="offer-pack" data-offer="pack"${code ? ` data-code="${esc(code)}"` : ''}>
-  <span class="kicker">手続きまで進めるなら</span>
-  <h3>親の障害者控除、過去5年分をさかのぼって取り戻す手順書</h3>
-  <p class="price"><b>${PACK_PRICE}円</b><span>買い切り・税込。HTMLファイル1つ、印刷してそのまま窓口へ</span></p>
-  <p>ここまでが無料で読めるところです。ここから先＝認定書をもらい、還付額を試算し、更正の請求か還付申告を出すまでを、${whose}1つにまとめました。</p>
-  <ul>
-  <li>親のランク（日常生活自立度）が<strong>どの書類のどこに書いてあるか</strong>と、手元にないときの取り寄せ方（開示請求）</li>
-  <li>所得税率5〜33%×障害者／特別障害者／同居特別障害者の<strong>還付額の試算表</strong>（年額と5年分）</li>
-  <li>確定申告済みなら更正の請求・未申告なら還付申告、それぞれの<strong>必要書類と出し方</strong></li>
-  <li>窓口での<strong>持ち物のチェックリスト</strong>と、「過去◯年分も」と伝えるべき理由</li>
-  </ul>
-  <p class="fine">先に確認してください：この控除で税金が戻るのは、<strong>親御さん本人が税を納めている</strong>か、<strong>あなたが親御さんを扶養親族として申告している</strong>場合です。どちらにも当てはまらないと、控除する税金がないため戻るお金はありません。</p>
-${chooser}
-  <p class="buyrow"><button type="button" class="btn-primary" data-buy>${PACK_PRICE}円で手順書を受け取る</button> <span class="buymsg" role="status"></span></p>
-${peekBox('手順書の冒頭（抜粋）', inner)}
+  return `  <div class="offer-link" id="offer-pack">
+  <p>ここまでが無料で読めるところです。ここから先＝認定書をもらい、還付額を試算し、更正の請求か還付申告を出すまでを、${whose}1つにまとめた<a href="${up}pack/${code ? `?code=${esc(code)}` : ''}"><strong>手順書（${PACK_PRICE}円・買い切り）</strong>があります</a>。</p>
   <p class="fine"><strong>買わなくても手続きはできます。</strong>迷ったら先に<a href="${up}shogai-kojo/">自治体別の一覧</a>で、自分の街の基準だけ確かめてください。制度の説明は<a href="${up}articles/shogaisha-kojo-tax.html">こちらの記事</a>で全部無料です。</p>
-  <p class="fine">クレジットカード決済（Stripe）。カード情報は当方を経由しません。お支払い後すぐダウンロードできます。<a href="${up}pack/">売り場のページ</a>／<a href="${up}tokushoho/">特定商取引法に基づく表記</a>／<a href="${up}kiyaku/">利用規約</a></p>
   </div>`
 }
 
 /** 記事の中に置く売り場（都営住宅 申込先えらび）。up＝ルートへの相対 */
 export function offerToeiLeaf({ up = '../' } = {}) {
-  return `  <div class="offer" id="offer-toei" data-offer="toei">
-  <span class="kicker">申込先を1つに決めるなら</span>
-  <h3>都営住宅（東京都）で「毎回すいている申込先」の住宅名つき一覧</h3>
-  <p class="price"><b>${TOEI_PRICE}円</b><span>買い切り・税込。HTMLファイル1つ、印刷可</span></p>
-  <p>申込書に書けるのは基本的に1回につき1つです。相場が分かっても、最後は住宅名を1つ選ぶことになります。<strong>1回だけ空いた住宅と、いつ見ても空いている住宅は区別できません</strong>。定期募集${TOEI_FACTS.rounds}回を住宅と募集区分ごとに名寄せして、中央値で選り分けた一覧です。</p>
-  <ul>
-  <li><strong>毎回すいている申込先</strong>（${TOEI_FACTS.minN}件以上の募集を観測できて、倍率の中央値が${TOEI_FACTS.suki}倍未満のものだけ。1回だけ空いた住宅は入れていません）</li>
-  <li>回によって当たりやすさが<strong>大きく動く申込先</strong>（住宅を変えるより、出す回を変えるほうが効く相手）</li>
-  <li>申込者ゼロが出た申込先と<strong>その回数</strong></li>
-  <li>観測できた<strong>全申込先の索引</strong>（区市町・住宅名・募集区分・倍率の中央値／最低／最高・観測件数・エレベーター・建てられた年・住宅名と同じ名前の町丁目の世帯数と住宅侵入の件数）</li>
-  </ul>
-  <p class="fine">先に確認してください：これは<strong>過去の実測から作った目安</strong>で、次の募集の倍率を約束するものではありません。募集される住宅は回ごとに変わります。申込資格（都内在住・収入基準など）は東京都・JKK東京の募集案内でご確認ください。<strong>対象は東京都の都営住宅だけ</strong>で、他の道府県の公営住宅は入っていません。</p>
-  <p class="buyrow"><button type="button" class="btn-primary" data-buy>${TOEI_PRICE}円で一覧を受け取る</button> <span class="buymsg" role="status"></span></p>
+  return `  <div class="offer-link" id="offer-toei">
+  <p>申込書に書けるのは基本的に1回につき1つです。相場が分かっても、最後は住宅名を1つ選ぶことになります。定期募集${TOEI_FACTS.rounds}回を住宅と募集区分ごとに名寄せして「毎回すいている申込先」を中央値で選り分けた<a href="${up}toei/"><strong>住宅名つきの一覧（${TOEI_PRICE}円・買い切り）</strong>があります</a>。</p>
   <p class="fine"><strong>買わなくても申し込みはできます。</strong>区市町ごとの相場は<a href="${up}toei/">無料の一覧</a>で全部公開しています。</p>
-${peekBox('一覧の冒頭（抜粋）', TOEI_PEEK)}
-  <p class="fine">${TOEI_PEEK_NOTE}</p>
-  <p class="fine">クレジットカード決済（Stripe）。カード情報は当方を経由しません。お支払い後すぐダウンロードできます。<a href="${up}tokushoho/">特定商取引法に基づく表記</a>／<a href="${up}kiyaku/">利用規約</a></p>
   </div>`
 }
+

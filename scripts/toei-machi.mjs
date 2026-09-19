@@ -603,11 +603,15 @@ for (const [rel, html] of pending) {
   for (const [rel, html] of pending) {
     if (!rel.startsWith('articles/toei-')) continue
     const name = rel.slice('articles/'.length)
-    // (1) 売り場のカードがちょうど1つ
-    const cards = (html.match(/<div class="offer" id="offer-toei"/g) || []).length
-    if (cards !== 1) bad.push(`${name}: 売り場カードが${cards}個`)
-    // (2) 買うボタンと計測の印
-    if (!/data-offer="toei"/.test(html) || !/data-buy/.test(html)) bad.push(`${name}: 買うボタンか data-offer が無い`)
+    // (1) 売り場への案内がちょうど1つ
+    //     ★2026-09-19 ユーザー裁定で、記事に置くのはリンクだけになった（購入ボタンは /toei/ にしかない）。
+    //       関所も「カードがあるか」から「売り場への案内が1つあり、そこから /toei/ へ行けるか」に変える。
+    //       ここを直し忘れると、生成器が毎回 die して記事が永久に古いまま残る。
+    const cards = (html.match(/<div class="offer-link" id="offer-toei"/g) || []).length
+    if (cards !== 1) bad.push(`${name}: 売り場への案内が${cards}個`)
+    // (2) 記事に購入ボタンが残っていないこと／売り場へのリンクがあること
+    if (/data-buy/.test(html)) bad.push(`${name}: 記事に購入ボタンが残っている（売り場は /toei/ だけ）`)
+    if (!/href="[^"]*\/toei\/"/.test(html)) bad.push(`${name}: /toei/ へのリンクが無い`)
     // (3) 薄すぎる面を出さない
     if (html.length < 12000) bad.push(`${name}: ${html.length}字しかない`)
     // (4) 記事内リンクの行き先が実在するか（生成中のものは ROOTS にある）

@@ -154,38 +154,9 @@
 
 <!-- offer:pack -->
   <p class="offer-lead">申請を考える前に、<strong>使い切れていない控除</strong>がないかも確かめてください。要介護認定を受けている親御さんは、障害者手帳がなくても市区町村の認定を受ければ障害者控除の対象になることがあり、過去5年分までさかのぼって税金を取り戻せます。<strong>すでに保護を受けている世帯は課税されていないことが多く、その場合に戻るお金はありません</strong>——親御さんやご家族に納税している人がいる場合の話です。</p>
-  <div class="offer" id="offer-pack" data-offer="pack">
-  <span class="kicker">手続きまで進めるなら</span>
-  <h3>親の障害者控除、過去5年分をさかのぼって取り戻す手順書</h3>
-  <p class="price"><b>500円</b><span>買い切り・税込。HTMLファイル1つ、印刷してそのまま窓口へ</span></p>
-  <p>ここまでが無料で読めるところです。ここから先＝認定書をもらい、還付額を試算し、更正の請求か還付申告を出すまでを、お住まいの市区町村の基準に合わせて1つにまとめました。</p>
-  <ul>
-  <li>親のランク（日常生活自立度）が<strong>どの書類のどこに書いてあるか</strong>と、手元にないときの取り寄せ方（開示請求）</li>
-  <li>所得税率5〜33%×障害者／特別障害者／同居特別障害者の<strong>還付額の試算表</strong>（年額と5年分）</li>
-  <li>確定申告済みなら更正の請求・未申告なら還付申告、それぞれの<strong>必要書類と出し方</strong></li>
-  <li>窓口での<strong>持ち物のチェックリスト</strong>と、「過去◯年分も」と伝えるべき理由</li>
-  </ul>
-  <p class="fine">先に確認してください：この控除で税金が戻るのは、<strong>親御さん本人が税を納めている</strong>か、<strong>あなたが親御さんを扶養親族として申告している</strong>場合です。どちらにも当てはまらないと、控除する税金がないため戻るお金はありません。</p>
-  <p><label for="munsel-pack"><strong>お住まいの市区町村を選んでください</strong></label></p>
-  <p><select id="munsel-pack" class="munsel" data-munsel><option value="">— 読み込み中 —</option></select></p>
-  <p class="buyrow"><button type="button" class="btn-primary" data-buy>500円で手順書を受け取る</button> <span class="buymsg" role="status"></span></p>
-  <p class="peek-lead">説明だけでは分からないと思うので、<strong>実物の冒頭をそのまま</strong>出します。宣伝用に書き直したものではありません。</p>
-  <div class="peek" aria-label="手順書の冒頭（抜粋）">
-    <h4 class="pk">ステップ2　いくら戻るか試算する</h4>
-    <p>障害者控除は「税金がその額だけ安くなる」のではなく、<b>課税所得を減らす</b>しくみです。実際に戻る金額は <b>控除額 × 税率</b> で決まります。控除を受ける人（親御さん本人か、扶養しているあなた）の税率で見てください。</p>
-    <div class="table-wrap"><table>
-    <thead><tr><th>あなたの所得税率</th><th>障害者</th><th>特別障害者</th><th>同居特別障害者</th></tr></thead>
-    <tbody>
-    <tr><th>5%</th><td><b>39,500円</b><br><small>5年で 197,500円</small></td><td><b>50,000円</b><br><small>5年で 250,000円</small></td><td><b>90,500円</b><br><small>5年で 452,500円</small></td></tr>
-    <tr><th>10%</th><td><b>53,000円</b><br><small>5年で 265,000円</small></td><td><b>70,000円</b><br><small>5年で 350,000円</small></td><td><b>128,000円</b><br><small>5年で 640,000円</small></td></tr>
-    <tr><th>20%</th><td><b>80,000円</b><br><small>5年で 400,000円</small></td><td><b>110,000円</b><br><small>5年で 550,000円</small></td><td><b>203,000円</b><br><small>5年で 1,015,000円</small></td></tr>
-    </tbody></table></div>
-    <p>所得税＝控除額×所得税率、住民税＝控除額×10%で計算した目安です。復興特別所得税や他の控除との兼ね合いは含めていません。</p>
-  </div>
-  <p class="peekcut"><span>抜粋はここまで</span></p>
-  <p class="fine">かすんでいるのは「ここで切れている」という印です。<strong>この先の本文はこのページに入っていません</strong>（ソースを見ても続きは出てきません）。</p>
+  <div class="offer-link" id="offer-pack">
+  <p>ここまでが無料で読めるところです。ここから先＝認定書をもらい、還付額を試算し、更正の請求か還付申告を出すまでを、お住まいの市区町村の基準に合わせて1つにまとめた<a href="../pack/"><strong>手順書（500円・買い切り）</strong>があります</a>。</p>
   <p class="fine"><strong>買わなくても手続きはできます。</strong>迷ったら先に<a href="../shogai-kojo/">自治体別の一覧</a>で、自分の街の基準だけ確かめてください。制度の説明は<a href="../articles/shogaisha-kojo-tax.html">こちらの記事</a>で全部無料です。</p>
-  <p class="fine">クレジットカード決済（Stripe）。カード情報は当方を経由しません。お支払い後すぐダウンロードできます。<a href="../pack/">売り場のページ</a>／<a href="../tokushoho/">特定商取引法に基づく表記</a>／<a href="../kiyaku/">利用規約</a></p>
   </div>
   <!-- /offer -->
 

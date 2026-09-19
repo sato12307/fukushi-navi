@@ -23,7 +23,7 @@ import fs from 'node:fs'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { page, esc, SITE } from './shogai-kojo-page.mjs'
-import { offerKoeiLeaf, jumpKoei } from './offer-block.mjs'
+import { offerKoeiLeaf, jumpKoei, offerKoeiSell } from './offer-block.mjs'
 import { load, CITIES, MIN_N, SUKI, BURE, MIN_GROUP, PRICE, r1, num, pct, WA } from './koei-lib.mjs'
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..')
@@ -121,7 +121,7 @@ ${peekList.slice(0, PEEK_ROWS).map((h) => `    ${hrow(h)}`).join('\n')}
     sukiN: num(F.suki), bureN: F.buread, enoughN: num(F.enough), key: C.key,
     axis: C.axis.label, only: C.only || `${C.city}営住宅だけ`,
   }
-  const OFFER = offerKoeiLeaf({ up: '../', peek: PEEK, facts })
+  const OFFER = offerKoeiLeaf({ up: '../', facts })
 
   // ── 無料ページ ──────────────────────────────────────────────────────────
   const body = `  <p class="breadcrumb"><a href="../index.html">トップ</a> ＞ <a href="../articles/koei-jutaku-bairitsu.html">公営住宅</a> ＞ ${esc(C.city)}営住宅 申込先えらび</p>
@@ -159,6 +159,21 @@ ${LIMITS}
   </ul>
   <p class="note"><strong>「倍率が低い＝誰でも入れる」ではありません。</strong>申込資格（市内在住・収入基準・住宅困窮要件など）を満たすことが前提で、同じ住宅でも回によって募集の有無・戸数・間取り・入居人数の条件が変わります。<strong>過去にあまった住宅が次回も募集に出るとはかぎりません。</strong>申し込む前に、その回の募集案内で必ず条件を確認してください。</p>
   <p class="note">内容の誤りを見つけられた場合は contact@fukushiru.com までご連絡ください。訂正します。</p>`
+
+  // ── 売り場（1市＝1ページ・2026-09-19 ユーザー裁定）────────────────────────
+  //   市の無料ページに埋めていた購入カードをここへ移した。無料ページにはリンクだけ。
+  //   ★ここに着いた回数が <市>_view。カードが画面に入っただけの <市>_offer_seen は廃止した。
+  write(`${C.key}/moushikomisaki/index.html`, page({
+    title: `${C.city}営住宅の申込先ごとの一覧（${PRICE}円）｜定期募集${F.rounds}回の実測｜フクシル`,
+    desc: `${C.city}営住宅の応募状況表${F.rounds}回分を申込先ごとに名寄せし、倍率の中央値で「毎回すいている申込先」${num(F.suki)}件を選り分けた一覧です。${C.axis.label}ごとの相場と混んでいる申込先の実名は無料。${PRICE}円。`,
+    canonical: `/${C.key}/moushikomisaki/`, depth: 2,
+    body: `  <p class="breadcrumb"><a href="../../index.html">トップ</a> ＞ <a href="../">${esc(C.city)}営住宅 申込先えらび</a> ＞ 申込先ごとの一覧</p>
+  <h1>${esc(C.city)}営住宅の申込先ごとの一覧</h1>
+  <p class="updated">最終更新：${READ_AT} ／ 出典＝${esc(C.city)}が公表する応募状況表${F.rounds}回分の読み取り</p>
+  <p class="lead"><a href="../">${esc(C.city)}営住宅で毎回すいている申込先はどこか</a>のページで、${esc(C.axis.label)}ごとの相場と混んでいる申込先の実名は<strong>全部無料で読めます</strong>。ここで売っているのは、その先＝申込先を1つに決めるための一覧だけです。</p>
+${offerKoeiSell({ up: '../../', peek: PEEK, facts })}
+  <p class="note">内容の誤りを見つけられた場合は contact@fukushiru.com までご連絡ください。訂正します。</p>`,
+  }))
 
   write(`${C.key}/index.html`, page({
     title: `${C.city}営住宅で毎回すいている申込先はどこか｜定期募集${F.rounds}回の実測｜フクシル`,
