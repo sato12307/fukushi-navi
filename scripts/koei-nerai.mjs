@@ -201,7 +201,7 @@ ${offerKoeiSell({ up: '../../', peek: PEEK, facts })}
     var s = new URLSearchParams(location.search).get('session_id')
     var a = document.getElementById('dl')
     if (!s) { a.textContent = '購入の確認ができません（session_id がありません）'; a.removeAttribute('href'); return }
-    a.href = '/api/download?product=${C.key}&session_id=' + encodeURIComponent(s)
+    a.href = '/api/pack?session_id=' + encodeURIComponent(s)
   })()
   </script>`,
   }))

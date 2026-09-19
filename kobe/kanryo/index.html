@@ -45,7 +45,7 @@
     var s = new URLSearchParams(location.search).get('session_id')
     var a = document.getElementById('dl')
     if (!s) { a.textContent = '購入の確認ができません（session_id がありません）'; a.removeAttribute('href'); return }
-    a.href = '/api/download?product=kobe&session_id=' + encodeURIComponent(s)
+    a.href = '/api/pack?session_id=' + encodeURIComponent(s)
   })()
   </script>
   </div>
