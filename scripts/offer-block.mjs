@@ -51,7 +51,7 @@ export function offerKoeiSell({ facts: f, peek, up = '../../' } = {}) {
   return `  <div class="offer" id="offer-${f.key}" data-offer="${f.key}" data-sell="1">
   <span class="kicker">申込先を1つに決めるなら</span>
   <h3>${f.city}営住宅で「毎回すいている申込先」の一覧</h3>
-  <p class="price"><b>${f.price}円</b><span>買い切り・税込。HTMLファイル1つ、印刷可</span></p>
+  <p class="price"><b>${f.price}円</b><span>買い切り・税込。買った直後にそのまま画面で読めます（保存・印刷も可）</span></p>
   <p>ここまでが無料で読めるところです。このページで分かるのは「どの${f.axis}が空きやすいか」まで。<strong>1回だけ空いた住宅と、いつ見ても空いている住宅は区別できません</strong>。定期募集${f.rounds}回を申込先ごとに名寄せして、中央値で選り分けた一覧です。</p>
   <ul>
   <li><strong>毎回すいている申込先</strong>（${f.minN}件以上の募集を観測できて、倍率の中央値が${f.suki}倍未満のものだけ<strong>${f.sukiN}件</strong>。1回だけ空いた住宅は入れていません）</li>
@@ -63,7 +63,7 @@ export function offerKoeiSell({ facts: f, peek, up = '../../' } = {}) {
   <p class="buyrow"><button type="button" class="btn-primary" data-buy>${f.price}円で一覧を受け取る</button> <span class="buymsg" role="status"></span></p>
   <p class="fine"><strong>買わなくても申し込みはできます。</strong>${f.axis}ごとの相場と混んでいる申込先の実名は、上に全部出しています。</p>
 ${peek ? peekBox('一覧の冒頭（抜粋）', peek) : ''}
-  <p class="fine">クレジットカード決済（Stripe）。カード情報は当方を経由しません。Apple Pay・Google Pay にも対応しています（お使いの端末が対応している場合）。PayPay は近日対応予定です。お支払い後すぐダウンロードできます。<a href="${up}tokushoho/">特定商取引法に基づく表記</a>／<a href="${up}kiyaku/">利用規約</a></p>
+  <p class="fine">クレジットカード決済（Stripe）。カード情報は当方を経由しません。Apple Pay・Google Pay にも対応しています（お使いの端末が対応している場合）。PayPay は近日対応予定です。お支払いが済むと、<strong>資料はそのまま画面に開きます</strong>（ダウンロードしてファイルを開き直す必要はありません。ファイルとして保存もできます）。<a href="${up}tokushoho/">特定商取引法に基づく表記</a>／<a href="${up}kiyaku/">利用規約</a></p>
   </div>`
 }
 
@@ -99,7 +99,7 @@ export function offerPack({ name = '', up = '../' } = {}) {
   <li>確定申告済みなら更正の請求・未申告なら還付申告、それぞれの<strong>必要書類と出し方</strong></li>
   <li>窓口での<strong>持ち物のチェックリスト</strong>と、「過去◯年分も」と伝えるべき理由</li>
   </ul>
-  <p class="price"><b>${PACK_PRICE}円</b><span>買い切り・税込。HTMLファイル1つ、印刷してそのまま窓口へ</span></p>
+  <p class="price"><b>${PACK_PRICE}円</b><span>買い切り・税込。買った直後にそのまま画面で読めます（印刷してそのまま窓口へ）</span></p>
   <p><a class="btn-primary" href="${up}pack/">${PACK_PRICE}円で手順書を受け取る&nbsp;→</a></p>
   <p class="fine"><strong>買わなくても手続きはできます。</strong>迷ったら先に<a href="${up}shogai-kojo/">自治体別の一覧</a>で、自分の街の基準だけ確かめてください。</p>
   </div>`
@@ -117,7 +117,7 @@ export function offerToei({ up = '../' } = {}) {
   <li>申込者ゼロが出た申込先と<strong>その回数</strong></li>
   <li>観測できた<strong>全申込先の索引</strong>（区市町・住宅名・募集区分・倍率の中央値／最低／最高・観測件数・エレベーター・建てられた年・住宅名と同じ名前の町丁目の世帯数と住宅侵入の件数）</li>
   </ul>
-  <p class="price"><b>${TOEI_PRICE}円</b><span>買い切り・税込。HTMLファイル1つ、印刷可</span></p>
+  <p class="price"><b>${TOEI_PRICE}円</b><span>買い切り・税込。買った直後にそのまま画面で読めます（保存・印刷も可）</span></p>
   <p><a class="btn-primary" href="${up}toei/">${TOEI_PRICE}円で一覧を受け取る&nbsp;→</a></p>
   <p class="fine"><strong>買わなくても申し込みはできます。</strong>上の相場だけでも、どのあたりを狙うかは決められます。</p>
   </div>`

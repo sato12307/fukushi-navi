@@ -18,6 +18,10 @@ import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { page, esc, SITE } from './shogai-kojo-page.mjs'
 import { kanryoScript } from './kanryo-script.mjs'
+// ★特商法表記に並べる商品の一覧は、政令市の正典（koei-lib の CITIES）から引く。
+//   ここに市名を書き写すと、市を足したときに**表記だけが古いまま残る**。
+//   法令上の表示なので、実際に売っているものとずれた時点で表記そのものが誤りになる。
+import { CITIES } from './koei-lib.mjs'
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..')
 const DATA = path.join(ROOT, 'data', 'shogai-kojo')
@@ -156,7 +160,7 @@ write('pack/index.html', page({
   </select></p>
   <p style="margin-top:1rem"><button id="buy" class="btn-primary">${PRICE}円で手順書を受け取る</button>
   <span id="msg" style="margin-left:.8rem"></span></p>
-  <p class="fine">クレジットカード決済（Stripe）。カード情報は当方を経由しません。Apple Pay・Google Pay にも対応しています（お使いの端末が対応している場合）。PayPay は近日対応予定です。お支払い後すぐ画面で開けます（ファイルとして保存もできます）。<strong>買わなくても手続きはできます</strong>——無料で読める範囲は上のとおりです。</p>
+  <p class="fine">クレジットカード決済（Stripe）。カード情報は当方を経由しません。Apple Pay・Google Pay にも対応しています（お使いの端末が対応している場合）。PayPay は近日対応予定です。お支払いが済むと、<strong>資料はそのまま画面に開きます</strong>（ダウンロードしてファイルを開き直す必要はありません。ファイルとして保存もできます）。<strong>買わなくても手続きはできます</strong>——無料で読める範囲は上のとおりです。</p>
   </div>
 
   <div class="callout warn"><p><span class="tag">先に確認してください</span>
@@ -216,10 +220,11 @@ write('tokushoho/index.html', page({
   body: `  <p class="breadcrumb"><a href="../index.html">トップ</a> ＞ 特定商取引法に基づく表記</p>
   <h1>特定商取引法に基づく表記</h1>
   <p class="note">通信販売に関する表示です。<strong>無料で提供している部分（制度の解説・自治体別の認定基準・都営住宅の区市町別の相場・各種計算機）については、購入の必要はありません。</strong></p>
-  <p class="note">販売している商品は次の2つです。どちらもお支払い後に画面でご覧いただけるデジタルコンテンツで（HTMLファイルとして保存もできます）、価格・引渡し・返品の条件は下表のとおり共通です。</p>
+  <p class="note">販売している商品は次の${2 + Object.keys(CITIES).length}つです。いずれもお支払い後にその画面でそのままご覧いただけるデジタルコンテンツで（HTMLファイルとして保存もできます）、価格・引渡し・返品の条件は下表のとおり共通です。</p>
   <ul class="note">
   <li><a href="../pack/">親の障害者控除の還付申請一式</a>（市区町村ごと・${PRICE}円）</li>
   <li><a href="../toei/">都営住宅の申込先えらび</a>（${PRICE}円）</li>
+${Object.values(CITIES).map((c) => `  <li><a href="../${c.key}/moushikomisaki/">${esc(c.city)}営住宅の申込先えらび</a>（${PRICE}円）</li>`).join('')}
   </ul>
   <div class="table-wrap"><table><tbody>
   <tr><th>販売業者</th><td>${esc(SELLER.name)}</td></tr>
