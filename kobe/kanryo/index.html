@@ -7,12 +7,12 @@
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <title>ご購入ありがとうございます｜フクシル</title>
-<meta name="description" content="神戸市営住宅 申込先えらびのダウンロード">
+<meta name="description" content="神戸市営住宅 申込先えらびの閲覧画面">
 <link rel="canonical" href="https://fukushiru.com/kobe/kanryo/">
 <meta name="robots" content="noindex,follow">
 <meta property="og:type" content="article">
 <meta property="og:title" content="ご購入ありがとうございます｜フクシル">
-<meta property="og:description" content="神戸市営住宅 申込先えらびのダウンロード">
+<meta property="og:description" content="神戸市営住宅 申込先えらびの閲覧画面">
 <meta property="og:site_name" content="フクシル">
 <meta property="og:url" content="https://fukushiru.com/kobe/kanryo/">
 <meta name="twitter:card" content="summary_large_image">
@@ -37,9 +37,9 @@
 <main id="main">
   <div class="inner">
   <h1>ご購入ありがとうございます</h1>
-  <p class="lead">下のボタンから資料をダウンロードしてください。購入から60日間は同じリンクで何度でも落とせます。</p>
-  <p class="buyrow"><a class="btn-primary" id="dl" href="#">資料をダウンロード</a></p>
-  <p class="fine">うまく落とせない・中身が説明と違う場合は、購入から14日以内に contact@fukushiru.com までご連絡ください。全額返金します。</p>
+  <p class="lead">資料はこの画面にそのまま開きます。購入から60日間は、このURLで何度でも開けます（ブックマークしておいてください）。</p>
+  <p class="buyrow"><a class="btn-primary" id="dl" href="#">資料を開く</a></p>
+  <p class="fine">うまく開けない・中身が説明と違う場合は、購入から14日以内に contact@fukushiru.com までご連絡ください。全額返金します。</p>
   <p id="msg" class="fine"></p>
   <script>
 (function () {
@@ -54,6 +54,61 @@
 
   if (!sid) { hide(); show('購入の情報が見つかりません。購入後に表示されたURLからお越しください。'); return }
 
+  // 資料をこの画面の中に開く。
+  var mounted = false
+  var mount = function () {
+    if (mounted) return
+    mounted = true
+    // 予備ボタンがあった場所（＝押すはずだった所）には、操作だけを置く。
+    var host = (a.parentNode && a.parentNode.tagName === 'P') ? a.parentNode : a
+    var bar = document.createElement('p')
+    bar.className = 'fine'
+    bar.style.cssText = 'display:flex;gap:1.2rem;flex-wrap:wrap;margin:.6rem 0'
+    var jump = document.createElement('a')
+    jump.href = '#packview'; jump.textContent = '↓ 申込先えらびの資料はこのページの下に開いています'
+    jump.style.cssText = 'font-weight:600'
+    var dl = document.createElement('a')
+    dl.href = api('&dl=1'); dl.textContent = 'ファイルとして保存（HTML）'; dl.setAttribute('download', '')
+    var tab = document.createElement('a')
+    tab.href = api(''); tab.target = '_blank'; tab.rel = 'noopener'; tab.textContent = '別のタブで開く'
+    bar.appendChild(jump); bar.appendChild(dl); bar.appendChild(tab)
+    host.parentNode.insertBefore(bar, host.nextSibling)
+
+    // 資料そのものは、この画面の一番下に開く。
+    var box = document.createElement('div')
+    box.id = 'packview'
+    box.style.cssText = 'margin:1.6rem 0 0;scroll-margin-top:1rem'
+
+    var f = document.createElement('iframe')
+    f.src = api('')
+    f.title = '申込先えらびの資料'
+    // 高さが測れなかったときのために既定値を置く（測れなければ二重スクロールになるが読める）
+    f.style.cssText = 'display:block;width:100%;height:70vh;border:1px solid #dfe4ea;border-radius:4px;background:#fff'
+
+    var fit = function () {
+      try {
+        var d = f.contentDocument
+        if (!d || !d.documentElement) return
+        var h = Math.max(d.documentElement.scrollHeight || 0, d.body ? d.body.scrollHeight : 0)
+        if (h > 0) f.style.height = (h + 24) + 'px'
+      } catch (e) { /* 測れないときは既定の高さのまま */ }
+    }
+    f.addEventListener('load', function () {
+      fit()
+      // 表の組み直しや字形の確定で高さが動く。数回だけ測り直す。
+      setTimeout(fit, 300); setTimeout(fit, 1200)
+      try {
+        if (window.ResizeObserver && f.contentDocument && f.contentDocument.body) {
+          new ResizeObserver(fit).observe(f.contentDocument.body)
+        }
+      } catch (e) {}
+    })
+    window.addEventListener('resize', fit)
+
+    box.appendChild(f)
+    host.parentNode.appendChild(box)
+  }
+
   hide()
   show('購入を確認しています…')
   var tries = 0
@@ -62,13 +117,7 @@
     fetch(api('&check=1'), { cache: 'no-store' })
       .then(function (r) { return r.json().catch(function () { return { ok: false } }) })
       .then(function (d) {
-        if (d && d.ok) {
-          a.href = api('')
-          a.textContent = '資料をダウンロード'
-          a.style.display = ''
-          show('')
-          return
-        }
+        if (d && d.ok) { show(''); mount(); return }
         // 受領の確認待ち（PayPay など別画面から戻る方法で起きる）。数回だけ聞き直す。
         if (d && d.retry && tries < 6) {
           show('お支払いの確認を待っています…（' + tries + '回目）')
@@ -79,8 +128,9 @@
       })
       .catch(function () {
         if (tries < 3) { setTimeout(ask, 3000); return }
-        // 通信そのものが通らないときは、直リンクだけでも出す（落とせる人を止めない）。
+        // 通信そのものが通らないときは、予備ボタンだけでも出す（読める人を止めない）。
         a.href = api('')
+        a.textContent = '申込先えらびの資料を開く'
         a.style.display = ''
         show('確認の通信に失敗しました。上のボタンをお試しください。開けない場合は contact@fukushiru.com までご連絡ください。')
       })

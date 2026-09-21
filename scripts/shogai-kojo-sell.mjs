@@ -1,7 +1,7 @@
 // ─────────────────────────────────────────────────────────────────────────────
 // shogai-kojo-sell.mjs — 有料パックの販売まわりのページを作る。
 //   /pack/          … 何を売っているかの説明と、市区町村を選んで買う画面
-//   /pack/kanryo/   … 支払い後のダウンロード画面
+//   /pack/kanryo/   … 支払い後の閲覧画面（資料をその場に開く）
 //   /tokushoho/     … 特定商取引法に基づく表記（売る以上、必須）
 //   /kiyaku/        … 利用規約
 //
@@ -88,7 +88,7 @@ write('pack/index.html', page({
   <strong>お住まいの市区町村で対象になる基準は、無料で公開しています。</strong>
   → <a href="../shogai-kojo/">全国の認定基準を比べる</a>　制度の説明は<a href="../articles/shogaisha-kojo-tax.html">こちら</a>。
   こちらのページで足りる方は、購入する必要はありません。</p></div>
-  <p class="cta-row"><a class="btn-primary" href="#kau">${PRICE}円で手順書を受け取る&nbsp;→</a> <span class="cta-note">市区町村を選んでカード決済。すぐダウンロードできます</span></p>
+  <p class="cta-row"><a class="btn-primary" href="#kau">${PRICE}円で手順書を受け取る&nbsp;→</a> <span class="cta-note">市区町村を選んでカード決済。すぐ画面で開けます</span></p>
 
   <h2>このパックに入っているもの</h2>
   <p>無料ページで「基準」は分かります。そこから先、実際に手続きを終えるまでに詰まるところをまとめました。</p>
@@ -156,7 +156,7 @@ write('pack/index.html', page({
   </select></p>
   <p style="margin-top:1rem"><button id="buy" class="btn-primary">${PRICE}円で手順書を受け取る</button>
   <span id="msg" style="margin-left:.8rem"></span></p>
-  <p class="fine">クレジットカード決済（Stripe）。カード情報は当方を経由しません。Apple Pay・Google Pay にも対応しています（お使いの端末が対応している場合）。PayPay は近日対応予定です。お支払い後すぐダウンロードできます。<strong>買わなくても手続きはできます</strong>——無料で読める範囲は上のとおりです。</p>
+  <p class="fine">クレジットカード決済（Stripe）。カード情報は当方を経由しません。Apple Pay・Google Pay にも対応しています（お使いの端末が対応している場合）。PayPay は近日対応予定です。お支払い後すぐ画面で開けます（ファイルとして保存もできます）。<strong>買わなくても手続きはできます</strong>——無料で読める範囲は上のとおりです。</p>
   </div>
 
   <div class="callout warn"><p><span class="tag">先に確認してください</span>
@@ -189,22 +189,22 @@ write('pack/index.html', page({
 // ── /pack/kanryo/ ───────────────────────────────────────────────────────────
 write('pack/kanryo/index.html', page({
   title: 'ご購入ありがとうございます｜フクシル',
-  desc: '障害者控除 還付申請パックのダウンロード画面です。',
+  desc: '障害者控除 還付申請パックの閲覧画面です。',
   canonical: '/pack/kanryo/', depth: 2, noindex: true,
   body: `  <h1>ご購入ありがとうございます</h1>
-  <p class="lead">下のボタンからダウンロードしてください。<strong>このページのURLは購入から60日間有効です。</strong>ブックマークしておくと再ダウンロードできます。</p>
-  <p><a id="dl" class="card" style="display:inline-block;padding:.8rem 1.6rem;font-weight:600" href="#">パックをダウンロード（HTML）</a></p>
+  <p class="lead">パックはこの画面にそのまま開きます。<strong>このページのURLは購入から60日間有効です。</strong>ブックマークしておくと、あとから何度でも開けます。</p>
+  <p><a id="dl" class="card" style="display:inline-block;padding:.8rem 1.6rem;font-weight:600" href="#">パックを開く</a></p>
   <p id="msg" class="note"></p>
   <h2>使い方</h2>
   <ol>
-  <li>ダウンロードしたファイルをブラウザで開きます。</li>
+  <li>下にパックが開きます。手元に残したいときは「ファイルとして保存」から保存してください。</li>
   <li>ステップ1から順に進めてください。まず<strong>主治医意見書の取り寄せ</strong>から始めると、あとが早く進みます。</li>
   <li>印刷して窓口へ持っていけます（ブラウザの印刷から「PDFに保存」もできます）。</li>
   </ol>
   <p class="note">開けない・内容が説明と違う・二重に決済された場合は、購入から14日以内に <a href="mailto:${SELLER.mail}">${SELLER.mail}</a> までご連絡ください。全額を返金します。
   領収書はStripeから届くメールでご確認いただけます。</p>
   <p class="related"><a href="../../shogai-kojo/">→ 全国の認定基準を比べる（無料）</a></p>
-<script>${kanryoScript({ label: 'パックをダウンロード（HTML）' })}</script>
+<script>${kanryoScript({ label: '還付申請パック' })}</script>
 `,
 }))
 
@@ -216,7 +216,7 @@ write('tokushoho/index.html', page({
   body: `  <p class="breadcrumb"><a href="../index.html">トップ</a> ＞ 特定商取引法に基づく表記</p>
   <h1>特定商取引法に基づく表記</h1>
   <p class="note">通信販売に関する表示です。<strong>無料で提供している部分（制度の解説・自治体別の認定基準・都営住宅の区市町別の相場・各種計算機）については、購入の必要はありません。</strong></p>
-  <p class="note">販売している商品は次の2つです。どちらもHTMLファイルのダウンロード販売で、価格・引渡し・返品の条件は下表のとおり共通です。</p>
+  <p class="note">販売している商品は次の2つです。どちらもお支払い後に画面でご覧いただけるデジタルコンテンツで（HTMLファイルとして保存もできます）、価格・引渡し・返品の条件は下表のとおり共通です。</p>
   <ul class="note">
   <li><a href="../pack/">親の障害者控除の還付申請一式</a>（市区町村ごと・${PRICE}円）</li>
   <li><a href="../toei/">都営住宅の申込先えらび</a>（${PRICE}円）</li>
@@ -231,8 +231,8 @@ write('tokushoho/index.html', page({
   <tr><th>商品代金以外の必要料金</th><td>ありません。通信料はお客様のご負担となります。</td></tr>
   <tr><th>お支払い方法</th><td>クレジットカード（Stripe による決済）。Apple Pay・Google Pay を含みます。</td></tr>
   <tr><th>お支払い時期</th><td>ご注文時にお支払いが確定します。</td></tr>
-  <tr><th>引渡し時期</th><td>お支払いの完了後、ただちにダウンロードいただけます。</td></tr>
-  <tr><th>返品・キャンセル</th><td>デジタルデータの性質上、ダウンロード後のお客様都合による返品・返金はお受けできません。<br>ただし<strong>ファイルが開けない場合、内容が説明と著しく異なる場合、二重に決済された場合</strong>は、購入から14日以内にメールでご連絡ください。全額を返金いたします。</td></tr>
+  <tr><th>引渡し時期</th><td>お支払いの完了後、ただちに画面でご覧いただけます（ファイルとして保存もできます）。</td></tr>
+  <tr><th>返品・キャンセル</th><td>デジタルデータの性質上、閲覧またはダウンロードの後のお客様都合による返品・返金はお受けできません。<br>ただし<strong>資料が開けない場合、内容が説明と著しく異なる場合、二重に決済された場合</strong>は、購入から14日以内にメールでご連絡ください。全額を返金いたします。</td></tr>
   <tr><th>動作環境</th><td>HTMLファイルを開けるウェブブラウザ。印刷にも対応しています。</td></tr>
   </tbody></table></div>
   <p class="note"><a href="../kiyaku/">利用規約</a>／<a href="../about.html">このサイトについて</a></p>
@@ -264,7 +264,7 @@ write('kiyaku/index.html', page({
   <h2>第4条（有料パックについて）</h2>
   <ol>
   <li>有料パックは、無料部分では扱っていない<strong>手続きの進め方（書類の探し方、還付額の試算、申請と更正の請求の手順）</strong>をまとめた資料です。</li>
-  <li>お支払いの完了後、ただちにダウンロードいただけます。ダウンロード用のURLは購入から<strong>60日間</strong>有効です。</li>
+  <li>お支払いの完了後、ただちに画面でご覧いただけます（ファイルとして保存もできます）。そのURLは購入から<strong>60日間</strong>有効です。</li>
   <li>購入されたパックは、購入者ご本人およびそのご家族の手続きのためにご利用ください。<strong>再配布・再販売はご遠慮ください。</strong></li>
   <li>返品・返金の条件は<a href="../tokushoho/">特定商取引法に基づく表記</a>に定めるとおりです。</li>
   </ol>

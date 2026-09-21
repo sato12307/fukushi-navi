@@ -211,7 +211,7 @@ ${cutBlocks}
 
   <p class="price"><b>${PRICE}円</b><span>買い切り・税込。HTMLファイル1つ、印刷可</span></p>
   <p><button id="buy" class="btn-primary" type="button">${PRICE}円で一覧を受け取る</button></p>
-  <p class="fine">クレジットカード決済（Stripe）。カード情報は当方を経由しません。Apple Pay・Google Pay にも対応しています（お使いの端末が対応している場合）。PayPay は近日対応予定です。お支払い後すぐダウンロードできます。<a href="../tokushoho/">特定商取引法に基づく表記</a>／<a href="../kiyaku/">利用規約</a></p>
+  <p class="fine">クレジットカード決済（Stripe）。カード情報は当方を経由しません。Apple Pay・Google Pay にも対応しています（お使いの端末が対応している場合）。PayPay は近日対応予定です。お支払い後すぐ画面で開けます（ファイルとして保存もできます）。<a href="../tokushoho/">特定商取引法に基づく表記</a>／<a href="../kiyaku/">利用規約</a></p>
   <p id="msg" class="note"></p>
   <p class="fine"><strong>買わなくても申し込みはできます。</strong>上の相場だけでも、どのあたりを狙うかは決められます。</p>
 <!-- TOEI:PEEK -->
@@ -261,15 +261,15 @@ ${envNote('free')}
 // ── /toei/kanryo/ 購入後の画面（noindex・2階層下）────────────────────────────
 write('toei/kanryo/index.html', page({
   title: 'ご購入ありがとうございます｜フクシル',
-  desc: '都営住宅 申込先えらびのダウンロード画面です。',
+  desc: '都営住宅 申込先えらびの閲覧画面です。',
   canonical: '/toei/kanryo/', depth: 2, noindex: true,
   body: `  <h1>ご購入ありがとうございます</h1>
-  <p class="lead">下のボタンからダウンロードしてください。<strong>このページのURLは購入から60日間有効です。</strong>ブックマークしておくと再ダウンロードできます。</p>
-  <p><a id="dl" class="card" style="display:inline-block;padding:.8rem 1.6rem;font-weight:600" href="#">一覧をダウンロード（HTML）</a></p>
+  <p class="lead">一覧はこの画面にそのまま開きます。<strong>このページのURLは購入から60日間有効です。</strong>ブックマークしておくと、あとから何度でも開けます。</p>
+  <p><a id="dl" class="card" style="display:inline-block;padding:.8rem 1.6rem;font-weight:600" href="#">一覧を開く</a></p>
   <p id="msg" class="note"></p>
   <h2>使い方</h2>
   <ol>
-  <li>ダウンロードしたファイルをブラウザで開きます。</li>
+  <li>下に一覧が開きます。手元に残したいときは「ファイルとして保存」から保存してください。</li>
   <li>まず「毎回すいている住宅」を自分の通える区市町でしぼってください。</li>
   <li>次の募集案内が出たら、その回に実際に募集されている住宅と突き合わせます。<strong>載っていても、その回に募集が無いことがあります。</strong></li>
   <li>印刷して持っていけます（ブラウザの印刷から「PDFに保存」もできます）。</li>
@@ -277,7 +277,7 @@ write('toei/kanryo/index.html', page({
   <p class="note">開けない・内容が説明と違う・二重に決済された場合は、購入から14日以内に <a href="mailto:contact@fukushiru.com">contact@fukushiru.com</a> までご連絡ください。全額を返金します。
   領収書はStripeから届くメールでご確認いただけます。</p>
   <p class="related"><a href="../../articles/koei-tokyo.html">→ 都営住宅の倍率と申込のしくみ（無料）</a></p>
-<script>${kanryoScript({ label: '一覧をダウンロード（HTML）' })}</script>
+<script>${kanryoScript({ label: '申込先えらびの一覧' })}</script>
 `,
 }))
 

@@ -199,14 +199,14 @@ ${offerKoeiSell({ up: '../../', peek: PEEK, facts })}
   }))
 
   write(`${C.key}/kanryo/index.html`, page({
-    title: 'ご購入ありがとうございます｜フクシル', desc: `${C.city}営住宅 申込先えらびのダウンロード`,
+    title: 'ご購入ありがとうございます｜フクシル', desc: `${C.city}営住宅 申込先えらびの閲覧画面`,
     canonical: `/${C.key}/kanryo/`, depth: 2, noindex: true,
     body: `  <h1>ご購入ありがとうございます</h1>
-  <p class="lead">下のボタンから資料をダウンロードしてください。購入から60日間は同じリンクで何度でも落とせます。</p>
-  <p class="buyrow"><a class="btn-primary" id="dl" href="#">資料をダウンロード</a></p>
-  <p class="fine">うまく落とせない・中身が説明と違う場合は、購入から14日以内に contact@fukushiru.com までご連絡ください。全額返金します。</p>
+  <p class="lead">資料はこの画面にそのまま開きます。購入から60日間は、このURLで何度でも開けます（ブックマークしておいてください）。</p>
+  <p class="buyrow"><a class="btn-primary" id="dl" href="#">資料を開く</a></p>
+  <p class="fine">うまく開けない・中身が説明と違う場合は、購入から14日以内に contact@fukushiru.com までご連絡ください。全額返金します。</p>
   <p id="msg" class="fine"></p>
-  <script>${kanryoScript({ label: '資料をダウンロード' })}</script>`,
+  <script>${kanryoScript({ label: '申込先えらびの資料' })}</script>`,
   }))
 
   // ── 有料資料 ────────────────────────────────────────────────────────────
