@@ -204,6 +204,7 @@ ${offerKoeiSell({ up: '../../', peek: PEEK, facts })}
     body: `  <h1>ご購入ありがとうございます</h1>
   <p class="lead">資料はこの画面にそのまま開きます。購入から60日間は、このURLで何度でも開けます（ブックマークしておいてください）。</p>
   <p class="buyrow"><a class="btn-primary" id="dl" href="#">資料を開く</a></p>
+  <noscript><p class="fine">この画面は、ブラウザの JavaScript を使って資料を開きます。無効になっていると開けません。有効にして読み込み直すか、<a href="mailto:contact@fukushiru.com">contact@fukushiru.com</a> までご連絡ください（購入時のメールアドレスを添えていただけると照合できます）。</p></noscript>
   <p class="fine">うまく開けない・中身が説明と違う場合は、購入から14日以内に contact@fukushiru.com までご連絡ください。全額返金します。</p>
   <p id="msg" class="fine"></p>
   <script>${kanryoScript({ label: '申込先えらびの資料' })}</script>`,

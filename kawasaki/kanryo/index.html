@@ -39,6 +39,7 @@
   <h1>ご購入ありがとうございます</h1>
   <p class="lead">資料はこの画面にそのまま開きます。購入から60日間は、このURLで何度でも開けます（ブックマークしておいてください）。</p>
   <p class="buyrow"><a class="btn-primary" id="dl" href="#">資料を開く</a></p>
+  <noscript><p class="fine">この画面は、ブラウザの JavaScript を使って資料を開きます。無効になっていると開けません。有効にして読み込み直すか、<a href="mailto:contact@fukushiru.com">contact@fukushiru.com</a> までご連絡ください（購入時のメールアドレスを添えていただけると照合できます）。</p></noscript>
   <p class="fine">うまく開けない・中身が説明と違う場合は、購入から14日以内に contact@fukushiru.com までご連絡ください。全額返金します。</p>
   <p id="msg" class="fine"></p>
   <script>
@@ -85,25 +86,34 @@
     // 高さが測れなかったときのために既定値を置く（測れなければ二重スクロールになるが読める）
     f.style.cssText = 'display:block;width:100%;height:70vh;border:1px solid #dfe4ea;border-radius:4px;background:#fff'
 
+    // ★測るのは body の高さだけ（2026-09-22）。
+    //   documentElement.scrollHeight は「中身の高さ」ではなく**最低でも中の窓の高さ**を返す。
+    //   iframe を伸ばすと中の窓も伸びるので、一度伸ばしたあとは同じ値しか返らなくなり、
+    //   **縮められなくなる**。端末を横向きにして本文が短くなると、その差がまるごと
+    //   空白として下に残る。body の高さは中身で決まるので、伸びも縮みも追える。
     var fit = function () {
       try {
         var d = f.contentDocument
-        if (!d || !d.documentElement) return
-        var h = Math.max(d.documentElement.scrollHeight || 0, d.body ? d.body.scrollHeight : 0)
+        if (!d) return
+        var h = (d.body && d.body.scrollHeight) || (d.documentElement && d.documentElement.scrollHeight) || 0
         if (h > 0) f.style.height = (h + 24) + 'px'
       } catch (e) { /* 測れないときは既定の高さのまま */ }
     }
+    // 向きを変えるたびに何十回も測らない（1回の変化で1度だけ測る）
+    var fitTimer = null
+    var fitSoon = function () { clearTimeout(fitTimer); fitTimer = setTimeout(fit, 120) }
     f.addEventListener('load', function () {
       fit()
       // 表の組み直しや字形の確定で高さが動く。数回だけ測り直す。
       setTimeout(fit, 300); setTimeout(fit, 1200)
       try {
         if (window.ResizeObserver && f.contentDocument && f.contentDocument.body) {
-          new ResizeObserver(fit).observe(f.contentDocument.body)
+          new ResizeObserver(fitSoon).observe(f.contentDocument.body)
         }
       } catch (e) {}
     })
-    window.addEventListener('resize', fit)
+    window.addEventListener('resize', fitSoon)
+    window.addEventListener('orientationchange', fitSoon)
 
     box.appendChild(f)
     host.parentNode.appendChild(box)

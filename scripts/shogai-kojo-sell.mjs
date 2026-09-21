@@ -198,6 +198,7 @@ write('pack/kanryo/index.html', page({
   body: `  <h1>ご購入ありがとうございます</h1>
   <p class="lead">パックはこの画面にそのまま開きます。<strong>このページのURLは購入から60日間有効です。</strong>ブックマークしておくと、あとから何度でも開けます。</p>
   <p><a id="dl" class="card" style="display:inline-block;padding:.8rem 1.6rem;font-weight:600" href="#">パックを開く</a></p>
+  <noscript><p class="fine">この画面は、ブラウザの JavaScript を使って資料を開きます。無効になっていると開けません。有効にして読み込み直すか、<a href="mailto:contact@fukushiru.com">contact@fukushiru.com</a> までご連絡ください（購入時のメールアドレスを添えていただけると照合できます）。</p></noscript>
   <p id="msg" class="note"></p>
   <h2>使い方</h2>
   <ol>
