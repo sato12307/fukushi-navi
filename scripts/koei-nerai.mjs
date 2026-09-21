@@ -25,6 +25,7 @@ import { fileURLToPath } from 'node:url'
 import { page, esc, SITE } from './shogai-kojo-page.mjs'
 import { offerKoeiLeaf, jumpKoei, offerKoeiSell } from './offer-block.mjs'
 import { load, CITIES, MIN_N, SUKI, BURE, MIN_GROUP, PRICE, r1, num, pct, WA } from './koei-lib.mjs'
+import { kanryoScript } from './kanryo-script.mjs'
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..')
 const args = process.argv.slice(2)
@@ -157,6 +158,14 @@ ${roundTable}
   <ul>
 ${LIMITS}
   </ul>
+  <div class="callout warn"><p><span class="tag">先に知っておいてください</span>
+  <strong>倍率が低い申込先だけを並べると、空いている理由がそのまま集まります。</strong>
+  都営住宅では同じ集計で確かめられました——毎回すいている595件のうち59%は、エレベーターが無いか築39年より古い住宅でした
+  （<a href="../toei/">都営住宅のページ</a>）。<strong>${C.city}の応募状況表には、エレベーターの有無も建てられた年も載っていません。</strong>
+  ${C.key === 'shizuoka' || C.key === 'kobe' ? '階だけは資料にありますが、実測では倍率とほとんど関係がありませんでした（エレベーターの有無が分からないため、階だけでは住みやすさを測れません）。' : ''}
+  ∴ この一覧は<strong>当たりやすさだけを並べたもの</strong>で、設備や築年数で選り分けてはいません。
+  気になる申込先が見つかったら、<strong>その回の募集案内と現地で、エレベーターの有無・階・築年数を必ず確かめてください。</strong></p></div>
+
   <p class="note"><strong>「倍率が低い＝誰でも入れる」ではありません。</strong>申込資格（市内在住・収入基準・住宅困窮要件など）を満たすことが前提で、同じ住宅でも回によって募集の有無・戸数・間取り・入居人数の条件が変わります。<strong>過去にあまった住宅が次回も募集に出るとはかぎりません。</strong>申し込む前に、その回の募集案内で必ず条件を確認してください。</p>
   <p class="note">内容の誤りを見つけられた場合は contact@fukushiru.com までご連絡ください。訂正します。</p>`
 
@@ -196,14 +205,8 @@ ${offerKoeiSell({ up: '../../', peek: PEEK, facts })}
   <p class="lead">下のボタンから資料をダウンロードしてください。購入から60日間は同じリンクで何度でも落とせます。</p>
   <p class="buyrow"><a class="btn-primary" id="dl" href="#">資料をダウンロード</a></p>
   <p class="fine">うまく落とせない・中身が説明と違う場合は、購入から14日以内に contact@fukushiru.com までご連絡ください。全額返金します。</p>
-  <script>
-  (function () {
-    var s = new URLSearchParams(location.search).get('session_id')
-    var a = document.getElementById('dl')
-    if (!s) { a.textContent = '購入の確認ができません（session_id がありません）'; a.removeAttribute('href'); return }
-    a.href = '/api/pack?session_id=' + encodeURIComponent(s)
-  })()
-  </script>`,
+  <p id="msg" class="fine"></p>
+  <script>${kanryoScript({ label: '資料をダウンロード' })}</script>`,
   }))
 
   // ── 有料資料 ────────────────────────────────────────────────────────────

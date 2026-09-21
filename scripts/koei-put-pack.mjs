@@ -43,24 +43,33 @@ for (const key of keys) {
   const rounds = new Set(raw.rows.map((r) => r.round)).size
   const html = fs.readFileSync(src)
   const packS = html.toString('utf8')
-  const free = fs.readFileSync(path.join(ROOT, key, 'index.html'), 'utf8').replace(/\r\n/g, '\n')
+  // ★2026-09-19 売り場は /<市>/ から /<市>/moushikomisaki/ へ移っている（コミット 7d96f35）。
+  //   この関所だけ /<市>/ を見たままだったので、その日から5市とも落ち続け、
+  //   **新しい資料をKVに入れられない状態**だった（本番の /api/download 404 と重なっていた）。
+  //   売り場の場所を変えたら、この関所の見る先も必ず一緒に変える。
+  const sellPath = path.join(ROOT, key, 'moushikomisaki', 'index.html')
+  if (!fs.existsSync(sellPath)) {
+    console.error(`/${key}/moushikomisaki/ がありません。先に node scripts/koei-nerai.mjs ${key} を回してください。`)
+    process.exit(1)
+  }
+  const free = fs.readFileSync(sellPath, 'utf8').replace(/\r\n/g, '\n')
   const flat = (s) => s.replace(/<[^>]+>/g, '').replace(/\s/g, '')
   const bad = []
   const m2 = /毎回すいている申込先（([\d,]+)件）/.exec(packS)
   const m6 = /観測できた申込先の索引（([\d,]+)件）/.exec(packS)
   if (!m2 || !m6) bad.push('有料資料の2章・6章の見出しが読めない')
   else {
-    if (!free.includes(`のものだけ<strong>${m2[1]}件</strong>`)) bad.push(`/${key}/ のカードが資料の2章（${m2[1]}件）と違う`)
-    if (!free.includes(`全申込先の索引${m6[1]}件`)) bad.push(`/${key}/ のカードが資料の索引（${m6[1]}件）と違う`)
+    if (!free.includes(`のものだけ<strong>${m2[1]}件</strong>`)) bad.push(`/${key}/moushikomisaki/ のカードが資料の2章（${m2[1]}件）と違う`)
+    if (!free.includes(`全申込先の索引${m6[1]}件`)) bad.push(`/${key}/moushikomisaki/ のカードが資料の索引（${m6[1]}件）と違う`)
     const i = free.indexOf('<div class="peek"')
     const j = free.indexOf('</div>', free.indexOf('</table>', i))
-    if (i < 0) bad.push(`/${key}/ に抜粋（.peek）が無い`)
+    if (i < 0) bad.push(`/${key}/moushikomisaki/ に抜粋（.peek）が無い`)
     else if (!flat(packS).includes(flat(free.slice(i, j)))) bad.push(`抜粋の文字が資料の本文に見つからない（node scripts/koei-nerai.mjs ${key} を回し直す）`)
-    if ((free.match(new RegExp(`id="offer-${key}"`, 'g')) || []).length !== 1) bad.push(`/${key}/ の売り場カードが1つでない`)
-    if ((free.match(/data-buy/g) || []).length !== 1) bad.push(`/${key}/ の買うボタンが1つでない`)
+    if ((free.match(new RegExp(`id="offer-${key}"`, 'g')) || []).length !== 1) bad.push(`/${key}/moushikomisaki/ の売り場カードが1つでない`)
+    if ((free.match(/data-buy/g) || []).length !== 1) bad.push(`/${key}/moushikomisaki/ の買うボタンが1つでない`)
   }
   if (bad.length) { console.error(`${C.city}：KV に入れません：\n- ` + bad.join('\n- ')); process.exit(1) }
-  console.log(`${C.city} 突き合わせ OK：資料（2章 ${m2[1]}件・索引 ${m6[1]}件）＝/${key}/ の売り場カードと抜粋`)
+  console.log(`${C.city} 突き合わせ OK：資料（2章 ${m2[1]}件・索引 ${m6[1]}件）＝/${key}/moushikomisaki/ の売り場カードと抜粋`)
   const gz = zlib.gzipSync(html)
   console.log(`  ${(html.length / 1024).toFixed(0)}KB → gzip ${(gz.length / 1024).toFixed(0)}KB`)
   bulk.push({ key: `pack:${key}`, value: gz.toString('base64'), base64: true })

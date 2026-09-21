@@ -220,7 +220,18 @@
   // 売り場ごとに名前を分ける。同じ名前にすると、どちらが動いたのか後から分けられない。
   var SELL = [
     { path: '/pack/', view: 'pack_view', click: 'to_pack' },   // 障害者控除の還付申請パック
-    { path: '/toei/', view: 'toei_view', click: 'to_toei' }    // 都営住宅の申込先えらび
+    { path: '/toei/', view: 'toei_view', click: 'to_toei' },   // 都営住宅の申込先えらび
+    // ★政令市5市（2026-09-20 追加）。売り場を /<市>/moushikomisaki/ へ切り出した 2026-09-19 に
+    //   ここへの登録が漏れ、<市>_view が一度も撃たれていなかった。盤面では決済だけが立ち、
+    //   手前の段が全部0に見えていた（数字が無いのであって、0ではない）。
+    // ★買う押（<市>_leaf_buy）は assets/buy.js 側にあり、data-offer とともに動いている。
+    // ★click は置かない。政令市の段は view → buy → pay で、押した段が初めから無い
+    //   （tools/buy-funnel-ships.mjs もそう定義している）。読まない名前を撃つと孤児のキーが増える。
+    { path: '/kawasaki/moushikomisaki/', view: 'kawasaki_view' },
+    { path: '/shizuoka/moushikomisaki/', view: 'shizuoka_view' },
+    { path: '/yokohama/moushikomisaki/', view: 'yokohama_view' },
+    { path: '/kobe/moushikomisaki/', view: 'kobe_view' },
+    { path: '/sagamihara/moushikomisaki/', view: 'sagamihara_view' }
   ]
   for (var i = 0; i < SELL.length; i++) {
     if (location.pathname.indexOf(SELL[i].path) === 0 && location.pathname.indexOf('kanryo') < 0) ev(SELL[i].view)
@@ -231,7 +242,7 @@
     var h = a.getAttribute('href') || ''
     if (h.indexOf('kanryo') >= 0) return
     for (var j = 0; j < SELL.length; j++) {
-      if (h.indexOf(SELL[j].path) >= 0) { ev(SELL[j].click); return }
+      if (h.indexOf(SELL[j].path) >= 0) { if (SELL[j].click) ev(SELL[j].click); return }
     }
   }, true)
 })();
