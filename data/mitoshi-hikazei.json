@@ -1,0 +1,40 @@
+{
+  "checked": "2026-09-22",
+  "note": "住民税が非課税になる線（給与収入だけの人）を年度ごとに出すための材料。線そのもの（所得）は法律・政令の式、年収の目安は給与所得控除の表から計算する。",
+  "limits": {
+    "kintou": { "base": { "1": 350000, "2": 315000, "3": 280000 }, "add": { "1": 210000, "2": 189000, "3": 168000 }, "plus": 100000,
+      "src": "地方税法295条3項・同施行令47条の3・同施行規則9条の21（級地の率 1級地1.0／2級地0.9／3級地0.8）", "srcUrl": "https://laws.e-gov.go.jp/law/325AC0000000226" },
+    "shotoku": { "base": 350000, "add": 320000, "plus": 100000,
+      "src": "地方税法附則3条の3第4項（級地によらず全国同じ）", "srcUrl": "https://laws.e-gov.go.jp/law/325AC0000000226" }
+  },
+  "plusFrom": "令和3年度",
+  "periods": [
+    { "id": "r3", "label": "令和3〜7年度", "years": "2021〜2025年度", "incomeYears": "令和2〜6年分の収入", "minDed": 550000,
+      "src": "国税庁 タックスアンサーNo.1410（令和2年分から令和6年分）", "srcUrl": "https://www.nta.go.jp/taxes/shiraberu/taxanswer/shotoku/1410.htm" },
+    { "id": "r8", "label": "令和8年度", "years": "2026年度", "incomeYears": "令和7年分の収入", "minDed": 650000,
+      "src": "国税庁 タックスアンサーNo.1410（令和7年分）", "srcUrl": "https://www.nta.go.jp/taxes/shiraberu/taxanswer/shotoku/1410.htm" },
+    { "id": "r9", "label": "令和9・10年度", "years": "2027・2028年度", "incomeYears": "令和8・9年分の収入", "minDed": 740000,
+      "src": "国税庁 タックスアンサーNo.1410（令和8年分・令和9年分。令和8年12月1日施行）", "srcUrl": "https://www.nta.go.jp/taxes/shiraberu/taxanswer/shotoku/1410.htm" }
+  ],
+  "check": {
+    "note": "大阪市が公表している令和8年度の非課税の年収の目安（1級地・給与収入のみ）。計算がこれと1円でも違えば生成を止める。",
+    "src": "大阪市「個人市・府民税が課税されない方」", "srcUrl": "https://www.city.osaka.lg.jp/zaisei/page/0000384084.html",
+    "period": "r8",
+    "kintou": [1100000, 1660000, 2059999, 2559999, 3059999],
+    "shotoku": [1100000, 1770000, 2215999, 2715999, 3215999]
+  },
+  "check2": {
+    "note": "名古屋市が公表している令和9年度の単身の目安（1級地）。",
+    "src": "名古屋市 令和9年度からの個人市民税・県民税の改正", "srcUrl": "https://www.city.nagoya.jp/kurashi/zeikin/1037356/1011880/1011899/1045304.html",
+    "period": "r9", "kintou0": 1190000
+  },
+  "rounding": {
+    "note": "2級地・3級地の額は「率を参酌して条例で定める」ので、丸め方が市によって違う例（単身の所得の線）。",
+    "rows": [
+      { "city": "柏市（千葉県）", "kyuchi": 2, "base": 315000, "add": 189000, "url": "https://www.city.kashiwa.lg.jp/shiminzei/kojinshiminzei/r8hikazei.html" },
+      { "city": "羽曳野市（大阪府）", "kyuchi": 2, "base": 320000, "add": 190000, "url": "https://www.city.habikino.lg.jp/soshiki/soumu/zeimuka/shiminzei/9570.html" },
+      { "city": "花巻市（岩手県）", "kyuchi": 3, "base": 280000, "add": 168000, "url": "https://www.city.hanamaki.iwate.jp/kurashi/zeikin/jyuminzei/1001286.html" },
+      { "city": "真岡市（栃木県）", "kyuchi": 3, "base": 280000, "add": 170000, "url": "https://www.city.moka.lg.jp/kakuka/zeimu/gyomu/zeimokubetu/juuminnzei/21005.html" }
+    ]
+  }
+}

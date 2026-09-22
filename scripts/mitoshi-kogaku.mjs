@@ -91,7 +91,7 @@ const title = '高額療養費の上限額はどう動いたか｜当初案・�
 const desc = `高額療養費の自己負担の上限額は、2025年1月の当初案が3月に見合わせになり、12月の新しい案で2026年8月から引き上げられ、2027年8月に2段目があります。厚生労働省の資料に散らばった各版の額を、年収13区分ごとに1枚に並べました。例：年収約370万〜510万円は${yen(fixOf(ex, 'genko'))}→${yen(fixOf(ex, 'ketsu2026'))}（2027年8月も同額）。`
 
 // ★この面の表は3列までにしてあるので、サイト共通の「最小幅520px・見出し列は折り返さない」を外して画面に収める。
-const FIT_CSS = `<style>table.fit{min-width:0}table.fit tbody th,table.fit td.num{white-space:normal}table.fit td.num{word-break:keep-all}</style>`
+const FIT_CSS = `<style>table.fit{min-width:0}table.fit tbody th,table.fit td.num,table.fit th.num{white-space:normal}table.fit td.num{word-break:keep-all}</style>`
 const body = `${FIT_CSS}
   <p class="updated">最終確認：${D.checked} ／ 70歳未満の月の上限額（すべて厚生労働省の公表資料から転記）</p>
   <h1>高額療養費の上限額は、どう動いたか<br><small>当初案・見合わせ・決定を、年収ごとに1枚に並べた記録</small></h1>
