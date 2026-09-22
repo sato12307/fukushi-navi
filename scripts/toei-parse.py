@@ -5,9 +5,10 @@
   これが一番安定する。行頭から建築年までが属性、そこから後ろが申込者数と倍率。
 ・★地区番号は回ごとに振り直されるので名寄せキーにしてはいけない。キーは 区市町×住宅名。
 ・★Python の \d は全角数字にも当たる。数値は必ず [0-9] で書く。
-出力: data/toei-bairitsu.json
+出力: data/toei-bairitsu.json（第2引数で出力先を変えられる）
 """
 import io, json, os, re, sys, glob
+from datetime import date
 from collections import defaultdict
 
 sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding="utf-8")
@@ -23,6 +24,12 @@ CITY = r"[一-龥ヶ]{2,6}[区市町村]"
 ERA = re.compile(r"(昭和|平成|令和)\s*([0-9]+)")
 NUM = re.compile(r"[0-9][0-9,]*\.?[0-9]*")
 HEAD = re.compile(r"^(" + CITY + r")\s*([^0-9]{0,8}?)\s*([0-9]{3,5})\s*([^0-9]+?)\s+([0-9]+)\s")
+# ★2026-09-22 募集戸数のすぐ後ろの「間取り」「㎡」も拾う（どの回のPDFにも印字されている）。
+#   表記は回で揺れる＝全角「２ＤＫ」・半角「1DK」・複数「２Ｋ・２ＤＫ」、広さは「31～35」の幅つき。
+#   読めなかった行は空のまま残す（推測で埋めない）。
+MADORI = re.compile(r"^\s*([0-9０-９]\s*[ＳＬＤＫSLDK]+(?:\s*[・･]\s*[0-9０-９]\s*[ＳＬＤＫSLDK]+)*)"
+                    r"\s+([0-9]+(?:\.[0-9]+)?)(?:\s*[～~〜]\s*([0-9]+(?:\.[0-9]+)?))?(?:\s|$)")
+ZEN = str.maketrans("０１２３４５６７８９ＳＬＤＫ･", "0123456789SLDK・")
 
 
 def category_of(text):
@@ -59,17 +66,24 @@ def parse_pdf(path):
                 chiku = m.group(3)
                 name = re.sub(r"\s+", "", m.group(4))
                 koho = int(m.group(5))
+                rest = head[m.end():]
             else:
                 m2 = re.search(r"([0-9]{3,5})\s*([^0-9]+?)\s+([0-9]+)\s", head)
                 if not m2 or not cur_city:
                     continue
                 ninzu, chiku, name, koho = "", m2.group(1), re.sub(r"\s+", "", m2.group(2)), int(m2.group(3))
+                rest = head[m2.end():]
+            md = MADORI.match(rest)
+            madori = re.sub(r"\s+", "", md.group(1)).translate(ZEN) if md else ""
+            sqm_min = float(md.group(2)) if md else None
+            sqm_max = float(md.group(3)) if md and md.group(3) else sqm_min
             if not (1 <= len(name) <= 24) or bairitsu > 3000:
                 continue
             rows.append({"city": cur_city, "city_src": ("head" if m else "fill"),
                          "chiku": chiku, "ninzu": ninzu, "name": name,
                          "koho": koho, "era": e.group(1) + e.group(2),
                          "moushikomi": moushikomi, "bairitsu": bairitsu,
+                         "madori": madori, "sqm_min": sqm_min, "sqm_max": sqm_max,
                          "ev": "有" if "有" in head[-14:] else ("無" if "無" in head[-14:] else "")})
     return cat, rows
 
@@ -103,8 +117,8 @@ def main():
     print(f"区市町が行頭から確実に読めた行: {tr}/{len(out)} ({tr/max(1,len(out))*100:.1f}%)")
     print("→ 残りは公式の団地一覧と突合して確定する（未実施）。集計で区市町を使うのはそれから。")
 
-    dst = os.path.join(PROJ, "data", "toei-bairitsu.json")
-    json.dump({"updated": "2026-08-18", "source": "JKK東京 都営住宅 定期募集 申込地区別倍率表",
+    dst = sys.argv[2] if len(sys.argv) > 2 else os.path.join(PROJ, "data", "toei-bairitsu.json")
+    json.dump({"updated": date.today().isoformat(), "source": "JKK東京 都営住宅 定期募集 申込地区別倍率表",
                "note": "地区番号は回ごとに振り直されるため名寄せキーにしない。キーは 区市町×住宅名。",
                "rows": out}, open(dst, "w", encoding="utf-8"), ensure_ascii=False)
     print(f"\n合計 {len(out)}行 / PDF {len(files)}本(失敗{bad}) → {dst}")

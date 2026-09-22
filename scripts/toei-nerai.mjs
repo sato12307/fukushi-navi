@@ -77,7 +77,20 @@ import {
   F,
   era,
   RANGE,
+  sizeCell,
 } from './toei-lib.mjs'
+
+// ── 広さ（2026-09-22）──────────────────────────────────────────────────────
+//   表の「間取り・広さ」の欄の書き方（sizeCell）は toei-lib に1つだけ置いた（区市町別ページと同じ文字にするため）。
+// 「広いほど空いている」に見える表の横に必ず置く注記（無料ページと有料資料で同じ文面）。
+//   ★数は toei-lib の F から引く（同じ住宅・同じ募集区分で狭い住戸と広い住戸の両方が出た申込先の比較）。
+const SIZE_NOTE = `<strong>広い部屋ほど倍率が低く見えますが、広さのおかげではありません。</strong>理由は2つあります。狭い住戸は「1〜2人」のように単身でも申し込める区分で出ることが多く、申し込む人の数がそもそも違います。また広い住戸は多摩の市町と1980年代に建った団地に多く、その立地と築年が倍率を下げています。<strong>同じ住宅・同じ募集区分・同じ人数の区分</strong>で、${F.sizeSmall}㎡未満の住戸と${F.sizeBig}㎡以上の住戸の両方が募集された${F.sizePairs}件だけで比べると、広いほうの倍率が高かったのは${F.sizePairsBigHigher}件、低かったのは${F.sizePairsBigLower}件${F.sizePairsSame ? `（同じだったのは${F.sizePairsSame}件）` : ''}で、倍率の中央値は狭いほう${F.sizePairsSmallMed}倍・広いほう${F.sizePairsBigMed}倍でした。<strong>同じ人が同じ団地で選ぶなら、広い部屋のほうが混みます。</strong>また、都営住宅の家賃（使用料）は収入に応じた額に、広さ・立地・古さの係数をかけて決まるため、<strong>広い部屋ほど家賃は高くなります</strong>。`
+// ★上の文は「同じ条件なら広いほうが混む」という向きで書いてある。データの向きが変わったら文が嘘になるので止める。
+if (!(F.sizePairsBigHigher > F.sizePairsBigLower && F.sizePairsBigMed > F.sizePairsSmallMed)) {
+  console.error('何も書き出していません。')
+  console.error(`広さの注記の向きがデータと合いません（広いほうが高い${F.sizePairsBigHigher}件・低い${F.sizePairsBigLower}件／中央値 ${F.sizePairsSmallMed}→${F.sizePairsBigMed}倍）。SIZE_NOTE を書き直してください。`)
+  process.exit(1)
+}
 
 // ★書き出しは最後にまとめて行う（flush）。途中の突き合わせ（記事の抜粋・トップのカード・sitemap）で
 //   止まったときに、無料ページだけ新しくて資料や抜粋が古い、という半端な状態をディスクに残さないため。
@@ -143,7 +156,7 @@ const cutBlocks = cuts.map((c) => `  <h3>${esc(c.label)}</h3>
   <p class="note">${cutNote(c)}</p>
   <div class="table-wrap"><table><thead><tr><th>${esc(c.label)}</th><th class="num">募集件数</th><th class="num">倍率の中央値</th></tr></thead><tbody>
 ${c.groups.map((g) => `  <tr><td>${esc(g.k)}</td><td class="num">${num(g.n)}</td><td class="num">${r1(g.med)}倍</td></tr>`).join('\n')}
-  </tbody></table></div>`).join('\n\n')
+  </tbody></table></div>${c.label === '部屋の広さ' ? `\n  <div class="callout warn"><p><span class="tag">広さの注意</span>${SIZE_NOTE}</p></div>` : ''}`).join('\n\n')
 
 write('toei/index.html', page({
   title: `都営住宅で毎回すいている住宅はどこか｜${F.rounds}回の募集を横に並べた実測｜フクシル`,
@@ -203,9 +216,10 @@ ${cutBlocks}
   <li><strong>すいてはいるが、条件を承知のうえで選ぶ申込先 ${num(F.sukiOff)}件</strong>を別掲。
     悪い住宅という意味ではありません（1階を選べるなら階段は問題になりませんし、古い住宅は都心に多く立地では有利なことがあります）。
     <strong>何を引き受けるのかが分かったうえで選べるように</strong>分けています。</li>
+  <li><strong>人数と広さで選ぶ章</strong>。すいている申込先を、募集区分と申込区分（人数）ごとに<strong>広い順</strong>に並べ直しました。同じくらい当たりやすいなら、どこが広いかが一目で分かります。</li>
   <li><strong>回によって当たりやすさが大きく動く申込先 ${F.buread}件</strong>。最高と最低が${BURE}倍以上ひらいた住宅です。住宅を変えるのではなく<strong>出す回を変える</strong>ほうが効く相手が分かります。</li>
   <li><strong>申込者ゼロが出た申込先 ${F.zeroHouses}件</strong>と、その回数。</li>
-  <li>観測できた<strong>${num(F.enough)}件すべての索引</strong>（区市町・住宅名・募集区分・倍率の中央値／最低／最高・観測件数・エレベーター・建てられた年と築年数・住宅名と同じ名前の町丁目の世帯数と住宅侵入の件数）。</li>
+  <li>観測できた<strong>${num(F.enough)}件すべての索引</strong>（区市町・住宅名・募集区分・倍率の中央値／最低／最高・観測件数・エレベーター・建てられた年と築年数・<strong>間取りと広さ（㎡）</strong>・住宅名と同じ名前の町丁目の世帯数と住宅侵入の件数）。</li>
   <li>「${JIKO}」${F.suki - F.sukiIppan}件は<strong>別掲</strong>。すいている側にはこの区分が集まるので、知らずに選ぶことがないよう分けました。</li>
   </ul>
 
@@ -287,8 +301,8 @@ write('toei/kanryo/index.html', page({
 // ★列の並びは「決めるのに要る順」。2026-09-19 に EV と建てられた年を中央値の直後へ動かした。
 //   それまで最低・最高・観測・申込0 の後ろにあり、抜粋でも本文でも**横に切れて見えなかった**。
 //   この資料が答える問いは「当たりやすくて、住めるのはどれか」なので、その2つを先に出す。
-const hrow = (h) => `<tr><td>${esc(h.city)}</td><td>${esc(h.name)}</td><td>${esc(h.cat)}</td><td class="num">${r1(h.med)}</td><td>${esc(h.ev)}</td><td>${esc(h.era)}${h.age != null ? `（築${h.age}年）` : ''}</td><td class="num">${r1(h.min)}</td><td class="num">${r1(h.max)}</td><td class="num">${h.n}</td><td class="num">${h.zero || ''}</td><td>${envCell(h.env, false)}</td></tr>`
-const TH = `<th>区市町</th><th>住宅</th><th>募集区分</th><th class="num">中央値</th><th>EV</th><th>建てられた年</th><th class="num">最低</th><th class="num">最高</th><th class="num">観測</th><th class="num">申込0</th><th>同じ名前の町丁目（世帯・住宅侵入 ${WIN_TXT}）</th>`
+const hrow = (h) => `<tr><td>${esc(h.city)}</td><td>${esc(h.name)}</td><td>${esc(h.cat)}</td><td class="num">${r1(h.med)}</td><td>${esc(h.ev)}</td><td>${esc(h.era)}${h.age != null ? `（築${h.age}年）` : ''}</td><td>${esc(sizeCell(h))}</td><td class="num">${r1(h.min)}</td><td class="num">${r1(h.max)}</td><td class="num">${h.n}</td><td class="num">${h.zero || ''}</td><td>${envCell(h.env, false)}</td></tr>`
+const TH = `<th>区市町</th><th>住宅</th><th>募集区分</th><th class="num">中央値</th><th>EV</th><th>建てられた年</th><th>間取り・広さ</th><th class="num">最低</th><th class="num">最高</th><th class="num">観測</th><th class="num">申込0</th><th>同じ名前の町丁目（世帯・住宅侵入 ${WIN_TXT}）</th>`
 const table = (list) => `<table class="grid"><thead><tr>${TH}</tr></thead><tbody>
 ${list.map(hrow).join('\n')}
 </tbody></table>`
@@ -321,6 +335,27 @@ const offCities = [...new Set(sukiOff.map((h) => h.city))].sort().map((city) => 
 }))
 const offByCity = offCities.map((c) => `<h3>${esc(c.city)}（${c.list.length}件）</h3>\n${table(c.list)}`).join('\n\n')
 
+
+// ── 4章＝人数と広さで選ぶ（2026-09-22）──────────────────────────────────────
+// ★申し込めるのは自分の人数に合う区分だけ。その中で、すいている申込先を「広い順」に並べる。
+//   同じ当たりやすさなら広いほうを選びたい、という問いに答える章。
+// ★「広いほど当たりやすい」とは書かない（SIZE_NOTE）。並べるのは、既にすいている申込先の中だけ。
+const SIZE_MIN_GROUP = 3
+const sizeGroups = (() => {
+  const g = new Map()
+  for (const h of sukiIppan) {
+    const k = `${h.cat}|${h.ninzu || ''}`
+    if (!g.has(k)) g.set(k, [])
+    g.get(k).push(h)
+  }
+  return [...g.entries()]
+    .map(([k, list]) => { const [cat, ninzu] = k.split('|'); return { cat, ninzu, list: list.slice().sort((a, b) => (b.sqmMax ?? -1) - (a.sqmMax ?? -1) || a.med - b.med) } })
+    .filter((x) => x.ninzu && x.list.length >= SIZE_MIN_GROUP)
+    .sort((a, b) => a.cat.localeCompare(b.cat, 'ja') || a.ninzu.localeCompare(b.ninzu, 'ja'))
+})()
+const sizeListed = sizeGroups.reduce((n, x) => n + x.list.length, 0)
+const SEC4_TITLE = `4. 人数と広さで選ぶ（${num(sizeListed)}件）`
+const sizeByGroup = sizeGroups.map((x) => `<h3>${esc(x.cat)}・${esc(x.ninzu)}（${x.list.length}件）</h3>\n${table(x.list)}`).join('\n\n')
 
 const packHtml = `<!DOCTYPE html>
 <html lang="ja"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
@@ -368,7 +403,8 @@ td.num,th.num{text-align:right;font-variant-numeric:tabular-nums}
 <li>中央値が${SUKI}倍未満だった申込先は <strong>${F.suki}件（${F.sukiPct}%）</strong>。うち病死等があった住宅を除くと${F.sukiIppan}件。</li>
 <li>申込者ゼロの募集が1回以上あった申込先 <strong>${F.zeroHouses}件</strong>。</li>
 <li>最高と最低が${BURE}倍以上ひらいた申込先 <strong>${F.buread}件</strong>。</li>
-<li>表の右端に、住宅名と同じ名前の町丁目の世帯数と住宅侵入の件数（姉妹サイト 住環境データ東京）を添えています（索引${num(F.enough)}件のうち${num(F.envEnough)}件。住宅名が町の名前までしか一致せず、町が広いため数字を付けていないもの${num(F.envWide)}件）。件数は率ではなく、建物の所在地と一致しないことがあります。読み方は7章。</li>
+<li>表の右端に、住宅名と同じ名前の町丁目の世帯数と住宅侵入の件数（姉妹サイト 住環境データ東京）を添えています（索引${num(F.enough)}件のうち${num(F.envEnough)}件。住宅名が町の名前までしか一致せず、町が広いため数字を付けていないもの${num(F.envWide)}件）。件数は率ではなく、建物の所在地と一致しないことがあります。読み方は9章。</li>
+<li>間取りと広さ（㎡）は倍率表の欄から読み取り、表の「間取り・広さ」の列に入れました（索引${num(F.enough)}件のうち${num(F.sqmEnough)}件で読めています）。人数と広さで並べ直した一覧は4章です。</li>
 </ul>
 <p class="note">「観測」の単位は募集件数で、募集回の数ではありません。同じ回に同じ住宅で複数の住戸が募集されることがあり、その1件ずつを数えています。</p>
 
@@ -384,31 +420,38 @@ ${goldByCity}
 ${offByCity}
 </div>
 
-<h2>4. 回によって当たりやすさが動く申込先（${F.buread}件）</h2>
+<h2>${SEC4_TITLE}</h2>
+<p>申し込めるのは、自分の世帯の人数に合う区分だけです。そこで2章・3章の「毎回すいている申込先」（病死等があった住宅を除く${num(F.sukiIppan)}件）を、<strong>募集区分と申込区分（人数）ごとに分け、広い順に</strong>並べ直しました。同じくらい当たりやすいなら、どこが広いかが一目で分かります。広さは倍率表の「間取り」「㎡」の欄から取り、同じ住宅でも号棟や住戸で違うので幅で書いています。人数の区分が読み取れなかった申込先と、${SIZE_MIN_GROUP}件に満たない区分は入っていません（2章・3章には載っています）。</p>
+<div class="box warn"><p><span class="tag">広さの注意</span>${SIZE_NOTE}</p></div>
+<div class="wrap">
+${sizeByGroup}
+</div>
+
+<h2>5. 回によって当たりやすさが動く申込先（${F.buread}件）</h2>
 <p>最高と最低が${BURE}倍以上ひらいた住宅です。この相手には「住宅を変える」より<strong>「出す回を変える」</strong>ほうが効きます。
 最低の欄が実際に起きた一番すいていた回の倍率です。</p>
 <div class="wrap">
 ${table(buread.slice().sort((a, b) => (b.max / b.min) - (a.max / a.min)))}
 </div>
 
-<h2>5. ${JIKO}（別掲・${suki.length - sukiIppan.length}件）</h2>
+<h2>6. ${JIKO}（別掲・${suki.length - sukiIppan.length}件）</h2>
 <p>すいている住宅にはこの区分が混ざります。知らずに選ぶことがないよう分けました。
 家賃が減額される場合があり、条件を承知のうえで選ぶ人には現実的な選択肢です。詳しい条件は募集案内をご確認ください。</p>
 <div class="wrap">
 ${table(suki.filter((h) => h.jiko))}
 </div>
 
-<h2>6. 条件を1つ変えたときの効き目</h2>
+<h2>7. 条件を1つ変えたときの効き目</h2>
 <p>募集${num(F.rows)}件を条件ごとに分けた倍率の中央値です。何をあきらめると何倍ぶん軽くなるかの目安。その条件が読み取れなかった行は、その表からだけ外しています。</p>
-${cuts.map((c) => `<h3>${esc(c.label)}</h3>\n<p class="note">${cutNote(c)}</p>\n<div class="wrap"><table class="grid"><thead><tr><th>${esc(c.label)}</th><th class="num">募集件数</th><th class="num">倍率の中央値</th></tr></thead><tbody>\n${c.groups.map((g) => `<tr><td>${esc(g.k)}</td><td class="num">${num(g.n)}</td><td class="num">${r1(g.med)}倍</td></tr>`).join('\n')}\n</tbody></table></div>`).join('\n')}
+${cuts.map((c) => `<h3>${esc(c.label)}</h3>\n<p class="note">${cutNote(c)}</p>\n<div class="wrap"><table class="grid"><thead><tr><th>${esc(c.label)}</th><th class="num">募集件数</th><th class="num">倍率の中央値</th></tr></thead><tbody>\n${c.groups.map((g) => `<tr><td>${esc(g.k)}</td><td class="num">${num(g.n)}</td><td class="num">${r1(g.med)}倍</td></tr>`).join('\n')}\n</tbody></table></div>${c.label === '部屋の広さ' ? `\n<div class="box warn"><p><span class="tag">広さの注意</span>${SIZE_NOTE}</p></div>` : ''}`).join('\n')}
 
-<h2>7. 観測できた申込先の索引（${num(F.enough)}件）</h2>
+<h2>8. 観測できた申込先の索引（${num(F.enough)}件）</h2>
 <p>中央値の低い順。上の各章に出ていない申込先もここには載っています。</p>
 <div class="wrap">
 ${table(enough)}
 </div>
 
-<h2>8. 出典と限界</h2>
+<h2>9. 出典と限界</h2>
 <ul>
 <li>出典＝${SRC}（${RANGE}の定期募集${F.rounds}回）。読み取り日 ${READ_AT}。</li>
 <li>PDFは回ごとに列の作りが違い、機械での読み取りは全${num(raw.rows.length)}行すべてを正しく復元できません。<strong>行頭に区市町が明記されていた${num(F.rowsHead)}行</strong>と、下に書いた方法で<strong>住宅名から区を確定できた${num(F.rowsLedger)}行</strong>の、合わせて${num(F.rows)}行を使っています。ここに出ていない住宅も多くあります。<strong>「載っていない＝空いていない」ではありません。</strong></li>

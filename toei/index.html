@@ -144,6 +144,17 @@
   <tr><td>2000年代</td><td class="num">2,215</td><td class="num">10.2倍</td></tr>
   </tbody></table></div>
 
+  <h3>部屋の広さ</h3>
+  <p class="note">この表の母数は14,514件です。部屋の広さが読み取れなかった行の268件（うち、区を台帳で確定した行 22件）は入っていません。区を台帳で確定した行のうち22件は、読み取りの段階で部屋の広さの欄が取れていない行です。</p>
+  <div class="table-wrap"><table><thead><tr><th>部屋の広さ</th><th class="num">募集件数</th><th class="num">倍率の中央値</th></tr></thead><tbody>
+  <tr><td>55〜64㎡</td><td class="num">5,224</td><td class="num">2倍</td></tr>
+  <tr><td>65㎡以上</td><td class="num">654</td><td class="num">2.2倍</td></tr>
+  <tr><td>45〜54㎡</td><td class="num">2,583</td><td class="num">3倍</td></tr>
+  <tr><td>35〜44㎡</td><td class="num">3,112</td><td class="num">8.2倍</td></tr>
+  <tr><td>35㎡未満</td><td class="num">2,941</td><td class="num">17倍</td></tr>
+  </tbody></table></div>
+  <div class="callout warn"><p><span class="tag">広さの注意</span><strong>広い部屋ほど倍率が低く見えますが、広さのおかげではありません。</strong>理由は2つあります。狭い住戸は「1〜2人」のように単身でも申し込める区分で出ることが多く、申し込む人の数がそもそも違います。また広い住戸は多摩の市町と1980年代に建った団地に多く、その立地と築年が倍率を下げています。<strong>同じ住宅・同じ募集区分・同じ人数の区分</strong>で、50㎡未満の住戸と55㎡以上の住戸の両方が募集された122件だけで比べると、広いほうの倍率が高かったのは80件、低かったのは33件（同じだったのは9件）で、倍率の中央値は狭いほう2.3倍・広いほう5.8倍でした。<strong>同じ人が同じ団地で選ぶなら、広い部屋のほうが混みます。</strong>また、都営住宅の家賃（使用料）は収入に応じた額に、広さ・立地・古さの係数をかけて決まるため、<strong>広い部屋ほど家賃は高くなります</strong>。</p></div>
+
   <h3>申込区分（人数）</h3>
   <p class="note">この表の母数は13,341件です。申込区分（人数）が読み取れなかった行と、募集件数が50件に満たない区分の1,441件（うち、区を台帳で確定した行 1,433件）は入っていません。区を台帳で確定した行は、もともと行頭に区市町が無かった行で、読み取りの段階で申込区分（人数）の欄が取れていないため、この表にはすべて入っていません。</p>
   <div class="table-wrap"><table><thead><tr><th>申込区分（人数）</th><th class="num">募集件数</th><th class="num">倍率の中央値</th></tr></thead><tbody>
@@ -192,9 +203,10 @@
   <li><strong>すいてはいるが、条件を承知のうえで選ぶ申込先 350件</strong>を別掲。
     悪い住宅という意味ではありません（1階を選べるなら階段は問題になりませんし、古い住宅は都心に多く立地では有利なことがあります）。
     <strong>何を引き受けるのかが分かったうえで選べるように</strong>分けています。</li>
+  <li><strong>人数と広さで選ぶ章</strong>。すいている申込先を、募集区分と申込区分（人数）ごとに<strong>広い順</strong>に並べ直しました。同じくらい当たりやすいなら、どこが広いかが一目で分かります。</li>
   <li><strong>回によって当たりやすさが大きく動く申込先 429件</strong>。最高と最低が10倍以上ひらいた住宅です。住宅を変えるのではなく<strong>出す回を変える</strong>ほうが効く相手が分かります。</li>
   <li><strong>申込者ゼロが出た申込先 460件</strong>と、その回数。</li>
-  <li>観測できた<strong>1,456件すべての索引</strong>（区市町・住宅名・募集区分・倍率の中央値／最低／最高・観測件数・エレベーター・建てられた年と築年数・住宅名と同じ名前の町丁目の世帯数と住宅侵入の件数）。</li>
+  <li>観測できた<strong>1,456件すべての索引</strong>（区市町・住宅名・募集区分・倍率の中央値／最低／最高・観測件数・エレベーター・建てられた年と築年数・<strong>間取りと広さ（㎡）</strong>・住宅名と同じ名前の町丁目の世帯数と住宅侵入の件数）。</li>
   <li>「居室内で病死等があった住宅」158件は<strong>別掲</strong>。すいている側にはこの区分が集まるので、知らずに選ぶことがないよう分けました。</li>
   </ul>
 
@@ -209,49 +221,49 @@
     <p>倍率の<strong>中央値が5倍未満</strong>で、かつ<strong>エレベーターがあり</strong>、<strong>築年数が39年以下</strong>（観測できた1,456件の中央値）の申込先です。4件以上観測できたものだけなので、<strong>1回だけたまたま空いた住宅は入りません</strong>。31の区市町にまたがり、倍率の中央値は2倍、築年数の中央値は31年です。区市町ごと、倍率の低い順。</p>
     <h4 class="pk">三鷹市（2件）</h4>
     <div class="table-wrap"><table style="white-space:nowrap">
-    <thead><tr><th>区市町</th><th>住宅</th><th>募集区分</th><th class="num">中央値</th><th>EV</th><th>建てられた年</th><th class="num">最低</th><th class="num">最高</th><th class="num">観測</th><th class="num">申込0</th><th>同じ名前の町丁目（世帯・住宅侵入 2021〜2025年の5年間）</th></tr></thead>
+    <thead><tr><th>区市町</th><th>住宅</th><th>募集区分</th><th class="num">中央値</th><th>EV</th><th>建てられた年</th><th>間取り・広さ</th><th class="num">最低</th><th class="num">最高</th><th class="num">観測</th><th class="num">申込0</th><th>同じ名前の町丁目（世帯・住宅侵入 2021〜2025年の5年間）</th></tr></thead>
     <tbody>
-    <tr><td>三鷹市</td><td>牟礼六丁目</td><td>世帯向（一般募集住宅）</td><td class="num">3</td><td>有</td><td>平成7（築31年）</td><td class="num">1</td><td class="num">26</td><td class="num">5</td><td class="num"></td><td><a href="https://living-environments.com/mitaka/e7899fe7a4bce585ade4b881e79bae/">牟礼六丁目</a>：世帯2,846・住宅侵入0件</td></tr>
-    <tr><td>三鷹市</td><td>中原三丁目</td><td>世帯向（一般募集住宅）</td><td class="num">3.5</td><td>有</td><td>平成4（築34年）</td><td class="num">1</td><td class="num">14.5</td><td class="num">19</td><td class="num"></td><td><a href="https://living-environments.com/mitaka/e4b8ade58e9fe4b889e4b881e79bae/">中原三丁目</a>：世帯1,483・住宅侵入0件</td></tr>
+    <tr><td>三鷹市</td><td>牟礼六丁目</td><td>世帯向（一般募集住宅）</td><td class="num">3</td><td>有</td><td>平成7（築31年）</td><td>3DK・57〜70㎡</td><td class="num">1</td><td class="num">26</td><td class="num">5</td><td class="num"></td><td><a href="https://living-environments.com/mitaka/e7899fe7a4bce585ade4b881e79bae/">牟礼六丁目</a>：世帯2,846・住宅侵入0件</td></tr>
+    <tr><td>三鷹市</td><td>中原三丁目</td><td>世帯向（一般募集住宅）</td><td class="num">3.5</td><td>有</td><td>平成4（築34年）</td><td>3DK・54〜75㎡</td><td class="num">1</td><td class="num">14.5</td><td class="num">19</td><td class="num"></td><td><a href="https://living-environments.com/mitaka/e4b8ade58e9fe4b889e4b881e79bae/">中原三丁目</a>：世帯1,483・住宅侵入0件</td></tr>
     </tbody></table></div>
     <h4 class="pk">世田谷区（2件）</h4>
     <div class="table-wrap"><table style="white-space:nowrap">
-    <thead><tr><th>区市町</th><th>住宅</th><th>募集区分</th><th class="num">中央値</th><th>EV</th><th>建てられた年</th><th class="num">最低</th><th class="num">最高</th><th class="num">観測</th><th class="num">申込0</th><th>同じ名前の町丁目（世帯・住宅侵入 2021〜2025年の5年間）</th></tr></thead>
+    <thead><tr><th>区市町</th><th>住宅</th><th>募集区分</th><th class="num">中央値</th><th>EV</th><th>建てられた年</th><th>間取り・広さ</th><th class="num">最低</th><th class="num">最高</th><th class="num">観測</th><th class="num">申込0</th><th>同じ名前の町丁目（世帯・住宅侵入 2021〜2025年の5年間）</th></tr></thead>
     <tbody>
-    <tr><td>世田谷区</td><td>北烏山二丁目</td><td>若年夫婦・子育て世帯向（定期使用住宅）</td><td class="num">1.5</td><td>有</td><td>平成30（築8年）</td><td class="num">0.3</td><td class="num">2.5</td><td class="num">4</td><td class="num"></td><td><a href="https://living-environments.com/setagaya/e58c97e7838fe5b1b1e4ba8ce4b881e79bae/">北烏山二丁目</a>：世帯1,186・住宅侵入1件</td></tr>
-    <tr><td>世田谷区</td><td>桜上水五丁目</td><td>若年夫婦・子育て世帯向（定期使用住宅）</td><td class="num">3.8</td><td>有</td><td>平成22（築16年）</td><td class="num">2</td><td class="num">5</td><td class="num">4</td><td class="num"></td><td><a href="https://living-environments.com/setagaya/e6a19ce4b88ae6b0b4e4ba94e4b881e79bae/">桜上水五丁目</a>：世帯1,731・住宅侵入1件</td></tr>
+    <tr><td>世田谷区</td><td>北烏山二丁目</td><td>若年夫婦・子育て世帯向（定期使用住宅）</td><td class="num">1.5</td><td>有</td><td>平成30（築8年）</td><td>2DK・47〜57㎡</td><td class="num">0.3</td><td class="num">2.5</td><td class="num">4</td><td class="num"></td><td><a href="https://living-environments.com/setagaya/e58c97e7838fe5b1b1e4ba8ce4b881e79bae/">北烏山二丁目</a>：世帯1,186・住宅侵入1件</td></tr>
+    <tr><td>世田谷区</td><td>桜上水五丁目</td><td>若年夫婦・子育て世帯向（定期使用住宅）</td><td class="num">3.8</td><td>有</td><td>平成22（築16年）</td><td>2DK・40〜57㎡</td><td class="num">2</td><td class="num">5</td><td class="num">4</td><td class="num"></td><td><a href="https://living-environments.com/setagaya/e6a19ce4b88ae6b0b4e4ba94e4b881e79bae/">桜上水五丁目</a>：世帯1,731・住宅侵入1件</td></tr>
     </tbody></table></div>
     <h4 class="pk">中野区（2件）</h4>
     <div class="table-wrap"><table style="white-space:nowrap">
-    <thead><tr><th>区市町</th><th>住宅</th><th>募集区分</th><th class="num">中央値</th><th>EV</th><th>建てられた年</th><th class="num">最低</th><th class="num">最高</th><th class="num">観測</th><th class="num">申込0</th><th>同じ名前の町丁目（世帯・住宅侵入 2021〜2025年の5年間）</th></tr></thead>
+    <thead><tr><th>区市町</th><th>住宅</th><th>募集区分</th><th class="num">中央値</th><th>EV</th><th>建てられた年</th><th>間取り・広さ</th><th class="num">最低</th><th class="num">最高</th><th class="num">観測</th><th class="num">申込0</th><th>同じ名前の町丁目（世帯・住宅侵入 2021〜2025年の5年間）</th></tr></thead>
     <tbody>
-    <tr><td>中野区</td><td>白鷺一丁目第３</td><td>若年夫婦・子育て世帯向（定期使用住宅）</td><td class="num">2</td><td>有</td><td>平成19（築19年）</td><td class="num">0</td><td class="num">8</td><td class="num">6</td><td class="num"></td><td><a href="https://living-environments.com/nakano/e799bde9b7bae4b880e4b881e79bae/">白鷺一丁目</a>：世帯2,217・住宅侵入8件</td></tr>
-    <tr><td>中野区</td><td>白鷺一丁目</td><td>世帯向（一般募集住宅）</td><td class="num">4</td><td>有</td><td>平成5（築33年）</td><td class="num">1</td><td class="num">55</td><td class="num">5</td><td class="num"></td><td><a href="https://living-environments.com/nakano/e799bde9b7bae4b880e4b881e79bae/">白鷺一丁目</a>：世帯2,217・住宅侵入8件</td></tr>
+    <tr><td>中野区</td><td>白鷺一丁目第３</td><td>若年夫婦・子育て世帯向（定期使用住宅）</td><td class="num">2</td><td>有</td><td>平成19（築19年）</td><td>3DK・37〜57㎡</td><td class="num">0</td><td class="num">8</td><td class="num">6</td><td class="num"></td><td><a href="https://living-environments.com/nakano/e799bde9b7bae4b880e4b881e79bae/">白鷺一丁目</a>：世帯2,217・住宅侵入8件</td></tr>
+    <tr><td>中野区</td><td>白鷺一丁目</td><td>世帯向（一般募集住宅）</td><td class="num">4</td><td>有</td><td>平成5（築33年）</td><td>2DK・36〜63㎡</td><td class="num">1</td><td class="num">55</td><td class="num">5</td><td class="num"></td><td><a href="https://living-environments.com/nakano/e799bde9b7bae4b880e4b881e79bae/">白鷺一丁目</a>：世帯2,217・住宅侵入8件</td></tr>
     </tbody></table></div>
     <h4 class="pk">八王子市（20件）</h4>
     <div class="table-wrap"><table style="white-space:nowrap">
-    <thead><tr><th>区市町</th><th>住宅</th><th>募集区分</th><th class="num">中央値</th><th>EV</th><th>建てられた年</th><th class="num">最低</th><th class="num">最高</th><th class="num">観測</th><th class="num">申込0</th><th>同じ名前の町丁目（世帯・住宅侵入 2021〜2025年の5年間）</th></tr></thead>
+    <thead><tr><th>区市町</th><th>住宅</th><th>募集区分</th><th class="num">中央値</th><th>EV</th><th>建てられた年</th><th>間取り・広さ</th><th class="num">最低</th><th class="num">最高</th><th class="num">観測</th><th class="num">申込0</th><th>同じ名前の町丁目（世帯・住宅侵入 2021〜2025年の5年間）</th></tr></thead>
     <tbody>
-    <tr><td>八王子市</td><td>長沼町第２</td><td>若年夫婦・子育て世帯向（定期使用住宅）</td><td class="num">0.3</td><td>有</td><td>平成2（築36年）</td><td class="num">0</td><td class="num">3</td><td class="num">11</td><td class="num">2</td><td><a href="https://living-environments.com/hachioji/e995b7e6b2bce794ba/">長沼町</a>：世帯3,788・住宅侵入0件</td></tr>
-    <tr><td>八王子市</td><td>多摩ニュータウン別所一丁目第３</td><td>世帯向（一般募集住宅）</td><td class="num">0.5</td><td>有</td><td>平成8（築30年）</td><td class="num">0</td><td class="num">20</td><td class="num">13</td><td class="num">5</td><td>—</td></tr>
-    <tr><td>八王子市</td><td>多摩ニュータウン下柚木</td><td>世帯向（一般募集住宅）</td><td class="num">0.5</td><td>有</td><td>平成4（築34年）</td><td class="num">0.2</td><td class="num">5</td><td class="num">9</td><td class="num"></td><td>—</td></tr>
-    <tr><td>八王子市</td><td>多摩ニュータウン別所一丁目</td><td>世帯向（一般募集住宅）</td><td class="num">0.8</td><td>有</td><td>平成6（築32年）</td><td class="num">0</td><td class="num">4.3</td><td class="num">12</td><td class="num">2</td><td>—</td></tr>
-    <tr><td>八王子市</td><td>多摩ニュータウン別所一丁目第２</td><td>世帯向（一般募集住宅）</td><td class="num">1</td><td>有</td><td>平成7（築31年）</td><td class="num">0</td><td class="num">2</td><td class="num">9</td><td class="num">2</td><td>—</td></tr>
-    <tr><td>八王子市</td><td>中野山王三丁目</td><td>世帯向（一般募集住宅）</td><td class="num">1.4</td><td>有</td><td>平成22（築16年）</td><td class="num">0</td><td class="num">16</td><td class="num">47</td><td class="num"></td><td><a href="https://living-environments.com/hachioji/e4b8ade9878ee5b1b1e78e8be4b889e4b881e79bae/">中野山王三丁目</a>：世帯1,488・住宅侵入0件</td></tr>
-    <tr><td>八王子市</td><td>長沼町第２</td><td>世帯向（一般募集住宅）</td><td class="num">1.4</td><td>有</td><td>平成2（築36年）</td><td class="num">0</td><td class="num">18</td><td class="num">26</td><td class="num"></td><td><a href="https://living-environments.com/hachioji/e995b7e6b2bce794ba/">長沼町</a>：世帯3,788・住宅侵入0件</td></tr>
-    <tr><td>八王子市</td><td>長房東</td><td>世帯向（一般募集住宅）</td><td class="num">2</td><td>有</td><td>平成23（築15年）</td><td class="num">0</td><td class="num">19</td><td class="num">21</td><td class="num">1</td><td>—</td></tr>
-    <tr><td>八王子市</td><td>多摩ニュータウン南大沢</td><td>世帯向（一般募集住宅）</td><td class="num">2</td><td>有</td><td>平成8（築30年）</td><td class="num">0</td><td class="num">12</td><td class="num">13</td><td class="num"></td><td>—</td></tr>
-    <tr><td>八王子市</td><td>多摩ニュータウン上柚木</td><td>世帯向（一般募集住宅）</td><td class="num">2</td><td>有</td><td>平成4（築34年）</td><td class="num">0.6</td><td class="num">8</td><td class="num">11</td><td class="num"></td><td>—</td></tr>
-    <tr><td>八王子市</td><td>多摩ニュータウン別所</td><td>世帯向（一般募集住宅）</td><td class="num">2</td><td>有</td><td>昭和63（築38年）</td><td class="num">1</td><td class="num">7</td><td class="num">7</td><td class="num"></td><td>—</td></tr>
-    <tr><td>八王子市</td><td>多摩ニュータウン別所</td><td>若年夫婦・子育て世帯向（定期使用住宅）</td><td class="num">2</td><td>有</td><td>昭和63（築38年）</td><td class="num">0</td><td class="num">6</td><td class="num">6</td><td class="num">2</td><td>—</td></tr>
-    <tr><td>八王子市</td><td>多摩ニュータウン長池</td><td>世帯向（一般募集住宅）</td><td class="num">2</td><td>有</td><td>平成3（築35年）</td><td class="num">0.5</td><td class="num">3</td><td class="num">5</td><td class="num"></td><td>—</td></tr>
-    <tr><td>八王子市</td><td>八王子石川町第２</td><td>若年夫婦・子育て世帯向（定期使用住宅）</td><td class="num">2</td><td>有</td><td>平成8（築30年）</td><td class="num">0</td><td class="num">5</td><td class="num">5</td><td class="num"></td><td><a href="https://living-environments.com/hachioji/e79fb3e5b79de794ba/">石川町</a>：世帯4,581・住宅侵入1件</td></tr>
-    <tr><td>八王子市</td><td>長房南</td><td>世帯向（一般募集住宅）</td><td class="num">2.1</td><td>有</td><td>平成22（築16年）</td><td class="num">0</td><td class="num">22</td><td class="num">18</td><td class="num">1</td><td>—</td></tr>
-    <tr><td>八王子市</td><td>八王子石川町第２</td><td>世帯向（一般募集住宅）</td><td class="num">2.2</td><td>有</td><td>平成8（築30年）</td><td class="num">0.7</td><td class="num">5.8</td><td class="num">12</td><td class="num"></td><td><a href="https://living-environments.com/hachioji/e79fb3e5b79de794ba/">石川町</a>：世帯4,581・住宅侵入1件</td></tr>
-    <tr><td>八王子市</td><td>多摩ニュータウン鑓水</td><td>世帯向（一般募集住宅）</td><td class="num">2.3</td><td>有</td><td>平成6（築32年）</td><td class="num">1</td><td class="num">6</td><td class="num">6</td><td class="num"></td><td>—</td></tr>
-    <tr><td>八王子市</td><td>長房</td><td>世帯向（一般募集住宅）</td><td class="num">2.7</td><td>有</td><td>平成8（築30年）</td><td class="num">0</td><td class="num">21</td><td class="num">27</td><td class="num">3</td><td>—</td></tr>
-    <tr><td>八王子市</td><td>多摩ニュータウン上柚木第２</td><td>世帯向（一般募集住宅）</td><td class="num">3</td><td>有</td><td>平成5（築33年）</td><td class="num">0</td><td class="num">10</td><td class="num">10</td><td class="num">1</td><td>—</td></tr>
-    <tr><td>八王子市</td><td>多摩ニュータウン鑓水第２</td><td>世帯向（一般募集住宅）</td><td class="num">3.2</td><td>有</td><td>平成7（築31年）</td><td class="num">1.5</td><td class="num">4.7</td><td class="num">4</td><td class="num"></td><td>—</td></tr>
+    <tr><td>八王子市</td><td>長沼町第２</td><td>若年夫婦・子育て世帯向（定期使用住宅）</td><td class="num">0.3</td><td>有</td><td>平成2（築36年）</td><td>3DK・54〜76㎡</td><td class="num">0</td><td class="num">3</td><td class="num">11</td><td class="num">2</td><td><a href="https://living-environments.com/hachioji/e995b7e6b2bce794ba/">長沼町</a>：世帯3,788・住宅侵入0件</td></tr>
+    <tr><td>八王子市</td><td>多摩ニュータウン別所一丁目第３</td><td>世帯向（一般募集住宅）</td><td class="num">0.5</td><td>有</td><td>平成8（築30年）</td><td>3DK・35〜74㎡</td><td class="num">0</td><td class="num">20</td><td class="num">13</td><td class="num">5</td><td>—</td></tr>
+    <tr><td>八王子市</td><td>多摩ニュータウン下柚木</td><td>世帯向（一般募集住宅）</td><td class="num">0.5</td><td>有</td><td>平成4（築34年）</td><td>2DK・3DK・59〜79㎡</td><td class="num">0.2</td><td class="num">5</td><td class="num">9</td><td class="num"></td><td>—</td></tr>
+    <tr><td>八王子市</td><td>多摩ニュータウン別所一丁目</td><td>世帯向（一般募集住宅）</td><td class="num">0.8</td><td>有</td><td>平成6（築32年）</td><td>2DK・57〜76㎡</td><td class="num">0</td><td class="num">4.3</td><td class="num">12</td><td class="num">2</td><td>—</td></tr>
+    <tr><td>八王子市</td><td>多摩ニュータウン別所一丁目第２</td><td>世帯向（一般募集住宅）</td><td class="num">1</td><td>有</td><td>平成7（築31年）</td><td>3DK・4DK・58〜76㎡</td><td class="num">0</td><td class="num">2</td><td class="num">9</td><td class="num">2</td><td>—</td></tr>
+    <tr><td>八王子市</td><td>中野山王三丁目</td><td>世帯向（一般募集住宅）</td><td class="num">1.4</td><td>有</td><td>平成22（築16年）</td><td>2DK・32〜75㎡</td><td class="num">0</td><td class="num">16</td><td class="num">47</td><td class="num"></td><td><a href="https://living-environments.com/hachioji/e4b8ade9878ee5b1b1e78e8be4b889e4b881e79bae/">中野山王三丁目</a>：世帯1,488・住宅侵入0件</td></tr>
+    <tr><td>八王子市</td><td>長沼町第２</td><td>世帯向（一般募集住宅）</td><td class="num">1.4</td><td>有</td><td>平成2（築36年）</td><td>3DK・54〜76㎡</td><td class="num">0</td><td class="num">18</td><td class="num">26</td><td class="num"></td><td><a href="https://living-environments.com/hachioji/e995b7e6b2bce794ba/">長沼町</a>：世帯3,788・住宅侵入0件</td></tr>
+    <tr><td>八王子市</td><td>長房東</td><td>世帯向（一般募集住宅）</td><td class="num">2</td><td>有</td><td>平成23（築15年）</td><td>2DK・34〜57㎡</td><td class="num">0</td><td class="num">19</td><td class="num">21</td><td class="num">1</td><td>—</td></tr>
+    <tr><td>八王子市</td><td>多摩ニュータウン南大沢</td><td>世帯向（一般募集住宅）</td><td class="num">2</td><td>有</td><td>平成8（築30年）</td><td>4DK・53〜75㎡</td><td class="num">0</td><td class="num">12</td><td class="num">13</td><td class="num"></td><td>—</td></tr>
+    <tr><td>八王子市</td><td>多摩ニュータウン上柚木</td><td>世帯向（一般募集住宅）</td><td class="num">2</td><td>有</td><td>平成4（築34年）</td><td>2DK・3DK・58〜79㎡</td><td class="num">0.6</td><td class="num">8</td><td class="num">11</td><td class="num"></td><td>—</td></tr>
+    <tr><td>八王子市</td><td>多摩ニュータウン別所</td><td>世帯向（一般募集住宅）</td><td class="num">2</td><td>有</td><td>昭和63（築38年）</td><td>3DK・47〜77㎡</td><td class="num">1</td><td class="num">7</td><td class="num">7</td><td class="num"></td><td>—</td></tr>
+    <tr><td>八王子市</td><td>多摩ニュータウン別所</td><td>若年夫婦・子育て世帯向（定期使用住宅）</td><td class="num">2</td><td>有</td><td>昭和63（築38年）</td><td>3DK・61〜75㎡</td><td class="num">0</td><td class="num">6</td><td class="num">6</td><td class="num">2</td><td>—</td></tr>
+    <tr><td>八王子市</td><td>多摩ニュータウン長池</td><td>世帯向（一般募集住宅）</td><td class="num">2</td><td>有</td><td>平成3（築35年）</td><td>3DK・63㎡</td><td class="num">0.5</td><td class="num">3</td><td class="num">5</td><td class="num"></td><td>—</td></tr>
+    <tr><td>八王子市</td><td>八王子石川町第２</td><td>若年夫婦・子育て世帯向（定期使用住宅）</td><td class="num">2</td><td>有</td><td>平成8（築30年）</td><td>2DK・53〜75㎡</td><td class="num">0</td><td class="num">5</td><td class="num">5</td><td class="num"></td><td><a href="https://living-environments.com/hachioji/e79fb3e5b79de794ba/">石川町</a>：世帯4,581・住宅侵入1件</td></tr>
+    <tr><td>八王子市</td><td>長房南</td><td>世帯向（一般募集住宅）</td><td class="num">2.1</td><td>有</td><td>平成22（築16年）</td><td>2DK・32〜57㎡</td><td class="num">0</td><td class="num">22</td><td class="num">18</td><td class="num">1</td><td>—</td></tr>
+    <tr><td>八王子市</td><td>八王子石川町第２</td><td>世帯向（一般募集住宅）</td><td class="num">2.2</td><td>有</td><td>平成8（築30年）</td><td>1DK・33〜75㎡</td><td class="num">0.7</td><td class="num">5.8</td><td class="num">12</td><td class="num"></td><td><a href="https://living-environments.com/hachioji/e79fb3e5b79de794ba/">石川町</a>：世帯4,581・住宅侵入1件</td></tr>
+    <tr><td>八王子市</td><td>多摩ニュータウン鑓水</td><td>世帯向（一般募集住宅）</td><td class="num">2.3</td><td>有</td><td>平成6（築32年）</td><td>3DK・4DK・57〜77㎡</td><td class="num">1</td><td class="num">6</td><td class="num">6</td><td class="num"></td><td>—</td></tr>
+    <tr><td>八王子市</td><td>長房</td><td>世帯向（一般募集住宅）</td><td class="num">2.7</td><td>有</td><td>平成8（築30年）</td><td>2DK・33〜74㎡</td><td class="num">0</td><td class="num">21</td><td class="num">27</td><td class="num">3</td><td>—</td></tr>
+    <tr><td>八王子市</td><td>多摩ニュータウン上柚木第２</td><td>世帯向（一般募集住宅）</td><td class="num">3</td><td>有</td><td>平成5（築33年）</td><td>3DK・57〜76㎡</td><td class="num">0</td><td class="num">10</td><td class="num">10</td><td class="num">1</td><td>—</td></tr>
+    <tr><td>八王子市</td><td>多摩ニュータウン鑓水第２</td><td>世帯向（一般募集住宅）</td><td class="num">3.2</td><td>有</td><td>平成7（築31年）</td><td>3DK・4DK・57〜74㎡</td><td class="num">1.5</td><td class="num">4.7</td><td class="num">4</td><td class="num"></td><td>—</td></tr>
     </tbody></table></div>
     <h4 class="pk">北区（3件）</h4>
     <h4 class="pk">国分寺市（2件）</h4>
@@ -273,7 +285,7 @@
   <div class="sources">
   <h2>出典と、この数字の限界</h2>
   <ul>
-  <li>出典＝JKK東京（東京都住宅供給公社）が募集回ごとに公表する「申込地区別倍率表」PDF（2022年5月〜2026年5月の定期募集16回）。読み取り日 2026-08-18。</li>
+  <li>出典＝JKK東京（東京都住宅供給公社）が募集回ごとに公表する「申込地区別倍率表」PDF（2022年5月〜2026年5月の定期募集16回）。読み取り日 2026-09-22。</li>
   <li>PDFは回ごとに列の作りが違い、機械での読み取りは全15,426行すべてを正しく復元できません。<strong>行頭に区市町が明記されていた13,349行</strong>と、下に書いた方法で<strong>住宅名から区を確定できた1,433行</strong>の、合わせて14,782行を使っています。したがってここに出ていない住宅も多くあります。</li>
   <li>「住宅と同じ名前の町丁目」の欄は、姉妹サイト<a href="https://living-environments.com/">住環境データ東京</a>が町丁目ごとにまとめた数字です。住宅侵入（空き巣・忍込み・居空き）は2021〜2025年の5年間の<strong>件数そのもので、率ではありません</strong>。世帯の多い町ほど件数は大きく出ます。<strong>0件は被害がなかったという意味ではありません</strong>（認知件数は、警察に届出があって初めて数えられます）。リンク先の町丁目ページに大きく出ている住宅侵入の件数は、2021年より前の年も含めた合計なので、ここの5年間の件数より大きいことがあります（どちらも同じ警視庁の公表資料から数えたものです）。</li>
   <li>住宅名と同じ名前の町丁目の数字で、<strong>建物の所在地がその町丁目と一致しない場合があります</strong>（町の名前が付いた住宅でも、建物が隣の町丁目に建っていることがあります）。住宅名の頭に区市町名が付いているもの（府中美好町一丁目 など）は、頭の区市町名を外した町丁目名で引いています（北区・港区のように区名が1文字のものは外していません）。町の名前までしか一致しないもの（住宅名に丁目が付いていないもの など）は、<strong>その町の丁目が3つ以下で、かつ町全体の世帯が5,000未満のときだけ</strong>町全体の合計を出し、「（町全体・2つの丁目）」のように何丁目ぶんの合計かを添えています。町が大きいほど、町全体の数字は住宅のまわりの様子を表しにくくなるためです。<strong>この線を超える町は数字を出さず</strong>、「（町が広いため数字なし・7つの丁目）」のように丁目の数を書いています（索引1,456件のうち、町全体の合計を出したもの8件・町が広いため数字なしのもの91件）。同じ区に同じ名前の町丁目が見つからないものは数字を付けていません（①の表では「同じ区に同じ名前の町丁目は見つかりません（数字なし）」と書いています）。同じ区に同じ名前の町丁目が2つ以上あってどれか決められないものも数字を付けず、見つからないものと分けて「決められません」と書いています（索引のうち0件）。住宅侵入の件数が公表されていない町丁目（町全体の場合は、公表の無い町丁目を1つでも含む町）は件数を書いていません（0件という意味ではありません）。</li>
@@ -283,7 +295,7 @@
   <li>「観測した募集件数」は募集回の数ではありません。同じ回に同じ住宅で複数の住戸が募集されることがあり、その1件ずつを数えています。</li>
   <li>当方が公表表を転載・改変したものではなく、<strong>公表された数値から当方が計算した指標</strong>（中央値・最低・最高・件数）を掲載しています。</li>
   </ul>
-  <p class="disclaimer">掲載内容は上記の公表資料を 2026-08-18 時点で読み取ったもので、当選を保証するものではありません。誤りを見つけられた場合はご連絡ください。訂正します。</p>
+  <p class="disclaimer">掲載内容は上記の公表資料を 2026-09-22 時点で読み取ったもので、当選を保証するものではありません。誤りを見つけられた場合はご連絡ください。訂正します。</p>
   </div>
 
   <p class="related"><a href="../articles/koei-tokyo.html">→ 都営住宅の倍率と申込のしくみ（無料）</a></p>

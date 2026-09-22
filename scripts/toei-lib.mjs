@@ -274,6 +274,12 @@ const houses = [...by.entries()].map(([k, v]) => {
     ev: mode(v.map((x) => x.ev).filter(Boolean)),
     era: mode(v.map((x) => x.era).filter(Boolean)),
     eras: new Set(v.map((x) => x.era).filter(Boolean)).size,   // 2以上＝号棟などで建てられた年が混ざっている
+    // ★2026-09-22 広さ。倍率表の「間取り」「㎡」の欄から。観測した募集のなかで一番多い間取りと、㎡の最小〜最大。
+    //   同じ住宅名でも号棟・住戸で広さが違うので、1つの数に丸めず幅で持つ。読めなかった住宅は null のまま。
+    madori: mode(v.map((x) => x.madori).filter(Boolean)),
+    sqmMin: v.some((x) => x.sqm_min != null) ? Math.min(...v.filter((x) => x.sqm_min != null).map((x) => x.sqm_min)) : null,
+    sqmMax: v.some((x) => x.sqm_max != null) ? Math.max(...v.filter((x) => x.sqm_max != null).map((x) => x.sqm_max)) : null,
+    ninzu: mode(v.map((x) => (x.ninzu || '').trim()).filter(Boolean)),   // 申込区分（人数）。区を台帳で確定した行は空なので、読めた行だけで決める
     ledger: v.filter((x) => x.city_by === 'ledger').length,   // 区を台帳で確定した行の数
     env: envOf(city, name),                                    // 同じ区の同じ名前の町丁目（数字を出すかは hasNum・見つからなければ null）
   }
@@ -358,13 +364,44 @@ const groupMed = (keyOf, src = rows) => {
   for (const r of src) { const k = keyOf(r); if (!k) continue; (g[k] = g[k] || []).push(r.bairitsu) }
   return Object.entries(g).map(([k, v]) => ({ k, n: v.length, med: med(v) })).sort((a, b) => a.med - b.med)
 }
+// ★2026-09-22 部屋の広さ。住戸の㎡の下限で帯に分ける（「31～35」のような幅は小さいほうで数える）。
+const SQM_BANDS = ['35㎡未満', '35〜44㎡', '45〜54㎡', '55〜64㎡', '65㎡以上']
+const sqmBand = (s) => (s == null ? '' : s < 35 ? SQM_BANDS[0] : s < 45 ? SQM_BANDS[1] : s < 55 ? SQM_BANDS[2] : s < 65 ? SQM_BANDS[3] : SQM_BANDS[4])
 const cuts = [
   cut('エレベーターの有無', (r) => (r.ev === '有' ? 'エレベーター有' : r.ev === '無' ? 'エレベーター無' : '')),
   cut('建てられた年', (r) => eraBand(r.era), { drop: ['不明'] }),
+  cut('部屋の広さ', (r) => sqmBand(r.sqm_min)),
   cut('申込区分（人数）', (r) => (r.ninzu || '').trim(), { min: 50 }),
   cut('募集区分', (r) => r.cat, { min: 50 }),
 ]
 // ★cutNote（表の下に出す注記）はここに置かない。文章は呼ぶ側の持ち物で、ここは件数まで。
+
+// ── 広さと倍率の「見かけ」を確かめる数（2026-09-22）────────────────────────────
+// ★条件別の表だけ見ると「広い部屋ほど空いている」（35㎡未満の中央値は二十倍台、55㎡以上は数倍）。
+//   見かけの理由は2つ。①狭い住戸は「1〜2人」など単身も申し込める区分で出ることが多く、申込者の母数が違う。
+//   ②広い住戸は多摩の市町と1980年代の団地に多く、その立地と築年が倍率を下げている。
+//   ∴比べるのは「同じ住宅・同じ募集区分・同じ申込区分（人数）」の中で、狭い住戸（50㎡未満）と
+//   広い住戸（55㎡以上）の両方が募集されたものだけ。実測（2026-09-22）＝122件中80件で広いほうが高かった
+//   （中央値 2.3倍→5.8倍）。同じ回の中だけで比べても向きは同じ（111件中73件）。
+//   ★人数区分をキーに入れ忘れると向きが逆に出る（445件中352件で広いほうが低い）。最初の版で踏んだ。
+//   ∴「広い部屋を選べば当たりやすい」とは書かない。向きは toei-nerai が F から判定して、合わなければ止める。
+const SIZE_SMALL = 50, SIZE_BIG = 55
+const sizePairs = []
+{
+  const g = new Map()
+  for (const r of rows) {
+    const nz = (r.ninzu || '').trim()
+    if (!nz || r.sqm_min == null) continue
+    const k = `${r.city}|${r.name}|${r.cat}|${nz}`
+    if (!g.has(k)) g.set(k, [])
+    g.get(k).push(r)
+  }
+  for (const v of g.values()) {
+    const s = v.filter((x) => x.sqm_min < SIZE_SMALL)
+    const b = v.filter((x) => x.sqm_min >= SIZE_BIG)
+    if (s.length && b.length) sizePairs.push({ small: med(s.map((x) => x.bairitsu)), big: med(b.map((x) => x.bairitsu)) })
+  }
+}
 
 // ── 数字を1か所で作る。無料ページと有料資料で違う数を出さないため ──────────────
 const F = {
@@ -394,7 +431,22 @@ const F = {
   goldMed: r1(med(gold.map((h) => h.med))),
   goldAgeMed: med(gold.filter((h) => h.age != null).map((h) => h.age)),
   goldCities: new Set(gold.map((h) => h.city)).size,
+  // 広さ（2026-09-22）
+  sqmRows: rows.filter((r) => r.sqm_min != null).length,
+  sqmEnough: enough.filter((h) => h.sqmMin != null).length,
+  sizeSmall: SIZE_SMALL, sizeBig: SIZE_BIG,
+  sizePairs: sizePairs.length,
+  sizePairsBigLower: sizePairs.filter((p) => p.big < p.small).length,
+  sizePairsSame: sizePairs.filter((p) => p.big === p.small).length,
+  sizePairsBigHigher: sizePairs.filter((p) => p.big > p.small).length,
+  sizePairsSmallMed: r1(med(sizePairs.map((p) => p.small))),
+  sizePairsBigMed: r1(med(sizePairs.map((p) => p.big))),
 }
+// ★例外（2026-09-22）：表の1マスの書き方だけはここに置く。無料の区市町別ページ（toei-machi）と
+//   有料資料（toei-nerai）の両方が「間取り・広さ」の欄を出すので、2か所に書くと片方だけ変わる。
+//   例「3DK・55〜58㎡」。読めなかった住宅は「—」。
+const sqmTxt = (a, b) => (a == null ? '' : a === b ? `${a}㎡` : `${a}〜${b}㎡`)
+const sizeCell = (h) => (h.madori || h.sqmMin != null ? [h.madori, sqmTxt(h.sqmMin, h.sqmMax)].filter(Boolean).join('・') : '—')
 const era = (r) => `${r.slice(0, 4)}年${Number(r.slice(5))}月`
 const RANGE = `${era(F.from)}〜${era(F.to)}`
 
@@ -457,6 +509,9 @@ export {
   eraBand,
   groupMed,
   cuts,
+  SQM_BANDS,
+  sqmBand,
+  sizeCell,
   F,
   era,
   RANGE,
