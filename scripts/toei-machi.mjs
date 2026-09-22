@@ -123,7 +123,10 @@ const die = (msg) => { console.error(msg); console.error('何も書き出して�
 
 // ★2026-09-22 間取り・広さは列にしない。320px幅で列を1本足したら5面で行が230pxを超えた（toei-check）。
 //   住宅名の下に小さく2行目として添える。読めなかった住宅は何も書かない。
-const sizeSub = (h) => { const t = sizeCell(h); return t === '—' ? '' : `<br><small>${esc(t)}</small>` }
+// ★2026-09-22 申込先の表は6列やめて5列にする。360px幅で「募集区分」（区分別の面では「区市町」）の列が
+//   1文字幅まで潰れ、「世/帯/向/（/一/般/）」と縦に並んでいた。行は230px未満・横スクロールも無いので
+//   toei-check では出ず、撮影して初めて見えた崩れ。区分（区市町）は住宅名の下の小さい2行目へ、間取り・広さと並べる。
+const subLine = (lead, h) => { const t = sizeCell(h); return `<br><small>${esc(lead)}${t === '—' ? '' : `・${esc(t)}`}</small>` }
 const tw = (inner) => `  <div class="table-wrap">\n${inner}\n  </div>`
 const tbl = (head, body) => tw(`  <table>\n  <thead><tr>${head}</tr></thead>\n  <tbody>\n${body}\n  </tbody></table>`)
 
@@ -237,9 +240,9 @@ const cityPage = (s) => {
   ]
 
   const secSuki = s.suki.length
-    ? `  <p>${MIN_N}件以上の募集を観測できて、倍率の<strong>中央値</strong>が${SUKI}倍未満だったものです。中央値で切っているので、<strong>1回だけたまたま空いた住宅は入りません</strong>。${JIKO}は性質が違うのでこの表から外しています。建てられた年とエレベーターの有無は、住宅ごとに<a href="../toei/">無料の一覧</a>と有料の索引に入れています。住宅名の下の小さい字は間取りと広さで、倍率表の欄から取り、同じ住宅でも号棟や住戸で違うので幅で書いています（広い部屋ほど倍率が低く見えるのは、広さでなく立地と築年のせいです。数字は<a href="../toei/">無料の一覧</a>の③にあります）。${s.suki.length > 20 ? `中央値の低い順に上位20件です（残り${s.suki.length - 20}件は有料の一覧に全部入っています）。` : ''}</p>
-${tbl('<th>住宅</th><th>募集区分</th><th class="num">中央値</th><th class="num">最低</th><th class="num">最高</th><th class="num">観測</th>',
-      sukiTop.map((h) => `  <tr><th scope="row">${esc(h.name)}${sizeSub(h)}</th><td>${esc(shortCat(h.cat))}</td><td class="lo">${r1(h.med)}倍</td><td class="num">${r1(h.min)}倍</td><td class="num">${r1(h.max)}倍</td><td class="num">${h.n}件</td></tr>`).join('\n'))}`
+    ? `  <p>${MIN_N}件以上の募集を観測できて、倍率の<strong>中央値</strong>が${SUKI}倍未満だったものです。中央値で切っているので、<strong>1回だけたまたま空いた住宅は入りません</strong>。${JIKO}は性質が違うのでこの表から外しています。建てられた年とエレベーターの有無は、住宅ごとに<a href="../toei/">無料の一覧</a>と有料の索引に入れています。住宅名の下の小さい字は募集区分と、間取り・広さです。間取り・広さは倍率表の欄から取り、同じ住宅でも号棟や住戸で違うので幅で書いています（広い部屋ほど倍率が低く見えるのは、広さでなく立地と築年のせいです。数字は<a href="../toei/">無料の一覧</a>の③にあります）。${s.suki.length > 20 ? `中央値の低い順に上位20件です（残り${s.suki.length - 20}件は有料の一覧に全部入っています）。` : ''}</p>
+${tbl('<th>住宅</th><th class="num">中央値</th><th class="num">最低</th><th class="num">最高</th><th class="num">観測</th>',
+      sukiTop.map((h) => `  <tr><th scope="row">${esc(h.name)}${subLine(shortCat(h.cat), h)}</th><td class="lo">${r1(h.med)}倍</td><td class="num">${r1(h.min)}倍</td><td class="num">${r1(h.max)}倍</td><td class="num">${h.n}件</td></tr>`).join('\n'))}`
     : `  <p>${esc(s.city)}では、${MIN_N}件以上の募集を観測できた申込先のうち、中央値が${SUKI}倍未満のものはありませんでした。${esc(s.city)}全体の中央値は${s.med}倍です。倍率の低い区市町は<a href="../toei/">都内の相場一覧</a>で比べられます。</p>`
 
   const secZero = hasZero
@@ -504,9 +507,9 @@ ${tbl('<th>区市町</th><th class="num">観測できた募集</th><th class="nu
     w.byCity.map((c) => `  <tr><th scope="row">${esc(c.city)}</th><td class="num">${num(c.n)}件</td><td class="${c.med < SUKI ? 'lo' : 'num'}">${c.med}倍</td><td class="num">${pct(c.zero, c.n)}%</td><td>${SLUG[c.city] && PAGES.some((p) => p.city === c.city) ? `<a href="toei-${SLUG[c.city]}.html">${esc(c.city)}の倍率</a>` : '—'}</td></tr>`).join('\n'))}` : ''}
 
 ${w.suki.length ? `  <h2 id="suki">${w.byCity.length ? '④' : '③'} 倍率が低かった申込先（${w.suki.length}件）</h2>
-  <p>${MIN_N}件以上の募集を観測できて、倍率の<strong>中央値</strong>が${SUKI}倍未満だったものです。中央値で切っているので、1回だけたまたま空いた住宅は入りません。中央値の低い順に上位30件。</p>
-${tbl('<th>区市町</th><th>住宅</th><th class="num">中央値</th><th class="num">最低</th><th class="num">最高</th><th class="num">観測</th>',
-    w.suki.slice(0, 30).map((h) => `  <tr><td>${esc(h.city)}</td><th scope="row">${esc(h.name)}${sizeSub(h)}</th><td class="lo">${r1(h.med)}倍</td><td class="num">${r1(h.min)}倍</td><td class="num">${r1(h.max)}倍</td><td class="num">${h.n}件</td></tr>`).join('\n'))}
+  <p>${MIN_N}件以上の募集を観測できて、倍率の<strong>中央値</strong>が${SUKI}倍未満だったものです。中央値で切っているので、1回だけたまたま空いた住宅は入りません。住宅名の下の小さい字は区市町と、間取り・広さです。中央値の低い順に上位30件。</p>
+${tbl('<th>住宅</th><th class="num">中央値</th><th class="num">最低</th><th class="num">最高</th><th class="num">観測</th>',
+    w.suki.slice(0, 30).map((h) => `  <tr><th scope="row">${esc(h.name)}${subLine(h.city, h)}</th><td class="lo">${r1(h.med)}倍</td><td class="num">${r1(h.min)}倍</td><td class="num">${r1(h.max)}倍</td><td class="num">${h.n}件</td></tr>`).join('\n'))}
 ${w.suki.length > 30 ? `  <p class="note">上位30件です（残り${w.suki.length - 30}件は有料の一覧に全部入っています）。</p>` : ''}` : ''}
 
   <div class="callout warn">
