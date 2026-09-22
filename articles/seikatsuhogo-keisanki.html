@@ -26,7 +26,7 @@
   "description": "生活保護の最低生活費を厚生労働省の令和8年度基準（第1類・第2類・逓減率・特例加算・経過的加算・各種加算）どおりに自動計算し、全国1,747市区町村の級地と、公表が確認できた地域の住宅扶助上限、収入認定まで反映するシミュレーター。",
   "inLanguage": "ja",
   "datePublished": "2026-08-03",
-  "dateModified": "2026-09-17",
+  "dateModified": "2026-09-22",
   "author": { "@type": "Organization", "name": "フクシル" },
   "publisher": { "@type": "Organization", "name": "フクシル" },
   "url": "https://fukushiru.com/articles/seikatsuhogo-keisanki.html",
@@ -103,7 +103,7 @@
   <p class="breadcrumb"><a href="../index.html">トップ</a> ＞ 生活保護 ＞ 支給額シミュレーター</p>
 
   <h1>生活保護はいくらもらえる？<br>自動計算シミュレーター【2026年度】</h1>
-  <p class="updated">最終更新：2026-09-17 ／ 厚生労働省「生活扶助基準額の算出方法（令和8年4月）」の計算式・基準額をそのまま実装。すべて<strong>概算</strong>です</p>
+  <p class="updated">最終更新：2026-09-22 ／ 厚生労働省「生活扶助基準額の算出方法（令和8年4月）」の計算式・基準額をそのまま実装。すべて<strong>概算</strong>です</p>
 
   <p class="lead">生活保護の金額は「一律いくら」ではなく、<strong>世帯全員の年齢 × 世帯人数 × 住んでいる地域（級地）</strong>で1円単位まで決まる積み上げ式です。このページは厚生労働省が公表している<strong>令和8年度の基準額表と計算式をそのまま実装</strong>し、ネットの記事にありがちな「ざっくり目安」ではなく、<strong>福祉事務所と同じロジック</strong>で最低生活費を計算します。<strong>級地は全国1,747市区町村ぶん</strong>収録しているので、町や村でも選べます。家賃の上限（住宅扶助）は、公表を確認できた<strong>237市区町村</strong>で自動的に入ります（人口でみると約4割）。働いた収入がある場合の<strong>差額支給</strong>も概算できます。</p>
 
@@ -279,6 +279,17 @@
   <div class="callout note">
     <p><span class="tag">あわせて読みたい</span>同じ金額でも地域によって実際に買える量は違います。<a href="seikatsuhogo-jisshitsu.html">物価と電気代で割り戻した実質の比較</a>もどうぞ（電気代の地域差は<a href="https://hatsudenbench.com/denkidai/">発電ベンチ</a>の集計）。申請が通るかどうかが気になる方は<a href="seikatsuhogo-shinsei-jichitai.html">自治体別の却下率</a>へ。家賃を下げて生活を安定させるなら<a href="koei-jutaku-bairitsu.html">公営住宅の倍率データ</a>と<a href="koei-hairiyasui.html">入りやすい人の条件</a>も参考に。生活保護までは必要ないけれど税負担を軽くしたい方は<a href="juminzei-hikazei-check.html">住民税非課税の判定シミュレーター</a>、医療費が心配な方は<a href="kougaku-ryouyouhi-2026.html">高額療養費の計算機（2026年8月改正対応）</a>へ。障害のある方は<a href="shogai-nenkin-keisanki.html">障害年金の計算機</a>もどうぞ。</p>
   </div>
+
+  <h2 id="taberumono">⑤ 今日、食べるものがないとき</h2>
+  <p>生活保護の決定には原則14日かかります。そのあいだ、あるいは申請するか迷っているあいだに<strong>食べるものが尽きたとき</strong>の窓口です。どれも無料で相談できます。</p>
+  <ul>
+    <li><strong>福祉事務所（生活保護の窓口）</strong>：「今日食べるものがない」ことをそのまま伝えてください。生活保護法は、急迫した状況にある人には<strong>申請を待たずに保護を始める</strong>よう福祉事務所に求めています（第25条）。</li>
+    <li><strong>自立相談支援の窓口（生活困窮者自立支援制度）</strong>：生活保護を受けるか決める前でも相談できます。市区町村の役所か社会福祉協議会に置かれていて、自治体によっては食料の提供につないでくれます。</li>
+    <li><strong>社会福祉協議会</strong>：一時的に生活費が足りないときの「緊急小口資金」（10万円以内・無利子の貸付）の相談先です。フードバンクと組んで食料を渡している社協もあります。</li>
+    <li><strong>フードバンク</strong>：農林水産省が<a href="https://www.maff.go.jp/j/syouan/access/index.html" rel="nofollow" onclick="window.__ev&amp;&amp;window.__ev('food_maff')">全国のフードバンクの一覧</a>を公開しています。団体ごとに「主な提供先」が書いてあり、<strong>個人にも渡している団体</strong>があります。受け取り方は団体ごとに違うので、先に連絡してください。</li>
+    <li><strong>年末年始</strong>：役所が休みになる期間の炊き出しや相談会の一覧が、毎年12月に<a href="https://www.mhlw.go.jp/stf/newpage_22854.html" rel="nofollow" onclick="window.__ev&amp;&amp;window.__ev('food_mhlw')">厚生労働省のページ</a>に載ります。</li>
+  </ul>
+  <p class="mini-note">炊き出しや食料の配布は、日時や場所が変わったり中止になったりします。行く前に主催する団体の最新の案内を確かめてください。</p>
 
   <h2>コメント（体験・自治体ごとの運用の情報交換）</h2>
   <p class="mini-note">申請時の体験や、お住まいの自治体の運用について共有いただけると、同じ立場の方の助けになります。個人が特定される情報はお書きにならないでください。</p>
