@@ -11,6 +11,12 @@ import io, json, os, re, sys, glob
 from datetime import date
 from collections import defaultdict
 
+# Windows の既定のコンソール（cp932）は「↔」「—」「≤」などを encode できず、
+# 進捗表示の1行で UnicodeEncodeError を出して途中で落ちる（2026-09-23 の川崎で実際に起きた）。
+# 記号を選び直すのは漏れるので、出力の文字コードのほうを UTF-8 に固定する。
+for _s in (sys.stdout, sys.stderr):
+    if hasattr(_s, "reconfigure"):
+        _s.reconfigure(encoding="utf-8", errors="replace")
 sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding="utf-8")
 from pypdf import PdfReader
 
