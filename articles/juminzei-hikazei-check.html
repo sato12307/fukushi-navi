@@ -117,6 +117,7 @@
   </table>
   </div>
   <p class="mini-note">※ひとり親はこれとは別に「前年の合計所得135万円以下（給与収入だと約204万円）なら非課税」という本人非課税の特例もあります（障害者・未成年者・寡婦も同じ135万円基準）。2級地では単身106.5万円・3級地では単身103万円が目安と、地方ほど少し下がります（2026年度・給与収入ベース。均等割の基本額35万円に0.9・0.8をかけた標準の値で、実際の額は市町村の条例で決まるため、数千円ずれる市もあります）。</p>
+  <div class="callout point"><p><span class="tag">市区町村別</span>住んでいる市区町村の線は、<a href="../hikazei/">全国1,741市区町村の早見表</a>で世帯人数別・給与と年金ごとに出ます（級地・令和9年度の見通しつき）。</p></div>
 
 <!-- kaitei:juminzei-hikazei -->
   <div class="callout note" data-kaitei="juminzei-hikazei">
@@ -174,7 +175,7 @@
         <option value="2">2級地（県庁所在地クラスの市など）</option>
         <option value="3">3級地（その他の市町村）</option>
       </select>
-      <span class="mini-note">生活保護の級地区分に準拠。フクシルで扱う12大都市はすべて1級地です</span>
+      <span class="mini-note">生活保護の級地区分に準拠。自分の市区町村の級地は<a href="../hikazei/">市区町村別の早見表</a>で分かります</span>
     </div>
     <div class="row">
       <label for="h-special">本人がいずれかに該当</label>
@@ -190,7 +191,7 @@
     </div>
   </div>
 
-  <h2>③ 非課税世帯になると受けられる主なメリット</h2>
+  <h2 id="merit">③ 非課税世帯になると受けられる主なメリット</h2>
   <p>「住民税がかからない」こと自体より、<strong>非課税世帯であることを条件に発動する制度</strong>のほうが金額的に大きいことが多いです。</p>
   <div class="table-wrap">
   <table class="merit-table">
@@ -259,13 +260,18 @@
 
 <script>
 // ====== 2026年度（令和8年度）住民税 非課税判定 ======
-// 給与所得控除（令和7年分以後）: 最低65万円
+// 給与所得控除（令和7年分）: 最低65万円（190万円未満）
+// ★190万円以上660万円未満は、収入を4,000円刻みに切り下げてから式に当てる（所得税法別表第五・国税庁 No.1410）。
+//   丸めずに式に当てると境目の数千円で判定が逆になる（例: 扶養2人 205万9,999円は非課税＝大阪市の公表値）。
+//   式の正典は scripts/hikazei-lib.mjs。scripts/hikazei-city.mjs がこの関数と1円単位で突き合わせる。
 function salaryShotoku(man){ // 収入(万円)→給与所得(万円)
-  if (man <= 190) return Math.max(0, man - 65);
-  if (man <= 360) return man * 0.7 - 8;
-  if (man <= 660) return man * 0.8 - 44;
-  if (man <= 850) return man * 0.9 - 110;
-  return man - 195;
+  var x = Math.round(man * 10000);
+  if (x < 1900000) return Math.max(0, x - 650000) / 10000;
+  var A = Math.floor(x / 4000) * 4000;
+  if (x < 3600000) return (A * 0.7 - 80000) / 10000;
+  if (x < 6600000) return (A * 0.8 - 440000) / 10000;
+  if (x <= 8500000) return (x * 0.9 - 1100000) / 10000;
+  return (x - 1950000) / 10000;
 }
 // 公的年金等控除（他の所得1,000万円以下の場合）
 function pensionShotoku(man, over65){
@@ -312,16 +318,19 @@ function genkaiShotokuwari(fuyo){
     else if (type.value === 'pension65') shotoku = pensionShotoku(man, true);
     else if (type.value === 'pension64') shotoku = pensionShotoku(man, false);
     else shotoku = man;
+    // 比べるのは円の整数どうし（万円の小数のまま比べると 18.9 のような額で浮動小数の誤差が出る）。表示だけ0.1万円に丸める。
+    var yen = function (m) { return Math.round(m * 10000); };
+    var sYen = yen(shotoku);
     shotoku = Math.round(shotoku * 10) / 10;
 
     var limitK = genkai(k, n);            // 均等割
     var limitS = genkaiShotokuwari(n);    // 所得割
-    var specialOK = special.value === 'yes' && shotoku <= 135;
+    var specialOK = special.value === 'yes' && sYen <= 1350000;
 
     var msg, cls;
-    if (shotoku <= limitK || specialOK) {
+    if (sYen <= yen(limitK) || specialOK) {
       msg = '非課税（均等割も所得割もかかりません）'; cls = 'verdict-ok';
-    } else if (shotoku <= limitS) {
+    } else if (sYen <= yen(limitS)) {
       msg = '均等割のみ課税（所得割は非課税）'; cls = 'verdict-mid';
     } else {
       msg = '課税（非課税世帯には該当しません）'; cls = 'verdict-no';

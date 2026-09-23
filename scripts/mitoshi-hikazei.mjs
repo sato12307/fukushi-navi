@@ -22,72 +22,18 @@ import fs from 'node:fs'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { page, esc, SITE } from './shogai-kojo-page.mjs'
+// 式と材料は hikazei-lib.mjs の1か所だけ（/hikazei/ の市区町村ごとの早見表と共有）
+import { D, L, PER, NS, maxIncome, kintouLim, shotokuLim, man, manT, selfCheck } from './hikazei-lib.mjs'
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..')
-const D = JSON.parse(fs.readFileSync(path.join(ROOT, 'data', 'mitoshi-hikazei.json'), 'utf8'))
 const OUT_REL = 'mitoshi/hikazei/index.html'
 const DRY = process.argv.includes('--dry')
 const TODAY = new Date(Date.now() + 9 * 3600 * 1000).toISOString().slice(0, 10)
 const die = (m) => { console.error(m); console.error('何も書き出していません。'); process.exit(1) }
 
-// ── 給与所得（給与収入 → 所得）。所得税法別表第五と同じ4,000円刻みの丸めを入れる ─────────
-//   国税庁 No.1410 の表と注。660万円未満は別表第五で求める（下の式はその表を再現したもの）。
-const floor4k = (x) => Math.floor(x / 4000) * 4000
-const upper = (x, A) => (x < 3600000 ? A * 0.7 - 80000 : x < 6600000 ? A * 0.8 - 440000 : x <= 8500000 ? x * 0.9 - 1100000 : x - 1950000)
-const kyuyo = {
-  // 令和2〜6年分：最低55万円（162.5万円まで）
-  r3: (x) => {
-    if (x < 1619000) return Math.max(0, x - 550000)
-    if (x < 1620000) return 1069000
-    if (x < 1622000) return 1070000
-    if (x < 1624000) return 1072000
-    if (x < 1628000) return 1074000
-    const A = floor4k(x)
-    if (x < 1800000) return A * 0.6 + 100000
-    return upper(x, A)
-  },
-  // 令和7年分：最低65万円（190万円まで）
-  r8: (x) => (x < 1900000 ? Math.max(0, x - 650000) : upper(x, floor4k(x))),
-  // 令和8・9年分：最低74万円（220万円まで）。219.1万〜220万円未満は注2の表。
-  r9: (x) => {
-    if (x < 2191000) return Math.max(0, x - 740000)
-    if (x < 2193000) return 1451000
-    if (x < 2196000) return 1453000
-    if (x < 2200000) return 1456000
-    return upper(x, floor4k(x))
-  },
-}
-// 所得が lim 以下になる、いちばん高い給与収入（1円単位）
-const maxIncome = (pid, lim) => {
-  let lo = 0, hi = 20000000
-  while (lo < hi) { const mid = Math.floor((lo + hi + 1) / 2); if (kyuyo[pid](mid) <= lim) lo = mid; else hi = mid - 1 }
-  return lo
-}
-// 非課税の所得の線。n＝扶養している人の数（同一生計配偶者を含む）
-const L = D.limits
-const kintouLim = (k, n, base = L.kintou.base[k], add = L.kintou.add[k]) => (n === 0 ? base + L.kintou.plus : base * (1 + n) + L.kintou.plus + add)
-const shotokuLim = (n) => (n === 0 ? L.shotoku.base + L.shotoku.plus : L.shotoku.base * (1 + n) + L.shotoku.plus + L.shotoku.add)
-const NS = [0, 1, 2, 3, 4]
-const PER = D.periods
+// ── 突き合わせ（大阪市・名古屋市の公表値）。式は hikazei-lib.mjs、1円でも違えば止める ─────────
+{ const e = selfCheck(); if (e) die(e) }
 
-// ── 突き合わせ（大阪市・名古屋市の公表値）──────────────────────────────────
-{
-  const c = D.check
-  const k = NS.map((n) => maxIncome(c.period, kintouLim('1', n)))
-  const s = NS.map((n) => maxIncome(c.period, shotokuLim(n)))
-  if (JSON.stringify(k) !== JSON.stringify(c.kintou)) die(`均等割の年収の目安が大阪市の公表値と違います。計算 ${k.join(',')} ／ 公表 ${c.kintou.join(',')}`)
-  if (JSON.stringify(s) !== JSON.stringify(c.shotoku)) die(`所得割の年収の目安が大阪市の公表値と違います。計算 ${s.join(',')} ／ 公表 ${c.shotoku.join(',')}`)
-  const c2 = D.check2
-  const k0 = maxIncome(c2.period, kintouLim('1', 0))
-  if (k0 !== c2.kintou0) die(`令和9年度の単身の目安が名古屋市の公表値と違います。計算 ${k0} ／ 公表 ${c2.kintou0}`)
-}
-
-const man = (y) => {   // 1,100,000 → 110万円 ／ 2,059,999 → 205万9,999円
-  const m = Math.floor(y / 10000), r = y % 10000
-  return r ? `${m.toLocaleString('ja-JP')}万${r.toLocaleString('ja-JP')}円` : `${m.toLocaleString('ja-JP')}万円`
-}
-// 表の中だけ「万」のあとで折り返せるようにする（360px幅で「205万9,999円」が1行に収まらない）
-const manT = (y) => man(y).replace('万', '万<wbr>')
 const WHO = ['単身（扶養なし）', '扶養1人（夫婦など）', '扶養2人（夫婦＋子1人など）', '扶養3人', '扶養4人']
 const WHO_S = ['単身', '扶養1人', '扶養2人', '扶養3人', '扶養4人']   // 表の中は短く（4列を360px幅に収める）
 const moveTxt = (a, b) => (a === b ? '<strong>動かない</strong>' : `＋${manT(b - a)}`)
@@ -170,7 +116,7 @@ ${tableOf(G3)}
   <tbody>
 ${roundRows}
   </tbody></table></div>
-  <p class="mini-note">自分の市区町村の線は、市区町村の税務課のページで確かめてください。級地は<a href="../../articles/juminzei-hikazei-check.html">住民税非課税の判定</a>で選べます。</p>
+  <p class="mini-note">自分の市区町村の級地と線は<a href="../../hikazei/">市区町村別の早見表（全国1,741市区町村）</a>で出ます。条例の額を公式ページで確かめた市町村はその額で出しています。実際に課税か非課税かを決めるのは市区町村の税務課です。</p>
 
   <h2>④ 線が動いた年の記録</h2>
   <div class="table-wrap"><table class="fit">
