@@ -152,6 +152,8 @@ def main():
     cur_sec = None
     result = {}       # 市町村名 -> 級地
     dup = Counter()
+    gun_rows = {}     # 「級地|県|◯◯郡」の見出し → その下に並んだ町村の数（0なら読み違いを疑う）
+    last_gun, cur_gun = None, []
     for page in doc:
         chars = chars_of(page)
         # 区分の見出し（【1級地－1】）。y座標つきで拾い、そのy以降に効く。
@@ -221,23 +223,40 @@ def main():
                     p = as_pref(name)
                     if p:
                         cur_pref = p
+                        last_gun, cur_gun = None, []
                         continue
                     if not cur_sec or not cur_pref:
                         continue
+                    # ★「◯◯郡」の行は見出し。**その郡の町村すべて**ではなく、すぐ下に字下げで並ぶ町村だけがその級地
+                    #   （2026-09-23 訂正。PDFを画像で見て確認＝2級地-1 の埼玉県「入間郡」の下は三芳町だけ、
+                    #    神奈川県「足柄下郡」の下は箱根町・真鶴町・湯河原町だけ）。
+                    #   以前は郡の行を郵便番号データで郡内の全町村に広げていたため、
+                    #   ①載っていない町村に級地が付く（福岡県みやこ町が2級地-2に・町の条例は3級地の額）
+                    #   ②後のページに同じ郡が出ると、先に正しく入った町の級地を上書きする
+                    #    （三芳町・大井町・熊取町・田尻町が2級地-1→3級地-1に）
+                    #   という誤りが両方向に出ていた。郡の行は町村の所属を確かめる手がかりにだけ使う。
                     if name.endswith("郡"):
-                        members = GUN.get(f"{cur_pref}|{name}", [])
-                        if not members:
+                        cur_gun = GUN.get(f"{cur_pref}|{name}", [])
+                        if not cur_gun:
                             dup[f"{cur_pref}|{name}(郡の中身が引けない)"] += 1
-                        for t in members:
-                            result[OFFICIAL.get(canon_key(cur_pref, t), f"{cur_pref}|{t}")] = cur_sec
+                        gun_rows[f"{cur_sec}|{cur_pref}|{name}"] = gun_rows.get(f"{cur_sec}|{cur_pref}|{name}", 0)
+                        last_gun = f"{cur_sec}|{cur_pref}|{name}"
                         continue
                     if not re.search(r"[市町村区]$|地域$", name):
                         continue
+                    # 郡の見出しの下の町村か（字下げの並び）。郡に属さない名前が来たら郡の並びは終わり。
+                    if last_gun:
+                        if any(canon_key(cur_pref, t) == canon_key(cur_pref, name) for t in cur_gun):
+                            gun_rows[last_gun] += 1
+                        else:
+                            last_gun, cur_gun = None, []
                     key = OFFICIAL.get(canon_key(cur_pref, name), f"{cur_pref}|{name}")
                     if key in result and result[key] != cur_sec:
                         dup[key] += 1
                     result[key] = cur_sec
 
+    empty_gun = [k for k, n in gun_rows.items() if n == 0]
+    print(f"郡の見出し {len(gun_rows)}件（下に町村が1つも並ばなかったもの {len(empty_gun)}件）" + (f" 例 {empty_gun[:8]}" if empty_gun else ""))
     by_sec = Counter(result.values())
     print("読めた市町村", len(result))
     for k in sorted(by_sec):
