@@ -1,0 +1,327 @@
+{
+  "checked": "2026-09-25",
+  "note": "国民健康保険（国保）の7割・5割・2割軽減の判定の線と、市区町村（または府県の統一保険料）の料率。式は scripts/kokuho-lib.mjs の1か所だけ。料率は公式ページの数字を写し、別の市のページの同じ数字と突き合わせてから載せる。",
+  "keigen": {
+    "nendo": "令和8年度",
+    "years": "2026年4月〜2027年3月",
+    "incomeYear": "2025年（令和7年）1〜12月の所得",
+    "incomePeriod": "r8",
+    "base": 430000,
+    "perWorker": 100000,
+    "go": 310000,
+    "ni": 570000,
+    "pension65": 150000,
+    "workerSalary": 550000,
+    "workerPension65": 1250000,
+    "workerPension64": 600000,
+    "law": "国民健康保険法施行令 第29条の7第5項（保険料の市町村）・地方税法施行令 第56条の89（保険税の市町村）",
+    "sources": [
+      {
+        "name": "国民健康保険法施行令 第29条の7（5割31万円・2割57万円・給与所得者等が2人以上のときだけ10万円×（人数−1）を足す）・附則第5条（当分の間、65歳以上の年金の所得から15万円を控除し、給与所得者等の年金の線110万円を125万円と読み替え）＝e-Gov法令検索",
+        "url": "https://laws.e-gov.go.jp/law/333CO0000000362"
+      },
+      {
+        "name": "大阪市「保険料の軽減・減免」（令和8年度の軽減判定所得・給与所得者等の定義・65歳以上の年金の15万円・給与所得者等が2人以上のときだけ10万円を足す）",
+        "url": "https://www.city.osaka.lg.jp/fukushi/page/0000369751.html"
+      },
+      {
+        "name": "さいたま市「国民健康保険税の軽減（低所得）」（令和8年度・同じ式）",
+        "url": "https://www.city.saitama.lg.jp/001/153/002/004/p010021.html"
+      },
+      {
+        "name": "川口市「国民健康保険税の軽減について」（令和5〜8年度の線の推移）",
+        "url": "https://www.city.kawaguchi.lg.jp/soshiki/01090/030/kokuminkenkouhokenzei/3340.html"
+      }
+    ],
+    "history": [
+      {
+        "nendo": "令和5年度",
+        "go": 290000,
+        "ni": 535000
+      },
+      {
+        "nendo": "令和6年度",
+        "go": 295000,
+        "ni": 545000
+      },
+      {
+        "nendo": "令和7年度",
+        "go": 305000,
+        "ni": 560000
+      },
+      {
+        "nendo": "令和8年度",
+        "go": 310000,
+        "ni": 570000
+      }
+    ],
+    "check": {
+      "note": "年金だけの65歳以上の単身は、年金収入168万円以下で7割軽減（168万−公的年金等控除110万−15万＝43万円）。LIMO・川口市ほか複数の解説と同じ。",
+      "pension65Single7": 1680000
+    }
+  },
+  "rateSets": {
+    "osaka-pref": {
+      "name": "大阪府の府内統一保険料",
+      "short": "大阪府の全43市町村",
+      "scope": "大阪府内の全43市町村（令和6年度から府内統一。同じ所得・同じ世帯なら府内のどこでも同じ保険料）",
+      "nendo": "令和8年度",
+      "kind": "保険料",
+      "rounding": "1円未満切り捨て（泉佐野市の公表）",
+      "checkedAt": "2026-09-25",
+      "parts": [
+        {
+          "id": "iryo",
+          "label": "医療分",
+          "rate": 9500,
+          "kintou": 34990,
+          "byodo": 33908,
+          "cap": 660000
+        },
+        {
+          "id": "shien",
+          "label": "後期高齢者支援金分",
+          "rate": 3060,
+          "kintou": 11191,
+          "byodo": 10845,
+          "cap": 260000
+        },
+        {
+          "id": "kaigo",
+          "label": "介護分",
+          "rate": 2600,
+          "kintou": 18682,
+          "byodo": 0,
+          "cap": 170000,
+          "ages": [
+            40,
+            64
+          ]
+        },
+        {
+          "id": "kodomo",
+          "label": "子ども・子育て支援金分",
+          "rate": 280,
+          "kintou": 1745,
+          "byodo": 0,
+          "cap": 30000,
+          "adultsOnly": true,
+          "kintouNote": "均等割1,745円（18歳未満は全額軽減）＋18歳以上均等割96円＝18歳以上1人あたり1,841円（大阪市のお知らせ）。泉佐野市のページは1,743円＋98円と書いているが、18歳以上1人あたりの合計（1,841円）と7・5・2割の軽減後の額は同じ",
+          "kintou18": 96
+        }
+      ],
+      "sources": [
+        {
+          "name": "大阪市「令和8年度大阪市国民健康保険料のお知らせ」（料率の表）",
+          "url": "https://www.city.osaka.lg.jp/fukushima/page/0000624311.html"
+        },
+        {
+          "name": "枚方市「令和8年度の国民健康保険料について」（同じ料率・前年からの増減）",
+          "url": "https://www.city.hirakata.osaka.jp/0000037140.html"
+        },
+        {
+          "name": "泉佐野市「国民健康保険料の計算について」（同じ料率・計算例・端数処理）",
+          "url": "https://www.city.izumisano.lg.jp/kakuka/kenkou/kokuho/menu/kokuho_keisan.html"
+        },
+        {
+          "name": "大阪市「保険料の決め方」（府内統一の説明）",
+          "url": "https://www.city.osaka.lg.jp/fukushi/page/0000624098.html"
+        }
+      ],
+      "checks": [
+        {
+          "src": "泉佐野市の計算例（世帯主45歳 給与収入450万円・配偶者41歳 収入なし・子15歳 収入なし）",
+          "members": [
+            {
+              "age": 45,
+              "sal": 4500000
+            },
+            {
+              "age": 41
+            },
+            {
+              "age": 15
+            }
+          ],
+          "expect": 645854,
+          "expectParts": {
+            "iryo": 398228,
+            "shien": 127956,
+            "kaigo": 108344,
+            "kodomo": 11326
+          }
+        }
+      ]
+    },
+    "tokyo-23": {
+      "name": "東京23区の統一保険料（特別区基準保険料率）",
+      "short": "東京23区のうち統一保険料の20区",
+      "scope": "東京23区のうち、特別区の統一保険料率を使っている20区（目黒区・中野区・江戸川区は料率が違うため別）",
+      "nendo": "令和8年度",
+      "kind": "保険料",
+      "rounding": "1円未満切り捨て（軽減後の均等割は足立区の表と同じ切り捨て）",
+      "checkedAt": "2026-09-25",
+      "parts": [
+        {
+          "id": "iryo",
+          "label": "医療分",
+          "rate": 7510,
+          "kintou": 47600,
+          "byodo": 0,
+          "cap": 670000
+        },
+        {
+          "id": "shien",
+          "label": "後期高齢者支援金分",
+          "rate": 2800,
+          "kintou": 17600,
+          "byodo": 0,
+          "cap": 260000
+        },
+        {
+          "id": "kaigo",
+          "label": "介護分",
+          "rate": 2430,
+          "kintou": 17800,
+          "byodo": 0,
+          "cap": 170000,
+          "ages": [
+            40,
+            64
+          ]
+        },
+        {
+          "id": "kodomo",
+          "label": "子ども・子育て支援金分",
+          "rate": 270,
+          "kintou": 1800,
+          "kintou18": 73,
+          "byodo": 0,
+          "cap": 30000,
+          "adultsOnly": true,
+          "kintouNote": "均等割1,800円（18歳未満は全額軽減）＋18歳以上均等割73円＝18歳以上1人あたり1,873円"
+        }
+      ],
+      "sources": [
+        {
+          "name": "東京都保健医療局「令和8年度 特別区国民健康保険料一覧表」（令和8年4月1日現在・23区の料率）",
+          "url": "https://www.hokeniryo.metro.tokyo.lg.jp/documents/d/hokeniryo/tokubetuku202605-pdf"
+        },
+        {
+          "name": "練馬区「国民健康保険料の計算方法（令和8年度）」",
+          "url": "https://www.city.nerima.tokyo.jp/kurashi/nenkinhoken/kokuminkenkohoken/hoken_hokenryo/keisan_hoho.html"
+        },
+        {
+          "name": "練馬区「国民健康保険料の計算例」（4例）",
+          "url": "https://www.city.nerima.tokyo.jp/kurashi/nenkinhoken/kokuminkenkohoken/hoken_hokenryo/keisan_example.html"
+        },
+        {
+          "name": "大田区「国民健康保険料計算方法」（同じ料率）",
+          "url": "https://www.city.ota.tokyo.jp/seikatsu/kokunen/kokuho/hokenryou/keisan.html"
+        },
+        {
+          "name": "足立区「国民健康保険料の均等割軽減・減免制度」（7・5・2割軽減後の均等割の額）",
+          "url": "https://www.city.adachi.tokyo.jp/kokuho/kurashi/hoken/hokenryougenmen.html"
+        }
+      ],
+      "checks": [
+        {
+          "src": "練馬区の計算例1（40歳未満・単身・給与収入300万円）",
+          "members": [
+            {
+              "age": 35,
+              "sal": 3000000
+            }
+          ],
+          "expect": 235295
+        },
+        {
+          "src": "練馬区の計算例2（40〜64歳・単身・給与収入450万円）",
+          "members": [
+            {
+              "age": 45,
+              "sal": 4500000
+            }
+          ],
+          "expect": 440046
+        },
+        {
+          "src": "練馬区の計算例3（40〜64歳 給与450万円・40歳未満 給与100万円・子17歳・子13歳）",
+          "members": [
+            {
+              "age": 45,
+              "sal": 4500000
+            },
+            {
+              "age": 35,
+              "sal": 1000000
+            },
+            {
+              "age": 17
+            },
+            {
+              "age": 13
+            }
+          ],
+          "expect": 637519
+        },
+        {
+          "src": "練馬区の計算例4（65歳以上 年金300万円・65歳以上 年金50万円）",
+          "members": [
+            {
+              "age": 70,
+              "pen": 3000000
+            },
+            {
+              "age": 70,
+              "pen": 500000
+            }
+          ],
+          "expect": 289672
+        },
+        {
+          "src": "足立区の軽減後の均等割の表（40〜64歳・単身・所得0円＝7割軽減）",
+          "members": [
+            {
+              "age": 45
+            }
+          ],
+          "expectLv": 7,
+          "expectParts": {
+            "iryo": 14280,
+            "shien": 5280,
+            "kaigo": 5340,
+            "kodomo": 561
+          },
+          "expect": 25461
+        }
+      ]
+    }
+  },
+  "prefSets": {
+    "27": "osaka-pref"
+  },
+  "muniSets": {
+    "13101": "tokyo-23",
+    "13102": "tokyo-23",
+    "13103": "tokyo-23",
+    "13104": "tokyo-23",
+    "13105": "tokyo-23",
+    "13106": "tokyo-23",
+    "13107": "tokyo-23",
+    "13108": "tokyo-23",
+    "13109": "tokyo-23",
+    "13111": "tokyo-23",
+    "13112": "tokyo-23",
+    "13113": "tokyo-23",
+    "13115": "tokyo-23",
+    "13116": "tokyo-23",
+    "13117": "tokyo-23",
+    "13118": "tokyo-23",
+    "13119": "tokyo-23",
+    "13120": "tokyo-23",
+    "13121": "tokyo-23",
+    "13122": "tokyo-23"
+  },
+  "muniSetsNote": "東京23区のうち目黒区(13110)・中野区(13114)・江戸川区(13123)は料率が違う（東京都の一覧表）。計算例を確かめるまで載せない"
+}

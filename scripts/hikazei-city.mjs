@@ -27,6 +27,7 @@ import vm from 'node:vm'
 import { fileURLToPath } from 'node:url'
 import { page, esc, SITE } from './shogai-kojo-page.mjs'
 import { D, L, NS, maxIncome, maxPension, kintouLim, shotokuLim, SPECIAL_LIM, man, manT, selfCheck } from './hikazei-lib.mjs'
+import { K as KK, selfCheck as kokuhoCheck, lines as kLines, annual as kAnnual, setOf as kSetOf, yen, rateTxt, lvTxt } from './kokuho-lib.mjs'
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..')
 const DRY = process.argv.includes('--dry')
@@ -39,11 +40,13 @@ const CK = readJson('data/hikazei-city-checks.json')
 const JF = readJson('data/jutaku-fujo.json')
 const HS = readJson('data/hogo-shinsei.json')
 const SR = readJson('data/seiho-ranking.json')
-const CHECKED = [D.checked, CK.checked].sort().pop()
+const CHECKED = [D.checked, CK.checked, KK.checked].sort().pop()
 
 // ── 1. 式の確かめ（大阪市・名古屋市の公表値と1円単位）────────────────────────────
 { const e = selfCheck(); if (e) die(e) }
 if (M.length !== 1741) die(`市区町村の数が1,741ではありません（${M.length}件）`)
+// 国保の軽減の線と年額（式は kokuho-lib.mjs）。公表の計算例と1円でも違えば止める
+{ const e = kokuhoCheck(); if (e) die(`国保：${e}`) }
 
 // ── 2. 計算機の記事（別実装）と突き合わせる ───────────────────────────────────────
 //   記事は万円で受けて、円の整数どうしで比べる（2026-09-23 に直した。それまでは0.1万円に丸めて比べていて、
@@ -168,10 +171,99 @@ const sourcesList = (r, c) => `<div class="sources">
   <li>公的年金等控除＝国税庁 タックスアンサーNo.1600 https://www.nta.go.jp/taxes/shiraberu/taxanswer/shotoku/1600.htm（令和2年分以後の表・年金以外の所得が1,000万円以下の人）</li>
   ${c ? `<li>${esc(r.pref + r.city)}の公表＝<a href="${esc(c.url)}" rel="nofollow">${esc(c.url)}</a>（${esc(c.nendo || '')}${c.nendo ? '・' : ''}${esc(c.checkedAt)}に確認）</li>` : ''}
   <li>計算の確かめ＝${esc(D.check.src)}（令和8年度・10個）・${esc(D.check2.src)}（令和9年度・単身）と1円単位で一致</li>
+  <li>国保の軽減の線＝${esc(KK.keigen.law)}。${KK.keigen.sources.map((x) => `${esc(x.name)} ${esc(x.url)}`).join('／')}</li>
+  ${kokuhoSourceLi(r)}
   <li>ここに出したのは<strong>給与だけ・年金だけの人の目安</strong>です。両方ある人、事業などの収入がある人、各種の控除がある人は変わります。実際に課税か非課税かを決めるのは${r ? `${esc(r.city)}` : '市区町村'}です。</li>
   <li>誤りを見つけられた場合は contact@fukushiru.com までご連絡ください。確かめて直します。</li>
   </ul>
   </div>`
+
+// ── 6b. 国民健康保険（国保）の軽減の線と年額（式は kokuho-lib.mjs の1か所だけ）───────────────
+//   軽減（7割・5割・2割）の線は全国共通。年額は、料率を公式ページで確かめた所（data/kokuho.json）だけ出す。
+//   年額は大人だけの世帯に限る（子どもは未就学児の軽減や市町村独自の軽減があって、1つの式で言い切れない）。
+//   ★2026-09-25 ユーザー裁定（発案第143回 #86「これはぜひやろう」）＝料率が取れた市だけ年額を出し、取れない市は線だけ。
+const KG = KK.keigen
+const KL = { sal: [1, 2, 3, 4, 5].map((n) => kLines('sal', n)), pen: [1, 2].map((n) => kLines('pen65', n)) }
+const K7SAL = KL.sal[0][7], K7PEN = KL.pen[0][7]
+// 7割の線は人数によらない（稼ぐ人が1人のとき）。人数で変わったら文言が嘘になるので止める
+if (KL.sal.some((x) => x[7] !== K7SAL) || KL.pen.some((x) => x[7] !== K7PEN)) die('国保の7割軽減の線が人数で変わっています（ページの文言の前提が崩れた）')
+const NIN = ['単身', '2人', '3人', '4人', '5人']
+const NIN_SUB = ['', '夫婦など', '夫婦＋子1人など', '夫婦＋子2人など', '夫婦＋子3人など']
+const ninTh = (i) => `<th scope="row">${NIN[i]}${NIN_SUB[i] ? `<br><small>${NIN_SUB[i]}</small>` : ''}</th>`
+const lineRows = (arr) => arr.map((x, i) => `<tr>${ninTh(i)}<td class="num">${manT(x[5])}</td><td class="num">${manT(x[2])}</td></tr>`).join('\n')
+const H0 = KG.history[0], HN = KG.history[KG.history.length - 1]
+const kokuhoLines = () => `<p><strong>給与だけの世帯</strong>（給与をもらう人は1人・ほかの人は収入なし）。7割軽減は人数によらず<strong>給与収入${man(K7SAL)}以下</strong>です。</p>
+  <div class="table-wrap"><table class="fit">
+  <thead><tr><th>国保の人数</th><th class="num">5割軽減</th><th class="num">2割軽減</th></tr></thead>
+  <tbody>
+${lineRows(KL.sal)}
+  </tbody></table></div>
+  <p><strong>年金だけの世帯</strong>（65〜74歳・年金をもらう人は1人。2人の世帯のもう1人は年金110万円以下）。7割軽減は人数によらず<strong>年金収入${man(K7PEN)}以下</strong>です。</p>
+  <div class="table-wrap"><table class="fit">
+  <thead><tr><th>国保の人数</th><th class="num">5割軽減</th><th class="num">2割軽減</th></tr></thead>
+  <tbody>
+${lineRows(KL.pen)}
+  </tbody></table></div>
+  <p class="mini-note">収入が表の額以下なら、その割合の軽減の目安です（2割軽減の列＝何かしら軽減される上限）。「国保の人数」は世帯で国保に入っている人の数で、国保から後期高齢者医療に移った人も数えます。判定に使うのは、世帯主（国保に入っていなくても）と国保の人全員の${esc(KG.incomeYear)}の合計です。給与や年金をもらう人（給与収入55万円超・65歳以上で年金125万円超・65歳未満で年金60万円超）が2人以上いると、1人ふえるごとに線が所得で10万円上がります。65歳以上の年金は、判定のときだけ所得から15万円を引きます。障害年金・遺族年金は収入に数えません。5割・2割の線（1人あたりの所得の額）は毎年上がっていて、${esc(H0.nendo)}の${man(H0.go)}・${man(H0.ni)}から、${esc(HN.nendo)}は${man(HN.go)}・${man(HN.ni)}になりました。</p>
+  <div class="callout warn"><p><span class="tag">申告が要ります</span>世帯の誰かが所得の申告をしていないと、軽減されません。<strong>収入が0円の人も</strong>、住民税の申告（または確定申告）をしておく必要があります。</p></div>`
+// 年額の表に出す世帯（大人だけ）
+const HH = [
+  { id: 'sal', title: '単身・40〜64歳・給与だけ', mk: (x) => [{ age: 45, sal: x }], L: KL.sal[0], rows: [0, KL.sal[0][7], KL.sal[0][5], KL.sal[0][2], 2000000, 3000000] },
+  { id: 'pen1', title: '単身・65〜74歳・年金だけ', mk: (x) => [{ age: 70, pen: x }], L: KL.pen[0], rows: [1000000, KL.pen[0][7], KL.pen[0][5], KL.pen[0][2], 3000000] },
+  { id: 'pen2', title: '夫婦2人・65〜74歳・年金は1人だけ（もう1人は年金110万円以下）', mk: (x) => [{ age: 70, pen: x }, { age: 70 }], L: KL.pen[1], rows: [1000000, KL.pen[1][7], KL.pen[1][5], KL.pen[1][2], 3500000] },
+]
+const tagOf = (hh, x) => (x === hh.L[7] ? '7割の上限' : x === hh.L[5] ? '5割の上限' : x === hh.L[2] ? '2割の上限' : '')
+const annualRows = (rs, hh) => hh.rows.map((x) => {
+  const a = kAnnual(rs, hh.mk(x)), tag = tagOf(hh, x)
+  return `<tr><th scope="row">${x ? manT(x) : '0円'}${tag ? `<br><small>${tag}</small>` : ''}</th><td>${lvTxt(a.lv)}</td><td class="num">${yen(a.total)}</td></tr>`
+}).join('\n')
+const rateList = (rs) => rs.parts.map((p) => `<li>${esc(p.label)}：所得割 ${rateTxt(p.rate)}・均等割 ${yen(p.kintou)}${p.kintou18 ? `＋18歳以上均等割 ${yen(p.kintou18)}（18歳以上1人あたり${yen(p.kintou + p.kintou18)}・18歳未満は全額軽減）` : p.adultsOnly ? '（18歳以上1人あたり）' : ''}${p.byodo ? `・平等割 ${yen(p.byodo)}` : '・平等割なし'}・年の上限 ${man(p.cap)}${p.ages ? `（${p.ages[0]}〜${p.ages[1]}歳の人だけ）` : ''}</li>`).join('\n  ')
+const COVERED = Object.values(KK.rateSets).map((x) => x.short).join('・')
+const kokuhoSourceLi = (r) => {
+  const rs = r ? kSetOf(r.code) : null
+  if (!rs) return ''
+  return `<li>国保の料率＝${rs.sources.map((x) => `${esc(x.name)} <a href="${esc(x.url)}" rel="nofollow">${esc(x.url)}</a>`).join('／')}（${esc(rs.checkedAt)}に確認）。年額の計算は${rs.checks.map((c) => esc(c.src)).join('・')}と1円単位で一致を確かめています</li>`
+}
+const kokuhoPrefNote = (p2, pref) => {
+  const rs = kSetOf(`${p2}000`)
+  if (!rs) return ''
+  const z = kAnnual(rs, [{ age: 45 }])
+  return `<p class="mini-note">国保：${esc(pref)}は国保の保険料を${esc(rs.short)}で統一しています（${esc(rs.nendo)}）。単身・40〜64歳の年額の目安は収入0円で${yen(z.total)}（7割軽減）。市町村名を押すと、国保が7割・5割・2割軽くなる年収と、年収ごとの年額の目安が出ます。</p>`
+}
+const kokuhoSection = (r, Ls) => {
+  const rs = kSetOf(r.code), s = Ls[0].sal8, pn = Ls[0].p65
+  const vs = (s > K7SAL
+    ? `${esc(r.city)}で住民税が非課税になる給与だけの単身は${man(s)}以下ですが、国保の7割軽減は<strong>${man(K7SAL)}以下</strong>です。給与が${man(K7SAL + 1)}〜${man(s)}の人は、住民税はかからなくても国保は5割軽減です。`
+    : `${esc(r.city)}で住民税が非課税になる給与だけの単身（${man(s)}以下）は、全員が国保の7割軽減（給与${man(K7SAL)}以下）に入ります。`)
+    + (pn < K7PEN
+      ? `年金だけの65歳以上の単身は、住民税が非課税になる線（${man(pn)}以下）より上の<strong>${man(K7PEN)}まで7割軽減</strong>です（国保の判定では、65歳以上の年金の所得から15万円を引くため）。`
+      : '')
+  const head = `<h2 id="kokuho">⑤ 国民健康保険（国保）が7割・5割・2割軽くなる年収</h2>
+  <p>国保に入っている世帯は、前の年の所得が少ないと、保険料のうち人数と世帯にかかる部分（<strong>均等割・平等割</strong>）が7割・5割・2割軽くなります。線は国の政令で決まっていて<strong>全国共通</strong>、申請はいりません。${esc(KG.nendo)}（${esc(KG.years)}の保険料）は${esc(KG.incomeYear)}で決まります。</p>
+  <p>${vs}</p>
+  ${kokuhoLines()}`
+  if (!rs) return `${head}
+  <p class="mini-note">${esc(r.city)}の国保料の年額（料率を使った計算）は、まだ載せていません。料率を公式ページで確かめた市区町村から順に足しています（いまは${esc(COVERED)}）。</p>`
+  const zero = kAnnual(rs, [{ age: 45 }]), zeroFull = kAnnual(rs, [{ age: 45 }], { lv: 0 })
+  const kaigo0 = zero.parts.find((p) => p.id === 'kaigo').yen
+  const cliff = (x) => kAnnual(rs, [{ age: 45, sal: x + 1 }]).total - kAnnual(rs, [{ age: 45, sal: x }]).total
+  const L1 = KL.sal[0]
+  return `${head}
+  <h3>${esc(r.city)}の国保料の年額の目安（${esc(rs.nendo)}）</h3>
+  <p>${esc(rs.scope)}の料率で計算した、<strong>大人だけの世帯</strong>の年額です。<strong>収入が0円でも、国保は0円になりません</strong>（7割軽減でも${rs.parts.some((p) => p.byodo) ? '均等割・平等割' : '均等割'}の3割はかかります）。単身・40〜64歳なら、収入0円で年${yen(zero.total)}です。</p>
+  ${HH.map((hh) => `<p><strong>${esc(hh.title)}</strong></p>
+  <div class="table-wrap"><table class="fit">
+  <thead><tr><th>年収</th><th>軽減</th><th class="num">年額</th></tr></thead>
+  <tbody>
+${annualRows(rs, hh)}
+  </tbody></table></div>`).join('\n  ')}
+  <p>線を1円でも超えると軽減が1段下がり、保険料が段差で上がります。給与だけの単身（40〜64歳）なら、${man(L1[7])}を超えると年${yen(cliff(L1[7]))}、${man(L1[5])}を超えると年${yen(cliff(L1[5]))}、${man(L1[2])}を超えると年${yen(cliff(L1[2]))}上がります。</p>
+  <p class="mini-note">39歳以下の人は介護分がかかりません（収入0円の単身で年${yen(kaigo0)}安い）。65〜74歳の人も国保の介護分はかからず、そのかわり介護保険料を別に納めます（この表に入っていません）。<strong>所得を申告していないと軽減されず、収入0円の単身（40〜64歳）でも年${yen(zeroFull.total)}</strong>になります。表は${esc(KG.incomeYear)}がこの収入だけで、ほかの世帯の人は収入なし（夫婦のもう1人は年金110万円以下）、後期高齢者医療に移った人はいない、減免なしとして計算した目安です。端数は${esc(rs.rounding)}。実際の額は${esc(r.city)}から届く決定通知書で確かめてください。</p>
+  <p class="mini-note">使った料率（${esc(rs.nendo)}・${esc(rs.name)}）：</p>
+  <ul class="mini-note">
+  ${rateList(rs)}
+  </ul>`
+}
 
 // ── 7. 市区町村のページ ─────────────────────────────────────────────────────────
 const muniPage = (r) => {
@@ -193,7 +285,7 @@ const muniPage = (r) => {
   }
 
   const title = `${name}の住民税非課税の年収｜単身${man(Ls[0].sal8)}以下・年金の夫婦${man(Ls[1].p65)}以下（令和8年度）｜フクシル`
-  const desc = `${name}（${kyuchiName(k)}）で住民税が非課税になる年収の目安。給与収入だけの単身は${man(Ls[0].sal8)}以下、65歳以上で年金だけの単身は${man(Ls[0].p65)}以下、配偶者を扶養する65歳以上の年金の夫婦は${man(Ls[1].p65)}以下（令和8年度）。令和9年度は給与だけの単身が${man(Ls[0].sal9)}以下に上がります。世帯人数別の表と、障害者・ひとり親の特例も。`
+  const desc = `${name}（${kyuchiName(k)}）で住民税が非課税になる年収の目安。給与収入だけの単身は${man(Ls[0].sal8)}以下、65歳以上で年金だけの単身は${man(Ls[0].p65)}以下、配偶者を扶養する65歳以上の年金の夫婦は${man(Ls[1].p65)}以下（令和8年度）。令和9年度は給与だけの単身が${man(Ls[0].sal9)}以下に上がります。世帯人数別の表と、障害者・ひとり親の特例、国保が7割軽減になる年収（給与だけの単身${man(K7SAL)}以下）も${kSetOf(r.code) ? `。${r.city}の国保料の年額の目安つき` : ''}。`
 
   // 表は3列まで（320px幅で4列にすると数字が「148 / 万円」のように割れて読めない＝2026-09-23 撮影で確認）
   const t1 = Ls.map((x) => `<tr>${whoTh(x.n, x.lim)}<td class="num">${manT(x.sal8)}</td><td class="num">${manT(x.p65)}</td></tr>`).join('\n')
@@ -233,7 +325,7 @@ const muniPage = (r) => {
   const body = `${CSS}
   ${crumbs(items, up)}
   <p class="updated">最終確認：${esc(CHECKED)} ／ 給与だけ・年金だけの人の目安。式は法令と国税庁の控除の表から計算し、大阪市・名古屋市の公表値と1円単位で一致を確かめています</p>
-  <h1>${esc(name)}の住民税非課税の年収の目安<br><small>世帯人数別・給与と年金（令和8年度・令和9年度）</small></h1>
+  <h1>${esc(name)}の住民税非課税の年収の目安<br><small>世帯人数別・給与と年金（令和8年度・令和9年度）と国保の軽減</small></h1>
 
   <p class="lead">${esc(r.city)}は、住民税の非課税の線を決める地域の区分で<strong>${kyuchiName(k)}</strong>です（生活保護の級地は${esc(r.kyuchi)}）。${why}</p>
 
@@ -284,12 +376,14 @@ ${t3}
   <div class="callout note"><p><span class="tag">自分の収入で確かめる</span>
   年収・扶養の人数・級地を入れて判定できる<a href="${up}articles/juminzei-hikazei-check.html">住民税非課税の判定</a>があります（${esc(r.city)}は「${kyuchiName(k)}」を選んでください${st === 'rounded' ? `。ただし${esc(r.city)}は条例で標準と違う額にしているので、判定の境目がこの表と少しずれます` : ''}）。</p></div>
 
-  <h2>⑤ ${esc(r.city)}の暮らしの線</h2>
+  ${kokuhoSection(r, Ls)}
+
+  <h2>⑥ ${esc(r.city)}の暮らしの線</h2>
   <ul>
   ${life.join('\n  ')}
   </ul>
 
-  <h2>⑥ ${esc(r.pref)}の中で線が違う市町村</h2>
+  <h2>⑦ ${esc(r.pref)}の中で線が違う市町村</h2>
   ${groups.length ? `<p>同じ${esc(r.pref)}でも、級地が違うと線が変わります。</p>\n  ${groupHtml}` : `<p>${esc(r.pref)}の市町村はすべて${kyuchiName(k)}です。</p>`}
   <p><a href="${up}hikazei/ken/${pref2(r)}/">${esc(r.pref)}の全${same.length}市町村の表</a>${prev ? ` ／ ← <a href="${up}hikazei/${prev.code}/">${esc(prev.city)}</a>` : ''}${next ? ` ／ <a href="${up}hikazei/${next.code}/">${esc(next.city)}</a> →` : ''}</p>
 
@@ -318,6 +412,7 @@ const prefPage = (p2, pref) => {
   <p class="updated">最終確認：${esc(CHECKED)} ／ 給与だけ・年金だけの人の目安</p>
   <h1>${esc(pref)}の住民税非課税の年収の目安<br><small>全${a.length}市町村の早見表（令和8年度）</small></h1>
   <p class="lead">住民税が非課税になる線は、市町村の「級地」で変わります。${esc(pref)}は${cnt.map(([k, n]) => `<strong>${kyuchiName(k)}が${n}</strong>`).join('・')}です。市町村名を押すと、世帯人数別（扶養4人まで）・令和9年度の見通し・障害者やひとり親の特例まで出ます。</p>
+  ${kokuhoPrefNote(p2, pref)}
   ${has23 ? `<p class="mini-note">2級地・3級地の額は、国の標準（1級地の0.9倍・0.8倍）を参考に市町村が条例で決めます。「条例で丸め」「公表と一致」の印が無い市町村は国の標準の値です。${surveyTxt()}</p>` : ''}
   <div class="table-wrap"><table class="fit">
   <thead><tr><th>市町村</th><th class="num">給与だけ<br><small>単身</small></th><th class="num">年金だけ<br><small>65歳以上・単身</small></th><th class="num">年金だけ<br><small>65歳以上・夫婦</small></th></tr></thead>
@@ -355,6 +450,10 @@ const hubPage = () => {
 ${grid}
   </tbody></table></div>
   <p class="mini-note">収入が表の額以下なら非課税の目安です。「夫婦」は配偶者を扶養している世帯。2級地・3級地は、市町村が条例で丸めていると少し違います。${surveyTxt()}</p>
+  <h2 id="kokuho">国民健康保険（国保）が7割・5割・2割軽くなる年収（全国共通・${esc(KG.nendo)}）</h2>
+  <p>国保の保険料のうち人数と世帯にかかる部分（均等割・平等割）は、前の年の所得が少ないと7割・5割・2割軽くなります。この線は国の政令で決まっていて全国共通です。住民税の非課税の線とは別の物差しで、たとえば給与だけの単身は、1級地で住民税が非課税になるのは${man(STDLINES['1'][0].sal8)}以下ですが、国保の7割軽減は${man(K7SAL)}以下です。</p>
+  ${kokuhoLines()}
+  <p>国保料の年額の目安は、料率を公式ページで確かめた市区町村のページに載せています（いまは${esc(COVERED)}）。</p>
   <h2>都道府県から探す</h2>
   <ul class="links">
 ${prefLinks}
