@@ -1,5 +1,5 @@
 {
-  "checked": "2026-09-25",
+  "checked": "2026-09-27",
   "note": "国民健康保険（国保）の7割・5割・2割軽減の判定の線と、市区町村（または府県の統一保険料）の料率。式は scripts/kokuho-lib.mjs の1か所だけ。料率は公式ページの数字を写し、別の市のページの同じ数字と突き合わせてから載せる。",
   "keigen": {
     "nendo": "令和8年度",
@@ -296,6 +296,3176 @@
           "expect": 25461
         }
       ]
+    },
+    "tokyo-13208": {
+      "name": "調布市の国民健康保険税",
+      "short": "調布市",
+      "scope": "調布市",
+      "nendo": "令和8年度",
+      "kind": "保険税",
+      "rounding": "区分ごとに、所得割と均等割を足したあと100円未満切り捨て（調布市の算出例）",
+      "round": {
+        "part": 100
+      },
+      "checkedAt": "2026-09-27",
+      "parts": [
+        {
+          "id": "iryo",
+          "label": "医療分",
+          "rate": 5800,
+          "kintou": 30500,
+          "byodo": 0,
+          "cap": 660000
+        },
+        {
+          "id": "shien",
+          "label": "後期高齢者支援金分",
+          "rate": 2080,
+          "kintou": 10900,
+          "byodo": 0,
+          "cap": 260000
+        },
+        {
+          "id": "kaigo",
+          "label": "介護分",
+          "rate": 1840,
+          "kintou": 12600,
+          "byodo": 0,
+          "cap": 170000,
+          "ages": [
+            40,
+            64
+          ]
+        },
+        {
+          "id": "kodomo",
+          "label": "子ども・子育て支援金分",
+          "rate": 300,
+          "kintou": 1900,
+          "kintou18": 100,
+          "byodo": 0,
+          "cap": 30000,
+          "adultsOnly": true,
+          "kintouNote": "均等割1,900円（18歳未満は全額軽減）＋18歳以上均等割100円＝18歳以上1人あたり2,000円"
+        }
+      ],
+      "sources": [
+        {
+          "name": "東京都保健医療局「令和８年度国民健康保険料（税）率等の状況」（令和8年4月1日現在・市町村）",
+          "url": "https://www.hokeniryo.metro.tokyo.lg.jp/documents/d/hokeniryo/shicyouson_20260518-pdf"
+        },
+        {
+          "name": "調布市「令和8年度国民健康保険税の計算方法」",
+          "url": "https://www.city.chofu.lg.jp/060080/p038109.html"
+        },
+        {
+          "name": "調布市「国民健康保険税算出例」（PDF・例1・例2）",
+          "url": "https://www.city.chofu.lg.jp/documents/11957/8kokuhozei_5.pdf"
+        },
+        {
+          "name": "調布市「令和8年度調布市国民健康保険税のお知らせ」（PDF・算出例）",
+          "url": "https://www.city.chofu.lg.jp/documents/661/r8hokennzeinoosirase.pdf"
+        }
+      ],
+      "checks": [
+        {
+          "src": "調布市の算出例1（50歳 給与所得500万円・50歳 所得なし・20歳 所得なし）",
+          "members": [
+            {
+              "age": 50,
+              "inc": 5000000,
+              "worker": true
+            },
+            {
+              "age": 50
+            },
+            {
+              "age": 20
+            }
+          ],
+          "expect": 613100,
+          "expectParts": {
+            "iryo": 356500,
+            "shien": 127700,
+            "kaigo": 109200,
+            "kodomo": 19700
+          }
+        },
+        {
+          "src": "調布市の算出例2（70歳 年金の所得200万円・70歳 所得なし）",
+          "members": [
+            {
+              "age": 70,
+              "inc": 2000000,
+              "incPen": true
+            },
+            {
+              "age": 70
+            }
+          ],
+          "expect": 215100,
+          "expectParts": {
+            "iryo": 152000,
+            "shien": 54400,
+            "kaigo": 0,
+            "kodomo": 8700
+          }
+        },
+        {
+          "src": "調布市のお知らせの算出例（43歳 給与所得460万円・42歳 不動産所得50万円・20歳・15歳）",
+          "members": [
+            {
+              "age": 43,
+              "inc": 4600000,
+              "worker": true
+            },
+            {
+              "age": 42,
+              "inc": 500000
+            },
+            {
+              "age": 20
+            },
+            {
+              "age": 15
+            }
+          ],
+          "expect": 621500,
+          "expectParts": {
+            "iryo": 367900,
+            "shien": 131700,
+            "kaigo": 103200,
+            "kodomo": 18700
+          }
+        }
+      ]
+    },
+    "tokyo-13209": {
+      "name": "町田市の国民健康保険税",
+      "short": "町田市",
+      "scope": "町田市",
+      "nendo": "令和8年度",
+      "kind": "保険税",
+      "rounding": "区分ごとに100円未満切り捨て（町田市の計算例）",
+      "round": {
+        "part": 100
+      },
+      "checkedAt": "2026-09-27",
+      "parts": [
+        {
+          "id": "iryo",
+          "label": "医療分",
+          "rate": 6770,
+          "kintou": 40200,
+          "byodo": 0,
+          "cap": 670000
+        },
+        {
+          "id": "shien",
+          "label": "後期高齢者支援金分",
+          "rate": 2330,
+          "kintou": 13700,
+          "byodo": 0,
+          "cap": 260000
+        },
+        {
+          "id": "kaigo",
+          "label": "介護分",
+          "rate": 2080,
+          "kintou": 15500,
+          "byodo": 0,
+          "cap": 170000,
+          "ages": [
+            40,
+            64
+          ]
+        },
+        {
+          "id": "kodomo",
+          "label": "子ども・子育て支援金分",
+          "rate": 300,
+          "kintou": 1855,
+          "kintou18": 105,
+          "byodo": 0,
+          "cap": 30000,
+          "adultsOnly": true,
+          "kintouNote": "均等割1,855円（18歳未満は全額軽減）＋18歳以上均等割105円＝18歳以上1人あたり1,960円"
+        }
+      ],
+      "sources": [
+        {
+          "name": "東京都保健医療局「令和８年度国民健康保険料（税）率等の状況」（令和8年4月1日現在・市町村）",
+          "url": "https://www.hokeniryo.metro.tokyo.lg.jp/documents/d/hokeniryo/shicyouson_20260518-pdf"
+        },
+        {
+          "name": "町田市「国民健康保険税の税率等」（計算例つき）",
+          "url": "https://www.city.machida.tokyo.jp/kurashi/hoken/kokuho/hokenzei/hokenzeiritsu/kokuhozeinozeiritutou.html"
+        }
+      ],
+      "checks": [
+        {
+          "src": "町田市の計算例1（42歳 給与収入350万円・38歳と12歳 収入なし）",
+          "members": [
+            {
+              "age": 42,
+              "sal": 3500000
+            },
+            {
+              "age": 38
+            },
+            {
+              "age": 12
+            }
+          ],
+          "expect": 403700,
+          "expectParts": {
+            "iryo": 251900,
+            "shien": 86300,
+            "kaigo": 55800,
+            "kodomo": 9700
+          }
+        },
+        {
+          "src": "町田市の計算例2（71歳 年金収入250万円・69歳 年金収入72万円・2割軽減）",
+          "members": [
+            {
+              "age": 71,
+              "pen": 2500000
+            },
+            {
+              "age": 69,
+              "pen": 720000
+            }
+          ],
+          "expect": 180400,
+          "expectLv": 2,
+          "expectParts": {
+            "iryo": 129900,
+            "shien": 44500,
+            "kaigo": 0,
+            "kodomo": 6000
+          }
+        }
+      ]
+    },
+    "tokyo-13210": {
+      "name": "小金井市の国民健康保険税",
+      "short": "小金井市",
+      "scope": "小金井市",
+      "nendo": "令和8年度",
+      "kind": "保険税",
+      "rounding": "区分ごとに100円未満切り捨て（小金井市の計算例）",
+      "round": {
+        "part": 100
+      },
+      "checkedAt": "2026-09-27",
+      "parts": [
+        {
+          "id": "iryo",
+          "label": "医療分",
+          "rate": 6740,
+          "kintou": 31000,
+          "byodo": 0,
+          "cap": 670000
+        },
+        {
+          "id": "shien",
+          "label": "後期高齢者支援金分",
+          "rate": 2250,
+          "kintou": 14000,
+          "byodo": 0,
+          "cap": 260000
+        },
+        {
+          "id": "kaigo",
+          "label": "介護分",
+          "rate": 2000,
+          "kintou": 15000,
+          "byodo": 0,
+          "cap": 170000,
+          "ages": [
+            40,
+            64
+          ]
+        },
+        {
+          "id": "kodomo",
+          "label": "子ども・子育て支援金分",
+          "rate": 300,
+          "kintou": 1855,
+          "kintou18": 89,
+          "byodo": 0,
+          "cap": 30000,
+          "adultsOnly": true,
+          "kintouNote": "均等割1,855円（18歳未満は全額軽減）＋18歳以上均等割89円＝18歳以上1人あたり1,944円"
+        }
+      ],
+      "sources": [
+        {
+          "name": "東京都保健医療局「令和８年度国民健康保険料（税）率等の状況」（令和8年4月1日現在・市町村）",
+          "url": "https://www.hokeniryo.metro.tokyo.lg.jp/documents/d/hokeniryo/shicyouson_20260518-pdf"
+        },
+        {
+          "name": "小金井市「国民健康保険税の税率及び計算方法」",
+          "url": "https://www.city.koganei.lg.jp/kurashi/427/kokuhozei/hokenzei_keisan.html"
+        },
+        {
+          "name": "小金井市「国民健康保険税の計算例」（4例）",
+          "url": "https://www.city.koganei.lg.jp/kurashi/427/kokuhozei/keisannrei.html"
+        }
+      ],
+      "checks": [
+        {
+          "src": "小金井市の計算例1（68歳 年金収入200万円・66歳 所得なし・5割軽減）",
+          "members": [
+            {
+              "age": 68,
+              "pen": 2000000
+            },
+            {
+              "age": 66
+            }
+          ],
+          "expect": 90400,
+          "expectLv": 5,
+          "expectParts": {
+            "iryo": 62600,
+            "shien": 24500,
+            "kaigo": 0,
+            "kodomo": 3300
+          }
+        },
+        {
+          "src": "小金井市の計算例2（68歳 単身 年金収入150万円・7割軽減）",
+          "members": [
+            {
+              "age": 68,
+              "pen": 1500000
+            }
+          ],
+          "expect": 14000,
+          "expectLv": 7,
+          "expectParts": {
+            "iryo": 9300,
+            "shien": 4200,
+            "kaigo": 0,
+            "kodomo": 500
+          }
+        },
+        {
+          "src": "小金井市の計算例3（43歳 給与収入500万円・41歳・10歳・7歳）",
+          "members": [
+            {
+              "age": 43,
+              "sal": 5000000
+            },
+            {
+              "age": 41
+            },
+            {
+              "age": 10
+            },
+            {
+              "age": 7
+            }
+          ],
+          "expect": 567100,
+          "expectParts": {
+            "iryo": 334900,
+            "shien": 126400,
+            "kaigo": 92600,
+            "kodomo": 13200
+          }
+        },
+        {
+          "src": "小金井市の計算例4（38歳 給与収入280万円・35歳・7歳・2割軽減）",
+          "members": [
+            {
+              "age": 38,
+              "sal": 2800000
+            },
+            {
+              "age": 35
+            },
+            {
+              "age": 7
+            }
+          ],
+          "expect": 245700,
+          "expectLv": 2,
+          "expectParts": {
+            "iryo": 172100,
+            "shien": 66200,
+            "kaigo": 0,
+            "kodomo": 7400
+          }
+        }
+      ]
+    },
+    "tokyo-13212": {
+      "name": "日野市の国民健康保険税",
+      "short": "日野市",
+      "scope": "日野市",
+      "nendo": "令和8年度",
+      "kind": "保険税",
+      "rounding": "区分ごとに、所得割と均等割を足したあと100円未満切り捨て（日野市のモデルケース）",
+      "round": {
+        "part": 100
+      },
+      "checkedAt": "2026-09-27",
+      "parts": [
+        {
+          "id": "iryo",
+          "label": "医療分",
+          "rate": 5800,
+          "kintou": 34500,
+          "byodo": 0,
+          "cap": 670000
+        },
+        {
+          "id": "shien",
+          "label": "後期高齢者支援金分",
+          "rate": 2100,
+          "kintou": 12300,
+          "byodo": 0,
+          "cap": 260000
+        },
+        {
+          "id": "kaigo",
+          "label": "介護分",
+          "rate": 2100,
+          "kintou": 14700,
+          "byodo": 0,
+          "cap": 170000,
+          "ages": [
+            40,
+            64
+          ]
+        },
+        {
+          "id": "kodomo",
+          "label": "子ども・子育て支援金分",
+          "rate": 300,
+          "kintou": 1899,
+          "kintou18": 84,
+          "byodo": 0,
+          "cap": 30000,
+          "adultsOnly": true,
+          "kintouNote": "均等割1,899円（18歳未満は全額軽減）＋18歳以上均等割84円＝18歳以上1人あたり1,983円"
+        }
+      ],
+      "sources": [
+        {
+          "name": "東京都保健医療局「令和８年度国民健康保険料（税）率等の状況」（令和8年4月1日現在・市町村）",
+          "url": "https://www.hokeniryo.metro.tokyo.lg.jp/documents/d/hokeniryo/shicyouson_20260518-pdf"
+        },
+        {
+          "name": "日野市「国民健康保険税とは」（モデルケースの計算）",
+          "url": "https://www.city.hino.lg.jp/kurashi/kokuhonenkin/1023198/1023202/1023220.html"
+        }
+      ],
+      "checks": [
+        {
+          "src": "日野市のモデルケース（42歳 給与収入350万円・38歳 給与収入130万円・9歳・5歳）",
+          "members": [
+            {
+              "age": 42,
+              "sal": 3500000
+            },
+            {
+              "age": 38,
+              "sal": 1300000
+            },
+            {
+              "age": 9
+            },
+            {
+              "age": 5
+            }
+          ],
+          "opt": {
+            "preschool": true
+          },
+          "expect": 400200,
+          "expectParts": {
+            "iryo": 246000,
+            "shien": 88400,
+            "kaigo": 55400,
+            "kodomo": 10400
+          }
+        }
+      ]
+    },
+    "tokyo-13213": {
+      "name": "東村山市の国民健康保険税",
+      "short": "東村山市",
+      "scope": "東村山市",
+      "nendo": "令和8年度",
+      "kind": "保険税",
+      "rounding": "区分ごとに、所得割と均等割を足したあと100円未満切り捨て（東村山市の算定例）",
+      "round": {
+        "part": 100
+      },
+      "checkedAt": "2026-09-27",
+      "parts": [
+        {
+          "id": "iryo",
+          "label": "医療分",
+          "rate": 6850,
+          "kintou": 41900,
+          "byodo": 0,
+          "cap": 670000
+        },
+        {
+          "id": "shien",
+          "label": "後期高齢者支援金分",
+          "rate": 2400,
+          "kintou": 14500,
+          "byodo": 0,
+          "cap": 260000
+        },
+        {
+          "id": "kaigo",
+          "label": "介護分",
+          "rate": 2250,
+          "kintou": 16500,
+          "byodo": 0,
+          "cap": 170000,
+          "ages": [
+            40,
+            64
+          ]
+        },
+        {
+          "id": "kodomo",
+          "label": "子ども・子育て支援金分",
+          "rate": 310,
+          "kintou": 1922,
+          "kintou18": 96,
+          "byodo": 0,
+          "cap": 30000,
+          "adultsOnly": true,
+          "kintouNote": "均等割1,922円（18歳未満は全額軽減）＋18歳以上均等割96円＝18歳以上1人あたり2,018円"
+        }
+      ],
+      "sources": [
+        {
+          "name": "東京都保健医療局「令和８年度国民健康保険料（税）率等の状況」（令和8年4月1日現在・市町村）",
+          "url": "https://www.hokeniryo.metro.tokyo.lg.jp/documents/d/hokeniryo/shicyouson_20260518-pdf"
+        },
+        {
+          "name": "東村山市「国民健康保険税について」（令和8年度の計算方法）",
+          "url": "https://www.city.higashimurayama.tokyo.jp/kurashi/zei/kokuho/hoken/hokenzei/kokuhozei.html"
+        },
+        {
+          "name": "東村山市「国民健康保険税はどのように計算するのですか。」（令和8年度の算定例10件）",
+          "url": "https://www.city.higashimurayama.tokyo.jp/faq/kurashi/zei/kokuho/kokuminkenkohokenzei/hokenzeikeisan.html"
+        }
+      ],
+      "checks": [
+        {
+          "src": "東村山市の算定例（45歳 単身 給与収入500万円）",
+          "members": [
+            {
+              "age": 45,
+              "sal": 5000000
+            }
+          ],
+          "expect": 444500,
+          "expectParts": {
+            "iryo": 256300,
+            "shien": 89600,
+            "kaigo": 86900,
+            "kodomo": 11700
+          }
+        },
+        {
+          "src": "東村山市の算定例（25歳 単身 給与収入125万円・5割軽減）",
+          "members": [
+            {
+              "age": 25,
+              "sal": 1250000
+            }
+          ],
+          "expect": 45300,
+          "expectLv": 5,
+          "expectParts": {
+            "iryo": 32500,
+            "shien": 11300,
+            "kaigo": 0,
+            "kodomo": 1500
+          }
+        },
+        {
+          "src": "東村山市の算定例（20歳 単身 所得0円・7割軽減）",
+          "members": [
+            {
+              "age": 20
+            }
+          ],
+          "expect": 17400,
+          "expectLv": 7,
+          "expectParts": {
+            "iryo": 12500,
+            "shien": 4300,
+            "kaigo": 0,
+            "kodomo": 600
+          }
+        },
+        {
+          "src": "東村山市の算定例（41歳 給与収入500万円・36歳 給与収入300万円）",
+          "members": [
+            {
+              "age": 41,
+              "sal": 5000000
+            },
+            {
+              "age": 36,
+              "sal": 3000000
+            }
+          ],
+          "expect": 654800,
+          "expectParts": {
+            "iryo": 407100,
+            "shien": 142200,
+            "kaigo": 86900,
+            "kodomo": 18600
+          }
+        },
+        {
+          "src": "東村山市の算定例（50歳 給与収入500万円・48歳 所得0円）",
+          "members": [
+            {
+              "age": 50,
+              "sal": 5000000
+            },
+            {
+              "age": 48
+            }
+          ],
+          "expect": 519400,
+          "expectParts": {
+            "iryo": 298200,
+            "shien": 104100,
+            "kaigo": 103400,
+            "kodomo": 13700
+          }
+        },
+        {
+          "src": "東村山市の算定例（23歳 給与収入230万円・20歳 所得0円・2割軽減）",
+          "members": [
+            {
+              "age": 23,
+              "sal": 2300000
+            },
+            {
+              "age": 20
+            }
+          ],
+          "expect": 198500,
+          "expectLv": 2,
+          "expectParts": {
+            "iryo": 142300,
+            "shien": 49600,
+            "kaigo": 0,
+            "kodomo": 6600
+          }
+        },
+        {
+          "src": "東村山市の算定例（45歳 給与収入250万円・38歳・8歳・5歳・5割軽減。子ども分の欄は別の例の写しの誤記で、合計の行を使う）",
+          "members": [
+            {
+              "age": 45,
+              "sal": 2500000
+            },
+            {
+              "age": 38
+            },
+            {
+              "age": 8
+            },
+            {
+              "age": 5
+            }
+          ],
+          "opt": {
+            "preschool": true
+          },
+          "expect": 255200,
+          "expectLv": 5,
+          "expectParts": {
+            "iryo": 158200,
+            "shien": 55100,
+            "kaigo": 36100
+          }
+        },
+        {
+          "src": "東村山市の算定例（70歳 単身 年金収入240万円）",
+          "members": [
+            {
+              "age": 70,
+              "pen": 2400000
+            }
+          ],
+          "expect": 141400,
+          "expectParts": {
+            "iryo": 101400,
+            "shien": 35300,
+            "kaigo": 0,
+            "kodomo": 4700
+          }
+        },
+        {
+          "src": "東村山市の算定例（66歳 単身 給与所得50万円・年金所得0円・5割軽減）",
+          "members": [
+            {
+              "age": 66,
+              "inc": 500000,
+              "worker": true
+            }
+          ],
+          "expect": 35800,
+          "expectLv": 5,
+          "expectParts": {
+            "iryo": 25700,
+            "shien": 8900,
+            "kaigo": 0,
+            "kodomo": 1200
+          }
+        },
+        {
+          "src": "東村山市の算定例（73歳 年金収入240万円・67歳 年金収入160万円・2割軽減）",
+          "members": [
+            {
+              "age": 73,
+              "pen": 2400000
+            },
+            {
+              "age": 67,
+              "pen": 1600000
+            }
+          ],
+          "expect": 183200,
+          "expectLv": 2,
+          "expectParts": {
+            "iryo": 131400,
+            "shien": 45700,
+            "kaigo": 0,
+            "kodomo": 6100
+          }
+        }
+      ]
+    },
+    "tokyo-13214": {
+      "name": "国分寺市の国民健康保険税",
+      "short": "国分寺市",
+      "scope": "国分寺市",
+      "nendo": "令和8年度",
+      "kind": "保険税",
+      "rounding": "区分ごとに100円未満切り捨て（国分寺市の概算早見表の額と一致）",
+      "round": {
+        "part": 100
+      },
+      "checkedAt": "2026-09-27",
+      "parts": [
+        {
+          "id": "iryo",
+          "label": "医療分",
+          "rate": 6530,
+          "kintou": 32200,
+          "byodo": 0,
+          "cap": 670000
+        },
+        {
+          "id": "shien",
+          "label": "後期高齢者支援金分",
+          "rate": 2460,
+          "kintou": 14600,
+          "byodo": 0,
+          "cap": 260000
+        },
+        {
+          "id": "kaigo",
+          "label": "介護分",
+          "rate": 2270,
+          "kintou": 16300,
+          "byodo": 0,
+          "cap": 170000,
+          "ages": [
+            40,
+            64
+          ]
+        },
+        {
+          "id": "kodomo",
+          "label": "子ども・子育て支援金分",
+          "rate": 300,
+          "kintou": 1881,
+          "kintou18": 78,
+          "byodo": 0,
+          "cap": 30000,
+          "adultsOnly": true,
+          "kintouNote": "均等割1,881円（18歳未満は全額軽減）＋18歳以上均等割78円＝18歳以上1人あたり1,959円"
+        }
+      ],
+      "sources": [
+        {
+          "name": "東京都保健医療局「令和８年度国民健康保険料（税）率等の状況」（令和8年4月1日現在・市町村）",
+          "url": "https://www.hokeniryo.metro.tokyo.lg.jp/documents/d/hokeniryo/shicyouson_20260518-pdf"
+        },
+        {
+          "name": "国分寺市「令和8年度国民健康保険税率を改定します」",
+          "url": "https://www.city.kokubunji.tokyo.jp/kenkou-fukushi/iryou/1011822/1019962/index.html"
+        },
+        {
+          "name": "国分寺市「令和８年度 国分寺市国民健康保険税 概算早見表」（PDF・加入者1人あたり・軽減前）",
+          "url": "https://www.city.kokubunji.tokyo.jp/_res/projects/default_project/_page_/001/033/299/r8gaisan.pdf"
+        }
+      ],
+      "checks": [
+        {
+          "src": "国分寺市の概算早見表（総所得金額0円・介護なし・軽減前）",
+          "members": [
+            {
+              "age": 30,
+              "inc": 0
+            }
+          ],
+          "opt": {
+            "lv": 0
+          },
+          "expect": 48700
+        },
+        {
+          "src": "国分寺市の概算早見表（総所得金額0円・介護あり・軽減前）",
+          "members": [
+            {
+              "age": 45,
+              "inc": 0
+            }
+          ],
+          "opt": {
+            "lv": 0
+          },
+          "expect": 65000
+        },
+        {
+          "src": "国分寺市の概算早見表（総所得金額200万円・介護なし）",
+          "members": [
+            {
+              "age": 30,
+              "inc": 2000000
+            }
+          ],
+          "opt": {
+            "lv": 0
+          },
+          "expect": 194500
+        },
+        {
+          "src": "国分寺市の概算早見表（総所得金額300万円・介護あり）",
+          "members": [
+            {
+              "age": 45,
+              "inc": 3000000
+            }
+          ],
+          "opt": {
+            "lv": 0
+          },
+          "expect": 362000
+        },
+        {
+          "src": "国分寺市の概算早見表（総所得金額725万円・介護あり＝介護分が上限）",
+          "members": [
+            {
+              "age": 45,
+              "inc": 7250000
+            }
+          ],
+          "opt": {
+            "lv": 0
+          },
+          "expect": 852200
+        },
+        {
+          "src": "国分寺市の概算早見表（総所得金額1,050万円・介護あり＝全区分が上限）",
+          "members": [
+            {
+              "age": 45,
+              "inc": 10500000
+            }
+          ],
+          "opt": {
+            "lv": 0
+          },
+          "expect": 1130000
+        }
+      ]
+    },
+    "tokyo-13215": {
+      "name": "国立市の国民健康保険税",
+      "short": "国立市",
+      "scope": "国立市",
+      "nendo": "令和8年度",
+      "kind": "保険税",
+      "rounding": "各区分の税額の100円未満切り捨て（国立市のページ）",
+      "round": {
+        "part": 100
+      },
+      "checkedAt": "2026-09-27",
+      "parts": [
+        {
+          "id": "iryo",
+          "label": "医療分",
+          "rate": 5700,
+          "kintou": 23500,
+          "byodo": 0,
+          "cap": 670000
+        },
+        {
+          "id": "shien",
+          "label": "後期高齢者支援金分",
+          "rate": 1950,
+          "kintou": 11200,
+          "byodo": 0,
+          "cap": 260000
+        },
+        {
+          "id": "kaigo",
+          "label": "介護分",
+          "rate": 1950,
+          "kintou": 12000,
+          "byodo": 0,
+          "cap": 170000,
+          "ages": [
+            40,
+            64
+          ]
+        },
+        {
+          "id": "kodomo",
+          "label": "子ども・子育て支援金分",
+          "rate": 290,
+          "kintou": 1835,
+          "kintou18": 96,
+          "byodo": 0,
+          "cap": 30000,
+          "adultsOnly": true,
+          "kintouNote": "均等割1,835円（18歳未満は全額軽減）＋18歳以上均等割96円＝18歳以上1人あたり1,931円"
+        }
+      ],
+      "sources": [
+        {
+          "name": "東京都保健医療局「令和８年度国民健康保険料（税）率等の状況」（令和8年4月1日現在・市町村）",
+          "url": "https://www.hokeniryo.metro.tokyo.lg.jp/documents/d/hokeniryo/shicyouson_20260518-pdf"
+        },
+        {
+          "name": "国立市「国民健康保険税のしくみ・計算方法について」",
+          "url": "https://www.city.kunitachi.tokyo.jp/soshiki/Dept03/Div04/Sec01/gyomu/0116/kokuhozei/1542343600065.html"
+        },
+        {
+          "name": "国立市「国民健康保険税額の早見表（めやす）」（PDF・ひとり世帯・軽減前）",
+          "url": "https://www.city.kunitachi.tokyo.jp/material/files/group/33/hayamihyo.pdf"
+        }
+      ],
+      "checks": [
+        {
+          "src": "国立市の早見表（給与収入150万円・40〜64歳・軽減前）",
+          "members": [
+            {
+              "age": 45,
+              "sal": 1500000
+            }
+          ],
+          "opt": {
+            "lv": 0
+          },
+          "expect": 89900
+        },
+        {
+          "src": "国立市の早見表（給与収入400万円・介護なし）",
+          "members": [
+            {
+              "age": 30,
+              "sal": 4000000
+            }
+          ],
+          "opt": {
+            "lv": 0
+          },
+          "expect": 221500
+        },
+        {
+          "src": "国立市の早見表（給与収入1,000万円・40〜64歳）",
+          "members": [
+            {
+              "age": 45,
+              "sal": 10000000
+            }
+          ],
+          "opt": {
+            "lv": 0
+          },
+          "expect": 802000
+        },
+        {
+          "src": "国立市の早見表（年金収入250万円・65歳以上・軽減前）",
+          "members": [
+            {
+              "age": 70,
+              "pen": 2500000
+            }
+          ],
+          "opt": {
+            "lv": 0
+          },
+          "expect": 113500
+        },
+        {
+          "src": "国立市の早見表（年金収入200万円・64歳以下）",
+          "members": [
+            {
+              "age": 60,
+              "pen": 2000000
+            }
+          ],
+          "opt": {
+            "lv": 0
+          },
+          "expect": 127200
+        },
+        {
+          "src": "国立市の早見表（所得300万円・40〜64歳）",
+          "members": [
+            {
+              "age": 45,
+              "inc": 3000000
+            }
+          ],
+          "opt": {
+            "lv": 0
+          },
+          "expect": 302600
+        },
+        {
+          "src": "国立市の早見表（所得43万円まで・介護なし・軽減前）",
+          "members": [
+            {
+              "age": 30,
+              "inc": 430000
+            }
+          ],
+          "opt": {
+            "lv": 0
+          },
+          "expect": 36600
+        }
+      ]
+    },
+    "tokyo-13221": {
+      "name": "清瀬市の国民健康保険税",
+      "short": "清瀬市",
+      "scope": "清瀬市",
+      "nendo": "令和8年度",
+      "kind": "保険税",
+      "rounding": "区分ごとに、所得割と均等割を足したあと100円未満切り捨て（清瀬市の計算例）",
+      "round": {
+        "part": 100
+      },
+      "checkedAt": "2026-09-27",
+      "parts": [
+        {
+          "id": "iryo",
+          "label": "医療分",
+          "rate": 5920,
+          "kintou": 28000,
+          "byodo": 0,
+          "cap": 670000
+        },
+        {
+          "id": "shien",
+          "label": "後期高齢者支援金分",
+          "rate": 2010,
+          "kintou": 10000,
+          "byodo": 0,
+          "cap": 260000
+        },
+        {
+          "id": "kaigo",
+          "label": "介護分",
+          "rate": 1900,
+          "kintou": 13000,
+          "byodo": 0,
+          "cap": 170000,
+          "ages": [
+            40,
+            64
+          ]
+        },
+        {
+          "id": "kodomo",
+          "label": "子ども・子育て支援金分",
+          "rate": 300,
+          "kintou": 1900,
+          "kintou18": 100,
+          "byodo": 0,
+          "cap": 30000,
+          "adultsOnly": true,
+          "kintouNote": "均等割1,900円（18歳未満は全額軽減）＋18歳以上均等割100円＝18歳以上1人あたり2,000円"
+        }
+      ],
+      "sources": [
+        {
+          "name": "東京都保健医療局「令和８年度国民健康保険料（税）率等の状況」（令和8年4月1日現在・市町村）",
+          "url": "https://www.hokeniryo.metro.tokyo.lg.jp/documents/d/hokeniryo/shicyouson_20260518-pdf"
+        },
+        {
+          "name": "清瀬市「国民健康保険税の計算方法」（計算例2つ）",
+          "url": "https://www.city.kiyose.lg.jp/kurashi/kokuhonenkin/kokuminkenkouhoken/1003675/1003681.html"
+        },
+        {
+          "name": "清瀬市「よくある質問集」（単身・収入なしの年額）",
+          "url": "https://www.city.kiyose.lg.jp/kurashi/kokuhonenkin/kokuminkenkouhoken/1003675/1012650/index.html"
+        }
+      ],
+      "checks": [
+        {
+          "src": "清瀬市の計算例1（単身・介護分なし・営業所得300万円）",
+          "members": [
+            {
+              "age": 35,
+              "inc": 3000000
+            }
+          ],
+          "expect": 251400,
+          "expectParts": {
+            "iryo": 180100,
+            "shien": 61600,
+            "kaigo": 0,
+            "kodomo": 9700
+          }
+        },
+        {
+          "src": "清瀬市の計算例2（給与収入300万円・給与収入90万円・子・介護分なし）",
+          "members": [
+            {
+              "age": 35,
+              "sal": 3000000
+            },
+            {
+              "age": 33,
+              "sal": 900000
+            },
+            {
+              "age": 10
+            }
+          ],
+          "expect": 248700,
+          "expectParts": {
+            "iryo": 178100,
+            "shien": 61900,
+            "kaigo": 0,
+            "kodomo": 8700
+          }
+        },
+        {
+          "src": "清瀬市のよくある質問（単身・40〜64歳・収入なし・申告なし＝軽減なし）",
+          "members": [
+            {
+              "age": 45
+            }
+          ],
+          "opt": {
+            "lv": 0
+          },
+          "expect": 53000
+        },
+        {
+          "src": "清瀬市のよくある質問（単身・40〜64歳・収入なし・申告あり＝7割軽減）",
+          "members": [
+            {
+              "age": 45
+            }
+          ],
+          "expect": 15900,
+          "expectLv": 7
+        }
+      ]
+    },
+    "tokyo-13222": {
+      "name": "東久留米市の国民健康保険税",
+      "short": "東久留米市",
+      "scope": "東久留米市",
+      "nendo": "令和8年度",
+      "kind": "保険税",
+      "rounding": "区分ごとに100円未満切り捨て（東久留米市の計算例）",
+      "round": {
+        "part": 100
+      },
+      "checkedAt": "2026-09-27",
+      "parts": [
+        {
+          "id": "iryo",
+          "label": "医療分",
+          "rate": 5920,
+          "kintou": 39300,
+          "byodo": 0,
+          "cap": 670000
+        },
+        {
+          "id": "shien",
+          "label": "後期高齢者支援金分",
+          "rate": 2230,
+          "kintou": 13600,
+          "byodo": 0,
+          "cap": 260000
+        },
+        {
+          "id": "kaigo",
+          "label": "介護分",
+          "rate": 1990,
+          "kintou": 14700,
+          "byodo": 0,
+          "cap": 170000,
+          "ages": [
+            40,
+            64
+          ]
+        },
+        {
+          "id": "kodomo",
+          "label": "子ども・子育て支援金分",
+          "rate": 300,
+          "kintou": 1900,
+          "kintou18": 200,
+          "byodo": 0,
+          "cap": 30000,
+          "adultsOnly": true,
+          "kintouNote": "均等割1,900円（18歳未満は全額軽減）＋18歳以上均等割200円＝18歳以上1人あたり2,100円"
+        }
+      ],
+      "sources": [
+        {
+          "name": "東京都保健医療局「令和８年度国民健康保険料（税）率等の状況」（令和8年4月1日現在・市町村）",
+          "url": "https://www.hokeniryo.metro.tokyo.lg.jp/documents/d/hokeniryo/shicyouson_20260518-pdf"
+        },
+        {
+          "name": "東久留米市「国保税の計算方法」（令和8年度分の計算例）",
+          "url": "https://www.city.higashikurume.lg.jp/kurashi/zei/kokuho/1019338/1019505.html"
+        }
+      ],
+      "checks": [
+        {
+          "src": "東久留米市の計算例（45歳 営業所得230万円・37歳 給与収入125万円・12歳）",
+          "members": [
+            {
+              "age": 45,
+              "inc": 2300000
+            },
+            {
+              "age": 37,
+              "sal": 1250000
+            },
+            {
+              "age": 12
+            }
+          ],
+          "expect": 387000,
+          "expectParts": {
+            "iryo": 238600,
+            "shien": 86200,
+            "kaigo": 51900,
+            "kodomo": 10300
+          }
+        }
+      ]
+    },
+    "tokyo-13223": {
+      "name": "武蔵村山市の国民健康保険税",
+      "short": "武蔵村山市",
+      "scope": "武蔵村山市",
+      "nendo": "令和8年度",
+      "kind": "保険税",
+      "rounding": "区分ごとに100円未満切り捨て（武蔵村山市の計算例）",
+      "round": {
+        "part": 100
+      },
+      "checkedAt": "2026-09-27",
+      "parts": [
+        {
+          "id": "iryo",
+          "label": "医療分",
+          "rate": 6940,
+          "kintou": 35200,
+          "byodo": 0,
+          "cap": 670000
+        },
+        {
+          "id": "shien",
+          "label": "後期高齢者支援金分",
+          "rate": 2210,
+          "kintou": 12500,
+          "byodo": 0,
+          "cap": 260000
+        },
+        {
+          "id": "kaigo",
+          "label": "介護分",
+          "rate": 1760,
+          "kintou": 13000,
+          "byodo": 0,
+          "cap": 170000,
+          "ages": [
+            40,
+            64
+          ]
+        },
+        {
+          "id": "kodomo",
+          "label": "子ども・子育て支援金分",
+          "rate": 310,
+          "kintou": 1800,
+          "kintou18": 200,
+          "byodo": 0,
+          "cap": 30000,
+          "adultsOnly": true,
+          "kintouNote": "均等割1,800円（18歳未満は全額軽減）＋18歳以上均等割200円＝18歳以上1人あたり2,000円"
+        }
+      ],
+      "sources": [
+        {
+          "name": "東京都保健医療局「令和８年度国民健康保険料（税）率等の状況」（令和8年4月1日現在・市町村）",
+          "url": "https://www.hokeniryo.metro.tokyo.lg.jp/documents/d/hokeniryo/shicyouson_20260518-pdf"
+        },
+        {
+          "name": "武蔵村山市「国民健康保険税（国保税）」（計算例つき）",
+          "url": "https://www.city.musashimurayama.lg.jp/kurashi/hoken/kenkouhoken/1000186.html"
+        }
+      ],
+      "checks": [
+        {
+          "src": "武蔵村山市の計算例（41歳 営業所得400万円・38歳・10歳・8歳）",
+          "members": [
+            {
+              "age": 41,
+              "inc": 4000000
+            },
+            {
+              "age": 38
+            },
+            {
+              "age": 10
+            },
+            {
+              "age": 8
+            }
+          ],
+          "expect": 608100,
+          "expectParts": {
+            "iryo": 388500,
+            "shien": 128800,
+            "kaigo": 75800,
+            "kodomo": 15000
+          }
+        }
+      ]
+    },
+    "tokyo-13224": {
+      "name": "多摩市の国民健康保険税",
+      "short": "多摩市",
+      "scope": "多摩市",
+      "nendo": "令和8年度",
+      "kind": "保険税",
+      "rounding": "医療分・後期分・介護分・子ども分ごとに合算し、100円未満切り捨て（多摩市のページ）",
+      "round": {
+        "part": 100
+      },
+      "checkedAt": "2026-09-27",
+      "parts": [
+        {
+          "id": "iryo",
+          "label": "医療分",
+          "rate": 6280,
+          "kintou": 30800,
+          "byodo": 0,
+          "cap": 670000
+        },
+        {
+          "id": "shien",
+          "label": "後期高齢者支援金分",
+          "rate": 2040,
+          "kintou": 12600,
+          "byodo": 0,
+          "cap": 260000
+        },
+        {
+          "id": "kaigo",
+          "label": "介護分",
+          "rate": 1820,
+          "kintou": 12900,
+          "byodo": 0,
+          "cap": 170000,
+          "ages": [
+            40,
+            64
+          ]
+        },
+        {
+          "id": "kodomo",
+          "label": "子ども・子育て支援金分",
+          "rate": 300,
+          "kintou": 1800,
+          "kintou18": 100,
+          "byodo": 0,
+          "cap": 30000,
+          "adultsOnly": true,
+          "kintouNote": "均等割1,800円（18歳未満は全額軽減）＋18歳以上均等割100円＝18歳以上1人あたり1,900円"
+        }
+      ],
+      "sources": [
+        {
+          "name": "東京都保健医療局「令和８年度国民健康保険料（税）率等の状況」（令和8年4月1日現在・市町村）",
+          "url": "https://www.hokeniryo.metro.tokyo.lg.jp/documents/d/hokeniryo/shicyouson_20260518-pdf"
+        },
+        {
+          "name": "多摩市「国民健康保険税額の計算と各種申請手続き」（1人当たりの均等割額と軽減後の額の表）",
+          "url": "https://www.city.tama.lg.jp/kurashi/kokuho/hokenzei/1002017.html"
+        },
+        {
+          "name": "多摩市「納入通知書の説明」（PDF・見本の年額）",
+          "url": "https://www.city.tama.lg.jp/_res/projects/default_project/_page_/001/006/836/ze.pdf"
+        }
+      ],
+      "checks": [
+        {
+          "src": "多摩市の納入通知書の見本の前回決定額（1人・所得0円・軽減なし）＝計算例は公表されていないので見本の額で合わせた",
+          "members": [
+            {
+              "age": 30
+            }
+          ],
+          "opt": {
+            "lv": 0
+          },
+          "expect": 45300,
+          "expectParts": {
+            "iryo": 30800,
+            "shien": 12600,
+            "kaigo": 0,
+            "kodomo": 1900
+          }
+        },
+        {
+          "src": "多摩市の納入通知書の見本の今回決定額（2人・所得0円・2割軽減）",
+          "members": [
+            {
+              "age": 30
+            },
+            {
+              "age": 30
+            }
+          ],
+          "opt": {
+            "lv": 2
+          },
+          "expect": 72300,
+          "expectParts": {
+            "iryo": 49200,
+            "shien": 20100,
+            "kaigo": 0,
+            "kodomo": 3000
+          }
+        }
+      ]
+    },
+    "tokyo-13203": {
+      "name": "武蔵野市の国民健康保険税",
+      "short": "武蔵野市",
+      "scope": "武蔵野市",
+      "nendo": "令和8年度",
+      "kind": "保険税",
+      "rounding": "区分ごとに100円未満切り捨て（武蔵野市の説明と、運営協議会の資料の額）",
+      "round": {
+        "part": 100
+      },
+      "checkedAt": "2026-09-27",
+      "parts": [
+        {
+          "id": "iryo",
+          "label": "医療分",
+          "rate": 5790,
+          "kintou": 33000,
+          "byodo": 0,
+          "cap": 660000
+        },
+        {
+          "id": "shien",
+          "label": "後期高齢者支援金分",
+          "rate": 2090,
+          "kintou": 12500,
+          "byodo": 0,
+          "cap": 260000
+        },
+        {
+          "id": "kaigo",
+          "label": "介護分",
+          "rate": 1840,
+          "kintou": 15000,
+          "byodo": 0,
+          "cap": 170000,
+          "ages": [
+            40,
+            64
+          ]
+        },
+        {
+          "id": "kodomo",
+          "label": "子ども・子育て支援金分",
+          "rate": 300,
+          "kintou": 1800,
+          "kintou18": 100,
+          "byodo": 0,
+          "cap": 30000,
+          "adultsOnly": true,
+          "kintouNote": "均等割1,800円（18歳未満は全額軽減）＋18歳以上均等割100円＝18歳以上1人あたり1,900円"
+        }
+      ],
+      "sources": [
+        {
+          "name": "東京都保健医療局「令和８年度国民健康保険料（税）率等の状況」（令和8年4月1日現在・市町村）",
+          "url": "https://www.hokeniryo.metro.tokyo.lg.jp/documents/d/hokeniryo/shicyouson_20260518-pdf"
+        },
+        {
+          "name": "武蔵野市「国民健康保険税について」",
+          "url": "https://www.city.musashino.lg.jp/kurashi_tetsuzuki/kokuminkenkouhoken_kokuminnenkin/kokuminkenkohoken/1052169/1004710.html"
+        },
+        {
+          "name": "武蔵野市 国民健康保険運営協議会（令和8年2月4日）資料2-3「令和8年度税率改定案（最終案）を適用した場合のモデル世帯・所得層別の影響額」（最終案＝確定した税率と同じ）",
+          "url": "https://www.city.musashino.lg.jp/_res/projects/default_project/_page_/001/053/479/R7_4_shiryo2_3_modelbetsu.pdf"
+        }
+      ],
+      "checks": [
+        {
+          "src": "武蔵野市の運営協議会の資料のモデルA①（30代単身・所得43万円・7割軽減）",
+          "members": [
+            {
+              "age": 35,
+              "inc": 430000,
+              "worker": true
+            }
+          ],
+          "expect": 14100,
+          "expectLv": 7
+        },
+        {
+          "src": "同 モデルA②（30代単身・所得72万円・5割軽減）",
+          "members": [
+            {
+              "age": 35,
+              "inc": 720000,
+              "worker": true
+            }
+          ],
+          "expect": 47300,
+          "expectLv": 5
+        },
+        {
+          "src": "同 モデルA③（30代単身・所得96.5万円・2割軽減）",
+          "members": [
+            {
+              "age": 35,
+              "inc": 965000,
+              "worker": true
+            }
+          ],
+          "expect": 81500,
+          "expectLv": 2
+        },
+        {
+          "src": "同 モデルA④（30代単身・所得300万円）",
+          "members": [
+            {
+              "age": 35,
+              "inc": 3000000,
+              "worker": true
+            }
+          ],
+          "expect": 257600
+        },
+        {
+          "src": "同 モデルA⑦（30代単身・所得1,227.3万円・限度額）",
+          "members": [
+            {
+              "age": 35,
+              "inc": 12273000,
+              "worker": true
+            }
+          ],
+          "expect": 950000
+        },
+        {
+          "src": "同 モデルB⑤（40〜50代夫婦＋子2人・所得600万円）",
+          "members": [
+            {
+              "age": 45,
+              "inc": 6000000,
+              "worker": true
+            },
+            {
+              "age": 45
+            },
+            {
+              "age": 12
+            },
+            {
+              "age": 9
+            }
+          ],
+          "expect": 773800
+        },
+        {
+          "src": "同 モデルB⑦（40〜50代夫婦＋子2人・所得1,047.8万円・限度額）",
+          "members": [
+            {
+              "age": 45,
+              "inc": 10478000,
+              "worker": true
+            },
+            {
+              "age": 45
+            },
+            {
+              "age": 12
+            },
+            {
+              "age": 9
+            }
+          ],
+          "expect": 1120000
+        },
+        {
+          "src": "同 モデルC①（70代夫婦・年金の所得43万円・7割軽減）",
+          "members": [
+            {
+              "age": 72,
+              "inc": 430000,
+              "incPen": true
+            },
+            {
+              "age": 72
+            }
+          ],
+          "expect": 28400,
+          "expectLv": 7
+        },
+        {
+          "src": "同 モデルC②（70代夫婦・年金の所得101万円・5割軽減）",
+          "members": [
+            {
+              "age": 72,
+              "inc": 1010000,
+              "incPen": true
+            },
+            {
+              "age": 72
+            }
+          ],
+          "expect": 94700,
+          "expectLv": 5
+        },
+        {
+          "src": "同 モデルC③（70代夫婦・年金の所得150万円・2割軽減）",
+          "members": [
+            {
+              "age": 72,
+              "inc": 1500000,
+              "incPen": true
+            },
+            {
+              "age": 72
+            }
+          ],
+          "expect": 163200,
+          "expectLv": 2
+        }
+      ]
+    },
+    "tokyo-13204": {
+      "name": "三鷹市の国民健康保険税",
+      "short": "三鷹市",
+      "scope": "三鷹市",
+      "nendo": "令和8年度",
+      "kind": "保険税",
+      "rounding": "区分ごとに100円未満切り捨て（三鷹市の計算例）",
+      "round": {
+        "part": 100
+      },
+      "checkedAt": "2026-09-27",
+      "parts": [
+        {
+          "id": "iryo",
+          "label": "医療分",
+          "rate": 6100,
+          "kintou": 29000,
+          "byodo": 0,
+          "cap": 660000
+        },
+        {
+          "id": "shien",
+          "label": "後期高齢者支援金分",
+          "rate": 2300,
+          "kintou": 11800,
+          "byodo": 0,
+          "cap": 260000
+        },
+        {
+          "id": "kaigo",
+          "label": "介護分",
+          "rate": 1600,
+          "kintou": 13400,
+          "byodo": 0,
+          "cap": 170000,
+          "ages": [
+            40,
+            64
+          ]
+        },
+        {
+          "id": "kodomo",
+          "label": "子ども・子育て支援金分",
+          "rate": 300,
+          "kintou": 1846,
+          "kintou18": 98,
+          "byodo": 0,
+          "cap": 30000,
+          "adultsOnly": true,
+          "kintouNote": "均等割1,846円（18歳未満は全額軽減）＋18歳以上均等割98円＝18歳以上1人あたり1,944円"
+        }
+      ],
+      "sources": [
+        {
+          "name": "東京都保健医療局「令和８年度国民健康保険料（税）率等の状況」（令和8年4月1日現在・市町村）",
+          "url": "https://www.hokeniryo.metro.tokyo.lg.jp/documents/d/hokeniryo/shicyouson_20260518-pdf"
+        },
+        {
+          "name": "三鷹市「国民健康保険税」",
+          "url": "https://www.city.mitaka.lg.jp/c_service/000/000431.html"
+        },
+        {
+          "name": "三鷹市「国民健康保険税の計算例」（令和7年度の例。医療分・支援分・介護分の税率は令和8年度も同じ）",
+          "url": "https://www.city.mitaka.lg.jp/c_service/020/020149.html"
+        },
+        {
+          "name": "三鷹市「納税者のみなさまへ」（令和8年度・医療分・支援分・介護分の改定なし）",
+          "url": "https://www.city.mitaka.lg.jp/c_service/114/attached/attach_114890_1.pdf"
+        }
+      ],
+      "checks": [
+        {
+          "src": "三鷹市の計算例1（42歳 給与収入500万円・38歳・子2人）の医療分・支援分・介護分（令和7年度の例・この3区分の税率は令和8年度も同じ）",
+          "members": [
+            {
+              "age": 42,
+              "sal": 5000000
+            },
+            {
+              "age": 38
+            },
+            {
+              "age": 10
+            },
+            {
+              "age": 8
+            }
+          ],
+          "expectParts": {
+            "iryo": 306900,
+            "shien": 119100,
+            "kaigo": 63400
+          }
+        },
+        {
+          "src": "三鷹市の計算例2（71歳 年金収入290万円・69歳 年金収入72万円）の医療分・支援分（同）",
+          "members": [
+            {
+              "age": 71,
+              "pen": 2900000
+            },
+            {
+              "age": 69,
+              "pen": 720000
+            }
+          ],
+          "expectParts": {
+            "iryo": 141500,
+            "shien": 55100
+          }
+        }
+      ]
+    },
+    "tokyo-13205": {
+      "name": "青梅市の国民健康保険税",
+      "short": "青梅市",
+      "scope": "青梅市",
+      "nendo": "令和8年度",
+      "kind": "保険税",
+      "rounding": "区分ごとに100円未満切り捨て（青梅市の計算例）",
+      "round": {
+        "part": 100
+      },
+      "checkedAt": "2026-09-27",
+      "parts": [
+        {
+          "id": "iryo",
+          "label": "医療分",
+          "rate": 6370,
+          "kintou": 34400,
+          "byodo": 0,
+          "cap": 670000
+        },
+        {
+          "id": "shien",
+          "label": "後期高齢者支援金分",
+          "rate": 2170,
+          "kintou": 12700,
+          "byodo": 0,
+          "cap": 260000
+        },
+        {
+          "id": "kaigo",
+          "label": "介護分",
+          "rate": 2030,
+          "kintou": 13800,
+          "byodo": 0,
+          "cap": 170000,
+          "ages": [
+            40,
+            64
+          ]
+        },
+        {
+          "id": "kodomo",
+          "label": "子ども・子育て支援金分",
+          "rate": 310,
+          "kintou": 1926,
+          "kintou18": 88,
+          "byodo": 0,
+          "cap": 30000,
+          "adultsOnly": true,
+          "kintouNote": "均等割1,926円（18歳未満は全額軽減）＋18歳以上均等割88円＝18歳以上1人あたり2,014円"
+        }
+      ],
+      "sources": [
+        {
+          "name": "東京都保健医療局「令和８年度国民健康保険料（税）率等の状況」（令和8年4月1日現在・市町村）",
+          "url": "https://www.hokeniryo.metro.tokyo.lg.jp/documents/d/hokeniryo/shicyouson_20260518-pdf"
+        },
+        {
+          "name": "青梅市「国民健康保険税の決め方と納付方法」（計算例2つ）",
+          "url": "https://www.city.ome.tokyo.jp/soshiki/18/711.html"
+        }
+      ],
+      "checks": [
+        {
+          "src": "青梅市の計算例1（41歳 給与収入500万円・35歳・10歳・8歳）",
+          "members": [
+            {
+              "age": 41,
+              "sal": 5000000
+            },
+            {
+              "age": 35
+            },
+            {
+              "age": 10
+            },
+            {
+              "age": 8
+            }
+          ],
+          "expect": 546600,
+          "expectParts": {
+            "iryo": 336900,
+            "shien": 118700,
+            "kaigo": 77300,
+            "kodomo": 13700
+          }
+        },
+        {
+          "src": "青梅市の計算例2（72歳 年金収入240万円・68歳 年金収入30万円・2割軽減）",
+          "members": [
+            {
+              "age": 72,
+              "pen": 2400000
+            },
+            {
+              "age": 68,
+              "pen": 300000
+            }
+          ],
+          "expect": 155400,
+          "expectLv": 2,
+          "expectParts": {
+            "iryo": 110400,
+            "shien": 39100,
+            "kaigo": 0,
+            "kodomo": 5900
+          }
+        }
+      ]
+    },
+    "tokyo-13207": {
+      "name": "昭島市の国民健康保険税",
+      "short": "昭島市",
+      "scope": "昭島市",
+      "nendo": "令和8年度",
+      "kind": "保険税",
+      "rounding": "区分ごとに100円未満切り捨て（昭島市の計算例）",
+      "round": {
+        "part": 100
+      },
+      "checkedAt": "2026-09-27",
+      "parts": [
+        {
+          "id": "iryo",
+          "label": "医療分",
+          "rate": 5900,
+          "kintou": 28000,
+          "byodo": 0,
+          "cap": 670000,
+          "childHalf": true
+        },
+        {
+          "id": "shien",
+          "label": "後期高齢者支援金分",
+          "rate": 2250,
+          "kintou": 12000,
+          "byodo": 0,
+          "cap": 260000,
+          "childHalf": true
+        },
+        {
+          "id": "kaigo",
+          "label": "介護分",
+          "rate": 1700,
+          "kintou": 15000,
+          "byodo": 0,
+          "cap": 170000,
+          "ages": [
+            40,
+            64
+          ]
+        },
+        {
+          "id": "kodomo",
+          "label": "子ども・子育て支援金分",
+          "rate": 300,
+          "kintou": 1900,
+          "kintou18": 100,
+          "byodo": 0,
+          "cap": 30000,
+          "adultsOnly": true,
+          "kintouNote": "均等割1,900円（18歳未満は全額軽減）＋18歳以上均等割100円＝18歳以上1人あたり2,000円"
+        }
+      ],
+      "sources": [
+        {
+          "name": "東京都保健医療局「令和８年度国民健康保険料（税）率等の状況」（令和8年4月1日現在・市町村）",
+          "url": "https://www.hokeniryo.metro.tokyo.lg.jp/documents/d/hokeniryo/shicyouson_20260518-pdf"
+        },
+        {
+          "name": "昭島市「保険税の決めかた」（令和8年度の計算例）",
+          "url": "https://www.city.akishima.lg.jp/kurashi/kokuho/1002176/1002195/1002197.html"
+        },
+        {
+          "name": "昭島市「保険税の軽減と減免」（市独自の減免＝18歳未満の子の医療分・支援分の均等割を5割減額）",
+          "url": "https://www.city.akishima.lg.jp/kurashi/kokuho/1002176/1002195/1002199.html"
+        }
+      ],
+      "checks": [
+        {
+          "src": "昭島市の計算例（40歳代 所得300万円・40歳代・10歳・5歳。未就学児の軽減と市独自の子どもの減免つき）",
+          "members": [
+            {
+              "age": 45,
+              "inc": 3000000
+            },
+            {
+              "age": 43
+            },
+            {
+              "age": 10
+            },
+            {
+              "age": 5
+            }
+          ],
+          "opt": {
+            "preschool": true
+          },
+          "expect": 414700,
+          "expectParts": {
+            "iryo": 235600,
+            "shien": 93800,
+            "kaigo": 73600,
+            "kodomo": 11700
+          }
+        }
+      ]
+    },
+    "tokyo-13225": {
+      "name": "稲城市の国民健康保険税",
+      "short": "稲城市",
+      "scope": "稲城市",
+      "nendo": "令和8年度",
+      "kind": "保険税",
+      "rounding": "医療分・支援金分・子ども分・介護分ごとに100円未満切り捨て（稲城市の計算例）",
+      "round": {
+        "part": 100
+      },
+      "checkedAt": "2026-09-27",
+      "parts": [
+        {
+          "id": "iryo",
+          "label": "医療分",
+          "rate": 5650,
+          "kintou": 36800,
+          "byodo": 0,
+          "cap": 670000
+        },
+        {
+          "id": "shien",
+          "label": "後期高齢者支援金分",
+          "rate": 2210,
+          "kintou": 14400,
+          "byodo": 0,
+          "cap": 260000
+        },
+        {
+          "id": "kaigo",
+          "label": "介護分",
+          "rate": 2190,
+          "kintou": 13100,
+          "byodo": 0,
+          "cap": 170000,
+          "ages": [
+            40,
+            64
+          ]
+        },
+        {
+          "id": "kodomo",
+          "label": "子ども・子育て支援金分",
+          "rate": 300,
+          "kintou": 1820,
+          "kintou18": 110,
+          "byodo": 0,
+          "cap": 30000,
+          "adultsOnly": true,
+          "kintouNote": "均等割1,820円（18歳未満は全額軽減）＋18歳以上均等割110円＝18歳以上1人あたり1,930円"
+        }
+      ],
+      "sources": [
+        {
+          "name": "東京都保健医療局「令和８年度国民健康保険料（税）率等の状況」（令和8年4月1日現在・市町村）",
+          "url": "https://www.hokeniryo.metro.tokyo.lg.jp/documents/d/hokeniryo/shicyouson_20260518-pdf"
+        },
+        {
+          "name": "稲城市「国民健康保険税について」（令和8年度の計算例）",
+          "url": "https://www.city.inagi.tokyo.jp/kenko/kokuho/1003290/1012917.html"
+        }
+      ],
+      "checks": [
+        {
+          "src": "稲城市の計算例（50歳 所得300万円・45歳 所得150万円・22歳）",
+          "members": [
+            {
+              "age": 50,
+              "inc": 3000000
+            },
+            {
+              "age": 45,
+              "inc": 1500000
+            },
+            {
+              "age": 22
+            }
+          ],
+          "expect": 562200,
+          "expectParts": {
+            "iryo": 316000,
+            "shien": 123600,
+            "kaigo": 105900,
+            "kodomo": 16700
+          }
+        }
+      ]
+    },
+    "tokyo-13227": {
+      "name": "羽村市の国民健康保険税",
+      "short": "羽村市",
+      "scope": "羽村市",
+      "nendo": "令和8年度",
+      "kind": "保険税",
+      "rounding": "区分ごとに100円未満切り捨て（羽村市の運営協議会の資料の額と一致）",
+      "round": {
+        "part": 100
+      },
+      "checkedAt": "2026-09-27",
+      "parts": [
+        {
+          "id": "iryo",
+          "label": "医療分",
+          "rate": 6680,
+          "kintou": 29100,
+          "byodo": 0,
+          "cap": 670000
+        },
+        {
+          "id": "shien",
+          "label": "後期高齢者支援金分",
+          "rate": 2440,
+          "kintou": 12200,
+          "byodo": 0,
+          "cap": 260000
+        },
+        {
+          "id": "kaigo",
+          "label": "介護分",
+          "rate": 2240,
+          "kintou": 13900,
+          "byodo": 0,
+          "cap": 170000,
+          "ages": [
+            40,
+            64
+          ]
+        },
+        {
+          "id": "kodomo",
+          "label": "子ども・子育て支援金分",
+          "rate": 300,
+          "kintou": 1839,
+          "kintou18": 89,
+          "byodo": 0,
+          "cap": 30000,
+          "adultsOnly": true,
+          "kintouNote": "均等割1,839円（18歳未満は全額軽減）＋18歳以上均等割89円＝18歳以上1人あたり1,928円"
+        }
+      ],
+      "sources": [
+        {
+          "name": "東京都保健医療局「令和８年度国民健康保険料（税）率等の状況」（令和8年4月1日現在・市町村）",
+          "url": "https://www.hokeniryo.metro.tokyo.lg.jp/documents/d/hokeniryo/shicyouson_20260518-pdf"
+        },
+        {
+          "name": "羽村市「国民健康保険税について」",
+          "url": "https://www.city.hamura.tokyo.jp/0000001328.html"
+        },
+        {
+          "name": "羽村市 国民健康保険運営協議会（令和8年1月）参考資料「令和8年度 羽村市国民健康保険税適正化について」のモデルケース（改定案②＝確定した税率と同じ・子ども分を含まない）",
+          "url": "https://www.city.hamura.tokyo.jp/cmsfiles/contents/0000020/20672/sankoushiryou.pdf"
+        }
+      ],
+      "checks": [
+        {
+          "src": "羽村市の資料のモデル（40〜64歳 単身・所得0円・7割軽減）の医療＋後期＋介護",
+          "members": [
+            {
+              "age": 45
+            }
+          ],
+          "expectLv": 7,
+          "expectSum": {
+            "ids": [
+              "iryo",
+              "shien",
+              "kaigo"
+            ],
+            "yen": 16400
+          }
+        },
+        {
+          "src": "同（40〜64歳 単身・給与収入128.5万円・5割軽減）",
+          "members": [
+            {
+              "age": 45,
+              "sal": 1285000
+            }
+          ],
+          "expectLv": 5,
+          "expectSum": {
+            "ids": [
+              "iryo",
+              "shien",
+              "kaigo"
+            ],
+            "yen": 50800
+          }
+        },
+        {
+          "src": "同（40〜64歳 単身・給与収入154万円・2割軽減）",
+          "members": [
+            {
+              "age": 45,
+              "sal": 1540000
+            }
+          ],
+          "expectLv": 2,
+          "expectSum": {
+            "ids": [
+              "iryo",
+              "shien",
+              "kaigo"
+            ],
+            "yen": 96300
+          }
+        },
+        {
+          "src": "同（40〜64歳 単身・所得500万円）",
+          "members": [
+            {
+              "age": 45,
+              "inc": 5000000
+            }
+          ],
+          "expectSum": {
+            "ids": [
+              "iryo",
+              "shien",
+              "kaigo"
+            ],
+            "yen": 574200
+          }
+        },
+        {
+          "src": "同（65歳以上 単身・年金収入153万円・7割軽減）",
+          "members": [
+            {
+              "age": 70,
+              "pen": 1530000
+            }
+          ],
+          "expectLv": 7,
+          "expectSum": {
+            "ids": [
+              "iryo",
+              "shien",
+              "kaigo"
+            ],
+            "yen": 12300
+          }
+        },
+        {
+          "src": "同（65歳以上 単身・年金収入183.5万円・5割軽減）",
+          "members": [
+            {
+              "age": 70,
+              "pen": 1835000
+            }
+          ],
+          "expectLv": 5,
+          "expectSum": {
+            "ids": [
+              "iryo",
+              "shien",
+              "kaigo"
+            ],
+            "yen": 48400
+          }
+        },
+        {
+          "src": "同（65歳以上 単身・年金収入209万円・2割軽減）",
+          "members": [
+            {
+              "age": 70,
+              "pen": 2090000
+            }
+          ],
+          "expectLv": 2,
+          "expectSum": {
+            "ids": [
+              "iryo",
+              "shien",
+              "kaigo"
+            ],
+            "yen": 84000
+          }
+        },
+        {
+          "src": "同（40〜64歳の両親＋子2人・所得165万円・5割軽減）",
+          "members": [
+            {
+              "age": 45,
+              "inc": 1650000,
+              "worker": true
+            },
+            {
+              "age": 45
+            },
+            {
+              "age": 12
+            },
+            {
+              "age": 9
+            }
+          ],
+          "expectLv": 5,
+          "expectSum": {
+            "ids": [
+              "iryo",
+              "shien",
+              "kaigo"
+            ],
+            "yen": 234900
+          }
+        },
+        {
+          "src": "同（40〜64歳の両親＋子2人・所得500万円）",
+          "members": [
+            {
+              "age": 45,
+              "inc": 5000000,
+              "worker": true
+            },
+            {
+              "age": 45
+            },
+            {
+              "age": 12
+            },
+            {
+              "age": 9
+            }
+          ],
+          "expectSum": {
+            "ids": [
+              "iryo",
+              "shien",
+              "kaigo"
+            ],
+            "yen": 712000
+          }
+        }
+      ]
+    },
+    "tokyo-13228": {
+      "name": "あきる野市の国民健康保険税",
+      "short": "あきる野市",
+      "scope": "あきる野市",
+      "nendo": "令和8年度",
+      "kind": "保険税",
+      "rounding": "区分ごとに100円未満切り捨て（あきる野市の運営協議会の諮問資料の額と一致）",
+      "round": {
+        "part": 100
+      },
+      "checkedAt": "2026-09-27",
+      "parts": [
+        {
+          "id": "iryo",
+          "label": "医療分",
+          "rate": 6280,
+          "kintou": 33000,
+          "byodo": 0,
+          "cap": 670000
+        },
+        {
+          "id": "shien",
+          "label": "後期高齢者支援金分",
+          "rate": 2370,
+          "kintou": 12300,
+          "byodo": 0,
+          "cap": 260000
+        },
+        {
+          "id": "kaigo",
+          "label": "介護分",
+          "rate": 2230,
+          "kintou": 14700,
+          "byodo": 0,
+          "cap": 170000,
+          "ages": [
+            40,
+            64
+          ]
+        },
+        {
+          "id": "kodomo",
+          "label": "子ども・子育て支援金分",
+          "rate": 300,
+          "kintou": 1800,
+          "kintou18": 200,
+          "byodo": 0,
+          "cap": 30000,
+          "adultsOnly": true,
+          "kintouNote": "均等割1,800円（18歳未満は全額軽減）＋18歳以上均等割200円＝18歳以上1人あたり2,000円"
+        }
+      ],
+      "sources": [
+        {
+          "name": "東京都保健医療局「令和８年度国民健康保険料（税）率等の状況」（令和8年4月1日現在・市町村）",
+          "url": "https://www.hokeniryo.metro.tokyo.lg.jp/documents/d/hokeniryo/shicyouson_20260518-pdf"
+        },
+        {
+          "name": "あきる野市「国民健康保険税」（令和8年度の税率等）",
+          "url": "https://www.city.akiruno.tokyo.jp/0000008551.html"
+        },
+        {
+          "name": "あきる野市 国民健康保険運営協議会の諮問資料（モデル世帯比較・改定後＝確定した税率と同じ）",
+          "url": "https://www.city.akiruno.tokyo.jp/cmsfiles/contents/0000008/8347/R07shimon2.pdf"
+        }
+      ],
+      "checks": [
+        {
+          "src": "あきる野市の諮問資料のモデル①（40歳未満 単身・給与収入108万円・7割軽減）",
+          "members": [
+            {
+              "age": 35,
+              "sal": 1080000
+            }
+          ],
+          "expect": 14100,
+          "expectLv": 7
+        },
+        {
+          "src": "同①（40歳未満 単身・給与収入126.5万円・5割軽減）",
+          "members": [
+            {
+              "age": 35,
+              "sal": 1265000
+            }
+          ],
+          "expect": 40100,
+          "expectLv": 5
+        },
+        {
+          "src": "同①（40歳未満 単身・給与収入150万円・2割軽減）",
+          "members": [
+            {
+              "age": 35,
+              "sal": 1500000
+            }
+          ],
+          "expect": 75200,
+          "expectLv": 2
+        },
+        {
+          "src": "同①（40歳未満 単身・給与収入300万円）",
+          "members": [
+            {
+              "age": 35,
+              "sal": 3000000
+            }
+          ],
+          "expect": 189400
+        },
+        {
+          "src": "同②（70歳夫婦・夫の年金収入153万円・妻70万円・7割軽減）",
+          "members": [
+            {
+              "age": 70,
+              "pen": 1530000
+            },
+            {
+              "age": 70,
+              "pen": 700000
+            }
+          ],
+          "expect": 28300,
+          "expectLv": 7
+        },
+        {
+          "src": "同②（70歳夫婦・夫の年金収入210万円・妻70万円・5割軽減）",
+          "members": [
+            {
+              "age": 70,
+              "pen": 2100000
+            },
+            {
+              "age": 70,
+              "pen": 700000
+            }
+          ],
+          "expect": 98200,
+          "expectLv": 5
+        },
+        {
+          "src": "同②（70歳夫婦・夫の年金収入262万円・妻70万円・2割軽減）",
+          "members": [
+            {
+              "age": 70,
+              "pen": 2620000
+            },
+            {
+              "age": 70,
+              "pen": 700000
+            }
+          ],
+          "expect": 173100,
+          "expectLv": 2
+        },
+        {
+          "src": "同②（70歳夫婦・夫の年金収入430万円・妻70万円）",
+          "members": [
+            {
+              "age": 70,
+              "pen": 4300000
+            },
+            {
+              "age": 70,
+              "pen": 700000
+            }
+          ],
+          "expect": 321800
+        }
+      ]
+    },
+    "tokyo-13229": {
+      "name": "西東京市の国民健康保険料",
+      "short": "西東京市",
+      "scope": "西東京市",
+      "nendo": "令和8年度",
+      "kind": "保険料",
+      "rounding": "区分ごとに、1人ずつ（所得割＋均等割）の100円未満を切り捨てて足す（西東京市のめやす表と、運営協議会の資料の世帯例の額に一致）",
+      "round": {
+        "person": 100
+      },
+      "checkedAt": "2026-09-27",
+      "parts": [
+        {
+          "id": "iryo",
+          "label": "医療分",
+          "rate": 5630,
+          "kintou": 33100,
+          "byodo": 0,
+          "cap": 670000
+        },
+        {
+          "id": "shien",
+          "label": "後期高齢者支援金分",
+          "rate": 1810,
+          "kintou": 7600,
+          "byodo": 0,
+          "cap": 260000
+        },
+        {
+          "id": "kaigo",
+          "label": "介護分",
+          "rate": 1720,
+          "kintou": 14600,
+          "byodo": 0,
+          "cap": 170000,
+          "ages": [
+            40,
+            64
+          ]
+        },
+        {
+          "id": "kodomo",
+          "label": "子ども・子育て支援金分",
+          "rate": 300,
+          "kintou": 1800,
+          "kintou18": 100,
+          "byodo": 0,
+          "cap": 30000,
+          "adultsOnly": true,
+          "kintouNote": "均等割1,800円（18歳未満は全額軽減）＋18歳以上均等割100円＝18歳以上1人あたり1,900円"
+        }
+      ],
+      "sources": [
+        {
+          "name": "東京都保健医療局「令和８年度国民健康保険料（税）率等の状況」（令和8年4月1日現在・市町村）",
+          "url": "https://www.hokeniryo.metro.tokyo.lg.jp/documents/d/hokeniryo/shicyouson_20260518-pdf"
+        },
+        {
+          "name": "西東京市「算出方法と納め方」",
+          "url": "https://www.city.nishitokyo.lg.jp/kurasi/kokuho/kokuminnkenkouhokeryou/sansyutu_osamekata/sansyutuhouhou.html"
+        },
+        {
+          "name": "西東京市「令和8年度 国民健康保険料のめやす（給与収入のみの場合）」（PDF・1人・軽減前）",
+          "url": "https://www.city.nishitokyo.lg.jp/kurasi/kokuho/kokuminnkenkouhokeryou/sansyutu_osamekata/sansyutuhouhou.files/R8meyasuhyoukyuuyo.pdf"
+        },
+        {
+          "name": "西東京市「令和8年度 国民健康保険料のめやす（年金収入のみの場合）」（PDF・1人・軽減前）",
+          "url": "https://www.city.nishitokyo.lg.jp/kurasi/kokuho/kokuminnkenkouhokeryou/sansyutu_osamekata/sansyutuhouhou.files/R8meyasuhyounenkin.pdf"
+        },
+        {
+          "name": "西東京市 国民健康保険運営協議会（令和7年12月23日）資料1 の世帯例（案②。医療・支援・介護の料率は確定と同じ）",
+          "url": "https://www.city.nishitokyo.lg.jp/siseizyoho/sesaku_keikaku/shingikaikaigiroku/hoken/kokuminkenkohoken/20251223.files/shiryou4-1.pdf"
+        }
+      ],
+      "checks": [
+        {
+          "src": "西東京市のめやす表（給与収入108万円・40〜64歳・軽減前）",
+          "members": [
+            {
+              "age": 45,
+              "sal": 1080000
+            }
+          ],
+          "opt": {
+            "lv": 0
+          },
+          "expect": 57200
+        },
+        {
+          "src": "同（給与収入108万円・40〜64歳以外）",
+          "members": [
+            {
+              "age": 30,
+              "sal": 1080000
+            }
+          ],
+          "opt": {
+            "lv": 0
+          },
+          "expect": 42600
+        },
+        {
+          "src": "同（給与収入300万円・40〜64歳）",
+          "members": [
+            {
+              "age": 45,
+              "sal": 3000000
+            }
+          ],
+          "opt": {
+            "lv": 0
+          },
+          "expect": 207400
+        },
+        {
+          "src": "同（給与収入400万円・40〜64歳以外）",
+          "members": [
+            {
+              "age": 30,
+              "sal": 4000000
+            }
+          ],
+          "opt": {
+            "lv": 0
+          },
+          "expect": 222700
+        },
+        {
+          "src": "同（給与収入1,750万円・40〜64歳＝限度額）",
+          "members": [
+            {
+              "age": 45,
+              "sal": 17500000
+            }
+          ],
+          "opt": {
+            "lv": 0
+          },
+          "expect": 1130000
+        },
+        {
+          "src": "同（年金収入200万円・65歳以上・軽減前）",
+          "members": [
+            {
+              "age": 70,
+              "pen": 2000000
+            }
+          ],
+          "opt": {
+            "lv": 0
+          },
+          "expect": 78900
+        },
+        {
+          "src": "同（年金収入200万円・65歳未満）",
+          "members": [
+            {
+              "age": 60,
+              "pen": 2000000
+            }
+          ],
+          "opt": {
+            "lv": 0
+          },
+          "expect": 132100
+        },
+        {
+          "src": "運営協議会の資料の世帯例②（40歳 所得276万円・妻・8歳・3歳）の医療＋支援＋介護",
+          "members": [
+            {
+              "age": 40,
+              "inc": 2760000,
+              "worker": true
+            },
+            {
+              "age": 40
+            },
+            {
+              "age": 8
+            },
+            {
+              "age": 3
+            }
+          ],
+          "opt": {
+            "preschool": true
+          },
+          "expectSum": {
+            "ids": [
+              "iryo",
+              "shien",
+              "kaigo"
+            ],
+            "yen": 384800
+          }
+        },
+        {
+          "src": "同 世帯例③（40歳 所得436万円・妻 所得95万円・8歳・3歳）の医療＋支援＋介護",
+          "members": [
+            {
+              "age": 40,
+              "inc": 4360000,
+              "worker": true
+            },
+            {
+              "age": 40,
+              "inc": 950000,
+              "worker": true
+            },
+            {
+              "age": 8
+            },
+            {
+              "age": 3
+            }
+          ],
+          "opt": {
+            "preschool": true
+          },
+          "expectSum": {
+            "ids": [
+              "iryo",
+              "shien",
+              "kaigo"
+            ],
+            "yen": 578900
+          }
+        },
+        {
+          "src": "同 世帯例①（70歳 単身・年金収入150万円・7割軽減）の医療＋支援",
+          "members": [
+            {
+              "age": 70,
+              "pen": 1500000
+            }
+          ],
+          "expectLv": 7,
+          "expectSum": {
+            "ids": [
+              "iryo",
+              "shien"
+            ],
+            "yen": 12100
+          }
+        }
+      ]
+    },
+    "tokyo-13110": {
+      "name": "目黒区の国民健康保険料",
+      "short": "目黒区",
+      "scope": "目黒区",
+      "nendo": "令和8年度",
+      "kind": "保険料",
+      "rounding": "1円未満切り捨て（目黒区の運営協議会の資料の額と一致）",
+      "checkedAt": "2026-09-27",
+      "parts": [
+        {
+          "id": "iryo",
+          "label": "医療分",
+          "rate": 7510,
+          "kintou": 47600,
+          "byodo": 0,
+          "cap": 670000
+        },
+        {
+          "id": "shien",
+          "label": "後期高齢者支援金分",
+          "rate": 2800,
+          "kintou": 17600,
+          "byodo": 0,
+          "cap": 260000
+        },
+        {
+          "id": "kaigo",
+          "label": "介護分",
+          "rate": 2350,
+          "kintou": 17800,
+          "byodo": 0,
+          "cap": 170000,
+          "ages": [
+            40,
+            64
+          ]
+        },
+        {
+          "id": "kodomo",
+          "label": "子ども・子育て支援金分",
+          "rate": 270,
+          "kintou": 1800,
+          "kintou18": 73,
+          "byodo": 0,
+          "cap": 30000,
+          "adultsOnly": true,
+          "kintouNote": "均等割1,800円（18歳未満は全額軽減）＋18歳以上均等割73円＝18歳以上1人あたり1,873円"
+        }
+      ],
+      "sources": [
+        {
+          "name": "東京都保健医療局「令和8年度 特別区国民健康保険料一覧表」（令和8年4月1日現在・23区の料率）",
+          "url": "https://www.hokeniryo.metro.tokyo.lg.jp/documents/d/hokeniryo/tokubetuku202605-pdf"
+        },
+        {
+          "name": "目黒区「国民健康保険料の計算」",
+          "url": "https://www.city.meguro.tokyo.jp/kokuho/kurashi/kokuho/keisan.html"
+        },
+        {
+          "name": "目黒区 国民健康保険運営協議会（令和8年3月5日）参考資料2「令和8年度 収入別・世帯構成別保険料試算」（軽減のない列を使った）",
+          "url": "https://www.city.meguro.tokyo.jp/documents/3681/05_r7-1_setsumei-shiryo.pdf"
+        }
+      ],
+      "checks": [
+        {
+          "src": "目黒区の運営協議会の資料（45歳 単身・給与収入300万円）",
+          "members": [
+            {
+              "age": 45,
+              "sal": 3000000
+            }
+          ],
+          "expect": 290460,
+          "expectParts": {
+            "kodomo": 6166
+          }
+        },
+        {
+          "src": "同（45歳 単身・給与収入400万円）",
+          "members": [
+            {
+              "age": 45,
+              "sal": 4000000
+            }
+          ],
+          "expect": 386142,
+          "expectParts": {
+            "kodomo": 8164
+          }
+        },
+        {
+          "src": "同（45歳・40歳の2人・給与収入500万円）",
+          "members": [
+            {
+              "age": 45,
+              "sal": 5000000
+            },
+            {
+              "age": 40
+            }
+          ],
+          "expect": 574455,
+          "expectParts": {
+            "kodomo": 12197
+          }
+        },
+        {
+          "src": "同（65歳 単身・年金収入300万円）",
+          "members": [
+            {
+              "age": 65,
+              "pen": 3000000
+            }
+          ],
+          "expect": 222599,
+          "expectParts": {
+            "kodomo": 5842
+          }
+        },
+        {
+          "src": "同（65歳の2人・年金収入400万円）",
+          "members": [
+            {
+              "age": 65,
+              "pen": 4000000
+            },
+            {
+              "age": 65
+            }
+          ],
+          "expect": 376956,
+          "expectParts": {
+            "kodomo": 9942
+          }
+        },
+        {
+          "src": "同（45歳 単身・給与収入900万円）",
+          "members": [
+            {
+              "age": 45,
+              "sal": 9000000
+            }
+          ],
+          "expect": 937469,
+          "expectParts": {
+            "kodomo": 19747
+          }
+        }
+      ]
+    },
+    "tokyo-13114": {
+      "name": "中野区の国民健康保険料",
+      "short": "中野区",
+      "scope": "中野区",
+      "nendo": "令和8年度",
+      "kind": "保険料",
+      "rounding": "1円未満切り捨て（中野区の運営協議会の資料の額と一致）",
+      "checkedAt": "2026-09-27",
+      "parts": [
+        {
+          "id": "iryo",
+          "label": "医療分",
+          "rate": 8030,
+          "kintou": 47100,
+          "byodo": 0,
+          "cap": 670000
+        },
+        {
+          "id": "shien",
+          "label": "後期高齢者支援金分",
+          "rate": 2940,
+          "kintou": 17400,
+          "byodo": 0,
+          "cap": 260000
+        },
+        {
+          "id": "kaigo",
+          "label": "介護分",
+          "rate": 2530,
+          "kintou": 17700,
+          "byodo": 0,
+          "cap": 170000,
+          "ages": [
+            40,
+            64
+          ]
+        },
+        {
+          "id": "kodomo",
+          "label": "子ども・子育て支援金分",
+          "rate": 270,
+          "kintou": 1800,
+          "kintou18": 73,
+          "byodo": 0,
+          "cap": 30000,
+          "adultsOnly": true,
+          "kintouNote": "均等割1,800円（18歳未満は全額軽減）＋18歳以上均等割73円＝18歳以上1人あたり1,873円"
+        }
+      ],
+      "sources": [
+        {
+          "name": "東京都保健医療局「令和8年度 特別区国民健康保険料一覧表」（令和8年4月1日現在・23区の料率）",
+          "url": "https://www.hokeniryo.metro.tokyo.lg.jp/documents/d/hokeniryo/tokubetuku202605-pdf"
+        },
+        {
+          "name": "中野区「国民健康保険料の計算方法」",
+          "url": "https://www.city.tokyo-nakano.lg.jp/kurashi/hoken/hokenryo/keisan.html"
+        },
+        {
+          "name": "中野区 国民健康保険運営協議会 資料5「モデル世帯別の保険料」（令和8年度案＝確定した料率と同じ・18歳以上均等割73円を除いた額）",
+          "url": "https://www.city.tokyo-nakano.lg.jp/kusei/kaigi/fuzokukikan/hoken/r8_1.files/R801siryou.pdf"
+        }
+      ],
+      "checks": [
+        {
+          "src": "中野区の運営協議会の資料（40歳 単身・年収100万円・7割軽減。73円を除いた額）",
+          "members": [
+            {
+              "age": 40,
+              "sal": 1000000
+            }
+          ],
+          "opt": {
+            "noKintou18": true
+          },
+          "expect": 25200,
+          "expectLv": 7
+        },
+        {
+          "src": "同（40歳 単身・年収300万円。73円を除いた額）",
+          "members": [
+            {
+              "age": 40,
+              "sal": 3000000
+            }
+          ],
+          "opt": {
+            "noKintou18": true
+          },
+          "expect": 302943
+        },
+        {
+          "src": "同（40歳 単身・年収500万円。73円を除いた額）",
+          "members": [
+            {
+              "age": 40,
+              "sal": 5000000
+            }
+          ],
+          "opt": {
+            "noKintou18": true
+          },
+          "expect": 515001
+        },
+        {
+          "src": "同（65歳以上 単身・年金収入100万円・7割軽減。73円を除いた額）",
+          "members": [
+            {
+              "age": 70,
+              "pen": 1000000
+            }
+          ],
+          "opt": {
+            "noKintou18": true
+          },
+          "expect": 19890,
+          "expectLv": 7
+        },
+        {
+          "src": "同（65歳以上 単身・年金収入400万円。73円を除いた額）",
+          "members": [
+            {
+              "age": 70,
+              "pen": 4000000
+            }
+          ],
+          "opt": {
+            "noKintou18": true
+          },
+          "expect": 324257
+        },
+        {
+          "src": "同（65歳以上 2人・年金収入300万円。73円を除いた額）",
+          "members": [
+            {
+              "age": 70,
+              "pen": 3000000
+            },
+            {
+              "age": 70
+            }
+          ],
+          "opt": {
+            "noKintou18": true
+          },
+          "expect": 297828
+        }
+      ]
+    },
+    "tokyo-13202": {
+      "name": "立川市の国民健康保険料",
+      "short": "立川市",
+      "scope": "立川市",
+      "nendo": "令和8年度",
+      "kind": "保険料",
+      "rounding": "区分ごとに、所得割と均等割を足したあと100円未満切り捨て（立川市の計算例）",
+      "round": {
+        "part": 100
+      },
+      "checkedAt": "2026-09-27",
+      "parts": [
+        {
+          "id": "iryo",
+          "label": "医療分",
+          "rate": 6850,
+          "kintou": 34200,
+          "byodo": 0,
+          "cap": 660000,
+          "preschoolFree": true
+        },
+        {
+          "id": "shien",
+          "label": "後期高齢者支援金分",
+          "rate": 2290,
+          "kintou": 12200,
+          "byodo": 0,
+          "cap": 250000,
+          "preschoolFree": true
+        },
+        {
+          "id": "kaigo",
+          "label": "介護分",
+          "rate": 1730,
+          "kintou": 14800,
+          "byodo": 0,
+          "cap": 170000,
+          "ages": [
+            40,
+            64
+          ]
+        },
+        {
+          "id": "kodomo",
+          "label": "子ども・子育て支援金分",
+          "rate": 310,
+          "kintou": 1890,
+          "kintou18": 110,
+          "byodo": 0,
+          "cap": 30000,
+          "adultsOnly": true,
+          "kintouNote": "均等割1,890円（18歳未満は全額軽減）＋18歳以上均等割110円＝18歳以上1人あたり2,000円"
+        }
+      ],
+      "sources": [
+        {
+          "name": "東京都保健医療局「令和８年度国民健康保険料（税）率等の状況」（令和8年4月1日現在・市町村）",
+          "url": "https://www.hokeniryo.metro.tokyo.lg.jp/documents/d/hokeniryo/shicyouson_20260518-pdf"
+        },
+        {
+          "name": "立川市「令和8年度国民健康保険料」",
+          "url": "https://www.city.tachikawa.lg.jp/kurashi/nenkin/1002478/1002510/1002554/1002560.html"
+        },
+        {
+          "name": "立川市「令和8年度の国民健康保険料の計算例」",
+          "url": "https://www.city.tachikawa.lg.jp/kurashi/nenkin/1002478/1002510/1002554/1002559.html"
+        }
+      ],
+      "checks": [
+        {
+          "src": "立川市の計算例（42歳 給与収入300万円・38歳 給与収入150万円・子2人〈うち未就学児1人＝市独自の軽減で均等割0円〉）",
+          "members": [
+            {
+              "age": 42,
+              "sal": 3000000
+            },
+            {
+              "age": 38,
+              "sal": 1500000
+            },
+            {
+              "age": 8
+            },
+            {
+              "age": 4
+            }
+          ],
+          "opt": {
+            "preschool": true
+          },
+          "expect": 375300,
+          "expectParts": {
+            "iryo": 240200,
+            "shien": 82600,
+            "kaigo": 42300,
+            "kodomo": 10200
+          }
+        }
+      ]
     }
   },
   "prefSets": {
@@ -311,9 +3481,11 @@
     "13107": "tokyo-23",
     "13108": "tokyo-23",
     "13109": "tokyo-23",
+    "13110": "tokyo-13110",
     "13111": "tokyo-23",
     "13112": "tokyo-23",
     "13113": "tokyo-23",
+    "13114": "tokyo-13114",
     "13115": "tokyo-23",
     "13116": "tokyo-23",
     "13117": "tokyo-23",
@@ -321,7 +3493,36 @@
     "13119": "tokyo-23",
     "13120": "tokyo-23",
     "13121": "tokyo-23",
-    "13122": "tokyo-23"
+    "13122": "tokyo-23",
+    "13202": "tokyo-13202",
+    "13203": "tokyo-13203",
+    "13204": "tokyo-13204",
+    "13205": "tokyo-13205",
+    "13207": "tokyo-13207",
+    "13208": "tokyo-13208",
+    "13209": "tokyo-13209",
+    "13210": "tokyo-13210",
+    "13212": "tokyo-13212",
+    "13213": "tokyo-13213",
+    "13214": "tokyo-13214",
+    "13215": "tokyo-13215",
+    "13221": "tokyo-13221",
+    "13222": "tokyo-13222",
+    "13223": "tokyo-13223",
+    "13224": "tokyo-13224",
+    "13225": "tokyo-13225",
+    "13227": "tokyo-13227",
+    "13228": "tokyo-13228",
+    "13229": "tokyo-13229"
   },
-  "muniSetsNote": "東京23区のうち目黒区(13110)・中野区(13114)・江戸川区(13123)は料率が違う（東京都の一覧表）。計算例を確かめるまで載せない"
+  "muniSetsNote": "東京都：料率は東京都保健医療局の一覧（令和8年4月1日現在）から書き起こし、各区市が公表している計算例と1円まで一致した区市だけ載せる。一覧にあっても計算例が見つからない・合わない区市（江戸川区・八王子市・府中市・小平市・福生市・狛江市・東大和市）と、町村・島しょはまだ載せない。",
+  "pending": {
+    "13123": "計算例も早見表も公表されていない（区の試算システムだけ。運営協議会のモデルケースの表も公開されていない）",
+    "13201": "計算例も早見表も公表されていない（外部の試算システムだけ）",
+    "13206": "計算例も早見表も公表されていない（外部の試算システムだけ）",
+    "13211": "令和8年度の計算例も早見表も公表されていない（運営協議会の資料の試算は改定前の前提で、1円の突き合わせに使えない）",
+    "13218": "試算は窓口と電話だけで、計算例も早見表も公表されていない",
+    "13219": "公表は試算シート（Excel）だけで、計算例も早見表も無い（18歳未満の第3子以降の均等割を全額減免する市独自の決まりもある）",
+    "13220": "計算例も早見表も公表されていない（入力して使う試算表のExcelだけ）"
+  }
 }

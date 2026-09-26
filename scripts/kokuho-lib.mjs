@@ -24,14 +24,19 @@ const G = K.keigen
 //   第29条の7の2の「特例対象被保険者等」）。前年の給与所得を100分の30とみなし、所得割と軽減（7・5・2割）の判定の
 //   両方をその額で計算する（同条第1項が第29条の7第2項第4号と第6項第1号の両方を読み替える）。給与所得以外は変わらない。
 //   施行令は「百分の三十に相当する金額」とだけ書くので、1円未満は切り捨てる。
+//   inc ＝所得（総所得金額等）をそのまま渡すとき。市区町村の計算例には収入でなく「給与所得500万円」「年金雑所得200万円」と
+//   書いたものがあるので、突き合わせのために持つ（ページの表は収入から計算する）。incPen: true＝年金の所得（65歳以上は判定で15万円を引く）、
+//   worker: true＝給与所得者等に数える人。
 const assertMember = (m) => {
   if (!Number.isInteger(m.age)) throw new Error('年齢がありません')
   if ((m.sal || 0) > 0 && (m.pen || 0) > 0) throw new Error('給与と年金の両方がある人はこの計算では扱いません')
+  if (m.inc != null && (m.sal || m.pen || m.hikoji || !Number.isInteger(m.inc))) throw new Error('所得（inc）を渡す人に収入や特例は一緒に書けません')
   if (m.hikoji && m.age >= 65) throw new Error('非自発的失業の特例は離職時65歳未満の人だけです')
 }
 // 総所得金額等（所得割の基礎と、軽減の判定の両方に使う）
 export const shotoku = (m) => {
   assertMember(m)
+  if (m.inc != null) return m.inc
   if (m.sal) {
     // 給与所得は所得税法の別表第五どおり整数（4,000円刻みの A×0.7−8万円 などを浮動小数で計算すると 2,000,399.9999… になる）
     const s = Math.round(kyuyo[G.incomePeriod](m.sal))
@@ -43,11 +48,11 @@ export const shotoku = (m) => {
 // 軽減の判定に使う所得＝65歳以上の人は年金の所得から15万円を引く（判定のときだけ。所得割の計算では引かない）
 export const hanteiShotoku = (m) => {
   const s = shotoku(m)
-  if (m.age >= 65 && m.pen) return Math.max(0, s - G.pension65)
+  if (m.age >= 65 && (m.pen || m.incPen)) return Math.max(0, s - G.pension65)
   return s
 }
 // 給与所得者等＝給与収入55万円超の人・公的年金等の収入が65歳未満60万円超／65歳以上125万円超の人
-export const isWorker = (m) => (m.sal || 0) > G.workerSalary || (m.pen || 0) > (m.age >= 65 ? G.workerPension65 : G.workerPension64)
+export const isWorker = (m) => m.worker === true || (m.sal || 0) > G.workerSalary || (m.pen || 0) > (m.age >= 65 ? G.workerPension65 : G.workerPension64)
 
 // ── 軽減の割合（0.7／0.5／0.2 を 7／5／2 の整数で返す。0＝軽減なし）──────────────────────
 //   「10万円×（給与所得者等の数−1）」は給与所得者等が2人以上のときだけ足す（大阪市のページに明記）。
@@ -105,10 +110,13 @@ const floorTo = (yen, unit) => (unit ? Math.floor(yen / unit) * unit : yen)
 //   base＝所得割の算定の基礎（区分ごとの、基礎控除後の所得の合計）を何円未満切り捨てるか
 //   part＝区分ごとの額（上限で頭打ちしたあと）を何円未満切り捨てるか
 //   total＝年額（区分の合計）を何円未満切り捨てるか
+//   person＝区分ごとに、1人ずつ（その人の所得割＋均等割）を何円未満切り捨ててから足すか（西東京市。世帯でまとめて切ると100円ずれる）
 //   書いていない料率は今までどおり（1円未満切り捨てだけ）。
 //   opt.lv を渡すと軽減の割合を決め打ちする（0＝所得の申告をしていなくて軽減されない場合の額を出すとき）。
+//   opt.preschool＝6歳未満の子を入れてよい（公表の計算例との突き合わせだけで使う）。未就学児の均等割は、7・5・2割の軽減の
+//   あとの額の5割を軽減する（日野市・町田市の説明）。ページの表は大人だけの世帯なので、ここを通らない。
 export const annual = (rs, members, opt = {}) => {
-  if (members.some((m) => m.age < 6)) throw new Error('6歳未満の子どもがいる世帯はこの計算では扱いません（未就学児の軽減）')
+  if (!opt.preschool && members.some((m) => m.age < 6)) throw new Error('6歳未満の子どもがいる世帯はこの計算では扱いません（未就学児の軽減）')
   const lv = opt.lv ?? keigenOf(members)
   const R = rs.round || {}
   const parts = rs.parts.map((p) => {
@@ -117,11 +125,20 @@ export const annual = (rs, members, opt = {}) => {
     const base = floorTo(inPart.reduce((a, m) => a + Math.max(0, shotoku(m) - G.base), 0), R.base)
     const shotokuwari = Math.floor((base * p.rate) / 100000)      // 率は10万分の1の整数（9.50%＝9500）
     const payers = p.adultsOnly ? inPart.filter((m) => m.age >= 18) : inPart
-    const adults = inPart.filter((m) => m.age >= 18)
-    const kintou = cut(p.kintou, lv) * payers.length + (p.kintou18 ? cut(p.kintou18, lv) * adults.length : 0)
+    //   p.childHalf＝市の独自の減免で、18歳未満の子（未就学児を除く）の均等割も5割にする区分（昭島市の医療分・支援分）
+    //   p.preschoolFree＝未就学児の均等割の残り5割も市が軽くして0円にする区分（立川市の医療分・支援分）
+    //   opt.noKintou18＝18歳以上均等割を除いた額（中野区の運営協議会の表は「18歳以上追加負担分は除く」と注記している）
+    const half = (m) => m.age < 6 || (p.childHalf && m.age < 18)
+    const own = (m) => (m.age < 6 && p.preschoolFree ? 0 : half(m) ? Math.floor(cut(p.kintou, lv) / 2) : cut(p.kintou, lv))
+    const kintouOf = (m) => (payers.includes(m) ? own(m) : 0) + (p.kintou18 && m.age >= 18 && !opt.noKintou18 ? cut(p.kintou18, lv) : 0)
+    const kintou = inPart.reduce((a, m) => a + kintouOf(m), 0)
     const byodo = p.byodo ? cut(p.byodo, lv) : 0
-    const yen = floorTo(Math.min(p.cap, shotokuwari + kintou + byodo), R.part)
-    return { id: p.id, label: p.label, yen, shotokuwari, kintou, byodo, capped: shotokuwari + kintou + byodo > p.cap }
+    if (R.person && byodo) throw new Error('1人ずつ切り捨てる料率に平等割は扱いません')
+    const sum = R.person
+      ? inPart.reduce((a, m) => a + floorTo(Math.floor((Math.max(0, shotoku(m) - G.base) * p.rate) / 100000) + kintouOf(m), R.person), 0)
+      : shotokuwari + kintou + byodo
+    const yen = floorTo(Math.min(p.cap, sum), R.part)
+    return { id: p.id, label: p.label, yen, shotokuwari, kintou, byodo, capped: sum > p.cap }
   })
   return { lv, total: floorTo(parts.reduce((a, p) => a + p.yen, 0), R.total), parts }
 }
@@ -152,13 +169,15 @@ export const selfCheck = () => {
   for (const [id, rs] of Object.entries(K.rateSets)) {
     if (!rs.checks || !rs.checks.length) return `${rs.name}に突き合わせの計算例がありません（公表の計算例か早見表と合わせてから載せる）`
     for (const c of rs.checks) {
-      const a = annual(rs, c.members)
+      const a = annual(rs, c.members, c.opt || {})
       if (c.expect != null && a.total !== c.expect) return `${rs.name}：公表の計算例と年額が違います。計算 ${a.total} ／ 公表 ${c.expect}（${c.src}）`
       for (const [pid, v] of Object.entries(c.expectParts || {})) {
         const got = a.parts.find((p) => p.id === pid)
         if (!got || got.yen !== v) return `${rs.name}：${pid} が公表の値と違います。計算 ${got && got.yen} ／ 公表 ${v}（${c.src}）`
       }
       if (c.expectLv != null && a.lv !== c.expectLv) return `${rs.name}：軽減の割合が公表の例と違います（${c.src}）`
+      //   expectSum＝いくつかの区分の合計だけが公表されている例（子ども分を含まない3区分の合計など）
+      if (c.expectSum) { const got = a.parts.filter((x) => c.expectSum.ids.includes(x.id)).reduce((t, x) => t + x.yen, 0); if (got !== c.expectSum.yen) return `${rs.name}：${c.expectSum.ids.join('＋')} が公表の値と違います。計算 ${got} ／ 公表 ${c.expectSum.yen}（${c.src}）` }
     }
     for (const p of rs.parts) if (!Number.isInteger(p.rate) || !Number.isInteger(p.kintou) || !Number.isInteger(p.byodo) || !Number.isInteger(p.cap) || (p.kintou18 != null && !Number.isInteger(p.kintou18))) return `${rs.name}：${p.label}の料率に欠けがあります`
     if (!rs.sources || !rs.sources.length || !rs.checkedAt) return `${rs.name}：出典か確認日がありません`
