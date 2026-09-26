@@ -279,9 +279,14 @@ const kokuhoSection = (r, Ls) => {
   const kaigo0 = zero.parts.find((p) => p.id === 'kaigo').yen
   const cliff = (x) => kAnnual(rs, [{ age: 45, sal: x + 1 }]).total - kAnnual(rs, [{ age: 45, sal: x }]).total
   const L1 = KL.sal[0]
+  const kw = rs.kind === '保険税' ? '国保税' : '国保料'
+  // 東京都の区市は、同じ世帯で並べた順位を1行（ラベルは付けない。順位と額だけ）
+  const tr = pref2(r) === '13' ? tkRowOf(r.code) : null
+  const rankLine = tr ? `<p>${esc(r.pref)}で料率を確かめた${TK.length}区市の中で、${RANK_HH.slice(0, 2).map((h) => `${esc(h.short)}は<strong>安いほうから${tkRank(h.id, tr)}番目</strong>（年${yen(tr.v[h.id])}）`).join('、')}です（同じ額の区市は同じ順番）。<a href="../../hikazei/kokuho-tokyo/">${TK.length}区市の比較の表</a></p>` : ''
   return `${head}
-  <h3>${esc(r.city)}の国保料の年額の目安（${esc(rs.nendo)}）</h3>
-  <p>${esc(rs.scope)}の料率で計算した、<strong>大人だけの世帯</strong>の年額です。<strong>収入が0円でも、国保は0円になりません</strong>（7割軽減でも${rs.parts.some((p) => p.byodo) ? '均等割・平等割' : '均等割'}の3割はかかります）。単身・40〜64歳なら、収入0円で年${yen(zero.total)}です。</p>
+  <h3>${esc(r.city)}の${kw}の年額の目安（${esc(rs.nendo)}）</h3>
+  <p>${esc(rs.scope)}の${rs.kind === '保険税' ? '税率' : '料率'}で計算した、<strong>大人だけの世帯</strong>の年額です。<strong>収入が0円でも、国保は0円になりません</strong>（7割軽減でも${rs.parts.some((p) => p.byodo) ? '均等割・平等割' : '均等割'}の3割はかかります）。単身・40〜64歳なら、収入0円で年${yen(zero.total)}です。</p>
+  ${rankLine}
   ${HH.map((hh) => `<p><strong>${esc(hh.title)}</strong></p>
   <div class="table-wrap"><table class="fit">
   <thead><tr><th>年収</th><th>軽減</th><th class="num">年額</th></tr></thead>
@@ -484,7 +489,7 @@ ${grid}
   <h2 id="kokuho">国民健康保険（国保）が7割・5割・2割軽くなる年収（全国共通・${esc(KG.nendo)}）</h2>
   <p>国保の保険料のうち人数と世帯にかかる部分（均等割・平等割）は、前の年の所得が少ないと7割・5割・2割軽くなります。この線は国の政令で決まっていて全国共通です。住民税の非課税の線とは別の物差しで、たとえば給与だけの単身は、1級地で住民税が非課税になるのは${man(STDLINES['1'][0].sal8)}以下ですが、国保の7割軽減は${man(K7SAL)}以下です。</p>
   ${kokuhoLines()}
-  <p>国保料の年額の目安は、料率を公式ページで確かめた市区町村のページに載せています（いまは${esc(COVERED)}）。</p>
+  <p>国保料の年額の目安は、料率を公式ページで確かめた市区町村のページに載せています（いまは${esc(COVERED)}）。${TK.length ? `東京都は区市ごとに料率が違うので、<a href="${up}hikazei/kokuho-tokyo/">${TK.length}区市の年額を同じ世帯で並べた比較</a>も作りました。` : ''}</p>
   <h2>都道府県から探す</h2>
   <ul class="links">
 ${prefLinks}
@@ -500,8 +505,114 @@ ${prefLinks}
   return page({ title, desc, canonical: '/hikazei/', depth: 1, body, jsonld: [articleLd(title, desc, '/hikazei/'), bcLd(items)] })
 }
 
+// ── 9b. 東京都の国民健康保険料（税）の比較（看板）────────────────────────────────
+//   上の 6c の順位をそのまま並べる（額の計算は kokuho-lib.mjs の annual だけ）。文の数字は全部ここで計算する＝手で書かない。
+const TK_PUBLISHED = '2026-09-27'
+const tokyoRankPage = () => {
+  const up = '../../'
+  const n = (y) => y.toLocaleString('ja-JP')
+  const sortBy = (key) => [...TK_ROWS].sort((a, b) => a.v[key] - b.v[key] || a.munis[0].code.localeCompare(b.munis[0].code))
+  const lo = (key) => sortBy(key)[0], hi = (key) => sortBy(key).at(-1)
+  const nm = (row) => (row.munis.length > 1 ? row.rs.short : row.munis[0].city)
+  const [Z, P, S] = RANK_HH
+  const times = (key) => (hi(key).v[key] / lo(key).v[key]).toFixed(1)
+  // 区がどの世帯でも市より高いか（言えるときだけ言う）
+  const kuRows = TK_ROWS.filter((x) => x.munis.every((r) => /区$/.test(r.city))), shiRows = TK_ROWS.filter((x) => x.munis.every((r) => /市$/.test(r.city)))
+  const kuAbove = kuRows.length && shiRows.length && RANK_HH.every((h) => Math.min(...kuRows.map((x) => x.v[h.id])) > Math.max(...shiRows.map((x) => x.v[h.id])))
+  const kuCount = TK.filter((r) => /区$/.test(r.city)).length, shiCount = TK.filter((r) => /市$/.test(r.city)).length
+  // 1人あたりの均等割（40〜64歳・大人）と、所得割の率の合計。順位が入れ替わる理由の説明に使う
+  const kintouSum = (rs) => rs.parts.reduce((a, p) => a + p.kintou + (p.kintou18 || 0), 0)
+  const rateSum = (rs) => rs.parts.reduce((a, p) => a + p.rate, 0)
+  const byK = [...TK_ROWS].sort((a, b) => kintouSum(a.rs) - kintouSum(b.rs)), byR = [...TK_ROWS].sort((a, b) => rateSum(a.rs) - rateSum(b.rs))
+  // 収入0円と給与400万円で順位がいちばん動いた市（1区市だけの行）
+  const moves = TK_ROWS.filter((x) => x.munis.length === 1).map((x) => ({ x, a: tkRank(Z.id, x), b: tkRank(S.id, x) }))
+    .filter((m) => m.a !== m.b).sort((p, q) => Math.abs(q.b - q.a) - Math.abs(p.b - p.a) || p.a - q.a).slice(0, 4)
+  const osaka = KK.rateSets['osaka-pref']
+  const oz = osaka ? kAnnual(osaka, Z.mk()).total : null
+  // 突き合わせていない東京都の町村・島しょ（順位を付けない）
+  const notYet = M.filter((r) => pref2(r) === '13' && !kSetOf(r.code))
+
+  const t1 = sortBy(Z.id).map((x) => `<tr><th scope="row" class="nm">${tkRank(Z.id, x)}．${tkName(x, up)}</th><td class="num">${n(x.v[Z.id])}</td><td class="num">${n(x.v[P.id])}</td></tr>`).join('\n')
+  const t2 = sortBy(S.id).map((x) => { const a = tkRank(Z.id, x), b = tkRank(S.id, x); return `<tr><th scope="row" class="nm">${b}．${tkName(x, up)}</th><td class="num">${n(x.v[S.id])}</td><td class="num">${a}番目${a === b ? '' : a > b ? '<br><small>↑上がる</small>' : '<br><small>↓下がる</small>'}</td></tr>` }).join('\n')
+  const srcRows = sortBy(Z.id).map((x) => `<li>${esc(nm(x))}（${esc(x.rs.kind || '保険料')}）＝${x.rs.checks.map((c) => esc(c.src)).join('・')}と1円まで一致。${x.rs.sources.filter((s) => !/metro\.tokyo/.test(s.url)).map((s) => `<a href="${esc(s.url)}" rel="nofollow">${esc(s.name)}</a>`).join('／')}</li>`).join('\n  ')
+
+  const title = `東京都の国民健康保険料（税）比較｜${TK.length}区市の年額ランキング・収入0円でも${times(Z.id)}倍の差（${KG.nendo}）｜フクシル`
+  const desc = `東京都の${TK.length}区市（${kuCount}区・${shiCount}市）の国民健康保険料（税）を同じ世帯で計算して並べました（${KG.nendo}）。収入0円の単身（40〜64歳）でも${nm(lo(Z.id))}の年${yen(lo(Z.id).v[Z.id])}から${nm(hi(Z.id))}の年${yen(hi(Z.id).v[Z.id])}まで。年金${man(RANK_PEN)}の夫婦・給与400万円の単身の順位も。各区市の公式の計算例と1円まで合わせています。`
+  const items = [['ホーム', 'index.html'], ['住民税非課税の年収（市区町村別）', 'hikazei/'], ['東京都の国民健康保険料（税）の比較', null]]
+  const faq = [
+    [`東京都で国民健康保険料がいちばん安いのはどこですか？`, `フクシルが料率を確かめた${TK.length}区市で、収入0円の単身（40〜64歳・所得を申告して7割軽減）なら${nm(lo(Z.id))}の年${yen(lo(Z.id).v[Z.id])}、${P.short}（65〜74歳）なら${nm(lo(P.id))}の年${yen(lo(P.id).v[P.id])}、${S.short}（40〜64歳）なら${nm(lo(S.id))}の年${yen(lo(S.id).v[S.id])}がいちばん安い額です（${KG.nendo}）。`],
+    [`収入が0円でも国民健康保険料はかかりますか？`, `かかります。所得を申告していれば人数にかかる均等割が7割軽くなりますが、3割は残ります。東京都の${TK.length}区市では、単身（40〜64歳）で年${yen(lo(Z.id).v[Z.id])}〜${yen(hi(Z.id).v[Z.id])}です。申告していないと軽減されません。`],
+  ]
+  const body = `${CSS}<style>table.fit td.num small{font-weight:400}.answer{border:2px solid var(--accent,#2a6);border-radius:8px;padding:10px 14px;margin:14px 0}.answer p{margin:.35em 0}</style>
+  ${crumbs(items, up)}
+  <p class="updated">最終確認：${esc(CHECKED)} ／ ${esc(KG.nendo)}（${esc(KG.years)}）の料率・${esc(KG.incomeYear)}で計算</p>
+  <h1>東京都の国民健康保険料（税）を${TK.length}区市で比べる<br><small>収入0円・年金暮らし・給与400万円の年額（${esc(KG.nendo)}）</small></h1>
+  <p class="lead">国民健康保険（国保）の保険料は、住んでいる区市町村で変わります。東京都の${TK.length}区市（${kuCount}区と${shiCount}市）で、<strong>同じ世帯・同じ収入</strong>の年額を計算して並べました。計算に使った料率は、東京都が公表している一覧と各区市のページで確かめ、<strong>各区市が公表している計算例と1円まで一致</strong>することを確かめています。</p>
+  <div class="answer">
+  <p><strong>${esc(Z.label)}</strong>：<strong>${esc(nm(lo(Z.id)))} 年${yen(lo(Z.id).v[Z.id])}</strong> 〜 ${esc(nm(hi(Z.id)))} 年${yen(hi(Z.id).v[Z.id])}（${times(Z.id)}倍）</p>
+  <p><strong>${esc(P.label)}</strong>：<strong>${esc(nm(lo(P.id)))} 年${yen(lo(P.id).v[P.id])}</strong> 〜 ${esc(nm(hi(P.id)))} 年${yen(hi(P.id).v[P.id])}</p>
+  <p><strong>${esc(S.label)}</strong>：<strong>${esc(nm(lo(S.id)))} 年${yen(lo(S.id).v[S.id])}</strong> 〜 ${esc(nm(hi(S.id)))} 年${yen(hi(S.id).v[S.id])}</p>
+  </div>
+  <p>${kuAbove ? `3つのどの世帯でも、<strong>区（${kuCount}区）はどの市より高い</strong>額になります。` : ''}収入が少ない世帯ほど、同じ東京都の中の差が<strong>割合として大きく</strong>なります。収入0円の単身では${times(Z.id)}倍、給与400万円の単身では${times(S.id)}倍です。</p>
+
+  <h2 id="low">収入が少ない世帯の年額（安い順）</h2>
+  <p>所得を申告していて、国保の均等割が7割軽くなる世帯（収入0円の単身）と、5割軽くなる世帯（年金${man(RANK_PEN)}の夫婦＝1級地で住民税が非課税になるいちばん上の額）です。区市名を押すと、その区市の年収ごとの年額が出ます。</p>
+  <div class="table-wrap"><table class="fit">
+  <thead><tr><th>順位・区市</th><th class="num">${esc(Z.short)}<br><small>40〜64歳（円・年）</small></th><th class="num">${esc(P.short)}<br><small>65〜74歳（円・年）</small></th></tr></thead>
+  <tbody>
+${t1}
+  </tbody></table></div>
+  <p class="mini-note">順位は収入0円の単身の額で、同じ額の区市は同じ順位です。${TK_ROWS.some((x) => x.munis.length > 1) ? `「${esc(TK_ROWS.find((x) => x.munis.length > 1).rs.short)}」は${esc(TK_ROWS.find((x) => x.munis.length > 1).munis.map((r) => r.city).join('・'))}です。` : ''}</p>
+
+  <h2 id="sal400">給与400万円の単身だと、順位が入れ替わる</h2>
+  <p>国保の年額は「人数にかかる額（均等割）」と「所得にかかる額（所得割）」の合計です。収入が少ないと均等割がほとんどを占めるので、<strong>均等割の安い区市が安く</strong>なります。収入が多いと、<strong>所得割の率</strong>が効いてきます。1人あたりの均等割（40〜64歳の合計）は${esc(nm(byK[0]))}の${yen(kintouSum(byK[0].rs))}から${esc(nm(byK.at(-1)))}の${yen(kintouSum(byK.at(-1).rs))}まで、所得割の率の合計は${esc(nm(byR[0]))}の${rateTxt(rateSum(byR[0].rs))}から${esc(nm(byR.at(-1)))}の${rateTxt(rateSum(byR.at(-1).rs))}までです。</p>
+  ${moves.length ? `<p>収入0円のときと給与400万円のときで順位がよく動くのは、${moves.map((m) => `${esc(m.x.munis[0].city)}（${m.a}番目→${m.b}番目）`).join('・')}です。</p>` : ''}
+  <div class="table-wrap"><table class="fit">
+  <thead><tr><th>順位・区市</th><th class="num">${esc(S.short)}<br><small>40〜64歳（円・年）</small></th><th class="num">収入0円の<br>ときの順位</th></tr></thead>
+  <tbody>
+${t2}
+  </tbody></table></div>
+
+  <h2 id="notes">この表の決まりごと</h2>
+  <ul>
+  <li><strong>所得の申告が要ります</strong>。世帯の誰かが所得を申告していないと、7割・5割・2割の軽減は付きません。収入が0円の人も、住民税の申告（または確定申告）をしておく必要があります。</li>
+  <li>65〜74歳の人は国保の介護分がかからず、そのかわり<strong>介護保険料を別に納めます</strong>。介護保険料も区市町村ごとに違いますが、この表には入っていません。</li>
+  <li>大人だけの世帯で比べています。子どもがいる世帯は、未就学児の軽減や区市独自の軽減があるので、この表では比べていません。</li>
+  <li>「保険税」の市は、年税額の100円未満の切り捨てなど端数の決まりが「保険料」の区と違います。それぞれの区市の計算例に合わせて計算しています。</li>
+  <li>国保に入った月からの月割り、減免、後期高齢者医療に移った人がいる世帯は計算に入れていません。実際の額は区市町村から届く決定通知書で確かめてください。</li>
+  ${notYet.length ? `<li>${esc(notYet.map((r) => r.city).join('・'))}は、東京都の一覧に料率がありますが、まだ公表の計算例と突き合わせていないので載せていません（順位を付けていません）。</li>` : ''}
+  ${oz != null ? `<li>参考：大阪府は府内の43市町村で保険料が同じ（府内統一）で、収入0円の単身（40〜64歳）は年${yen(oz)}です。世帯にかかる平等割があるぶん、東京都のどの区市よりも高い額です。</li>` : ''}
+  </ul>
+  <div class="callout note"><p><span class="tag">会社都合で辞めた人</span>倒産・解雇・雇止めなどで離職した65歳未満の人は、前年の給与を3割として国保を計算してもらえます（届け出が必要）。区市ごとの年額は<a href="https://taishoku-kokuho.com/">退職後の国保しらべ</a>にあります。</p></div>
+
+  <h2>あわせて読む</h2>
+  <ul>
+  <li><a href="${up}hikazei/#kokuho">国保が7割・5割・2割軽くなる年収（全国共通）</a></li>
+  <li><a href="${up}hikazei/ken/13/">東京都の住民税非課税の年収の目安（区市町村別）</a></li>
+  <li><a href="${up}mitoshi/kogaku/">高額療養費の上限額の記録</a>（医療費の月の上限）</li>
+  </ul>
+
+  <div class="sources">
+  <h2>出典と確かめ方</h2>
+  <ul>
+  ${[...new Map(TK_ROWS.flatMap((x) => x.rs.sources).filter((s) => /metro\.tokyo/.test(s.url)).map((s) => [s.url, s])).values()].map((s) => `<li>${esc(s.name)} <a href="${esc(s.url)}" rel="nofollow">${esc(s.url)}</a></li>`).join('\n  ')}
+  <li>国保の軽減の線＝${esc(KG.law)}</li>
+  ${srcRows}
+  <li>額の計算は、全部の区市で同じ式（フクシルの国保の計算・1か所）を使っています。誤りを見つけられた場合は contact@fukushiru.com までご連絡ください。確かめて直します。</li>
+  </ul>
+  </div>
+`
+  const ld = [
+    { ...articleLd(title, desc, '/hikazei/kokuho-tokyo/'), datePublished: TK_PUBLISHED },
+    bcLd(items),
+    { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faq.map(([q, a]) => ({ '@type': 'Question', name: q, acceptedAnswer: { '@type': 'Answer', text: a } })) },
+  ]
+  return page({ title, desc, canonical: '/hikazei/kokuho-tokyo/', depth: 2, body, jsonld: ld })
+}
+
 // ── 10. 書き出し ──────────────────────────────────────────────────────────────
 const out = [['hikazei/index.html', '/hikazei/', hubPage(), '0.8']]
+if (TK.length) out.push(['hikazei/kokuho-tokyo/index.html', '/hikazei/kokuho-tokyo/', tokyoRankPage(), '0.8'])
 for (const [p2, pref] of PREFS) out.push([`hikazei/ken/${p2}/index.html`, `/hikazei/ken/${p2}/`, prefPage(p2, pref), '0.7'])
 for (const r of M) out.push([`hikazei/${r.code}/index.html`, `/hikazei/${r.code}/`, muniPage(r), '0.6'])
 
