@@ -100,23 +100,30 @@ export const setOf = (code) => {
   return id ? { id, ...K.rateSets[id] } : null
 }
 const cut = (yen, lv) => Math.floor((yen * (10 - lv)) / 10)
+const floorTo = (yen, unit) => (unit ? Math.floor(yen / unit) * unit : yen)
+//   端数（rs.round）。保険「税」の市町村は地方税法の端数の決まりがかかるので、公表の計算例に合わせて料率ごとに持つ。
+//   base＝所得割の算定の基礎（区分ごとの、基礎控除後の所得の合計）を何円未満切り捨てるか
+//   part＝区分ごとの額（上限で頭打ちしたあと）を何円未満切り捨てるか
+//   total＝年額（区分の合計）を何円未満切り捨てるか
+//   書いていない料率は今までどおり（1円未満切り捨てだけ）。
 //   opt.lv を渡すと軽減の割合を決め打ちする（0＝所得の申告をしていなくて軽減されない場合の額を出すとき）。
 export const annual = (rs, members, opt = {}) => {
   if (members.some((m) => m.age < 6)) throw new Error('6歳未満の子どもがいる世帯はこの計算では扱いません（未就学児の軽減）')
   const lv = opt.lv ?? keigenOf(members)
+  const R = rs.round || {}
   const parts = rs.parts.map((p) => {
     const inPart = p.ages ? members.filter((m) => m.age >= p.ages[0] && m.age <= p.ages[1]) : members
     if (!inPart.length) return { id: p.id, label: p.label, yen: 0, shotokuwari: 0, kintou: 0, byodo: 0 }
-    const base = inPart.reduce((a, m) => a + Math.max(0, shotoku(m) - G.base), 0)
+    const base = floorTo(inPart.reduce((a, m) => a + Math.max(0, shotoku(m) - G.base), 0), R.base)
     const shotokuwari = Math.floor((base * p.rate) / 100000)      // 率は10万分の1の整数（9.50%＝9500）
     const payers = p.adultsOnly ? inPart.filter((m) => m.age >= 18) : inPart
     const adults = inPart.filter((m) => m.age >= 18)
     const kintou = cut(p.kintou, lv) * payers.length + (p.kintou18 ? cut(p.kintou18, lv) * adults.length : 0)
     const byodo = p.byodo ? cut(p.byodo, lv) : 0
-    const yen = Math.min(p.cap, shotokuwari + kintou + byodo)
+    const yen = floorTo(Math.min(p.cap, shotokuwari + kintou + byodo), R.part)
     return { id: p.id, label: p.label, yen, shotokuwari, kintou, byodo, capped: shotokuwari + kintou + byodo > p.cap }
   })
-  return { lv, total: parts.reduce((a, p) => a + p.yen, 0), parts }
+  return { lv, total: floorTo(parts.reduce((a, p) => a + p.yen, 0), R.total), parts }
 }
 
 // ── 表示 ────────────────────────────────────────────────────────────────────

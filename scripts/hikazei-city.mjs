@@ -218,13 +218,44 @@ const annualRows = (rs, hh) => hh.rows.map((x) => {
   return `<tr><th scope="row">${x ? manT(x) : '0円'}${tag ? `<br><small>${tag}</small>` : ''}</th><td>${lvTxt(a.lv)}</td><td class="num">${yen(a.total)}</td></tr>`
 }).join('\n')
 const rateList = (rs) => rs.parts.map((p) => `<li>${esc(p.label)}：所得割 ${rateTxt(p.rate)}・均等割 ${yen(p.kintou)}${p.kintou18 ? `＋18歳以上均等割 ${yen(p.kintou18)}（18歳以上1人あたり${yen(p.kintou + p.kintou18)}・18歳未満は全額軽減）` : p.adultsOnly ? '（18歳以上1人あたり）' : ''}${p.byodo ? `・平等割 ${yen(p.byodo)}` : '・平等割なし'}・年の上限 ${man(p.cap)}${p.ages ? `（${p.ages[0]}〜${p.ages[1]}歳の人だけ）` : ''}</li>`).join('\n  ')
-const COVERED = Object.values(KK.rateSets).map((x) => x.short).join('・')
+// 年額を出せる範囲。東京は区市ごとに料率が違い、料率の組の名前を並べると長くなるので、都道府県ごとに数えて言う。
+const KCOV = PREFS.map(([p2, pref]) => [p2, pref, muniOfPref(p2).filter((r) => kSetOf(r.code))]).filter(([, , a]) => a.length)
+const COVERED = KCOV.map(([p2, pref, a]) => {
+  const all = muniOfPref(p2).length
+  if (a.length === all) return `${pref}の全${all}市町村`
+  const ku = a.filter((r) => /区$/.test(r.city)).length, shi = a.filter((r) => /市$/.test(r.city)).length, etc = a.length - ku - shi
+  return `${pref}の${[ku && `${ku}区`, shi && `${shi}市`, etc && `${etc}町村`].filter(Boolean).join('と')}`
+}).join('・')
+
+// ── 6c. 東京都の区市の国保の年額の順位（看板 /hikazei/kokuho-tokyo/ と、各区市のページの1行）─────────────
+//   ★2026-09-26 ユーザー裁定 v275（#140「ぜひやろう」）＝市区町村を負担の重さで並べてよい。「厳しい・甘い」のラベルは付けない。
+//   並べるのは、料率を公式の計算例と1円で合わせた区市だけ（町村・島しょは、東京都の一覧に料率があっても突き合わせるまで順位を付けない）。
+//   世帯は収入を固定して比べる（住民税の非課税の線は級地で違う＝羽村市・あきる野市は2級地。線で比べると収入が揃わない）。
+//   同じ料率の区（23区の統一保険料の20区）は1行にまとめる。順位は区市ごとに数える（同じ額は同じ順位）。
+const TK = M.filter((r) => pref2(r) === '13' && kSetOf(r.code))
+const RANK_PEN = STDLINES['1'][1].p65   // 1級地で、配偶者を扶養する65歳以上の年金の世帯が住民税非課税になる上限
+const RANK_HH = [
+  { id: 'zero', label: '単身・40〜64歳・収入0円', short: '収入0円の単身', mk: () => [{ age: 45 }] },
+  { id: 'pen2', label: `夫婦2人・65〜74歳・年金${man(RANK_PEN)}（もう1人は年金なし）`, short: `年金${man(RANK_PEN)}の夫婦`, mk: () => [{ age: 70, pen: RANK_PEN }, { age: 70 }] },
+  { id: 'sal400', label: '単身・40〜64歳・給与収入400万円', short: '給与400万円の単身', mk: () => [{ age: 45, sal: 4000000 }] },
+]
+const TK_ROWS = [...TK.reduce((m, r) => { const id = kSetOf(r.code).id; if (!m.has(id)) m.set(id, []); m.get(id).push(r); return m }, new Map())]
+  .map(([id, munis]) => { const rs = kSetOf(munis[0].code); return { id, munis, rs, v: Object.fromEntries(RANK_HH.map((h) => [h.id, kAnnual(rs, h.mk()).total])) } })
+// 区市ごとの順位（安いほうから）。自分より安い区市の数＋1＝同じ額なら同じ順位
+const tkRank = (key, row) => 1 + TK_ROWS.filter((x) => x.v[key] < row.v[key]).reduce((a, x) => a + x.munis.length, 0)
+const tkRowOf = (code) => TK_ROWS.find((x) => x.munis.some((r) => r.code === code)) || null
+const tkName = (row, up) => (row.munis.length > 1
+  ? `${esc(row.rs.short)}<br><small>${row.munis.length}区が同じ額</small>`
+  : `<a href="${up}hikazei/${row.munis[0].code}/">${esc(row.munis[0].city)}</a>`)
+if (TK.length && TK_ROWS.some((x) => RANK_HH.some((h) => !Number.isInteger(x.v[h.id]) || x.v[h.id] <= 0))) die('東京都の国保の年額に0円以下か数でない値があります')
+
 const kokuhoSourceLi = (r) => {
   const rs = r ? kSetOf(r.code) : null
   if (!rs) return ''
   return `<li>国保の料率＝${rs.sources.map((x) => `${esc(x.name)} <a href="${esc(x.url)}" rel="nofollow">${esc(x.url)}</a>`).join('／')}（${esc(rs.checkedAt)}に確認）。年額の計算は${rs.checks.map((c) => esc(c.src)).join('・')}と1円単位で一致を確かめています</li>`
 }
 const kokuhoPrefNote = (p2, pref) => {
+  if (p2 === '13' && TK.length) return `<p class="mini-note">国保：${esc(pref)}は区市町村ごとに国保の料率が違います。料率を公式の計算例と1円で合わせた${TK.length}区市の年額を同じ世帯で並べた<a href="../../kokuho-tokyo/">${esc(pref)}の国民健康保険料（税）の比較</a>があります。区市名を押すと、国保が7割・5割・2割軽くなる年収と、年収ごとの年額の目安が出ます。</p>`
   const rs = kSetOf(`${p2}000`)
   if (!rs) return ''
   const z = kAnnual(rs, [{ age: 45 }])
