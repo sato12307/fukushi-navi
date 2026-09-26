@@ -17,17 +17,26 @@ const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..')
 export const K = JSON.parse(fs.readFileSync(path.join(ROOT, 'data', 'kokuho.json'), 'utf8'))
 const G = K.keigen
 
-// ── 世帯の人（member）＝ { age, sal: 給与収入, pen: 公的年金等収入 } ──────────────────────
+// ── 世帯の人（member）＝ { age, sal: 給与収入, pen: 公的年金等収入, hikoji: 非自発的失業の特例 } ─────────
 //   年齢は所得の年の12月31日（令和8年度なら2025年12月31日）の年齢。給与と年金の両方がある人は扱わない
 //   （所得金額調整控除が入って式が変わるため。黙って間違えるより止める）。
+//   hikoji: true ＝倒産・解雇・雇止めなどで離職した人（雇用保険の特定受給資格者・特定理由離職者＝国民健康保険法施行令
+//   第29条の7の2の「特例対象被保険者等」）。前年の給与所得を100分の30とみなし、所得割と軽減（7・5・2割）の判定の
+//   両方をその額で計算する（同条第1項が第29条の7第2項第4号と第6項第1号の両方を読み替える）。給与所得以外は変わらない。
+//   施行令は「百分の三十に相当する金額」とだけ書くので、1円未満は切り捨てる。
 const assertMember = (m) => {
   if (!Number.isInteger(m.age)) throw new Error('年齢がありません')
   if ((m.sal || 0) > 0 && (m.pen || 0) > 0) throw new Error('給与と年金の両方がある人はこの計算では扱いません')
+  if (m.hikoji && m.age >= 65) throw new Error('非自発的失業の特例は離職時65歳未満の人だけです')
 }
 // 総所得金額等（所得割の基礎と、軽減の判定の両方に使う）
 export const shotoku = (m) => {
   assertMember(m)
-  if (m.sal) return kyuyo[G.incomePeriod](m.sal)
+  if (m.sal) {
+    // 給与所得は所得税法の別表第五どおり整数（4,000円刻みの A×0.7−8万円 などを浮動小数で計算すると 2,000,399.9999… になる）
+    const s = Math.round(kyuyo[G.incomePeriod](m.sal))
+    return m.hikoji ? Math.floor((s * 30) / 100) : s
+  }
   if (m.pen) return Math.floor(nenkin(m.pen, m.age >= 65))   // 収入×75%の段は1円未満が出る＝切り捨て
   return 0
 }
@@ -68,6 +77,15 @@ export const lineOf = (kind, n, level) => {
 }
 // 7>5>2 の順に「その割合以上の軽減になる」上限を出す（2割の線＝軽減が何かしら付く上限）
 export const lines = (kind, n) => ({ 7: lineOf(kind, n, 7), 5: lineOf(kind, n, 5), 2: lineOf(kind, n, 2) })
+// 非自発的失業の特例を受けたときの線（稼いでいた人が特例の対象・ほかの人は収入なし）。前年の給与収入の上限（1円単位）。
+export const hikojiLineOf = (n, level, age = 45) => {
+  const ok = (x) => keigenOf([{ age, sal: x, hikoji: true }, ...others('sal', n)]) >= level
+  let lo = 0, hi = 50000000
+  if (!ok(0)) return null
+  while (lo < hi) { const mid = Math.floor((lo + hi + 1) / 2); if (ok(mid)) lo = mid; else hi = mid - 1 }
+  return lo
+}
+export const hikojiLines = (n) => ({ 7: hikojiLineOf(n, 7), 5: hikojiLineOf(n, 5), 2: hikojiLineOf(n, 2) })
 
 // ── 保険料の年額 ───────────────────────────────────────────────────────────────
 //   区分（医療分・後期高齢者支援金分・介護分・子ども・子育て支援金分）ごとに
@@ -137,6 +155,28 @@ export const selfCheck = () => {
     }
     for (const p of rs.parts) if (!Number.isInteger(p.rate) || !Number.isInteger(p.kintou) || !Number.isInteger(p.byodo) || !Number.isInteger(p.cap) || (p.kintou18 != null && !Number.isInteger(p.kintou18))) return `${rs.name}：${p.label}の料率に欠けがあります`
     if (!rs.sources || !rs.sources.length || !rs.checkedAt) return `${rs.name}：出典か確認日がありません`
+  }
+  // (4) 非自発的失業の特例：給与所得を100分の30に（給与収入500万円＝給与所得356万円→106万8,000円）
+  const h500 = shotoku({ age: 45, sal: 5000000, hikoji: true })
+  if (h500 !== 1068000) return `非自発的失業の特例の所得が違います。計算 ${h500} ／ 期待 1068000（給与所得356万円×30/100）`
+  // (5) 特例の線の内側と外側：線の額ならその割合、1円上なら1段下がる。特例の線は通常の線より高い
+  for (const n of [1, 2, 3, 4, 5]) {
+    const H = hikojiLines(n), L = lines('sal', n)
+    for (const lv of [7, 5, 2]) {
+      const x = H[lv]
+      const mk = (y) => [{ age: 45, sal: y, hikoji: true }, ...others('sal', n)]
+      if (keigenOf(mk(x)) < lv || keigenOf(mk(x + 1)) >= lv) return `特例の線の境目がずれています（${n}人・${lv}割）：${x}円`
+      if (!(x > L[lv])) return `特例の線が通常の線より高くありません（${n}人・${lv}割）`
+    }
+  }
+  // (6) 特例を受けた年額は、受けないときの年額を超えない（料率ごと・年齢帯ごと・給与収入100万〜2,000万円）
+  for (const [id, rs] of Object.entries(K.rateSets)) {
+    for (const age of [30, 50]) {
+      for (let s = 1000000; s <= 20000000; s += 100000) {
+        const a = annual(rs, [{ age, sal: s }]).total, b = annual(rs, [{ age, sal: s, hikoji: true }]).total
+        if (b > a) return `${rs.name}：特例の年額が通常より高くなりました（${age}歳・給与収入${s}円）`
+      }
+    }
   }
   for (const [p2, id] of Object.entries(K.prefSets)) if (!K.rateSets[id]) return `都道府県${p2}の料率 ${id} がありません`
   for (const [code, id] of Object.entries(K.muniSets)) if (!K.rateSets[id]) return `市区町村${code}の料率 ${id} がありません`
