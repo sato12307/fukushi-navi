@@ -7,8 +7,9 @@
 //   ① 月の上限（所得区分ごと）＝全国共通。額と区分は data/jiritsu.json だけが持つ（出典＝こども家庭庁・厚労省の審議会資料）。
 //   ② 1割で受けられるのは、受給者証に書いた指定医療機関（病院・診療所・薬局・訪問看護）だけ。変えるときは届け出る。
 //   ③ 指定医療機関の一覧は都道府県・指定都市ごと。公式の一覧への入口を67機関ぶん並べる（リンクはどこでも可）。
-//   ④ 一覧そのもの（名称・所在地）を載せるのは、再利用を明記している機関だけ（HOST_POLICY）。
-//      それ以外も手元では毎月の版を取り続ける（前の版から外れた機関の履歴は、あとから誰も作れない）。
+//   ④ 一覧そのもの（名称・所在地・電話）を全機関ぶん載せる（HOST_POLICY＝facts・2026-09-26 ユーザー裁定「事実ベースなので著作権はない。公開してくれ」）。
+//      規約で再利用を明記している機関は、その利用条件（CC BY・PDL など）を書く。それ以外は「事実を並べ直したもの」と書く。
+//      毎月の版の積み重ねは非公開の jiritsu-ledger に残す（前の版から外れた機関の履歴は、あとから誰も作れない）。
 //
 // ★言ってはいけないこと
 //   ・「外れた」を「取消」「廃止」と断定しない（辞退・移転・名称変更・一覧の書き方の変更もある）。判定のラベルは付けない。
@@ -22,22 +23,47 @@ import { page, esc, SITE } from './shogai-kojo-page.mjs'
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..')
 const D = JSON.parse(fs.readFileSync(path.join(ROOT, 'data', 'jiritsu.json'), 'utf8'))
-const AUTH_PATH = path.resolve(ROOT, '..', 'jiritsu-ledger', 'authorities.json')   // 調査のメモ（規約の判定）ごと非公開の親リポジトリに置く
-// ★版はフクシルの中に置かない（リポジトリの根ごと GitHub Pages に出るので data/ も公開される）。親リポジトリ（非公開）の jiritsu-ledger に置く。
+const AUTH_PATH = path.resolve(ROOT, '..', 'jiritsu-ledger', 'authorities.json')   // 調査のメモ（規約の判定）ごと非公開の台帳に置く
+// ★版はフクシルの中に置かない（リポジトリの根ごと GitHub Pages に出るので data/ も公開される）。
+//   非公開のリポジトリ sato12307/jiritsu-ledger（手元では ../jiritsu-ledger）に置く。毎月の取得は .github/workflows/jiritsu-monthly.yml。
 const VER_DIR = path.resolve(ROOT, '..', 'jiritsu-ledger', 'versions')
 const DRY = process.argv.includes('--dry')
 const TODAY = new Date(Date.now() + 9 * 3600 * 1000).toISOString().slice(0, 10)
 const die = (m) => { console.error(m); console.error('何も書き出していません。'); process.exit(1) }
 
 // ★一覧を載せてよい機関の決め方（1か所）。'explicit' ＝サイトの規約が再利用を明記している機関だけ。
-//   'facts' に変えると、名称・所在地などの事実として全機関を載せる（ユーザー裁定が出るまで explicit のまま）。
-const HOST_POLICY = 'explicit'
+//   'facts' ＝名称・所在地・電話番号という事実として全機関を載せる（2026-09-26 ユーザー裁定で facts）。
+const HOST_POLICY = 'facts'
 const hosted = (a) => (HOST_POLICY === 'facts' ? true : a.reuse === 'ok')
 
-if (!fs.existsSync(AUTH_PATH)) die('data/jiritsu/authorities.json がありません（調査結果をまとめてから）')
+if (!fs.existsSync(AUTH_PATH)) die('../jiritsu-ledger/authorities.json がありません（調査結果をまとめてから・git -C ../jiritsu-ledger pull）')
 const A = JSON.parse(fs.readFileSync(AUTH_PATH, 'utf8'))
 if (A.length !== 67) die(`機関の数が67ではありません（${A.length}）`)
+
+// ★手元の jiritsu-ledger が古いまま build すると、毎月の取得（GitHub Actions）が載せた新しい版を古い版で上書きしてしまう。
+//   入口のページに「版のいちばん新しい取得日・確認日」を書いておき、手元の版がそれより古ければ書き出す前に止める。
+const IDX = path.join(ROOT, 'jiritsu', 'index.html')
+const ON_SITE = fs.existsSync(IDX) ? (fs.readFileSync(IDX, 'utf8').match(/<!-- jiritsu-ledger: (\d{4}-\d{2}-\d{2}) -->/) || [])[1] || '' : ''
+let ledgerMax = ''
 const yen = (n) => `${n.toLocaleString('ja-JP')}円`
+
+// 一覧の時点の書き方は機関ごとにばらばら（「令和８年（2026年）９月１日現在」「R8.8.1現在（ファイル内表題）」「９月１日時点（2026年）」
+// 「2026年9月1日付け」）。画面では「令和8年9月1日現在」の形にそろえる。読めないものはそのまま出す。
+const asOfTxt = (s) => {
+  const t = String(s || '').normalize('NFKC').replace(/\s+/g, '')
+  const hits = []
+  for (const m of t.matchAll(/令和(\d+|元)(?:\(\d{4}年?\))?年(?:\(\d{4}年?\))?(\d{1,2})月(?:(\d{1,2})日)?/g)) hits.push([m.index, m[0].length, m[1] === '元' ? 1 : +m[1], +m[2], m[3] && +m[3]])
+  for (const m of t.matchAll(/R(\d{1,2})\.(\d{1,2})(?:\.(\d{1,2}))?/g)) hits.push([m.index, m[0].length, +m[1], +m[2], m[3] && +m[3]])
+  for (const m of t.matchAll(/(20\d\d)(?:年|-)(\d{1,2})(?:月|-)(?:(\d{1,2})日?)?/g)) hits.push([m.index, m[0].length, +m[1] - 2018, +m[2], m[3] && +m[3]])
+  if (!hits.length) {
+    const md = t.match(/(\d{1,2})月(\d{1,2})日/), y = t.match(/(20\d\d)年/)
+    if (md && y) hits.push([md.index, md[0].length, +y[1] - 2018, +md[1], +md[2]])
+  }
+  if (!hits.length) return t
+  const [i, len, ry, mo, d] = hits.sort((a, b) => a[0] - b[0])[0]
+  const suf = (t.slice(i + len).match(/^(現在|時点|付け?|指定|更新|取得)/) || [])[1] || ''
+  return `令和${ry}年${mo}月${d ? `${d}日` : ''}${suf.replace('付け', '付')}`
+}
 
 // 版（取得した一覧を正規化したもの）を読む。versions/<code>/<YYYY-MM-DD>.json＝{ asOf, fetched, rows:[{kind,name,zip,addr,tel}] }
 const versionsOf = (code) => {
@@ -45,7 +71,10 @@ const versionsOf = (code) => {
   if (!fs.existsSync(dir)) return []
   return fs.readdirSync(dir).filter((f) => /^\d{4}-\d{2}-\d{2}\.json(\.gz)?$/.test(f)).sort().map((f) => {
     const buf = fs.readFileSync(path.join(dir, f))
-    return JSON.parse((f.endsWith('.gz') ? zlib.gunzipSync(buf) : buf).toString('utf8'))
+    const v = JSON.parse((f.endsWith('.gz') ? zlib.gunzipSync(buf) : buf).toString('utf8'))
+    v.asOf = asOfTxt(v.asOf)
+    v.asOfByKind = Object.fromEntries(Object.entries(v.asOfByKind || {}).map(([k, x]) => [k, asOfTxt(x)]))
+    return v
   })
 }
 const KIND_ORDER = ['病院・診療所', '薬局', '訪問看護']
@@ -71,6 +100,7 @@ for (const a of A) {
   const vs = versionsOf(a.code)
   if (!vs.length) { console.warn(`載せる機関なのに版がありません（先に取得と読み取り）: ${a.authority}`); continue }
   const cur = vs[vs.length - 1], prev = vs.length > 1 ? vs[vs.length - 2] : null
+  for (const d of [cur.fetched, cur.checked]) if (d && d > ledgerMax) ledgerMax = d
   const byKind = Object.fromEntries(KIND_ORDER.map((k) => [k, cur.rows.filter((r) => r.kind === k)]))
   let diffHtml = `<p>前の版と比べられるのは、次の版を取得してからです（この機関の最初の版は ${esc(cur.asOf)}）。一覧は毎月取り直して、載らなくなった機関と新しく載った機関をここに並べます。</p>`
   if (prev) {
@@ -88,11 +118,12 @@ for (const a of A) {
 <tbody>${byKind[k].map((r) => `<tr><td>${esc(r.name)}</td><td>${esc([r.zip ? `〒${r.zip}` : '', r.addr].filter(Boolean).join(' '))}</td>${hasTel ? `<td class="num">${esc(r.tel || '')}</td>` : ''}${hasSince ? `<td class="num">${esc(r.since || '')}</td>` : ''}</tr>`).join('\n')}</tbody></table></div>`
   const total = cur.rows.length
   const asOfOf = (k) => (cur.asOfByKind && cur.asOfByKind[k]) || cur.asOf   // 種類ごとに時点が違う一覧（岡山県）
-  // 利用条件（CC BY・PDL など）と、このサイトで形を変えたこと（CC BY・PDL は編集・加工を書く決まり）
-  const lic = a.license || { name: `${a.authority}のサイトの利用規約`, url: a.termsUrl }
+  // 利用条件（CC BY・PDL など）と、このサイトで形を変えたこと（CC BY・PDL は編集・加工を書く決まり）。
+  // 再利用の明記が無い機関は、利用条件を名乗らず「事実を並べ直したもの」と書く（元の表の体裁・説明文は使っていない）。
+  const lic = a.reuse === 'ok' ? (a.license || { name: `${a.authority}のサイトの利用規約`, url: a.termsUrl }) : null
   const credit = `<ul class="sources"><li>出典：<a href="${esc(a.pageUrl)}" rel="noopener">${esc(a.authority)}「${esc(a.pageTitle || '指定自立支援医療機関（精神通院医療）の一覧')}」</a>（${esc(cur.asOf)}）</li>
-<li>利用条件：<a href="${esc(lic.url || '')}" rel="noopener">${esc(lic.name)}</a></li>
-<li>このサイトで編集・加工しています（種類ごとに分けて並べ、郵便番号・電話番号の書き方をそろえました）。正しい内容は出典の一覧で確かめてください。</li></ul>`
+${lic ? `<li>利用条件：<a href="${esc(lic.url || '')}" rel="noopener">${esc(lic.name)}</a></li>
+<li>このサイトで編集・加工しています（種類ごとに分けて並べ、郵便番号・電話番号の書き方をそろえました）。正しい内容は出典の一覧で確かめてください。</li>` : `<li>医療機関の名称・所在地・電話番号という事実を、種類ごとに分けて並べ直したものです（郵便番号・電話番号の書き方をそろえました。元の表の体裁や説明文は使っていません）。正しい内容は出典の一覧で確かめてください。</li>`}</ul>`
   const search = `<p><label>名前や住所で絞り込む：<input type="search" id="jq" placeholder="例：〇〇クリニック・〇〇市" style="width:100%;max-width:420px"></label></p>`
   const filterJs = `<script>(function(){var q=document.getElementById('jq');if(!q)return;q.addEventListener('input',function(){var v=q.value.trim();document.querySelectorAll('table.jiritsu-list tbody tr').forEach(function(tr){tr.style.display=!v||tr.textContent.indexOf(v)>=0?'':'none'})})})();</script>`
   const SUB = { '薬局': 'yakkyoku', '訪問看護': 'houmon' }
@@ -142,7 +173,7 @@ ${filterJs}`
 const rowOf = (a) => {
   const h = hostedList.find((x) => x.a.code === a.code)
   const files = (a.files || []).map((f) => fmtLabel[f.format] || f.format).filter((v, i, arr) => arr.indexOf(v) === i).join('・')
-  const asOf = h ? h.cur.asOf : ((a.files || [])[0] || {}).asOf || ''
+  const asOf = h ? h.cur.asOf : asOfTxt(((a.files || [])[0] || {}).asOf)
   return `<tr><th scope="row">${esc(a.authority)}</th><td>${a.pageUrl ? `<a href="${esc(a.pageUrl)}" rel="noopener">公式の一覧</a>` : '見つかっていません'}${files ? `<br><small>${esc(files)}</small>` : ''}</td><td>${esc(asOf)}</td><td>${h ? `<a href="ken/${a.code}/">このサイトで探す（${h.total}件）</a>` : '<small>公式の一覧へ</small>'}</td></tr>`
 }
 const prefs = A.filter((a) => a.type === 'pref'), cities = A.filter((a) => a.type === 'city')
@@ -165,12 +196,14 @@ ${tierTable}
 <h2>指定都市の一覧（${cities.length}）</h2>
 <div class="table-wrap"><table><thead><tr><th scope="col">市</th><th scope="col">公式の一覧</th><th scope="col">時点</th><th scope="col">このサイト</th></tr></thead>
 <tbody>${cities.map(rowOf).join('\n')}</tbody></table></div>
-<p class="mini-note">一覧は都道府県・指定都市が毎月〜数か月ごとに改めています。このサイトでは毎月の版を取り続け、前の版から載らなくなった医療機関を並べられるようにしています（名称と所在地を載せているのは、サイトの利用規約で再利用が明記されている機関だけです）。</p>
+<p class="mini-note">一覧は都道府県・指定都市が毎月〜数か月ごとに改めています。このサイトでは毎月、各機関の公式の一覧を取り直して、前の版から載らなくなった医療機関・新しく載った医療機関を並べています。</p>
 <h2>出典</h2>
-${srcList()}`
+${srcList()}
+<!-- jiritsu-ledger: ${ledgerMax} -->`
 pages.push(['jiritsu/index.html', '/jiritsu/', page({ title, desc, canonical: '/jiritsu/', depth: 1, body, jsonld: [{ '@context': 'https://schema.org', '@type': 'Article', headline: title.split('｜')[0], description: desc, inLanguage: 'ja', url: `${SITE}/jiritsu/`, dateModified: D.checked }] }), '0.8'])
 
-if (DRY) { console.log(`ページ ${pages.length}（入口1・一覧を載せる機関 ${hostedList.length}）／ 機関 ${A.length}（うち規約で再利用が明記 ${A.filter((a) => a.reuse === 'ok').length}）`); process.exit(0) }
+if (DRY) { console.log(`ページ ${pages.length}（入口1・一覧を載せる機関 ${hostedList.length}）／ 機関 ${A.length}（うち規約で再利用が明記 ${A.filter((a) => a.reuse === 'ok').length}）／ 版の最新 ${ledgerMax}（公開中 ${ON_SITE || 'なし'}）`); process.exit(0) }
+if (ON_SITE && ON_SITE > ledgerMax) die(`手元の jiritsu-ledger（${ledgerMax}）が公開中の版（${ON_SITE}）より古い。git -C ../jiritsu-ledger pull してから`)
 
 // ── 書き出しと sitemap（lastmod は中身が変わった日だけ進める）──────────────────────────
 const changed = new Set()

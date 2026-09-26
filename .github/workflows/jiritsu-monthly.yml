@@ -1,0 +1,96 @@
+name: 自立支援医療（精神通院）の指定医療機関を取り直す
+
+# 毎月2回（8日・22日 10:00 JST）＋手動。都道府県・指定都市67機関の公式の一覧を取り直して
+#   ① 版（毎月の一覧の積み重ね）を非公開の sato12307/jiritsu-ledger へ
+#   ② 面（/jiritsu/ の201枚と sitemap）をこのリポジトリへ
+# 積み、Pages の配信（pages.yml）を起こす。2026-09-26 ユーザー指示「定期タスクは GitHub Actions で」。
+#
+# ★版をこのリポジトリに置かない：フクシルはリポジトリの根ごと GitHub Pages に出る（data/ も公開される）。
+#   面に出すのは「いまの一覧」と「前の版からの出入り」だけ。版の積み重ねは非公開の台帳に残す。
+#   台帳への書き込みは deploy key（jiritsu-ledger だけ・書き込み可）を secret JIRITSU_LEDGER_KEY に入れてある。
+# ★多くの機関はファイルのURLを毎月変える → scripts/jiritsu-fetch.py が一覧のページからリンクを取り直す（台帳の links.json）。
+# ★半分より多くの機関が読めない日は取得の工程が落ちる（接続元のIPが弾かれた疑い）→ 何もコミットしない。
+#   機関ごとの NG は実行の要約（Summary）に表で出る。
+# ★GITHUB_TOKEN の push では pages.yml が起きない（GitHub の仕様）→ 最後に workflow_dispatch で起こす。
+
+on:
+  schedule:
+    - cron: "0 1 8,22 * *"   # 毎月8日・22日 01:00 UTC = 10:00 JST（月初に改める機関と月半ばの機関の両方を拾う）
+  workflow_dispatch:
+    inputs:
+      only:
+        description: "1機関だけ（コード。空なら全機関）"
+        required: false
+        default: ""
+
+permissions:
+  contents: write
+  actions: write
+
+concurrency:
+  group: jiritsu-monthly
+  cancel-in-progress: false
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    steps:
+      - name: フクシルを取る
+        uses: actions/checkout@v4
+        with:
+          path: fukushi-navi
+      - name: 版の台帳（非公開）を取る
+        uses: actions/checkout@v4
+        with:
+          repository: sato12307/jiritsu-ledger
+          path: jiritsu-ledger
+          ssh-key: ${{ secrets.JIRITSU_LEDGER_KEY }}
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: 読み取りの道具
+        run: pip install --quiet openpyxl xlrd pdfplumber beautifulsoup4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: 一覧を取り直して読む（版と links.json を台帳に書く）
+        working-directory: fukushi-navi
+        env:
+          ONLY: ${{ inputs.only }}
+        run: python scripts/jiritsu-fetch.py ${ONLY:+--only "$ONLY"}
+
+      - name: 版を台帳へ積む
+        working-directory: jiritsu-ledger
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add versions links.json
+          if git diff --cached --quiet; then
+            echo "版の変化なし"
+          else
+            git commit -q -m "版: $(TZ=Asia/Tokyo date +%F) の取得（Actions）"
+            git push origin HEAD:main || { git pull --rebase origin main && git push origin HEAD:main; }
+          fi
+
+      - name: 面を作り直す
+        working-directory: fukushi-navi
+        run: node scripts/jiritsu-build.mjs
+
+      - name: 面をコミットして配信を起こす
+        working-directory: fukushi-navi
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add jiritsu sitemap.xml
+          if git diff --cached --quiet; then
+            echo "面の変化なし"
+          else
+            git commit -q -m "chore(jiritsu): 指定医療機関の一覧を取り直した $(TZ=Asia/Tokyo date +%F)"
+            git pull --rebase -X theirs origin main
+            git push origin HEAD:main
+            gh workflow run pages.yml --ref main
+          fi
