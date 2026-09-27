@@ -458,7 +458,7 @@ const prefPage = (p2, pref) => {
 ${rows}
   </tbody></table></div>
   <p class="mini-note">「夫婦」は配偶者を扶養している世帯（扶養1人）。収入が表の額以下なら非課税の目安です。障害年金・遺族年金は収入に数えません。</p>
-  <p><a href="${up}hikazei/">ほかの都道府県から探す</a> ／ <a href="${up}mitoshi/hikazei/">線が年度ごとにどう動いたか</a> ／ <a href="${up}articles/juminzei-hikazei-check.html">自分の収入で判定する</a></p>
+  <p><a href="${up}hikazei/">ほかの都道府県から探す</a> ／ <a href="${up}hikazei/nenkin-ranking/">年金だけの人の線（全国一覧）</a> ／ <a href="${up}mitoshi/hikazei/">線が年度ごとにどう動いたか</a> ／ <a href="${up}articles/juminzei-hikazei-check.html">自分の収入で判定する</a></p>
   ${sourcesList(null, null)}
 `
   return page({ title, desc, canonical: `/hikazei/ken/${p2}/`, depth: 3, body, jsonld: [articleLd(title, desc, `/hikazei/ken/${p2}/`), bcLd(items)] })
@@ -489,6 +489,7 @@ const hubPage = () => {
 ${grid}
   </tbody></table></div>
   <p class="mini-note">収入が表の額以下なら非課税の目安です。「夫婦」は配偶者を扶養している世帯。2級地・3級地は、市町村が条例で丸めていると少し違います。${surveyTxt()}</p>
+  <p><a href="${up}hikazei/nenkin-ranking/"><strong>年金だけで暮らす65歳以上の人の線を、全国の市区町村の一覧で見る</strong></a>（同じ額の市区町村をまとめて高い順）</p>
   <h2 id="kokuho">国民健康保険（国保）が7割・5割・2割軽くなる年収（全国共通・${esc(KG.nendo)}）</h2>
   <p>国保の保険料のうち人数と世帯にかかる部分（均等割・平等割）は、前の年の所得が少ないと7割・5割・2割軽くなります。この線は国の政令で決まっていて全国共通です。住民税の非課税の線とは別の物差しで、たとえば給与だけの単身は、1級地で住民税が非課税になるのは${man(STDLINES['1'][0].sal8)}以下ですが、国保の7割軽減は${man(K7SAL)}以下です。</p>
   ${kokuhoLines()}
@@ -500,6 +501,7 @@ ${prefLinks}
   <h2>あわせて読む</h2>
   <ul>
   <li><a href="${up}mitoshi/hikazei/">住民税非課税の年収の線は、いつ・いくら動いたか</a>（令和3年度〜令和10年度の記録）</li>
+  <li><a href="${up}hikazei/nenkin-ranking/">年金だけで暮らす人の住民税非課税ライン（全国の市区町村の一覧）</a></li>
   <li><a href="${up}articles/juminzei-hikazei-check.html">住民税非課税の判定</a>（年収・扶養・級地を入れて判定）</li>
   <li><a href="${up}mitoshi/kogaku/">高額療養費の上限額の記録</a>（非課税世帯の区分の額）</li>
   </ul>
@@ -617,9 +619,72 @@ ${t2}
   return page({ title, desc, canonical: '/hikazei/kokuho-tokyo/', depth: 2, body, jsonld: ld })
 }
 
+// ── 9c. 年金だけで暮らす65歳以上の人の線を、全国の市区町村で並べる（看板 /hikazei/nenkin-ranking/）──────────────
+//   ★2026-09-27 発案第151回の生存案・ユーザー裁定 v277（#150＝年金生活の読み手はフクシルの中で増床）。
+//   額は lines()（県のページ・市区町村のページと同じ）をそのまま使う＝手で書かない。同じ額の市区町村をまとめて、額の高い順に並べる。
+//   線は級地と、2級地・3級地の条例の丸めで決まる（公式ページで確かめた額は data/hikazei-city-checks.json）。
+const NR_PUBLISHED = '2026-09-27'
+const nenkinRankPage = () => {
+  const up = '../../'
+  const groups = [...M.reduce((m, r) => {
+    const Ls = lines(r), key = `${Ls[0].p65}|${Ls[1].p65}`
+    if (!m.has(key)) m.set(key, { p1: Ls[0].p65, p2: Ls[1].p65, rows: [] })
+    m.get(key).rows.push(r)
+    return m
+  }, new Map()).values()].sort((a, b) => b.p1 - a.p1 || b.p2 - a.p2)
+  const kyuchiSet = (g) => [...new Set(g.rows.map((r) => r.zeiKyuchi))].sort().map(kyuchiName).join('・')
+  const nRounded = (g) => g.rows.filter((r) => statusOf(r) === 'rounded').length
+  const whyOf = (g) => (nRounded(g) === g.rows.length ? `${kyuchiSet(g)}で、条例で額を丸めている市町村（公式ページで確かめた額）` : kyuchiSet(g) === '1級地' ? '1級地（政令で決まった額）' : `${kyuchiSet(g)}（国の標準の値${g.rows.some((r) => statusOf(r) === 'match') ? '・一部は公式ページで一致を確かめた' : ''}）`)
+  const summary = groups.map((g) => `<tr><td class="num"><strong>${manT(g.p1)}</strong></td><td class="num"><strong>${manT(g.p2)}</strong></td><td class="num">${g.rows.length.toLocaleString('ja-JP')}</td><td class="nm">${esc(whyOf(g))}</td></tr>`).join('\n')
+  const mark = (r) => { const st = statusOf(r); return st === 'rounded' ? '<small>（条例で丸め）</small>' : st === 'match' ? '<small>（公表と一致）</small>' : '' }
+  const sections = groups.map((g, i) => {
+    const byPref = [...g.rows.reduce((m, r) => m.set(r.pref, [...(m.get(r.pref) || []), r]), new Map()).entries()]
+    return `<h2 id="g${i + 1}">単身 ${manT(g.p1)}・夫婦 ${manT(g.p2)}（${g.rows.length.toLocaleString('ja-JP')}市区町村）</h2>
+  <p class="mini-note">${esc(whyOf(g))}</p>
+  <ul class="nr">
+${byPref.map(([pref, rs]) => `<li data-p="${esc(pref)}"><strong>${esc(pref)}</strong>：${rs.map((r) => `<span class="m"><a href="${up}hikazei/${r.code}/">${esc(r.city)}</a>${mark(r)}</span>`).join('')}</li>`).join('\n')}
+  </ul>`
+  }).join('\n')
+  const top = groups[0], low = groups.at(-1)
+  const title = `年金だけで暮らす人の住民税非課税ライン｜全国${M.length.toLocaleString('ja-JP')}市区町村の一覧（65歳以上の単身・夫婦・令和8年度）｜フクシル`
+  const desc = `65歳以上で年金だけの人が住民税非課税になる年金収入の目安を、全国${M.length.toLocaleString('ja-JP')}市区町村で額の高い順にまとめました。単身は${man(top.p1)}〜${man(low.p1)}、夫婦（配偶者を扶養）は${man(top.p2)}〜${man(low.p2)}以下が目安。住んでいる市区町村の級地と条例で決まります。`
+  const items = [['ホーム', 'index.html'], ['住民税非課税の年収（市区町村別）', 'hikazei/'], ['年金だけの人の線（全国一覧）', null]]
+  const faq = [
+    ['年金だけで暮らしている65歳以上の人は、年金がいくらまでなら住民税が非課税ですか？', `住んでいる市区町村で違います。単身なら${man(top.p1)}以下（${whyOf(top)}）から${man(low.p1)}以下（${whyOf(low)}）まで、夫婦（配偶者を扶養）なら${man(top.p2)}以下から${man(low.p2)}以下までです（令和8年度）。障害年金・遺族年金は収入に数えません。`],
+    ['障害者やひとり親の場合は？', `本人が障害者・ひとり親・寡婦なら、級地によらず前年の合計所得135万円以下で非課税です。65歳以上で年金だけなら年金収入${man(SPECIAL.p65)}以下が目安です。`],
+  ]
+  const body = `${CSS}<style>ul.nr{padding-left:1.1em}ul.nr li{margin:.35em 0;line-height:1.9}ul.nr span.m{display:inline-block;margin-right:.9em}</style>
+  ${crumbs(items, up)}
+  <p class="updated">最終確認：${esc(CHECKED)}</p>
+  <h1>年金だけで暮らす人の住民税非課税ライン<br><small>全国${M.length.toLocaleString('ja-JP')}市区町村の一覧（65歳以上・令和8年度）</small></h1>
+  <p class="lead">65歳以上で年金だけの人が住民税非課税になる<strong>年金収入の目安</strong>は、住んでいる市区町村の<strong>級地</strong>（生活保護と同じ地域の区分）と、2級地・3級地では市町村の<strong>条例</strong>で決まります。同じ額の市区町村をまとめて、額の高い順に並べました。市区町村名を押すと、扶養4人までの線・65歳未満の線・国保の軽減まで出ます。</p>
+  <div class="table-wrap"><table class="fit">
+  <caption>年金だけ・65歳以上の住民税非課税ライン（年金収入・令和8年度）</caption>
+  <thead><tr><th class="num">単身</th><th class="num">夫婦<br><small>配偶者を扶養</small></th><th class="num">市区町村</th><th>どこか</th></tr></thead>
+  <tbody>
+${summary}
+  </tbody></table></div>
+  <p class="mini-note">収入が表の額以下なら非課税の目安です。障害年金・遺族年金は収入に数えません。65歳未満（繰上げ受給など）は線が下がります。本人が障害者・ひとり親・寡婦なら、級地によらず年金収入${man(SPECIAL.p65)}以下が目安です（65歳以上）。世帯の全員が非課税なら「住民税非課税世帯」です。令和9年度も、年金の人の線は変わりません（給与の人だけ上がります）。</p>
+  <p><label>市区町村名・都道府県名で絞り込む：<input type="search" id="nq" placeholder="例：名古屋市・北海道" style="width:100%;max-width:420px"></label></p>
+${sections}
+  <h2>この一覧の確かめ方</h2>
+  <p>額は、県のページ・市区町村のページと同じ計算（フクシルの住民税非課税の計算・1か所）から出しています。式は大阪市・名古屋市の公表値と1円まで一致することを、作り直すたびに確かめています。2級地・3級地で市町村が条例で額を丸めているところは、公式ページ（または例規集）で確かめた額で出しています（「条例で丸め」の印）。${surveyTxt()}</p>
+  <p><a href="${up}hikazei/">都道府県から探す</a> ／ <a href="${up}articles/juminzei-hikazei-check.html">自分の収入で判定する</a> ／ <a href="${up}mitoshi/hikazei/">線が年度ごとにどう動いたか</a></p>
+  ${sourcesList(null, null)}
+  <script>(function(){var q=document.getElementById('nq');if(!q)return;q.addEventListener('input',function(){var v=q.value.trim();document.querySelectorAll('ul.nr li').forEach(function(li){var p=li.getAttribute('data-p')||'',hit=0;li.querySelectorAll('span.m').forEach(function(m){var ok=!v||p.indexOf(v)>=0||m.textContent.indexOf(v)>=0;m.style.display=ok?'':'none';if(ok)hit++});li.style.display=hit?'':'none'})})})();</script>
+`
+  const ld = [
+    { ...articleLd(title, desc, '/hikazei/nenkin-ranking/'), datePublished: NR_PUBLISHED },
+    bcLd(items),
+    { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faq.map(([q, a]) => ({ '@type': 'Question', name: q, acceptedAnswer: { '@type': 'Answer', text: a } })) },
+  ]
+  return page({ title, desc, canonical: '/hikazei/nenkin-ranking/', depth: 2, body, jsonld: ld })
+}
+
 // ── 10. 書き出し ──────────────────────────────────────────────────────────────
 const out = [['hikazei/index.html', '/hikazei/', hubPage(), '0.8']]
 if (TK.length) out.push(['hikazei/kokuho-tokyo/index.html', '/hikazei/kokuho-tokyo/', tokyoRankPage(), '0.8'])
+out.push(['hikazei/nenkin-ranking/index.html', '/hikazei/nenkin-ranking/', nenkinRankPage(), '0.8'])
 for (const [p2, pref] of PREFS) out.push([`hikazei/ken/${p2}/index.html`, `/hikazei/ken/${p2}/`, prefPage(p2, pref), '0.7'])
 for (const r of M) out.push([`hikazei/${r.code}/index.html`, `/hikazei/${r.code}/`, muniPage(r), '0.6'])
 
