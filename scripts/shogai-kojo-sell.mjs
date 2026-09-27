@@ -173,6 +173,9 @@ write('pack/index.html', page({
 <script>
 (function(){
   var sel=document.getElementById('mun'), btn=document.getElementById('buy'), msg=document.getElementById('msg');
+  ${/* ★2026-09-28 市区町村のページ（/shogai-kojo/<6桁>.html ・/hikazei/<5桁>/）は「〇〇市版」として ?code=<6桁> つきで
+       ここへ案内している。受け取っていなかったので、437件の中から自分の街を選び直させていた。版がある市区町村だけ選んでおく。 */''}var q=/[?&]code=(\\d{6})(?:&|$)/.exec(location.search);
+  if(q && sel.querySelector('option[value="'+q[1]+'"]')) sel.value=q[1];
   btn.addEventListener('click', function(){
     if(!sel.value){ msg.textContent='市区町村を選んでください'; return; }
     if(window.__ev) window.__ev('buy_click');
