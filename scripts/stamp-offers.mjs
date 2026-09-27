@@ -12,8 +12,13 @@
 // ★どの記事に置くかを、この1つの表で決める
 //   手書きの記事が40枚あり、目で数えると必ず抜ける。表と実際の枚数を最後に突き合わせる。
 //   ここに無い記事には置かない（商品と関係のない記事に売り場を置かない）。
+//
+// ★2026-09-28 撒き餌の面（住民税非課税・生活保護・高額療養費・全国横断の公営住宅）に、有料の3系統への
+//   入口（offerHub）も貼る。目印：<!-- hub:<話題> --> … <!-- /hub -->。表は下の HUBS。
 import fs from 'node:fs'
-import { offerPackLeaf, offerToeiLeaf, jumpPack, jumpToei } from './offer-block.mjs'
+import path from 'node:path'
+import { offerPackLeaf, offerToeiLeaf, jumpPack, jumpToei, offerHub } from './offer-block.mjs'
+import { CITIES } from './koei-lib.mjs'
 
 // ★2026-09-08(2) 東京都以外の記事から都営の売り場を外した
 //   商品は東京都の都営住宅だけを扱う。札幌市・福岡市などの記事や、全国横断の記事に置くと
@@ -118,7 +123,29 @@ const TARGETS = {
 // ★置くのは「商品と読者が合っている面」だけ（下の表の jumpBefore）。
 //   住民税非課税・高額療養費・生活保護の面は、読者の用事と商品（親の障害者控除の手順書）が
 //   ずれているので案内を強めない。カードはそのまま置く（面そのものは撒き餌として価値がある）。
+//   ★2026-09-28 この3面（と全国横断の公営住宅の面）には、1行の案内ではなく下の HUBS の入口を置く
+//     ことにした（ユーザー指示「撒き餌の面から有料への導線をしっかり目立つところに」）。
 const jump = (kind) => (kind === 'toei' ? jumpToei() : jumpPack())
+
+// ── 撒き餌の面の入口（2026-09-28 ユーザー指示）────────────────────────────────
+// 人が降りている面（住民税非課税・生活保護・高額療養費）から、有料の3系統（親の障害者控除・都営・
+// 政令市の市営住宅）へ行く入口。文面の正典は offer-block.mjs の offerHub()。ここは「どの面に・どの話題で・
+// どこに」だけを決める。目印：<!-- hub:<話題> --> … <!-- /hub -->（剥がしてから入れ直す）。
+// ★位置は ① の見出しの直前＝面の要点の囲み（最初の答え）のすぐ下。冒頭の案内（jumpBefore）と同じ高さ。
+// ★全国横断の公営住宅の面（2026-09-08(2) に都営のカードを外した面）にも置く。外した理由は「読者の地域と
+//   商品が合わない」だったが、入口は地域（東京都・各市）を名札にして並べ、読者が自分で選ぶ形にしている。
+// ★生成ページ（/hikazei/<市区町村>/・seikatsuhogo-jisshitsu・seikatsuhogo-shinsei-jichitai・/mitoshi/）は
+//   各生成器が offerHub() を呼ぶので、ここには書かない（書くと生成し直したときに消える）。
+const HUBS = {
+  'juminzei-hikazei-check.html': { topic: 'hikazei', before: /  <h2[^>]*>① 早見表：非課税になる収入ライン/ },
+  'seikatsuhogo-keisanki.html': { topic: 'seiho', before: /  <h2[^>]*>① まず結論：単身なら月いくら？/ },
+  'kougaku-ryouyouhi-2026.html': { topic: 'kogaku', before: /  <h2[^>]*>① 早見表：月の自己負担上限額/ },
+  'koei-shunyu-kijun.html': { topic: 'koei', before: /  <h2[^>]*>① 早見表：収入基準に収まる年収の目安/ },
+  'koei-yachin-keisan.html': { topic: 'koei', before: /  <h2[^>]*>① 公営住宅の家賃は/ },
+  'koei-jutaku-bairitsu.html': { topic: 'koei', before: /  <h2 id="toukei">公営住宅の応募倍率 統計データ/ },
+  'koei-hairiyasui.html': { topic: 'koei', before: /  <h2>大前提：収入基準を満たしていること<\/h2>/ },
+}
+const hubMark = /\n*<!-- hub:[a-z]+ -->[\s\S]*?<!-- \/hub -->\n*/
 
 const block = (t) => {
   const card = t.kind === 'pack' ? offerPackLeaf({ peek: t.peek, up: '../' }) : offerToeiLeaf({ up: '../' })
@@ -127,7 +154,7 @@ const block = (t) => {
 }
 
 const files = fs.readdirSync('articles').filter((f) => f.endsWith('.html'))
-const missing = Object.keys(TARGETS).filter((f) => !files.includes(f))
+const missing = [...Object.keys(TARGETS), ...Object.keys(HUBS)].filter((f) => !files.includes(f))
 if (missing.length) { console.error('表にあるのに記事が無い:', missing.join(', ')); process.exit(1) }
 
 // ★before があれば「剥がしてから入れ直す」。貼り直すだけの実装だと、表に書いた位置を直しても
@@ -165,6 +192,20 @@ for (const f of files) {
   if (out !== raw) changedFiles.push(f)
   fs.writeFileSync(p, out)
 }
+// 撒き餌の面の入口。上のカードを貼り終えたあとの記事に入れる（同じ記事に両方ある面がある）。
+let hubbed = 0
+for (const [f, h] of Object.entries(HUBS)) {
+  const p = 'articles/' + f
+  const raw = fs.readFileSync(p, 'utf8')
+  const crlf = raw.includes('\r\n')
+  let s = raw.replace(/\r\n/g, '\n').replace(hubMark, '\n\n')
+  if (!h.before.test(s)) { failed.push(`${f}（入口の位置）`); continue }
+  s = s.replace(h.before, (m) => `<!-- hub:${h.topic} -->\n${offerHub(h.topic, { up: '../' })}\n  <!-- /hub -->\n\n${m}`)
+  hubbed++
+  const out = crlf ? s.replace(/\n/g, '\r\n') : s
+  if (out !== raw && !changedFiles.includes(f)) changedFiles.push(f)
+  fs.writeFileSync(p, out)
+}
 if (failed.length) { console.error('位置が見つからない:', failed.join(', ')); process.exit(1) }
 
 // ★2026-09-13 中身が変わった記事は sitemap.xml の lastmod を今日（日本時間）にする。
@@ -192,9 +233,30 @@ for (const f of Object.keys(TARGETS)) n[TARGETS[f].kind]++
 console.log(`位置を決め直し ${moved} ／ その場で貼り直し ${replaced} ／ 新規 ${inserted} ／ 冒頭の案内 ${jumped} ／ 表 ${Object.keys(TARGETS).length}枚（pack ${n.pack}・toei ${n.toei}）／ 実際にカードのある記事 ${has.length}枚`)
 if (has.length !== Object.keys(TARGETS).length) { console.error('★数が合わない'); process.exit(1) }
 // 冒頭の案内を書いた面に実際に入っているか（目印ではなくリンクの実在で数える）
+// ★2026-09-28 検算を直した。冒頭の案内の行き先はいま売り場（/pack/ ・/toei/）なのに、ここは記事内の
+//   カードへの href="#offer-…" を探していて、案内が正しく入っていても毎回 exit 1 で止まっていた。
 {
   const want = Object.entries(TARGETS).filter(([, t]) => t.jumpBefore)
-  const miss = want.filter(([f, t]) => !fs.readFileSync('articles/' + f, 'utf8').includes(`href=\"#offer-${t.kind}\"`))
+  const miss = want.filter(([f, t]) => {
+    const m = /<!-- jump -->([\s\S]*?)<!-- \/jump -->/.exec(fs.readFileSync('articles/' + f, 'utf8'))
+    return !m || !m[1].includes(`href="/${t.kind}/"`)
+  })
   if (miss.length) { console.error('★冒頭の案内が入っていない: ' + miss.map(([f]) => f).join(', ')); process.exit(1) }
   console.log(`冒頭の案内を置いた面 ${want.length}枚：${want.map(([f]) => f).join('・')}`)
+}
+// 撒き餌の面の入口：3系統の売り場へのリンクが実際にあり、行き先のページが実在するか。
+// 表から外した記事に入口が残っていないか（剥がすのは表にある記事だけなので、外した記事は手で消す）。
+{
+  const stray = files.filter((f) => !HUBS[f] && /<!-- hub:[a-z]+ -->/.test(fs.readFileSync('articles/' + f, 'utf8')))
+  if (stray.length) { console.error('★表に無い記事に入口が残っている: ' + stray.join(', ')); process.exit(1) }
+  const sells = ['pack', 'toei', ...Object.keys(CITIES).map((k) => `${k}/moushikomisaki`)]
+  const bad = []
+  for (const f of Object.keys(HUBS)) {
+    const m = /<!-- hub:[a-z]+ -->([\s\S]*?)<!-- \/hub -->/.exec(fs.readFileSync('articles/' + f, 'utf8'))
+    const hrefs = m ? [...m[1].matchAll(/href="([^"]+)"/g)].map((x) => x[1]) : []
+    for (const s of sells) if (!hrefs.includes(`../${s}/`)) bad.push(`${f}（${s} へのリンクが無い）`)
+    for (const h of hrefs) if (!fs.existsSync(path.join('articles', h.split('?')[0], 'index.html'))) bad.push(`${f}（行き先が無い：${h}）`)
+  }
+  if (bad.length) { console.error('★入口のリンク: ' + bad.join(', ')); process.exit(1) }
+  console.log(`撒き餌の面の入口 ${hubbed}枚（売り場${sells.length}か所へのリンクと行き先を確認）：${Object.keys(HUBS).join('・')}`)
 }

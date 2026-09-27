@@ -29,6 +29,8 @@
 import fs from 'node:fs'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
+// 有料の資料への入口（2026-09-28 ユーザー指示「撒き餌の面から有料への導線を目立つところに」）。文面は offer-block.mjs。
+import { offerHub } from './offer-block.mjs'
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..')
 const SRC = path.join(ROOT, 'data', 'seiho-ranking.json')
@@ -202,6 +204,8 @@ const html = `<!DOCTYPE html>
     <p><span class="tag">先に読んでください</span><strong>これは「どこに住めば得か」の表ではありません。</strong>生活保護は住む場所を選べる制度ではなく、転居には福祉事務所の判断が要ります。この表は<strong>「同じ制度なのに、実際に買える量がどれだけ違うか」を見るための物差し</strong>です。</p>
     <p><strong>冬季加算を含んでいません。</strong>11月〜3月などの期間、地区別に暖房費の上乗せがあります。寒い地域ほど厚いので、<strong>この表は寒冷地を実際より低く見せています</strong>。金額は地区と世帯人員で決まるため、ここでは金額を出していません（一次情報で地区別の表を確認できていないので、推定して書きません）。お住まいの地区の額は福祉事務所で確認してください。</p>
   </div>
+
+${offerHub('seiho', { up: '../' })}
 
   <h2>① 生活扶助の差より、電気代の差のほうが大きい</h2>
   <p>級地で決まる生活扶助は、${num(sMin)}円（2級地-1）から${num(sMax)}円（1級地-1）まで<strong>${p1((sMax / sMin - 1) * 100)}%</strong>しか違いません。ところが同じ月の電気代は<strong>${eMin.city}の${num(eMin.denkiMonth)}円から${eMax.city}の${num(eMax.denkiMonth)}円まで${p1(eMax.denkiMonth / eMin.denkiMonth)}倍</strong>ひらきます。<strong>制度が地域差として認めている幅より、電気代の地域差のほうがずっと大きい</strong>ということです。</p>

@@ -22,6 +22,8 @@ import fs from 'node:fs'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { page, esc, SITE } from './shogai-kojo-page.mjs'
+// 有料の資料への入口（2026-09-28 ユーザー指示「撒き餌の面から有料への導線を目立つところに」）。文面は offer-block.mjs。
+import { offerHub } from './offer-block.mjs'
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..')
 const D = JSON.parse(fs.readFileSync(path.join(ROOT, 'data', 'mitoshi-kogaku.json'), 'utf8'))
@@ -102,6 +104,8 @@ const body = `${FIT_CSS}
   <div class="callout note"><p><span class="tag">先に知っておいてください</span>
   <strong>2025年1月の当初案は、一度も実施されていません。</strong>このページで「当初案より低い」と書くのは<strong>案どうしの比較</strong>で、実際に払う額が下がったという意味ではありません。
   実際に払う額は「これまで → 2026年8月〜 → 2027年8月〜」の順に<strong>上がっています</strong>。</p></div>
+
+${offerHub('kogaku', { up: '../../' })}
 
   <h2>① いま決まっていること</h2>
   <ul>

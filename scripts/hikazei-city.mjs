@@ -26,6 +26,7 @@ import path from 'node:path'
 import vm from 'node:vm'
 import { fileURLToPath } from 'node:url'
 import { page, esc, SITE } from './shogai-kojo-page.mjs'
+import { offerHub } from './offer-block.mjs'
 import { D, L, NS, maxIncome, maxPension, kintouLim, shotokuLim, SPECIAL_LIM, man, manT, selfCheck } from './hikazei-lib.mjs'
 import { K as KK, selfCheck as kokuhoCheck, lines as kLines, annual as kAnnual, setOf as kSetOf, yen, rateTxt, lvTxt } from './kokuho-lib.mjs'
 
@@ -348,6 +349,15 @@ const muniPage = (r) => {
   if (exists(`houkatsu/${r.code6}.html`)) life.push(`<li><strong>地域包括支援センター</strong>：<a href="${up}houkatsu/${r.code6}.html">${esc(r.city)}の担当センターを住所から引く</a>。</li>`)
   life.push(`<li><strong>非課税世帯になると変わること</strong>：医療費の月の上限が「住民税非課税」の区分になります（<a href="${up}mitoshi/kogaku/">高額療養費の上限額の記録</a>）。給付金の対象になることもあります（<a href="${up}articles/juminzei-hikazei-check.html#merit">非課税世帯のおもな得</a>）。</li>`)
 
+  // 有料の資料への入口（2026-09-28 ユーザー指示「撒き餌の面から有料への導線を目立つところに」）。文面は offer-block.mjs。
+  // ★この市区町村で実際に買えるものだけを並べる（手順書はその市区町村の版があるとき・都営は東京都・市営は政令市5市）。
+  //   1つも無い市区町村では出さない。買えない商品へ案内すると、売り場で自分の街が見つからずに終わる。
+  const koeiKey = kh && kh[0] !== 'toei/' ? kh[0].replace(/\/$/, '') : null
+  const paid = offerHub('hikazei', { up, local: { city: r.city, code: r.code6, pack: exists(`shogai-kojo/${r.code6}.html`), toei: kh?.[0] === 'toei/', koei: koeiKey } })
+  for (const href of [...paid.matchAll(/href="\.\.\/\.\.\/([^"?]*)/g)].map((m) => m[1])) {
+    if (!exists(`${href}index.html`)) die(`${name}：有料の入口の行き先がありません（/${href}）`)
+  }
+
   // 同じ県で線が違う市町村
   const same = muniOfPref(pref2(r))
   const groups = ['1', '2', '3'].filter((g) => g !== k).map((g) => [g, same.filter((x) => x.zeiKyuchi === g)]).filter(([, a]) => a.length)
@@ -365,7 +375,7 @@ const muniPage = (r) => {
   <h1>${esc(name)}の住民税非課税の年収の目安<br><small>世帯人数別・給与と年金（令和8年度・令和9年度）と国保の軽減</small></h1>
 
   <p class="lead">${esc(r.city)}は、住民税の非課税の線を決める地域の区分で<strong>${kyuchiName(k)}</strong>です（生活保護の級地は${esc(r.kyuchi)}）。${why}</p>
-
+${paid ? `\n${paid}\n` : ''}
   <h2>① 令和8年度に住民税がかからない年収の目安</h2>
   <p>令和8年度（2026年6月から納める分）の住民税は、<strong>2025年1〜12月の収入</strong>で決まります。均等割も所得割もかからない、いちばん下の線です。</p>
   <div class="table-wrap"><table class="fit">

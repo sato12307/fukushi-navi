@@ -16,6 +16,8 @@
 //   「4件以上」「5倍未満」「16回」も資料と同じ定数から受け取る（TOEI_FACTS）。手で書くと資料を作り直したときにずれる。
 import { TOEI_PEEK, TOEI_PEEK_NOTE, TOEI_FACTS } from './toei-peek.mjs'
 import { peekBox } from './peek-box.mjs'
+// 政令市の市営住宅（商品の一覧と値段）の正典。ここに市名を書き写すと、市を足したときに入口だけ古いまま残る。
+import { CITIES, PRICE as KOEI_PRICE } from './koei-lib.mjs'
 
 export const PACK_PRICE = 500
 export const TOEI_PRICE = 500
@@ -83,6 +85,102 @@ export function jumpPack() {
 export function jumpToei() {
   return `  <div class="callout note">
     <p><span class="tag">有料の一覧</span>このページの相場は全部無料です。そのうえで<strong>住宅名を1つに決める</strong>ところまで要るなら、定期募集${TOEI_FACTS.rounds}回を名寄せして<strong>当たりやすさと住みやすさが両方そろう申込先${TOEI_FACTS.gold}件</strong>を住宅名つきで並べた一覧（<strong>${TOEI_PRICE}円</strong>・買い切り）があります。<a href="/toei/">中身と値段を見る →</a></p>
+  </div>`
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// 撒き餌の面から有料の3系統へ行く入口（2026-09-28 ユーザー指示「導線をしっかり目立つとこに」）
+//
+// ★なぜ要るか
+//   人が降りている面の上位は住民税非課税・生活保護・高額療養費（09-13〜09-27・日本からの入口860のうち
+//   この3面で480＝56%）。そこから有料へ行く道は、本文の3画面目あたりにある .offer-link の段落1つだけで、
+//   .offer-link には CSS が無く地の文と同じ見た目だった（tools/css-class-check.mjs が未定義と出していた）。
+//   行き先も親の障害者控除だけで、都営・政令市の市営住宅へは1本も無かった。
+//   ∴ 面の最初の答えのすぐ下（① の見出しの前）に、3系統の入口を1枚にまとめて置く。
+// ★売り場は独自ページだけ（2026-09-19 ユーザー裁定）を崩さない
+//   置くのはリンクだけ。買うボタン・抜粋・data-offer は置かない（buy.js に拾わせない／「売り場に着いた」段を
+//   消さない）。押されると assets/ev.js が to_pack / to_toei を立て、着いた先で pack_view / toei_view /
+//   <市>_view が立つ。段の定義（tools/buy-funnel-ships.mjs）はそのまま使える。
+// ★見た目はトップの「このサイトで売っているもの」と同じ .offer.gold（有料の案内だけ金色＝艦隊で揃えた色）。
+//   新しい class は作らない。.offer でも data-offer が無ければ buy.js は触らない。
+// ★面ごとに違うのは「見出し・読者に向けた一言・並べる順」だけ（HUB_TOPIC）。商品の名前はここ1か所。
+//   手書きの記事へは scripts/stamp-offers.mjs が貼り、生成ページは各生成器がこれを呼ぶ。
+// ★短く保つ。最初は商品ごとに説明文を付けて、390px幅で高さ約1,000px（1.2画面ぶん）になり、
+//   面の答え（① の表）を丸1画面以上押し下げていた（2026-09-28 実測）。中身の説明は売り場に任せ、
+//   ここは「有料であること・値段・何の資料か・この面の読者に効く理由を1文」だけにする。
+// ─────────────────────────────────────────────────────────────────────────────
+const LEAD_HOUSE = '公営住宅は<strong>収入が少ないほど家賃が下がる</strong>しくみで、壁になるのは倍率（抽選）です。'
+const HUB_TOPIC = {
+  // 住民税非課税の判定・早見表・線の記録
+  hikazei: {
+    order: ['pack', 'toei', 'koei'],
+    head: '親の税金を取り戻す・家賃を下げるための資料',
+    lead: '要介護の親御さんは、市区町村の認定で住民税の非課税の線が<strong>合計所得135万円まで上がる</strong>ことがあります。',
+  },
+  // 生活保護の計算・実質・申請
+  seiho: {
+    order: ['toei', 'koei', 'pack'],
+    head: '家賃を下げる・家族の税金を取り戻すための資料',
+    lead: LEAD_HOUSE,
+  },
+  // 高額療養費の上限・版の記録
+  kogaku: {
+    order: ['pack', 'toei', 'koei'],
+    head: '医療費がかさむ世帯が、税金と家賃を軽くするための資料',
+    lead: '医療費がかかっているのが要介護の親御さんなら、障害者控除で<strong>過去5年分の税金を取り戻せる</strong>ことがあります。',
+  },
+  // 公営住宅の収入基準・家賃・倍率（全国横断）。読者の地域は決められないので、地域を名札にして並べ、読者に選ばせる。
+  koei: {
+    order: ['toei', 'koei', 'pack'],
+    head: '申し込む住宅を1つに決めるための資料',
+    lead: '1回だけ空いた住宅と、<strong>いつ見ても空いている住宅</strong>は、募集回を横に並べないと見分けられません。',
+  },
+}
+const HUB_PRICE = { pack: PACK_PRICE, toei: TOEI_PRICE, koei: KOEI_PRICE }
+const hubItem = {
+  pack: ({ up, local }) => `  <li><a href="${up}pack/${local ? `?code=${esc(local.code)}` : ''}"><strong>親の障害者控除、過去5年分をさかのぼって取り戻す手順書</strong></a>${local ? `（${esc(local.city)}版）` : ''}</li>`,
+  toei: ({ up }) => `  <li><a href="${up}toei/"><strong>都営住宅で「毎回すいている申込先」の一覧</strong></a>（東京都）</li>`,
+  koei: ({ up, local }) => {
+    if (local) {
+      const c = CITIES[local.koei]
+      return `  <li><a href="${up}${c.key}/moushikomisaki/"><strong>${esc(c.city)}営住宅で「毎回すいている申込先」の一覧</strong></a></li>`
+    }
+    const links = Object.values(CITIES).map((c) => `<a href="${up}${c.key}/moushikomisaki/"><strong>${esc(c.city)}</strong></a>`).join('・')
+    return `  <li>市営住宅で「毎回すいている申込先」の一覧：${links}</li>`
+  },
+}
+
+/**
+ * 撒き餌の面に置く「有料の資料」の入口。topic … HUB_TOPIC のキー　up … ルートへの相対
+ * local … 市区町村のページ（/hikazei/<5桁>/）用。{ city, code, pack, toei, koei }
+ *   code＝6桁の団体コード　pack＝その市区町村の手順書がある　toei＝東京都　koei＝政令市のキー（CITIES）か null
+ *   その市区町村で実際に買えるものだけを並べ、1つも無ければ何も出さない（買えない商品へ案内しない）。
+ */
+export function offerHub(topic, { up = '../', local = null } = {}) {
+  const T = HUB_TOPIC[topic]
+  if (!T) throw new Error(`offerHub: 知らない面です（${topic}）`)
+  let { order, head, lead } = T
+  if (local) {
+    if (local.koei && !CITIES[local.koei]) throw new Error(`offerHub: 政令市のキーが違います（${local.koei}）`)
+    order = order.filter((k) => (k === 'koei' ? !!local.koei : !!local[k]))
+    if (!order.length) return ''
+    const house = order.includes('toei') || order.includes('koei')
+    head = `${[order.includes('pack') && '親の税金を取り戻す', house && '家賃を下げる'].filter(Boolean).join('・')}ための資料`
+    // 一言は1文だけ。手順書が買える市区町村では、その市区町村の認定の話（この面の非課税の線に直に効く）を優先する。
+    lead = order.includes('pack')
+      ? `要介護の親御さんは、${esc(local.city)}の認定で住民税の非課税の線が<strong>合計所得135万円まで上がる</strong>ことがあります。`
+      : LEAD_HOUSE
+  }
+  const prices = [...new Set(order.map((k) => HUB_PRICE[k]))]
+  const kicker = prices.length === 1 ? `有料の資料・${order.length > 1 ? '各' : ''}${prices[0]}円（買い切り）` : '有料の資料（買い切り）'
+  return `  <div class="offer gold" id="offer-hub">
+  <span class="kicker">${kicker}</span>
+  <h3>${head}</h3>
+  <p>${lead}</p>
+  <ul>
+${order.map((k) => hubItem[k]({ up, local })).join('\n')}
+  </ul>
+  <p class="fine"><strong>買わなくても手続き・申し込みはできます。</strong>このページも、制度の説明も全部無料です。</p>
   </div>`
 }
 

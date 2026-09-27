@@ -24,6 +24,8 @@
 import fs from 'node:fs'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
+// 有料の資料への入口（2026-09-28 ユーザー指示「撒き餌の面から有料への導線を目立つところに」）。文面は offer-block.mjs。
+import { offerHub } from './offer-block.mjs'
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..')
 const SRC = path.join(ROOT, 'data', 'hogo-shinsei.json')
@@ -356,6 +358,8 @@ const html = `<!DOCTYPE html>
     <p><span class="tag">先に読んでください</span><strong>「却下率が低い＝審査が甘い」ではありません。</strong>却下率の分母は<strong>申請までたどり着いた人</strong>だけです。窓口で申請書を渡さずに帰した場合、その人は分母にも分子にも入らないので、<strong>却下率はかえって下がります</strong>。逆に、申請を広く受け付けている自治体では、通らない見込みの申請も受理されるぶん却下率は上がります。</p>
     <p>だからこのページは、却下率と一緒に<strong>「人口千人あたり何件の申請が起きているか」</strong>を必ず並べています。実測すると、この2つの相関は<strong>${R_TXT}</strong>しかありません（ほぼ無関係）。<strong>片方から、もう片方を推測することはできません。</strong></p>
   </div>
+
+${offerHub('seiho', { up: '../' })}
 
   <h2>① 全国の却下率は6年上がり続けている</h2>
   <p>申請そのものも増えていますが、却下はそれ以上のペースで増えています。取下げは逆に減っています。</p>

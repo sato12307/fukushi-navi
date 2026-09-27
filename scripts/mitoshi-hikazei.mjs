@@ -22,6 +22,8 @@ import fs from 'node:fs'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { page, esc, SITE } from './shogai-kojo-page.mjs'
+// 有料の資料への入口（2026-09-28 ユーザー指示「撒き餌の面から有料への導線を目立つところに」）。文面は offer-block.mjs。
+import { offerHub } from './offer-block.mjs'
 // 式と材料は hikazei-lib.mjs の1か所だけ（/hikazei/ の市区町村ごとの早見表と共有）
 import { D, L, PER, NS, maxIncome, kintouLim, shotokuLim, man, manT, selfCheck } from './hikazei-lib.mjs'
 
@@ -74,6 +76,8 @@ const body = `${FIT_CSS}
   <p class="lead">住民税が非課税になるかどうかの<strong>線（所得の額）は、${esc(D.plusFrom)}から1円も変わっていません</strong>。
   それでも「非課税の年収が上がった」と言われるのは、給料から差し引かれる<strong>給与所得控除の最低額</strong>が上がり、同じ所得の線に届く<strong>年収</strong>が高くなったからです。
   そのため、動くのは<strong>${moved.map((n) => esc(WHO[n].replace(/（.*）/, ''))).join('・')}</strong>の世帯の年収の目安で、<strong>${still.map((n) => esc(WHO[n].replace(/（.*）/, ''))).join('・')}の世帯は動きません</strong>（1級地・住民税が全部かからない線）。</p>
+
+${offerHub('hikazei', { up: '../../' })}
 
   <h2>① 住民税が全部かからない年収の目安（1級地）</h2>
   <p>均等割も所得割もかからない線です。東京23区・大阪市・名古屋市などの大都市（1級地）。下の小さい字は、1つ前の年度からの動きです。</p>
