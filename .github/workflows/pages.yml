@@ -31,6 +31,10 @@ jobs:
         uses: actions/checkout@v4
       - name: Configure Pages
         uses: actions/configure-pages@v5
+      # AdSense の読み込みタグを全ページの <head> に入れる（2026-09-28）。ページを書く生成器が12か所あり、
+      # 月次の Actions も面を作り直すので、公開の直前のここ1か所で入れる（理由は scripts/stamp-adsense.mjs の冒頭）。
+      - name: Stamp AdSense tag
+        run: node scripts/stamp-adsense.mjs
       - name: Upload artifact (site root)
         uses: actions/upload-pages-artifact@v3
         with:
