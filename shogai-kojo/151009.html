@@ -25,7 +25,7 @@
   "description": "新潟県新潟市で「障害者控除対象者認定」を受けられる基準。要介護認定を受けている65歳以上なら、障害者手帳がなくても所得税27万円・特別障害者なら40万円の控除が使えます。新潟県新潟市が定めた判定ランクの下限を、根拠の例規リンクつきで掲載。",
   "inLanguage": "ja",
   "datePublished": "2026-08-27",
-  "dateModified": "2026-08-27",
+  "dateModified": "2026-09-29",
   "author": {
     "@type": "Organization",
     "name": "フクシル"
@@ -97,6 +97,16 @@
   <li>判定の基準日は、控除を受ける年の<strong>12月31日</strong>です（その年に亡くなった場合はその日）。</li>
   <li><strong>過去の分もさかのぼれる場合があります。</strong>すでに確定申告した年の還付は、原則5年前まで請求できます。</li>
   </ul>
+  <h2 id="idou">障害者手帳があれば：新潟市のタクシー券・燃料費の助成</h2>
+  <p>障害者手帳を持っている人（または家族）は、税の控除とは別に、新潟市からタクシー券や自家用車の燃料費の助成を受けられることがあります。新潟市のいまの案内から、1年分（4月〜翌3月）の額を書き出しました。</p>
+  <ul>
+  <li><strong>対象</strong>：身体1・2級、身体3級（下肢・体幹・移動・内部）、療育A、精神1級など</li>
+  <li><strong>タクシー券</strong>：500円券×52枚＝年26,000円（10月以降の申請は26枚）</li>
+  <li><strong>燃料費</strong>：年10,000円まで（給油の領収書で後払い。10月以降に対象になった人は5,000円まで）</li>
+  <li><strong>選び方</strong>：どちらか1つ</li>
+  <li><strong>所得制限</strong>：案内に記載なし</li>
+  </ul>
+  <p class="note">額は、1年分の期間のはじめに申請した場合の上限です。途中から申請すると少なくなることがあり、施設に入所している人などは対象外になることがあります。JR や有料道路の割引は国の別の制度です。最終的な対象と額は新潟市の窓口で確かめてください。出典＝<a href="https://www.city.niigata.lg.jp/iryo/shofuku/seikatsu/koutsuu/taxi1.html" rel="nofollow">新潟市の案内1</a>・<a href="https://www.city.niigata.lg.jp/iryo/shofuku/seikatsu/koutsuu/nenryouhi1.html" rel="nofollow">新潟市の案内2</a>（2026-09-29確認）。</p>
 
   <div class="sources">
   <h2>出典</h2>
@@ -157,7 +167,18 @@
   // 売り場ごとに名前を分ける。同じ名前にすると、どちらが動いたのか後から分けられない。
   var SELL = [
     { path: '/pack/', view: 'pack_view', click: 'to_pack' },   // 障害者控除の還付申請パック
-    { path: '/toei/', view: 'toei_view', click: 'to_toei' }    // 都営住宅の申込先えらび
+    { path: '/toei/', view: 'toei_view', click: 'to_toei' },   // 都営住宅の申込先えらび
+    // ★政令市5市（2026-09-20 追加）。売り場を /<市>/moushikomisaki/ へ切り出した 2026-09-19 に
+    //   ここへの登録が漏れ、<市>_view が一度も撃たれていなかった。盤面では決済だけが立ち、
+    //   手前の段が全部0に見えていた（数字が無いのであって、0ではない）。
+    // ★買う押（<市>_leaf_buy）は assets/buy.js 側にあり、data-offer とともに動いている。
+    // ★click は置かない。政令市の段は view → buy → pay で、押した段が初めから無い
+    //   （tools/buy-funnel-ships.mjs もそう定義している）。読まない名前を撃つと孤児のキーが増える。
+    { path: '/kawasaki/moushikomisaki/', view: 'kawasaki_view' },
+    { path: '/shizuoka/moushikomisaki/', view: 'shizuoka_view' },
+    { path: '/yokohama/moushikomisaki/', view: 'yokohama_view' },
+    { path: '/kobe/moushikomisaki/', view: 'kobe_view' },
+    { path: '/sagamihara/moushikomisaki/', view: 'sagamihara_view' }
   ]
   for (var i = 0; i < SELL.length; i++) {
     if (location.pathname.indexOf(SELL[i].path) === 0 && location.pathname.indexOf('kanryo') < 0) ev(SELL[i].view)
@@ -168,7 +189,7 @@
     var h = a.getAttribute('href') || ''
     if (h.indexOf('kanryo') >= 0) return
     for (var j = 0; j < SELL.length; j++) {
-      if (h.indexOf(SELL[j].path) >= 0) { ev(SELL[j].click); return }
+      if (h.indexOf(SELL[j].path) >= 0) { if (SELL[j].click) ev(SELL[j].click); return }
     }
   }, true)
 })();

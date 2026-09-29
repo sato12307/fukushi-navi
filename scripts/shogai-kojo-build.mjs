@@ -58,6 +58,30 @@ const readAt = (r) => [r.fetchedAt, r.bessiFetchedAt].filter(Boolean).sort()[0] 
 // ── データを1自治体1件に畳む（読めたものを優先）──────────────────────────────
 const reiki = JSON.parse(fs.readFileSync(path.join(DATA, 'records.json'), 'utf8')).records
 const cities = JSON.parse(fs.readFileSync(path.join(DATA, 'cities-records.json'), 'utf8')).records
+
+// 障害者手帳の移動助成（タクシー券・燃料券）の年額（2026-09-29・ユーザー裁定 v280 #172）。
+// ★自治体の案内・要綱・しおりで令和8年度の額を確かめた市区（data/idou-josei.json）にだけ節を出す。
+//   確かめていない自治体には何も書かない（「助成が無い」とも書かない）。文は自分の言葉で、原文の表を丸写ししない。
+//   国の JR・有料道路の割引は全国で同じ答えの一般論なので載せない（第154回の検証で専門サイトが整理済み）。
+const IDOU = JSON.parse(fs.readFileSync(path.join(ROOT, 'data', 'idou-josei.json'), 'utf8'))
+const idouOf = (code6) => IDOU.items.find((x) => x.code6 === code6)
+const idouSection = (code6) => {
+  const x = idouOf(code6)
+  if (!x) return ''
+  const name = x.name
+  const links = x.sources.map((u, i) => `<a href="${esc(u)}" rel="nofollow">${esc(name)}の案内${x.sources.length > 1 ? i + 1 : ''}</a>`).join('・')
+  return `
+  <h2 id="idou">障害者手帳があれば：${esc(name)}のタクシー券・燃料費の助成</h2>
+  <p>障害者手帳を持っている人（または家族）は、税の控除とは別に、${esc(name)}からタクシー券や自家用車の燃料費の助成を受けられることがあります。${esc(name)}のいまの案内から、1年分（${esc(x.period)}）の額を書き出しました。</p>
+  <ul>
+  <li><strong>対象</strong>：${esc(x.target)}</li>
+  <li><strong>タクシー券</strong>：${esc(x.taxi)}</li>
+  <li><strong>燃料費</strong>：${esc(x.fuel)}</li>
+${x.choose === '案内に記載なし' ? '' : `  <li><strong>選び方</strong>：${esc(x.choose)}</li>
+`}  <li><strong>所得制限</strong>：${esc(x.income)}</li>
+  </ul>
+  <p class="note">${x.note ? esc(x.note) : ''}額は、1年分の期間のはじめに申請した場合の上限です。途中から申請すると少なくなることがあり、施設に入所している人などは対象外になることがあります。JR や有料道路の割引は国の別の制度です。最終的な対象と額は${esc(name)}の窓口で確かめてください。出典＝${links}（${esc(IDOU.checked)}確認）。</p>`
+}
 const score = (r) => (/読めた/.test(r.status) ? 100 : 0) + ['shogai', 'tokubetsu'].reduce((a, k) => a + Object.keys(r[k] || {}).length, 0)
 const byCode = new Map()
 for (const r of [...reiki, ...cities]) {
@@ -169,7 +193,7 @@ ${offerPackLeaf({ code: r.code, name, peek: 'nintei', up: '../' })}
   <li>ほとんどの自治体の基準には<strong>「その他市（区・町・村）長が認めるもの」という条項</strong>があります。表の下限に届いていなくても、状態によっては認定されることがあります。逆に届いていても認定されないことがあります。</li>
   <li>判定の基準日は、控除を受ける年の<strong>12月31日</strong>です（その年に亡くなった場合はその日）。</li>
   <li><strong>過去の分もさかのぼれる場合があります。</strong>すでに確定申告した年の還付は、原則5年前まで請求できます。</li>
-  </ul>
+  </ul>${idouSection(r.code)}
 
   <div class="sources">
   <h2>出典</h2>
@@ -189,7 +213,7 @@ ${offerPackLeaf({ code: r.code, name, peek: 'nintei', up: '../' })}
     title, desc, canonical: `/shogai-kojo/${r.code}.html`, depth: 1, body,
     jsonld: {
       '@context': 'https://schema.org', '@type': 'Article', headline: title.split('｜')[0],
-      description: desc, inLanguage: 'ja', datePublished: at, dateModified: at,
+      description: desc, inLanguage: 'ja', datePublished: at, dateModified: idouOf(r.code) && IDOU.checked > at ? IDOU.checked : at,
       author: { '@type': 'Organization', name: 'フクシル' }, publisher: { '@type': 'Organization', name: 'フクシル' },
       about: { '@type': 'AdministrativeArea', name },
     },
@@ -394,7 +418,7 @@ sm = sm.replace(/^\s*<url>(?:(?!<\/url>)[\s\S])*\/shogai-kojo\/[\s\S]*?<\/url>\n
 // 毎回の再クロールを促しておいて中身が同じ、という信号を送り続けることになる。
 const urls = [`  <url><loc>${SITE}/shogai-kojo/</loc><lastmod>${LATEST}</lastmod><priority>0.9</priority></url>`]
   .concat([...ok, ...notPublished].map((r) =>
-    `  <url><loc>${SITE}/shogai-kojo/${r.code}.html</loc><lastmod>${readAt(r)}</lastmod><priority>0.6</priority></url>`))
+    `  <url><loc>${SITE}/shogai-kojo/${r.code}.html</loc><lastmod>${idouOf(r.code) && IDOU.checked > readAt(r) ? IDOU.checked : readAt(r)}</lastmod><priority>0.6</priority></url>`))
 sm = sm.replace('</urlset>', urls.join('\n') + '\n</urlset>')
 fs.writeFileSync(smPath, sm)
 const total = (sm.match(/<url>/g) || []).length

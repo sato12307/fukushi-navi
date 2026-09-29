@@ -1,0 +1,277 @@
+{
+ "_doc": "障害者手帳の移動助成（タクシー券・燃料券）。/shogai-kojo/〈6桁〉.html に出す（2026-09-29・v280 #172）。自治体の案内・要綱・しおりで令和8年度の額を確かめた19市区だけ。文は自分の言葉で書き、原文の表の丸写しはしない。国の JR・有料道路の割引は別の制度なので載せない。広島市は今期の資料が無く保留。",
+ "checked": "2026-09-29",
+ "items": [
+  {
+   "code6": "111007",
+   "name": "さいたま市",
+   "period": "4月〜翌3月",
+   "target": "身体1・2級、身体3級（下肢・体幹）、療育Ⓐ・A、精神1級、精神2級・身体3級・療育Bのうち2つ以上を持つ人",
+   "taxi": "初乗り運賃分（1枚500円まで）の券×54枚＝年最大27,000円（身体3級の下肢・体幹は36枚）",
+   "fuel": "1リットルあたり50円、年10,000円まで",
+   "choose": "どちらか1つ",
+   "income": "本人の前年度の住民税が非課税の人だけ",
+   "sources": [
+    "https://www.city.saitama.lg.jp/002/003/004/003/003/p001344.html",
+    "https://www.city.saitama.lg.jp/002/003/004/003/003/p001352.html"
+   ]
+  },
+  {
+   "code6": "121002",
+   "name": "千葉市",
+   "period": "8月〜翌7月",
+   "target": "身体1・2級、療育Ⓐ〜A、精神1級、特別児童扶養手当1級・障害児福祉手当・特別障害者手当を受けている人など",
+   "taxi": "運賃の半額（1枚1,300円まで）の券×30枚＝年最大39,000円（寝たきり・車いすでリフト付きなどを使う人は1枚5,500円まで）",
+   "fuel": "3か月ごとに5,000円×4回＝年20,000円（口座振込）",
+   "choose": "どちらか1つ",
+   "income": "あり（特別障害者手当の所得制限の限度額を超える人は対象外）",
+   "sources": [
+    "https://www.city.chiba.jp/hokenfukushi/koreishogai/jiritsu/hukushitakusi.html",
+    "https://www.city.chiba.jp/hokenfukushi/koreishogai/jiritsu/documents/r8taxiannnai.pdf"
+   ]
+  },
+  {
+   "code6": "131024",
+   "name": "中央区",
+   "period": "4月〜翌3月",
+   "target": "身体1〜3級（下肢・体幹）、身体1・2級（内部・視覚）、脳性まひ・進行性筋萎縮症、愛の手帳1・2度、精神1級",
+   "taxi": "タクシー利用券 年48,000円分（4〜6月に申請した場合。7〜9月は36,000円、10〜12月は24,000円、1〜3月は12,000円）",
+   "fuel": "自家用車がある人は燃料費を現金で年48,000円まで（申請した時期による減り方はタクシー券と同じ）",
+   "choose": "どちらか1つ",
+   "income": "案内に記載なし",
+   "sources": [
+    "https://www.city.chuo.lg.jp/a0023/kenkouiryou/shougaishafukushi/shienservice/seikatuken/takusir.html",
+    "https://www.city.chuo.lg.jp/documents/16917/r7_press.pdf"
+   ]
+  },
+  {
+   "code6": "131075",
+   "name": "墨田区",
+   "period": "4月〜翌3月",
+   "target": "身体1・2級（視覚）、身体1〜3級（下肢・体幹・脳病変による移動機能）、内部障害1・2級、愛の手帳1・2度",
+   "taxi": "タクシーにも給油にも使える共通券で年30,000円分（下肢・体幹・脳病変による移動機能・腎臓の1級は40,000円分）",
+   "fuel": "上の共通券で給油にも使える（別の枠ではない）",
+   "choose": "共通券1つ（タクシーと給油を合わせて上の額）",
+   "income": "あり（心身障害者福祉手当の限度額）",
+   "note": "申請した月によって5,000円ずつ減ります。内部障害2級の扱いは区の案内と要綱で書き方が違うため、区に確かめてください。",
+   "sources": [
+    "https://www.city.sumida.lg.jp/kenko_fukushi/syougai/waribiki/taxi.html",
+    "https://www.city.sumida.lg.jp/kenko_fukushi/syougai/tetyou_soudan/syougaifukushitebiki.files/R8fure-8.pdf"
+   ]
+  },
+  {
+   "code6": "131118",
+   "name": "大田区",
+   "period": "4月〜翌3月（申請した月から）",
+   "target": "身体1〜3級（下肢・体幹・移動機能）、身体1・2級（視覚・内部）、愛の手帳1・2度",
+   "taxi": "タクシーにも給油にも使える移送サービス利用券（1枚200円）を月20枚＝年48,000円（65歳以上は月18枚＝年43,200円、生活保護の人は月12枚＝年28,800円）",
+   "fuel": "上の共通券で給油にも使える（別の枠ではない）",
+   "choose": "共通券1つ",
+   "income": "案内に記載なし",
+   "sources": [
+    "https://www.city.ota.tokyo.jp/seikatsu/fukushi/shougai/seikatsushien/seikatsuken/seikatsuken/fukushi.html",
+    "https://www.city.ota.tokyo.jp/seikatsu/fukushi/shougai/seikatsushien/seikatsuken/seikatsuken/fukushi.files/R8_riyouannnai.pdf"
+   ]
+  },
+  {
+   "code6": "131121",
+   "name": "世田谷区",
+   "period": "4月〜翌3月（申請した月から）",
+   "target": "身体1〜3級（下肢・体幹・内部・平衡・脳性まひなどの運動機能）、身体1・2級（視覚）、愛の手帳1・2度",
+   "taxi": "月3,900円分の券（500円券5枚＋100円券14枚）×12か月＝年46,800円",
+   "fuel": "半年ごとに13,800円まで（領収書で後払い）＝年27,600円まで",
+   "choose": "どちらか1つ（施設に入所・長く入院している人は対象外）",
+   "income": "案内に記載なし",
+   "sources": [
+    "https://www.city.setagaya.lg.jp/02084/2758.html",
+    "https://www.city.setagaya.lg.jp/02084/2759.html"
+   ]
+  },
+  {
+   "code6": "131211",
+   "name": "足立区",
+   "period": "4月〜翌3月",
+   "target": "身体1〜3級（下肢・体幹・移動・平衡）、身体1・2級（視覚）、身体1級（内部）、愛の手帳1・2度",
+   "taxi": "タクシーにも給油にも使える共通券 14,000円の冊×3冊＝年42,000円（4〜7月に申請した場合。8〜11月は2冊、12〜3月は1冊）",
+   "fuel": "上の共通券で給油にも使える。身体4級（下肢・移動・本人が運転）と内部2・3級の人は給油だけの券",
+   "choose": "共通券1つ",
+   "income": "案内に記載なし",
+   "sources": [
+    "https://www.city.adachi.tokyo.jp/shogai/20220301.html",
+    "https://www.city.adachi.tokyo.jp/shogai/documents/20220314.html"
+   ]
+  },
+  {
+   "code6": "132012",
+   "name": "八王子市",
+   "period": "4月〜翌3月",
+   "target": "身体1・2級、愛の手帳1・2度",
+   "taxi": "タクシーにもガソリンにも使える共通券 300円券×月8枚＝年28,800円（視覚障害は月12枚＝年43,200円、透析で通院する人は月4枚を足す）",
+   "fuel": "上の共通券でガソリンにも使える（別の枠ではない）",
+   "choose": "共通券1つ",
+   "income": "あり",
+   "sources": [
+    "https://www.city.hachioji.tokyo.jp/kurashi/welfare/005/007/001/p004204.html",
+    "https://www.city.hachioji.tokyo.jp/kurashi/welfare/005/002/p033518.html"
+   ]
+  },
+  {
+   "code6": "141003",
+   "name": "横浜市",
+   "period": "10月〜翌9月",
+   "target": "身体1・2級（下肢・体幹・視覚・内部・移動機能のいずれか）、療育A1・A2、身体3級かつ療育B1、精神1級",
+   "taxi": "1枚500円までの券×84枚＝年最大42,000円（週3回以上タクシーで透析に通う人は168枚）",
+   "fuel": "1,000円券×24枚＝年24,000円（透析の人は48枚）",
+   "choose": "タクシー券・燃料券・福祉特別乗車券（福祉パス）・敬老特別乗車証などのうち1つ",
+   "income": "案内に記載なし",
+   "note": "令和8年10月から、1回の乗車で使える枚数の上限（7枚）がなくなります。",
+   "sources": [
+    "https://www.city.yokohama.lg.jp/kenko-iryo-fukushi/fukushi-kaigo/fukushi/annai/gaishutsu/kotsu/riyoken.html",
+    "https://www.city.yokohama.lg.jp/kenko-iryo-fukushi/fukushi-kaigo/fukushi/annai/gaishutsu/car/jidousyanenryouken.html"
+   ]
+  },
+  {
+   "code6": "141305",
+   "name": "川崎市",
+   "period": "4月〜翌3月",
+   "target": "身体1・2級（下肢・体幹・視覚・内部のいずれか）、療育A1・A2、身体3級かつ療育B1、精神1級",
+   "taxi": "500円券×月7枚×12か月＝84枚・年42,000円（週3回以上透析で通う人は月14枚）",
+   "fuel": "市の案内に燃料費の助成は載っていません",
+   "choose": "ふれあいフリーパスなどのバスの無料パスとは選択",
+   "income": "案内に記載なし",
+   "sources": [
+    "https://www.city.kawasaki.jp/350/page/0000025652.html",
+    "https://www.city.kawasaki.jp/350/page/0000038223.html"
+   ]
+  },
+  {
+   "code6": "151009",
+   "name": "新潟市",
+   "period": "4月〜翌3月",
+   "target": "身体1・2級、身体3級（下肢・体幹・移動・内部）、療育A、精神1級など",
+   "taxi": "500円券×52枚＝年26,000円（10月以降の申請は26枚）",
+   "fuel": "年10,000円まで（給油の領収書で後払い。10月以降に対象になった人は5,000円まで）",
+   "choose": "どちらか1つ",
+   "income": "案内に記載なし",
+   "sources": [
+    "https://www.city.niigata.lg.jp/iryo/shofuku/seikatsu/koutsuu/taxi1.html",
+    "https://www.city.niigata.lg.jp/iryo/shofuku/seikatsu/koutsuu/nenryouhi1.html"
+   ]
+  },
+  {
+   "code6": "221007",
+   "name": "静岡市",
+   "period": "4月〜翌3月",
+   "target": "身体1・2級（聴覚・音声言語・そしゃく機能を除く）、療育A、精神1級",
+   "taxi": "550円券×24枚＝年13,200円（車いす用のタクシー券もある）",
+   "fuel": "市の案内に燃料費の助成は載っていません",
+   "choose": "自動車税・軽自動車税の減免とは選択",
+   "income": "案内に記載なし",
+   "sources": [
+    "https://www.city.shizuoka.lg.jp/s5498/s002825.html",
+    "https://www.city.shizuoka.lg.jp/youkou/s5498/s011502.html"
+   ]
+  },
+  {
+   "code6": "221309",
+   "name": "浜松市",
+   "period": "4月〜翌3月",
+   "target": "身体1〜4級、療育A1〜B1、精神1・2級",
+   "taxi": "バス・電車のカードやタクシー券など6種類から1つを選ぶ7,000円分（タクシー券なら500円×14枚）。視覚1・2級と肢体不自由1級は、自動車税などの減免を受けていないなどの条件で20,000円分（500円×40枚）を別に受けられる",
+   "fuel": "ガソリン券7,000円分も6種類の1つ（一部の地域だけ）",
+   "choose": "6種類から1つ",
+   "income": "案内に記載なし",
+   "sources": [
+    "https://www.city.hamamatsu.shizuoka.jp/syoghuku/welfare/obstacle/contents/09basutaxi.html",
+    "https://www.city.hamamatsu.shizuoka.jp/syoghuku/welfare/obstacle/contents/09basutaxi_itiran.html"
+   ]
+  },
+  {
+   "code6": "261009",
+   "name": "京都市",
+   "period": "4月〜翌3月",
+   "target": "身体1・2級、療育A、精神1級",
+   "taxi": "500円券×月4枚＝年48枚・24,000円",
+   "fuel": "市の案内に燃料費の助成は載っていません",
+   "choose": "福祉乗車証・敬老乗車証とは選択",
+   "income": "案内に記載なし",
+   "sources": [
+    "https://www.city.kyoto.lg.jp/hokenfukushi/page/0000349115.html",
+    "https://www.city.kyoto.lg.jp/hokenfukushi/page/0000349020.html"
+   ]
+  },
+  {
+   "code6": "271403",
+   "name": "堺市",
+   "period": "4月〜翌3月",
+   "target": "身体1・2級（視覚・下肢・体幹・内部など）、療育A",
+   "taxi": "券26枚まで（1回500円＝年最大13,000円。リフト付きなどの福祉タクシーは1回1,000円＝最大26,000円）",
+   "fuel": "市の案内に燃料費の助成は載っていません",
+   "choose": "案内に記載なし",
+   "income": "案内に記載なし",
+   "sources": [
+    "https://www.city.sakai.lg.jp/kenko/fukushikaigo/shogaifukushi/syakai_sanka/seikatsu/71806820230314113715928.html",
+    "https://www.city.sakai.lg.jp/shisei/sonota/jyorei/youkou/kousei/11830-14-1.html"
+   ]
+  },
+  {
+   "code6": "281000",
+   "name": "神戸市",
+   "period": "4月〜翌3月",
+   "target": "身体1・2級（視覚・下肢・体幹・移動・内部のいずれかが単独で）など、療育A、精神1級",
+   "taxi": "500円券×72枚＝年36,000円",
+   "fuel": "年12,000円まで（給油の領収書で後払い）",
+   "choose": "タクシー券・燃料費・福祉乗車証・敬老優待乗車証のうち1つ",
+   "income": "案内に記載なし",
+   "note": "申請した月によって枚数・上限が減ります。",
+   "sources": [
+    "https://www.city.kobe.lg.jp/a40792/kenko/handicap/zaitakufukushi/koutsukikan/s031.html",
+    "https://www.city.kobe.lg.jp/a40792/kenko/handicap/zaitakufukushi/koutsukikan/s033.html"
+   ]
+  },
+  {
+   "code6": "331007",
+   "name": "岡山市",
+   "period": "4月〜翌3月",
+   "target": "身体1・2級、療育A",
+   "taxi": "1回630円までの券×月4枚＝年最大30,240円（週2回以上通院する難病の人は月8枚、週3回以上の透析は月12枚）",
+   "fuel": "市の案内に燃料費の助成は載っていません",
+   "choose": "案内に記載なし",
+   "income": "所得税が非課税の世帯だけ",
+   "sources": [
+    "https://www.city.okayama.jp/kurashi/0000058357.html",
+    "https://www.city.okayama.jp/kurashi/cmsfiles/contents/0000058/58357/taxi.pdf"
+   ]
+  },
+  {
+   "code6": "431001",
+   "name": "熊本市",
+   "period": "4月〜翌3月",
+   "target": "身体1・2級、療育A1・A2、精神1・2級",
+   "taxi": "500円券×40枚＝年20,000円",
+   "fuel": "療育A1・A2の人だけ、1,000円券×12枚＝年12,000円",
+   "choose": "どちらか1つ",
+   "income": "あり（タクシーは本人の住民税が非課税か生活保護、燃料は住民税が非課税）",
+   "note": "申請した月によって枚数が減ります。",
+   "sources": [
+    "https://www.city.kumamoto.jp/kiji003681/3_681_up_y62y52jd.pdf",
+    "https://www.city.kumamoto.jp/kiji003681/3_681_up_6vxrvhc5.pdf"
+   ]
+  },
+  {
+   "code6": "041009",
+   "name": "仙台市",
+   "period": "10月〜翌9月",
+   "target": "身体1・2級（視覚・下肢・体幹・移動・内部などの部位に条件あり）、身体3・4級で車いすを使うか在宅酸素療法をしている人、療育A、精神1・2級",
+   "taxi": "500円券×60枚＝年30,000円",
+   "fuel": "1,000円券×30枚＝年30,000円（本人か同居の家族の車）",
+   "choose": "ふれあい乗車証（市営バスなど）・タクシー券・燃料券のうち1つ（70歳以上は敬老乗車証とも選ぶ）",
+   "income": "あり（20歳以上は本人、20歳未満は保護者の所得）",
+   "note": "申請した月によって枚数が減ります。",
+   "sources": [
+    "https://www.city.sendai.jp/servicekanri/kurashi/kenkotofukushi/shogai/shakaisanka/waribiki/kofu.html",
+    "https://www.city.sendai.jp/servicekanri/kurashi/kenkotofukushi/shogai/shakaisanka/jikayosha/nenryohi.html"
+   ]
+  }
+ ]
+}
