@@ -41,7 +41,7 @@ const CK = readJson('data/hikazei-city-checks.json')
 const JF = readJson('data/jutaku-fujo.json')
 const HS = readJson('data/hogo-shinsei.json')
 const SR = readJson('data/seiho-ranking.json')
-// 水道・下水道の福祉減免（2026-09-29・v280 #173）。公式の原文で確かめた市区町村だけ（東京23区・大阪市・堺市）。
+// 水道・下水道の福祉減免（2026-09-29・v280 #173）。公式の原文で確かめた市区町村だけ（東京23区・枚方市・大阪市・堺市・東大阪市）。
 // ★確かめていない市区町村には何も書かない（「無い」とも書かない）。読み取れなかったことと、制度が無いことは別。
 const SG = readJson('data/suido-genmen.json')
 {
@@ -52,6 +52,14 @@ const SG = readJson('data/suido-genmen.json')
     const sewer = Math.floor(t.sewer_upto8 * t.taxRate)
     const m = SG.tokyo23.monthly[mm]
     if (m.water !== water || m.sewer !== sewer || m.total !== water + sewer) die(`水道の減免額が条例の単価と合わない（${mm}：載せる ${m.water}/${m.sewer}/${m.total} ・計算 ${water}/${sewer}/${water + sewer}）`)
+  }
+  // 市の料金表から計算し直す（基本料金＋m3 までの従量、税込みは1円未満を切り捨て。整数で計算して小数の誤差を持ち込まない）
+  for (const c of SG.cities) {
+    const t = c.tariff
+    const water = Math.floor((t.waterBasic + t.water1to8 * t.m3) * 11 / 10)
+    const sewer = Math.floor((t.sewerBasic + t.sewer1to8 * t.m3) * 11 / 10)
+    const m = c.monthly
+    if (m.water !== water || m.sewer !== sewer || m.total !== water + sewer) die(`水道の減免額が料金表と合わない（${c.name}：載せる ${m.water}/${m.sewer}/${m.total} ・計算 ${water}/${sewer}/${water + sewer}）`)
   }
 }
 const CHECKED = [D.checked, CK.checked, KK.checked].sort().pop()
@@ -367,6 +375,11 @@ const muniPage = (r) => {
   if (SG.tokyo23.codes.includes(r.code)) {
     const T = SG.tokyo23, a = T.monthly, n = (x) => x.toLocaleString('ja-JP')
     life.push(`<li><strong>水道・下水道の減免</strong>：<strong>住民税非課税であることだけでは対象になりません</strong>。${esc(r.city)}は${esc(T.water)}・${esc(T.sewer)}の減免で、対象は${esc(T.eligible)}です（${esc(T.sewerOnly)}は下水道だけ）。申請すると水道の基本料金と1か月10m³までの使用料、下水道の1か月8m³までの料金がかからなくなり、使用量が10m³以上の月なら口径13mmで月${n(a.mm13.total)}円・20mmで月${n(a.mm20.total)}円（2か月ごとの請求で${n(a.mm13.total * 2)}円・${n(a.mm20.total * 2)}円）安くなります。${esc(T.period)}。申請は${esc(T.apply)}。出典＝${sgLinks(T.sources)}（${esc(SG.checked)}確認）。</li>`)
+  }
+  const sgCity = SG.cities.find((x) => x.code === r.code)
+  if (sgCity) {
+    const c = sgCity, m = c.monthly, n = (x) => x.toLocaleString('ja-JP')
+    life.push(`<li><strong>水道・下水道の減免</strong>：<strong>住民税非課税であることだけでは対象になりません</strong>。${esc(c.name)}は${esc(c.utility)}の福祉減免で、対象は${esc(c.eligible)}です。申請すると水道と下水道の基本料金と1か月${c.tariff.m3}m³までの料金がかからなくなり、使用量が${c.tariff.m3}m³以上の月なら月${n(m.total)}円ほど（水道${n(m.water)}円・下水道${n(m.sewer)}円。2か月ごとの検針なら${n(m.total * 2)}円ほど）安くなります。<strong>${esc(c.caution)}</strong>。申請は${esc(c.apply)}。出典＝${sgLinks(c.sources)}（${esc(SG.checked)}確認）。</li>`)
   }
   const sgNone = SG.none.find((x) => x.code === r.code)
   if (sgNone) life.push(`<li><strong>水道・下水道の減免</strong>：${esc(sgNone.text)}。出典＝${sgLinks(sgNone.sources)}（${esc(SG.checked)}確認）。</li>`)
