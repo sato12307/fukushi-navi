@@ -1,0 +1,721 @@
+{
+ "_doc": "愛知県営住宅の定期募集・回ごとの募集戸数と応募者数（一般／福祉枠、管理事務所・支所ごとの合計行）（2026-09-29・ユーザー裁定 v280 #171）。愛知県住宅供給公社が公表する「抽選結果表」のうち文字の入ったPDFの12回だけ。福祉枠の数は（福祉）の印のある行の和。行の和が節ごとの合計行と一の位まで合うことを確かめたもの（うち11回は、別に書いた読み取りでも一般・福祉枠の数まで一致）。2026年度第1回は画像だけのPDFで、読み取りが公表の合計と合わない節があったため載せない。",
+ "checked": "2026-09-29",
+ "page": "https://www.aichi-kousha.or.jp/prefectural/additional/result/",
+ "guide": {
+  "url": "https://www.aichi-kousha.or.jp/prefectural/uploads/260804_regular_guide.pdf",
+  "label": "2026年度第2回 定期募集の申込案内書"
+ },
+ "skipped": [
+  {
+   "round": "2026-1",
+   "file": "https://www.aichi-kousha.or.jp/prefectural/additional/result/uploads/0e643b6867ae79dc87843f3a598df016f363f1e3.pdf",
+   "why": "画像だけのPDF"
+  }
+ ],
+ "rounds": [
+  {
+   "round": "2022-1",
+   "file": "https://www.aichi-kousha.or.jp/prefectural/additional/result/uploads/ab048820245b77cb1c8b21288ad99c32f22faf56.pdf",
+   "ippan": {
+    "koho": 375,
+    "oubo": 1189
+   },
+   "fukushi": {
+    "koho": 54,
+    "oubo": 168
+   },
+   "sections": [
+    {
+     "sec": "名古屋尾張住宅管理事務所（名古屋地区）",
+     "koho": 167,
+     "oubo": 326
+    },
+    {
+     "sec": "名古屋尾張住宅管理事務所（尾張地区）",
+     "koho": 72,
+     "oubo": 236
+    },
+    {
+     "sec": "一宮住宅管理事務所",
+     "koho": 24,
+     "oubo": 96
+    },
+    {
+     "sec": "海部駐在",
+     "koho": 2,
+     "oubo": 16
+    },
+    {
+     "sec": "知多支所",
+     "koho": 32,
+     "oubo": 141
+    },
+    {
+     "sec": "三河住宅管理事務所",
+     "koho": 26,
+     "oubo": 83
+    },
+    {
+     "sec": "知立支所",
+     "koho": 26,
+     "oubo": 186
+    },
+    {
+     "sec": "豊田加茂支所",
+     "koho": 63,
+     "oubo": 174
+    },
+    {
+     "sec": "東三河支所",
+     "koho": 17,
+     "oubo": 99
+    }
+   ]
+  },
+  {
+   "round": "2022-2",
+   "file": "https://www.aichi-kousha.or.jp/prefectural/additional/result/uploads/e657c3fdd853224d040cf2040ad30738049f9266.pdf",
+   "ippan": {
+    "koho": 407,
+    "oubo": 1426
+   },
+   "fukushi": {
+    "koho": 69,
+    "oubo": 291
+   },
+   "sections": [
+    {
+     "sec": "名古屋尾張住宅管理事務所（名古屋地区）",
+     "koho": 165,
+     "oubo": 499
+    },
+    {
+     "sec": "名古屋尾張住宅管理事務所（尾張地区）",
+     "koho": 60,
+     "oubo": 305
+    },
+    {
+     "sec": "一宮住宅管理事務所",
+     "koho": 39,
+     "oubo": 138
+    },
+    {
+     "sec": "海部駐在",
+     "koho": 3,
+     "oubo": 11
+    },
+    {
+     "sec": "知多支所",
+     "koho": 36,
+     "oubo": 142
+    },
+    {
+     "sec": "三河住宅管理事務所",
+     "koho": 30,
+     "oubo": 87
+    },
+    {
+     "sec": "知立支所",
+     "koho": 37,
+     "oubo": 177
+    },
+    {
+     "sec": "豊田加茂支所",
+     "koho": 60,
+     "oubo": 240
+    },
+    {
+     "sec": "東三河支所",
+     "koho": 46,
+     "oubo": 118
+    }
+   ]
+  },
+  {
+   "round": "2022-3",
+   "file": "https://www.aichi-kousha.or.jp/prefectural/additional/result/uploads/37dd1947d38ac956a169e8a438b310775915c8ca.pdf",
+   "ippan": {
+    "koho": 446,
+    "oubo": 1386
+   },
+   "fukushi": {
+    "koho": 51,
+    "oubo": 274
+   },
+   "sections": [
+    {
+     "sec": "名古屋尾張住宅管理事務所（名古屋地区）",
+     "koho": 168,
+     "oubo": 515
+    },
+    {
+     "sec": "名古屋尾張住宅管理事務所（尾張地区）",
+     "koho": 100,
+     "oubo": 321
+    },
+    {
+     "sec": "一宮住宅管理事務所",
+     "koho": 33,
+     "oubo": 116
+    },
+    {
+     "sec": "海部駐在",
+     "koho": 3,
+     "oubo": 8
+    },
+    {
+     "sec": "知多支所",
+     "koho": 35,
+     "oubo": 111
+    },
+    {
+     "sec": "三河住宅管理事務所",
+     "koho": 27,
+     "oubo": 65
+    },
+    {
+     "sec": "知立支所",
+     "koho": 41,
+     "oubo": 202
+    },
+    {
+     "sec": "豊田加茂支所",
+     "koho": 43,
+     "oubo": 195
+    },
+    {
+     "sec": "東三河支所",
+     "koho": 47,
+     "oubo": 127
+    }
+   ]
+  },
+  {
+   "round": "2023-1",
+   "file": "https://www.aichi-kousha.or.jp/prefectural/additional/result/uploads/e471b8608edb43b075f6b3a6224d1524ff11dfa3.pdf",
+   "ippan": {
+    "koho": 530,
+    "oubo": 1660
+   },
+   "fukushi": {
+    "koho": 102,
+    "oubo": 364
+   },
+   "sections": [
+    {
+     "sec": "名古屋尾張住宅管理事務所（名古屋地区）",
+     "koho": 216,
+     "oubo": 608
+    },
+    {
+     "sec": "名古屋尾張住宅管理事務所（尾張地区）",
+     "koho": 109,
+     "oubo": 353
+    },
+    {
+     "sec": "一宮住宅管理事務所",
+     "koho": 47,
+     "oubo": 111
+    },
+    {
+     "sec": "海部駐在",
+     "koho": 1,
+     "oubo": 5
+    },
+    {
+     "sec": "知多支所",
+     "koho": 40,
+     "oubo": 116
+    },
+    {
+     "sec": "三河住宅管理事務所",
+     "koho": 46,
+     "oubo": 92
+    },
+    {
+     "sec": "知立支所",
+     "koho": 53,
+     "oubo": 309
+    },
+    {
+     "sec": "豊田加茂支所",
+     "koho": 70,
+     "oubo": 297
+    },
+    {
+     "sec": "東三河支所",
+     "koho": 50,
+     "oubo": 133
+    }
+   ]
+  },
+  {
+   "round": "2023-2",
+   "file": "https://www.aichi-kousha.or.jp/prefectural/additional/result/uploads/02c4a3ed7067cffc35dab4bb52a46c1e830d7dcc.pdf",
+   "ippan": {
+    "koho": 411,
+    "oubo": 1670
+   },
+   "fukushi": {
+    "koho": 57,
+    "oubo": 334
+   },
+   "sections": [
+    {
+     "sec": "名古屋尾張住宅管理事務所（名古屋地区）",
+     "koho": 143,
+     "oubo": 671
+    },
+    {
+     "sec": "名古屋尾張住宅管理事務所（尾張地区）",
+     "koho": 65,
+     "oubo": 270
+    },
+    {
+     "sec": "一宮住宅管理事務所",
+     "koho": 41,
+     "oubo": 129
+    },
+    {
+     "sec": "海部駐在",
+     "koho": 4,
+     "oubo": 14
+    },
+    {
+     "sec": "知多支所",
+     "koho": 36,
+     "oubo": 165
+    },
+    {
+     "sec": "三河住宅管理事務所",
+     "koho": 27,
+     "oubo": 77
+    },
+    {
+     "sec": "知立支所",
+     "koho": 54,
+     "oubo": 256
+    },
+    {
+     "sec": "豊田加茂支所",
+     "koho": 47,
+     "oubo": 299
+    },
+    {
+     "sec": "東三河支所",
+     "koho": 51,
+     "oubo": 123
+    }
+   ]
+  },
+  {
+   "round": "2023-3",
+   "file": "https://www.aichi-kousha.or.jp/prefectural/additional/result/uploads/d83b9be980f26df649790cbe049386854dee75e0.pdf",
+   "ippan": {
+    "koho": 374,
+    "oubo": 1686
+   },
+   "fukushi": {
+    "koho": 46,
+    "oubo": 234
+   },
+   "sections": [
+    {
+     "sec": "名古屋尾張住宅管理事務所（名古屋地区）",
+     "koho": 114,
+     "oubo": 610
+    },
+    {
+     "sec": "名古屋尾張住宅管理事務所（尾張地区）",
+     "koho": 86,
+     "oubo": 307
+    },
+    {
+     "sec": "一宮住宅管理事務所",
+     "koho": 38,
+     "oubo": 139
+    },
+    {
+     "sec": "海部駐在",
+     "koho": 2,
+     "oubo": 3
+    },
+    {
+     "sec": "知多支所",
+     "koho": 26,
+     "oubo": 129
+    },
+    {
+     "sec": "三河住宅管理事務所",
+     "koho": 41,
+     "oubo": 171
+    },
+    {
+     "sec": "知立支所",
+     "koho": 42,
+     "oubo": 242
+    },
+    {
+     "sec": "豊田加茂支所",
+     "koho": 37,
+     "oubo": 241
+    },
+    {
+     "sec": "東三河支所",
+     "koho": 34,
+     "oubo": 78
+    }
+   ]
+  },
+  {
+   "round": "2024-1",
+   "file": "https://www.aichi-kousha.or.jp/prefectural/additional/result/uploads/24d3024bc9a3c451a9dd765f4f60065ec63db9b8.pdf",
+   "ippan": {
+    "koho": 451,
+    "oubo": 1663
+   },
+   "fukushi": {
+    "koho": 48,
+    "oubo": 177
+   },
+   "sections": [
+    {
+     "sec": "名古屋尾張住宅管理事務所（名古屋地区）",
+     "koho": 151,
+     "oubo": 604
+    },
+    {
+     "sec": "名古屋尾張住宅管理事務所（尾張地区）",
+     "koho": 76,
+     "oubo": 263
+    },
+    {
+     "sec": "一宮住宅管理事務所",
+     "koho": 53,
+     "oubo": 133
+    },
+    {
+     "sec": "海部駐在",
+     "koho": 4,
+     "oubo": 8
+    },
+    {
+     "sec": "知多支所",
+     "koho": 35,
+     "oubo": 145
+    },
+    {
+     "sec": "三河住宅管理事務所",
+     "koho": 43,
+     "oubo": 126
+    },
+    {
+     "sec": "知立支所",
+     "koho": 32,
+     "oubo": 213
+    },
+    {
+     "sec": "豊田加茂支所",
+     "koho": 60,
+     "oubo": 242
+    },
+    {
+     "sec": "東三河支所",
+     "koho": 45,
+     "oubo": 106
+    }
+   ]
+  },
+  {
+   "round": "2024-2",
+   "file": "https://www.aichi-kousha.or.jp/prefectural/additional/result/uploads/ce44140632846fbf88d0545483c32eb636a571b6.pdf",
+   "ippan": {
+    "koho": 467,
+    "oubo": 1731
+   },
+   "fukushi": {
+    "koho": 66,
+    "oubo": 287
+   },
+   "sections": [
+    {
+     "sec": "名古屋尾張住宅管理事務所（名古屋地区）",
+     "koho": 179,
+     "oubo": 667
+    },
+    {
+     "sec": "名古屋尾張住宅管理事務所（尾張地区）",
+     "koho": 84,
+     "oubo": 281
+    },
+    {
+     "sec": "一宮支所",
+     "koho": 45,
+     "oubo": 118
+    },
+    {
+     "sec": "知多支所",
+     "koho": 35,
+     "oubo": 149
+    },
+    {
+     "sec": "三河住宅管理事務所",
+     "koho": 37,
+     "oubo": 119
+    },
+    {
+     "sec": "知立支所",
+     "koho": 41,
+     "oubo": 255
+    },
+    {
+     "sec": "豊田加茂支所",
+     "koho": 56,
+     "oubo": 278
+    },
+    {
+     "sec": "東三河支所",
+     "koho": 56,
+     "oubo": 151
+    }
+   ]
+  },
+  {
+   "round": "2024-3",
+   "file": "https://www.aichi-kousha.or.jp/prefectural/additional/result/uploads/6e1c0867b4af7cc9d5678919bb5a8006aace0d19.pdf",
+   "ippan": {
+    "koho": 362,
+    "oubo": 1473
+   },
+   "fukushi": {
+    "koho": 42,
+    "oubo": 205
+   },
+   "sections": [
+    {
+     "sec": "名古屋尾張住宅管理事務所（名古屋地区）",
+     "koho": 106,
+     "oubo": 526
+    },
+    {
+     "sec": "名古屋尾張住宅管理事務所（尾張地区）",
+     "koho": 93,
+     "oubo": 330
+    },
+    {
+     "sec": "一宮支所",
+     "koho": 42,
+     "oubo": 124
+    },
+    {
+     "sec": "海部駐在",
+     "koho": 4,
+     "oubo": 9
+    },
+    {
+     "sec": "知多支所",
+     "koho": 27,
+     "oubo": 89
+    },
+    {
+     "sec": "三河住宅管理事務所",
+     "koho": 22,
+     "oubo": 133
+    },
+    {
+     "sec": "知立支所",
+     "koho": 22,
+     "oubo": 161
+    },
+    {
+     "sec": "豊田加茂支所",
+     "koho": 35,
+     "oubo": 179
+    },
+    {
+     "sec": "東三河支所",
+     "koho": 53,
+     "oubo": 127
+    }
+   ]
+  },
+  {
+   "round": "2025-1",
+   "file": "https://www.aichi-kousha.or.jp/prefectural/additional/result/uploads/4e559a59912bab08307dcda66d6b80cd2e9cfa1e.pdf",
+   "ippan": {
+    "koho": 389,
+    "oubo": 1654
+   },
+   "fukushi": {
+    "koho": 148,
+    "oubo": 481
+   },
+   "sections": [
+    {
+     "sec": "名古屋尾張住宅管理事務所（名古屋地区）",
+     "koho": 173,
+     "oubo": 696
+    },
+    {
+     "sec": "名古屋尾張住宅管理事務所（尾張地区）",
+     "koho": 96,
+     "oubo": 271
+    },
+    {
+     "sec": "一宮支所",
+     "koho": 52,
+     "oubo": 139
+    },
+    {
+     "sec": "海部駐在",
+     "koho": 3,
+     "oubo": 7
+    },
+    {
+     "sec": "知多支所",
+     "koho": 31,
+     "oubo": 140
+    },
+    {
+     "sec": "三河住宅管理事務所",
+     "koho": 32,
+     "oubo": 142
+    },
+    {
+     "sec": "知立支所",
+     "koho": 37,
+     "oubo": 323
+    },
+    {
+     "sec": "豊田加茂支所",
+     "koho": 55,
+     "oubo": 267
+    },
+    {
+     "sec": "東三河支所",
+     "koho": 58,
+     "oubo": 150
+    }
+   ]
+  },
+  {
+   "round": "2025-2",
+   "file": "https://www.aichi-kousha.or.jp/prefectural/additional/result/uploads/a3ada95790587a2ee44a19a11cf148edfa75097b.pdf",
+   "ippan": {
+    "koho": 390,
+    "oubo": 1642
+   },
+   "fukushi": {
+    "koho": 103,
+    "oubo": 355
+   },
+   "sections": [
+    {
+     "sec": "名古屋尾張住宅管理事務所（名古屋地区）",
+     "koho": 175,
+     "oubo": 707
+    },
+    {
+     "sec": "名古屋尾張住宅管理事務所（尾張地区）",
+     "koho": 87,
+     "oubo": 261
+    },
+    {
+     "sec": "一宮支所",
+     "koho": 50,
+     "oubo": 127
+    },
+    {
+     "sec": "海部駐在",
+     "koho": 7,
+     "oubo": 5
+    },
+    {
+     "sec": "知多支所",
+     "koho": 31,
+     "oubo": 113
+    },
+    {
+     "sec": "三河住宅管理事務所",
+     "koho": 22,
+     "oubo": 152
+    },
+    {
+     "sec": "知立支所",
+     "koho": 30,
+     "oubo": 255
+    },
+    {
+     "sec": "豊田加茂支所",
+     "koho": 50,
+     "oubo": 251
+    },
+    {
+     "sec": "東三河支所",
+     "koho": 41,
+     "oubo": 126
+    }
+   ]
+  },
+  {
+   "round": "2025-3",
+   "file": "https://www.aichi-kousha.or.jp/prefectural/additional/result/uploads/b7be6e39cff0ace7ed2256f556d251475a3c1535.pdf",
+   "ippan": {
+    "koho": 341,
+    "oubo": 1538
+   },
+   "fukushi": {
+    "koho": 91,
+    "oubo": 284
+   },
+   "sections": [
+    {
+     "sec": "名古屋尾張住宅管理事務所（名古屋地区）",
+     "koho": 154,
+     "oubo": 644
+    },
+    {
+     "sec": "名古屋尾張住宅管理事務所（尾張地区）",
+     "koho": 90,
+     "oubo": 285
+    },
+    {
+     "sec": "一宮支所",
+     "koho": 34,
+     "oubo": 97
+    },
+    {
+     "sec": "海部駐在",
+     "koho": 4,
+     "oubo": 6
+    },
+    {
+     "sec": "知多支所",
+     "koho": 25,
+     "oubo": 113
+    },
+    {
+     "sec": "三河住宅管理事務所",
+     "koho": 20,
+     "oubo": 122
+    },
+    {
+     "sec": "知立支所",
+     "koho": 32,
+     "oubo": 242
+    },
+    {
+     "sec": "豊田加茂支所",
+     "koho": 35,
+     "oubo": 201
+    },
+    {
+     "sec": "東三河支所",
+     "koho": 38,
+     "oubo": 112
+    }
+   ]
+  }
+ ]
+}

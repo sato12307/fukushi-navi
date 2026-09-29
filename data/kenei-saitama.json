@@ -1,0 +1,443 @@
+{
+ "_doc": "埼玉県営住宅の定期募集・回ごと住宅種別ごとの募集戸数と申込件数（2026-09-29・ユーザー裁定 v280 #171）。埼玉県住宅供給公社が回ごとに公表する「申込状況」PDFを2通りに読み、一致したうえで公表の合計と一の位まで合うものだけ。住宅ごとの行は載せない（公表の表を丸ごと写さない）。",
+ "checked": "2026-09-29",
+ "page": "https://www.saijk.or.jp/lookingfor/kenei/apply/",
+ "guide": {
+  "url": "https://www.saijk.or.jp/wp/wp-content/uploads/2026/06/bosyuannai.2026-.07.pdf",
+  "label": "令和8年7月 定期募集の募集案内（8ページ「抽せん」）"
+ },
+ "rounds": [
+  {
+   "round": "2024-10",
+   "file": "https://www.saijk.or.jp/wp/wp-content/uploads/2025/09/bairitsuhyou_06.10.pdf",
+   "published": {
+    "koho": 460,
+    "moushikomi": 2368,
+    "from": "申込状況の表頭"
+   },
+   "prefPressKoho": 460,
+   "types": {
+    "一般住宅": {
+     "koho": 231,
+     "moushikomi": 925,
+     "rows": 145,
+     "zero": 19
+    },
+    "子育て支援住宅": {
+     "koho": 89,
+     "moushikomi": 233,
+     "rows": 39,
+     "zero": 5
+    },
+    "高齢者・障がい者住宅": {
+     "koho": 69,
+     "moushikomi": 164,
+     "rows": 54,
+     "zero": 19
+    },
+    "車イス住宅": {
+     "koho": 6,
+     "moushikomi": 4,
+     "rows": 4,
+     "zero": 1
+    },
+    "単身住宅": {
+     "koho": 64,
+     "moushikomi": 1030,
+     "rows": 54,
+     "zero": 8
+    },
+    "単身車イス住宅": {
+     "koho": 1,
+     "moushikomi": 12,
+     "rows": 1,
+     "zero": 0
+    }
+   }
+  },
+  {
+   "round": "2025-01",
+   "file": "https://www.saijk.or.jp/wp/wp-content/uploads/2025/09/bairitsuhyou_07.01.pdf",
+   "published": {
+    "koho": 624,
+    "moushikomi": 2387,
+    "from": "申込状況の表頭"
+   },
+   "prefPressKoho": 624,
+   "types": {
+    "一般住宅": {
+     "koho": 353,
+     "moushikomi": 897,
+     "rows": 182,
+     "zero": 39
+    },
+    "子育て支援住宅": {
+     "koho": 75,
+     "moushikomi": 162,
+     "rows": 46,
+     "zero": 13
+    },
+    "高齢者・障がい者住宅": {
+     "koho": 93,
+     "moushikomi": 176,
+     "rows": 71,
+     "zero": 30
+    },
+    "車イス住宅": {
+     "koho": 4,
+     "moushikomi": 5,
+     "rows": 4,
+     "zero": 1
+    },
+    "単身住宅": {
+     "koho": 97,
+     "moushikomi": 1139,
+     "rows": 80,
+     "zero": 17
+    },
+    "単身車イス住宅": {
+     "koho": 2,
+     "moushikomi": 8,
+     "rows": 2,
+     "zero": 0
+    }
+   }
+  },
+  {
+   "round": "2025-04",
+   "file": "https://www.saijk.or.jp/wp/wp-content/uploads/2025/09/mouskomiitiran_R7.4.pdf",
+   "published": {
+    "koho": 445,
+    "moushikomi": 2521,
+    "from": "申込状況の表頭"
+   },
+   "prefPressKoho": 445,
+   "types": {
+    "一般住宅": {
+     "koho": 202,
+     "moushikomi": 779,
+     "rows": 113,
+     "zero": 24
+    },
+    "子育て支援住宅": {
+     "koho": 100,
+     "moushikomi": 362,
+     "rows": 66,
+     "zero": 9
+    },
+    "高齢者・障がい者住宅": {
+     "koho": 45,
+     "moushikomi": 168,
+     "rows": 41,
+     "zero": 14
+    },
+    "車イス住宅": {
+     "koho": 2,
+     "moushikomi": 15,
+     "rows": 2,
+     "zero": 0
+    },
+    "単身住宅": {
+     "koho": 94,
+     "moushikomi": 1193,
+     "rows": 64,
+     "zero": 5
+    },
+    "単身車イス住宅": {
+     "koho": 2,
+     "moushikomi": 4,
+     "rows": 2,
+     "zero": 1
+    }
+   }
+  },
+  {
+   "round": "2025-07",
+   "file": "https://www.saijk.or.jp/wp/wp-content/uploads/2025/09/mouskomiitiran_R7.7.pdf",
+   "published": {
+    "koho": 616,
+    "moushikomi": 2279,
+    "from": "申込状況の表頭"
+   },
+   "prefPressKoho": 616,
+   "types": {
+    "一般住宅": {
+     "koho": 281,
+     "moushikomi": 705,
+     "rows": 152,
+     "zero": 36
+    },
+    "子育て支援住宅": {
+     "koho": 133,
+     "moushikomi": 273,
+     "rows": 73,
+     "zero": 16
+    },
+    "高齢者・障がい者住宅": {
+     "koho": 62,
+     "moushikomi": 165,
+     "rows": 44,
+     "zero": 17
+    },
+    "車イス住宅": {
+     "koho": 6,
+     "moushikomi": 8,
+     "rows": 5,
+     "zero": 3
+    },
+    "単身住宅": {
+     "koho": 133,
+     "moushikomi": 1126,
+     "rows": 76,
+     "zero": 11
+    },
+    "単身車イス住宅": {
+     "koho": 1,
+     "moushikomi": 2,
+     "rows": 1,
+     "zero": 0
+    }
+   }
+  },
+  {
+   "round": "2025-10",
+   "file": "https://www.saijk.or.jp/wp/wp-content/uploads/2025/12/mousikomijyoukyouR7.10_HP.pdf",
+   "published": {
+    "koho": 470,
+    "moushikomi": 2352,
+    "from": "申込状況の表頭"
+   },
+   "prefPressKoho": 470,
+   "types": {
+    "一般住宅": {
+     "koho": 206,
+     "moushikomi": 653,
+     "rows": 125,
+     "zero": 24
+    },
+    "子育て支援住宅": {
+     "koho": 93,
+     "moushikomi": 300,
+     "rows": 55,
+     "zero": 7
+    },
+    "高齢者・障がい者住宅": {
+     "koho": 47,
+     "moushikomi": 169,
+     "rows": 34,
+     "zero": 9
+    },
+    "車イス住宅": {
+     "koho": 2,
+     "moushikomi": 5,
+     "rows": 2,
+     "zero": 0
+    },
+    "単身住宅": {
+     "koho": 105,
+     "moushikomi": 1224,
+     "rows": 65,
+     "zero": 10
+    },
+    "福島": {
+     "koho": 17,
+     "moushikomi": 1,
+     "rows": 10,
+     "zero": 9
+    }
+   }
+  },
+  {
+   "round": "2026-01",
+   "file": "https://www.saijk.or.jp/wp/wp-content/uploads/2026/03/mouskomijyoukyou_R8.01.pdf",
+   "published": {
+    "koho": 444,
+    "moushikomi": 2343,
+    "from": "申込状況の表頭"
+   },
+   "prefPressKoho": 444,
+   "types": {
+    "一般住宅": {
+     "koho": 196,
+     "moushikomi": 705,
+     "rows": 116,
+     "zero": 22
+    },
+    "子育て支援住宅": {
+     "koho": 78,
+     "moushikomi": 317,
+     "rows": 53,
+     "zero": 5
+    },
+    "高齢者・障がい者住宅": {
+     "koho": 50,
+     "moushikomi": 138,
+     "rows": 25,
+     "zero": 4
+    },
+    "車イス住宅": {
+     "koho": 1,
+     "moushikomi": 0,
+     "rows": 1,
+     "zero": 1
+    },
+    "単身住宅": {
+     "koho": 111,
+     "moushikomi": 1179,
+     "rows": 67,
+     "zero": 8
+    },
+    "単身車イス住宅": {
+     "koho": 2,
+     "moushikomi": 4,
+     "rows": 2,
+     "zero": 1
+    },
+    "福島": {
+     "koho": 6,
+     "moushikomi": 0,
+     "rows": 6,
+     "zero": 6
+    }
+   }
+  },
+  {
+   "round": "2026-04",
+   "file": "https://www.saijk.or.jp/wp/wp-content/uploads/2026/06/mousikomijyoukyou.R8.4.pdf",
+   "published": {
+    "koho": 420,
+    "moushikomi": 2411,
+    "from": "申込状況の表頭"
+   },
+   "prefPressKoho": 420,
+   "publishedByType": {
+    "一般住宅": {
+     "koho": 204,
+     "moushikomi": 797,
+     "bairitsu": "3.91"
+    },
+    "子育て支援住宅": {
+     "koho": 66,
+     "moushikomi": 333,
+     "bairitsu": "5.05"
+    },
+    "高齢者・障がい者住宅": {
+     "koho": 38,
+     "moushikomi": 144,
+     "bairitsu": "3.79"
+    },
+    "車イス住宅": {
+     "koho": 3,
+     "moushikomi": 4,
+     "bairitsu": "1.33"
+    },
+    "単身住宅": {
+     "koho": 105,
+     "moushikomi": 1126,
+     "bairitsu": "10.72"
+    },
+    "単身車イス住宅": {
+     "koho": 1,
+     "moushikomi": 6,
+     "bairitsu": "6.00"
+    },
+    "福島": {
+     "koho": 3,
+     "moushikomi": 1,
+     "bairitsu": "0.33"
+    },
+    "合計": {
+     "koho": 420,
+     "moushikomi": 2411,
+     "bairitsu": "5.74"
+    }
+   },
+   "types": {
+    "一般住宅": {
+     "koho": 204,
+     "moushikomi": 797,
+     "rows": 107,
+     "zero": 7
+    },
+    "子育て支援住宅": {
+     "koho": 66,
+     "moushikomi": 333,
+     "rows": 42,
+     "zero": 2
+    },
+    "高齢者・障がい者住宅": {
+     "koho": 38,
+     "moushikomi": 144,
+     "rows": 27,
+     "zero": 4
+    },
+    "車イス住宅": {
+     "koho": 3,
+     "moushikomi": 4,
+     "rows": 2,
+     "zero": 1
+    },
+    "単身住宅": {
+     "koho": 105,
+     "moushikomi": 1126,
+     "rows": 62,
+     "zero": 5
+    },
+    "単身車イス住宅": {
+     "koho": 1,
+     "moushikomi": 6,
+     "rows": 1,
+     "zero": 0
+    },
+    "福島": {
+     "koho": 3,
+     "moushikomi": 1,
+     "rows": 3,
+     "zero": 2
+    }
+   }
+  },
+  {
+   "round": "2026-07",
+   "file": "https://www.saijk.or.jp/wp/wp-content/uploads/2026/07/bairitsuhyou_saisyukekka2026.07.29.pdf",
+   "published": {
+    "koho": 317,
+    "moushikomi": 2378,
+    "from": "募集一覧表（申込状況の表頭には申込件数だけ）"
+   },
+   "prefPressKoho": 316,
+   "types": {
+    "一般住宅": {
+     "koho": 173,
+     "moushikomi": 705,
+     "rows": 106,
+     "zero": 17
+    },
+    "子育て支援住宅": {
+     "koho": 51,
+     "moushikomi": 253,
+     "rows": 35,
+     "zero": 4
+    },
+    "高齢者・障がい者住宅": {
+     "koho": 20,
+     "moushikomi": 101,
+     "rows": 16,
+     "zero": 1
+    },
+    "車イス住宅": {
+     "koho": 2,
+     "moushikomi": 0,
+     "rows": 2,
+     "zero": 2
+    },
+    "単身住宅": {
+     "koho": 71,
+     "moushikomi": 1319,
+     "rows": 60,
+     "zero": 3
+    }
+   }
+  }
+ ]
+}
