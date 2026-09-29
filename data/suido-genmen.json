@@ -1,39 +1,157 @@
 {
-  "_doc": "水道・下水道の福祉減免（/hikazei/〈市区町村〉/ の暮らしの線に出す）。2026-09-29 ユーザー裁定 v280（第154回 #173）。公式の条文・案内の原文で確かめた市区町村だけを載せる。確かめていない市区町村は何も書かない（「無い」とも書かない）。金額は hikazei-city.mjs がビルドのたびに tariff の単価から計算し直して照合する。",
+  "_doc": "水道・下水道の福祉減免（/hikazei/〈市区町村〉/ の暮らしの線に出す）。2026-09-29 ユーザー裁定 v280（第154回 #173）。公式の条文・案内の原文で確かめた市区町村だけを載せる。確かめていない市区町村は何も書かない（「無い」とも書かない）。「無い」「廃止」は、公式の文面がそう言っているものだけ（案内に載っていない、からは言わない）。金額は hikazei-city.mjs がビルドのたびに calc の税抜きの額から計算し直して照合する（1円未満は切り捨て。約○円の表示は四捨五入）。",
   "checked": "2026-09-29",
   "tokyo23": {
-    "codes": ["13101", "13102", "13103", "13104", "13105", "13106", "13107", "13108", "13109", "13110", "13111", "13112", "13113", "13114", "13115", "13116", "13117", "13118", "13119", "13120", "13121", "13122", "13123"],
+    "codes": [
+      "13101",
+      "13102",
+      "13103",
+      "13104",
+      "13105",
+      "13106",
+      "13107",
+      "13108",
+      "13109",
+      "13110",
+      "13111",
+      "13112",
+      "13113",
+      "13114",
+      "13115",
+      "13116",
+      "13117",
+      "13118",
+      "13119",
+      "13120",
+      "13121",
+      "13122",
+      "13123"
+    ],
     "water": "東京都水道局",
     "sewer": "東京都下水道局",
     "eligible": "生活保護（生活扶助・教育扶助・住宅扶助・医療扶助・介護扶助）、児童扶養手当・特別児童扶養手当、中国残留邦人等の支援給付を受けている世帯",
     "sewerOnly": "老齢福祉年金を受けている世帯",
-    "tariff": { "basic": { "mm13": 860, "mm20": 1170 }, "per_m3_5to10": 22, "sewer_upto8": 560, "taxRate": 1.1 },
-    "monthly": { "mm13": { "water": 1067, "sewer": 616, "total": 1683 }, "mm20": { "water": 1408, "sewer": 616, "total": 2024 } },
+    "tariff": {
+      "basic": {
+        "mm13": 860,
+        "mm20": 1170
+      },
+      "per_m3_5to10": 22,
+      "sewer_upto8": 560,
+      "taxRate": 1.1
+    },
+    "monthly": {
+      "mm13": {
+        "water": 1067,
+        "sewer": 616,
+        "total": 1683
+      },
+      "mm20": {
+        "water": 1408,
+        "sewer": 616,
+        "total": 2024
+      }
+    },
     "period": "10m³までの使用料の分や、教育扶助などだけの世帯の分は東京都の減免措置で、いまの期間は水道が令和11年3月31日まで・下水道が令和13年3月31日まで（生活扶助と両手当の世帯の基本料金と下水道8m³分は条例による免除）",
     "apply": "受持ちの水道局の営業所・サービスステーションへ、保護開始決定通知書や受給証書などを持参（郵送は福祉事務所などで受給確認を受けた申請書を送る）。申請を受け付けた月の分から",
     "sources": [
-      { "label": "東京都水道局「水道料金・下水道料金の減免のご案内」", "url": "https://www.waterworks.metro.tokyo.lg.jp/tetsuduki/ryokin/genmen" },
-      { "label": "東京都給水条例（第23条・第23条の2・第23条の3・第30条）", "url": "https://www.waterworks.metro.tokyo.lg.jp/reiki_int/reiki_honbun/g171RG00001800.html" },
-      { "label": "水道料金及び下水道料金の減免措置（2026年3月の別紙）", "url": "https://www.waterworks.metro.tokyo.lg.jp/documents/d/waterworks/204003015149058-01" }
+      {
+        "label": "東京都水道局「水道料金・下水道料金の減免のご案内」",
+        "url": "https://www.waterworks.metro.tokyo.lg.jp/tetsuduki/ryokin/genmen"
+      },
+      {
+        "label": "東京都給水条例（第23条・第23条の2・第23条の3・第30条）",
+        "url": "https://www.waterworks.metro.tokyo.lg.jp/reiki_int/reiki_honbun/g171RG00001800.html"
+      },
+      {
+        "label": "水道料金及び下水道料金の減免措置（2026年3月の別紙）",
+        "url": "https://www.waterworks.metro.tokyo.lg.jp/documents/d/waterworks/204003015149058-01"
+      }
     ]
   },
   "none": [
     {
       "code": "27100",
       "text": "大阪市には、生活保護世帯などへの水道料金・下水道使用料の福祉減免はありません（平成24年7月の市政改革プランで廃止。2026年の市民の声への回答でも廃止の方針のまま）",
-      "sources": [ { "label": "大阪市「市民の声」への回答", "url": "https://www.city.osaka.lg.jp/seisakukikakushitsu/page/0000685121.html" } ]
+      "sources": [
+        {
+          "label": "大阪市「市民の声」への回答",
+          "url": "https://www.city.osaka.lg.jp/seisakukikakushitsu/page/0000685121.html"
+        }
+      ]
     },
     {
       "code": "27140",
       "text": "堺市には、生活保護世帯・高齢者・障害のある人への水道料金の減額や免除の制度はありません（堺市上下水道局のよくある質問「堺市では行っておりません」）",
-      "sources": [ { "label": "堺市上下水道局 よくある質問", "url": "https://water.city.sakai.lg.jp/soshikikarasagasu/srvsuishin/jigyoservice/okyakusama/faq/844.html" } ]
+      "sources": [
+        {
+          "label": "堺市上下水道局 よくある質問",
+          "url": "https://water.city.sakai.lg.jp/soshikikarasagasu/srvsuishin/jigyoservice/okyakusama/faq/844.html"
+        }
+      ]
+    },
+    {
+      "code": "27203",
+      "text": "豊中市上下水道局は、身体障害者や母子家庭などの世帯への料金の福祉減免を実施していません（上下水道局のよくある質問）",
+      "sources": [
+        {
+          "label": "豊中市上下水道局 よくある質問",
+          "url": "https://www.city.toyonaka.osaka.jp/jogesuido/okyakusama_joho/faq/ryokin/fukushigenmen.html"
+        }
+      ]
+    },
+    {
+      "code": "27204",
+      "text": "池田市の水道料金・下水道使用料の福祉減免は、平成29年度に全面廃止されています",
+      "sources": [
+        {
+          "label": "池田市 上下水道の料金制度の資料",
+          "url": "https://www.city.ikeda.osaka.jp/material/files/group/17/sankou_H29gaiyou.pdf"
+        }
+      ]
+    },
+    {
+      "code": "27207",
+      "text": "高槻市には、高齢者や障がいのある人の世帯などを対象にした水道料金の減免・割引の制度はありません（市のよくある質問）",
+      "sources": [
+        {
+          "label": "高槻市 よくある質問",
+          "url": "https://www.faq.city.takatsuki.osaka.jp/faq/detail.aspx?id=2030"
+        }
+      ]
+    },
+    {
+      "code": "27219",
+      "text": "和泉市の水道料金・下水道使用料の福祉減免は、令和6年3月31日で廃止されました。その日に対象だった世帯は、経過措置として令和9年3月分まで手続きなしで減免が続きます（新しい申請は受け付けていません）",
+      "sources": [
+        {
+          "label": "和泉市上下水道部「福祉減免制度の廃止について」",
+          "url": "https://www.izumi-suido.com/news/20231205_fukushigenmen-haishi.html"
+        }
+      ]
     },
     {
       "code": "27227",
       "text": "東大阪市の水道料金・下水道使用料の福祉減免は、令和3年3月31日で廃止されています（市政だより令和2年9月1日号で告知。いまの上下水道局の申し込みの案内にある減額は、漏水の分だけです）",
       "sources": [
-        { "label": "東大阪市 市政だより令和2年9月1日号", "url": "https://www.city.higashiosaka.lg.jp/0000028348.html" },
-        { "label": "東大阪市 水道料金に関する各種申し込み", "url": "https://www.city.higashiosaka.lg.jp/0000000933.html" }
+        {
+          "label": "東大阪市 市政だより令和2年9月1日号",
+          "url": "https://www.city.higashiosaka.lg.jp/0000028348.html"
+        },
+        {
+          "label": "東大阪市 水道料金に関する各種申し込み",
+          "url": "https://www.city.higashiosaka.lg.jp/0000000933.html"
+        }
+      ]
+    },
+    {
+      "code": "27231",
+      "text": "大阪狭山市の上下水道料金の福祉減免（生活保護世帯や高齢者世帯などの基本料金の減免）は、令和6年2月請求分または3月請求分で廃止されました",
+      "sources": [
+        {
+          "label": "大阪狭山市「上下水道料金の福祉減免制度の廃止について」（国立国会図書館のウェブアーカイブに保存されたもの）",
+          "url": "https://warp.ndl.go.jp/20240209/20240208100610/https://www.city.osakasayama.osaka.jp/sosiki/suidokyoku/keieikikakugroup/3/3/1410334968417.html"
+        }
       ]
     }
   ],
@@ -43,13 +161,104 @@
       "name": "枚方市",
       "utility": "枚方市上下水道局",
       "eligible": "児童扶養手当を受けている市民税非課税の世帯、身体障害者手帳1・2級・療育手帳A・精神障害者保健福祉手帳1級を持つ人か、特別児童扶養手当・障害児福祉手当・特別障害者手当を受けている人がいる世帯、要介護4・5の人がいる世帯、65歳以上で市民税非課税・前年の年収150万円以下（2人目から1人50万円を足す）・預貯金350万円以下などの条件をすべて満たす生活に困っている高齢者の世帯",
-      "tariff": { "waterBasic": 660, "water1to8": 4, "sewerBasic": 768, "sewer1to8": 4, "m3": 8 },
-      "monthly": { "water": 761, "sewer": 880, "total": 1641 },
+      "benefit": "水道と下水道の基本料金と1か月8m³までの料金がかからなくなり、使用量が8m³以上の月なら月{total}円ほど（水道{water}円・下水道{sewer}円。2か月ごとの検針なら{total2}円ほど）安くなります",
+      "calc": {
+        "water": {
+          "parts": [
+            660,
+            32
+          ],
+          "why": "基本料金660円＋1〜8m³は1m³4円（税抜き）"
+        },
+        "sewer": {
+          "parts": [
+            768,
+            32
+          ],
+          "why": "基本使用料768円＋1〜8m³は1m³4円（税抜き）"
+        }
+      },
+      "monthly": {
+        "water": 761,
+        "sewer": 880,
+        "total": 1641
+      },
       "caution": "生活保護を受けている世帯は、令和8年10月検針分から対象外になります（ほかの条件に当たっても対象外）。すでに別の条件で減免を受けている人、施設に入所している人・長く入院している人も対象外です",
       "apply": "使用水量のお知らせ（または領収書）と手帳・証書などを持って、市役所本館1階か上下水道局庁舎1階のお客さまセンター窓口へ（生活困窮の高齢者世帯は印鑑と預貯金通帳なども要る）",
       "sources": [
-        { "label": "枚方市「水道料金・下水道使用料の福祉減免」", "url": "https://www.city.hirakata.osaka.jp/suidou/0000052807.html" },
-        { "label": "枚方市「料金表・計算・早見表」", "url": "https://www.city.hirakata.osaka.jp/suidou/0000052826.html" }
+        {
+          "label": "枚方市「水道料金・下水道使用料の福祉減免」",
+          "url": "https://www.city.hirakata.osaka.jp/suidou/0000052807.html"
+        },
+        {
+          "label": "枚方市「料金表・計算・早見表」",
+          "url": "https://www.city.hirakata.osaka.jp/suidou/0000052826.html"
+        }
+      ]
+    },
+    {
+      "code": "27206",
+      "name": "泉大津市",
+      "utility": "泉大津市の水道課・下水道課",
+      "eligible": "市民税非課税の世帯のうち、ひとり親家庭の医療証を受けている世帯、身体障がい者手帳1・2級・精神障がい者保健福祉手帳1・2級・療育手帳A・B1を持つ人がいる世帯、特別児童扶養手当を受けている世帯、全員が70歳以上の世帯",
+      "benefit": "水道料金が1か月329円（税抜き。税込みで約{waterR}円）、下水道使用料が1か月600円（税抜き。税込みで{sewer}円）安くなります（合わせて月{totalR}円ほど）",
+      "calc": {
+        "water": {
+          "parts": [
+            329
+          ],
+          "why": "水道料金の減免額 1か月あたり定額329円（消費税を含まず）"
+        },
+        "sewer": {
+          "parts": [
+            600
+          ],
+          "why": "下水道条例施行規則第18条第2項第1号 一般排水減免 600円＋消費税等"
+        }
+      },
+      "monthly": {
+        "water": 361,
+        "sewer": 660,
+        "total": 1021
+      },
+      "caution": "生活保護を受けている世帯は対象外です。泉大津市の水道は令和9年4月1日に大阪広域水道企業団へ統合される予定で、統合案には、福祉減免は企業団では引き継がない、とあります。統合のあとの扱いは市の案内で確かめてください",
+      "apply": "印鑑と、医療証・手帳・特別児童扶養手当の通知などを持って水道課サービス係へ（水道の減免を受けていれば、下水道の分は手続きなしで適用）",
+      "sources": [
+        {
+          "label": "泉大津市「水道料金の減免・助成制度」",
+          "url": "https://www.city.izumiotsu.lg.jp/kakuka/tosiseisakubu/suidouka/news/siyouryou_kanyuukinn/1364198603711.html"
+        },
+        {
+          "label": "泉大津市「下水道使用料について」",
+          "url": "https://www.city.izumiotsu.lg.jp/kakuka/tosiseisakubu/gesuidouka/tantougyoumu/gesuidousiyouryou/1296009726800.html"
+        },
+        {
+          "label": "泉大津市下水道条例施行規則（第18条）",
+          "url": "https://www.city.izumiotsu.lg.jp/section/reiki/reiki_honbun/k208RG00000403.html"
+        },
+        {
+          "label": "大阪広域水道企業団「3団体（泉大津市・箕面市・門真市）の水道事業統合案」",
+          "url": "https://www.wsa-osaka.jp/material/files/group/5/3danntaitougouann_honnpenn.pdf"
+        }
+      ]
+    },
+    {
+      "code": "27214",
+      "name": "富田林市",
+      "utility": "大阪広域水道企業団 富田林水道センター",
+      "eligible": "身体障がい者手帳1・2級か療育手帳Aの人がいる一般家庭（口径40mm未満の給水装置）",
+      "benefit": "水道料金と下水道使用料の基本料金が半分になります",
+      "caution": "水道料金の分は、令和9年3月31日で終わります（企業団は「令和8年度をもって料金の減免制度を終了」と案内）",
+      "apply": "身体障がい者手帳か療育手帳と印鑑を持って、富田林水道お客様センター（市役所地階）か金剛連絡所へ",
+      "sources": [
+        {
+          "label": "大阪広域水道企業団「重度障がい者家庭の料金減免について」（富田林）",
+          "url": "https://www.wsa-osaka.jp/suido/tondabayashi/ryokin/13507.html"
+        },
+        {
+          "label": "富田林市「障がい福祉の手引」（上下水道料金の軽減制度）",
+          "url": "https://www.city.tondabayashi.lg.jp/uploaded/attachment/113777.pdf"
+        }
       ]
     }
   ]
