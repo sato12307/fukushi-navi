@@ -391,7 +391,7 @@ const muniPage = (r) => {
   const sgCity = SG.cities.find((x) => x.code === r.code)
   if (sgCity) {
     const c = sgCity
-    life.push(`<li><strong>水道・下水道の減免</strong>：<strong>住民税非課税であることだけでは対象になりません</strong>。${esc(c.name)}で対象になるのは、${esc(c.eligible)}です（${esc(c.utility)}）。申請すると${sgBenefit(c)}。<strong>${esc(c.caution)}</strong>。申請は${esc(c.apply)}。出典＝${sgLinks(c.sources)}（${esc(SG.checked)}確認）。</li>`)
+    life.push(`<li><strong>水道・下水道の減免</strong>：<strong>住民税非課税であることだけでは対象になりません</strong>。${esc(c.name)}で対象になるのは、${esc(c.eligible)}です（${esc(c.utility)}）。申請すると、${sgBenefit(c)}。<strong>${esc(c.caution)}</strong>。申請は${esc(c.apply)}。出典＝${sgLinks(c.sources)}（${esc(SG.checked)}確認）。</li>`)
   }
   const sgNone = SG.none.find((x) => x.code === r.code)
   if (sgNone) life.push(`<li><strong>水道・下水道の減免</strong>：${esc(sgNone.text)}。出典＝${sgLinks(sgNone.sources)}（${esc(SG.checked)}確認）。</li>`)
