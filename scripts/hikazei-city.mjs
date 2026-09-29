@@ -41,6 +41,19 @@ const CK = readJson('data/hikazei-city-checks.json')
 const JF = readJson('data/jutaku-fujo.json')
 const HS = readJson('data/hogo-shinsei.json')
 const SR = readJson('data/seiho-ranking.json')
+// 水道・下水道の福祉減免（2026-09-29・v280 #173）。公式の原文で確かめた市区町村だけ（東京23区・大阪市・堺市）。
+// ★確かめていない市区町村には何も書かない（「無い」とも書かない）。読み取れなかったことと、制度が無いことは別。
+const SG = readJson('data/suido-genmen.json')
+{
+  // 月の減免額を条例の単価から計算し直して、載せる数字と1円まで突き合わせる（合わなければ何も書かずに止める）
+  const t = SG.tokyo23.tariff
+  for (const mm of ['mm13', 'mm20']) {
+    const water = Math.floor((t.basic[mm] + t.per_m3_5to10 * 5) * t.taxRate)
+    const sewer = Math.floor(t.sewer_upto8 * t.taxRate)
+    const m = SG.tokyo23.monthly[mm]
+    if (m.water !== water || m.sewer !== sewer || m.total !== water + sewer) die(`水道の減免額が条例の単価と合わない（${mm}：載せる ${m.water}/${m.sewer}/${m.total} ・計算 ${water}/${sewer}/${water + sewer}）`)
+  }
+}
 const CHECKED = [D.checked, CK.checked, KK.checked].sort().pop()
 
 // ── 1. 式の確かめ（大阪市・名古屋市の公表値と1円単位）────────────────────────────
@@ -348,6 +361,15 @@ const muniPage = (r) => {
   if (exists(`shogai-kojo/${r.code6}.html`)) life.push(`<li><strong>障害者控除の認定</strong>：<a href="${up}shogai-kojo/${r.code6}.html">${esc(r.city)}の障害者控除対象者認定</a>（要介護の人が障害者控除を受けると、非課税の線の内側に入ることがあります）。</li>`)
   if (exists(`houkatsu/${r.code6}.html`)) life.push(`<li><strong>地域包括支援センター</strong>：<a href="${up}houkatsu/${r.code6}.html">${esc(r.city)}の担当センターを住所から引く</a>。</li>`)
   life.push(`<li><strong>非課税世帯になると変わること</strong>：医療費の月の上限が「住民税非課税」の区分になります（<a href="${up}mitoshi/kogaku/">高額療養費の上限額の記録</a>）。給付金の対象になることもあります（<a href="${up}articles/juminzei-hikazei-check.html#merit">非課税世帯のおもな得</a>）。</li>`)
+  // 水道・下水道の福祉減免（2026-09-29・v280 #173）。原文で確かめた市区町村だけ。東京23区は「非課税だけでは対象外」を先に言う
+  // （非課税なら水道代も安くなると思われやすく、実際にそう書いている民間の記事もある）。
+  const sgLinks = (ss) => ss.map((s) => `<a href="${esc(s.url)}" rel="nofollow">${esc(s.label)}</a>`).join('・')
+  if (SG.tokyo23.codes.includes(r.code)) {
+    const T = SG.tokyo23, a = T.monthly, n = (x) => x.toLocaleString('ja-JP')
+    life.push(`<li><strong>水道・下水道の減免</strong>：<strong>住民税非課税であることだけでは対象になりません</strong>。${esc(r.city)}は${esc(T.water)}・${esc(T.sewer)}の減免で、対象は${esc(T.eligible)}です（${esc(T.sewerOnly)}は下水道だけ）。申請すると水道の基本料金と1か月10m³までの使用料、下水道の1か月8m³までの料金がかからなくなり、使用量が10m³以上の月なら口径13mmで月${n(a.mm13.total)}円・20mmで月${n(a.mm20.total)}円（2か月ごとの請求で${n(a.mm13.total * 2)}円・${n(a.mm20.total * 2)}円）安くなります。${esc(T.period)}。申請は${esc(T.apply)}。出典＝${sgLinks(T.sources)}（${esc(SG.checked)}確認）。</li>`)
+  }
+  const sgNone = SG.none.find((x) => x.code === r.code)
+  if (sgNone) life.push(`<li><strong>水道・下水道の減免</strong>：${esc(sgNone.text)}。出典＝${sgLinks(sgNone.sources)}（${esc(SG.checked)}確認）。</li>`)
 
   // 有料の資料への入口（2026-09-28 ユーザー指示「撒き餌の面から有料への導線を目立つところに」）。文面は offer-block.mjs。
   // ★この市区町村で実際に買えるものだけを並べる（手順書はその市区町村の版があるとき・都営は東京都・市営は政令市5市）。
@@ -712,7 +734,9 @@ let changedN = 0
 const changedLocs = new Set()
 for (const [rel, loc, html] of out) {
   const p = path.join(ROOT, rel)
-  if (fs.existsSync(p) && fs.readFileSync(p, 'utf8') === html) continue
+  // ★改行コードを揃えて比べる（2026-09-29）。git の checkout（autocrlf）で手元の面が CRLF になっていると、
+  //   中身が同じでも全1,791枚を「変わった」と数え、sitemap の lastmod を全部今日にしていた。
+  if (fs.existsSync(p) && fs.readFileSync(p, 'utf8').replace(/\r\n/g, '\n') === html) continue
   fs.mkdirSync(path.dirname(p), { recursive: true })
   fs.writeFileSync(p, html)
   changedN++; changedLocs.add(loc)
