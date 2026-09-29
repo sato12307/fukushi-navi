@@ -26,4 +26,8 @@ data/shizuoka-bairitsu.json
 data/yokohama-bairitsu.json
 data/kobe-bairitsu.json
 data/sagamihara-bairitsu.json
+# 埼玉県営・愛知県営の申込状況／抽選結果表PDFを読み取った生の中間ファイル（2026-09-30）。政令市と同じ扱い。
+# 作り直しは scratchpad の make-kenei-rows.cjs（公開しているのは回×区分の合計＝data/kenei-*.json だけ）。
+data/saitama-ken-bairitsu.json
+data/aichi-ken-bairitsu.json
 .tmp-*

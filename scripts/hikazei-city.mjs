@@ -162,8 +162,8 @@ const jutakuOf = (r) => {
   return row ? { org: r.pref, row, source: pf.source, how: `${r.pref}の表・${r.zeiKyuchi}級地` } : null
 }
 const seihoOf = (r) => SR.rows.find((x) => x.city === r.city && x.pref === r.pref) || null
-const KOEI = { '東京都': ['toei/', '都営住宅の倍率と申込先'], '神奈川県|川崎市': ['kawasaki/', '川崎市営住宅の倍率と申込先'], '神奈川県|横浜市': ['yokohama/', '横浜市営住宅の倍率と申込先'], '兵庫県|神戸市': ['kobe/', '神戸市営住宅の倍率と申込先'], '静岡県|静岡市': ['shizuoka/', '静岡市営住宅の倍率と申込先'], '神奈川県|相模原市': ['sagamihara/', '相模原市営住宅の倍率と申込先'], '埼玉県': ['saitama-ken/', '埼玉県営住宅の倍率（募集回ごと・住宅種別ごと）', 'free'], '愛知県': ['aichi-ken/', '愛知県営住宅の倍率（定期募集の回ごと）', 'free'] }
-// ★3つ目が 'free' の面は無料の倍率ページだけ（scripts/kenei-build.mjs）。売り場（申込先えらび）が無いので、下の有料の入口（offerHub）には渡さない
+const KOEI = { '東京都': ['toei/', '都営住宅の倍率と申込先'], '神奈川県|川崎市': ['kawasaki/', '川崎市営住宅の倍率と申込先'], '神奈川県|横浜市': ['yokohama/', '横浜市営住宅の倍率と申込先'], '兵庫県|神戸市': ['kobe/', '神戸市営住宅の倍率と申込先'], '静岡県|静岡市': ['shizuoka/', '静岡市営住宅の倍率と申込先'], '神奈川県|相模原市': ['sagamihara/', '相模原市営住宅の倍率と申込先'], '埼玉県': ['saitama-ken/', '埼玉県営住宅の倍率（募集回ごと・住宅種別ごと）'], '愛知県': ['aichi-ken/', '愛知県営住宅の倍率（定期募集の回ごと）'] }
+// ★県営（埼玉・愛知）は 2026-09-30 から売り場（/<key>/moushikomisaki/）がある。3つ目に 'free' と書いた面は、売り場の無い無料ページとして offerHub に渡さない（いまは該当なし）
 const koeiOf = (r) => KOEI[`${r.pref}|${r.city}`] || KOEI[r.pref] || null
 const exists = (rel) => fs.existsSync(path.join(ROOT, rel))
 
@@ -755,17 +755,24 @@ if (DRY) {
   process.exit(0)
 }
 
-let changedN = 0
+let changedN = 0, scriptOnlyN = 0
 const changedLocs = new Set()
+// ★計測の埋め込み（assets/ev.js を page() が <script> に入れたもの）と buy.js の版だけが違う面は、
+//   書き直しはするが lastmod は進めない（2026-09-30）。ev.js に売り場を1行足した日に、読み手に見える中身は
+//   同じなのに全1,791枚の lastmod が今日になりかけた（県営の売り場を足した日に実測）。
+const readable = (h) => h.replace(/<script>[\s\S]*?<\/script>/g, '').replace(/assets\/buy\.js\?v=\w+/g, 'assets/buy.js')
 for (const [rel, loc, html] of out) {
   const p = path.join(ROOT, rel)
   // ★改行コードを揃えて比べる（2026-09-29）。git の checkout（autocrlf）で手元の面が CRLF になっていると、
   //   中身が同じでも全1,791枚を「変わった」と数え、sitemap の lastmod を全部今日にしていた。
-  if (fs.existsSync(p) && fs.readFileSync(p, 'utf8').replace(/\r\n/g, '\n') === html) continue
+  const old = fs.existsSync(p) ? fs.readFileSync(p, 'utf8').replace(/\r\n/g, '\n') : null
+  if (old === html) continue
   fs.mkdirSync(path.dirname(p), { recursive: true })
   fs.writeFileSync(p, html)
+  if (old !== null && readable(old) === readable(html)) { scriptOnlyN++; continue }
   changedN++; changedLocs.add(loc)
 }
+if (scriptOnlyN) console.log(`計測の埋め込みだけ変わった面 ${scriptOnlyN}枚（書き直したが lastmod は進めない）`)
 // 一覧から外れた市区町村のページが残っていないか（消さずに知らせる）
 const known = new Set(M.map((r) => r.code))
 const strays = fs.readdirSync(path.join(ROOT, 'hikazei')).filter((d) => /^\d{5}$/.test(d) && !known.has(d))

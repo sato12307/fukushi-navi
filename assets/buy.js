@@ -33,7 +33,13 @@
     shizuoka: { product: 'shizuoka', perCity: false, seen: 'shizuoka_offer_seen', read: 'shizuoka_offer_read', buy: 'shizuoka_leaf_buy' },
     yokohama: { product: 'yokohama', perCity: false, seen: 'yokohama_offer_seen', read: 'yokohama_offer_read', buy: 'yokohama_leaf_buy' },
     kobe: { product: 'kobe', perCity: false, seen: 'kobe_offer_seen', read: 'kobe_offer_read', buy: 'kobe_leaf_buy' },
-    sagamihara: { product: 'sagamihara', perCity: false, seen: 'sagamihara_offer_seen', read: 'sagamihara_offer_read', buy: 'sagamihara_leaf_buy' }
+    sagamihara: { product: 'sagamihara', perCity: false, seen: 'sagamihara_offer_seen', read: 'sagamihara_offer_read', buy: 'sagamihara_leaf_buy' },
+    // 県営の申込先えらび（2026-09-30）。商品ID・URL は saitama-ken だが、イベント名は saitamaken_ にする。
+    // ★fukushiru-pay の /api/ev は名前の a-z と _ 以外を落とす（ハイフンが消える）。名前を最初から落とした形に
+    //   そろえておかないと、送った名前と数えられる名前が食い違う（売り場に着いた view は data-offer＋_view で
+    //   送られ、受け口で saitamaken_view になる＝ここの名前と同じになる）。
+    'saitama-ken': { product: 'saitama-ken', perCity: false, seen: 'saitamaken_offer_seen', read: 'saitamaken_offer_read', buy: 'saitamaken_leaf_buy' },
+    'aichi-ken': { product: 'aichi-ken', perCity: false, seen: 'aichiken_offer_seen', read: 'aichiken_offer_read', buy: 'aichiken_leaf_buy' }
   }
 
   // ── どこまで進んだかを3段で数える ────────────────────────────────────────

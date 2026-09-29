@@ -94,11 +94,12 @@
   <p class="lead">川島町は、住民税の非課税の線を決める地域の区分で<strong>3級地</strong>です（生活保護の級地は3級地-2）。3級地の線は、1級地の額に0.8をかけた額を参考に市町村が条例で決めます。下の表はその<strong>国の標準の値</strong>で、川島町が条例で定めた額はまだ確かめていません。フクシルが市区町村の公式ページで額を確かめた範囲では、3級地27のうち1の市町村が標準と違う額（高い側に丸め）にしていました。標準より低い額にしていた市町村はありません。表の額以下なら非課税の見込みで、表の額を少し超えても非課税のことがあります。</p>
 
   <div class="offer gold" id="offer-hub">
-  <span class="kicker">有料の資料・500円（買い切り）</span>
-  <h3>親の税金を取り戻すための資料</h3>
+  <span class="kicker">有料の資料・各500円（買い切り）</span>
+  <h3>親の税金を取り戻す・家賃を下げるための資料</h3>
   <p>要介護の親御さんは、川島町の認定で住民税の非課税の線が<strong>合計所得135万円まで上がる</strong>ことがあります。</p>
   <ul>
   <li><a href="../../pack/?code=113468"><strong>親の障害者控除、過去5年分をさかのぼって取り戻す手順書</strong></a>（川島町版）</li>
+  <li><a href="../../saitama-ken/moushikomisaki/"><strong>埼玉県営住宅で「毎回すいている申込先」の一覧</strong></a></li>
   </ul>
   <p class="fine"><strong>買わなくても手続き・申し込みはできます。</strong>このページも、制度の説明も全部無料です。</p>
   </div>
@@ -281,7 +282,10 @@
     { path: '/shizuoka/moushikomisaki/', view: 'shizuoka_view' },
     { path: '/yokohama/moushikomisaki/', view: 'yokohama_view' },
     { path: '/kobe/moushikomisaki/', view: 'kobe_view' },
-    { path: '/sagamihara/moushikomisaki/', view: 'sagamihara_view' }
+    { path: '/sagamihara/moushikomisaki/', view: 'sagamihara_view' },
+    // ★県営（2026-09-30）。イベント名にハイフンを入れない（/api/ev が a-z と _ 以外を落とす）。
+    { path: '/saitama-ken/moushikomisaki/', view: 'saitamaken_view' },
+    { path: '/aichi-ken/moushikomisaki/', view: 'aichiken_view' }
   ]
   for (var i = 0; i < SELL.length; i++) {
     if (location.pathname.indexOf(SELL[i].path) === 0 && location.pathname.indexOf('kanryo') < 0) ev(SELL[i].view)

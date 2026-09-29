@@ -16,7 +16,9 @@ export const esc = (s) => String(s ?? '').replace(/[&<>"]/g, (c) => ({ '&': '&am
 // ── 共通の枠 ────────────────────────────────────────────────────────────────
 // noindex は「購入者だけが来る画面」に使う（/pack/kanryo/）。
 // 特商法表記と規約は買う前に読めることが要件なので、こちらは索引させる。
-export const page = ({ title, desc, canonical, depth, body, jsonld, noindex }) => {
+// buyVer … assets/buy.js の版（キャッシュよけ）。★既定を上げると全ページが「変わった」扱いになり sitemap の lastmod が一斉に進む。
+//   新しい商品を buy.js に足したときは、その売り場を作る生成器だけが新しい版を渡す（2026-09-30 県営）。
+export const page = ({ title, desc, canonical, depth, body, jsonld, noindex, buyVer = '20260917a' }) => {
   // depth は「サイト根からの階層」。/pack/kanryo/ のような2階層下で '../' を使うと
   // /pack/assets/style.css を見にいって404になる。[[relative-asset-paths-subpages]]
   const up = depth === 0 ? './' : '../'.repeat(depth)
@@ -73,7 +75,7 @@ ${EV}
 </script>
 ${/* 記事の中の売り場（.offer[data-offer]）の決済と計測。カードが無いページでは即 return するので、
      どのページから読んでも害はない。判定を各ページに写経しないためここ1か所で読む。 */''}
-<script src="${up}assets/buy.js?v=20260917a" defer></script>
+<script src="${up}assets/buy.js?v=${buyVer}" defer></script>
 </body>
 </html>
 `

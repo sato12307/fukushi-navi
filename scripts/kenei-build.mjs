@@ -3,13 +3,15 @@
 //   node scripts/kenei-build.mjs      → saitama-ken/index.html ・ aichi-ken/index.html ・ sitemap.xml
 //
 // ★2026-09-29 ユーザー裁定 v280（第154回 #171「公営住宅の倍率を県営へ広げる」）。
-// ★売らない。県営の有料資料（500円）はユーザーの判断待ち。∴ koei-lib の CITIES には入れない
-//   （入れると /<key>/moushikomisaki/ の売り場と、offerHub の売り場一覧に連動してしまう）。
+// ★2026-09-30 ユーザー裁定「県営も売りに出そうか」で有料化した。売り場（/<key>/moushikomisaki/）・購入後画面・有料資料は
+//   koei-nerai.mjs が koei-lib の CITIES（freePage: false）から作る。この面は無料のまま、置くのは案内とリンクだけ
+//   （2026-09-19 ユーザー裁定「売り場は独自ページだけ」）。件数は koei-lib の load() から取り、売り場・有料資料とずらさない。
 // ★倍率は「申込（応募）の合計 ÷ 募集戸数の合計」。公社が公表している倍率と同じ定義で、
 //   埼玉は2026年4月の回に公社が載せた種別ごとの倍率と、ここで計算した倍率が一致する。
 //   koei-lib の中央値（申込先ごとの倍率の真ん中）とは別の物差しなので混ぜない。
 // ★数字は data/kenei-*.json からだけ作る。ビルドのたびに公表の合計と照合し、合わなければ止める。
-//   住宅ごとの行は持たない・出さない（公表の表を丸ごと写さない。両県とも無断転載を断っている）。
+//   公表の表は丸ごと写さない（両県とも無断転載を断っている）。住宅ごとに出すのは、当方が計算した指標
+//   （混んでいる申込先の倍率の中央値・最高・観測件数）だけ。行データ（data/<key>-bairitsu.json）は公開しない。
 // ★文の前提（「単身がいちばん高い」など）もビルドのたびに数字で確かめる。
 //   データを入れ替えて前提が崩れたら、文を黙って残さずに止める。
 // ─────────────────────────────────────────────────────────────────────────────
@@ -17,7 +19,8 @@ import fs from 'node:fs'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { page, esc, SITE } from './shogai-kojo-page.mjs'
-import { WA } from './koei-lib.mjs'
+import { WA, load, MIN_N, SUKI, PRICE, num, r1 } from './koei-lib.mjs'
+import { offerKoeiLeaf, jumpKoei } from './offer-block.mjs'
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..')
 const readJson = (rel) => JSON.parse(fs.readFileSync(path.join(ROOT, rel), 'utf8'))
@@ -56,6 +59,31 @@ const write = (dir, html) => {
   return true
 }
 
+// ── 有料の一覧への案内（冒頭の1行・混んでいる申込先・申込先ごとの一覧へのリンク）────────────────
+// ★「混んでいる申込先の実名は上に全部出しています」と案内の文が言うので、混んでいる申込先の表は案内より上に置く。
+const sellParts = (key) => {
+  const { C, F, konde } = load(key)
+  const facts = { price: PRICE, city: C.city, rounds: F.rounds, minN: MIN_N, suki: SUKI, sukiN: num(F.suki), bureN: F.buread, enoughN: num(F.enough), key: C.key, axis: C.axis.label, only: C.only || `${C.city}営住宅だけ` }
+  const fields = C.cols.map(([f]) => f)
+  const axisField = fields.find((f) => konde.every((h) => h[f] === h.axis))
+  if (!axisField) die(`${C.city}：軸の欄が名寄せの鍵に無い（混んでいる申込先の表が作れない）`)
+  const rest = fields.filter((f) => f !== axisField && f !== 'name')
+  const top = konde.slice(0, 12)
+  const kondeHtml = `  <h2 id="konde">混んでいる申込先（実名・無料）</h2>
+  <p>避けるべき相手も無料で出します。定期募集${F.rounds}回を申込先ごとに名寄せし、${MIN_N}件以上観測できた申込先を、倍率の中央値が高い順に${top.length}件並べました。</p>
+  <div class="table-wrap">
+  <table class="grid">
+  <thead><tr><th>${esc(C.axis.label)}</th><th>住宅</th><th class="num">中央値</th><th class="num">最高</th><th class="num">観測</th></tr></thead>
+  <tbody>
+${top.map((h) => `  <tr><td>${esc(h[axisField])}</td><td>${esc(h.name)}${rest.length ? `<br><small>${rest.map((f) => esc(h[f])).filter(Boolean).join('・')}</small>` : ''}</td><td class="num">${r1(h.med)}倍</td><td class="num">${r1(h.max)}倍</td><td class="num">${h.n}件</td></tr>`).join('\n')}
+  </tbody></table></div>
+  <p class="note">中央値・最高は、その申込先の各回の倍率（申込÷募集戸数）から当方が計算したものです。「観測」は募集の件数で、募集回の数ではありません。</p>`
+  const leafHtml = `  <h2 id="pack">申込先ごとの一覧（${PRICE}円）</h2>
+  <p class="offer-lead"><strong>申込書に書けるのは1回につき1つ</strong>です。${esc(C.axis.label)}ごとの相場が分かっても、最後は申込先を1つに決めることになります。そこだけは申込先ごとの実測が要ります。</p>
+${offerKoeiLeaf({ facts, up: '../' })}`
+  return { jump: jumpKoei({ ...facts, up: '../' }), konde: kondeHtml, leaf: leafHtml }
+}
+
 // ── 2. 埼玉 ────────────────────────────────────────────────────────────────
 function saitama () {
   const R = [...SA.rounds].sort((a, b) => b.round.localeCompare(a.round))   // 新しい回を上に
@@ -71,6 +99,7 @@ function saitama () {
   const zero = R.map((r) => sum(Object.values(r.types), (v) => v.zero)), rows = R.map((r) => sum(Object.values(r.types), (v) => v.rows))
   const [zMin, zMax] = minmax(zero), [pMin, pMax] = minmax(zero.map((z, i) => Math.round((z / rows[i]) * 100)))
   const first = R[R.length - 1], N = R.length
+  const S = sellParts('saitama-ken')
   const title = `埼玉県営住宅の倍率｜募集回ごと・住宅種別ごと（${WA(first.round)}〜${WA(latest.round)}の${N}回）｜フクシル`
   const desc = `埼玉県営住宅の定期募集${N}回ぶんの申込状況を集計し、一般・子育て支援・高齢者・障がい者・単身の住宅種別ごとに倍率（申込件数÷募集戸数）を並べました。単身住宅は${tMin.toFixed(2)}〜${tMax.toFixed(2)}倍と、ほかの種別よりずっと高くなっています。`
   const rowsHtml = R.map((r) => `  <tr><th scope="row">${WA(r.round)}</th>${cell(r.published.moushikomi, r.published.koho, '件')}${COLS.map(([t]) => (r.types[t] ? cell(r.types[t].moushikomi, r.types[t].koho, '件') : '<td class="num">—</td>')).join('')}</tr>`).join('\n')
@@ -84,6 +113,8 @@ function saitama () {
 
   <div class="callout point"><p><span class="tag">要点</span><strong>単身住宅は、${N}回とも${tMin.toFixed(2)}〜${tMax.toFixed(2)}倍</strong>でした。一般・子育て支援・高齢者・障がい者住宅（${oMin.toFixed(2)}〜${oMax.toFixed(2)}倍）より、どの回もずっと高くなっています。${latestTop ? `直近の${WA(latest.round)}は募集が${n(latest.published.koho)}戸と${N}回でいちばん少なく、全体の倍率も${bai(latest.published.moushikomi, latest.published.koho)}倍と${N}回でいちばん高い回でした。` : ''}</p></div>
 
+${S.jump}
+
   <h2>募集回ごとの倍率</h2>
   <div class="table-wrap">
   <table class="grid">
@@ -93,6 +124,10 @@ ${rowsHtml}
   </tbody></table></div>
   <p class="note">倍率は申込件数÷募集戸数です。公社が${WA('2026-04')}の回に載せた住宅種別ごとの倍率と同じ計算で、その回は種別ごとの数と倍率がすべて一致します。
   車イス住宅・単身車イス住宅・福島自主避難住宅は募集戸数が少ないので列を作らず、「全体」にだけ入れています。</p>
+
+${S.konde}
+
+${S.leaf}
 
   <h2>表の読み方</h2>
   <ul>
@@ -125,6 +160,7 @@ ${rowsHtml}
 function aichi () {
   const R = [...AI.rounds].sort((a, b) => b.round.localeCompare(a.round))
   const first = R[R.length - 1], latest = R[0], N = R.length
+  const S = sellParts('aichi-ken')
   const tot = (r) => ({ koho: r.ippan.koho + r.fukushi.koho, oubo: r.ippan.oubo + r.fukushi.oubo })
   const [aMin, aMax] = minmax(R.map((r) => tot(r).oubo / tot(r).koho))
   // 文の前提：最新の年度の回はすべて一般のほうが高い／それより前の年度は福祉枠のほうが高い回が多い
@@ -162,6 +198,8 @@ function aichi () {
   <div class="callout warn"><p><span class="tag">2026年9月の募集から変わりました</span>令和8年度第2回（2026年9月受付）から、<strong>部屋ごとの募集</strong>に変わりました。福祉枠に当たる世帯は、事故住宅を除くすべての一般世帯向住宅に申し込めます（福祉枠で申し込むと、抽選番号が2つ届きます）。
   このため、下の表の「一般」と「福祉枠」の倍率は、これからの回とはそのままは比べられません。</p></div>
 
+${S.jump}
+
   <h2>定期募集の回ごとの倍率</h2>
   <div class="table-wrap">
   <table class="grid">
@@ -179,6 +217,10 @@ ${rowsHtml}
 ${secHtml}
   </tbody></table></div>
   <p class="note">抽選結果表は、住宅を受け持つ管理事務所・支所ごとに分かれています。数字は、その合計行を${cur.length}回ぶん足したものです。管理事務所・支所の一覧は、申込案内書の49・50ページにあります。</p>
+
+${S.konde}
+
+${S.leaf}
 
   <h2>表の読み方</h2>
   <ul>
@@ -207,13 +249,19 @@ ${secHtml}
 // ── 4. 書き出しと sitemap ────────────────────────────────────────────────────
 const out = [['saitama-ken', saitama(), SA.checked], ['aichi-ken', aichi(), AI.checked]]
 const changed = out.filter(([dir, p]) => write(dir, p.html)).map(([dir]) => dir)
-// sitemap：この2面のぶんだけ入れ替える（lastmod はデータの確認日。ビルドした日にしない）
+// sitemap：この2面のぶんだけ入れ替える。lastmod は、この回で中身が変わった面だけ今日（日本時間）にし、
+// 変わらなかった面は前の値を残す（初めて載せるときはデータの確認日）。ビルドしただけの日にはしない。
+// ★2026-09-30 有料の一覧への案内と混んでいる申込先の表を足した日に、確認日のまま据え置かれていたので直した。
+const TODAY = new Date(Date.now() + 9 * 3600e3).toISOString().slice(0, 10)
 const smPath = path.join(ROOT, 'sitemap.xml')
 let sm = fs.readFileSync(smPath, 'utf8')
 for (const [dir, , checked] of out) {
   const loc = `${SITE}/${dir}/`
-  sm = sm.replace(new RegExp(`^\\s*<url><loc>${loc.replace(/[.*+?^${}()|[\]\\/]/g, '\\$&')}</loc>.*\\n`, 'm'), '')
-  sm = sm.replace('</urlset>', `  <url><loc>${loc}</loc><lastmod>${checked}</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>\n</urlset>`)
+  const re = new RegExp(`^\\s*<url><loc>${loc.replace(/[.*+?^${}()|[\]\\/]/g, '\\$&')}</loc><lastmod>([^<]+)</lastmod>.*\\n`, 'm')
+  const prev = re.exec(sm)?.[1]
+  const lm = changed.includes(dir) ? TODAY : (prev || checked)
+  sm = sm.replace(re, '')
+  sm = sm.replace('</urlset>', `  <url><loc>${loc}</loc><lastmod>${lm}</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>\n</urlset>`)
 }
 fs.writeFileSync(smPath, sm)
 console.log(`県営住宅の面：${out.map(([d]) => d).join('・')}（書き換え ${changed.length}枚）`)

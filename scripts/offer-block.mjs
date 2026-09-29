@@ -61,7 +61,7 @@ export function offerKoeiSell({ facts: f, peek, up = '../../' } = {}) {
   <li>申込者ゼロが出た申込先と<strong>その回数</strong></li>
   <li>観測できた<strong>全申込先の索引${f.enoughN}件</strong>（倍率の中央値／最低／最高・観測件数・申込0の回数・のべ募集戸数・最後に募集された回）</li>
   </ul>
-  <p class="fine">先に確認してください：これは<strong>過去の実測から作った目安</strong>で、次の募集の倍率を約束するものではありません。募集される住宅は回ごとに変わります。申込資格（市内在住・収入基準など）は${f.city}の募集案内でご確認ください。<strong>対象は${f.only}</strong>で、都道府県営住宅や他市の市営住宅は入っていません。</p>
+  <p class="fine">先に確認してください：これは<strong>過去の実測から作った目安</strong>で、次の募集の倍率を約束するものではありません。募集される住宅は回ごとに変わります。申込資格（${f.shikaku || '市内在住・収入基準など'}）は${f.guideOrg || f.city}の募集案内でご確認ください。<strong>対象は${f.only}</strong>で、${f.notIn || '都道府県営住宅や他市の市営住宅'}は入っていません。</p>
   <p class="buyrow"><button type="button" class="btn-primary" data-buy>${f.price}円で一覧を受け取る</button> <span class="buymsg" role="status"></span></p>
   <p class="fine"><strong>買わなくても申し込みはできます。</strong>${f.axis}ごとの相場と混んでいる申込先の実名は、上に全部出しています。</p>
 ${peek ? peekBox('一覧の冒頭（抜粋）', peek) : ''}
@@ -145,8 +145,12 @@ const hubItem = {
       const c = CITIES[local.koei]
       return `  <li><a href="${up}${c.key}/moushikomisaki/"><strong>${esc(c.city)}営住宅で「毎回すいている申込先」の一覧</strong></a></li>`
     }
-    const links = Object.values(CITIES).map((c) => `<a href="${up}${c.key}/moushikomisaki/"><strong>${esc(c.city)}</strong></a>`).join('・')
-    return `  <li>市営住宅で「毎回すいている申込先」の一覧：${links}</li>`
+    // ★2026-09-30 県営（埼玉・愛知）を足した。「市営住宅で…」の行に県を混ぜると嘘になるので、kind ごとに行を分ける。
+    const line = (kind) => {
+      const cs = Object.values(CITIES).filter((c) => (c.kind || '市営') === kind)
+      return cs.length ? `  <li>${kind}住宅で「毎回すいている申込先」の一覧：${cs.map((c) => `<a href="${up}${c.key}/moushikomisaki/"><strong>${esc(c.city)}</strong></a>`).join('・')}</li>` : ''
+    }
+    return [line('市営'), line('県営')].filter(Boolean).join('\n')
   },
 }
 
