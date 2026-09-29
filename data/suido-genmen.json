@@ -153,6 +153,16 @@
           "url": "https://warp.ndl.go.jp/20240209/20240208100610/https://www.city.osakasayama.osaka.jp/sosiki/suidokyoku/keieikikakugroup/3/3/1410334968417.html"
         }
       ]
+    },
+    {
+      "code": "27361",
+      "text": "熊取町の水道（大阪広域水道企業団 熊取水道センター）には、福祉減免などによる水道料金の減免制度はありません（企業団のよくある質問）",
+      "sources": [
+        {
+          "label": "大阪広域水道企業団 熊取水道センター「水道料金の減免制度はありますか」",
+          "url": "https://www.wsa-osaka.jp/soshiki/kumatori/1/2/2759.html"
+        }
+      ]
     }
   ],
   "cities": [
@@ -292,6 +302,55 @@
         {
           "label": "富田林市「障がい福祉の手引」（上下水道料金の軽減制度）",
           "url": "https://www.city.tondabayashi.lg.jp/uploaded/attachment/113777.pdf"
+        }
+      ]
+    },
+    {
+      "code": "27321",
+      "name": "豊能町",
+      "utility": "豊能町の下水道",
+      "eligible": "生活保護・遺族基礎年金・児童扶養手当・被爆者の手当（医療特別手当・特別手当・健康管理手当など）を受けている世帯、老齢福祉年金を受けている一人暮らしの高齢者の世帯",
+      "benefit": "下水道使用料が半分になります（町が適当と認めたとき）",
+      "caution": "この減免は下水道使用料の分だけです",
+      "apply": "町へ（窓口と書類は町に確かめてください）",
+      "sources": [
+        {
+          "label": "豊能町下水道条例施行規則（第23条）",
+          "url": "https://www.town.toyono.osaka.jp/reiki_int/reiki_honbun/k236RG00000363.html"
+        }
+      ]
+    },
+    {
+      "code": "27341",
+      "name": "忠岡町",
+      "utility": "忠岡町 福祉課の水道料金等補助事業",
+      "eligible": "町民税が非課税で、生活保護を受けておらず、水道料金などの滞納がない、ひとり親世帯か65歳以上の一人暮らしの世帯",
+      "benefit": "水道の基本料金の額が、あとから年2回（10月末・3月末）に分けて補助されます（いったん払ったあとで戻ってくる形で、減免ではありません）",
+      "caution": "いまは町が全部の世帯の水道の基本料金を減免している期間（令和8年10月検針分まで）なので、そのあいだこの補助は行われません",
+      "apply": "必要なものを持って町の福祉課へ（申請した月の翌月の分から）",
+      "sources": [
+        {
+          "label": "忠岡町「水道料金等補助事業について」",
+          "url": "https://www.town.tadaoka.osaka.jp/soshiki/fukushi/gyoumuannai/3/1169.html"
+        },
+        {
+          "label": "忠岡町「水道基本料金の減免」（補助事業の取扱い）",
+          "url": "https://www.town.tadaoka.osaka.jp/soshiki/keiei_senryaku/oshirase/5013.html"
+        }
+      ]
+    },
+    {
+      "code": "27366",
+      "name": "岬町",
+      "utility": "岬町の下水道",
+      "eligible": "（特別）児童扶養手当を受けている世帯、遺族基礎年金を受けていて住民税が非課税の世帯、身体障がい者手帳1・2級か療育手帳Aの人がいる世帯、全員が65歳以上で住民税が非課税の世帯、どちらかが65歳以上の夫婦の世帯で住民税が非課税の世帯など",
+      "benefit": "下水道使用料が減免されます（減る額は町の案内に書かれていないので、町に確かめてください）",
+      "caution": "この減免は下水道使用料の分だけです",
+      "apply": "町の申請書に添付書類を添えて提出（原則、申請した月の使用料から）",
+      "sources": [
+        {
+          "label": "岬町「下水道使用料金について」（下水道使用料金の減免について）",
+          "url": "https://www.town.misaki.osaka.jp/kurashi/sumai/gesuidou/1641.html"
         }
       ]
     }
