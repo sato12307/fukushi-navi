@@ -44,6 +44,8 @@ for (const key of keys) {
   const { C, F, RANGE, READ_AT, INDEX_URL, SRC_NAME, enough, suki, buread, konde, shownGroups, BY_ROUND } = D
   const W = C.wa || WA   // 回の呼び方（愛知県営だけ「令和◯年度第◯回」。koei-lib の RANGE と同じ）
   const pending = []
+  const U = C.byRounds ? '回' : '件'   // 「毎回」の数え方（byRounds＝募集回の数）
+  const BOSHU = C.boshu || '定期募集'   // 募集の呼び方（大阪府営は「総合募集」）
   const write = (rel, html) => pending.push([rel, html])
 
   // ── 軸ごとの相場（無料）──────────────────────────────────────────────────
@@ -62,7 +64,7 @@ for (const key of keys) {
   const table = (list) => `<table class="grid"><thead><tr>${TH}</tr></thead><tbody>\n${list.map(hrow).join('\n')}\n</tbody></table>`
 
   const SEC2_TITLE = `2. 毎回すいている申込先（${num(F.suki)}件）`
-  const SEC2_LEAD = `${MIN_N}件以上観測できて、倍率の<strong>中央値</strong>が${SUKI}倍未満だったものだけを載せています。中央値で切っているので、<strong>1回だけたまたま空いた住宅は入りません</strong>。倍率の低い順。`
+  const SEC2_LEAD = `${MIN_N}${U}以上${C.byRounds ? 'の募集で' : ''}観測できて、倍率の<strong>中央値</strong>が${SUKI}倍未満だったものだけを載せています。中央値で切っているので、<strong>1回だけたまたま空いた住宅は入りません</strong>。倍率の低い順。`
   const sukiByGroup = shownGroups.map((g) => {
     const list = suki.filter((h) => h.axis === g.label).sort((a, b) => a.med - b.med || b.n - a.n)
     return list.length ? `  <h3>${esc(g.label)}（${list.length}件）</h3>\n  <div class="wrap">${table(list)}</div>` : ''
@@ -100,7 +102,7 @@ for (const key of keys) {
 ${checked ? `  <li>${checked}</li>\n` : ''}  <li>${C.calcNote || '倍率は公表表の倍率の列を読まず、<strong>応募者数÷募集戸数</strong>で当方が計算しています。公表列をそのまま読むと、レイアウトが崩れた回に住宅名と倍率の対応がずれて入ることがあり、件数を数えても気づけないためです。'}</li>
 ${C.thin ? `  <li>${C.thin(F)}</li>
 ` : ''}
-  <li>「観測」の単位は募集件数で、募集回の数ではありません。同じ回に同じ住宅で複数の区分・住戸が募集されることがあり、その1件ずつを数えています。</li>
+  <li>「観測」の単位は募集件数で、募集回の数ではありません。同じ回に同じ住宅で複数の区分・住戸が募集されることがあり、その1件ずつを数えています。${C.byRounds ? `ただし「毎回すいている」の対象は、<strong>${MIN_N}回以上の募集で観測できた申込先</strong>だけです（同じ回に何戸出ても1回と数えます）。` : ''}</li>
   <li>${esc(C.note)}</li>
   <li>本資料は公表表の転載・改変ではなく、公表された数値から当方が計算した指標（中央値・最低・最高・件数）を、当方の区分で並べたものです。</li>
   <li>当サイトは${esc(C.orgs || C.city)}とは関係のない個人が運営しています。制度・資格・募集内容は必ず公式の募集案内でご確認ください。</li>`
@@ -121,7 +123,7 @@ ${peekList.slice(0, PEEK_ROWS).map((h) => `    ${hrow(h)}`).join('\n')}
   const facts = {
     price: PRICE, city: C.city, rounds: F.rounds, minN: MIN_N, suki: SUKI,
     sukiN: num(F.suki), bureN: F.buread, enoughN: num(F.enough), key: C.key,
-    axis: C.axis.label, only: C.only || `${C.city}営住宅だけ`,
+    axis: C.axis.label, only: C.only || `${C.city}営住宅だけ`, minU: U, boshu: BOSHU,
     shikaku: C.shikaku || '市内在住・収入基準など', notIn: C.notIn || '都道府県営住宅や他市の市営住宅', guideOrg: C.guideOrg || C.city,
   }
   const OFFER = offerKoeiLeaf({ up: '../', facts })
@@ -129,7 +131,7 @@ ${peekList.slice(0, PEEK_ROWS).map((h) => `    ${hrow(h)}`).join('\n')}
   // ── 無料ページ ──────────────────────────────────────────────────────────
   const body = `  <p class="breadcrumb"><a href="../index.html">トップ</a> ＞ <a href="../articles/koei-jutaku-bairitsu.html">公営住宅</a> ＞ ${esc(C.city)}営住宅 申込先えらび</p>
 
-  <h1>${esc(C.city)}営住宅で「毎回すいている申込先」はどこか<br><small>${RANGE}の定期募集${F.rounds}回・${num(F.rows)}件を申込先ごとに名寄せした実測</small></h1>
+  <h1>${esc(C.city)}営住宅で「毎回すいている申込先」はどこか<br><small>${RANGE}の${BOSHU}${F.rounds}回・${num(F.rows)}件を申込先ごとに名寄せした実測</small></h1>
   <p class="updated">最終更新：${READ_AT} ／ 出典＝${esc(C.pub || C.city)}が公表する${esc(C.doc || '応募状況表')}${F.rounds}回分の読み取り</p>
 
   <p class="lead">${esc(C.city)}は募集回ごとに応募状況を出していますが、<strong>回をまたいで「どの申込先が毎回すいているか」を並べた資料は公表していません</strong>。1回だけたまたま空いた住宅と、いつ見ても空いている住宅は、申し込む側にとってまったく別のものです。ここでは${F.rounds}回分を読み直して、申込先ごとに名寄せしました。</p>
@@ -175,11 +177,12 @@ ${LIMITS}
   //   市の無料ページに埋めていた購入カードをここへ移した。無料ページにはリンクだけ。
   //   ★ここに着いた回数が <市>_view。カードが画面に入っただけの <市>_offer_seen は廃止した。
   write(`${C.key}/moushikomisaki/index.html`, page({
-    title: `${C.city}営住宅の申込先ごとの一覧（${PRICE}円）｜定期募集${F.rounds}回の実測｜フクシル`,
+    title: `${C.city}営住宅の申込先ごとの一覧（${PRICE}円）｜${BOSHU}${F.rounds}回の実測｜フクシル`,
     desc: `${C.city}営住宅の${C.doc || '応募状況表'}${F.rounds}回分を申込先ごとに名寄せし、倍率の中央値で「毎回すいている申込先」${num(F.suki)}件を選り分けた一覧です。${C.axis.label}ごとの相場と混んでいる申込先の実名は無料。${PRICE}円。`,
     canonical: `/${C.key}/moushikomisaki/`, depth: 2,
-    // ★buy.js に県営（saitama-ken・aichi-ken）を足した版。古い版がキャッシュから出ると、県営の買うボタンが P[] に無く動かない
-    buyVer: '20260930a',
+    // ★buy.js に県営（saitama-ken・aichi-ken・osaka-fu）を足した版。古い版がキャッシュから出ると、買うボタンが P[] に無く動かない
+    //   （2026-10-01 大阪府営を足したので上げた。売り場を作り直したときだけ新しい版を読む＝ほかの面の lastmod は動かない）
+    buyVer: '20261001a',
     body: `  <p class="breadcrumb"><a href="../../index.html">トップ</a> ＞ <a href="../">${esc(C.freeTitle || `${C.city}営住宅 申込先えらび`)}</a> ＞ 申込先ごとの一覧</p>
   <h1>${esc(C.city)}営住宅の申込先ごとの一覧</h1>
   <p class="updated">最終更新：${READ_AT} ／ 出典＝${esc(C.pub || C.city)}が公表する${esc(C.doc || '応募状況表')}${F.rounds}回分の読み取り</p>
@@ -189,7 +192,7 @@ ${offerKoeiSell({ up: '../../', peek: PEEK, facts })}
   }))
 
   if (C.freePage !== false) write(`${C.key}/index.html`, page({
-    title: `${C.city}営住宅で毎回すいている申込先はどこか｜定期募集${F.rounds}回の実測｜フクシル`,
+    title: `${C.city}営住宅で毎回すいている申込先はどこか｜${BOSHU}${F.rounds}回の実測｜フクシル`,
     desc: `${C.city}営住宅の${C.doc || '応募状況表'}${F.rounds}回分（${RANGE}）を申込先ごとに名寄せしました。観測できた募集${num(F.rows)}件、倍率の中央値は${F.allMed}倍で、${MIN_N}件以上観測できた${num(F.enough)}件のうち${F.suki}件が${SUKI}倍未満。${C.axis.label}ごとの相場と混んでいる申込先の実名は無料、申込先ごとの一覧は${PRICE}円です。`,
     canonical: `/${C.key}/`, depth: 1, body,
     jsonld: {
@@ -217,7 +220,7 @@ ${offerKoeiSell({ up: '../../', peek: PEEK, facts })}
   // ── 有料資料 ────────────────────────────────────────────────────────────
   const packHtml = `<!DOCTYPE html>
 <html lang="ja"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>${esc(C.city)}営住宅 申込先えらび（定期募集${F.rounds}回の実測）｜フクシル</title>
+<title>${esc(C.city)}営住宅 申込先えらび（${BOSHU}${F.rounds}回の実測）｜フクシル</title>
 <style>
 body{font-family:system-ui,-apple-system,"Hiragino Kaku Gothic ProN","Noto Sans JP",sans-serif;line-height:1.75;color:#182028;max-width:960px;margin:0 auto;padding:24px 16px 80px}
 h1{font-size:1.5rem;line-height:1.4;margin:0 0 .3em}h1 small{display:block;font-size:.95rem;font-weight:400;color:#566;margin-top:.4em}
@@ -235,7 +238,7 @@ table.grid td.num{text-align:right;white-space:nowrap}
 .note{font-size:.86rem;color:#566}
 @media print{body{max-width:none}h2{page-break-after:avoid}}
 </style></head><body>
-<h1>${esc(C.city)}営住宅 申込先えらび<br><small>${RANGE}の定期募集${F.rounds}回・${num(F.rows)}件を申込先ごとに名寄せした実測</small></h1>
+<h1>${esc(C.city)}営住宅 申込先えらび<br><small>${RANGE}の${BOSHU}${F.rounds}回・${num(F.rows)}件を申込先ごとに名寄せした実測</small></h1>
 <p class="lead">フクシル（${SITE}）／作成 ${READ_AT} 時点の公表資料より</p>
 
 <div class="box"><p><span class="tag">この資料の読み方</span>
@@ -250,7 +253,7 @@ table.grid td.num{text-align:right;white-space:nowrap}
 
 <h2>1. まず全体像</h2>
 <ul>
-<li>観測できた申込先 <strong>${num(F.all)}件</strong>。うち${MIN_N}件以上の募集が観測できた <strong>${num(F.enough)}件</strong>を集計の対象にしています。</li>
+<li>観測できた申込先 <strong>${num(F.all)}件</strong>。うち${MIN_N}${U}以上の募集${C.byRounds ? 'で' : 'が'}観測できた <strong>${num(F.enough)}件</strong>を集計の対象にしています。</li>
 <li>${esc(C.note)}</li>
 <li>その${num(F.enough)}件の倍率の中央値は <strong>${F.allMed}倍</strong>。中央値が${SUKI}倍未満だった申込先は <strong>${F.suki}件（${F.sukiPct}%）</strong>。</li>
 <li>申込者ゼロの募集が1回以上あった申込先 <strong>${F.zeroHousesEnough}件</strong>。</li>
@@ -270,7 +273,7 @@ ${sukiByGroup}
 <div class="wrap">${table(enough.filter((h) => h.zero > 0).sort((a, b) => b.zero - a.zero || a.med - b.med))}</div>
 
 <h2>5. ${esc(C.axis.label)}ごとの相場</h2>
-<p>申込先が${MIN_GROUP}件以上ある${esc(C.axis.label)}だけ、倍率の低い順。どこで出せるかで${RATIO}倍変わります。</p>
+<p>申込先が${MIN_GROUP}件以上ある${esc(C.axis.label)}だけ、倍率の低い順。${LO.med > 0 ? `どこで出せるかで${RATIO}倍変わります。` : `中央値が0倍（半分以上の募集で申込みが無い）の${esc(C.axis.label)}もあります。`}</p>
 <div class="wrap"><table class="grid"><thead><tr><th>${esc(C.axis.label)}</th><th class="num">観測できた募集</th><th class="num">のべ戸数</th><th class="num">倍率の中央値</th><th class="num">申込者ゼロ</th><th class="num">申込先</th><th class="num">${SUKI}倍未満</th></tr></thead><tbody>
 ${shownGroups.map((g) => `<tr><td>${esc(g.label)}</td><td class="num">${num(g.n)}</td><td class="num">${num(g.koho)}</td><td class="num">${g.med}倍</td><td class="num">${pct(g.zero, g.n)}%</td><td class="num">${g.houses}</td><td class="num">${g.suki}</td></tr>`).join('\n')}
 </tbody></table></div>

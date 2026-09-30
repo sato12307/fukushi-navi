@@ -39,7 +39,8 @@
     //   そろえておかないと、送った名前と数えられる名前が食い違う（売り場に着いた view は data-offer＋_view で
     //   送られ、受け口で saitamaken_view になる＝ここの名前と同じになる）。
     'saitama-ken': { product: 'saitama-ken', perCity: false, seen: 'saitamaken_offer_seen', read: 'saitamaken_offer_read', buy: 'saitamaken_leaf_buy' },
-    'aichi-ken': { product: 'aichi-ken', perCity: false, seen: 'aichiken_offer_seen', read: 'aichiken_offer_read', buy: 'aichiken_leaf_buy' }
+    'aichi-ken': { product: 'aichi-ken', perCity: false, seen: 'aichiken_offer_seen', read: 'aichiken_offer_read', buy: 'aichiken_leaf_buy' },
+    'osaka-fu': { product: 'osaka-fu', perCity: false, seen: 'osakafu_offer_seen', read: 'osakafu_offer_read', buy: 'osakafu_leaf_buy' }   // 2026-10-01 大阪府営
   }
 
   // ── どこまで進んだかを3段で数える ────────────────────────────────────────

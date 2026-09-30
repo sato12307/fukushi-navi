@@ -47,7 +47,8 @@
     { path: '/sagamihara/moushikomisaki/', view: 'sagamihara_view' },
     // ★県営（2026-09-30）。イベント名にハイフンを入れない（/api/ev が a-z と _ 以外を落とす）。
     { path: '/saitama-ken/moushikomisaki/', view: 'saitamaken_view' },
-    { path: '/aichi-ken/moushikomisaki/', view: 'aichiken_view' }
+    { path: '/aichi-ken/moushikomisaki/', view: 'aichiken_view' },
+    { path: '/osaka-fu/moushikomisaki/', view: 'osakafu_view' }   // 2026-10-01 大阪府営
   ]
   for (var i = 0; i < SELL.length; i++) {
     if (location.pathname.indexOf(SELL[i].path) === 0 && location.pathname.indexOf('kanryo') < 0) ev(SELL[i].view)

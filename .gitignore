@@ -33,3 +33,5 @@ data/aichi-ken-bairitsu.json
 .tmp-*
 # 高知県営（2026-10-01・三大都市圏の外の県は申込先ごとの一覧まで無料で出す）。行データは公開しない。
 data/kochi-ken-bairitsu.json
+# 大阪府営（2026-10-01・三大都市圏＝有料の申込先えらび）。行データは公開しない。
+data/osaka-fu-bairitsu.json

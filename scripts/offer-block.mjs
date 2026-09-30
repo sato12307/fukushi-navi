@@ -43,7 +43,7 @@ const esc = (s) => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replac
 //   買う導線そのものが切れていたので、呼ぶ側は必ず up を渡すこと。
 export function jumpKoei(f) {
   return `  <div class="callout note">
-    <p><span class="tag">有料の一覧</span>このページの相場は全部無料です。そのうえで<strong>申込先を1つに決める</strong>ところまで要るなら、定期募集${f.rounds}回を名寄せして「毎回すいている申込先」を並べた一覧（<strong>${f.price}円</strong>・買い切り）があります。<a href="${f.up || ''}${f.key}/moushikomisaki/">中身と値段を見る →</a></p>
+    <p><span class="tag">有料の一覧</span>このページの相場は全部無料です。そのうえで<strong>申込先を1つに決める</strong>ところまで要るなら、${f.boshu || '定期募集'}${f.rounds}回を名寄せして「毎回すいている申込先」を並べた一覧（<strong>${f.price}円</strong>・買い切り）があります。<a href="${f.up || ''}${f.key}/moushikomisaki/">中身と値段を見る →</a></p>
   </div>`
 }
 
@@ -54,9 +54,9 @@ export function offerKoeiSell({ facts: f, peek, up = '../../' } = {}) {
   <span class="kicker">申込先を1つに決めるなら</span>
   <h3>${f.city}営住宅で「毎回すいている申込先」の一覧</h3>
   <p class="price"><b>${f.price}円</b><span>買い切り・税込。買った直後にそのまま画面で読めます（保存・印刷も可）</span></p>
-  <p>ここまでが無料で読めるところです。このページで分かるのは「どの${f.axis}が空きやすいか」まで。<strong>1回だけ空いた住宅と、いつ見ても空いている住宅は区別できません</strong>。定期募集${f.rounds}回を申込先ごとに名寄せして、中央値で選り分けた一覧です。</p>
+  <p>ここまでが無料で読めるところです。このページで分かるのは「どの${f.axis}が空きやすいか」まで。<strong>1回だけ空いた住宅と、いつ見ても空いている住宅は区別できません</strong>。${f.boshu || '定期募集'}${f.rounds}回を申込先ごとに名寄せして、中央値で選り分けた一覧です。</p>
   <ul>
-  <li><strong>毎回すいている申込先</strong>（${f.minN}件以上の募集を観測できて、倍率の中央値が${f.suki}倍未満のものだけ<strong>${f.sukiN}件</strong>。1回だけ空いた住宅は入れていません）</li>
+  <li><strong>毎回すいている申込先</strong>（${f.minN}${f.minU || '件'}以上の募集${f.minU === '回' ? 'で' : 'を'}観測できて、倍率の中央値が${f.suki}倍未満のものだけ<strong>${f.sukiN}件</strong>。1回だけ空いた住宅は入れていません）</li>
   <li>回によって当たりやすさが<strong>大きく動く申込先</strong>（${f.bureN}件。住宅を変えるより、出す回を変えるほうが効く相手）</li>
   <li>申込者ゼロが出た申込先と<strong>その回数</strong></li>
   <li>観測できた<strong>全申込先の索引${f.enoughN}件</strong>（倍率の中央値／最低／最高・観測件数・申込0の回数・のべ募集戸数・最後に募集された回）</li>
@@ -72,7 +72,7 @@ ${peek ? peekBox('一覧の冒頭（抜粋）', peek) : ''}
 /** 市の無料ページに置く案内。★2026-09-19 からリンクだけ（購入ボタンは売り場にしかない）。 */
 export function offerKoeiLeaf({ facts: f, up = '../' } = {}) {
   return `  <div class="offer-link" id="offer-${f.key}">
-  <p>ここまでが無料で読めるところです。このページで分かるのは「どの${f.axis}が空きやすいか」まで。<strong>1回だけ空いた住宅と、いつ見ても空いている住宅は区別できません</strong>。定期募集${f.rounds}回を申込先ごとに名寄せして中央値で選り分けた<a href="${up}${f.key}/moushikomisaki/"><strong>申込先ごとの一覧（${f.price}円・買い切り）</strong>があります</a>。</p>
+  <p>ここまでが無料で読めるところです。このページで分かるのは「どの${f.axis}が空きやすいか」まで。<strong>1回だけ空いた住宅と、いつ見ても空いている住宅は区別できません</strong>。${f.boshu || '定期募集'}${f.rounds}回を申込先ごとに名寄せして中央値で選り分けた<a href="${up}${f.key}/moushikomisaki/"><strong>申込先ごとの一覧（${f.price}円・買い切り）</strong>があります</a>。</p>
   <p class="fine"><strong>買わなくても申し込みはできます。</strong>${f.axis}ごとの相場と混んでいる申込先の実名は、上に全部出しています。</p>
   </div>`
 }
@@ -148,7 +148,9 @@ const hubItem = {
     // ★2026-09-30 県営（埼玉・愛知）を足した。「市営住宅で…」の行に県を混ぜると嘘になるので、kind ごとに行を分ける。
     const line = (kind) => {
       const cs = Object.values(CITIES).filter((c) => (c.kind || '市営') === kind)
-      return cs.length ? `  <li>${kind}住宅で「毎回すいている申込先」の一覧：${cs.map((c) => `<a href="${up}${c.key}/moushikomisaki/"><strong>${esc(c.city)}</strong></a>`).join('・')}</li>` : ''
+      // 大阪府が入ると「県営住宅で…大阪府」は不正確なので、府があれば「府県営」と書く（2026-10-01）
+      const label = kind === '県営' && cs.some((c) => c.city.endsWith('府')) ? '府県営' : kind
+      return cs.length ? `  <li>${label}住宅で「毎回すいている申込先」の一覧：${cs.map((c) => `<a href="${up}${c.key}/moushikomisaki/"><strong>${esc(c.city)}</strong></a>`).join('・')}</li>` : ''
     }
     return [line('市営'), line('県営')].filter(Boolean).join('\n')
   },

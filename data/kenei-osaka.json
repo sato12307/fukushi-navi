@@ -1,0 +1,1580 @@
+{
+ "_doc": "大阪府営住宅の総合募集（令和7年4月〜）の回×区分・回×地域（管理センター）・住戸の条件ごとの集計（2026-10-01）。指定管理者3社が公表する総合募集受付状況表を読み、同じ回の募集住宅一覧と申込区分コードで結んで数えた。住戸ごとの行は持たない。",
+ "checked": "2026-10-01",
+ "pages": {
+  "千里": "https://www.osakafueijutaku.jp/whats-new/whats-new-detail.php?news-id=493",
+  "高槻": "https://www.osakafueijutaku.jp/whats-new/whats-new-detail.php?news-id=493",
+  "守口": "https://www.osakafueijutaku.jp/whats-new/whats-new-detail.php?news-id=493",
+  "堺東": "https://www.osakafueijutaku.jp/whats-new/whats-new-detail.php?news-id=493",
+  "泉北": "https://www.osakafueijutaku.jp/whats-new/whats-new-detail.php?news-id=493",
+  "岸和田": "https://www.osakafueijutaku.jp/whats-new/whats-new-detail.php?news-id=493",
+  "布施": "https://osaka-fujyu.com/news/",
+  "藤井寺": "https://www.osaka-fuei.com/info/index.html"
+ },
+ "boshuList": {
+  "2025-04": {
+   "url": "https://www.osaka-fuei.com/pdf/r7_7-2.pdf",
+   "totalPrinted": 1050,
+   "records": 1050,
+   "duplicateCodes": [
+    "8501-14-0504-53"
+   ]
+  },
+  "2025-06": {
+   "url": "https://www.osaka-fuei.com/pdf/r7_2-2.pdf",
+   "totalPrinted": 845,
+   "records": 845,
+   "duplicateCodes": []
+  },
+  "2025-08": {
+   "url": "https://www.osaka-fuei.com/pdf/r7_3-2.pdf",
+   "totalPrinted": 1067,
+   "records": 1067,
+   "duplicateCodes": []
+  },
+  "2025-10": {
+   "url": "https://www.osaka-fuei.com/pdf/r7_4-2.pdf",
+   "totalPrinted": 1546,
+   "records": 1546,
+   "duplicateCodes": []
+  },
+  "2025-12": {
+   "url": "https://www.osaka-fuei.com/pdf/r7_5-2.pdf",
+   "totalPrinted": 1348,
+   "records": 1348,
+   "duplicateCodes": []
+  },
+  "2026-02": {
+   "url": "https://www.osaka-fuei.com/pdf/r7_6-2.pdf",
+   "totalPrinted": 1328,
+   "records": 1328,
+   "duplicateCodes": []
+  },
+  "2026-04": {
+   "url": "https://www.osaka-fuei.com/pdf/r8_1-2.pdf",
+   "totalPrinted": 1052,
+   "records": 1048,
+   "duplicateCodes": []
+  },
+  "2026-06": {
+   "url": "https://www.osaka-fuei.com/pdf/r8_2-2.pdf",
+   "totalPrinted": 1270,
+   "records": 1277,
+   "duplicateCodes": []
+  },
+  "2026-08": {
+   "url": "https://www.osaka-fuei.com/pdf/r8_3-2.pdf",
+   "totalPrinted": 1232,
+   "records": 1232,
+   "duplicateCodes": []
+  }
+ },
+ "rounds": [
+  {
+   "round": "2025-04",
+   "kai": "令和7年度第1回",
+   "sum": {
+    "koho": 1049,
+    "uke": 5189
+   },
+   "published": {
+    "koho": 1049,
+    "uke": 5189
+   },
+   "cats": {
+    "新婚・子育てあき家": {
+     "koho": 285,
+     "uke": 293,
+     "rows": 285,
+     "zero": 182
+    },
+    "福祉あき家": {
+     "koho": 351,
+     "uke": 3255,
+     "rows": 351,
+     "zero": 147
+    },
+    "一般あき家": {
+     "koho": 316,
+     "uke": 1474,
+     "rows": 316,
+     "zero": 151
+    },
+    "車いすあき家": {
+     "koho": 25,
+     "uke": 44,
+     "rows": 25,
+     "zero": 10
+    },
+    "一般事故": {
+     "koho": 29,
+     "uke": 23,
+     "rows": 29,
+     "zero": 20
+    },
+    "福祉事故": {
+     "koho": 32,
+     "uke": 72,
+     "rows": 32,
+     "zero": 18
+    },
+    "親子近居あき家": {
+     "koho": 7,
+     "uke": 1,
+     "rows": 7,
+     "zero": 6
+    },
+    "シルバーあき家": {
+     "koho": 3,
+     "uke": 25,
+     "rows": 3,
+     "zero": 1
+    },
+    "車いす事故": {
+     "koho": 1,
+     "uke": 2,
+     "rows": 1,
+     "zero": 0
+    }
+   },
+   "centers": {
+    "千里": {
+     "koho": 78,
+     "uke": 1260,
+     "rows": 78,
+     "zero": 21
+    },
+    "高槻": {
+     "koho": 51,
+     "uke": 604,
+     "rows": 51,
+     "zero": 10
+    },
+    "守口": {
+     "koho": 166,
+     "uke": 815,
+     "rows": 166,
+     "zero": 76
+    },
+    "堺東": {
+     "koho": 129,
+     "uke": 904,
+     "rows": 129,
+     "zero": 46
+    },
+    "泉北": {
+     "koho": 148,
+     "uke": 285,
+     "rows": 148,
+     "zero": 102
+    },
+    "岸和田": {
+     "koho": 233,
+     "uke": 258,
+     "rows": 233,
+     "zero": 169
+    },
+    "布施": {
+     "koho": 72,
+     "uke": 754,
+     "rows": 72,
+     "zero": 14
+    },
+    "藤井寺": {
+     "koho": 172,
+     "uke": 309,
+     "rows": 172,
+     "zero": 97
+    }
+   },
+   "files": [
+    {
+     "center": "千里",
+     "file": "https://www.osakafueijutaku.jp/whats-new/release/2025-1-senri-general-recruitment-reception-status.pdf"
+    },
+    {
+     "center": "高槻",
+     "file": "https://www.osakafueijutaku.jp/whats-new/release/2025-1-takatsuki-general-recruitment-reception-status.pdf"
+    },
+    {
+     "center": "守口",
+     "file": "https://www.osakafueijutaku.jp/whats-new/release/2025-1-moriguchi-general-recruitment-reception-status.pdf"
+    },
+    {
+     "center": "堺東",
+     "file": "https://www.osakafueijutaku.jp/whats-new/release/2025-1-sakaihigashi-general-recruitment-reception-status.pdf"
+    },
+    {
+     "center": "泉北",
+     "file": "https://www.osakafueijutaku.jp/whats-new/release/2025-1-senboku-general-recruitment-reception-status.pdf"
+    },
+    {
+     "center": "岸和田",
+     "file": "https://www.osakafueijutaku.jp/whats-new/release/2025-1-izumisano-general-recruitment-reception-status.pdf"
+    },
+    {
+     "center": "布施",
+     "file": "https://osaka-fujyu.com/news/media-download/36/f2e6ec631348d90c/PDF/"
+    },
+    {
+     "center": "藤井寺",
+     "file": "https://www.osaka-fuei.com/pdf/tousen_r07_1/b_h.pdf"
+    }
+   ]
+  },
+  {
+   "round": "2025-06",
+   "kai": "令和7年度第2回",
+   "sum": {
+    "koho": 844,
+    "uke": 4588
+   },
+   "published": {
+    "koho": 844,
+    "uke": 4588
+   },
+   "cats": {
+    "福祉事故": {
+     "koho": 41,
+     "uke": 131,
+     "rows": 41,
+     "zero": 23
+    },
+    "福祉あき家": {
+     "koho": 321,
+     "uke": 2957,
+     "rows": 321,
+     "zero": 99
+    },
+    "新婚・子育てあき家": {
+     "koho": 194,
+     "uke": 196,
+     "rows": 194,
+     "zero": 133
+    },
+    "一般あき家": {
+     "koho": 250,
+     "uke": 1199,
+     "rows": 250,
+     "zero": 115
+    },
+    "シルバーあき家": {
+     "koho": 5,
+     "uke": 80,
+     "rows": 5,
+     "zero": 0
+    },
+    "一般事故": {
+     "koho": 16,
+     "uke": 6,
+     "rows": 16,
+     "zero": 13
+    },
+    "車いすあき家": {
+     "koho": 10,
+     "uke": 19,
+     "rows": 10,
+     "zero": 5
+    },
+    "親子近居あき家": {
+     "koho": 7,
+     "uke": 0,
+     "rows": 7,
+     "zero": 7
+    }
+   },
+   "centers": {
+    "千里": {
+     "koho": 77,
+     "uke": 1301,
+     "rows": 77,
+     "zero": 20
+    },
+    "高槻": {
+     "koho": 66,
+     "uke": 683,
+     "rows": 66,
+     "zero": 19
+    },
+    "守口": {
+     "koho": 161,
+     "uke": 504,
+     "rows": 161,
+     "zero": 83
+    },
+    "堺東": {
+     "koho": 50,
+     "uke": 493,
+     "rows": 50,
+     "zero": 16
+    },
+    "泉北": {
+     "koho": 86,
+     "uke": 235,
+     "rows": 86,
+     "zero": 53
+    },
+    "岸和田": {
+     "koho": 156,
+     "uke": 230,
+     "rows": 156,
+     "zero": 97
+    },
+    "布施": {
+     "koho": 77,
+     "uke": 717,
+     "rows": 77,
+     "zero": 12
+    },
+    "藤井寺": {
+     "koho": 171,
+     "uke": 425,
+     "rows": 171,
+     "zero": 95
+    }
+   },
+   "files": [
+    {
+     "center": "千里",
+     "file": "https://www.osakafueijutaku.jp/whats-new/release/2025-2-senri-general-recruitment-reception-status.pdf"
+    },
+    {
+     "center": "高槻",
+     "file": "https://www.osakafueijutaku.jp/whats-new/release/2025-2-takatsuki-general-recruitment-reception-status.pdf"
+    },
+    {
+     "center": "守口",
+     "file": "https://www.osakafueijutaku.jp/whats-new/release/2025-2-moriguchi-general-recruitment-reception-status.pdf"
+    },
+    {
+     "center": "堺東",
+     "file": "https://www.osakafueijutaku.jp/whats-new/release/2025-2-sakaihigashi-general-recruitment-reception-status.pdf"
+    },
+    {
+     "center": "泉北",
+     "file": "https://www.osakafueijutaku.jp/whats-new/release/2025-2-senboku-general-recruitment-reception-status.pdf"
+    },
+    {
+     "center": "岸和田",
+     "file": "https://www.osakafueijutaku.jp/whats-new/release/2025-2-kishiwada-general-recruitment-reception-status.pdf"
+    },
+    {
+     "center": "布施",
+     "file": "https://osaka-fujyu.com/news/media-download/42/f98aa04a22d78950/PDF/"
+    },
+    {
+     "center": "藤井寺",
+     "file": "https://www.osaka-fuei.com/pdf/tousen_r07_2/b_h.pdf"
+    }
+   ]
+  },
+  {
+   "round": "2025-08",
+   "kai": "令和7年度第3回",
+   "sum": {
+    "koho": 1067,
+    "uke": 4371
+   },
+   "published": {
+    "koho": 1067,
+    "uke": 4370
+   },
+   "cats": {
+    "一般あき家": {
+     "koho": 300,
+     "uke": 997,
+     "rows": 300,
+     "zero": 158
+    },
+    "車いすあき家": {
+     "koho": 22,
+     "uke": 28,
+     "rows": 22,
+     "zero": 14
+    },
+    "新婚・子育てあき家": {
+     "koho": 295,
+     "uke": 335,
+     "rows": 295,
+     "zero": 175
+    },
+    "福祉あき家": {
+     "koho": 366,
+     "uke": 2837,
+     "rows": 366,
+     "zero": 134
+    },
+    "一般事故": {
+     "koho": 13,
+     "uke": 6,
+     "rows": 13,
+     "zero": 9
+    },
+    "福祉事故": {
+     "koho": 57,
+     "uke": 153,
+     "rows": 57,
+     "zero": 36
+    },
+    "シルバーあき家": {
+     "koho": 5,
+     "uke": 15,
+     "rows": 5,
+     "zero": 2
+    },
+    "親子近居あき家": {
+     "koho": 7,
+     "uke": 0,
+     "rows": 7,
+     "zero": 7
+    },
+    "車いす事故": {
+     "koho": 2,
+     "uke": 0,
+     "rows": 2,
+     "zero": 2
+    }
+   },
+   "centers": {
+    "千里": {
+     "koho": 69,
+     "uke": 971,
+     "rows": 69,
+     "zero": 24
+    },
+    "高槻": {
+     "koho": 84,
+     "uke": 637,
+     "rows": 84,
+     "zero": 28
+    },
+    "守口": {
+     "koho": 144,
+     "uke": 537,
+     "rows": 144,
+     "zero": 78
+    },
+    "堺東": {
+     "koho": 137,
+     "uke": 748,
+     "rows": 137,
+     "zero": 57
+    },
+    "泉北": {
+     "koho": 102,
+     "uke": 212,
+     "rows": 102,
+     "zero": 71
+    },
+    "岸和田": {
+     "koho": 203,
+     "uke": 354,
+     "rows": 203,
+     "zero": 104
+    },
+    "布施": {
+     "koho": 158,
+     "uke": 493,
+     "rows": 158,
+     "zero": 80
+    },
+    "藤井寺": {
+     "koho": 170,
+     "uke": 419,
+     "rows": 170,
+     "zero": 95
+    }
+   },
+   "files": [
+    {
+     "center": "千里",
+     "file": "https://www.osakafueijutaku.jp/whats-new/release/2025-3-senri-general-recruitment-reception-status.pdf"
+    },
+    {
+     "center": "高槻",
+     "file": "https://www.osakafueijutaku.jp/whats-new/release/2025-3-takatsuki-general-recruitment-reception-status.pdf"
+    },
+    {
+     "center": "守口",
+     "file": "https://www.osakafueijutaku.jp/whats-new/release/2025-3-moriguchi-general-recruitment-reception-status.pdf"
+    },
+    {
+     "center": "堺東",
+     "file": "https://www.osakafueijutaku.jp/whats-new/release/2025-3-sakaihigashi-general-recruitment-reception-status.pdf"
+    },
+    {
+     "center": "泉北",
+     "file": "https://www.osakafueijutaku.jp/whats-new/release/2025-3-senboku-general-recruitment-reception-status.pdf"
+    },
+    {
+     "center": "岸和田",
+     "file": "https://www.osakafueijutaku.jp/whats-new/release/2025-3-kishiwada-general-recruitment-reception-status.pdf"
+    },
+    {
+     "center": "布施",
+     "file": "https://osaka-fujyu.com/news/media-download/53/66375f98fcf6a418/PDF/"
+    },
+    {
+     "center": "藤井寺",
+     "file": "https://www.osaka-fuei.com/pdf/tousen_r07_3/b_h.pdf"
+    }
+   ]
+  },
+  {
+   "round": "2025-10",
+   "kai": "令和7年度第4回",
+   "sum": {
+    "koho": 1546,
+    "uke": 3314
+   },
+   "published": {
+    "koho": 1546,
+    "uke": 3314
+   },
+   "cats": {
+    "新婚・子育てあき家": {
+     "koho": 396,
+     "uke": 500,
+     "rows": 396,
+     "zero": 220
+    },
+    "一般あき家": {
+     "koho": 377,
+     "uke": 502,
+     "rows": 377,
+     "zero": 242
+    },
+    "福祉あき家": {
+     "koho": 611,
+     "uke": 1703,
+     "rows": 611,
+     "zero": 330
+    },
+    "シルバーあき家": {
+     "koho": 11,
+     "uke": 144,
+     "rows": 11,
+     "zero": 1
+    },
+    "福祉事故": {
+     "koho": 84,
+     "uke": 375,
+     "rows": 84,
+     "zero": 58
+    },
+    "一般事故": {
+     "koho": 20,
+     "uke": 41,
+     "rows": 20,
+     "zero": 11
+    },
+    "車いすあき家": {
+     "koho": 24,
+     "uke": 43,
+     "rows": 24,
+     "zero": 13
+    },
+    "親子近居あき家": {
+     "koho": 7,
+     "uke": 0,
+     "rows": 7,
+     "zero": 7
+    },
+    "子育てあき家": {
+     "koho": 13,
+     "uke": 6,
+     "rows": 13,
+     "zero": 8
+    },
+    "車いす事故": {
+     "koho": 3,
+     "uke": 0,
+     "rows": 3,
+     "zero": 3
+    }
+   },
+   "centers": {
+    "千里": {
+     "koho": 85,
+     "uke": 546,
+     "rows": 85,
+     "zero": 27
+    },
+    "高槻": {
+     "koho": 121,
+     "uke": 411,
+     "rows": 121,
+     "zero": 41
+    },
+    "守口": {
+     "koho": 467,
+     "uke": 634,
+     "rows": 467,
+     "zero": 327
+    },
+    "堺東": {
+     "koho": 127,
+     "uke": 452,
+     "rows": 127,
+     "zero": 41
+    },
+    "泉北": {
+     "koho": 98,
+     "uke": 60,
+     "rows": 98,
+     "zero": 70
+    },
+    "岸和田": {
+     "koho": 217,
+     "uke": 298,
+     "rows": 217,
+     "zero": 127
+    },
+    "布施": {
+     "koho": 225,
+     "uke": 556,
+     "rows": 225,
+     "zero": 137
+    },
+    "藤井寺": {
+     "koho": 206,
+     "uke": 357,
+     "rows": 206,
+     "zero": 123
+    }
+   },
+   "files": [
+    {
+     "center": "千里",
+     "file": "https://www.osakafueijutaku.jp/whats-new/release/2025-4-senri-general-recruitment-reception-status.pdf"
+    },
+    {
+     "center": "高槻",
+     "file": "https://www.osakafueijutaku.jp/whats-new/release/2025-4-takatsuki-general-recruitment-reception-status.pdf"
+    },
+    {
+     "center": "守口",
+     "file": "https://www.osakafueijutaku.jp/whats-new/release/2025-4-moriguchi-general-recruitment-reception-status.pdf"
+    },
+    {
+     "center": "堺東",
+     "file": "https://www.osakafueijutaku.jp/whats-new/release/2025-4-sakaihigashi-general-recruitment-reception-status.pdf"
+    },
+    {
+     "center": "泉北",
+     "file": "https://www.osakafueijutaku.jp/whats-new/release/2025-4-senboku-general-recruitment-reception-status.pdf"
+    },
+    {
+     "center": "岸和田",
+     "file": "https://www.osakafueijutaku.jp/whats-new/release/2025-4-kishiwada-general-recruitment-reception-status.pdf"
+    },
+    {
+     "center": "布施",
+     "file": "https://osaka-fujyu.com/news/media-download/63/a5f6dbf465add24a/PDF/"
+    },
+    {
+     "center": "藤井寺",
+     "file": "https://www.osaka-fuei.com/pdf/tousen_r07_4/b_h.pdf"
+    }
+   ]
+  },
+  {
+   "round": "2025-12",
+   "kai": "令和7年度第5回",
+   "sum": {
+    "koho": 1348,
+    "uke": 3777
+   },
+   "published": {
+    "koho": 1348,
+    "uke": 3777
+   },
+   "cats": {
+    "新婚・子育てあき家": {
+     "koho": 344,
+     "uke": 404,
+     "rows": 344,
+     "zero": 204
+    },
+    "一般あき家": {
+     "koho": 362,
+     "uke": 967,
+     "rows": 362,
+     "zero": 226
+    },
+    "福祉あき家": {
+     "koho": 502,
+     "uke": 2182,
+     "rows": 502,
+     "zero": 282
+    },
+    "車いすあき家": {
+     "koho": 22,
+     "uke": 42,
+     "rows": 22,
+     "zero": 9
+    },
+    "シルバーあき家": {
+     "koho": 3,
+     "uke": 83,
+     "rows": 3,
+     "zero": 0
+    },
+    "一般事故": {
+     "koho": 27,
+     "uke": 60,
+     "rows": 27,
+     "zero": 14
+    },
+    "福祉事故": {
+     "koho": 52,
+     "uke": 29,
+     "rows": 52,
+     "zero": 38
+    },
+    "親子近居あき家": {
+     "koho": 6,
+     "uke": 0,
+     "rows": 6,
+     "zero": 6
+    },
+    "シルバー事故": {
+     "koho": 1,
+     "uke": 4,
+     "rows": 1,
+     "zero": 0
+    },
+    "子育てあき家": {
+     "koho": 29,
+     "uke": 6,
+     "rows": 29,
+     "zero": 24
+    }
+   },
+   "centers": {
+    "千里": {
+     "koho": 96,
+     "uke": 1093,
+     "rows": 96,
+     "zero": 31
+    },
+    "高槻": {
+     "koho": 82,
+     "uke": 410,
+     "rows": 82,
+     "zero": 32
+    },
+    "守口": {
+     "koho": 325,
+     "uke": 307,
+     "rows": 325,
+     "zero": 246
+    },
+    "堺東": {
+     "koho": 102,
+     "uke": 547,
+     "rows": 102,
+     "zero": 36
+    },
+    "泉北": {
+     "koho": 130,
+     "uke": 284,
+     "rows": 130,
+     "zero": 85
+    },
+    "岸和田": {
+     "koho": 212,
+     "uke": 221,
+     "rows": 212,
+     "zero": 148
+    },
+    "布施": {
+     "koho": 206,
+     "uke": 611,
+     "rows": 206,
+     "zero": 115
+    },
+    "藤井寺": {
+     "koho": 195,
+     "uke": 304,
+     "rows": 195,
+     "zero": 110
+    }
+   },
+   "files": [
+    {
+     "center": "千里",
+     "file": "https://www.osakafueijutaku.jp/whats-new/release/2025-5-senri-general-recruitment-reception-status.pdf"
+    },
+    {
+     "center": "高槻",
+     "file": "https://www.osakafueijutaku.jp/whats-new/release/2025-5-takatsuki-general-recruitment-reception-status.pdf"
+    },
+    {
+     "center": "守口",
+     "file": "https://www.osakafueijutaku.jp/whats-new/release/2025-5-moriguchi-general-recruitment-reception-status.pdf"
+    },
+    {
+     "center": "堺東",
+     "file": "https://www.osakafueijutaku.jp/whats-new/release/2025-5-sakaihigashi-general-recruitment-reception-status.pdf"
+    },
+    {
+     "center": "泉北",
+     "file": "https://www.osakafueijutaku.jp/whats-new/release/2025-5-senboku-general-recruitment-reception-status.pdf"
+    },
+    {
+     "center": "岸和田",
+     "file": "https://www.osakafueijutaku.jp/whats-new/release/2025-5-kishiwada-general-recruitment-reception-status.pdf"
+    },
+    {
+     "center": "布施",
+     "file": "https://osaka-fujyu.com/news/media-download/71/733915102c460ac8/PDF/"
+    },
+    {
+     "center": "藤井寺",
+     "file": "https://www.osaka-fuei.com/pdf/tousen_r07_5/b_h.pdf"
+    }
+   ]
+  },
+  {
+   "round": "2026-02",
+   "kai": "令和7年度第6回",
+   "sum": {
+    "koho": 1328,
+    "uke": 4764
+   },
+   "published": {
+    "koho": 1328,
+    "uke": 4764
+   },
+   "cats": {
+    "福祉事故": {
+     "koho": 59,
+     "uke": 72,
+     "rows": 59,
+     "zero": 46
+    },
+    "車いすあき家": {
+     "koho": 27,
+     "uke": 30,
+     "rows": 27,
+     "zero": 14
+    },
+    "新婚・子育てあき家": {
+     "koho": 365,
+     "uke": 192,
+     "rows": 365,
+     "zero": 285
+    },
+    "一般あき家": {
+     "koho": 331,
+     "uke": 1497,
+     "rows": 331,
+     "zero": 183
+    },
+    "福祉あき家": {
+     "koho": 481,
+     "uke": 2947,
+     "rows": 481,
+     "zero": 254
+    },
+    "一般事故": {
+     "koho": 28,
+     "uke": 2,
+     "rows": 28,
+     "zero": 26
+    },
+    "シルバーあき家": {
+     "koho": 5,
+     "uke": 18,
+     "rows": 5,
+     "zero": 1
+    },
+    "親子近居あき家": {
+     "koho": 6,
+     "uke": 0,
+     "rows": 6,
+     "zero": 6
+    },
+    "子育てあき家": {
+     "koho": 24,
+     "uke": 6,
+     "rows": 24,
+     "zero": 21
+    },
+    "車いす事故": {
+     "koho": 2,
+     "uke": 0,
+     "rows": 2,
+     "zero": 2
+    }
+   },
+   "centers": {
+    "千里": {
+     "koho": 81,
+     "uke": 1380,
+     "rows": 81,
+     "zero": 16
+    },
+    "高槻": {
+     "koho": 46,
+     "uke": 240,
+     "rows": 46,
+     "zero": 15
+    },
+    "守口": {
+     "koho": 305,
+     "uke": 687,
+     "rows": 305,
+     "zero": 222
+    },
+    "堺東": {
+     "koho": 99,
+     "uke": 864,
+     "rows": 99,
+     "zero": 33
+    },
+    "泉北": {
+     "koho": 141,
+     "uke": 297,
+     "rows": 141,
+     "zero": 117
+    },
+    "岸和田": {
+     "koho": 270,
+     "uke": 284,
+     "rows": 270,
+     "zero": 198
+    },
+    "藤井寺": {
+     "koho": 204,
+     "uke": 397,
+     "rows": 204,
+     "zero": 143
+    },
+    "布施": {
+     "koho": 182,
+     "uke": 615,
+     "rows": 182,
+     "zero": 94
+    }
+   },
+   "files": [
+    {
+     "center": "千里",
+     "file": "https://www.osakafueijutaku.jp/whats-new/release/2025-6-senri-general-recruitment-reception-status.pdf"
+    },
+    {
+     "center": "高槻",
+     "file": "https://www.osakafueijutaku.jp/whats-new/release/2025-6-takatsuki-general-recruitment-reception-status.pdf"
+    },
+    {
+     "center": "守口",
+     "file": "https://www.osakafueijutaku.jp/whats-new/release/2025-6-moriguchi-general-recruitment-reception-status.pdf"
+    },
+    {
+     "center": "堺東",
+     "file": "https://www.osakafueijutaku.jp/whats-new/release/2025-6-sakaihigashi-general-recruitment-reception-status.pdf"
+    },
+    {
+     "center": "泉北",
+     "file": "https://www.osakafueijutaku.jp/whats-new/release/2025-6-senboku-general-recruitment-reception-status.pdf"
+    },
+    {
+     "center": "岸和田",
+     "file": "https://www.osakafueijutaku.jp/whats-new/release/2025-6-kishiwada-general-recruitment-reception-status.pdf"
+    },
+    {
+     "center": "布施",
+     "file": "https://osaka-fujyu.com/news/media-download/80/e3382811c3258271/PDF/"
+    },
+    {
+     "center": "藤井寺",
+     "file": "https://www.osaka-fuei.com/pdf/tousen_r07_6/b_h.pdf"
+    }
+   ]
+  },
+  {
+   "round": "2026-04",
+   "kai": "令和8年度第1回",
+   "sum": {
+    "koho": 1052,
+    "uke": 4941
+   },
+   "published": {
+    "koho": 1052,
+    "uke": 4941
+   },
+   "cats": {
+    "一般あき家": {
+     "koho": 271,
+     "uke": 1182,
+     "rows": 271,
+     "zero": 126
+    },
+    "福祉あき家": {
+     "koho": 379,
+     "uke": 3196,
+     "rows": 379,
+     "zero": 136
+    },
+    "車いすあき家": {
+     "koho": 12,
+     "uke": 22,
+     "rows": 12,
+     "zero": 5
+    },
+    "一般事故": {
+     "koho": 16,
+     "uke": 14,
+     "rows": 16,
+     "zero": 11
+    },
+    "新婚・子育てあき家": {
+     "koho": 287,
+     "uke": 195,
+     "rows": 287,
+     "zero": 207
+    },
+    "福祉事故": {
+     "koho": 43,
+     "uke": 138,
+     "rows": 43,
+     "zero": 27
+    },
+    "シルバーあき家": {
+     "koho": 6,
+     "uke": 52,
+     "rows": 6,
+     "zero": 0
+    },
+    "車いす事故": {
+     "koho": 1,
+     "uke": 1,
+     "rows": 1,
+     "zero": 0
+    },
+    "親子近居あき家": {
+     "koho": 6,
+     "uke": 1,
+     "rows": 6,
+     "zero": 5
+    },
+    "車いす新築": {
+     "koho": 5,
+     "uke": 8,
+     "rows": 2,
+     "zero": 0
+    },
+    "福祉新築": {
+     "koho": 2,
+     "uke": 64,
+     "rows": 1,
+     "zero": 0
+    },
+    "一般新築": {
+     "koho": 2,
+     "uke": 56,
+     "rows": 2,
+     "zero": 0
+    },
+    "新婚・子育て新築": {
+     "koho": 1,
+     "uke": 6,
+     "rows": 1,
+     "zero": 0
+    },
+    "子育てあき家": {
+     "koho": 21,
+     "uke": 6,
+     "rows": 21,
+     "zero": 17
+    }
+   },
+   "centers": {
+    "千里": {
+     "koho": 82,
+     "uke": 1393,
+     "rows": 82,
+     "zero": 23
+    },
+    "高槻": {
+     "koho": 85,
+     "uke": 607,
+     "rows": 85,
+     "zero": 32
+    },
+    "守口": {
+     "koho": 218,
+     "uke": 555,
+     "rows": 218,
+     "zero": 132
+    },
+    "堺東": {
+     "koho": 110,
+     "uke": 909,
+     "rows": 106,
+     "zero": 41
+    },
+    "泉北": {
+     "koho": 114,
+     "uke": 310,
+     "rows": 114,
+     "zero": 59
+    },
+    "岸和田": {
+     "koho": 162,
+     "uke": 243,
+     "rows": 162,
+     "zero": 111
+    },
+    "布施": {
+     "koho": 135,
+     "uke": 487,
+     "rows": 135,
+     "zero": 59
+    },
+    "藤井寺": {
+     "koho": 146,
+     "uke": 437,
+     "rows": 146,
+     "zero": 77
+    }
+   },
+   "files": [
+    {
+     "center": "千里",
+     "file": "https://www.osakafueijutaku.jp/whats-new/release/2026-1-senri-general-recruitment-reception-status.pdf"
+    },
+    {
+     "center": "高槻",
+     "file": "https://www.osakafueijutaku.jp/whats-new/release/2026-1-takatsuki-general-recruitment-reception-status.pdf"
+    },
+    {
+     "center": "守口",
+     "file": "https://www.osakafueijutaku.jp/whats-new/release/2026-1-moriguchi-general-recruitment-reception-status.pdf"
+    },
+    {
+     "center": "堺東",
+     "file": "https://www.osakafueijutaku.jp/whats-new/release/2026-1-sakaihigashi-general-recruitment-reception-status.pdf"
+    },
+    {
+     "center": "泉北",
+     "file": "https://www.osakafueijutaku.jp/whats-new/release/2026-1-senboku-general-recruitment-reception-status.pdf"
+    },
+    {
+     "center": "岸和田",
+     "file": "https://www.osakafueijutaku.jp/whats-new/release/2026-1-kishiwada-general-recruitment-reception-status.pdf"
+    },
+    {
+     "center": "布施",
+     "file": "https://osaka-fujyu.com/news/media-download/91/10bcce0c5599e25a/PDF/"
+    },
+    {
+     "center": "藤井寺",
+     "file": "https://www.osaka-fuei.com/pdf/tousen_r08_1/b_h.pdf"
+    }
+   ]
+  },
+  {
+   "round": "2026-06",
+   "kai": "令和8年度第2回",
+   "sum": {
+    "koho": 1268,
+    "uke": 5109
+   },
+   "published": {
+    "koho": 1268,
+    "uke": 5109
+   },
+   "cats": {
+    "新婚・子育てあき家": {
+     "koho": 350,
+     "uke": 234,
+     "rows": 350,
+     "zero": 252
+    },
+    "一般あき家": {
+     "koho": 309,
+     "uke": 1368,
+     "rows": 309,
+     "zero": 151
+    },
+    "福祉あき家": {
+     "koho": 464,
+     "uke": 3246,
+     "rows": 464,
+     "zero": 185
+    },
+    "福祉事故": {
+     "koho": 57,
+     "uke": 127,
+     "rows": 57,
+     "zero": 30
+    },
+    "一般事故": {
+     "koho": 33,
+     "uke": 24,
+     "rows": 33,
+     "zero": 23
+    },
+    "車いすあき家": {
+     "koho": 19,
+     "uke": 43,
+     "rows": 19,
+     "zero": 8
+    },
+    "車いす事故": {
+     "koho": 2,
+     "uke": 0,
+     "rows": 2,
+     "zero": 2
+    },
+    "シルバーあき家": {
+     "koho": 10,
+     "uke": 55,
+     "rows": 10,
+     "zero": 4
+    },
+    "シルバー事故": {
+     "koho": 1,
+     "uke": 0,
+     "rows": 1,
+     "zero": 1
+    },
+    "親子近居あき家": {
+     "koho": 6,
+     "uke": 0,
+     "rows": 6,
+     "zero": 6
+    },
+    "子育てあき家": {
+     "koho": 17,
+     "uke": 12,
+     "rows": 17,
+     "zero": 11
+    }
+   },
+   "centers": {
+    "千里": {
+     "koho": 106,
+     "uke": 1453,
+     "rows": 106,
+     "zero": 31
+    },
+    "高槻": {
+     "koho": 100,
+     "uke": 590,
+     "rows": 100,
+     "zero": 48
+    },
+    "守口": {
+     "koho": 231,
+     "uke": 563,
+     "rows": 231,
+     "zero": 134
+    },
+    "堺東": {
+     "koho": 136,
+     "uke": 921,
+     "rows": 136,
+     "zero": 41
+    },
+    "泉北": {
+     "koho": 96,
+     "uke": 299,
+     "rows": 96,
+     "zero": 62
+    },
+    "岸和田": {
+     "koho": 268,
+     "uke": 343,
+     "rows": 268,
+     "zero": 175
+    },
+    "布施": {
+     "koho": 155,
+     "uke": 569,
+     "rows": 155,
+     "zero": 75
+    },
+    "藤井寺": {
+     "koho": 176,
+     "uke": 371,
+     "rows": 176,
+     "zero": 107
+    }
+   },
+   "files": [
+    {
+     "center": "千里",
+     "file": "https://www.osakafueijutaku.jp/whats-new/release/2026-2-senri-general-recruitment-reception-status.pdf"
+    },
+    {
+     "center": "高槻",
+     "file": "https://www.osakafueijutaku.jp/whats-new/release/2026-2-takatsuki-general-recruitment-reception-status.pdf"
+    },
+    {
+     "center": "守口",
+     "file": "https://www.osakafueijutaku.jp/whats-new/release/2026-2-moriguchi-general-recruitment-reception-status.pdf"
+    },
+    {
+     "center": "堺東",
+     "file": "https://www.osakafueijutaku.jp/whats-new/release/2026-2-sakaihigashi-general-recruitment-reception-status.pdf"
+    },
+    {
+     "center": "泉北",
+     "file": "https://www.osakafueijutaku.jp/whats-new/release/2026-2-senboku-general-recruitment-reception-status.pdf"
+    },
+    {
+     "center": "岸和田",
+     "file": "https://www.osakafueijutaku.jp/whats-new/release/2026-2-kishiwada-general-recruitment-reception-status.pdf"
+    },
+    {
+     "center": "布施",
+     "file": "https://osaka-fujyu.com/news/media-download/103/9c716076a488ec70/PDF/"
+    },
+    {
+     "center": "藤井寺",
+     "file": "https://www.osaka-fuei.com/pdf/tousen_r08_2/b_h.pdf"
+    }
+   ]
+  },
+  {
+   "round": "2026-08",
+   "kai": "令和8年度第3回",
+   "sum": {
+    "koho": 1232,
+    "uke": 5343
+   },
+   "published": {
+    "koho": 1232,
+    "uke": 5343
+   },
+   "cats": {
+    "福祉あき家": {
+     "koho": 451,
+     "uke": 3253,
+     "rows": 451,
+     "zero": 201
+    },
+    "一般事故": {
+     "koho": 30,
+     "uke": 24,
+     "rows": 30,
+     "zero": 20
+    },
+    "新婚・子育てあき家": {
+     "koho": 338,
+     "uke": 132,
+     "rows": 338,
+     "zero": 256
+    },
+    "一般あき家": {
+     "koho": 301,
+     "uke": 1811,
+     "rows": 301,
+     "zero": 104
+    },
+    "車いすあき家": {
+     "koho": 25,
+     "uke": 19,
+     "rows": 25,
+     "zero": 16
+    },
+    "シルバーあき家": {
+     "koho": 3,
+     "uke": 2,
+     "rows": 3,
+     "zero": 2
+    },
+    "福祉事故": {
+     "koho": 64,
+     "uke": 98,
+     "rows": 64,
+     "zero": 38
+    },
+    "親子近居あき家": {
+     "koho": 6,
+     "uke": 0,
+     "rows": 6,
+     "zero": 6
+    },
+    "車いす事故": {
+     "koho": 3,
+     "uke": 2,
+     "rows": 3,
+     "zero": 2
+    },
+    "子育てあき家": {
+     "koho": 11,
+     "uke": 2,
+     "rows": 11,
+     "zero": 9
+    }
+   },
+   "centers": {
+    "千里": {
+     "koho": 76,
+     "uke": 1316,
+     "rows": 76,
+     "zero": 14
+    },
+    "高槻": {
+     "koho": 97,
+     "uke": 733,
+     "rows": 97,
+     "zero": 34
+    },
+    "守口": {
+     "koho": 353,
+     "uke": 753,
+     "rows": 353,
+     "zero": 220
+    },
+    "堺東": {
+     "koho": 123,
+     "uke": 1115,
+     "rows": 123,
+     "zero": 25
+    },
+    "泉北": {
+     "koho": 107,
+     "uke": 277,
+     "rows": 107,
+     "zero": 68
+    },
+    "岸和田": {
+     "koho": 201,
+     "uke": 253,
+     "rows": 201,
+     "zero": 137
+    },
+    "布施": {
+     "koho": 81,
+     "uke": 489,
+     "rows": 81,
+     "zero": 23
+    },
+    "藤井寺": {
+     "koho": 194,
+     "uke": 407,
+     "rows": 194,
+     "zero": 133
+    }
+   },
+   "files": [
+    {
+     "center": "千里",
+     "file": "https://www.osakafueijutaku.jp/whats-new/release/2026-3-senri-general-recruitment-reception-status.pdf"
+    },
+    {
+     "center": "高槻",
+     "file": "https://www.osakafueijutaku.jp/whats-new/release/2026-3-takatsuki-general-recruitment-reception-status.pdf"
+    },
+    {
+     "center": "守口",
+     "file": "https://www.osakafueijutaku.jp/whats-new/release/2026-3-moriguchi-general-recruitment-reception-status.pdf"
+    },
+    {
+     "center": "堺東",
+     "file": "https://www.osakafueijutaku.jp/whats-new/release/2026-3-sakaihigashi-general-recruitment-reception-status.pdf"
+    },
+    {
+     "center": "泉北",
+     "file": "https://www.osakafueijutaku.jp/whats-new/release/2026-3-senboku-general-recruitment-reception-status.pdf"
+    },
+    {
+     "center": "岸和田",
+     "file": "https://www.osakafueijutaku.jp/whats-new/release/2026-3-kishiwada-general-recruitment-reception-status.pdf"
+    },
+    {
+     "center": "布施",
+     "file": "https://osaka-fujyu.com/news/media-download/111/465b5a64dd815061/PDF/"
+    },
+    {
+     "center": "藤井寺",
+     "file": "https://www.osaka-fuei.com/pdf/tousen_r08_3/b_h.pdf"
+    }
+   ]
+  }
+ ],
+ "byWalk": {
+  "徒歩10分以内": {
+   "koho": 3179,
+   "uke": 19144,
+   "rows": 3175,
+   "zero": 1337
+  },
+  "徒歩11〜20分": {
+   "koho": 3762,
+   "uke": 16622,
+   "rows": 3762,
+   "zero": 1901
+  },
+  "バス": {
+   "koho": 3698,
+   "uke": 5599,
+   "rows": 3698,
+   "zero": 2542
+  },
+  "徒歩21分以上": {
+   "koho": 95,
+   "uke": 31,
+   "rows": 95,
+   "zero": 82
+  }
+ },
+ "byEv": {
+  "2階以上・その階にエレベーターが止まる": {
+   "koho": 4977,
+   "uke": 33070,
+   "rows": 4977,
+   "zero": 2046
+  },
+  "1階": {
+   "koho": 1509,
+   "uke": 4878,
+   "rows": 1509,
+   "zero": 707
+  },
+  "2階以上・エレベーターが止まらない（通過・なし）": {
+   "koho": 4238,
+   "uke": 3314,
+   "rows": 4238,
+   "zero": 3109
+  }
+ },
+ "byBuilt": {
+  "1970年代": {
+   "koho": 3888,
+   "uke": 3885,
+   "rows": 3888,
+   "zero": 2698
+  },
+  "1980年代": {
+   "koho": 1383,
+   "uke": 1458,
+   "rows": 1383,
+   "zero": 921
+  },
+  "1990年代": {
+   "koho": 2576,
+   "uke": 8311,
+   "rows": 2576,
+   "zero": 1269
+  },
+  "2000年以降": {
+   "koho": 2283,
+   "uke": 27457,
+   "rows": 2283,
+   "zero": 470
+  },
+  "1969年以前": {
+   "koho": 594,
+   "uke": 151,
+   "rows": 594,
+   "zero": 504
+  }
+ }
+}

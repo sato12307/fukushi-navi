@@ -224,7 +224,7 @@ write('tokushoho/index.html', page({
   body: `  <p class="breadcrumb"><a href="../index.html">トップ</a> ＞ 特定商取引法に基づく表記</p>
   <h1>特定商取引法に基づく表記</h1>
   <p class="note">通信販売に関する表示です。<strong>無料で提供している部分（制度の解説・自治体別の認定基準・都営住宅の区市町別の相場・各種計算機）については、購入の必要はありません。</strong></p>
-  <p class="note">販売している商品は次の${2 + Object.keys(CITIES).length}つです。いずれもお支払い後にその画面でそのままご覧いただけるデジタルコンテンツで（HTMLファイルとして保存もできます）、価格・引渡し・返品の条件は下表のとおり共通です。</p>
+  <p class="note">販売している商品は次の${2 + Object.keys(CITIES).length}${2 + Object.keys(CITIES).length >= 10 ? '件' : 'つ'}です。いずれもお支払い後にその画面でそのままご覧いただけるデジタルコンテンツで（HTMLファイルとして保存もできます）、価格・引渡し・返品の条件は下表のとおり共通です。</p>
   <ul class="note">
   <li><a href="../pack/">親の障害者控除の還付申請一式</a>（市区町村ごと・${PRICE}円）</li>
   <li><a href="../toei/">都営住宅の申込先えらび</a>（${PRICE}円）</li>

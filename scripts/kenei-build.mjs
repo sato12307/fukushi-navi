@@ -52,31 +52,40 @@ for (const r of AI.rounds) {
 
 const cell = (m, k, unit) => `<td class="num"><strong>${bai(m, k)}倍</strong><br><small>${n(k)}戸・${n(m)}${unit}</small></td>`
 const jsonld = (title, desc, url, checked) => ({ '@context': 'https://schema.org', '@type': 'Article', headline: title.split('｜')[0], description: desc, inLanguage: 'ja', url: `${SITE}${url}`, datePublished: '2026-09-29', dateModified: checked, author: { '@type': 'Organization', name: 'フクシル' }, publisher: { '@type': 'Organization', name: 'フクシル' } })
+// 書き出し。戻り値＝中身（読み手に見える部分）が変わったか。計測の埋め込み（ev.js）と buy.js の版だけの違いは書き直すが、
+// 変わったとは数えない（sitemap の lastmod を進めない）＝hikazei-city.mjs と同じ判定（2026-10-01）。
+const readable = (h) => h.replace(/<script>[\s\S]*?<\/script>/g, '').replace(/assets\/buy\.js\?v=\w+/g, 'assets/buy.js')
 const write = (dir, html) => {
   const p = path.join(ROOT, dir, 'index.html')
   fs.mkdirSync(path.dirname(p), { recursive: true })
-  if (fs.existsSync(p) && fs.readFileSync(p, 'utf8').replace(/\r\n/g, '\n') === html) return false
+  const old = fs.existsSync(p) ? fs.readFileSync(p, 'utf8').replace(/\r\n/g, '\n') : null
+  if (old === html) return false
   fs.writeFileSync(p, html)
-  return true
+  return old === null || readable(old) !== readable(html)
 }
 
 // ── 有料の一覧への案内（冒頭の1行・混んでいる申込先・申込先ごとの一覧へのリンク）────────────────
 // ★「混んでいる申込先の実名は上に全部出しています」と案内の文が言うので、混んでいる申込先の表は案内より上に置く。
 const sellParts = (key) => {
   const { C, F, konde } = load(key)
-  const facts = { price: PRICE, city: C.city, rounds: F.rounds, minN: MIN_N, suki: SUKI, sukiN: num(F.suki), bureN: F.buread, enoughN: num(F.enough), key: C.key, axis: C.axis.label, only: C.only || `${C.city}営住宅だけ` }
+  const U = C.byRounds ? '回' : '件'
+  const BOSHU = C.boshu || '定期募集'
+  const facts = { price: PRICE, city: C.city, rounds: F.rounds, minN: MIN_N, suki: SUKI, sukiN: num(F.suki), bureN: F.buread, enoughN: num(F.enough), key: C.key, axis: C.axis.label, only: C.only || `${C.city}営住宅だけ`, minU: U, boshu: BOSHU }
   const fields = C.cols.map(([f]) => f)
   const axisField = fields.find((f) => konde.every((h) => h[f] === h.axis))
   if (!axisField) die(`${C.city}：軸の欄が名寄せの鍵に無い（混んでいる申込先の表が作れない）`)
-  const rest = fields.filter((f) => f !== axisField && f !== 'name')
+  // 住宅名の欄（大阪府営は団地を住宅コードで見分けるので danchi）。添え書きは名寄せの鍵の残り＋市区町村・最寄り駅だけ（家賃などまで並べると長すぎる）
+  const nameField = fields.includes('name') ? 'name' : (fields.includes('danchi') ? 'danchi' : fields[0])
+  const keyN = C.keyOf(konde[0] || {}).length
+  const rest = [...fields.slice(0, keyN), ...['city', 'access'].filter((f) => fields.includes(f))].filter((f, i, a) => f !== axisField && f !== nameField && a.indexOf(f) === i)
   const top = konde.slice(0, 12)
   const kondeHtml = `  <h2 id="konde">混んでいる申込先（実名・無料）</h2>
-  <p>避けるべき相手も無料で出します。定期募集${F.rounds}回を申込先ごとに名寄せし、${MIN_N}件以上観測できた申込先を、倍率の中央値が高い順に${top.length}件並べました。</p>
+  <p>避けるべき相手も無料で出します。${BOSHU}${F.rounds}回を申込先ごとに名寄せし、${MIN_N}${U}以上${C.byRounds ? 'の募集で' : ''}観測できた申込先を、倍率の中央値が高い順に${top.length}件並べました。</p>
   <div class="table-wrap">
   <table class="grid">
   <thead><tr><th>${esc(C.axis.label)}</th><th>住宅</th><th class="num">中央値</th><th class="num">最高</th><th class="num">観測</th></tr></thead>
   <tbody>
-${top.map((h) => `  <tr><td>${esc(h[axisField])}</td><td>${esc(h.name)}${rest.length ? `<br><small>${rest.map((f) => esc(h[f])).filter(Boolean).join('・')}</small>` : ''}</td><td class="num">${r1(h.med)}倍</td><td class="num">${r1(h.max)}倍</td><td class="num">${h.n}件</td></tr>`).join('\n')}
+${top.map((h) => `  <tr><td>${esc(h[axisField])}</td><td>${esc(h[nameField])}${rest.length ? `<br><small>${rest.map((f) => esc(h[f])).filter(Boolean).join('・')}</small>` : ''}</td><td class="num">${r1(h.med)}倍</td><td class="num">${r1(h.max)}倍</td><td class="num">${h.n}件</td></tr>`).join('\n')}
   </tbody></table></div>
   <p class="note">中央値・最高は、その申込先の各回の倍率（申込÷募集戸数）から当方が計算したものです。「観測」は募集の件数で、募集回の数ではありません。</p>`
   const leafHtml = `  <h2 id="pack">申込先ごとの一覧（${PRICE}円）</h2>
@@ -247,8 +256,114 @@ ${S.leaf}
   return { title, html: page({ title, desc, canonical: '/aichi-ken/', depth: 1, body, jsonld: jsonld(title, desc, '/aichi-ken/', AI.checked) }) }
 }
 
+// ── 3b. 大阪府（2026-10-01 ユーザー「粒度がいい狙い目の県を追加」＝三大都市圏なので申込先えらびは500円）────
+// ★数は data/kenei-osaka.json（公開してよい集計＝回×区分・回×地域・住戸の条件ごと）から。住戸ごとの行は持たない。
+// ★「住戸の条件ごとの倍率」は大阪府の資料の粒度だから出せる面の目玉（募集住宅一覧と申込区分コードで住戸ごとに結んだ）。
+//   条件どうしは重なり合う（新しい団地ほどエレベーターがある等）ので、どれか1つが倍率を決めているとは書かない。
+const OS = readJson('data/kenei-osaka.json')
+function osaka () {
+  const R = [...OS.rounds].sort((a, b) => b.round.localeCompare(a.round))
+  for (const r of R) {
+    const cs = Object.values(r.cats), ce = Object.values(r.centers)
+    if (sum(cs, (v) => v.koho) !== r.sum.koho || sum(cs, (v) => v.uke) !== r.sum.uke || sum(ce, (v) => v.koho) !== r.sum.koho || sum(ce, (v) => v.uke) !== r.sum.uke) die(`大阪 ${r.round}：区分・地域の和が回の合計と合わない`)
+    if (Math.abs(r.sum.koho - r.published.koho) + Math.abs(r.sum.uke - r.published.uke) > 1) die(`大阪 ${r.round}：回の合計が公表の合計と2以上ずれる`)
+  }
+  const first = R[R.length - 1], latest = R[0], N = R.length
+  const S = sellParts('osaka-fu')
+  const CATS = [['福祉あき家', '福祉世帯向け'], ['一般あき家', '一般世帯向け'], ['新婚・子育てあき家', '新婚・子育て']]
+  const cellU = (v) => (v ? `<td class="num"><strong>${bai(v.uke, v.koho)}倍</strong><br><small>${n(v.koho)}戸・${n(v.uke)}件</small></td>` : '<td class="num">—</td>')
+  const rowsHtml = R.map((r) => `  <tr><th scope="row">${WA(r.round)}<br><small>${esc(r.kai)}</small></th>${cellU(r.sum)}${CATS.map(([c]) => cellU(r.cats[c])).join('')}</tr>`).join('\n')
+  const centers = {}
+  for (const r of R) for (const [c, v] of Object.entries(r.centers)) { const a = centers[c] || (centers[c] = { koho: 0, uke: 0, rows: 0, zero: 0 }); a.koho += v.koho; a.uke += v.uke; a.rows += v.rows; a.zero += v.zero }
+  const pctZ = (v) => Math.round((v.zero / v.rows) * 100)
+  const tbl = (head, entries) => `  <div class="table-wrap">
+  <table class="grid">
+  <thead><tr><th>${head}</th><th class="num">倍率</th><th class="num">受付0件の住戸</th></tr></thead>
+  <tbody>
+${entries.map(([k, v]) => `  <tr><th scope="row">${esc(k)}</th>${cellU(v)}<td class="num">${pctZ(v)}%</td></tr>`).join('\n')}
+  </tbody></table></div>`
+  const order = (m, keys) => keys.filter((k) => m[k]).map((k) => [k, m[k]])
+  const centerRows = Object.entries(centers).sort((a, b) => b[1].uke / b[1].koho - a[1].uke / a[1].koho)
+  const W = OS.byWalk, E = OS.byEv, B = OS.byBuilt
+  const walkKeys = ['徒歩10分以内', '徒歩11〜20分', '徒歩21分以上', 'バス']
+  const evKeys = ['2階以上・その階にエレベーターが止まる', '2階以上・エレベーターが止まらない（通過・なし）', '1階']
+  const builtKeys = ['2000年以降', '1990年代', '1980年代', '1970年代', '1969年以前']
+  const odds = (v) => v.uke / v.koho
+  // 文の前提を数字で確かめる（崩れたら文を書き直す）
+  if (!(odds(W['徒歩10分以内']) > odds(W['バス']) && odds(E[evKeys[0]]) > odds(E[evKeys[1]]) && odds(B['2000年以降']) > odds(B['1970年代']))) die('大阪：要点の文の前提（駅近・EV・新しい住戸ほど倍率が高い）が崩れた。文を書き直す')
+  const tot = OS.rounds.reduce((a, r) => ({ koho: a.koho + r.sum.koho, uke: a.uke + r.sum.uke }), { koho: 0, uke: 0 })
+  const zeroAll = Object.values(OS.byWalk).reduce((a, v) => ({ zero: a.zero + v.zero, rows: a.rows + v.rows }), { zero: 0, rows: 0 })
+  const title = `大阪府営住宅の倍率｜募集回ごと・区分ごと・駅からの距離やエレベーターごと（${WA(first.round)}〜${WA(latest.round)}の${N}回）｜フクシル`
+  const desc = `大阪府営住宅の総合募集${N}回ぶんの受付状況を、同じ回の募集住宅一覧と住戸ごとに結んで集計しました。駅から徒歩10分以内の住戸は${bai(W['徒歩10分以内'].uke, W['徒歩10分以内'].koho)}倍、バス便の住戸は${bai(W['バス'].uke, W['バス'].koho)}倍。区分ごと・地域ごと・エレベーター・完成年度ごとの倍率も並べています。`
+  const guide = 'https://www.osaka-fuei.com/pdf/r8_3-1.pdf'
+  const body = `  <p class="breadcrumb"><a href="../index.html">トップ</a> ＞ <a href="../articles/koei-jutaku-bairitsu.html">公営住宅</a> ＞ 大阪府営住宅の倍率</p>
+  <h1>大阪府営住宅の倍率（募集回ごと・区分ごと・住戸の条件ごと）</h1>
+  <p class="updated">最終確認：${esc(OS.checked)} ／ 指定管理者3社が公表している総合募集受付状況表（${N}回・8つの管理センター）から計算</p>
+
+  <p class="lead">大阪府営住宅の総合募集は、偶数月に年6回あります。府営住宅を管理する指定管理者（東急コミュニティー・穴吹ハウジングサービス・日本管財）は、回ごと・管理センターごとに、住戸ごとの受付数と倍率を「総合募集受付状況表」で公表しています。
+  ${WA(first.round)}から${WA(latest.round)}までの${N}回を集め、同じ回の募集住宅一覧と<strong>住戸ごとに結んで</strong>、区分ごと・地域ごと・住戸の条件（駅からの距離・エレベーター・完成年度）ごとの倍率（受付数の合計÷募集戸数の合計）にしました。</p>
+
+  <div class="callout point"><p><span class="tag">要点</span>${N}回で<strong>${n(tot.koho)}戸</strong>が募集され、受付は${n(tot.uke)}件でした。ただし<strong>受付が0件の住戸が${Math.round((zeroAll.zero / zeroAll.rows) * 100)}%</strong>あり、倍率は住戸の条件で大きく割れます。駅から徒歩10分以内の住戸は<strong>${bai(W['徒歩10分以内'].uke, W['徒歩10分以内'].koho)}倍</strong>、バス便の住戸は<strong>${bai(W['バス'].uke, W['バス'].koho)}倍</strong>。2階以上で<strong>その階にエレベーターが止まる住戸は${bai(E[evKeys[0]].uke, E[evKeys[0]].koho)}倍</strong>、止まらない住戸は${bai(E[evKeys[1]].uke, E[evKeys[1]].koho)}倍でした。</p></div>
+
+${S.jump}
+
+  <h2>募集回ごとの倍率</h2>
+  <div class="table-wrap">
+  <table class="grid">
+  <thead><tr><th>募集回</th><th class="num">全体</th>${CATS.map(([, h]) => `<th class="num">${h}</th>`).join('')}</tr></thead>
+  <tbody>
+${rowsHtml}
+  </tbody></table></div>
+  <p class="note">倍率は受付数の合計÷募集戸数の合計です。事故住宅・車いす常用者世帯向け・シルバーハウジング・親子近居・子育て世帯向け・新築は募集が少ないので列を作らず、「全体」にだけ入れています。</p>
+
+  <h2>住戸の条件ごとの倍率（${N}回の合計）</h2>
+  <p>同じ団地でも、住戸によって階やエレベーターの止まり方が違います。そこで住戸ごとに募集住宅一覧と結んで数えました。</p>
+  <h3>駅からの距離</h3>
+${tbl('最寄り駅から', order(W, walkKeys))}
+  <h3>エレベーター</h3>
+${tbl('住戸の階とエレベーター', order(E, evKeys))}
+  <h3>完成年度</h3>
+${tbl('完成年度', order(B, builtKeys))}
+  <p class="note">「駅から」は募集住宅一覧の交通の欄（最初の駅からの徒歩分。バスを使う住戸は「バス」）。「エレベーターが止まる」は、その住戸の階にエレベーターが止まるもの（一覧の「停止」）です。条件どうしは重なり合っていて（新しい団地ほどエレベーターがある、など）、どれか1つが倍率を決めているわけではありません。</p>
+
+  <h2>地域（管理センター）ごとの倍率（${N}回の合計）</h2>
+${tbl('管理センター', centerRows)}
+  <p class="note">府営住宅は管理センターごとに受付状況表が分かれています。どの市区町村の住宅がどのセンターの受け持ちかは、府の募集案内に載っています。</p>
+
+${S.konde}
+
+${S.leaf}
+
+  <h2>表の読み方</h2>
+  <ul>
+  <li><strong>倍率は受付数÷募集戸数です</strong>（受付状況表の倍率の列も同じ計算です）。受付数は申込の件数で、資格の審査は当選の後です。</li>
+  <li>府の募集案内によると、18歳未満の子どもを3人以上扶養している世帯（多子世帯）は、<strong>抽選番号を2つ</strong>持てます。同じ倍率でも、当たりやすさは世帯によって違います。</li>
+  <li>総合募集の申込みの受付は、偶数月の1日から15日です（府の募集案内）。</li>
+  <li><strong>「倍率が低い＝誰でも入れる」ではありません。</strong>申込資格（収入基準・世帯の条件など）を満たすことが前提で、同じ住宅でも回によって募集の有無・戸数が変わります。申し込む前に、その回の募集案内で必ず条件を確かめてください。</li>
+  </ul>
+
+  <h2>数字の確かめ方</h2>
+  <p>${N}回・8つの管理センターの受付状況表を2通りの方法で読み、全行で値が一致しました。センターごとの表末尾の合計とは、回×センターの72本のうち70本が<strong>一の位まで一致</strong>しています。泉北（令和7年8月）は、無効になった申込1件を表の合計が0と数えている1件差です。布施（令和8年2月）は表に合計の行が無いので、同じ回の募集住宅一覧の戸数と申込区分コードの全件一致、府が公表した年度ごとの住宅別の応募状況との一致で確かめました。住戸の条件は、同じ回の募集住宅一覧と申込区分コードの完全一致だけで結んでいます（結べた割合は全回で100%）。</p>
+
+  <div class="sources">
+  <h2>出典</h2>
+  <ul>
+  <li>東急コミュニティー（千里・高槻・守口・堺東・泉北・岸和田の管理センター）「総合募集受付状況」<br><a href="${esc(OS.pages['千里'])}" rel="nofollow">${esc(OS.pages['千里'])}</a></li>
+  <li>あなぶきハウジングサービス（布施管理センター）お知らせ<br><a href="${esc(OS.pages['布施'])}" rel="nofollow">${esc(OS.pages['布施'])}</a></li>
+  <li>日本管財（藤井寺管理センター）お知らせ<br><a href="${esc(OS.pages['藤井寺'])}" rel="nofollow">${esc(OS.pages['藤井寺'])}</a></li>
+  <li>募集住宅一覧（日本管財のサイトに回ごとに置かれた府内全域版）：${R.slice().reverse().map((r) => (OS.boshuList[r.round] ? `<a href="${esc(OS.boshuList[r.round].url)}" rel="nofollow">${WA(r.round)}</a>` : '')).filter(Boolean).join('・')}</li>
+  <li>令和8年度第3回 総合募集の募集案内（多子世帯優遇・受付の期間）<br><a href="${guide}" rel="nofollow">${guide}</a></li>
+  </ul>
+  <p class="disclaimer">当サイトは大阪府・府営住宅の指定管理者とは関係のない個人が運営しています。数字は上記の公表資料を${esc(OS.checked)}時点で集計したもので、当選を保証するものではありません。申込みの資格・募集の内容は、必ず最新の募集案内でご確認ください。誤りを見つけられた場合はご連絡ください。訂正します。</p>
+  </div>
+
+  <p class="related">関連：<a href="../hikazei/ken/27/">大阪府の住民税非課税の年収の目安</a> ／ <a href="../articles/koei-osaka.html">大阪市の市営住宅の当選倍率</a> ／ <a href="../articles/koei-shunyu-kijun.html">公営住宅の収入基準は年収いくらまでか</a> ／ <a href="../articles/koei-jutaku-bairitsu.html">公営住宅の当選倍率まとめ</a></p>
+`
+  return { title, html: page({ title, desc, canonical: '/osaka-fu/', depth: 1, body, jsonld: jsonld(title, desc, '/osaka-fu/', OS.checked) }) }
+}
+
 // ── 4. 書き出しと sitemap ────────────────────────────────────────────────────
-const out = [['saitama-ken', saitama(), SA.checked], ['aichi-ken', aichi(), AI.checked], ...FREE.map((C) => { const p = freePage(C); return [C.key, p, p.checked] })]
+const out = [['saitama-ken', saitama(), SA.checked], ['aichi-ken', aichi(), AI.checked], ['osaka-fu', osaka(), OS.checked], ...FREE.map((C) => { const p = freePage(C); return [C.key, p, p.checked] })]
 const changed = out.filter(([dir, p]) => write(dir, p.html)).map(([dir]) => dir)
 // sitemap：この2面のぶんだけ入れ替える。lastmod は、この回で中身が変わった面だけ今日（日本時間）にし、
 // 変わらなかった面は前の値を残す（初めて載せるときはデータの確認日）。ビルドしただけの日にはしない。

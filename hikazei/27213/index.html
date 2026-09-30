@@ -93,6 +93,16 @@
 
   <p class="lead">泉佐野市は、住民税の非課税の線を決める地域の区分で<strong>2級地</strong>です（生活保護の級地は2級地-1）。2級地の線は、1級地の額に0.9をかけた額を参考に市町村が条例で決めます。下の表はその<strong>国の標準の値</strong>で、泉佐野市が条例で定めた額はまだ確かめていません。フクシルが市区町村の公式ページで額を確かめた範囲では、2級地17のうち7の市町村が標準と違う額（高い側に丸め）にしていました。標準より低い額にしていた市町村はありません。表の額以下なら非課税の見込みで、表の額を少し超えても非課税のことがあります。</p>
 
+  <div class="offer gold" id="offer-hub">
+  <span class="kicker">有料の資料・500円（買い切り）</span>
+  <h3>家賃を下げるための資料</h3>
+  <p>公営住宅は<strong>収入が少ないほど家賃が下がる</strong>しくみで、壁になるのは倍率（抽選）です。</p>
+  <ul>
+  <li><a href="../../osaka-fu/moushikomisaki/"><strong>大阪府営住宅で「毎回すいている申込先」の一覧</strong></a></li>
+  </ul>
+  <p class="fine"><strong>買わなくても手続き・申し込みはできます。</strong>このページも、制度の説明も全部無料です。</p>
+  </div>
+
   <h2>① 令和8年度に住民税がかからない年収の目安</h2>
   <p>令和8年度（2026年6月から納める分）の住民税は、<strong>2025年1〜12月の収入</strong>で決まります。均等割も所得割もかからない、いちばん下の線です。</p>
   <div class="table-wrap"><table class="fit">
@@ -226,6 +236,7 @@
   <h2>⑥ 泉佐野市の暮らしの線</h2>
   <ul>
   <li><strong>生活保護の級地</strong>：2級地-1。生活保護の基準額（生活扶助・住宅扶助）もこの級地で決まります（<a href="../../articles/seikatsuhogo-keisanki.html">生活保護の計算機</a>）。</li>
+  <li><strong>公営住宅</strong>：<a href="../../osaka-fu/">大阪府営住宅の倍率（駅からの距離・エレベーターごと）と申込先</a>。収入の基準は住民税とは別の物差し（政令月収）です（<a href="../../articles/koei-jutaku-bairitsu.html">公営住宅の倍率と収入基準</a>）。</li>
   <li><strong>非課税世帯になると変わること</strong>：医療費の月の上限が「住民税非課税」の区分になります（<a href="../../mitoshi/kogaku/">高額療養費の上限額の記録</a>）。給付金の対象になることもあります（<a href="../../articles/juminzei-hikazei-check.html#merit">非課税世帯のおもな得</a>）。</li>
   <li><strong>水道・下水道の減免</strong>：<strong>住民税非課税であることだけでは対象になりません</strong>。泉佐野市で対象になるのは、65歳以上の人だけの世帯、特別児童扶養手当・障害児福祉手当・特別障害者手当を受けている人がいる世帯、児童扶養手当かひとり親家庭医療費の助成を受けている人がいる世帯です（泉佐野市上下水道局）。申請すると、水道の基本料金・1か月10m³までの超過料金・メーター使用料がかからなくなります。<strong>所得などの制限があります。生活保護を受けている世帯は対象外です</strong>。申請は市役所の担当課へ（65歳以上だけの世帯は地域共生推進課 福祉総務係、障害の手当の世帯は同 障害福祉係、ひとり親世帯は子育て支援課 児童係。上下水道局では受け付けていません）。出典＝<a href="https://www.water.izumisano.osaka.jp/ryokin/genmen/" rel="nofollow">泉佐野市上下水道局「福祉減免制度について」</a>（2026-09-29確認）。</li>
   </ul>
@@ -314,7 +325,8 @@
     { path: '/sagamihara/moushikomisaki/', view: 'sagamihara_view' },
     // ★県営（2026-09-30）。イベント名にハイフンを入れない（/api/ev が a-z と _ 以外を落とす）。
     { path: '/saitama-ken/moushikomisaki/', view: 'saitamaken_view' },
-    { path: '/aichi-ken/moushikomisaki/', view: 'aichiken_view' }
+    { path: '/aichi-ken/moushikomisaki/', view: 'aichiken_view' },
+    { path: '/osaka-fu/moushikomisaki/', view: 'osakafu_view' }   // 2026-10-01 大阪府営
   ]
   for (var i = 0; i < SELL.length; i++) {
     if (location.pathname.indexOf(SELL[i].path) === 0 && location.pathname.indexOf('kanryo') < 0) ev(SELL[i].view)
