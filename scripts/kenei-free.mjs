@@ -20,7 +20,7 @@ const bai = (m, k) => (k ? (m / k).toFixed(2) : '—')
 
 export const FREE = [
   {
-    key: 'kochi-ken', city: '高知県', short: '高知県営', kind: '県営', prefCode: '39',
+    key: 'kochi-ken', city: '高知県', short: '高知県営', kind: '県営', prefCode: '39', byRounds: true, hasSecond: true,
     pub: '高知県住宅供給公社', doc: '入居者募集状況一覧表', freq: '年4回（2・5・8・11月）',
     src: '高知県住宅供給公社が定期募集の回ごとに公表する県営住宅の「入居者募集状況一覧表」PDF',
     // 名寄せ＝団地×区分×間取りの型。階はまとめる（階ごとに分けると観測が1〜2件に割れ、「毎回」が言えない）。
@@ -46,17 +46,46 @@ export const FREE = [
     ],
     orgs: '高知県・高知県住宅供給公社',
   },
+  {
+    // ★hold＝公開保留（2026-10-01）。宮城県住宅供給公社のサイトに「著作権法上認められた場合を除き、無断で複製・転用することは
+    //   できません」（https://www.miyagi-jk.or.jp/about/privacy-2-2/ の3.）がある。出すのは公表数値から計算した指標と事実だけだが、
+    //   v281（規約で禁じていれば使わない）の線に近いので、ユーザーの判断を待つ。hold を外せば /miyagi-ken/ が出る。
+    hold: true,
+    key: 'miyagi-ken', city: '宮城県', short: '宮城県営', kind: '県営', prefCode: '04', byRounds: true,
+    pub: '宮城県住宅供給公社', doc: '定期募集住宅応募状況一覧', freq: '年4回（3・6・9・12月）',
+    src: '宮城県住宅供給公社が定期募集の回ごとに公表する「定期募集住宅応募状況一覧」PDF',
+    // 名寄せ＝団地（棟の記号 A/B/C を外す。回によって付いたり付かなかったりする）×用途×型式。「毎回」は募集回の数で数える
+    axis: { label: '用途', of: (r) => r.cat },
+    keyOf: (r) => [r.danchi, r.cat, r.type],
+    cols: [['danchi', '団地'], ['cat', '用途'], ['type', '型式'], ['city', '市町村'], ['access', '最寄り（徒歩）'], ['ev', 'エレベーター'], ['built', '完成年度']],
+    catCols: [['一般向', '一般向'], ['特別割当', '特別割当']],
+    otherCats: '事故等・車椅子・シルバーハウジング・子育て世帯向の住宅',
+    lead: '宮城県営住宅の定期募集は年4回（3・6・9・12月）です。宮城県住宅供給公社は回ごとに「定期募集住宅応募状況一覧」（住宅・型式・用途ごとの募集戸数・応募者数・倍率）を公表していますが、記事からリンクされるのは最新の1回だけです。',
+    notes: [
+      '<strong>倍率は応募者数÷募集戸数です</strong>（公社の一覧の倍率も同じ計算です）。',
+      '「特別割当」は、老人世帯・障害者世帯・20歳未満の子を3人以上扶養している母子・父子世帯に限って募集する住宅です（公社の募集住宅一覧表の注記）。',
+      '「事故等」は、以前に事件や事故などで空家になり、一定期間募集を止めていた住宅です（同じ注記）。倍率が低いことには、この理由があります。',
+      '同じ団地でも、回によって住宅名に棟の記号（A・B など）が付いたり付かなかったりするので、記号を外した団地×用途×型式で数えています。',
+      '最寄り（徒歩分）・エレベーター・完成年度は、公社の団地詳細と募集住宅一覧表から付けました。徒歩分の多くは団地詳細の「平成17年4月1日現在」の記載です。家賃は、その回の募集住宅一覧表でご確認ください。',
+    ],
+    check: (F, L) => `${L.length}回とも、読み取った行の和が、一覧の全体の合計に募集戸数・応募者数とも<strong>一の位まで合う</strong>ことを確かめています。令和8年9月の回は、一般向の募集戸数の小計が表では104戸、行の和では105戸で、表の小計の和（119戸）が同じ表の全体の合計（120戸）と合わないため、表の側の食い違いと判断しました。`,
+    sources: [
+      ['宮城県住宅供給公社「県営住宅 定期募集」（応募状況のお知らせ）', 'https://www.miyagi-jk.or.jp/news/post-300/'],
+    ],
+    orgs: '宮城県・宮城県住宅供給公社',
+  },
 ]
 
 // 表の列（申込先の一覧）：名寄せの鍵の列＋中央値など＋付属情報の列
+// 第二希望の列は資料に第二希望がある県（hasSecond＝高知）だけ
 const houseTable = (C, list, secondOf) => {
   const keyN = C.keyOf(list[0] || {}).length
   const keyCols = C.cols.slice(0, keyN), attrCols = C.cols.slice(keyN)
   const head = keyCols.map(([, l]) => `<th>${esc(l)}</th>`).join('') +
-    '<th class="num">中央値</th><th class="num">最低</th><th class="num">最高</th><th class="num">観測</th><th class="num">申込0</th><th class="num">第二希望</th>' +
+    '<th class="num">中央値</th><th class="num">最低</th><th class="num">最高</th><th class="num">観測</th><th class="num">申込0</th>' + (C.hasSecond ? '<th class="num">第二希望</th>' : '') +
     attrCols.map(([, l]) => `<th>${esc(l)}</th>`).join('') + '<th>最後の募集</th>'
   const row = (h) => '<tr>' + keyCols.map(([f]) => `<td>${esc(h[f] || '')}</td>`).join('') +
-    `<td class="num"><strong>${r1(h.med)}倍</strong></td><td class="num">${r1(h.min)}</td><td class="num">${r1(h.max)}</td><td class="num">${h.n}件</td><td class="num">${h.zero || ''}</td><td class="num">${secondOf(h) || ''}</td>` +
+    `<td class="num"><strong>${r1(h.med)}倍</strong></td><td class="num">${r1(h.min)}</td><td class="num">${r1(h.max)}</td><td class="num">${C.byRounds ? `${h.rounds}回${h.n !== h.rounds ? `<br><small>${h.n}件</small>` : ''}` : `${h.n}件`}</td><td class="num">${h.zero || ''}</td>${C.hasSecond ? `<td class="num">${secondOf(h) || ''}</td>` : ''}` +
     attrCols.map(([f]) => `<td>${esc(h[f] || '—')}</td>`).join('') + `<td>${WA(h.last)}</td></tr>`
   return `  <div class="table-wrap">\n  <table class="grid" style="white-space:nowrap">\n  <thead><tr>${head}</tr></thead>\n  <tbody>\n${list.map((h) => '  ' + row(h)).join('\n')}\n  </tbody></table></div>`
 }
@@ -88,9 +117,11 @@ export function freePage (C) {
   const [aMin, aMax] = [Math.min(...all), Math.max(...all)]
   const first = R[R.length - 1], latest = R[0], N = R.length
   const top = konde[0]
+  // 申込先の呼び名＝名寄せの鍵の列（高知 name・cat・madoriType、宮城 danchi・cat・type）→「団地（区分・間取り）」
+  const nameOf = (h) => { const [a, ...rest] = C.cols.slice(0, C.keyOf(h).length).map(([f]) => h[f]).filter(Boolean); return `${esc(a)}（${rest.map(esc).join('・')}）` }
   const sukiSorted = suki.slice().sort((a, b) => a.med - b.med || b.n - a.n)
   const title = `${C.city}営住宅の倍率と、毎回すいている申込先（定期募集${N}回の実測・無料）｜フクシル`
-  const desc = `${C.city}営住宅の${C.doc}${N}回ぶん（${WA(first)}〜${WA(latest)}）を申込先ごとに名寄せしました。${MIN_N}回以上観測できた${num(F.enough)}件のうち${num(F.suki)}件は倍率の中央値が${SUKI}倍未満。最寄り・エレベーター・建設年度つきの一覧まで全部無料です。`
+  const desc = `${C.city}営住宅の${C.doc}${N}回ぶん（${WA(first)}〜${WA(latest)}）を申込先ごとに名寄せしました。${MIN_N}回以上の募集で観測できた${num(F.enough)}件のうち${num(F.suki)}件は倍率の中央値が${SUKI}倍未満。最寄り・エレベーター・建設年度つきの一覧まで全部無料です。`
   const links = R.slice().reverse().map((rd) => { const l = ledger.find((x) => x.round === rd); return l && l.file ? `<a href="${esc(l.file)}" rel="nofollow">${WA(rd)}</a>` : WA(rd) }).join('・')
   const body = `  <p class="breadcrumb"><a href="../index.html">トップ</a> ＞ <a href="../articles/koei-jutaku-bairitsu.html">公営住宅</a> ＞ ${esc(C.city)}営住宅の倍率と申込先</p>
   <h1>${esc(C.city)}営住宅の倍率と、毎回すいている申込先<br><small>${WA(first)}〜${WA(latest)}の定期募集${N}回・${num(F.rows)}件を申込先ごとに名寄せした実測</small></h1>
@@ -99,7 +130,7 @@ export function freePage (C) {
   <p class="lead">${C.lead}
   そこで${WA(first)}から${WA(latest)}までの${N}回を集め、<strong>申込先（${C.cols.slice(0, C.keyOf(rows[0]).length).map(([, l]) => esc(l)).join('×')}）ごとに名寄せ</strong>しました。<strong>申込先ごとの一覧まで、このページで全部無料で読めます。</strong></p>
 
-  <div class="callout point"><p><span class="tag">要点</span>全体の倍率は、回によって<strong>${aMin.toFixed(2)}〜${aMax.toFixed(2)}倍</strong>でした。${MIN_N}回以上観測できた申込先<strong>${num(F.enough)}件</strong>のうち、<strong>${num(F.suki)}件（${F.sukiPct}%）</strong>は倍率の中央値が${SUKI}倍未満です。${top ? `いちばん混んでいるのは${esc(top.name)}（${esc(top.cat)}・${esc(top.madoriType || '')}）で、中央値${r1(top.med)}倍でした。` : ''}</p></div>
+  <div class="callout point"><p><span class="tag">要点</span>全体の倍率は、回によって<strong>${aMin.toFixed(2)}〜${aMax.toFixed(2)}倍</strong>でした。${MIN_N}回以上の募集で観測できた申込先<strong>${num(F.enough)}件</strong>のうち、<strong>${num(F.suki)}件（${F.sukiPct}%）</strong>は倍率の中央値が${SUKI}倍未満です。${top ? `いちばん混んでいるのは${nameOf(top)}で、中央値${r1(top.med)}倍でした。` : ''}</p></div>
 
   <h2>募集回ごとの倍率</h2>
   <div class="table-wrap">
@@ -111,11 +142,11 @@ ${roundRows}
   <p class="note">倍率は応募者数の合計÷募集戸数の合計です。${esc(C.otherCats)}は募集が少ないので列を作らず、「全体」にだけ入れています。</p>
 
   <h2 id="suki">毎回すいている申込先（${num(F.suki)}件・無料）</h2>
-  <p>${MIN_N}回以上観測できて、倍率の<strong>中央値</strong>が${SUKI}倍未満だったものだけを、倍率の低い順に並べました。中央値で切っているので、<strong>1回だけたまたま空いた住宅は入りません</strong>。</p>
+  <p>${MIN_N}回以上の募集で観測できて（同じ回に何戸出ても1回と数えます）、倍率の<strong>中央値</strong>が${SUKI}倍未満だったものだけを、倍率の低い順に並べました。中央値で切っているので、<strong>1回だけたまたま空いた住宅は入りません</strong>。</p>
 ${houseTable(C, sukiSorted, secondOf)}
 
   <h2 id="konde">混んでいる申込先（上位${Math.min(12, konde.length)}件）</h2>
-  <p>${MIN_N}回以上観測できた申込先を、倍率の中央値が高い順に並べました。</p>
+  <p>${MIN_N}回以上の募集で観測できた申込先を、倍率の中央値が高い順に並べました。</p>
 ${houseTable(C, konde.slice(0, 12), secondOf)}
 
 ${buread.length ? `  <h2 id="bure">回によって当たりやすさが大きく動く申込先（${buread.length}件）</h2>
@@ -123,13 +154,13 @@ ${buread.length ? `  <h2 id="bure">回によって当たりやすさが大きく
 ${houseTable(C, buread.slice().sort((a, b) => (b.max / b.min) - (a.max / a.min)), secondOf)}
 ` : ''}
   <h2 id="all">観測できた申込先の索引（${num(F.enough)}件）</h2>
-  <p>${MIN_N}回以上観測できた申込先の全部です。倍率の中央値の低い順。${MIN_N}回未満の申込先（${num(F.all - F.enough)}件）は、「毎回」と言えないので載せていません。</p>
+  <p>${MIN_N}回以上の募集で観測できた申込先の全部です。倍率の中央値の低い順。${MIN_N}回未満の申込先（${num(F.all - F.enough)}件）は、「毎回」と言えないので載せていません。</p>
 ${houseTable(C, enough, secondOf)}
 
   <h2>表の読み方</h2>
   <ul>
 ${C.notes.map((t) => `  <li>${t}</li>`).join('\n')}
-  <li>「観測」は募集の件数（一覧表の行の数）で、募集回の数ではありません。同じ回に同じ申込先で階の違う住戸が出ると、1件ずつ数えています。「申込0」は応募者が0だった件数です。</li>
+  <li>${C.byRounds ? '「観測」は、その申込先が募集に出た<strong>回の数</strong>です（同じ回に階の違う住戸が並んでも1回）。下の小さい数字は一覧表の行の数（件）で、倍率の中央値・最低・最高は行ごとの倍率から出しています。「申込0」は応募者が0だった件数（行の数）です。' : '「観測」は募集の件数（一覧表の行の数）で、募集回の数ではありません。同じ回に同じ申込先で階の違う住戸が出ると、1件ずつ数えています。「申込0」は応募者が0だった件数です。'}</li>
   <li><strong>「倍率が低い＝誰でも入れる」ではありません。</strong>申込資格（収入基準・世帯の条件など）を満たすことが前提で、同じ住宅でも回によって募集の有無・戸数・間取りが変わります。申し込む前に、その回の募集案内で必ず条件を確かめてください。</li>
   </ul>
 

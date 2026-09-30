@@ -363,7 +363,7 @@ ${S.leaf}
 }
 
 // ── 4. 書き出しと sitemap ────────────────────────────────────────────────────
-const out = [['saitama-ken', saitama(), SA.checked], ['aichi-ken', aichi(), AI.checked], ['osaka-fu', osaka(), OS.checked], ...FREE.map((C) => { const p = freePage(C); return [C.key, p, p.checked] })]
+const out = [['saitama-ken', saitama(), SA.checked], ['aichi-ken', aichi(), AI.checked], ['osaka-fu', osaka(), OS.checked], ...FREE.filter((C) => !C.hold).map((C) => { const p = freePage(C); return [C.key, p, p.checked] })]   // hold＝公開保留（宮城）
 const changed = out.filter(([dir, p]) => write(dir, p.html)).map(([dir]) => dir)
 // sitemap：この2面のぶんだけ入れ替える。lastmod は、この回で中身が変わった面だけ今日（日本時間）にし、
 // 変わらなかった面は前の値を残す（初めて載せるときはデータの確認日）。ビルドしただけの日にはしない。
@@ -376,8 +376,9 @@ for (const [dir, , checked] of out) {
   const re = new RegExp(`^\\s*<url><loc>${loc.replace(/[.*+?^${}()|[\]\\/]/g, '\\$&')}</loc><lastmod>([^<]+)</lastmod>.*\\n`, 'm')
   const prev = re.exec(sm)?.[1]
   const lm = changed.includes(dir) ? TODAY : (prev || checked)
-  sm = sm.replace(re, '')
-  sm = sm.replace('</urlset>', `  <url><loc>${loc}</loc><lastmod>${lm}</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>\n</urlset>`)
+  // 載っている面はその場で置き換える（消して末尾に足すと、shogai-kojo-sell.mjs の行と順番が入れ替わり、毎回差分が出る）
+  const line = `  <url><loc>${loc}</loc><lastmod>${lm}</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>\n`
+  sm = re.test(sm) ? sm.replace(re, () => line) : sm.replace('</urlset>', () => `${line}</urlset>`)
 }
 fs.writeFileSync(smPath, sm)
 console.log(`県営住宅の面：${out.map(([d]) => d).join('・')}（書き換え ${changed.length}枚）`)

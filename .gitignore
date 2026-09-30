@@ -35,3 +35,5 @@ data/aichi-ken-bairitsu.json
 data/kochi-ken-bairitsu.json
 # 大阪府営（2026-10-01・三大都市圏＝有料の申込先えらび）。行データは公開しない。
 data/osaka-fu-bairitsu.json
+# 宮城県営（2026-10-01・無料の候補。公社サイトの著作権の定めについてユーザー判断待ち）。行データは公開しない。
+data/miyagi-ken-bairitsu.json
