@@ -177,6 +177,14 @@ export const isZero = (r) => r.moushikomi === 0
 export function load(key) {
   const C = CITIES[key]
   if (!C) throw new Error(`知らない市です: ${key}`)
+  return loadFrom(C)
+}
+
+// ★CITIES（＝売っている商品の表）に入れずに、同じ数え方だけを使う入口（2026-10-01）。
+//   三大都市圏の外の県営は申込先ごとの一覧まで無料で出す（ユーザー「反応を見たい」）。商品表に入れると
+//   特商法の表記・有料の案内の一覧・KV への投入の対象に紛れ込むので、設定を直に渡してここで畳む。
+export function loadFrom(C) {
+  const key = C.key
   const src = path.join(ROOT, 'data', `${key}-bairitsu.json`)
   if (!fs.existsSync(src)) {
     console.error(`data/${key}-bairitsu.json がありません（公開していない中間ファイルです）。`)

@@ -21,6 +21,7 @@ import { fileURLToPath } from 'node:url'
 import { page, esc, SITE } from './shogai-kojo-page.mjs'
 import { WA, load, MIN_N, SUKI, PRICE, num, r1 } from './koei-lib.mjs'
 import { offerKoeiLeaf, jumpKoei } from './offer-block.mjs'
+import { FREE, freePage } from './kenei-free.mjs'   // 三大都市圏の外の県＝申込先ごとの一覧まで無料（2026-10-01）
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..')
 const readJson = (rel) => JSON.parse(fs.readFileSync(path.join(ROOT, rel), 'utf8'))
@@ -247,7 +248,7 @@ ${S.leaf}
 }
 
 // ── 4. 書き出しと sitemap ────────────────────────────────────────────────────
-const out = [['saitama-ken', saitama(), SA.checked], ['aichi-ken', aichi(), AI.checked]]
+const out = [['saitama-ken', saitama(), SA.checked], ['aichi-ken', aichi(), AI.checked], ...FREE.map((C) => { const p = freePage(C); return [C.key, p, p.checked] })]
 const changed = out.filter(([dir, p]) => write(dir, p.html)).map(([dir]) => dir)
 // sitemap：この2面のぶんだけ入れ替える。lastmod は、この回で中身が変わった面だけ今日（日本時間）にし、
 // 変わらなかった面は前の値を残す（初めて載せるときはデータの確認日）。ビルドしただけの日にはしない。
