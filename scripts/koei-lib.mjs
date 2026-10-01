@@ -241,6 +241,7 @@ export function loadFrom(C) {
       med: med(b), min: Math.min(...b), max: Math.max(...b),
       koho: v.reduce((a, x) => a + x.koho, 0),
       zero: v.filter(isZero).length,
+      zeroKoho: v.filter(isZero).reduce((a, x) => a + x.koho, 0),   // 応募0だった戸数（無料の一覧の「応募ゼロ」の欄）
       last: v.map((x) => x.round).sort().pop(),
     }
   }).sort((a, b2) => a.med - b2.med || b2.n - a.n)

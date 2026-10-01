@@ -72,21 +72,67 @@ export const FREE = [
       ['宮城県住宅供給公社「県営住宅 定期募集」（応募状況のお知らせ）', 'https://www.miyagi-jk.or.jp/news/post-300/'],
     ],
     orgs: '宮城県・宮城県住宅供給公社',
+    // 倍率のわりに条件がいい申込先（kosupaSection）。★エレベーターは条件にしない＝県営の団地の大半に無く、条件にすると数件しか残らない。列で見せる
+    kosupa: {
+      evOk: null,
+      evRule: (base) => `エレベーターは条件にしていません。観測できた申込先${base.length}件のうち、エレベーターのある申込先は${base.filter((h) => /あり/.test(h.ev)).length}件だけで、条件にすると数件しか残らないためです。有無は表の「エレベーター」の列でご確認ください。`,
+      jiko: '事故等', catNote: '一般向・特別割当・車椅子など',
+    },
   },
 ]
 
 // 表の列（申込先の一覧）：名寄せの鍵の列＋中央値など＋付属情報の列
 // 第二希望の列は資料に第二希望がある県（hasSecond＝高知）だけ
+// ★2026-10-01 ユーザー「観測の欄があまりに機械語ぽく、なにを言いたいのかわからない」。
+//   「観測 8回 / 26件」「申込0 26」を、「募集された回 8回（計26戸）」「応募ゼロ 26戸（全戸）」と、言葉で読める形にした。
+//   応募ゼロは行の数ではなく戸数で数える（1行に何戸もある県があるので、行の数だと「何の数か」が読めない）。
+export const LEGEND = '<strong>倍率</strong>は応募の数÷募集戸数です。「中央値」は、その申込先が募集に出た各回の倍率を低い順に並べた真ん中、「最低・最高」はいちばん空いた回・混んだ回の倍率です。「募集された回」はその申込先が募集に出た回数と、その間に募集された戸数の合計。「応募ゼロ」はそのうち<strong>応募が1件も無かった戸数</strong>です。'
+const zeroCell = (h) => (!h.zeroKoho ? '' : h.zeroKoho === h.koho ? `${h.koho}戸<br><small>全戸</small>` : `<small>${h.koho}戸中</small>${h.zeroKoho}戸`)
 export const houseTable = (C, list, secondOf) => {
   const keyN = C.keyOf(list[0] || {}).length
   const keyCols = C.cols.slice(0, keyN), attrCols = C.cols.slice(keyN)
   const head = keyCols.map(([, l]) => `<th>${esc(l)}</th>`).join('') +
-    '<th class="num">中央値</th><th class="num">最低</th><th class="num">最高</th><th class="num">観測</th><th class="num">申込0</th>' + (C.hasSecond ? '<th class="num">第二希望</th>' : '') +
+    '<th class="num">倍率の<br>中央値</th><th class="num">最低</th><th class="num">最高</th><th class="num">募集された<br>回</th><th class="num">応募<br>ゼロ</th>' + (C.hasSecond ? '<th class="num">第二希望</th>' : '') +
     attrCols.map(([, l]) => `<th>${esc(l)}</th>`).join('') + '<th>最後の募集</th>'
   const row = (h) => '<tr>' + keyCols.map(([f]) => `<td>${esc(h[f] || '')}</td>`).join('') +
-    `<td class="num"><strong>${r1(h.med)}倍</strong></td><td class="num">${r1(h.min)}</td><td class="num">${r1(h.max)}</td><td class="num">${C.byRounds ? `${h.rounds}回${h.n !== h.rounds ? `<br><small>${h.n}件</small>` : ''}` : `${h.n}件`}</td><td class="num">${h.zero || ''}</td>${C.hasSecond ? `<td class="num">${secondOf(h) || ''}</td>` : ''}` +
+    `<td class="num"><strong>${r1(h.med)}倍</strong></td><td class="num">${r1(h.min)}倍</td><td class="num">${r1(h.max)}倍</td><td class="num">${h.rounds}回<br><small>計${num(h.koho)}戸</small></td><td class="num">${zeroCell(h)}</td>${C.hasSecond ? `<td class="num">${secondOf(h) || ''}</td>` : ''}` +
     attrCols.map(([f]) => `<td>${esc(h[f] || '—')}</td>`).join('') + `<td>${WA(h.last)}</td></tr>`
   return `  <div class="table-wrap">\n  <table class="grid" style="white-space:nowrap">\n  <thead><tr>${head}</tr></thead>\n  <tbody>\n${list.map((h) => '  ' + row(h)).join('\n')}\n  </tbody></table></div>`
+}
+
+// ── 倍率のわりに条件がいい申込先（コスパ）────────────────────────────────────
+// ★2026-10-01 ユーザー「都営などでも行っていた各種変数条件を加味すれば、倍率は比較的ましだと思われるコスパに優れた住戸を宮城と大阪府にもだして」。
+//   都営の「黄金比」（toei-lib の isGold＝中央値5倍未満・エレベーター有・築年数が中央値以下）と同じ考え方。倍率だけで切ると、
+//   駅から遠い・階段・古いという「空いている理由」がそのまま集まる（大阪の中央値0倍には、バス便でしか行けない団地が並ぶ）。
+// ★条件は資料から文字で取れるものだけ：①中央値が SUKI 倍未満 ②駅から徒歩15分以内（バス停からの徒歩は駅ではないので数えない）
+//   ③完成年（複数棟は最も古い棟）が、観測できた申込先の真ん中以降 ④エレベーター（県ごとに evOk で決める。無ければ条件にしない）。
+//   事故住宅は除く（都営の sukiIppan と同じ。空いている理由が別にある）。点数や順位は付けない＝条件を満たすかどうかだけ。
+export const walkMin = (a) => { const ms = [...String(a || '').matchAll(/駅\s*(?:から)?\s*徒歩(\d+)分/g)].map((m) => Number(m[1])); return ms.length ? Math.min(...ms) : null }
+export const yearOf = (b) => { const m = String(b || '').match(/(\d{4})/); return m ? Number(m[1]) : null }
+export const WALK_MAX = 15
+export function kosupaSection (C, D, secondOf, opt) {
+  const base = D.enough.filter((h) => !/事故/.test(h.cat))
+  const ys = base.map((h) => yearOf(h.built)).filter(Boolean).sort((a, b) => a - b)
+  const yMed = ys[Math.floor((ys.length - 1) / 2)]
+  const ok = (h) => h.med < SUKI && walkMin(h.access) != null && walkMin(h.access) <= WALK_MAX && yearOf(h.built) >= yMed && (!opt.evOk || opt.evOk(h.ev))
+  const list = base.filter(ok).sort((a, b) => a.med - b.med || walkMin(a.access) - walkMin(b.access))
+  const suki = base.filter((h) => h.med < SUKI)
+  if (list.length < 3) die(`${C.city}：コスパの申込先が${list.length}件しかない。条件か文を見直す`)
+  const builtL = (C.cols.find(([f]) => f === 'built') || [, '完成年度'])[1]
+  const zero = list.filter((h) => h.med === 0).length
+  return `  <h2 id="kosupa">倍率のわりに条件がいい申込先（${num(list.length)}件・無料）</h2>
+  <p>倍率の低い順に並べるだけだと、<strong>駅から遠い・階段しかない・古い</strong>といった「空いている理由」のある住宅ばかりが上に来ます。そこで都営住宅の一覧と同じ考え方で、倍率が比較的ましなうえに<strong>住む条件もいい</strong>申込先だけを残しました。中央値${SUKI}倍未満の${num(suki.length)}件のうち、次の条件を<strong>すべて</strong>満たすのは${num(list.length)}件です。</p>
+  <ol>
+  <li>${MIN_N}回以上の募集に出て、倍率の中央値が${SUKI}倍未満（1回だけたまたま空いた住宅は入りません）</li>
+  <li><strong>駅から徒歩${WALK_MAX}分以内</strong>（バス便・バス停からの徒歩は入れていません）</li>
+  <li><strong>${esc(builtL)}が${yMed}年以降</strong>（観測できた申込先の真ん中より新しい側。棟によって違う団地は、いちばん古い棟で判定）</li>
+  <li>${typeof opt.evRule === 'function' ? opt.evRule(base) : opt.evRule}</li>
+  </ol>
+  <p>事故住宅（${esc(opt.jiko)}）は、空いている理由が別にあるので除いています。倍率の中央値の低い順、同じなら駅に近い順です。${zero ? `中央値が0倍の${zero}件は、<strong>募集された住戸の半分以上で応募が1件も無かった</strong>申込先です。` : ''}${opt.after || ''}</p>
+  <p class="note">${LEGEND}</p>
+${houseTable(C, list, secondOf)}
+  <p class="note">条件に順位や点数は付けていません。どの地域・どの間取りがいいかは読む人が決めることなので、条件を満たすかどうかだけで切っています。区分（${esc(opt.catNote)}）によって申し込める世帯が違うので、ご自身が申し込める区分かどうかを必ず確かめてください。</p>
+`
 }
 
 export function freePage (C) {
@@ -131,6 +177,9 @@ export function freePage (C) {
 
   <div class="callout point"><p><span class="tag">要点</span>全体の倍率は、回によって<strong>${aMin.toFixed(2)}〜${aMax.toFixed(2)}倍</strong>でした。${MIN_N}回以上の募集で観測できた申込先<strong>${num(F.enough)}件</strong>のうち、<strong>${num(F.suki)}件（${F.sukiPct}%）</strong>は倍率の中央値が${SUKI}倍未満です。${top ? `いちばん混んでいるのは${nameOf(top)}で、中央値${r1(top.med)}倍でした。` : ''}</p></div>
 
+${C.kosupa ? `  <p>→ <a href="#kosupa">倍率のわりに条件がいい申込先</a> ／ <a href="#suki">毎回すいている申込先</a> ／ <a href="#all">観測できた申込先の索引</a></p>
+
+${kosupaSection(C, D, secondOf, C.kosupa)}` : ''}
   <h2>募集回ごとの倍率</h2>
   <div class="table-wrap">
   <table class="grid">
@@ -142,6 +191,7 @@ ${roundRows}
 
   <h2 id="suki">毎回すいている申込先（${num(F.suki)}件・無料）</h2>
   <p>${MIN_N}回以上の募集で観測できて（同じ回に何戸出ても1回と数えます）、倍率の<strong>中央値</strong>が${SUKI}倍未満だったものだけを、倍率の低い順に並べました。中央値で切っているので、<strong>1回だけたまたま空いた住宅は入りません</strong>。</p>
+  <p class="note">${LEGEND}</p>
 ${houseTable(C, sukiSorted, secondOf)}
 
   <h2 id="konde">混んでいる申込先（上位${Math.min(12, konde.length)}件）</h2>
@@ -159,7 +209,7 @@ ${houseTable(C, enough, secondOf)}
   <h2>表の読み方</h2>
   <ul>
 ${C.notes.map((t) => `  <li>${t}</li>`).join('\n')}
-  <li>${C.byRounds ? '「観測」は、その申込先が募集に出た<strong>回の数</strong>です（同じ回に階の違う住戸が並んでも1回）。下の小さい数字は一覧表の行の数（件）で、倍率の中央値・最低・最高は行ごとの倍率から出しています。「申込0」は応募者が0だった件数（行の数）です。' : '「観測」は募集の件数（一覧表の行の数）で、募集回の数ではありません。同じ回に同じ申込先で階の違う住戸が出ると、1件ずつ数えています。「申込0」は応募者が0だった件数です。'}</li>
+  <li>「募集された回」は、その申込先が募集に出た<strong>回の数</strong>です（同じ回に階の違う住戸が並んでも1回）。下の小さい数字は、その間に募集された戸数の合計です。倍率の中央値・最低・最高は、一覧表の行ごとの倍率から出しています。「応募ゼロ」は、そのうち応募が1件も無かった戸数です。</li>
   <li><strong>「倍率が低い＝誰でも入れる」ではありません。</strong>申込資格（収入基準・世帯の条件など）を満たすことが前提で、同じ住宅でも回によって募集の有無・戸数・間取りが変わります。申し込む前に、その回の募集案内で必ず条件を確かめてください。</li>
   </ul>
 

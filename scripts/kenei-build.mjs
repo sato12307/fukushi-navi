@@ -21,7 +21,7 @@ import { fileURLToPath } from 'node:url'
 import { page, esc, SITE } from './shogai-kojo-page.mjs'
 import { WA, load, loadFrom, OSAKA_FU, MIN_N, SUKI, BURE, PRICE, num, r1 } from './koei-lib.mjs'
 import { offerKoeiLeaf, jumpKoei } from './offer-block.mjs'
-import { FREE, freePage, houseTable } from './kenei-free.mjs'   // 三大都市圏の外の県＝申込先ごとの一覧まで無料（2026-10-01）
+import { FREE, freePage, houseTable, kosupaSection, LEGEND } from './kenei-free.mjs'   // 三大都市圏の外の県＝申込先ごとの一覧まで無料（2026-10-01）
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..')
 const readJson = (rel) => JSON.parse(fs.readFileSync(path.join(ROOT, rel), 'utf8'))
@@ -281,6 +281,16 @@ function osaka () {
 ${houseTable(OSAKA_FU, hs, none)}
   </details>`).join('\n')
   const topK = D.konde[0]
+  // 倍率のわりに条件がいい申込先（2026-10-01 ユーザー「都営などでも行っていた各種変数条件を加味…大阪府にもだして」）。
+  // ★エレベーターの欄は申込先ごとにまとめ直した文字（「止まる（4戸とも）」「7戸中2戸で止まる」「なし・通過」「1階の住戸」）。
+  //   半分以上の住戸で止まるか、1階の住戸だけの申込先を「階段を使わずに済む」とみなす。
+  const evOk = (e) => { if (/^止まる/.test(e) || e === '1階の住戸') return true; const m = String(e).match(/(\d+)戸中(\d+)戸で止まる/); return m ? Number(m[2]) * 2 >= Number(m[1]) : false }
+  const kosupa = kosupaSection(OSAKA_FU, D, none, {
+    evOk,
+    evRule: '<strong>エレベーター</strong>：2階以上の住戸の半分以上で、その階にエレベーターが止まる（1階の住戸だけの申込先も含めます）',
+    jiko: '一般事故・福祉事故など', catNote: '一般・福祉世帯向け・新婚子育て・車いすなど',
+    after: '最寄り駅・エレベーター・完成年度・家賃の列は右へスクロールすると見られます。',
+  })
   const CATS = [['福祉あき家', '福祉世帯向け'], ['一般あき家', '一般世帯向け'], ['新婚・子育てあき家', '新婚・子育て']]
   const cellU = (v) => (v ? `<td class="num"><strong>${bai(v.uke, v.koho)}倍</strong><br><small>${n(v.koho)}戸・${n(v.uke)}件</small></td>` : '<td class="num">—</td>')
   const rowsHtml = R.map((r) => `  <tr><th scope="row">${WA(r.round)}<br><small>${esc(r.kai)}</small></th>${cellU(r.sum)}${CATS.map(([c]) => cellU(r.cats[c])).join('')}</tr>`).join('\n')
@@ -316,8 +326,9 @@ ${entries.map(([k, v]) => `  <tr><th scope="row">${esc(k)}</th>${cellU(v)}<td cl
 
   <div class="callout point"><p><span class="tag">要点</span>${N}回で<strong>${n(tot.koho)}戸</strong>が募集され、受付は${n(tot.uke)}件でした。ただし<strong>受付が0件の住戸が${Math.round((zeroAll.zero / zeroAll.rows) * 100)}%</strong>あり、倍率は住戸の条件で大きく割れます。駅から徒歩10分以内の住戸は<strong>${bai(W['徒歩10分以内'].uke, W['徒歩10分以内'].koho)}倍</strong>、バス便の住戸は<strong>${bai(W['バス'].uke, W['バス'].koho)}倍</strong>。2階以上で<strong>その階にエレベーターが止まる住戸は${bai(E[evKeys[0]].uke, E[evKeys[0]].koho)}倍</strong>、止まらない住戸は${bai(E[evKeys[1]].uke, E[evKeys[1]].koho)}倍でした。${MIN_N}回以上の募集で観測できた申込先<strong>${num(F.enough)}件</strong>のうち、<strong>${num(F.suki)}件（${F.sukiPct}%）</strong>は倍率の中央値が${SUKI}倍未満です。</p></div>
 
-  <p><strong>申込先ごとの一覧まで、このページで全部無料で読めます。</strong>→ <a href="#all">地域ごとの申込先の一覧（${num(F.enough)}件）</a> ／ <a href="#konde">混んでいる申込先</a>${D.buread.length ? ' ／ <a href="#bure">回によって大きく動く申込先</a>' : ''}</p>
+  <p><strong>申込先ごとの一覧まで、このページで全部無料で読めます。</strong>→ <a href="#kosupa">倍率のわりに条件がいい申込先</a> ／ <a href="#all">地域ごとの申込先の一覧（${num(F.enough)}件）</a> ／ <a href="#konde">混んでいる申込先</a>${D.buread.length ? ' ／ <a href="#bure">回によって大きく動く申込先</a>' : ''}</p>
 
+${kosupa}
   <h2>募集回ごとの倍率</h2>
   <div class="table-wrap">
   <table class="grid">
@@ -343,6 +354,7 @@ ${tbl('管理センター', centerRows)}
 
   <h2 id="all">地域ごとの申込先の一覧（${num(F.enough)}件・無料）</h2>
   <p>総合募集${N}回を申込先（団地×区分×寝室数）ごとに名寄せし、${MIN_N}回以上の募集で観測できた申込先の全部を、管理センターごとに倍率の中央値の低い順で並べました（同じ回に何戸出ても1回と数えます）。中央値で並べているので、<strong>1回だけたまたま空いた住宅は上に来ません</strong>。地域の名前を押すと開きます。${MIN_N}回未満の申込先（${num(F.all - F.enough)}件）は「毎回」と言えないので載せていません。</p>
+  <p class="note">${LEGEND}</p>
 ${byCenter}
 
   <h2 id="konde">混んでいる申込先（上位${Math.min(15, D.konde.length)}件）</h2>
@@ -359,7 +371,7 @@ ${houseTable(OSAKA_FU, D.buread.slice().sort((a, b) => (b.max / b.min) - (a.max 
   <li>府の募集案内によると、18歳未満の子どもを3人以上扶養している世帯（多子世帯）は、<strong>抽選番号を2つ</strong>持てます。同じ倍率でも、当たりやすさは世帯によって違います。</li>
   <li>総合募集の申込みの受付は、偶数月の1日から15日です（府の募集案内）。</li>
   <li>${OSAKA_FU.note}</li>
-  <li>申込先の一覧の「観測」は、その申込先が募集に出た<strong>回の数</strong>です（同じ回に階の違う住戸が並んでも1回）。下の小さい数字は受付状況表の行（住戸）の数で、倍率の中央値・最低・最高は住戸ごとの倍率から出しています。「申込0」は受付が0件だった住戸の数です。</li>
+  <li>申込先の一覧の「募集された回」は、その申込先が募集に出た<strong>回の数</strong>です（同じ回に階の違う住戸が並んでも1回）。下の小さい数字は、その間に募集された戸数の合計です。倍率の中央値・最低・最高は住戸ごとの倍率から出しています。「応募ゼロ」は、そのうち受付が1件も無かった戸数です。</li>
   <li><strong>「倍率が低い＝誰でも入れる」ではありません。</strong>申込資格（収入基準・世帯の条件など）を満たすことが前提で、同じ住宅でも回によって募集の有無・戸数が変わります。申し込む前に、その回の募集案内で必ず条件を確かめてください。</li>
   </ul>
 
