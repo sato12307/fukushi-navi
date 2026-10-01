@@ -24,7 +24,7 @@ import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { page, esc, SITE } from './shogai-kojo-page.mjs'
 import { offerKoeiLeaf, jumpKoei, offerKoeiSell } from './offer-block.mjs'
-import { load, CITIES, MIN_N, SUKI, BURE, MIN_GROUP, PRICE, r1, num, pct, WA } from './koei-lib.mjs'
+import { load, loadFrom, OSAKA_FU, CITIES, MIN_N, SUKI, BURE, MIN_GROUP, PRICE, r1, num, pct, WA } from './koei-lib.mjs'
 import { kanryoScript } from './kanryo-script.mjs'
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..')
@@ -339,10 +339,12 @@ ${LIMITS}
   const page = fs.readFileSync(hub, 'utf8')
   if (page.includes(S) && page.includes(E)) {
     // 面が実際にある市だけ載せる（作っていない市を案内しない）
-    const built = Object.keys(CITIES).filter((k) => fs.existsSync(path.join(ROOT, k, 'index.html')))
-    const rows = built.map((k) => {
-      const D = load(k)
-      return { k, C: CITIES[k], F: D.F, RANGE: D.RANGE }
+    // ★売っていない面（大阪府営＝2026-10-01「あえての無料公開」、三大都市圏の外の県＝kenei-free の FREE）も同じ数え方なので並べる
+    const { FREE } = await import('./kenei-free.mjs')
+    const cfgs = [...Object.values(CITIES), OSAKA_FU, ...FREE.filter((c) => !c.hold)]
+    const rows = cfgs.filter((c) => fs.existsSync(path.join(ROOT, c.key, 'index.html'))).map((c) => {
+      const D = loadFrom(c)
+      return { k: c.key, C: c, F: D.F, RANGE: D.RANGE }
     }).sort((a, b) => b.F.rounds - a.F.rounds)
     const body = [
       '  <div class="table-wrap">',   // ★狭い画面は横スクロールにする。包まないと320pxではみ出す

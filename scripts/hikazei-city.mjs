@@ -162,8 +162,8 @@ const jutakuOf = (r) => {
   return row ? { org: r.pref, row, source: pf.source, how: `${r.pref}の表・${r.zeiKyuchi}級地` } : null
 }
 const seihoOf = (r) => SR.rows.find((x) => x.city === r.city && x.pref === r.pref) || null
-const KOEI = { '東京都': ['toei/', '都営住宅の倍率と申込先'], '神奈川県|川崎市': ['kawasaki/', '川崎市営住宅の倍率と申込先'], '神奈川県|横浜市': ['yokohama/', '横浜市営住宅の倍率と申込先'], '兵庫県|神戸市': ['kobe/', '神戸市営住宅の倍率と申込先'], '静岡県|静岡市': ['shizuoka/', '静岡市営住宅の倍率と申込先'], '神奈川県|相模原市': ['sagamihara/', '相模原市営住宅の倍率と申込先'], '埼玉県': ['saitama-ken/', '埼玉県営住宅の倍率（募集回ごと・住宅種別ごと）'], '愛知県': ['aichi-ken/', '愛知県営住宅の倍率（定期募集の回ごと）'], '高知県': ['kochi-ken/', '高知県営住宅の倍率と申込先ごとの一覧（無料）', 'free'], '大阪府': ['osaka-fu/', '大阪府営住宅の倍率（駅からの距離・エレベーターごと）と申込先'] }
-// ★県営（埼玉・愛知）は 2026-09-30 から売り場（/<key>/moushikomisaki/）がある。3つ目に 'free' と書いた面は、売り場の無い無料ページとして offerHub に渡さない（三大都市圏の外の県＝scripts/kenei-free.mjs）
+const KOEI = { '東京都': ['toei/', '都営住宅の倍率と申込先'], '神奈川県|川崎市': ['kawasaki/', '川崎市営住宅の倍率と申込先'], '神奈川県|横浜市': ['yokohama/', '横浜市営住宅の倍率と申込先'], '兵庫県|神戸市': ['kobe/', '神戸市営住宅の倍率と申込先'], '静岡県|静岡市': ['shizuoka/', '静岡市営住宅の倍率と申込先'], '神奈川県|相模原市': ['sagamihara/', '相模原市営住宅の倍率と申込先'], '埼玉県': ['saitama-ken/', '埼玉県営住宅の倍率（募集回ごと・住宅種別ごと）'], '愛知県': ['aichi-ken/', '愛知県営住宅の倍率（定期募集の回ごと）'], '高知県': ['kochi-ken/', '高知県営住宅の倍率と申込先ごとの一覧（無料）', 'free'], '宮城県': ['miyagi-ken/', '宮城県営住宅の倍率と申込先ごとの一覧（無料）', 'free'], '大阪府': ['osaka-fu/', '大阪府営住宅の倍率と申込先ごとの一覧（無料）', 'free'] }
+// ★県営（埼玉・愛知）は 2026-09-30 から売り場（/<key>/moushikomisaki/）がある。3つ目に 'free' と書いた面は、売り場の無い無料ページとして offerHub に渡さない（三大都市圏の外の県＝scripts/kenei-free.mjs、大阪府＝2026-10-01 ユーザー「あえての無料公開」）
 const koeiOf = (r) => KOEI[`${r.pref}|${r.city}`] || KOEI[r.pref] || null
 const exists = (rel) => fs.existsSync(path.join(ROOT, rel))
 

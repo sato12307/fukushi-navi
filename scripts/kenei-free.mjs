@@ -47,10 +47,9 @@ export const FREE = [
     orgs: '高知県・高知県住宅供給公社',
   },
   {
-    // ★hold＝公開保留（2026-10-01）。宮城県住宅供給公社のサイトに「著作権法上認められた場合を除き、無断で複製・転用することは
-    //   できません」（https://www.miyagi-jk.or.jp/about/privacy-2-2/ の3.）がある。出すのは公表数値から計算した指標と事実だけだが、
-    //   v281（規約で禁じていれば使わない）の線に近いので、ユーザーの判断を待つ。hold を外せば /miyagi-ken/ が出る。
-    hold: true,
+    // ★宮城県住宅供給公社のサイトに「著作権法上認められた場合を除き、無断で複製・転用することはできません」
+    //   （https://www.miyagi-jk.or.jp/about/privacy-2-2/ の3.）がある。2026-10-01 いったん公開を保留したが、同日ユーザーが公開を許可した
+    //   （出すのは公表数値から当方が計算した指標と事実だけで、表の転載はしない）。
     key: 'miyagi-ken', city: '宮城県', short: '宮城県営', kind: '県営', prefCode: '04', byRounds: true,
     pub: '宮城県住宅供給公社', doc: '定期募集住宅応募状況一覧', freq: '年4回（3・6・9・12月）',
     src: '宮城県住宅供給公社が定期募集の回ごとに公表する「定期募集住宅応募状況一覧」PDF',
@@ -78,7 +77,7 @@ export const FREE = [
 
 // 表の列（申込先の一覧）：名寄せの鍵の列＋中央値など＋付属情報の列
 // 第二希望の列は資料に第二希望がある県（hasSecond＝高知）だけ
-const houseTable = (C, list, secondOf) => {
+export const houseTable = (C, list, secondOf) => {
   const keyN = C.keyOf(list[0] || {}).length
   const keyCols = C.cols.slice(0, keyN), attrCols = C.cols.slice(keyN)
   const head = keyCols.map(([, l]) => `<th>${esc(l)}</th>`).join('') +

@@ -19,9 +19,9 @@ import fs from 'node:fs'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { page, esc, SITE } from './shogai-kojo-page.mjs'
-import { WA, load, MIN_N, SUKI, PRICE, num, r1 } from './koei-lib.mjs'
+import { WA, load, loadFrom, OSAKA_FU, MIN_N, SUKI, BURE, PRICE, num, r1 } from './koei-lib.mjs'
 import { offerKoeiLeaf, jumpKoei } from './offer-block.mjs'
-import { FREE, freePage } from './kenei-free.mjs'   // 三大都市圏の外の県＝申込先ごとの一覧まで無料（2026-10-01）
+import { FREE, freePage, houseTable } from './kenei-free.mjs'   // 三大都市圏の外の県＝申込先ごとの一覧まで無料（2026-10-01）
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..')
 const readJson = (rel) => JSON.parse(fs.readFileSync(path.join(ROOT, rel), 'utf8'))
@@ -256,7 +256,10 @@ ${S.leaf}
   return { title, html: page({ title, desc, canonical: '/aichi-ken/', depth: 1, body, jsonld: jsonld(title, desc, '/aichi-ken/', AI.checked) }) }
 }
 
-// ── 3b. 大阪府（2026-10-01 ユーザー「粒度がいい狙い目の県を追加」＝三大都市圏なので申込先えらびは500円）────
+// ── 3b. 大阪府（2026-10-01 ユーザー「粒度がいい狙い目の県を追加」）────
+// ★同日ユーザー「大阪府はあえての無料公開にしましょう」。売り場（/osaka-fu/moushikomisaki/）を畳み、申込先ごとの一覧まで
+//   このページに無料で出す。数え方は koei-lib の loadFrom(OSAKA_FU)（売っていたときの有料資料と同じ名寄せ・中央値・すいている判定）。
+//   一覧は547件あるので、地域（管理センター）ごとに畳んで出す（読者は住む場所で選ぶ）。
 // ★数は data/kenei-osaka.json（公開してよい集計＝回×区分・回×地域・住戸の条件ごと）から。住戸ごとの行は持たない。
 // ★「住戸の条件ごとの倍率」は大阪府の資料の粒度だから出せる面の目玉（募集住宅一覧と申込区分コードで住戸ごとに結んだ）。
 //   条件どうしは重なり合う（新しい団地ほどエレベーターがある等）ので、どれか1つが倍率を決めているとは書かない。
@@ -269,7 +272,15 @@ function osaka () {
     if (Math.abs(r.sum.koho - r.published.koho) + Math.abs(r.sum.uke - r.published.uke) > 1) die(`大阪 ${r.round}：回の合計が公表の合計と2以上ずれる`)
   }
   const first = R[R.length - 1], latest = R[0], N = R.length
-  const S = sellParts('osaka-fu')
+  const D = loadFrom(OSAKA_FU), F = D.F
+  const none = () => 0   // 受付状況表に第二希望は無い（OSAKA_FU は hasSecond なし＝列も出ない）
+  const nameOf = (h) => `${esc(h.danchi)}（${esc(h.cat)}・${esc(h.madori)}）`
+  const centerList = [...new Set(D.enough.map((h) => h.center))].map((c) => [c, D.enough.filter((h) => h.center === c)]).sort((a, b) => b[1].length - a[1].length)
+  const byCenter = centerList.map(([c, hs]) => `  <details>
+  <summary><strong>${esc(c)}</strong>（${hs.length}件・うち中央値${SUKI}倍未満 ${hs.filter((h) => h.med < SUKI).length}件）</summary>
+${houseTable(OSAKA_FU, hs, none)}
+  </details>`).join('\n')
+  const topK = D.konde[0]
   const CATS = [['福祉あき家', '福祉世帯向け'], ['一般あき家', '一般世帯向け'], ['新婚・子育てあき家', '新婚・子育て']]
   const cellU = (v) => (v ? `<td class="num"><strong>${bai(v.uke, v.koho)}倍</strong><br><small>${n(v.koho)}戸・${n(v.uke)}件</small></td>` : '<td class="num">—</td>')
   const rowsHtml = R.map((r) => `  <tr><th scope="row">${WA(r.round)}<br><small>${esc(r.kai)}</small></th>${cellU(r.sum)}${CATS.map(([c]) => cellU(r.cats[c])).join('')}</tr>`).join('\n')
@@ -293,19 +304,19 @@ ${entries.map(([k, v]) => `  <tr><th scope="row">${esc(k)}</th>${cellU(v)}<td cl
   if (!(odds(W['徒歩10分以内']) > odds(W['バス']) && odds(E[evKeys[0]]) > odds(E[evKeys[1]]) && odds(B['2000年以降']) > odds(B['1970年代']))) die('大阪：要点の文の前提（駅近・EV・新しい住戸ほど倍率が高い）が崩れた。文を書き直す')
   const tot = OS.rounds.reduce((a, r) => ({ koho: a.koho + r.sum.koho, uke: a.uke + r.sum.uke }), { koho: 0, uke: 0 })
   const zeroAll = Object.values(OS.byWalk).reduce((a, v) => ({ zero: a.zero + v.zero, rows: a.rows + v.rows }), { zero: 0, rows: 0 })
-  const title = `大阪府営住宅の倍率｜募集回ごと・区分ごと・駅からの距離やエレベーターごと（${WA(first.round)}〜${WA(latest.round)}の${N}回）｜フクシル`
-  const desc = `大阪府営住宅の総合募集${N}回ぶんの受付状況を、同じ回の募集住宅一覧と住戸ごとに結んで集計しました。駅から徒歩10分以内の住戸は${bai(W['徒歩10分以内'].uke, W['徒歩10分以内'].koho)}倍、バス便の住戸は${bai(W['バス'].uke, W['バス'].koho)}倍。区分ごと・地域ごと・エレベーター・完成年度ごとの倍率も並べています。`
+  const title = `大阪府営住宅の倍率と、毎回すいている申込先（総合募集${N}回の実測・無料）｜フクシル`
+  const desc = `大阪府営住宅の総合募集${N}回ぶん（${WA(first.round)}〜${WA(latest.round)}）の受付状況を、募集住宅一覧と住戸ごとに結んで集計しました。駅から徒歩10分以内の住戸は${bai(W['徒歩10分以内'].uke, W['徒歩10分以内'].koho)}倍、バス便は${bai(W['バス'].uke, W['バス'].koho)}倍。${MIN_N}回以上の募集で観測できた申込先${num(F.enough)}件の一覧（最寄り駅・エレベーター・完成年度・家賃つき）まで全部無料です。`
   const guide = 'https://www.osaka-fuei.com/pdf/r8_3-1.pdf'
   const body = `  <p class="breadcrumb"><a href="../index.html">トップ</a> ＞ <a href="../articles/koei-jutaku-bairitsu.html">公営住宅</a> ＞ 大阪府営住宅の倍率</p>
-  <h1>大阪府営住宅の倍率（募集回ごと・区分ごと・住戸の条件ごと）</h1>
+  <h1>大阪府営住宅の倍率と、毎回すいている申込先<br><small>${WA(first.round)}〜${WA(latest.round)}の総合募集${N}回・${n(sum(R, (r) => r.sum.koho))}戸を住戸の条件ごと・申込先ごとに集計した実測</small></h1>
   <p class="updated">最終確認：${esc(OS.checked)} ／ 指定管理者3社が公表している総合募集受付状況表（${N}回・8つの管理センター）から計算</p>
 
   <p class="lead">大阪府営住宅の総合募集は、偶数月に年6回あります。府営住宅を管理する指定管理者（東急コミュニティー・穴吹ハウジングサービス・日本管財）は、回ごと・管理センターごとに、住戸ごとの受付数と倍率を「総合募集受付状況表」で公表しています。
   ${WA(first.round)}から${WA(latest.round)}までの${N}回を集め、同じ回の募集住宅一覧と<strong>住戸ごとに結んで</strong>、区分ごと・地域ごと・住戸の条件（駅からの距離・エレベーター・完成年度）ごとの倍率（受付数の合計÷募集戸数の合計）にしました。</p>
 
-  <div class="callout point"><p><span class="tag">要点</span>${N}回で<strong>${n(tot.koho)}戸</strong>が募集され、受付は${n(tot.uke)}件でした。ただし<strong>受付が0件の住戸が${Math.round((zeroAll.zero / zeroAll.rows) * 100)}%</strong>あり、倍率は住戸の条件で大きく割れます。駅から徒歩10分以内の住戸は<strong>${bai(W['徒歩10分以内'].uke, W['徒歩10分以内'].koho)}倍</strong>、バス便の住戸は<strong>${bai(W['バス'].uke, W['バス'].koho)}倍</strong>。2階以上で<strong>その階にエレベーターが止まる住戸は${bai(E[evKeys[0]].uke, E[evKeys[0]].koho)}倍</strong>、止まらない住戸は${bai(E[evKeys[1]].uke, E[evKeys[1]].koho)}倍でした。</p></div>
+  <div class="callout point"><p><span class="tag">要点</span>${N}回で<strong>${n(tot.koho)}戸</strong>が募集され、受付は${n(tot.uke)}件でした。ただし<strong>受付が0件の住戸が${Math.round((zeroAll.zero / zeroAll.rows) * 100)}%</strong>あり、倍率は住戸の条件で大きく割れます。駅から徒歩10分以内の住戸は<strong>${bai(W['徒歩10分以内'].uke, W['徒歩10分以内'].koho)}倍</strong>、バス便の住戸は<strong>${bai(W['バス'].uke, W['バス'].koho)}倍</strong>。2階以上で<strong>その階にエレベーターが止まる住戸は${bai(E[evKeys[0]].uke, E[evKeys[0]].koho)}倍</strong>、止まらない住戸は${bai(E[evKeys[1]].uke, E[evKeys[1]].koho)}倍でした。${MIN_N}回以上の募集で観測できた申込先<strong>${num(F.enough)}件</strong>のうち、<strong>${num(F.suki)}件（${F.sukiPct}%）</strong>は倍率の中央値が${SUKI}倍未満です。</p></div>
 
-${S.jump}
+  <p><strong>申込先ごとの一覧まで、このページで全部無料で読めます。</strong>→ <a href="#all">地域ごとの申込先の一覧（${num(F.enough)}件）</a> ／ <a href="#konde">混んでいる申込先</a>${D.buread.length ? ' ／ <a href="#bure">回によって大きく動く申込先</a>' : ''}</p>
 
   <h2>募集回ごとの倍率</h2>
   <div class="table-wrap">
@@ -330,15 +341,25 @@ ${tbl('完成年度', order(B, builtKeys))}
 ${tbl('管理センター', centerRows)}
   <p class="note">府営住宅は管理センターごとに受付状況表が分かれています。どの市区町村の住宅がどのセンターの受け持ちかは、府の募集案内に載っています。</p>
 
-${S.konde}
+  <h2 id="all">地域ごとの申込先の一覧（${num(F.enough)}件・無料）</h2>
+  <p>総合募集${N}回を申込先（団地×区分×寝室数）ごとに名寄せし、${MIN_N}回以上の募集で観測できた申込先の全部を、管理センターごとに倍率の中央値の低い順で並べました（同じ回に何戸出ても1回と数えます）。中央値で並べているので、<strong>1回だけたまたま空いた住宅は上に来ません</strong>。地域の名前を押すと開きます。${MIN_N}回未満の申込先（${num(F.all - F.enough)}件）は「毎回」と言えないので載せていません。</p>
+${byCenter}
 
-${S.leaf}
+  <h2 id="konde">混んでいる申込先（上位${Math.min(15, D.konde.length)}件）</h2>
+  <p>${MIN_N}回以上の募集で観測できた申込先を、倍率の中央値が高い順に並べました。${topK ? `いちばん混んでいるのは${nameOf(topK)}で、中央値${r1(topK.med)}倍でした。` : ''}</p>
+${houseTable(OSAKA_FU, D.konde.slice(0, 15), none)}
 
+${D.buread.length ? `  <h2 id="bure">回によって当たりやすさが大きく動く申込先（${D.buread.length}件）</h2>
+  <p>最高と最低が${BURE}倍以上ひらいた申込先です（最低が0倍の申込先は除いています）。住宅を変えるより、<strong>出す回を変える</strong>ほうが効く相手です。</p>
+${houseTable(OSAKA_FU, D.buread.slice().sort((a, b) => (b.max / b.min) - (a.max / a.min)), none)}
+` : ''}
   <h2>表の読み方</h2>
   <ul>
   <li><strong>倍率は受付数÷募集戸数です</strong>（受付状況表の倍率の列も同じ計算です）。受付数は申込の件数で、資格の審査は当選の後です。</li>
   <li>府の募集案内によると、18歳未満の子どもを3人以上扶養している世帯（多子世帯）は、<strong>抽選番号を2つ</strong>持てます。同じ倍率でも、当たりやすさは世帯によって違います。</li>
   <li>総合募集の申込みの受付は、偶数月の1日から15日です（府の募集案内）。</li>
+  <li>${OSAKA_FU.note}</li>
+  <li>申込先の一覧の「観測」は、その申込先が募集に出た<strong>回の数</strong>です（同じ回に階の違う住戸が並んでも1回）。下の小さい数字は受付状況表の行（住戸）の数で、倍率の中央値・最低・最高は住戸ごとの倍率から出しています。「申込0」は受付が0件だった住戸の数です。</li>
   <li><strong>「倍率が低い＝誰でも入れる」ではありません。</strong>申込資格（収入基準・世帯の条件など）を満たすことが前提で、同じ住宅でも回によって募集の有無・戸数が変わります。申し込む前に、その回の募集案内で必ず条件を確かめてください。</li>
   </ul>
 
@@ -354,7 +375,7 @@ ${S.leaf}
   <li>募集住宅一覧（日本管財のサイトに回ごとに置かれた府内全域版）：${R.slice().reverse().map((r) => (OS.boshuList[r.round] ? `<a href="${esc(OS.boshuList[r.round].url)}" rel="nofollow">${WA(r.round)}</a>` : '')).filter(Boolean).join('・')}</li>
   <li>令和8年度第3回 総合募集の募集案内（多子世帯優遇・受付の期間）<br><a href="${guide}" rel="nofollow">${guide}</a></li>
   </ul>
-  <p class="disclaimer">当サイトは大阪府・府営住宅の指定管理者とは関係のない個人が運営しています。数字は上記の公表資料を${esc(OS.checked)}時点で集計したもので、当選を保証するものではありません。申込みの資格・募集の内容は、必ず最新の募集案内でご確認ください。誤りを見つけられた場合はご連絡ください。訂正します。</p>
+  <p class="disclaimer">当サイトは大阪府・府営住宅の指定管理者とは関係のない個人が運営しています。数字は上記の公表資料を${esc(OS.checked)}時点で集計したもので、当選を保証するものではありません。本ページは公表表の転載ではなく、公表された数値から当方が計算した指標（倍率・倍率の中央値・最低・最高・件数）を、当方の区分で並べたものです。申込みの資格・募集の内容は、必ず最新の募集案内でご確認ください。誤りを見つけられた場合はご連絡ください。訂正します。</p>
   </div>
 
   <p class="related">関連：<a href="../hikazei/ken/27/">大阪府の住民税非課税の年収の目安</a> ／ <a href="../articles/koei-osaka.html">大阪市の市営住宅の当選倍率</a> ／ <a href="../articles/koei-shunyu-kijun.html">公営住宅の収入基準は年収いくらまでか</a> ／ <a href="../articles/koei-jutaku-bairitsu.html">公営住宅の当選倍率まとめ</a></p>
