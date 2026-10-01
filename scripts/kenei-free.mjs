@@ -81,6 +81,25 @@ export const FREE = [
   },
 ]
 
+// ── 滋賀県営（2026-10-01 ユーザー「滋賀はぜひやろう。OCR時間かけてもオーケ」）────────────────────
+// ★資料は滋賀県営住宅管理センター（指定管理者・shiga-kenei.com）の定期募集「空家一覧表」と「県営住宅抽選結果表」。
+//   どちらも画像だけの PDF で、scratchpad/kenei-data/shiga/work で読み取った（罫で枠を切り、Windows OCR と字の形の型あわせの
+//   2通りで読み、食い違い・読めない枠は目で確かめた）。サイトに利用規約は無く、robots.txt が禁じるのは /wp-admin/ だけ。
+// ★倍率は空家一覧表の「前回倍率（参考）」＝団地×種別（一般／身体障害者世帯向／高齢者世話付）ごとに1つ。その申込先が
+//   「前に募集に出た回」の倍率なので、次に出た回の一覧の値を、前に出た回の観測として数える（行データの bairitsu）。
+//   最初に出た回の値（令和2年度より前の募集のもの）は回が分からないので使わない。
+// ★申込先ごとの一覧は freePage ではなく kenei-build.mjs の shiga() で出す（回ごとの表が抽選結果表から作る別の形のため）。
+export const SHIGA_KEN = {
+  key: 'shiga-ken', city: '滋賀県', short: '滋賀県営', kind: '県営', prefCode: '25', byRounds: true,
+  wa: (r) => `令和${Number(r.slice(0, 4)) - 2018}年度第${r.slice(5)}回`,
+  pub: '滋賀県営住宅管理センター', doc: '空家一覧表', freq: '年4回',
+  src: '滋賀県営住宅管理センターが定期募集の回ごとに公表する「空家一覧表」（前回倍率）と「県営住宅抽選結果表」PDF',
+  axis: { label: '種別', of: (r) => r.cat },
+  keyOf: (r) => [r.danchi, r.cat],
+  cols: [['danchi', '団地'], ['cat', '種別'], ['city', '市町'], ['access', '交通'], ['ev', 'エレベーター'], ['built', '建築年度'], ['madoriAll', '間取り'], ['rent', '家賃（最後の募集）']],
+  orgs: '滋賀県・滋賀県営住宅管理センター',
+}
+
 // 表の列（申込先の一覧）：名寄せの鍵の列＋中央値など＋付属情報の列
 // 第二希望の列は資料に第二希望がある県（hasSecond＝高知）だけ
 // ★2026-10-01 ユーザー「観測の欄があまりに機械語ぽく、なにを言いたいのかわからない」。
@@ -96,7 +115,7 @@ export const houseTable = (C, list, secondOf) => {
     attrCols.map(([, l]) => `<th>${esc(l)}</th>`).join('') + '<th>最後の募集</th>'
   const row = (h) => '<tr>' + keyCols.map(([f]) => `<td>${esc(h[f] || '')}</td>`).join('') +
     `<td class="num"><strong>${r1(h.med)}倍</strong></td><td class="num">${r1(h.min)}倍</td><td class="num">${r1(h.max)}倍</td><td class="num">${h.rounds}回<br><small>計${num(h.koho)}戸</small></td><td class="num">${zeroCell(h)}</td>${C.hasSecond ? `<td class="num">${secondOf(h) || ''}</td>` : ''}` +
-    attrCols.map(([f]) => `<td>${esc(h[f] || '—')}</td>`).join('') + `<td>${WA(h.last)}</td></tr>`
+    attrCols.map(([f]) => `<td>${esc(h[f] || '—')}</td>`).join('') + `<td>${(C.wa || WA)(h.last)}</td></tr>`
   return `  <div class="table-wrap">\n  <table class="grid" style="white-space:nowrap">\n  <thead><tr>${head}</tr></thead>\n  <tbody>\n${list.map((h) => '  ' + row(h)).join('\n')}\n  </tbody></table></div>`
 }
 
@@ -107,7 +126,8 @@ export const houseTable = (C, list, secondOf) => {
 // ★条件は資料から文字で取れるものだけ：①中央値が SUKI 倍未満 ②駅から徒歩15分以内（バス停からの徒歩は駅ではないので数えない）
 //   ③完成年（複数棟は最も古い棟）が、観測できた申込先の真ん中以降 ④エレベーター（県ごとに evOk で決める。無ければ条件にしない）。
 //   事故住宅は除く（都営の sukiIppan と同じ。空いている理由が別にある）。点数や順位は付けない＝条件を満たすかどうかだけ。
-export const walkMin = (a) => { const ms = [...String(a || '').matchAll(/駅\s*(?:から)?\s*徒歩(\d+)分/g)].map((m) => Number(m[1])); return ms.length ? Math.min(...ms) : null }
+// 滋賀の交通の書き方（「長浜駅より徒歩4分」「長谷野駅下車 徒歩約5分」「（水口駅）から徒歩7分」）も読む
+export const walkMin = (a) => { const ms = [...String(a || '').matchAll(/駅[）)]?\s*(?:から|より|下車)?\s*徒歩約?(\d+)分/g)].map((m) => Number(m[1])); return ms.length ? Math.min(...ms) : null }
 export const yearOf = (b) => { const m = String(b || '').match(/(\d{4})/); return m ? Number(m[1]) : null }
 export const WALK_MAX = 15
 export function kosupaSection (C, D, secondOf, opt) {

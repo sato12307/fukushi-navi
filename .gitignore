@@ -37,3 +37,5 @@ data/kochi-ken-bairitsu.json
 data/osaka-fu-bairitsu.json
 # 宮城県営（2026-10-01・無料の候補。公社サイトの著作権の定めについてユーザー判断待ち）。行データは公開しない。
 data/miyagi-ken-bairitsu.json
+# 滋賀県営（2026-10-01）：行データは非公開。公開は回ごとの集計 data/kenei-shiga.json だけ
+data/shiga-ken-bairitsu.json

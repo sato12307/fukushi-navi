@@ -21,7 +21,7 @@ import { fileURLToPath } from 'node:url'
 import { page, esc, SITE } from './shogai-kojo-page.mjs'
 import { WA, load, loadFrom, OSAKA_FU, MIN_N, SUKI, BURE, PRICE, num, r1 } from './koei-lib.mjs'
 import { offerKoeiLeaf, jumpKoei } from './offer-block.mjs'
-import { FREE, freePage, houseTable, kosupaSection, LEGEND } from './kenei-free.mjs'   // 三大都市圏の外の県＝申込先ごとの一覧まで無料（2026-10-01）
+import { FREE, freePage, houseTable, kosupaSection, LEGEND, SHIGA_KEN, walkMin, WALK_MAX } from './kenei-free.mjs'   // 三大都市圏の外の県＝申込先ごとの一覧まで無料（2026-10-01）
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..')
 const readJson = (rel) => JSON.parse(fs.readFileSync(path.join(ROOT, rel), 'utf8'))
@@ -395,8 +395,103 @@ ${houseTable(OSAKA_FU, D.buread.slice().sort((a, b) => (b.max / b.min) - (a.max 
   return { title, html: page({ title, desc, canonical: '/osaka-fu/', depth: 1, body, jsonld: jsonld(title, desc, '/osaka-fu/', OS.checked) }) }
 }
 
+// ── 3c. 滋賀（2026-10-01 ユーザー「滋賀はぜひやろう。OCR時間かけてもオーケ」）────────────────
+// ★倍率は空家一覧表の「前回倍率（参考）」（団地×種別ごと）。行データの bairitsu は「次に一覧に出た回の前回倍率」を
+//   前に出た回の観測としたもの（kenei-free.mjs の SHIGA_KEN の注）。回ごとの表は倍率でなく、抽選結果表（住戸ごと）から
+//   「抽選に来た人が1人もいなかった住戸」を数える（倍率は申込先ごとにしか出ていないので、回の合計の倍率は作らない）。
+// ★data/kenei-shiga.json の台帳で、全回とも募集戸数の行の和が表の合計と一の位まで合うことをビルドのたびに確かめる。
+const SG = readJson('data/kenei-shiga.json')
+function shiga () {
+  const C = SHIGA_KEN
+  for (const l of SG.rounds) if (!l.match || l.koho !== l.publishedKoho) die(`滋賀 ${l.round}：募集戸数の行の和 ${l.koho} が表の合計 ${l.publishedKoho} と合わない`)
+  const D = loadFrom(C), F = D.F
+  const W = C.wa
+  const R = [...SG.rounds].sort((a, b) => b.round.localeCompare(a.round))
+  const done = R.filter((l) => l.kekka)
+  const first = R[R.length - 1], latest = R[0], N = R.length
+  const lotK = sum(done, (l) => l.lotteryKoho), absK = sum(done, (l) => l.kekka.absentKoho)
+  const pctAbs = Math.round((absK / lotK) * 100)
+  const kekkaRows = sum(done, (l) => l.kekka.singleRows + l.kekka.lotteryRows)
+  const none = () => 0
+  const top = D.konde[0]
+  const nameOf = (h) => `${esc(h.danchi)}（${esc(h.cat)}）`
+  // ★エレベーターは条件にしない（宮城と同じ）：駅から歩ける団地が少なく、そのうちエレベーターのある団地は古い側に寄っていて、3つとも満たす申込先が残らない（2026-10-01 実測0件）。列で見せる
+  const kosupa = kosupaSection(C, D, none, {
+    evOk: null,
+    evRule: (base) => `エレベーターは条件にしていません。滋賀県営は駅から歩ける団地が少なく（観測できた申込先${base.length}件のうち、駅から徒歩${WALK_MAX}分以内は${base.filter((h) => walkMin(h.access) != null && walkMin(h.access) <= WALK_MAX).length}件）、エレベーターまで条件にすると1件も残らないためです。有無は表の「エレベーター」の列でご確認ください。`,
+    jiko: '空家一覧表の区分が「事故住宅」のもの', catNote: '一般・身体障害者世帯向・高齢者世話付',
+    after: '交通・エレベーター・建築年度・間取り・家賃の列は右へスクロールすると見られます。',
+  })
+  const rowsHtml = R.map((l) => {
+    const k = l.kekka
+    return `  <tr><th scope="row">${W(l.round)}</th><td class="num">${n(l.koho)}戸</td>${k ? `<td class="num"><strong>${n(k.absentKoho)}戸</strong><br><small>${l.lotteryKoho}戸中・${Math.round((k.absentKoho / l.lotteryKoho) * 100)}%</small></td><td class="num">${n(k.singleRows)}件</td>` : '<td class="num" colspan="2"><small>抽選結果の公表前</small></td>'}</tr>`
+  }).join('\n')
+  const title = `滋賀県営住宅の倍率と、毎回すいている申込先（定期募集${N}回の実測・無料）｜フクシル`
+  const desc = `滋賀県営住宅の定期募集${N}回ぶん（${W(first.round)}〜${W(latest.round)}）の空家一覧表と抽選結果表を読み取り、団地ごとの前回倍率を名寄せしました。${MIN_N}回以上の募集で倍率が分かった申込先${num(F.enough)}件のうち${num(F.suki)}件は倍率の中央値が${SUKI}倍未満。抽選のある住戸の${pctAbs}%は、抽選結果表に1人も載りませんでした。`
+  const body = `  <p class="breadcrumb"><a href="../index.html">トップ</a> ＞ <a href="../articles/koei-jutaku-bairitsu.html">公営住宅</a> ＞ 滋賀県営住宅の倍率と申込先</p>
+  <h1>滋賀県営住宅の倍率と、毎回すいている申込先<br><small>${W(first.round)}〜${W(latest.round)}の定期募集${N}回・${n(sum(R, (l) => l.koho))}戸を団地ごとに名寄せした実測</small></h1>
+  <p class="updated">最終確認：${esc(SG.checked)} ／ 滋賀県営住宅管理センターが公表する空家一覧表（${N}回）と県営住宅抽選結果表（${done.length}回）から集計</p>
+
+  <p class="lead">滋賀県営住宅の定期募集は年4回です。滋賀県営住宅管理センターは回ごとに「空家一覧表」を出し、団地ごとに<strong>前回の募集の倍率（参考）</strong>を載せています。抽選の後には、住戸ごとの当選者を「県営住宅抽選結果表」で公表しています。どちらも画像だけのPDFで、ページからリンクされているのは今年度の回だけです。
+  そこで${W(first.round)}から${W(latest.round)}までの${N}回を読み取り、<strong>団地ごとに前回倍率を名寄せ</strong>しました。<strong>申込先ごとの一覧まで、このページで全部無料で読めます。</strong></p>
+
+  <div class="callout point"><p><span class="tag">要点</span>${MIN_N}回以上の募集で倍率が分かった申込先<strong>${num(F.enough)}件</strong>のうち、<strong>${num(F.suki)}件（${F.sukiPct}%）</strong>は倍率の中央値が${SUKI}倍未満でした。抽選のある住戸${n(lotK)}戸（${done.length}回の合計）のうち<strong>${n(absK)}戸（${pctAbs}%）は、抽選結果表に1人も載りませんでした</strong>。${top ? `いちばん混んでいるのは${nameOf(top)}で、中央値${r1(top.med)}倍です。` : ''}</p></div>
+
+  <p>→ <a href="#kosupa">倍率のわりに条件がいい申込先</a> ／ <a href="#suki">毎回すいている申込先</a> ／ <a href="#konde">混んでいる申込先</a> ／ <a href="#all">申込先の索引</a></p>
+
+${kosupa}
+  <h2>募集回ごとの戸数と、抽選に1人も来なかった住戸</h2>
+  <div class="table-wrap">
+  <table class="grid">
+  <thead><tr><th>募集回</th><th class="num">募集戸数</th><th class="num">抽選結果表に<br>載らなかった住戸</th><th class="num">単一申込者<br>当選</th></tr></thead>
+  <tbody>
+${rowsHtml}
+  </tbody></table></div>
+  <p class="note">募集戸数は空家一覧表の合計です（${N}回とも、行の和と一の位まで一致）。「抽選結果表に載らなかった住戸」は、抽選のある住戸（身体障害者世帯向・高齢者世話付は抽選が無いので除く）のうち、その回の抽選結果表に出てこなかった住戸の数で、抽選に申込者が1人もいなかった住戸にあたります。「単一申込者当選」は、申込者が1人だけで抽選なしに当選した住宅番号の数です。</p>
+
+  <h2 id="suki">毎回すいている申込先（${num(F.suki)}件・無料）</h2>
+  <p>${MIN_N}回以上の募集で倍率が分かり、倍率の<strong>中央値</strong>が${SUKI}倍未満だったものを、倍率の低い順に並べました。中央値で切っているので、<strong>1回だけたまたま空いた団地は入りません</strong>。</p>
+  <p class="note">${LEGEND}</p>
+${houseTable(C, D.suki.slice().sort((a, b) => a.med - b.med || b.n - a.n), none)}
+
+  <h2 id="konde">混んでいる申込先（上位${Math.min(12, D.konde.length)}件）</h2>
+  <p>${MIN_N}回以上の募集で倍率が分かった申込先を、倍率の中央値が高い順に並べました。</p>
+${houseTable(C, D.konde.slice(0, 12), none)}
+
+  <h2 id="all">申込先の索引（${num(F.enough)}件）</h2>
+  <p>${MIN_N}回以上の募集で倍率が分かった申込先の全部です。倍率の中央値の低い順。${MIN_N}回未満の申込先（${num(F.all - F.enough)}件）は「毎回」と言えないので載せていません。</p>
+${houseTable(C, D.enough, none)}
+
+  <h2>表の読み方</h2>
+  <ul>
+  <li><strong>倍率は、空家一覧表の「前回倍率（参考）」です。</strong>管理センターが団地ごとに（一般の住戸と、身体障害者世帯向・高齢者世話付の住戸は別に）、<strong>その団地が前に募集に出た回</strong>の倍率を載せています。そこで、次に一覧に出た回の値を、前に出た回の倍率として数えました。令和2年度第1回より前の募集の値は、どの回か分からないので使っていません。「募集された回」「最後の募集」も、倍率が分かった回の数と、そのいちばん新しい回です。</li>
+  <li>前回倍率は小数1けたに丸めた値です。抽選結果表と突き合わせると、前回倍率が抽選結果表から数えた申込者の数を下回ることはありませんでしたが、上回ることはありました。申込の後に辞退した人や資格の無かった人を含む数とみられます。</li>
+  <li>同じ団地でも、住戸ごとに間取り・階・家賃が違います。エレベーター・建築年度・間取り・家賃は、その団地で募集された住戸（${N}回ぶん）からまとめました（家賃は最後の募集の回の、収入区分のいちばん低い額〜いちばん高い額）。交通は管理センターの「県営住宅一覧」の記載です。</li>
+  <li>空家一覧表で「斡旋団地（○）」の印がある団地は、前年度4回の募集の合計で募集割れした団地です。その回に申込みの無かった住戸があれば、その団地の抽選に外れた人に入居をあっせんします（空家一覧表の注記）。</li>
+  <li><strong>「倍率が低い＝誰でも入れる」ではありません。</strong>申込資格（収入基準・世帯の条件など）を満たすことが前提で、同じ団地でも回によって募集の有無・戸数が変わります。申し込む前に、その回の空家一覧表と募集案内で必ず条件を確かめてください。</li>
+  </ul>
+
+  <h2>数字の確かめ方</h2>
+  <p>空家一覧表${N}回と抽選結果表${done.length}回は、どれも字の入っていない画像のPDFです。空家一覧表は罫線で枠を切り、数字の欄を<strong>Windows の文字認識と、字の形の型あわせの2通り</strong>で読みました。2通りが食い違った枠・読めなかった枠と、<strong>前回倍率の枠はすべて</strong>、元の画像と目で照らして確かめています。${N}回とも、読み取った募集戸数の和は表の合計と<strong>一の位まで一致</strong>しました。抽選結果表は別に目で読み、載っている住宅番号${n(kekkaRows)}件すべてで、その住宅番号の団地名が同じ回の空家一覧表と一致することを確かめています。</p>
+
+  <div class="sources">
+  <h2>出典</h2>
+  <ul>
+  <li>滋賀県営住宅管理センター「入居者募集のご案内」（定期募集の日程・空家一覧表・抽選結果）<br><a href="${esc(SG.page)}" rel="nofollow">${esc(SG.page)}</a></li>
+  <li>各回の空家一覧表（PDF）：${R.slice().reverse().map((l) => `<a href="${esc(l.file)}" rel="nofollow">${W(l.round)}</a>`).join('・')}<br><small>今年度より前の回は、ページのリンクから外れています。</small></li>
+  <li>各回の県営住宅抽選結果表（PDF）：${done.slice().reverse().map((l) => `<a href="${esc(l.kekkaFile)}" rel="nofollow">${W(l.round)}</a>`).join('・')}</li>
+  <li>滋賀県営住宅管理センター「県営住宅一覧」（団地の所在地・交通）<br><a href="https://shiga-kenei.com/list/index.html" rel="nofollow">https://shiga-kenei.com/list/index.html</a></li>
+  </ul>
+  <p class="disclaimer">当サイトは滋賀県・滋賀県営住宅管理センターとは関係のない個人が運営しています。数字は上記の公表資料を${esc(SG.checked)}時点で集計したもので、当選を保証するものではありません。本ページは公表表の転載ではなく、公表された数値から当方が計算した指標（倍率の中央値・最低・最高・件数）を、当方の区分で並べたものです。誤りを見つけられた場合はご連絡ください。訂正します。</p>
+  </div>
+
+  <p class="related">関連：<a href="../hikazei/ken/25/">滋賀県の住民税非課税の年収の目安</a> ／ <a href="../articles/koei-shunyu-kijun.html">公営住宅の収入基準は年収いくらまでか</a> ／ <a href="../articles/koei-jutaku-bairitsu.html">公営住宅の当選倍率まとめ</a></p>
+`
+  return { title, html: page({ title, desc, canonical: '/shiga-ken/', depth: 1, body, jsonld: { ...jsonld(title, desc, '/shiga-ken/', SG.checked), datePublished: '2026-10-01' } }) }
+}
+
 // ── 4. 書き出しと sitemap ────────────────────────────────────────────────────
-const out = [['saitama-ken', saitama(), SA.checked], ['aichi-ken', aichi(), AI.checked], ['osaka-fu', osaka(), OS.checked], ...FREE.filter((C) => !C.hold).map((C) => { const p = freePage(C); return [C.key, p, p.checked] })]   // hold＝公開保留（宮城）
+const out = [['saitama-ken', saitama(), SA.checked], ['aichi-ken', aichi(), AI.checked], ['osaka-fu', osaka(), OS.checked], ['shiga-ken', shiga(), SG.checked], ...FREE.filter((C) => !C.hold).map((C) => { const p = freePage(C); return [C.key, p, p.checked] })]   // hold＝公開保留（宮城）
 const changed = out.filter(([dir, p]) => write(dir, p.html)).map(([dir]) => dir)
 // sitemap：この2面のぶんだけ入れ替える。lastmod は、この回で中身が変わった面だけ今日（日本時間）にし、
 // 変わらなかった面は前の値を残す（初めて載せるときはデータの確認日）。ビルドしただけの日にはしない。

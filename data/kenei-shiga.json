@@ -1,0 +1,542 @@
+{
+ "checked": "2026-10-01",
+ "page": "https://shiga-kenei.com/guide/index.html",
+ "rounds": [
+  {
+   "round": "2020-1",
+   "kai": "令和2年度第1回定期募集",
+   "used": true,
+   "file": "https://shiga-kenei.com/common/media/r02_1.pdf",
+   "kekkaFile": "https://shiga-kenei.com/common/media/r02_1_kekka.pdf",
+   "fileLastModified": "Fri, 03 Apr 2020 05:11:00 GMT",
+   "rows": 51,
+   "koho": 77,
+   "publishedKoho": 77,
+   "match": true,
+   "lotteryRows": 50,
+   "lotteryKoho": 76,
+   "kekka": {
+    "absentRows": 22,
+    "singleRows": 14,
+    "lotteryRows": 14,
+    "absentKoho": 39
+   }
+  },
+  {
+   "round": "2020-2",
+   "kai": "令和2年度第2回定期募集",
+   "used": true,
+   "file": "https://shiga-kenei.com/common/media/r02_2.pdf",
+   "kekkaFile": "https://shiga-kenei.com/common/media/r02_2_kekka.pdf",
+   "fileLastModified": "Tue, 07 Jul 2020 05:15:00 GMT",
+   "rows": 63,
+   "koho": 81,
+   "publishedKoho": 81,
+   "match": true,
+   "lotteryRows": 61,
+   "lotteryKoho": 79,
+   "kekka": {
+    "absentRows": 32,
+    "singleRows": 9,
+    "lotteryRows": 20,
+    "absentKoho": 47
+   }
+  },
+  {
+   "round": "2020-3",
+   "kai": "令和2年度第3回定期募集",
+   "used": true,
+   "file": "https://shiga-kenei.com/common/media/r02_3.pdf",
+   "kekkaFile": "https://shiga-kenei.com/common/media/r02_3_kekka.pdf",
+   "fileLastModified": "Thu, 08 Oct 2020 01:34:00 GMT",
+   "rows": 81,
+   "koho": 116,
+   "publishedKoho": 116,
+   "match": true,
+   "lotteryRows": 79,
+   "lotteryKoho": 114,
+   "kekka": {
+    "absentRows": 47,
+    "singleRows": 14,
+    "lotteryRows": 18,
+    "absentKoho": 69
+   }
+  },
+  {
+   "round": "2020-4",
+   "kai": "令和2年度第4回定期募集",
+   "used": true,
+   "file": "https://shiga-kenei.com/common/media/r02_4.pdf",
+   "kekkaFile": "https://shiga-kenei.com/common/media/r02_4_kekka.pdf",
+   "fileLastModified": "Thu, 24 Dec 2020 04:00:00 GMT",
+   "rows": 21,
+   "koho": 34,
+   "publishedKoho": 34,
+   "match": true,
+   "lotteryRows": 20,
+   "lotteryKoho": 32,
+   "kekka": {
+    "absentRows": 6,
+    "singleRows": 3,
+    "lotteryRows": 11,
+    "absentKoho": 6
+   }
+  },
+  {
+   "round": "2021-1",
+   "kai": "令和3年度第1回定期募集",
+   "used": true,
+   "file": "https://shiga-kenei.com/common/media/r03_1.pdf",
+   "kekkaFile": "https://shiga-kenei.com/common/media/r03_1_kekka.pdf",
+   "fileLastModified": "Thu, 25 Mar 2021 02:35:00 GMT",
+   "rows": 60,
+   "koho": 79,
+   "publishedKoho": 79,
+   "match": true,
+   "lotteryRows": 58,
+   "lotteryKoho": 76,
+   "kekka": {
+    "absentRows": 23,
+    "singleRows": 17,
+    "lotteryRows": 18,
+    "absentKoho": 36
+   }
+  },
+  {
+   "round": "2021-2",
+   "kai": "令和3年度第2回定期募集",
+   "used": true,
+   "file": "https://shiga-kenei.com/common/media/r03_2.pdf",
+   "kekkaFile": "https://shiga-kenei.com/common/media/r03_2_kekka.pdf",
+   "fileLastModified": "Tue, 29 Jun 2021 04:03:24 GMT",
+   "rows": 40,
+   "koho": 54,
+   "publishedKoho": 54,
+   "match": true,
+   "lotteryRows": 38,
+   "lotteryKoho": 51,
+   "kekka": {
+    "absentRows": 20,
+    "singleRows": 9,
+    "lotteryRows": 9,
+    "absentKoho": 30
+   }
+  },
+  {
+   "round": "2021-3",
+   "kai": "令和3年度第3回定期募集",
+   "used": true,
+   "file": "https://shiga-kenei.com/common/media/r03_3.pdf",
+   "kekkaFile": "https://shiga-kenei.com/common/media/r03_3_kekka.pdf",
+   "fileLastModified": "Fri, 24 Sep 2021 00:49:35 GMT",
+   "rows": 33,
+   "koho": 45,
+   "publishedKoho": 45,
+   "match": true,
+   "lotteryRows": 32,
+   "lotteryKoho": 43,
+   "kekka": {
+    "absentRows": 12,
+    "singleRows": 13,
+    "lotteryRows": 7,
+    "absentKoho": 17
+   }
+  },
+  {
+   "round": "2021-4",
+   "kai": "令和3年度第4回定期募集",
+   "used": true,
+   "file": "https://shiga-kenei.com/common/media/r03_4.pdf",
+   "kekkaFile": "https://shiga-kenei.com/common/media/r03_4_kekka.pdf",
+   "fileLastModified": "Tue, 21 Dec 2021 10:21:44 GMT",
+   "rows": 31,
+   "koho": 35,
+   "publishedKoho": 35,
+   "match": true,
+   "lotteryRows": 30,
+   "lotteryKoho": 33,
+   "kekka": {
+    "absentRows": 9,
+    "singleRows": 9,
+    "lotteryRows": 12,
+    "absentKoho": 12
+   }
+  },
+  {
+   "round": "2022-1",
+   "kai": "令和4年度第1回定期募集",
+   "used": true,
+   "file": "https://shiga-kenei.com/common/media/r04_1.pdf",
+   "kekkaFile": "https://shiga-kenei.com/common/media/r04_1_kekka.pdf",
+   "fileLastModified": "Wed, 23 Mar 2022 04:44:00 GMT",
+   "rows": 45,
+   "koho": 62,
+   "publishedKoho": 62,
+   "match": true,
+   "lotteryRows": 44,
+   "lotteryKoho": 60,
+   "kekka": {
+    "absentRows": 25,
+    "singleRows": 4,
+    "lotteryRows": 15,
+    "absentKoho": 37
+   }
+  },
+  {
+   "round": "2022-2",
+   "kai": "令和4年度第2回定期募集",
+   "used": true,
+   "file": "https://shiga-kenei.com/common/media/r04_2.pdf",
+   "kekkaFile": "https://shiga-kenei.com/common/media/r04_2_kekka.pdf",
+   "fileLastModified": "Mon, 27 Jun 2022 00:49:27 GMT",
+   "rows": 50,
+   "koho": 72,
+   "publishedKoho": 72,
+   "match": true,
+   "lotteryRows": 48,
+   "lotteryKoho": 69,
+   "kekka": {
+    "absentRows": 29,
+    "singleRows": 9,
+    "lotteryRows": 10,
+    "absentKoho": 47
+   }
+  },
+  {
+   "round": "2022-3",
+   "kai": "令和4年度第3回定期募集",
+   "used": true,
+   "file": "https://shiga-kenei.com/common/media/r04_3.pdf",
+   "kekkaFile": "https://shiga-kenei.com/common/media/r04_3_kekka.pdf",
+   "fileLastModified": "Tue, 27 Sep 2022 00:25:31 GMT",
+   "rows": 56,
+   "koho": 77,
+   "publishedKoho": 77,
+   "match": true,
+   "lotteryRows": 54,
+   "lotteryKoho": 74,
+   "kekka": {
+    "absentRows": 30,
+    "singleRows": 4,
+    "lotteryRows": 20,
+    "absentKoho": 48
+   }
+  },
+  {
+   "round": "2022-4",
+   "kai": "令和4年度第4回定期募集",
+   "used": true,
+   "file": "https://shiga-kenei.com/common/media/r04_4.pdf",
+   "kekkaFile": "https://shiga-kenei.com/common/media/r04_4_kekka.pdf",
+   "fileLastModified": "Fri, 23 Dec 2022 06:08:00 GMT",
+   "rows": 54,
+   "koho": 76,
+   "publishedKoho": 76,
+   "match": true,
+   "lotteryRows": 52,
+   "lotteryKoho": 74,
+   "kekka": {
+    "absentRows": 26,
+    "singleRows": 10,
+    "lotteryRows": 16,
+    "absentKoho": 38
+   }
+  },
+  {
+   "round": "2023-1",
+   "kai": "令和5年度第1回定期募集",
+   "used": true,
+   "file": "https://shiga-kenei.com/common/media/r05_1.pdf",
+   "kekkaFile": "https://shiga-kenei.com/common/media/r05_1_kekka.pdf",
+   "fileLastModified": "Tue, 28 Mar 2023 01:20:23 GMT",
+   "rows": 64,
+   "koho": 84,
+   "publishedKoho": 84,
+   "match": true,
+   "lotteryRows": 61,
+   "lotteryKoho": 81,
+   "kekka": {
+    "absentRows": 30,
+    "singleRows": 9,
+    "lotteryRows": 22,
+    "absentKoho": 44
+   }
+  },
+  {
+   "round": "2023-2",
+   "kai": "令和5年度第2回定期募集",
+   "used": true,
+   "file": "https://shiga-kenei.com/common/media/r05_2.pdf",
+   "kekkaFile": "https://shiga-kenei.com/common/media/r05_2_kekka.pdf",
+   "fileLastModified": "Mon, 26 Jun 2023 04:35:34 GMT",
+   "rows": 55,
+   "koho": 72,
+   "publishedKoho": 72,
+   "match": true,
+   "lotteryRows": 53,
+   "lotteryKoho": 70,
+   "kekka": {
+    "absentRows": 33,
+    "singleRows": 7,
+    "lotteryRows": 13,
+    "absentKoho": 50
+   }
+  },
+  {
+   "round": "2023-3",
+   "kai": "令和5年度第3回定期募集",
+   "used": true,
+   "file": "https://shiga-kenei.com/common/media/r05_3.pdf",
+   "kekkaFile": "https://shiga-kenei.com/common/media/r05_3_kekka.pdf",
+   "fileLastModified": "Thu, 21 Sep 2023 02:31:09 GMT",
+   "rows": 45,
+   "koho": 65,
+   "publishedKoho": 65,
+   "match": true,
+   "lotteryRows": 44,
+   "lotteryKoho": 64,
+   "kekka": {
+    "absentRows": 27,
+    "singleRows": 9,
+    "lotteryRows": 8,
+    "absentKoho": 46
+   }
+  },
+  {
+   "round": "2023-4",
+   "kai": "令和5年度第4回定期募集",
+   "used": true,
+   "file": "https://shiga-kenei.com/common/media/r05_4.pdf",
+   "kekkaFile": "https://shiga-kenei.com/common/media/r05_4_kekka.pdf",
+   "fileLastModified": "Sun, 17 Dec 2023 23:59:00 GMT",
+   "rows": 45,
+   "koho": 62,
+   "publishedKoho": 62,
+   "match": true,
+   "lotteryRows": 44,
+   "lotteryKoho": 61,
+   "kekka": {
+    "absentRows": 25,
+    "singleRows": 5,
+    "lotteryRows": 14,
+    "absentKoho": 38
+   }
+  },
+  {
+   "round": "2024-1",
+   "kai": "令和6年度第1回定期募集",
+   "used": true,
+   "file": "https://shiga-kenei.com/common/media/r06_1.pdf",
+   "kekkaFile": "https://shiga-kenei.com/common/media/r06_1_kekka.pdf",
+   "fileLastModified": "Tue, 19 Mar 2024 08:21:53 GMT",
+   "rows": 36,
+   "koho": 65,
+   "publishedKoho": 65,
+   "match": true,
+   "lotteryRows": 35,
+   "lotteryKoho": 64,
+   "kekka": {
+    "absentRows": 19,
+    "singleRows": 6,
+    "lotteryRows": 10,
+    "absentKoho": 32
+   }
+  },
+  {
+   "round": "2024-2",
+   "kai": "令和6年度第2回定期募集",
+   "used": true,
+   "file": "https://shiga-kenei.com/common/media/r06_2.pdf",
+   "kekkaFile": "https://shiga-kenei.com/common/media/r06_2_kekka.pdf",
+   "fileLastModified": "Mon, 01 Jul 2024 04:34:28 GMT",
+   "rows": 34,
+   "koho": 60,
+   "publishedKoho": 60,
+   "match": true,
+   "lotteryRows": 32,
+   "lotteryKoho": 57,
+   "kekka": {
+    "absentRows": 17,
+    "singleRows": 3,
+    "lotteryRows": 12,
+    "absentKoho": 32
+   }
+  },
+  {
+   "round": "2024-3",
+   "kai": "令和6年度第3回定期募集",
+   "used": true,
+   "file": "https://shiga-kenei.com/common/media/r06_3.pdf",
+   "kekkaFile": "https://shiga-kenei.com/common/media/r06_3_kekka.pdf",
+   "fileLastModified": "Tue, 24 Sep 2024 02:26:52 GMT",
+   "rows": 43,
+   "koho": 60,
+   "publishedKoho": 60,
+   "match": true,
+   "lotteryRows": 41,
+   "lotteryKoho": 57,
+   "kekka": {
+    "absentRows": 20,
+    "singleRows": 5,
+    "lotteryRows": 16,
+    "absentKoho": 29
+   }
+  },
+  {
+   "round": "2024-4",
+   "kai": "令和6年度第4回定期募集",
+   "used": true,
+   "file": "https://shiga-kenei.com/common/media/r06_4.pdf",
+   "kekkaFile": "https://shiga-kenei.com/common/media/r06_4_kekka.pdf",
+   "fileLastModified": "Mon, 23 Dec 2024 00:40:07 GMT",
+   "rows": 39,
+   "koho": 54,
+   "publishedKoho": 54,
+   "match": true,
+   "lotteryRows": 36,
+   "lotteryKoho": 50,
+   "kekka": {
+    "absentRows": 20,
+    "singleRows": 1,
+    "lotteryRows": 15,
+    "absentKoho": 34
+   }
+  },
+  {
+   "round": "2025-1",
+   "kai": "令和7年度第1回定期募集",
+   "used": true,
+   "file": "https://shiga-kenei.com/common/media/r07_1.pdf",
+   "kekkaFile": "https://shiga-kenei.com/common/media/r07_1_kekka.pdf",
+   "fileLastModified": "Fri, 21 Mar 2025 01:28:52 GMT",
+   "rows": 30,
+   "koho": 37,
+   "publishedKoho": 37,
+   "match": true,
+   "lotteryRows": 27,
+   "lotteryKoho": 33,
+   "kekka": {
+    "absentRows": 10,
+    "singleRows": 6,
+    "lotteryRows": 11,
+    "absentKoho": 16
+   }
+  },
+  {
+   "round": "2025-2",
+   "kai": "令和7年度第2回定期募集",
+   "used": true,
+   "file": "https://shiga-kenei.com/common/media/r07_2.pdf",
+   "kekkaFile": "https://shiga-kenei.com/common/media/r07_2_kekka.pdf",
+   "fileLastModified": "Thu, 26 Jun 2025 07:36:20 GMT",
+   "rows": 25,
+   "koho": 32,
+   "publishedKoho": 32,
+   "match": true,
+   "lotteryRows": 22,
+   "lotteryKoho": 28,
+   "kekka": {
+    "absentRows": 11,
+    "singleRows": 1,
+    "lotteryRows": 10,
+    "absentKoho": 17
+   }
+  },
+  {
+   "round": "2025-3",
+   "kai": "令和7年度第3回定期募集",
+   "used": true,
+   "file": "https://shiga-kenei.com/common/media/r07_3.pdf",
+   "kekkaFile": "https://shiga-kenei.com/common/media/r07_3_kekka.pdf",
+   "fileLastModified": "Thu, 18 Sep 2025 05:45:33 GMT",
+   "rows": 29,
+   "koho": 36,
+   "publishedKoho": 36,
+   "match": true,
+   "lotteryRows": 26,
+   "lotteryKoho": 32,
+   "kekka": {
+    "absentRows": 13,
+    "singleRows": 3,
+    "lotteryRows": 10,
+    "absentKoho": 19
+   }
+  },
+  {
+   "round": "2025-4",
+   "kai": "令和7年度第4回定期募集",
+   "used": true,
+   "file": "https://shiga-kenei.com/common/media/r07_4.pdf",
+   "kekkaFile": "https://shiga-kenei.com/common/media/r07_4_kekka.pdf",
+   "fileLastModified": "Mon, 22 Dec 2025 09:03:45 GMT",
+   "rows": 31,
+   "koho": 38,
+   "publishedKoho": 38,
+   "match": true,
+   "lotteryRows": 28,
+   "lotteryKoho": 34,
+   "kekka": {
+    "absentRows": 8,
+    "singleRows": 7,
+    "lotteryRows": 13,
+    "absentKoho": 13
+   }
+  },
+  {
+   "round": "2026-1",
+   "kai": "令和8年度第1回定期募集",
+   "used": true,
+   "file": "https://shiga-kenei.com/common/media/r08_1.pdf",
+   "kekkaFile": "https://shiga-kenei.com/common/media/r08_1_kekka.pdf",
+   "fileLastModified": "Wed, 18 Mar 2026 01:07:00 GMT",
+   "rows": 27,
+   "koho": 31,
+   "publishedKoho": 31,
+   "match": true,
+   "lotteryRows": 24,
+   "lotteryKoho": 27,
+   "kekka": {
+    "absentRows": 11,
+    "singleRows": 4,
+    "lotteryRows": 9,
+    "absentKoho": 14
+   }
+  },
+  {
+   "round": "2026-2",
+   "kai": "令和8年度第2回定期募集",
+   "used": true,
+   "file": "https://shiga-kenei.com/common/media/r08_2.pdf",
+   "kekkaFile": "https://shiga-kenei.com/common/media/r08_2_kekka.pdf",
+   "fileLastModified": "Tue, 23 Jun 2026 08:54:57 GMT",
+   "rows": 30,
+   "koho": 34,
+   "publishedKoho": 34,
+   "match": true,
+   "lotteryRows": 27,
+   "lotteryKoho": 30,
+   "kekka": {
+    "absentRows": 10,
+    "singleRows": 5,
+    "lotteryRows": 12,
+    "absentKoho": 13
+   }
+  },
+  {
+   "round": "2026-3",
+   "kai": "令和8年度第3回定期募集",
+   "used": true,
+   "file": "https://shiga-kenei.com/common/media/r08_3.pdf",
+   "kekkaFile": null,
+   "fileLastModified": "Thu, 17 Sep 2026 06:18:19 GMT",
+   "rows": 29,
+   "koho": 33,
+   "publishedKoho": 33,
+   "match": true,
+   "lotteryRows": 25,
+   "lotteryKoho": 28,
+   "kekka": null
+  }
+ ],
+ "note": "回ごとの募集戸数（空家一覧表の合計と一致）と、抽選結果表に載った住戸の数。行ごとの値は公開しない。"
+}

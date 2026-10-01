@@ -340,8 +340,8 @@ ${LIMITS}
   if (page.includes(S) && page.includes(E)) {
     // 面が実際にある市だけ載せる（作っていない市を案内しない）
     // ★売っていない面（大阪府営＝2026-10-01「あえての無料公開」、三大都市圏の外の県＝kenei-free の FREE）も同じ数え方なので並べる
-    const { FREE } = await import('./kenei-free.mjs')
-    const cfgs = [...Object.values(CITIES), OSAKA_FU, ...FREE.filter((c) => !c.hold)]
+    const { FREE, SHIGA_KEN } = await import('./kenei-free.mjs')
+    const cfgs = [...Object.values(CITIES), OSAKA_FU, SHIGA_KEN, ...FREE.filter((c) => !c.hold)]
     const rows = cfgs.filter((c) => fs.existsSync(path.join(ROOT, c.key, 'index.html'))).map((c) => {
       const D = loadFrom(c)
       return { k: c.key, C: c, F: D.F, RANGE: D.RANGE }
