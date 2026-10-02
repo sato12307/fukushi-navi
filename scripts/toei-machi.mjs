@@ -311,6 +311,7 @@ ${faq.map((f) => `  <h3>Q. ${esc(f.q)}</h3>\n  <p>A. ${f.a}</p>`).join('\n')}
   <li><a href="toei-waku.html">都営住宅は申し込む区分で倍率が${WAKU_LEAD.ratio}倍違う</a>（募集区分ごとの実測）</li>
   <li><a href="../toei/">都営住宅 申込先えらび</a>（区市町ごとの相場・条件別の効き目）</li>
   <li><a href="koei-tokyo.html">東京都の公営住宅の倍率</a>／<a href="koei-shunyu-kijun.html">政令月収の判定</a>／<a href="koei-hairiyasui.html">優遇抽選</a></li>
+  <li>収入が少ないとき：<a href="juminzei-hikazei-check.html">住民税非課税世帯の年収の条件</a>／<a href="seikatsuhogo-keisanki.html">生活保護費の自動計算</a></li>
   <li>近い規模の区市町：${near(s)}</li>
   </ul>
 

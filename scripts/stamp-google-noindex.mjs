@@ -28,8 +28,11 @@ const BULK = [
   /^jiritsu\/ken\/\d{2}\/((\d{5,6}|yakkyoku|houmon)\/)?$/, // 自立支援医療（都道府県・市区町村・薬局・訪問看護）
   /^houkatsu\/\d{6}\.html$/,       // 地域包括支援センター（市区町村）
 ]
-// Bing で需要が見えた型の面（2026-10-02 GetPageStats）。Google にも見せる
-const KEEP = new Set(['shogai-kojo/272248.html', 'shogai-kojo/252131.html', 'hikazei/44210/'])
+// Google にも見せる型の面：Bing で需要が見えた3枚（2026-10-02 GetPageStats）と、Google に登録済みだった8枚（同日の URL検査の台帳）。
+//   登録済みの面まで外すと、取れている評価を自分で捨てることになる
+const KEEP = new Set(['shogai-kojo/272248.html', 'shogai-kojo/252131.html', 'hikazei/44210/',
+  'shogai-kojo/012351.html', 'shogai-kojo/114642.html', 'shogai-kojo/131075.html', 'shogai-kojo/131118.html',
+  'shogai-kojo/131121.html', 'shogai-kojo/261009.html', 'shogai-kojo/342122.html', 'houkatsu/221309.html'])
 
 export const isBulk = (rel) => !KEEP.has(rel) && BULK.some((re) => re.test(rel))
 

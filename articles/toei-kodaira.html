@@ -261,6 +261,7 @@
   <li><a href="toei-waku.html">都営住宅は申し込む区分で倍率が17倍違う</a>（募集区分ごとの実測）</li>
   <li><a href="../toei/">都営住宅 申込先えらび</a>（区市町ごとの相場・条件別の効き目）</li>
   <li><a href="koei-tokyo.html">東京都の公営住宅の倍率</a>／<a href="koei-shunyu-kijun.html">政令月収の判定</a>／<a href="koei-hairiyasui.html">優遇抽選</a></li>
+  <li>収入が少ないとき：<a href="juminzei-hikazei-check.html">住民税非課税世帯の年収の条件</a>／<a href="seikatsuhogo-keisanki.html">生活保護費の自動計算</a></li>
   <li>近い規模の区市町：<a href="toei-machida.html">町田市</a> ／ <a href="toei-setagaya.html">世田谷区</a> ／ <a href="toei-ota.html">大田区</a> ／ <a href="toei-higashimurayama.html">東村山市</a> ／ <a href="toei-fuchu.html">府中市</a> ／ <a href="toei-shinjuku.html">新宿区</a></li>
   </ul>
 
@@ -327,7 +328,11 @@
     { path: '/shizuoka/moushikomisaki/', view: 'shizuoka_view' },
     { path: '/yokohama/moushikomisaki/', view: 'yokohama_view' },
     { path: '/kobe/moushikomisaki/', view: 'kobe_view' },
-    { path: '/sagamihara/moushikomisaki/', view: 'sagamihara_view' }
+    { path: '/sagamihara/moushikomisaki/', view: 'sagamihara_view' },
+    // ★県営（2026-09-30）。イベント名にハイフンを入れない（/api/ev が a-z と _ 以外を落とす）。
+    { path: '/saitama-ken/moushikomisaki/', view: 'saitamaken_view' },
+    { path: '/aichi-ken/moushikomisaki/', view: 'aichiken_view' },
+    { path: '/osaka-fu/moushikomisaki/', view: 'osakafu_view' }   // 2026-10-01 大阪府営
   ]
   for (var i = 0; i < SELL.length; i++) {
     if (location.pathname.indexOf(SELL[i].path) === 0 && location.pathname.indexOf('kanryo') < 0) ev(SELL[i].view)
