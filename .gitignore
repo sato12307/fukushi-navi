@@ -39,3 +39,5 @@ data/osaka-fu-bairitsu.json
 data/miyagi-ken-bairitsu.json
 # 滋賀県営（2026-10-01）：行データは非公開。公開は回ごとの集計 data/kenei-shiga.json だけ
 data/shiga-ken-bairitsu.json
+# デプロイの直前に作る（scripts/stamp-google-noindex.mjs）
+sitemap-google.xml

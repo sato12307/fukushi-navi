@@ -35,6 +35,10 @@ jobs:
       # 月次の Actions も面を作り直すので、公開の直前のここ1か所で入れる（理由は scripts/stamp-adsense.mjs の冒頭）。
       - name: Stamp AdSense tag
         run: node scripts/stamp-adsense.mjs
+      # 量産の面（市区町村・都道府県ごとの型の面）を Google にだけ noindex にし、Google 用の sitemap-google.xml を作る（2026-10-02）。
+      #   Bing には全部入りの sitemap.xml と IndexNow で見せたまま（理由は scripts/stamp-google-noindex.mjs の冒頭）。
+      - name: Google-only noindex for bulk pages
+        run: node scripts/stamp-google-noindex.mjs
       - name: Upload artifact (site root)
         uses: actions/upload-pages-artifact@v3
         with:

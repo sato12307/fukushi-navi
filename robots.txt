@@ -1,4 +1,5 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://fukushiru.com/sitemap.xml
+# Google には型の面を抜いた sitemap-google.xml を知らせる。全部入りの sitemap.xml は Bing に登録済み（scripts/stamp-google-noindex.mjs）
+Sitemap: https://fukushiru.com/sitemap-google.xml
