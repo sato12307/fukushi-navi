@@ -45,3 +45,17 @@ console.log(`AdSense のタグ：${CHECK ? '入れる予定' : '入れた'} ${ad
 const odd = noHead.filter((r) => !/^google[0-9a-f]+\.html$/.test(r))
 if (noHead.length) console.log(`<head> の無い HTML ${noHead.length}枚：${noHead.slice(0, 5).join(', ')}`)
 if (odd.length) { console.error('★<head> の無いページがある（ページの作りが変わった？）: ' + odd.slice(0, 10).join(', ')); process.exit(1) }
+
+// ── フッターに「プライバシーポリシー」を足す（2026-10-02）──────────────────────────
+// ★AdSense は、第三者配信の広告 Cookie の開示（/privacy/）を求める。フッターの「利用規約」のあとに1つ足す。
+//   フッターを書く所も生成器ごとに散っているので、タグと同じくデプロイの直前のここで入れる（何度流しても1個）。
+let linked = 0
+for (const f of files) {
+  const html = fs.readFileSync(f, 'utf8')
+  if (/privacy\/">プライバシーポリシー<\/a>/.test(html)) continue
+  const next = html.replace(/<a href="([^"]*)kiyaku\/">利用規約<\/a>/, (m, up) => `${m} ／ <a href="${up}privacy/">プライバシーポリシー</a>`)
+  if (next === html) continue
+  linked++
+  if (!CHECK) fs.writeFileSync(f, next)
+}
+console.log(`フッターのプライバシーポリシー：${CHECK ? '足す予定' : '足した'} ${linked}枚`)

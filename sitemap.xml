@@ -2980,5 +2980,6 @@
   <url><loc>https://fukushiru.com/pack/</loc><lastmod>2026-10-01</lastmod><priority>0.7</priority></url>
   <url><loc>https://fukushiru.com/tokushoho/</loc><lastmod>2026-10-01</lastmod><priority>0.7</priority></url>
   <url><loc>https://fukushiru.com/kiyaku/</loc><lastmod>2026-10-01</lastmod><priority>0.7</priority></url>
+  <url><loc>https://fukushiru.com/privacy/</loc><lastmod>2026-10-02</lastmod><changefreq>yearly</changefreq><priority>0.3</priority></url>
   <url><loc>https://fukushiru.com/shiga-ken/</loc><lastmod>2026-10-01</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
 </urlset>
