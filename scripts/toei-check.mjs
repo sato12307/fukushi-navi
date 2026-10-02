@@ -14,7 +14,10 @@
 // ★<a class="skip"> は画面外に置くのが正しいので、はみ出しから除く（全ページにある）。
 import { spawn } from 'node:child_process'
 import fs from 'node:fs'; import os from 'node:os'; import path from 'node:path'
-const CHROME = ['C:/Program Files/Google/Chrome/Application/chrome.exe', 'C:/Program Files (x86)/Microsoft/Edge/Application/msedge.exe'].find((p) => fs.existsSync(p))
+import { pathToFileURL } from 'node:url'
+// ★Actions(ubuntu)でも回る（2026-10-02: Windowsの場所しか知らず、毎月のCIで CHROME=undefined のまま spawn して落ちた）
+const CHROME = [process.env.CHROME, 'C:/Program Files/Google/Chrome/Application/chrome.exe', 'C:/Program Files (x86)/Microsoft/Edge/Application/msedge.exe', '/usr/bin/google-chrome', '/usr/bin/google-chrome-stable', '/usr/bin/chromium-browser', '/usr/bin/chromium'].find((p) => p && fs.existsSync(p))
+if (!CHROME) { console.error('Chrome/Edge が見つからない（CHROME= で場所を渡せる）'); process.exit(1) }
 const port = 9200 + Math.floor(Math.random() * 700)
 const profile = fs.mkdtempSync(path.join(os.tmpdir(), 'chk-'))
 const child = spawn(CHROME, ['--headless=new', '--disable-gpu', '--hide-scrollbars', '--no-first-run', '--remote-debugging-port=' + port, '--user-data-dir=' + profile, 'about:blank'], { stdio: 'ignore' })
@@ -69,7 +72,7 @@ try {
   await cdp.send('Emulation.setDeviceMetricsOverride', { width: 320, height: 800, deviceScaleFactor: 1, mobile: true }, sessionId)
   await cdp.send('Page.enable', {}, sessionId)
   for (const f of files) {
-    const url = 'file:///' + path.resolve(f).replace(/\\/g, '/')
+    const url = pathToFileURL(path.resolve(f)).href
     await cdp.send('Page.navigate', { url }, sessionId)
     await cdp.waitFor('Page.loadEventFired')
     await sleep(120)
