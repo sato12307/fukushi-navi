@@ -160,7 +160,7 @@ write('pack/index.html', page({
   </select></p>
   <p style="margin-top:1rem"><button id="buy" class="btn-primary">${PRICE}円で手順書を受け取る</button>
   <span id="msg" style="margin-left:.8rem"></span></p>
-  <p class="fine">クレジットカード決済（Stripe）。カード情報は当方を経由しません。Apple Pay・Google Pay にも対応しています（お使いの端末が対応している場合）。PayPay は近日対応予定です。お支払いが済むと、<strong>資料はそのまま画面に開きます</strong>（ダウンロードしてファイルを開き直す必要はありません。ファイルとして保存もできます）。<strong>買わなくても手続きはできます</strong>——無料で読める範囲は上のとおりです。</p>
+  <p class="fine">クレジットカード・PayPay（決済は Stripe）。カード情報は当方を経由しません。Apple Pay・Google Pay にも対応しています（お使いの端末が対応している場合）。お支払いが済むと、<strong>資料はそのまま画面に開きます</strong>（ダウンロードしてファイルを開き直す必要はありません。ファイルとして保存もできます）。<strong>買わなくても手続きはできます</strong>——無料で読める範囲は上のとおりです。</p>
   </div>
 
   <div class="callout warn"><p><span class="tag">先に確認してください</span>
@@ -238,7 +238,7 @@ ${Object.values(CITIES).map((c) => `  <li><a href="../${c.key}/moushikomisaki/">
   <tr><th>メールアドレス</th><td>${esc(SELLER.mail)}</td></tr>
   <tr><th>販売価格</th><td>${PRICE}円（消費税込み）</td></tr>
   <tr><th>商品代金以外の必要料金</th><td>ありません。通信料はお客様のご負担となります。</td></tr>
-  <tr><th>お支払い方法</th><td>クレジットカード（Stripe による決済）。Apple Pay・Google Pay を含みます。</td></tr>
+  <tr><th>お支払い方法</th><td>クレジットカード・PayPay（Stripe による決済）。カード払いには Apple Pay・Google Pay を含みます。</td></tr>
   <tr><th>お支払い時期</th><td>ご注文時にお支払いが確定します。</td></tr>
   <tr><th>引渡し時期</th><td>お支払いの完了後、ただちに画面でご覧いただけます（ファイルとして保存もできます）。</td></tr>
   <tr><th>返品・キャンセル</th><td>デジタルデータの性質上、閲覧またはダウンロードの後のお客様都合による返品・返金はお受けできません。<br>ただし<strong>資料が開けない場合、内容が説明と著しく異なる場合、二重に決済された場合</strong>は、購入から14日以内にメールでご連絡ください。全額を返金いたします。</td></tr>
