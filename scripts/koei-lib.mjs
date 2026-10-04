@@ -62,10 +62,28 @@ export const CITIES = {
     key: 'yokohama', city: '横浜市', short: '横浜',
     src: '横浜市が募集回ごとに公表する記者発表「横浜市営住宅の抽選結果について」の応募状況表PDF',
     // ★横浜は18区と募集区分の両方がある。軸は区（読者が住む場所で選ぶため）。
-    axis: { label: '区', of: (r) => r.ku || '（区なし）' },
+    // ★全市単位（住宅を決めずに申し込む枠）は区が無い。区の相場には入れず「（全市単位）」として別に数える。
+    axis: { label: '区', of: (r) => r.ku || (r.unit === '全市単位' ? '（全市単位）' : '（区なし）') },
+    // ★募集区分（cat）は「単位×区分」を1つにした語（2026-10-04〜）。以前は高齢二人世帯向・高齢単身者用の
+    //   「直接建設型」「借上型」が一般世帯向に混ざっていた（応募状況表の2ページ目を読んでいなかった）。
     keyOf: (r) => [r.ku, r.name, r.cat],
-    cols: [['ku', '区'], ['name', '住宅'], ['cat', '募集区分'], ['tanshin', '単身可'], ['ev', 'エレベーター']],
-    note: '同じ住宅でも募集区分が違えば別に数えています。単身可（※）とエレベーターの印（□△×）は、資料の凡例にある印を住宅名から切り出したものです。',
+    cols: [['ku', '区'], ['name', '住宅'], ['cat', '募集区分'], ['tanshin', '単身可'], ['ev', 'エレベーターの印']],
+    // 索引の追加の欄は、最後の回だけでなく観測した全部の回から決める。
+    //   単身可 … 全部の回で印あり＝可／一部の回だけ＝回による（車いす用などで実際に揺れる）
+    //   エレベーターの印 … 観測した印を全部（同じ団地が棟で分かれて募集された回だけ付く）
+    extraOf: {
+      tanshin: (v) => { const n = v.filter((x) => x.tanshin).length; return n === v.length ? '可' : n ? '回による' : '' },
+      ev: (v) => [...new Set(v.map((x) => x.ev).filter(Boolean))].join('・'),
+    },
+    // ★有料資料の索引に「条件で絞る」を付ける（2026-10-04 第169回の0円検証：表末尾の合計と9回とも1件まで一致、
+    //   入居者募集の記者発表の区分ごとの戸数とも9回とも一致、単身可の印と区分（単身者可／不可）の食い違い0）。
+    //   エレベーターの印は9回で40件しか付かない（印の無い行＝表に書いていない）ので、絞り込みには使わない。
+    filter: true,
+    evNote: '横浜市の応募状況表には建てられた年が載っていません。エレベーターの印（〇各階に停止・□一部の階に停止・△踊り場に停止・×なし）は、同じ団地が棟で分かれて募集された回にだけ付いていて、印の無い申込先は「エレベーターあり」ではなく「表に書いていない」という意味です。',
+    note: '同じ住宅でも募集区分が違えば別に数えています。募集区分は、資料の「単位」（住宅単位・高齢二人世帯向・高齢単身者用・特別空家など）と「区分」（直接建設型・借上型・単身者可・子育て世帯専用など）を組み合わせたものです（令和5年10月の募集から「事故住宅」は「特別空家」に改称されたので、同じ枠として数えています）。全市単位・行政区単位は住宅を決めずに申し込む枠で、それぞれ1つの申込先として数えています。単身可は資料の凡例の（※）印（令和4年4月の回だけは太字）を、エレベーターの印（〇□△×）は住宅名から切り出したものです。',
+    check: {
+      text: (F) => `${F.rounds}回とも、読み取った行の和が<strong>応募状況表の末尾の合計（募集戸数・応募者数）と1件まで一致</strong>しています。あわせて、同じ回の<strong>入居者募集の記者発表にある募集区分ごとの戸数</strong>（全市単位・一般世帯向・子育て世帯専用・特定目的住宅・特別空家など）とも${F.boshuMatched}回で一致しました。`,
+    },
   },
   kobe: {
     key: 'kobe', city: '神戸市', short: '神戸',
@@ -234,7 +252,7 @@ export function loadFrom(C) {
     return {
       ...o,
       // 索引に出す追加の欄（資料にある分だけ）
-      ...Object.fromEntries(C.cols.slice(C.keyOf(v[0]).length).map(([f]) => [f, v[v.length - 1][f] || ''])),
+      ...Object.fromEntries(C.cols.slice(C.keyOf(v[0]).length).map(([f]) => [f, C.extraOf && C.extraOf[f] ? C.extraOf[f](v) : (v[v.length - 1][f] || '')])),
       axis: C.axis.of(v[0]),
       n: v.length,
       rounds: new Set(v.map((x) => x.round)).size,
@@ -291,6 +309,7 @@ export function loadFrom(C) {
     skippedRounds: ledger.filter((l) => !l.used).map((l) => l.round),
     allRounds: ledger.length,
     matched: ledger.filter((l) => l.match).length,
+    boshuMatched: ledger.filter((l) => l.boshu && l.boshu.match).length,   // 横浜：入居者募集の記者発表の区分ごとの戸数とも一致した回
     explained: ledger.filter((l) => l.used && l.match === false && l.explained).length,
     noNameRows: ledger.reduce((a, l) => a + ((l.noName && l.noName.rows) || 0), 0),
     noNameKoho: ledger.reduce((a, l) => a + ((l.noName && l.noName.koho) || 0), 0),

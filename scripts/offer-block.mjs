@@ -60,7 +60,7 @@ export function offerKoeiSell({ facts: f, peek, up = '../../' } = {}) {
   <li>回によって当たりやすさが<strong>大きく動く申込先</strong>（${f.bureN}件。住宅を変えるより、出す回を変えるほうが効く相手）</li>
   <li>申込者ゼロが出た申込先と<strong>その回数</strong></li>
   <li>観測できた<strong>全申込先の索引${f.enoughN}件</strong>（倍率の中央値／最低／最高・観測件数・申込0の回数・のべ募集戸数・最後に募集された回）</li>
-  </ul>
+${f.extraLi ? `  ${f.extraLi}\n` : ''}  </ul>
   <p class="fine">先に確認してください：これは<strong>過去の実測から作った目安</strong>で、次の募集の倍率を約束するものではありません。募集される住宅は回ごとに変わります。申込資格（${f.shikaku || '市内在住・収入基準など'}）は${f.guideOrg || f.city}の募集案内でご確認ください。<strong>対象は${f.only}</strong>で、${f.notIn || '都道府県営住宅や他市の市営住宅'}は入っていません。</p>
   <p class="buyrow"><button type="button" class="btn-primary" data-buy>${f.price}円で一覧を受け取る</button> <span class="buymsg" role="status"></span></p>
   <p class="fine"><strong>買わなくても申し込みはできます。</strong>${f.axis}ごとの相場と混んでいる申込先の実名は、上に全部出しています。</p>

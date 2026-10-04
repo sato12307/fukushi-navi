@@ -59,6 +59,8 @@ const files = [
   //   ★2026-09-29 県営の無料ページ（scripts/kenei-build.mjs）。売り場は無いが、回×種別の表の崩れを見る。
   //   ★2026-10-01 三大都市圏の外の県営（申込先ごとの一覧まで無料・scripts/kenei-free.mjs）。横に長い一覧の表の崩れを見る。
   ...['saitama-ken', 'aichi-ken', 'osaka-fu', 'shiga-ken', 'kochi-ken', 'miyagi-ken'].map((k) => k + '/index.html').filter((f) => fs.existsSync(f)),
+  //   ★2026-10-04 市営住宅の倍率の推移の看板（scripts/koei-suii-build.mjs）。市ごとの回の表の崩れを見る。
+  ...['koei/bairitsu-suii/index.html'].filter((f) => fs.existsSync(f)),
 ].sort()
 // 売り場の有無で当てる検査を分ける（売り場を置かない面もある。例＝東京都以外の公営住宅の記事）
 const hasOffer = (html) => /class="offer"/.test(html)

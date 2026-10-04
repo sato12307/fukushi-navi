@@ -15,6 +15,10 @@ import re
 
 HERE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 DATA = os.path.join(HERE, "data", "koei-cities.json")
+# ★2026-10-04 募集回ごとの倍率の推移（公表の合計と1件まで合った回だけ）。数は scripts/koei-suii-lib.mjs が出し、
+#   scripts/koei-suii-build.mjs が data/koei-suii.json に書く。ここは並べるだけ（数え直さない）。
+#   推計（何回で当たるか・当選の見込み）は持たない（2026-10-04 ユーザー裁定 v297）。
+SUII = os.path.join(HERE, "data", "koei-suii.json")
 ARTDIR = os.path.join(HERE, "articles")
 
 # ---- 計算機（補正＋優遇）。__BASE__/__NOTE__ だけ差し込み、JSは静的 ----
@@ -207,6 +211,57 @@ NERAI_HTML = u"""  <div class="callout point">
   </div>
 """
 
+def f1(x):
+    return "{:.1f}".format(float(x))
+
+
+def suii_html(c, suii):
+    """市別の記事に入れる「前の回まで：募集回ごとの倍率の推移」。data/koei-suii.json に3回以上ある市だけ。"""
+    s = next((x for x in suii.get("cities", [])
+              if x.get("article") == "koei-" + c["slug"] and x.get("stats") and x["stats"].get("n", 0) >= 3), None)
+    if not s:
+        return ""
+    S = s["stats"]
+    sub = any(r.get("sub") for r in s["rounds"])
+    sub_label = next((r["sub"]["label"] for r in s["rounds"] if r.get("sub")), "")
+    head = '<th scope="col">募集回</th><th scope="col">募集戸数</th><th scope="col">応募者数</th><th scope="col">倍率</th>'
+    if sub:
+        head += '<th scope="col">{}の倍率</th>'.format(esc(sub_label))
+    rows = []
+    for r in reversed(s["rounds"]):
+        cell = ""
+        if sub:
+            b = (r.get("sub") or {}).get("bairitsu")
+            cell = "<td>{}</td>".format(f1(b) + "倍" if b is not None else "—")
+        rows.append('      <tr><th scope="row">{l}</th><td>{k:,}戸</td><td>{m:,}人</td><td><strong>{b}倍</strong></td>{c}</tr>'.format(
+            l=esc(r["label"]), k=r["koho"], m=r["mo"], b=f1(r["bairitsu"]), c=cell))
+    out = [
+        '  <h2 id="suii">前の回まで：募集回ごとの倍率の推移</h2>',
+        '  <p>{c}営住宅の{bo}は、公表の合計と1件まで合った<strong>{n}回</strong>（{fi}〜{la}）で、回全体の倍率が'
+        '<strong>最小{mi}倍</strong>（{mia}）・<strong>中央値{me}倍</strong>・<strong>最大{ma}倍</strong>（{maa}）でした。'
+        '直近の{la}は<strong>{lt}倍</strong>です。</p>'.format(
+            c=esc(s["city"]), bo=esc(s.get("boshu") or "定期募集"), n=S["n"], fi=esc(S["first"]), la=esc(S["last"]),
+            mi=f1(S["min"]), mia=esc(S["minAt"]), me=f1(S["med"]), ma=f1(S["max"]), maa=esc(S["maxAt"]), lt=f1(S["latest"])),
+        '  <div class="table-wrap">\n  <table class="ratio-table">',
+        '    <caption>{}営住宅 募集回ごとの倍率（新しい回が上）</caption>'.format(esc(s["city"])),
+        '    <thead><tr>{}</tr></thead>'.format(head),
+        '    <tbody>\n{}\n    </tbody>\n  </table>\n  </div>'.format("\n".join(rows)),
+        '  <p style="font-size:.88rem;color:var(--sub)">倍率＝その回の応募者数の合計÷募集戸数の合計（回全体）。出典＝{p}の{d}。'
+        '載せたのは資料の合計と当方の読み取りが1件まで合った回だけです{x}。</p>'.format(
+            p=esc(s.get("publisher", "")), d=esc(s.get("doc", "")),
+            x=("（載せなかった{}回と理由は<a href=\"../koei/bairitsu-suii/#{}\">市ごとの推移の表</a>に）".format(len(s["dropped"]), esc(s["key"]))
+               if s.get("dropped") else "")),
+    ]
+    y = s.get("yugu")
+    if y:
+        out.append('  <div class="callout note">\n    <p><span class="tag">横浜市の優遇（特認組）の決まり・原文のまま</span></p>\n'
+                   + "\n".join("    <p>{}</p>".format(esc(l)) for l in y["lines"])
+                   + '\n    <p style="font-size:.85rem">出典：<a href="{u}" rel="nofollow">{t}</a>（最終更新日 {d}）。各組の対象世帯の一覧は出典のページにあります。</p>\n  </div>'.format(
+                       u=esc(y["url"]), t=esc(y["title"]), d=esc(y["updated"])))
+    out.append('  <p><a href="../koei/bairitsu-suii/">ほかの市と並べた「市営住宅の倍率の推移」を見る →</a></p>\n')
+    return "\n".join(out)
+
+
 def units_table(cap, rows, cls):
     tr = "\n".join(
         '      <tr><th scope="row">{n}</th><td class="{c}">{r}</td><td>{a}</td></tr>'.format(
@@ -292,7 +347,7 @@ PAGE = r"""<!DOCTYPE html>
 @@TOP@@
 @@BOTTOM@@
   <p style="font-size:.88rem;color:var(--sub)">倍率は募集回・住戸・年度で大きく変わる参考値です。1回の値だけで判断せず傾向で見てください。</p>
-
+@@SUII@@
   <h2>② @@NAME@@で倍率を左右する要因</h2>
   <ul class="factors">
 @@FACTORS@@
@@ -373,6 +428,10 @@ def main():
         data = json.load(f)
     cities = data["cities"]
     updated = data.get("updated", "")
+    suii = {}
+    if os.path.exists(SUII):
+        with open(SUII, encoding="utf-8") as f:
+            suii = json.load(f)
     written = []
     for c in cities:
         # 品質ゲート: 実データ(top/bottom)が無い都市はスキップ
@@ -475,6 +534,7 @@ def main():
             "@@NERAI@@": (NERAI_HTML.format(name=NERAI_CITIES[c["slug"]], slug=c["slug"])
                           if c["slug"] in NERAI_CITIES else ""),
             "@@RELATED@@": related, "@@SOURCES@@": sources,
+            "@@SUII@@": suii_html(c, suii),
         }.items():
             page = page.replace(k, v)
 

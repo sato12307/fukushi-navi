@@ -26,6 +26,7 @@ import { page, esc, SITE } from './shogai-kojo-page.mjs'
 import { offerKoeiLeaf, jumpKoei, offerKoeiSell } from './offer-block.mjs'
 import { load, loadFrom, OSAKA_FU, CITIES, MIN_N, SUKI, BURE, MIN_GROUP, PRICE, r1, num, pct, WA } from './koei-lib.mjs'
 import { kanryoScript } from './kanryo-script.mjs'
+import { suiiOf, suiiSection, SUII_KEYS } from './koei-suii-lib.mjs'
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..')
 const args = process.argv.slice(2)
@@ -62,6 +63,44 @@ for (const key of keys) {
   const hrow = (h) => '<tr>' + C.cols.map(([f]) => `<td>${esc(h[f] || '')}</td>`).join('') +
     `<td class="num">${r1(h.med)}</td><td class="num">${r1(h.min)}</td><td class="num">${r1(h.max)}</td><td class="num">${h.n}</td><td class="num">${h.zero || ''}</td><td class="num">${h.koho}</td><td class="num">${W(h.last)}</td></tr>`
   const table = (list) => `<table class="grid"><thead><tr>${TH}</tr></thead><tbody>\n${list.map(hrow).join('\n')}\n</tbody></table>`
+
+  // ── 索引の「条件で絞る」（横浜・2026-10-04）────────────────────────────────
+  //   単身か（資料の※印）・募集区分（単位×区分＝世帯区分）・区で、有料資料の索引を絞る。資料はその場で開く完結した HTML なので
+  //   JavaScript は資料の中に置く（動かなくても索引は全部出ている）。
+  //   ★エレベーターでは絞らない。印は9回で40件にしか付かず、印の無い行は「表に書いていない」だけ。絞ると「残った＝エレベーターあり」と読まれる。
+  //     代わりに、1階かエレベーター付きが要る人の枠（全市単位の「1階又はEV付き」）の回ごとの倍率を添える。
+  const CAT_ORDER = ['一般世帯向（直接建設型）', '一般世帯向（借上型）', '4部屋以上', '単身者可', '子育て世帯専用', '子育て優遇', '車いす用', '単身者用',
+    '高齢単身者用（直接建設型）', '高齢単身者用（借上型）', '高齢二人世帯向（直接建設型）', '高齢二人世帯向（借上型）', '行政区単位', '全市単位']
+  const filterBlock = (D) => {
+    const ord = (c) => (CAT_ORDER.map((x) => x.normalize('NFKC')).indexOf(c.normalize('NFKC')) + 1) || 99
+    const cats = [...new Set(enough.map((h) => h.cat))].sort((a, b) => ord(a) - ord(b) || a.localeCompare(b, 'ja'))
+    const kus = [...new Set(enough.map((h) => h.ku).filter(Boolean))].sort((a, b) => a.localeCompare(b, 'ja'))
+    const frow = (h) => hrow(h).replace('<tr>', `<tr data-t="${h.tanshin ? '1' : ''}" data-c="${esc(h.cat)}" data-k="${esc(h.ku || '')}">`)
+    const evRows = D.rows.filter((r) => r.unit === '全市単位' && /EV付き/.test(r.name))
+    const evByRound = D.ROUNDS.map((rd) => {
+      const rs = evRows.filter((r) => r.round === rd)
+      const k = rs.reduce((a, x) => a + x.koho, 0), m = rs.reduce((a, x) => a + x.moushikomi, 0)
+      return k ? `<tr><td>${W(rd)}</td><td>${esc([...new Set(rs.map((r) => r.name))].join('／'))}</td><td class="num">${k}</td><td class="num">${m}</td><td class="num">${r1(m / k).toFixed(1)}</td></tr>` : ''
+    }).filter(Boolean).join('\n')
+    const evN = D.rows.filter((r) => r.ev).length
+    return `<div class="box" id="flt"><p><span class="tag">条件で絞る</span>単身で申し込めるか・募集区分（世帯区分）・区で、下の索引を絞れます。</p>
+<p><label><input type="checkbox" id="f-t"> 単身で申し込める申込先だけ（資料の※印。令和4年4月の回は太字。印が回によって違う申込先も残します）</label></p>
+<p><label>募集区分 <select id="f-c"><option value="">すべて</option>${cats.map((c) => `<option>${esc(c)}</option>`).join('')}</select></label>
+<label>区 <select id="f-k"><option value="">すべて</option>${kus.map((k) => `<option>${esc(k)}</option>`).join('')}</select></label></p>
+<p class="note" id="f-n" aria-live="polite"></p>
+<p class="note">エレベーターでは絞れません。エレベーターの印（〇各階に停止・□一部の階に停止・△踊り場に停止・×なし）は、同じ団地が棟で分かれて募集された回にだけ付いていて（${F.rounds}回で${evN}件）、<strong>印の無い申込先は「エレベーターあり」ではなく「表に書いていない」</strong>という意味です。印のある申込先は索引の「エレベーターの印」の欄に出しています。</p>
+<noscript><p class="note">絞り込みはブラウザの JavaScript で動きます。動かない場合も、索引は全部この下に出ています。</p></noscript>
+</div>
+${evByRound ? `<h3>1階かエレベーター付きの住戸が要る場合：全市単位の枠</h3>
+<p>横浜市の定期募集には、住宅を決めずに申し込む「全市単位」の枠があり、その中に「1階又はEV付き」の住戸の枠があります（回によって名前が少し違います）。全市単位は申込先ごとの名寄せの対象にしていないので、ここだけ回ごとの倍率を出しています。</p>
+<div class="wrap"><table class="grid"><thead><tr><th>募集回</th><th>枠の名前（資料のまま）</th><th class="num">募集戸数</th><th class="num">応募者数</th><th class="num">倍率</th></tr></thead><tbody>
+${evByRound}
+</tbody></table></div>` : ''}
+<div class="wrap"><table class="grid" id="idx"><thead><tr>${TH}</tr></thead><tbody>
+${enough.map(frow).join('\n')}
+</tbody></table></div>
+<script>(function(){var t=document.getElementById('f-t'),c=document.getElementById('f-c'),k=document.getElementById('f-k'),n=document.getElementById('f-n');if(!t||!c||!k)return;var rows=document.querySelectorAll('#idx tbody tr');function go(){var m=0;for(var i=0;i<rows.length;i++){var r=rows[i];var ok=(!t.checked||r.getAttribute('data-t'))&&(!c.value||r.getAttribute('data-c')===c.value)&&(!k.value||r.getAttribute('data-k')===k.value);r.style.display=ok?'':'none';if(ok)m++}n.textContent=m+'件を表示しています（索引の全'+rows.length+'件のうち）'}t.addEventListener('change',go);c.addEventListener('change',go);k.addEventListener('change',go);go()})()</script>`
+  }
 
   const SEC2_TITLE = `2. 毎回すいている申込先（${num(F.suki)}件）`
   const SEC2_LEAD = `${MIN_N}${U}以上${C.byRounds ? 'の募集で' : ''}観測できて、倍率の<strong>中央値</strong>が${SUKI}倍未満だったものだけを載せています。中央値で切っているので、<strong>1回だけたまたま空いた住宅は入りません</strong>。倍率の低い順。`
@@ -125,6 +164,8 @@ ${peekList.slice(0, PEEK_ROWS).map((h) => `    ${hrow(h)}`).join('\n')}
     sukiN: num(F.suki), bureN: F.buread, enoughN: num(F.enough), key: C.key,
     axis: C.axis.label, only: C.only || `${C.city}営住宅だけ`, minU: U, boshu: BOSHU,
     shikaku: C.shikaku || '市内在住・収入基準など', notIn: C.notIn || '都道府県営住宅や他市の市営住宅', guideOrg: C.guideOrg || C.city,
+    // ★索引に「条件で絞る」が付く市（横浜）だけ、売り場の中身の説明に1行足す（offer-block は市ごとの if を持たない）
+    extraLi: C.filter ? `<li>索引は<strong>条件で絞れます</strong>（単身で申し込めるか・募集区分（一般世帯向・子育て・高齢単身者用・高齢二人世帯向など）・区。エレベーターの印は付いている申込先にだけ表示）</li>` : '',
   }
   const OFFER = offerKoeiLeaf({ up: '../', facts })
 
@@ -157,6 +198,7 @@ ${kondeTable}
   <h2 id="round">④ 募集回ごとの相場（無料）</h2>
   <p>倍率は回によって動きます。どの回が狙い目だったかの目安。</p>
 ${roundTable}
+${SUII_KEYS.includes(C.key) ? suiiSection(suiiOf(C.key), { up: '../' }) : ''}
 
   <h2>出典と、この数字の限界</h2>
   <ul>
@@ -165,7 +207,7 @@ ${LIMITS}
   <div class="callout warn"><p><span class="tag">先に知っておいてください</span>
   <strong>倍率が低い申込先だけを並べると、空いている理由がそのまま集まります。</strong>
   都営住宅では同じ集計で確かめられました——毎回すいている595件のうち59%は、エレベーターが無いか築39年より古い住宅でした
-  （<a href="../toei/">都営住宅のページ</a>）。<strong>${C.city}の応募状況表には、エレベーターの有無も建てられた年も載っていません。</strong>
+  （<a href="../toei/">都営住宅のページ</a>）。<strong>${C.evNote ? esc(C.evNote) : `${C.city}の応募状況表には、エレベーターの有無も建てられた年も載っていません。`}</strong>
   ${C.key === 'shizuoka' || C.key === 'kobe' ? '階だけは資料にありますが、実測では倍率とほとんど関係がありませんでした（エレベーターの有無が分からないため、階だけでは住みやすさを測れません）。' : ''}
   ∴ この一覧は<strong>当たりやすさだけを並べたもの</strong>で、設備や築年数で選り分けてはいません。
   気になる申込先が見つかったら、<strong>その回の募集案内と現地で、エレベーターの有無・階・築年数を必ず確かめてください。</strong></p></div>
@@ -280,7 +322,7 @@ ${shownGroups.map((g) => `<tr><td>${esc(g.label)}</td><td class="num">${num(g.n)
 
 <h2>6. 観測できた申込先の索引（${num(F.enough)}件）</h2>
 <p>中央値の低い順。上の各章に出ていない申込先もここには載っています。</p>
-<div class="wrap">${table(enough)}</div>
+${C.filter ? filterBlock(D) : `<div class="wrap">${table(enough)}</div>`}
 
 <h2>7. 出典と限界</h2>
 <ul>
@@ -361,6 +403,9 @@ ${LIMITS}
       '  </table>',
       '  </div>',
       `  <p style="font-size:.88rem;color:var(--sub)">「毎回すいている」は、${MIN_N}回以上募集のあった申込先のうち、倍率の中央値が${SUKI}倍未満のものです。申込先の数え方は市によって違います（${rows.map((r) => `${r.C.short}＝${r.C.axis.label}まで分ける`).join('／')}）。名前をクリックすると、どの申込先かまで見られます。</p>`,
+      // ★2026-10-04 市ごとの「前の回まで何回・どれくらいの倍率だったか」（回全体の倍率の推移）の看板へ
+      ...(fs.existsSync(path.join(ROOT, 'koei', 'bairitsu-suii', 'index.html'))
+        ? ['  <p>募集回ごとの<strong>回全体の倍率の推移</strong>（前の回まで何回・何倍だったか）を市ごとに並べた表は <a href="../koei/bairitsu-suii/">市営住宅の倍率の推移</a> にあります。</p>'] : []),
     ].join('\n')
     const next = page.replace(new RegExp(`${S}[\\s\\S]*?${E}`), `${S}\n${body}\n  ${E}`)
     if (next !== page) {

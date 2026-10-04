@@ -16,6 +16,12 @@
 //
 // ★記者発表には「募集を始めます」の回もある。応募状況表が付いているものだけ取る。
 //
+// ★「入居者を募集します」（古い回は「市営住宅の入居者募集」）の記者発表も取る（2026-10-04〜）。
+//   募集区分ごとの募集戸数が載っていて、応募状況表の読み取りを区分ごとに突き合わせる相手になる
+//   （scripts/yokohama-parse.py の検算）。PDF は .cache/yokohama/boshu/<ページ名>.pdf に置き、
+//   どの回の募集かは parse 側が PDF の本文（「令和◯年◯月横浜市営住宅の入居者募集」）から読む。
+//   ★ファイル名は「shiejutaku」と綴りが違う回がある（2021/0329shiejutaku-1）。拾う正規表現は shiei?jutaku。
+//
 // ★礼儀：1本ごとに1秒空ける。User-Agent に連絡先を書く。
 // ─────────────────────────────────────────────────────────────────────────────
 import fs from 'node:fs'
@@ -56,7 +62,7 @@ const listPages = async () => {
   for (const y of YEARS) {
     let html
     try { html = await get(`${BASE}${DIR}/${y}/`) } catch { continue }
-    for (const m of html.matchAll(/href="([^"]*shieijutaku[^"]*\.html)"/g)) {
+    for (const m of html.matchAll(/href="([^"]*shiei?jutaku[^"]*\.html)"/g)) {
       out.push({ year: y, page: new URL(m[1], `${BASE}${DIR}/${y}/`).href })
     }
     await sleep(600)
@@ -70,11 +76,19 @@ process.stderr.write(`記者発表 ${pages.length}本を見ます\n`)
 
 const rounds = new Map()
 const notResult = []
+const boshuPages = []
 for (const p of pages) {
   await sleep(1000)
   let html
   try { html = await get(p.page) } catch (e) { notResult.push(`${p.page}: ${e.message}`); continue }
   const text = html.replace(/<[^>]+>/g, ' ')
+  // 入居者募集の記者発表（検算の相手）。抽選結果の回とは別に集める。
+  const h1 = ((/<h1[^>]*>([\s\S]*?)<\/h1>/.exec(html) || [])[1] || '').replace(/<[^>]+>/g, '').normalize('NFKC')
+  if (/入居者(を)?募集/.test(h1) && !/抽選結果/.test(h1)) {
+    const pdfs = [...html.matchAll(/href="([^"]+\.pdf)"/g)].map((m) => new URL(m[1], p.page).href)
+    if (pdfs.length) boshuPages.push({ page: p.page, pdf: pdfs[0] })
+    continue
+  }
   // 抽選結果の回だけ。「募集します」の回には応募状況表が付かない。
   if (!/抽選結果/.test(text.normalize('NFKC'))) { notResult.push(`${p.page}（抽選結果ではない）`); continue }
   const round = roundOf(text)
@@ -118,6 +132,20 @@ if (ARGS.includes('--list')) {
     }
     if (!saved) failed.push(`${r.round}: PDFを落とせなかった ${r.page}`)
   }
+  // 入居者募集の記者発表（区分ごとの募集戸数）。無いものだけ落とす。
+  const BOSHU = path.join(CACHE, 'boshu')
+  fs.mkdirSync(BOSHU, { recursive: true })
+  let gotB = 0
+  for (const b of boshuPages) {
+    const out = path.join(BOSHU, `${path.basename(new URL(b.page).pathname, '.html')}.pdf`)
+    if (fs.existsSync(out)) continue
+    await sleep(1000)
+    try {
+      const buf = await get(b.pdf, true)
+      if (buf.subarray(0, 5).toString('latin1') === '%PDF-') { fs.writeFileSync(out, buf); gotB++ }
+    } catch (e) { failed.push(`入居者募集 ${b.page}: ${e.message}`) }
+  }
+  console.log(`入居者募集の記者発表 ${boshuPages.length}本（新規取得 ${gotB}）`)
   manifest.sort((a, b) => a.round.localeCompare(b.round))
   fs.writeFileSync(path.join(CACHE, '_manifest.json'),
     JSON.stringify({ source: `${BASE}${DIR}/`, fetchedAt: new Date(Date.now() + 9 * 3600e3).toISOString().slice(0, 16).replace('T', ' '), rounds: manifest, notResult }, null, 2) + '\n')
