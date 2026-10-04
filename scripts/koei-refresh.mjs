@@ -96,6 +96,10 @@ if (!grew.length) {
     run('node', ['scripts/koei-put-pack.mjs', g.key])
     console.log(`  ✓ ${g.city}  ${g.before} → ${g.after}回`)
   }
+  // ★回が増えたら、市営住宅の倍率の推移（看板 /koei/bairitsu-suii/・data/koei-suii.json・市別の記事の節）も作り直す（2026-10-04〜）。
+  //   /<市>/ の⑤は koei-nerai.mjs が同じ数え方（scripts/koei-suii-lib.mjs）で出しているので、ここで揃えないと看板だけ古い回で止まる。
+  run('node', ['scripts/koei-suii-build.mjs'])
+  run('python', ['tools/build_koei_cities.py'])
   // ★生成器を回すと計測ビーコンが生成面から剥がれる。関所の前に必ず貼り直す。
   //   [[deploy-gate-after-generators]]
   run('node', ['scripts/stamp-offers.mjs'])
