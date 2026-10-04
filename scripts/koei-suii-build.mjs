@@ -36,6 +36,7 @@ const json = {
     face: s.face || null, article: s.article || null, excluded: s.excluded || null,
     rounds: s.rounds.map((r) => ({ round: r.round, label: r.label, koho: r.koho, mo: r.mo, bairitsu: r.bairitsu, ...(r.sub ? { sub: r.sub } : {}) })),
     dropped: s.dropped, stats: s.stats, allRounds: s.allRounds || 0,
+    ...(s.checkNote ? { checkNote: s.checkNote } : {}), ...(s.articleNote ? { articleNote: s.articleNote } : {}), ...(s.articleLink ? { articleLink: s.articleLink } : {}),
     ...(s.key === 'yokohama' ? { yugu: YOKOHAMA_YUGU } : {}),
   })),
 }
@@ -67,7 +68,7 @@ ${rank.map((s) => `  <tr><th><a href="#${s.key}">${esc(s.city)}</a></th><td><str
 const citySection = (s) => `  <h2 id="${s.key}">${esc(s.city)}営住宅：前の回までの倍率</h2>
   <p>${suiiSummary(s)}</p>
 ${suiiTable(s)}
-  <p ${SMALL}>出典＝${esc(s.publisher)}の${esc(s.doc)}。載せたのは、資料の合計（募集戸数・応募者数）と当方の読み取りが<strong>1件まで合った回だけ</strong>です。</p>
+  <p ${SMALL}>出典＝${esc(s.publisher)}の${esc(s.doc)}。${s.checkNote ? esc(s.checkNote) : '載せたのは、資料の合計（募集戸数・応募者数）と当方の読み取りが<strong>1件まで合った回だけ</strong>です。'}</p>
 ${suiiDropped(s)}
 ${s.key === 'yokohama' ? `  <h3>横浜市の優遇（特認組）の決まり</h3>\n${yokohamaYugu()}\n` : ''}${faceLink(s) ? `  <p>${faceLink(s)}</p>\n` : ''}`
 
@@ -76,7 +77,7 @@ const body = `  <p class="breadcrumb"><a href="../../index.html">トップ</a> �
   <h1>市営住宅の倍率は、前の回までどう動いたか<br><small>${esc(names)}の募集回ごとの実際の倍率（公表の合計と1件まで合った回だけ）</small></h1>
   <p class="updated">最終更新：${today} ／ 出典＝各市（または住宅供給公社）が募集回ごとに公表する応募状況・抽選結果の資料</p>
 
-  <p class="lead">「前回の倍率は何倍だったか」「ここ数年で上がっているのか」を、市ごとに募集回を並べて見比べられるようにしました。数字は<strong>その回の応募者数の合計÷募集戸数の合計（回全体の倍率）</strong>で、市が公表した合計と当方の読み取りが<strong>1件まで合った回だけ</strong>を載せています。合わなかった回は、市ごとの表の下に回と理由を書いています。</p>
+  <p class="lead">「前回の倍率は何倍だったか」「ここ数年で上がっているのか」を、市ごとに募集回を並べて見比べられるようにしました。数字は<strong>その回の応募者数の合計÷募集戸数の合計（回全体の倍率）</strong>で、市（または住宅供給公社・住宅管理公社）が公表した合計と当方の読み取りが<strong>1件まで合った回だけ</strong>を載せています。合わなかった回は、市ごとの表の下に回と理由を書いています。</p>
 
   <div class="callout point">
     <p><span class="tag">数字だけ</span>${rank.map((s) => `${esc(s.city)}は${s.stats.n}回で<strong>${f1(s.stats.min)}〜${f1(s.stats.max)}倍</strong>（中央値${f1(s.stats.med)}倍）`).join('、')}でした。</p>
@@ -102,7 +103,7 @@ ${notShown.map((s) => `  <li><strong>${esc(s.city)}</strong>：${esc(s.excluded 
   <p class="note">内容の誤りを見つけられた場合は contact@fukushiru.com までご連絡ください。訂正します。</p>`
 
 const title = `市営住宅の倍率の推移（${names}）｜募集回ごとの実際の倍率｜フクシル`
-const desc = `市営住宅の募集回ごとの倍率（応募者数÷募集戸数）を、${names}について並べました。${rank.map((s) => `${s.city}${s.stats.n}回で${f1(s.stats.min)}〜${f1(s.stats.max)}倍`).join('、')}。市が公表した合計と1件まで合った回だけを載せています。`
+const desc = `市営住宅の募集回ごとの倍率（応募者数÷募集戸数）を、${names}について並べました。${rank.map((s) => `${s.city}${s.stats.n}回で${f1(s.stats.min)}〜${f1(s.stats.max)}倍`).join('、')}。市や公社が公表した合計と1件まで合った回だけを載せています。`
 const html = page({
   title, desc, canonical: '/koei/bairitsu-suii/', depth: 2, body,
   jsonld: {

@@ -220,7 +220,16 @@ def suii_html(c, suii):
     s = next((x for x in suii.get("cities", [])
               if x.get("article") == "koei-" + c["slug"] and x.get("stats") and x["stats"].get("n", 0) >= 3), None)
     if not s:
-        return ""
+        # 推移を作れなかった市のうち、読者の問い（例：福岡市営住宅 前回募集時の倍率）にどこを見れば答えがあるかを書ける市だけ、短い注記を置く
+        x = next((x for x in suii.get("cities", []) if x.get("article") == "koei-" + c["slug"] and x.get("articleNote")), None)
+        if not x:
+            return ""
+        link = x.get("articleLink")
+        note = esc(x["articleNote"])
+        if link:
+            note += '（<a href="{}" rel="nofollow">{}</a>）'.format(esc(link["url"]), esc(link["title"]))
+        return ('  <div class="callout note">\n    <p><span class="tag">前回の倍率について</span>{}</p>\n'
+                '    <p style="font-size:.88rem">ほかの市の募集回ごとの倍率の推移は <a href="../koei/bairitsu-suii/">市営住宅の倍率の推移</a> にあります。</p>\n  </div>\n').format(note)
     S = s["stats"]
     sub = any(r.get("sub") for r in s["rounds"])
     sub_label = next((r["sub"]["label"] for r in s["rounds"] if r.get("sub")), "")
@@ -247,8 +256,9 @@ def suii_html(c, suii):
         '    <thead><tr>{}</tr></thead>'.format(head),
         '    <tbody>\n{}\n    </tbody>\n  </table>\n  </div>'.format("\n".join(rows)),
         '  <p style="font-size:.88rem;color:var(--sub)">倍率＝その回の応募者数の合計÷募集戸数の合計（回全体）。出典＝{p}の{d}。'
-        '載せたのは資料の合計と当方の読み取りが1件まで合った回だけです{x}。</p>'.format(
+        '{k}{x}。</p>'.format(
             p=esc(s.get("publisher", "")), d=esc(s.get("doc", "")),
+            k=(esc(s["checkNote"]).rstrip("。") if s.get("checkNote") else "載せたのは資料の合計と当方の読み取りが1件まで合った回だけです"),
             x=("（載せなかった{}回と理由は<a href=\"../koei/bairitsu-suii/#{}\">市ごとの推移の表</a>に）".format(len(s["dropped"]), esc(s["key"]))
                if s.get("dropped") else "")),
     ]

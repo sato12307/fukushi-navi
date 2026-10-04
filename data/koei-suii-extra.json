@@ -1,0 +1,143 @@
+{
+ "_doc": "公社の資料（Wayback Machine の写しを含む）から当方が読んだ、市営住宅の募集回ごとの合計。公開してよい回の合計だけ（住戸ごとの行は持たない）。scripts/koei-suii-lib.mjs の suiiExtra() が読む。2026-10-04 取得・照合。",
+ "fetchedAt": "2026-10-04T20:03:13+09:00",
+ "cities": [
+  {
+   "key": "sapporo",
+   "city": "札幌市",
+   "short": "札幌",
+   "boshu": "定期募集（年3回・前期・中期・後期）",
+   "publisher": "札幌市住宅管理公社",
+   "doc": "定期募集の「申込状況表」（Wayback Machine に残る写しを含む）",
+   "face": null,
+   "article": "koei-sapporo",
+   "checkNote": "札幌の申込状況表は1行が1戸（申込番号ごとに団地・棟・室が決まる）で、表の最後の集計表に応募者数の合計と区分ごと（単身・家族×一般・車いす・長期連続応募者用など）の小計が載っています。載せたのは、その合計と区分ごとの小計に当方の読み取りの和が1人まで合った回だけです。募集戸数は行の数（「募集割れ」の住戸を含み、「欠番」は除く）で、総募集戸数が資料に書かれているのは令和8年度前期だけでした（194戸で一致）。",
+   "rounds": [
+    {
+     "round": "2019-1",
+     "label": "令和元年度前期",
+     "koho": 171,
+     "moushikomi": 3993,
+     "match": true,
+     "src": "https://web.archive.org/web/20190917154919/https://s-j-k.or.jp/wp/wp-content/themes/s-j-k/pdf/boshu/2019_zenki-boshu_oubo-joukyo.pdf"
+    },
+    {
+     "round": "2022-2",
+     "label": "令和4年度中期",
+     "koho": 102,
+     "moushikomi": 2973,
+     "match": true,
+     "src": "https://web.archive.org/web/20230205105233/https://s-j-k.or.jp/wp/wp-content/themes/s-j-k/pdf/boshu/r04_tyuki-boshu_oubo-joukyo.pdf"
+    },
+    {
+     "round": "2023-1",
+     "label": "令和5年度前期",
+     "koho": 189,
+     "moushikomi": 2993,
+     "match": true,
+     "src": "https://web.archive.org/web/20230924170644/https://s-j-k.or.jp/wp/wp-content/themes/s-j-k/pdf/boshu/r05_zenki-boshu_oubo-joukyo.pdf"
+    },
+    {
+     "round": "2023-2",
+     "label": "令和5年度中期",
+     "koho": 177,
+     "moushikomi": 3246,
+     "match": true,
+     "src": "https://web.archive.org/web/20231218034621/https://s-j-k.or.jp/wp/wp-content/themes/s-j-k/pdf/boshu/r05_tyuki-boshu_oubo-joukyo.pdf"
+    },
+    {
+     "round": "2023-3",
+     "label": "令和5年度後期",
+     "koho": 181,
+     "moushikomi": 3244,
+     "match": true,
+     "src": "https://web.archive.org/web/20240401062800/https://s-j-k.or.jp/wp/wp-content/themes/s-j-k/pdf/boshu/r05_kouki-boshu_oubo-joukyo.pdf"
+    },
+    {
+     "round": "2024-1",
+     "label": "令和6年度前期",
+     "koho": 182,
+     "moushikomi": 3044,
+     "match": true,
+     "src": "https://web.archive.org/web/20240814200050/https://s-j-k.or.jp/wp/wp-content/themes/s-j-k/pdf/boshu/r06_zenki-boshu_oubo-joukyo.pdf"
+    },
+    {
+     "round": "2024-2",
+     "label": "令和6年度中期",
+     "koho": 144,
+     "moushikomi": 3246,
+     "match": true,
+     "src": "https://web.archive.org/web/20241201153028/https://s-j-k.or.jp/wp/wp-content/themes/s-j-k/pdf/boshu/r06_tyuki-boshu_oubo-joukyo.pdf"
+    },
+    {
+     "round": "2024-3",
+     "label": "令和6年度後期",
+     "koho": 256,
+     "moushikomi": 3115,
+     "match": false,
+     "src": "https://web.archive.org/web/20250331084054/https://s-j-k.or.jp/wp/wp-content/themes/s-j-k/pdf/boshu/r06_kouki-boshu_oubo-joukyo.pdf",
+     "why": "申込状況表に合計の集計表が無い回です（同じ公社の当選番号一覧表の応募者数の和とは一致しますが、突き合わせる「公表の合計」が無いので載せていません）"
+    },
+    {
+     "round": "2025-1",
+     "label": "令和7年度前期",
+     "koho": 207,
+     "moushikomi": 3450,
+     "match": true,
+     "src": "https://web.archive.org/web/20250728110321/https://s-j-k.or.jp/wp/wp-content/themes/s-j-k/pdf/boshu/r07_zenki-boshu_oubo-joukyo.pdf"
+    },
+    {
+     "round": "2025-2",
+     "label": "令和7年度中期",
+     "koho": 154,
+     "moushikomi": 2576,
+     "match": true,
+     "src": "https://web.archive.org/web/20251126080855/https://s-j-k.or.jp/wp/wp-content/themes/s-j-k/pdf/boshu/r07_tyuki-boshu_oubo-joukyo.pdf"
+    },
+    {
+     "round": "2025-3",
+     "label": "令和7年度後期",
+     "koho": 187,
+     "moushikomi": 2605,
+     "match": true,
+     "src": "https://web.archive.org/web/20260330081644/https://s-j-k.or.jp/wp/wp-content/themes/s-j-k/pdf/boshu/r07_kouki-boshu_oubo-joukyo.pdf"
+    },
+    {
+     "round": "2026-1",
+     "label": "令和8年度前期",
+     "koho": 194,
+     "moushikomi": 3252,
+     "match": true,
+     "src": "https://s-j-k.or.jp/wp/wp-content/themes/s-j-k/pdf/boshu/r08_zenki-boshu_oubo-joukyo.pdf"
+    }
+   ],
+   "notFound": [
+    {
+     "label": "令和元年度中期・後期、令和2〜3年度、令和4年度前期・後期",
+     "why": "申込状況表が公社のサイトに残っておらず、Wayback Machine にも写しがありません（当選番号一覧表の写しはありますが、この年の版には応募者数の列がありません）"
+    },
+    {
+     "label": "令和8年度中期",
+     "why": "Wayback Machine に写しが無く、まだ取り込んでいません"
+    }
+   ]
+  },
+  {
+   "key": "fukuoka",
+   "city": "福岡市",
+   "short": "福岡",
+   "boshu": "定期募集（抽選方式・年4回）",
+   "publisher": "福岡市住宅供給公社",
+   "doc": "市営住宅入居者募集案内書（抽選方式）・仮当選番号表",
+   "face": null,
+   "article": "koei-fukuoka",
+   "rounds": [],
+   "excluded": "福岡市住宅供給公社の資料（募集案内書・仮当選番号表）には、回ごとの応募者数も合計も載っていません。募集案内書の「募集住宅一覧表」のいちばん右の列に、申込住宅ごとの「前回募集時の倍率」がありますが、住宅ごとに指している回が違うので、回全体の倍率にはなりません。応募者数を倍率から逆算すると推計になるので、載せていません",
+   "articleNote": "福岡市の市営住宅（抽選方式）の「前回募集時の倍率」は、福岡市住宅供給公社の募集案内書の「募集住宅一覧表」のいちばん右の列に、申込住宅ごとに載っています（同じ条件での募集がこれまで無かった住宅は「ー」）。ただし回ごとの応募者数や回全体の合計は公表されていないので、当サイトでは回ごとの倍率の推移は作っていません。",
+   "articleLink": {
+    "url": "https://www.nicety.or.jp/shiei1-osagashi/",
+    "title": "福岡市住宅供給公社「市営住宅をお探しの方」"
+   }
+  }
+ ]
+}
