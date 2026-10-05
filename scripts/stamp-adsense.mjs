@@ -49,13 +49,49 @@ if (odd.length) { console.error('★<head> の無いページがある（ペー�
 // ── フッターに「プライバシーポリシー」を足す（2026-10-02）──────────────────────────
 // ★AdSense は、第三者配信の広告 Cookie の開示（/privacy/）を求める。フッターの「利用規約」のあとに1つ足す。
 //   フッターを書く所も生成器ごとに散っているので、タグと同じくデプロイの直前のここで入れる（何度流しても1個）。
-let linked = 0
+// ★2026-10-06 直した：フッター（ページの最後の <footer>…</footer>）の中だけを見て、そこへ足す。
+//   10-02 の版はページ全体の「最初の利用規約リンク」の後ろに足していたため、本文に「特定商取引法に基づく表記／利用規約」が
+//   ある面（売り場の9枚・/tokushoho/・/privacy/ 自身）では本文の側に入り、フッターには入っていなかった。
+//   本文にプライバシーポリシーへのリンクがある面（about.html）は、丸ごと飛ばしていた。
+// ★同じ日、フッターに法務のリンクがそもそも無い面（tools/build_koei_*.py・kaigo-build.mjs が書く記事14枚。
+//   「トップへ戻る／このサイトについて」だけ、または文だけ）にも、欠けているものを足すようにした。
+//   課金サイトのフッターには「このサイトについて／特定商取引法に基づく表記／利用規約／プライバシーポリシー」の4つを
+//   全ページにそろえる（scratchpad/legal-pages-2026-10-06.md）。これもタグと同じ理由でここ1か所で入れる。
+const LEGAL = [
+  ['about.html', 'このサイトについて'],
+  ['tokushoho/', '特定商取引法に基づく表記'],
+  ['kiyaku/', '利用規約'],
+  ['privacy/', 'プライバシーポリシー'],
+]
+const reEsc = (s) => s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
+let linked = 0, filled = 0
 for (const f of files) {
   const html = fs.readFileSync(f, 'utf8')
-  if (/privacy\/">プライバシーポリシー<\/a>/.test(html)) continue
-  const next = html.replace(/<a href="([^"]*)kiyaku\/">利用規約<\/a>/, (m, up) => `${m} ／ <a href="${up}privacy/">プライバシーポリシー</a>`)
-  if (next === html) continue
-  linked++
-  if (!CHECK) fs.writeFileSync(f, next)
+  const s = html.lastIndexOf('<footer')
+  const e = s < 0 ? -1 : html.indexOf('</footer>', s)
+  if (e < 0) continue   // フッターの無い HTML（google*.html のような確認用ファイル）
+  const foot = html.slice(s, e)
+  // フッターの中の法務リンクの位置（無ければ -1）。相対パスの深さは面ごとに違うので、../ の数は問わない。
+  const at = LEGAL.map(([href, label]) => {
+    const m = new RegExp(`<a href="(?:\\./|(?:\\.\\./)*)${reEsc(href)}">${reEsc(label)}</a>`).exec(foot)
+    return m ? { end: m.index + m[0].length } : null
+  })
+  const missing = LEGAL.filter((_, i) => !at[i])
+  if (!missing.length) continue
+  const rel = path.relative(ROOT, f).split(path.sep).join('/')
+  const up = '../'.repeat(rel.split('/').length - 1)
+  const links = missing.map(([href, label]) => `<a href="${up}${href}">${label}</a>`).join(' ／ ')
+  // 足す場所：フッターにある法務リンクのうち一番後ろのものの直後（ふつうは「利用規約」→ その後ろにプライバシーポリシー）。
+  //   法務リンクが1つも無いフッターには、最後の </p> の後ろに1段落を足す（</p> も無ければ </footer> の直前）。
+  const last = at.filter(Boolean).reduce((a, b) => (b.end > a ? b.end : a), -1)
+  let next
+  if (last >= 0) next = foot.slice(0, last) + ' ／ ' + links + foot.slice(last)
+  else {
+    const p = foot.lastIndexOf('</p>')
+    next = p >= 0 ? foot.slice(0, p + 4) + `\n    <p>${links}</p>` + foot.slice(p + 4) : foot + `<p>${links}</p>\n`
+  }
+  if (missing.some(([href]) => href === 'privacy/')) linked++
+  if (missing.some(([href]) => href !== 'privacy/')) filled++
+  if (!CHECK) fs.writeFileSync(f, html.slice(0, s) + next + html.slice(e))
 }
-console.log(`フッターのプライバシーポリシー：${CHECK ? '足す予定' : '足した'} ${linked}枚`)
+console.log(`フッターのプライバシーポリシー：${CHECK ? '足す予定' : '足した'} ${linked}枚 ／ ほかの法務リンク（特商法表記・利用規約・このサイトについて）も欠けていた面：${filled}枚`)
