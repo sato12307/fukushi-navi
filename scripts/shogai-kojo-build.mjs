@@ -185,7 +185,7 @@ ${jumpPack()}`}
   <p class="note">これは「税金が○万円安くなる」のではなく、<strong>課税所得を減らす</strong>しくみです。実際の減税額は控除額×税率。
   くわしくは<a href="../articles/shogaisha-kojo-tax.html">障害者控除で税金はいくら安くなるか</a>をご覧ください。</p>
 
-${offerPackLeaf({ code: r.code, name, peek: 'nintei', up: '../' })}
+${offerPackLeaf({ code: r.code, name, has, peek: 'nintei', up: '../' })}
 
   <h2>気をつけること</h2>
   <ul>

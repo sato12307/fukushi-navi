@@ -36,8 +36,8 @@
     sagamihara: { product: 'sagamihara', perCity: false, seen: 'sagamihara_offer_seen', read: 'sagamihara_offer_read', buy: 'sagamihara_leaf_buy' },
     // 県営の申込先えらび（2026-09-30）。商品ID・URL は saitama-ken だが、イベント名は saitamaken_ にする。
     // ★fukushiru-pay の /api/ev は名前の a-z と _ 以外を落とす（ハイフンが消える）。名前を最初から落とした形に
-    //   そろえておかないと、送った名前と数えられる名前が食い違う（売り場に着いた view は data-offer＋_view で
-    //   送られ、受け口で saitamaken_view になる＝ここの名前と同じになる）。
+    //   そろえておかないと、送った名前と数えられる名前が食い違う（売り場に着いた view は assets/ev.js が
+    //   saitamaken_view の名前で撃つ＝ここの名前とそろえてある。2026-10-06 まではここからも撃っていた）。
     'saitama-ken': { product: 'saitama-ken', perCity: false, seen: 'saitamaken_offer_seen', read: 'saitamaken_offer_read', buy: 'saitamaken_leaf_buy' },
     'aichi-ken': { product: 'aichi-ken', perCity: false, seen: 'aichiken_offer_seen', read: 'aichiken_offer_read', buy: 'aichiken_leaf_buy' },
   }
@@ -68,14 +68,14 @@
   //       判定材料そのものが動いているかを、こちらで確かめられる書き方にしておく。
   // ★2026-09-19 売り場を独自ページへ戻した（ユーザー裁定）。
   //   data-sell="1" が付いたカードは「独自の売り場ページの本体」なので、
-  //   スクロールで数える seen / read / pick ではなく、**着いた時点で view を1回**撃つ。
+  //   スクロールで数える seen / read / pick ではなく、**着いた時点の view を1回**で数える（下の check() は飛ばす）。
   //   記事に埋めたバナーはもう存在しないので、seen 系が立つのはここ以外に無い。
-  var sellCards = []
-  for (var si = 0; si < cards.length; si++) if (cards[si].getAttribute('data-sell')) sellCards.push(cards[si])
-  for (var sj = 0; sj < sellCards.length; sj++) {
-    var sk = sellCards[sj].getAttribute('data-offer')
-    if (P[sk]) ev(sk + '_view')
-  }
+  // ★その view はここでは撃たない（2026-10-06）。assets/ev.js が SELL 表のパス（/<市>/moushikomisaki/ など）に
+  //   着いた時点で同じ <key>_view を撃っている。ev.js は page() が全生成ページに埋め込み、売り場7枚も
+  //   scripts/koei-nerai.mjs が page() で作るので必ず入っている。09-20 に ev.js の SELL へ政令市を足してから
+  //   ここでも撃っていたため、1回の来訪で <key>_view が2つ立ち、盤面の「見た」が実際の2倍になっていた。
+  //   ev.js を直すと埋め込み先の全ページ（2,500枚超）が書き換わるので、こちらを外した。
+  //   ∴ 売り場を足すときは assets/ev.js の SELL に1行足すこと（ここの P だけでは view が立たない）。
 
   var fired = {}
   var dwell = {}

@@ -54,8 +54,20 @@ for (const it of items) {
   if (!byPref.has(it.pref)) byPref.set(it.pref, [])
   byPref.get(it.pref).push(it)
 }
+// ★判定に使う基準を公表していない市区町村（_index.json の has:false・2026-10-06 時点で19）。
+//   その版のステップ1は基準の表ではなく「公表していません。窓口で直接聞く」になる。
+//   売り場は「お住まいの市区町村の認定基準を差し込んだ版」とだけ書いていて、買う前にそれが分からなかった
+//   （ユーザー指示「注記をだしましょう」）。選択肢の名前・選んだときの注記・説明文の3か所で、買う前に分かるようにする。
+//   ★Worker（fukushiru-pay）の決済画面の説明文も meta の has を見て同じ言い方にしている。片方だけ直さないこと。
+const noKijun = items.filter((i) => i.has === false)
+const hasN = items.length - noKijun.length
+// 説明文に並べる名前。区は都道府県から書く（「中央区」だけでは他県の区と見分けられない）。
+const noKijunNames = noKijun.map((i) => (/区$/.test(i.city) ? `${i.pref}${i.city}` : i.city)).join('・')
+const NOKIJUN_LABEL = '（基準非公表・窓口で聞く手順の版）'
 const options = [...byPref.entries()].map(([pref, list]) =>
-  `<optgroup label="${esc(pref)}">${list.map((i) => `<option value="${i.code}">${esc(i.pref)}${esc(i.city)}</option>`).join('')}</optgroup>`).join('')
+  `<optgroup label="${esc(pref)}">${list.map((i) => (i.has === false
+    ? `<option value="${i.code}" data-nokijun="1" data-name="${esc(i.pref)}${esc(i.city)}">${esc(i.pref)}${esc(i.city)}${NOKIJUN_LABEL}</option>`
+    : `<option value="${i.code}">${esc(i.pref)}${esc(i.city)}</option>`)).join('')}</optgroup>`).join('')
 
 const write = (rel, html) => {
   const p = path.join(ROOT, rel)
@@ -69,7 +81,8 @@ write('pack/index.html', page({
   //   「障害者控除」「特別障害者控除」が9位・表示2,148・クリック103。
   //   ∴ 商品名（還付申請パック）ではなく、その人が知りたいこと（5年分いくら戻るか）を先に置く。
   title: `親の障害者控除、過去5年分でいくら戻るか｜${items.length}市区町村の認定基準と申請手順｜フクシル`,
-  desc: `要介護の親御さんが障害者控除の対象になるかを確かめ、過去5年分さかのぼって税金を取り戻すための手順書。自立度ランクが書かれた書類の探し方、税率別の還付試算、更正の請求の手順まで。${items.length}市区町村それぞれの認定基準に対応。${PRICE}円。`,
+  // ★「437市区町村それぞれの認定基準に対応」と書いていたが、基準を公表していない市区町村の版に基準は入っていない（2026-10-06）。
+  desc: `要介護の親御さんが障害者控除の対象になるかを確かめ、過去5年分さかのぼって税金を取り戻すための手順書。自立度ランクが書かれた書類の探し方、税率別の還付試算、更正の請求の手順まで。${items.length}市区町村版（うち${hasN}市区町村は公表されている認定基準を差し込み済み）。${PRICE}円。`,
   canonical: '/pack/', depth: 1,
   // ★2026-09-05 冒頭だけ実物を見せる形にしたので、Googleへ「この面には有料部分がある」と申告する。
   //   人とクローラーへ同じものを出しているので隠す必要がない（切った本文はHTMLに無い）。
@@ -111,7 +124,9 @@ write('pack/index.html', page({
   <tr><th>過去分の取り戻し方</th><td>確定申告済みなら<strong>更正の請求</strong>、未申告なら<strong>還付申告</strong>。どちらも5年。必要書類と出し方。</td></tr>
   <tr><th>窓口で何を言えばいいか</th><td>持ち物のチェックリストと、「過去◯年分も」と伝えるべき理由。</td></tr>
   </tbody></table></div>
-  <p class="note">お住まいの市区町村の認定基準を差し込んだ版をお渡しします。HTMLファイル1つ（約12KB）。ブラウザで開けて、そのまま印刷して窓口に持っていけます。</p>
+  <p class="note">お住まいの市区町村の版をお渡しします。認定基準を公表している${hasN}市区町村の版には、その市区町村の基準（どのランクから対象になるか）を差し込んであります。${noKijun.length ? `
+  判定に使う基準を公表していない${noKijun.length}市区町村（${esc(noKijunNames)}）の版は、基準の表の代わりに、ステップ1を窓口で確かめる手順にしてあります（下の選択肢に「基準非公表」と付いています）。` : ''}
+  HTMLファイル1つ（約12KB）。ブラウザで開けて、そのまま印刷して窓口に持っていけます。</p>
 
   ${/* ★2026-09-05 中身の冒頭を実物のまま見せる（note型の試験・ユーザー指示）。
         これまでこの面は中身を「表で説明」するだけで、実物を1行も見せていなかった。
@@ -160,10 +175,12 @@ write('pack/index.html', page({
   <div class="offer">
   <p class="price"><b>${PRICE}円</b><span>買い切り・税込。HTMLファイル1つ、印刷してそのまま窓口へ</span></p>
   <p><label for="mun"><strong>お住まいの市区町村を選んでください</strong></label></p>
-  <p><select id="mun" style="width:100%;max-width:22rem;padding:.5rem;font-size:1rem">
+  <p><select id="mun" style="width:100%;max-width:28rem;padding:.5rem;font-size:1rem">
   <option value="">— 選択してください —</option>
   ${options}
   </select></p>
+  ${/* ★基準を公表していない市区町村を選んだとき（?code= で選ばれて着いたときも）にだけ出す注記（2026-10-06）。
+       選択肢の名前にも「基準非公表」と付けてあるが、選んだあとの欄は幅で切れることがあるので、ここで全文を出す。 */''}<p id="munnote" class="callout warn" role="status" style="display:none"><span class="tag">基準非公表</span><span></span></p>
   <p style="margin-top:1rem"><button id="buy" class="btn-primary">${PRICE}円で手順書を受け取る</button>
   <span id="msg" style="margin-left:.8rem"></span></p>
   <p class="fine">クレジットカード・PayPay（決済は Stripe）。カード情報は当方を経由しません。Apple Pay・Google Pay にも対応しています（お使いの端末が対応している場合）。お支払いが済むと、<strong>資料はそのまま画面に開きます</strong>（ダウンロードしてファイルを開き直す必要はありません。ファイルとして保存もできます）。<strong>買わなくても手続きはできます</strong>——無料で読める範囲は上のとおりです。</p>
@@ -178,10 +195,20 @@ write('pack/index.html', page({
 
 <script>
 (function(){
-  var sel=document.getElementById('mun'), btn=document.getElementById('buy'), msg=document.getElementById('msg');
+  var sel=document.getElementById('mun'), btn=document.getElementById('buy'), msg=document.getElementById('msg'), note=document.getElementById('munnote');
+  function showNote(){
+    var o=sel.options[sel.selectedIndex];
+    if(o && o.getAttribute('data-nokijun')){
+      note.lastChild.textContent=o.getAttribute('data-name')+'は判定に使う基準を公表していないため、手順書のステップ1は窓口で確かめる手順の版になります（基準の表は入っていません）。書類の探し方・還付額の試算・申請と更正の請求の手順は、ほかの市区町村の版と同じです。';
+      note.style.display='';
+    } else { note.style.display='none'; }
+  }
+  sel.addEventListener('change', showNote);
   ${/* ★2026-09-28 市区町村のページ（/shogai-kojo/<6桁>.html ・/hikazei/<5桁>/）は「〇〇市版」として ?code=<6桁> つきで
        ここへ案内している。受け取っていなかったので、437件の中から自分の街を選び直させていた。版がある市区町村だけ選んでおく。 */''}var q=/[?&]code=(\\d{6})(?:&|$)/.exec(location.search);
   if(q && sel.querySelector('option[value="'+q[1]+'"]')) sel.value=q[1];
+  ${/* 選ばれた状態で着いたとき・戻るで選択が復元されたときも、注記を合わせる（change は起きない） */''}showNote();
+  window.addEventListener('pageshow', showNote);
   btn.addEventListener('click', function(){
     if(!sel.value){ msg.textContent='市区町村を選んでください'; return; }
     if(window.__ev) window.__ev('buy_click');
@@ -327,12 +354,17 @@ write('kiyaku/index.html', page({
 // ── sitemap に載せる（kanryo は購入者専用なので載せない）────────────────────
 // ★自分のぶんだけ入れ替える。build.mjs が /shogai-kojo/ を、こちらが /pack/ 等を持つ。
 //   互いのぶんを消さないよう、対象のパスを限定して置換すること。
+// ★改行は元のファイルに合わせる（2026-10-06）。手元の作業コピーは core.autocrlf=true で CRLF のことがあり、
+//   LF 決め打ちで消して足すと、消した行の CR が残ったり CRLF と LF の行が混ざったりして、回すたびに手で戻していた。
+//   多いほうの改行で足し、消す行は行末の改行ごと消す。
 const smPath = path.join(ROOT, 'sitemap.xml')
 let sm = fs.readFileSync(smPath, 'utf8')
-sm = sm.replace(/^\s*<url>(?:(?!<\/url>)[\s\S])*\/(?:pack|tokushoho|kiyaku)\/[\s\S]*?<\/url>\n?/gm, '')
+const nCrlf = (sm.match(/\r\n/g) || []).length
+const EOL = nCrlf > (sm.match(/\n/g) || []).length - nCrlf ? '\r\n' : '\n'
+sm = sm.replace(/^[ \t]*<url>(?:(?!<\/url>)[\s\S])*\/(?:pack|tokushoho|kiyaku)\/[\s\S]*?<\/url>[ \t]*\r?\n?/gm, '')
 const add = ['/pack/', '/tokushoho/', '/kiyaku/']
   .map((u) => `  <url><loc>${SITE}${u}</loc><lastmod>${TODAY}</lastmod><priority>0.7</priority></url>`)
-sm = sm.replace('</urlset>', add.join('\n') + '\n</urlset>')
+sm = sm.replace('</urlset>', add.join(EOL) + EOL + '</urlset>')
 fs.writeFileSync(smPath, sm)
 
 console.log(`販売ページ 4枚（/pack/ ・/pack/kanryo/ ・/tokushoho/ ・/kiyaku/）／ 選択できる市区町村 ${items.length}`)

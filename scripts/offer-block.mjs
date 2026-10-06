@@ -322,10 +322,20 @@ const PACK_PEEK = {
 //   理由は厳密な効果測定＝埋め込みだと「売り場に着いた」段が存在せず、カードが画面に入っただけ
 //   （*_offer_seen）と、買う気で売り場に来た人を同じ列に入れることになる。
 //   記事に残すのはリンクだけ。押されたら to_pack / to_toei が立ち、着いたら pack_view / toei_view が立つ。
-export function offerPackLeaf({ code = '', name = '', peek = 'rank', up = '../' } = {}) {
+// has … その市区町村が判定に使う基準を公表しているか（false＝公表していない19市区町村。/pack/ の選択肢で「基準非公表」と出る）。
+//   ★2026-10-06 公表していない市区町村のページでも「〇〇の基準に合わせて1つにまとめた手順書」と書いていて、
+//   すぐ上の「〇〇は公表していません」と食い違っていた。その版のステップ1は窓口で確かめる手順なので、そう書く。
+export function offerPackLeaf({ code = '', name = '', has = true, peek = 'rank', up = '../' } = {}) {
+  const href = `${up}pack/${code ? `?code=${esc(code)}` : ''}`
+  if (name && has === false) {
+    return `  <div class="offer-link" id="offer-pack">
+  <p>ここまでが無料で読めるところです。ここから先＝認定書をもらい、還付額を試算し、更正の請求か還付申告を出すまでを1つにまとめた<a href="${href}"><strong>${esc(name)}版の手順書（${PACK_PRICE}円・買い切り）</strong>があります</a>。${esc(name)}は判定に使う基準を公表していないため、この版のステップ1は窓口で確かめる手順にしてあります。</p>
+  <p class="fine"><strong>買わなくても手続きはできます。</strong>制度の説明は<a href="${up}articles/shogaisha-kojo-tax.html">こちらの記事</a>で全部無料です。</p>
+  </div>`
+  }
   const whose = name ? `${esc(name)}の基準に合わせて` : 'お住まいの市区町村の基準に合わせて'
   return `  <div class="offer-link" id="offer-pack">
-  <p>ここまでが無料で読めるところです。ここから先＝認定書をもらい、還付額を試算し、更正の請求か還付申告を出すまでを、${whose}1つにまとめた<a href="${up}pack/${code ? `?code=${esc(code)}` : ''}"><strong>手順書（${PACK_PRICE}円・買い切り）</strong>があります</a>。</p>
+  <p>ここまでが無料で読めるところです。ここから先＝認定書をもらい、還付額を試算し、更正の請求か還付申告を出すまでを、${whose}1つにまとめた<a href="${href}"><strong>手順書（${PACK_PRICE}円・買い切り）</strong>があります</a>。</p>
   <p class="fine"><strong>買わなくても手続きはできます。</strong>迷ったら先に<a href="${up}shogai-kojo/">自治体別の一覧</a>で、自分の街の基準だけ確かめてください。制度の説明は<a href="${up}articles/shogaisha-kojo-tax.html">こちらの記事</a>で全部無料です。</p>
   </div>`
 }
