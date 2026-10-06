@@ -24,16 +24,21 @@ const WORKER = path.resolve(ROOT, '..', 'fukushiru-pay')
 const idx = JSON.parse(fs.readFileSync(path.join(PACKS, '_index.json'), 'utf8'))
 
 // wrangler の bulk put は JSON ファイルで渡す。base64 でバイナリ（gzip）も入る。
+// ★--only=コード,コード で、その自治体のパックだけを入れる（meta は入れない）（2026-10-06）。
+//   KV の書き込みは1日1,000件・艦隊共通の枠。文言だけ直した一部を入れ直すときに全件（874キー）を書かないため。
+const ONLY = (process.argv.find((a) => a.startsWith('--only=')) || '').slice(7).split(',').filter(Boolean)
+const items = ONLY.length ? idx.items.filter((it) => ONLY.includes(it.code)) : idx.items
+if (ONLY.length && items.length !== ONLY.length) { console.error(`--only の ${ONLY.length}件のうち、生成物にあるのは ${items.length}件だけ`); process.exit(1) }
 const bulk = []
-for (const it of idx.items) {
+for (const it of items) {
   const gz = zlib.gzipSync(fs.readFileSync(path.join(PACKS, `${it.code}.html`)))
   bulk.push({ key: `pack:${it.code}`, value: gz.toString('base64'), base64: true })
-  bulk.push({ key: `meta:${it.code}`, value: JSON.stringify({ pref: it.pref, city: it.city, has: it.has }) })
+  if (!ONLY.length) bulk.push({ key: `meta:${it.code}`, value: JSON.stringify({ pref: it.pref, city: it.city, has: it.has }) })
 }
 const tmp = path.join(ROOT, '.dist', 'kv-bulk.json')
 fs.writeFileSync(tmp, JSON.stringify(bulk))
 const mb = (fs.statSync(tmp).size / 1024 / 1024).toFixed(1)
-console.log(`${idx.items.length}自治体ぶん（キー${bulk.length}件・${mb}MB）を KV へ入れます`)
+console.log(`${items.length}自治体ぶん（キー${bulk.length}件・${mb}MB）を KV へ入れます`)
 
 // ★wrangler は大きな bulk で socket closed になることがある（艦隊で実測）。
 //   バージョンを固定し、環境変数のトークンを外して OAuth を使わせる。

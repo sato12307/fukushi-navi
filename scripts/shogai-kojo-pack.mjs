@@ -28,7 +28,11 @@ import { NINCHI, NETAKIRI, KAIGO } from './shogai-kojo-lib.mjs'
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..')
 const DATA = path.join(ROOT, 'data', 'shogai-kojo')
 const OUT = path.join(ROOT, '.dist', 'packs')
-const TODAY = new Date().toISOString().slice(0, 10)
+// ★--asof=YYYY-MM-DD で「◯◯時点の公表資料」の日付を指定できる（2026-10-06）。
+//   文言だけを直して一部の自治体を入れ直すとき、資料の時点まで今日に見せないため。省略時は今日。
+const ASOF = (process.argv.find((a) => a.startsWith('--asof=')) || '').slice(7)
+if (ASOF && !/^[0-9]{4}-[0-9]{2}-[0-9]{2}$/.test(ASOF)) { console.error('--asof は YYYY-MM-DD で指定する'); process.exit(1) }
+const TODAY = ASOF || new Date().toISOString().slice(0, 10)
 fs.rmSync(OUT, { recursive: true, force: true })
 fs.mkdirSync(OUT, { recursive: true })
 
@@ -136,12 +140,12 @@ for (const r of targets) {
 </div>
 
 <h2>ステップ1　親の「自立度ランク」を調べる</h2>
-<p>${esc(name)}の判定は、下の物差しで行われます。まず親御さんのランクを確かめます。</p>
+${has ? `<p>${esc(name)}の判定は、下の物差しで行われます。まず親御さんのランクを確かめます。</p>` : ''}
 ${has ? `<table><tr><th>判定に使う物差し</th><th>障害者に準ずる<br><small>所得税27万円</small></th><th>特別障害者に準ずる<br><small>所得税40万円</small></th></tr>${rows}</table>
 <p class="meta">「以上」は、その値より重い状態を含みます。この表は${esc(name)}が公表している資料から読み取ったものです（出典は末尾）。</p>`
       : `<div class="warn"><p><b>${esc(name)}は、判定に使うランクを公表していません。</b>「知的障害者（軽度・中度）に準ずる方」といった区分までは示していますが、
 どのランクから対象になるかは外から分かりません。ステップ1は飛ばして、<b>ステップ3で窓口に直接聞く</b>のが最短です。
-なお全国の多くの自治体は、下に書いたランクを使っています。目安として読んでください。</p></div>`}
+なお、全国の多くの自治体が使っているランクの目安は、フクシルの<a href="https://fukushiru.com/shogai-kojo/">自治体別の比較表</a>で確かめられます。窓口で聞くときの手がかりにしてください。</p></div>`}
 
 <h3>ランクはどこに書いてあるか</h3>
 <p>「認知症高齢者の日常生活自立度」と「障害高齢者の日常生活自立度（寝たきり度）」は、
