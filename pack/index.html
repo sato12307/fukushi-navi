@@ -145,6 +145,7 @@
   if(q && sel.querySelector('option[value="'+q[1]+'"]')) sel.value=q[1];
   showNote();
   window.addEventListener('pageshow', showNote);
+  window.addEventListener('pageshow', function(e){ if(e.persisted){ btn.disabled=false; if(msg.textContent==='決済ページへ移動します…') msg.textContent=''; } });
   btn.addEventListener('click', function(){
     if(!sel.value){ msg.textContent='市区町村を選んでください'; return; }
     if(window.__ev) window.__ev('buy_click');

@@ -209,6 +209,7 @@ write('pack/index.html', page({
   if(q && sel.querySelector('option[value="'+q[1]+'"]')) sel.value=q[1];
   ${/* 選ばれた状態で着いたとき・戻るで選択が復元されたときも、注記を合わせる（change は起きない） */''}showNote();
   window.addEventListener('pageshow', showNote);
+  ${/* 決済画面から「戻る」で戻ると、押した直後の状態（ボタンが押せない）のままページが復元される。押せる状態に戻す（2026-10-08） */''}window.addEventListener('pageshow', function(e){ if(e.persisted){ btn.disabled=false; if(msg.textContent==='決済ページへ移動します…') msg.textContent=''; } });
   btn.addEventListener('click', function(){
     if(!sel.value){ msg.textContent='市区町村を選んでください'; return; }
     if(window.__ev) window.__ev('buy_click');

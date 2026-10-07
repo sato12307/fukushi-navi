@@ -177,5 +177,12 @@
         })
         .catch(function () { btn.disabled = false; say('通信に失敗しました。時間をおいてお試しください') })
     })
+    // ★決済画面からブラウザの「戻る」で戻ると、ページは押した直後の状態（ボタンが押せない・「移動します…」）のまま
+    //   bfcache から復元され、買い直せなかった。復元されたときは押せる状態に戻す（2026-10-08 売り物の点検で発見）。
+    window.addEventListener('pageshow', function (e) {
+      if (!e.persisted) return
+      btn.disabled = false
+      if (msg && msg.textContent === '決済ページへ移動します…') say('')
+    })
   }
 })();

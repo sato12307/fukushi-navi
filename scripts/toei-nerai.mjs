@@ -256,6 +256,7 @@ ${envNote('free')}
 (function(){
   var btn=document.getElementById('buy'), msg=document.getElementById('msg');
   if(!btn) return;
+  ${/* 決済画面から「戻る」で戻ると、押した直後の状態（ボタンが押せない）のままページが復元される。押せる状態に戻す（2026-10-08） */''}window.addEventListener('pageshow', function(e){ if(e.persisted){ btn.disabled=false; if(msg.textContent==='決済ページへ移動します…') msg.textContent=''; } });
   btn.addEventListener('click', function(){
     if(window.__ev) window.__ev('toei_buy');
     btn.disabled=true; msg.textContent='決済ページへ移動します…';

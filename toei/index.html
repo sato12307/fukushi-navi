@@ -303,6 +303,7 @@
 (function(){
   var btn=document.getElementById('buy'), msg=document.getElementById('msg');
   if(!btn) return;
+  window.addEventListener('pageshow', function(e){ if(e.persisted){ btn.disabled=false; if(msg.textContent==='決済ページへ移動します…') msg.textContent=''; } });
   btn.addEventListener('click', function(){
     if(window.__ev) window.__ev('toei_buy');
     btn.disabled=true; msg.textContent='決済ページへ移動します…';
