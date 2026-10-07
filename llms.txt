@@ -33,9 +33,17 @@
 - [障害者控除で税金はいくら戻る？](https://fukushiru.com/articles/shogaisha-kojo-tax.html)
 - [障がい者雇用と就労移行支援の仕組み](https://fukushiru.com/articles/shurou-ikou-koyou.html)
 
+## 有料の資料（各500円・消費税込み）
+制度の説明・自治体別の認定基準・公営住宅の区や募集区分ごとの相場・混んでいる申込先の実名は無料です。有料なのは、その先の手続きの一式と、申込先ごとの一覧だけです。お支払い後の画面でそのまま開くHTMLの資料で、購入から60日間開けます（JavaScript が要ります）。
+- [親の障害者控除 還付申請パック](https://fukushiru.com/pack/): 市区町村ごと（437市区町村）。要介護の親御さんの自立度ランクが書かれた書類の探し方、所得税率5〜33%×障害者／特別障害者／同居特別障害者の15通りの還付試算（年額と5年分）、認定書の申請と、更正の請求・還付申告の手順。税務相談ではない
+- [都営住宅の申込先えらび](https://fukushiru.com/toei/): 定期募集の倍率を住宅と募集区分ごとに名寄せし、倍率の中央値で「毎回すいている申込先」を選り分けた一覧
+- 市営・県営住宅の申込先えらび: [川崎市営](https://fukushiru.com/kawasaki/moushikomisaki/) / [静岡市営](https://fukushiru.com/shizuoka/moushikomisaki/) / [横浜市営](https://fukushiru.com/yokohama/moushikomisaki/) / [神戸市営](https://fukushiru.com/kobe/moushikomisaki/) / [相模原市営](https://fukushiru.com/sagamihara/moushikomisaki/) / [埼玉県営](https://fukushiru.com/saitama-ken/moushikomisaki/) / [愛知県営](https://fukushiru.com/aichi-ken/moushikomisaki/)。募集回ごとに公表される応募状況を申込先ごとに名寄せし、4件以上観測できて倍率の中央値が5倍未満の申込先を選り分けた一覧
+
 ## サイト情報
 - [トップ](https://fukushiru.com/)
 - [このサイトについて](https://fukushiru.com/about.html)
+- [特定商取引法に基づく表記](https://fukushiru.com/tokushoho/): 販売業者・価格・支払い方法（クレジットカード・PayPay）・引渡し・ご覧いただける期間・返金の条件
+- [利用規約](https://fukushiru.com/kiyaku/)
 
 ## データの性質
 - 自治体・住宅供給公社・省庁等の公開情報を出典つきで集約（各記事末尾に出典一覧）
