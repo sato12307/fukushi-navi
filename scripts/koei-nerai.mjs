@@ -109,6 +109,16 @@ ${enough.map(frow).join('\n')}
     return list.length ? `  <h3>${esc(g.label)}（${list.length}件）</h3>\n  <div class="wrap">${table(list)}</div>` : ''
   }).filter(Boolean).join('\n')
   if (!sukiByGroup) die(`${C.city}：すいている申込先が1件もありません。読み取りが壊れていないか確かめてください。`)
+  // ★2章の見出しの件数（F.suki）は全区分で数えるが、上の表は申込先が MIN_GROUP 件以上ある区分（shownGroups）しか出さない。
+  //   小さい区分のすいている申込先が、見出しには数えられて表のどこにも無かった（2026-10-08 の点検。川崎 103件／95行・
+  //   横浜 117／114・相模原 24／22・愛知 262／261）。残りは「その他の区分」にまとめ、見出しの件数＝表の行数にする。
+  //   売り場のカードの件数（＝見出し）は変わらない。koei-put-pack.mjs も入れる前に同じことを確かめる。
+  const shownLabels = new Set(shownGroups.map((g) => g.label))
+  const sukiRest = suki.filter((h) => !shownLabels.has(h.axis)).sort((a, b) => a.med - b.med || b.n - a.n)
+  const sukiOther = sukiRest.length
+    ? `  <h3>その他の区分（${sukiRest.length}件）</h3>\n  <p class="note">申込先が${MIN_GROUP}件未満の${esc(C.axis.label)}（${[...new Set(sukiRest.map((h) => h.axis))].map((a) => esc(a.replace(/^（(.+)）$/, '$1'))).join('・')}）のぶんを、まとめて倍率の低い順に並べています。</p>\n  <div class="wrap">${table(sukiRest)}</div>`
+    : ''
+  if (suki.filter((h) => shownLabels.has(h.axis)).length + sukiRest.length !== F.suki) die(`${C.city}：2章の表の行数が見出しの件数（${F.suki}件）と合いません。`)
 
   // ── 混んでいる申込先（実名・無料）───────────────────────────────────────
   const kondeTable = tbl(
@@ -304,7 +314,7 @@ table.grid td.num{text-align:right;white-space:nowrap}
 
 <h2>${SEC2_TITLE}</h2>
 <p>${SEC2_LEAD}</p>
-${sukiByGroup}
+${sukiByGroup}${sukiOther ? `\n${sukiOther}` : ''}
 
 <h2>3. 回によって当たりやすさが動く申込先（${F.buread}件）</h2>
 <p>最高と最低が${BURE}倍以上ひらいた申込先です。この相手には「住宅を変える」より<strong>「出す回を変える」</strong>ほうが効きます。最低の欄が実際に起きた一番すいていた回の倍率です。</p>
@@ -329,7 +339,7 @@ ${C.filter ? filterBlock(D) : `<div class="wrap">${table(enough)}</div>`}
 ${LIMITS}
 </ul>
 <p class="note">内容の誤りを見つけられた場合は contact@fukushiru.com までご連絡ください。訂正します。
-開けない・説明と違う場合は購入から14日以内のご連絡で全額返金します。</p>
+開けない・内容が説明と著しく異なる・二重に決済された場合は、購入から14日以内のご連絡で全額を返金します。</p>
 </body></html>
 `
   write(`.dist/${C.key}-pack.html`, packHtml)

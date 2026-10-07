@@ -55,10 +55,18 @@ for (const key of keys) {
   const free = fs.readFileSync(sellPath, 'utf8').replace(/\r\n/g, '\n')
   const flat = (s) => s.replace(/<[^>]+>/g, '').replace(/\s/g, '')
   const bad = []
-  const m2 = /毎回すいている申込先（([\d,]+)件）/.exec(packS)
+  const m2 = /<h2>2\. 毎回すいている申込先（([\d,]+)件）<\/h2>/.exec(packS)
   const m6 = /観測できた申込先の索引（([\d,]+)件）/.exec(packS)
+  // ★2章の見出しの件数＝2章の表の行数（2026-10-08）。見出しは全区分で数え、表は申込先が5件以上ある区分しか出していなかったので、
+  //   川崎は「103件」と書いて95行しか無かった（横浜・相模原・愛知も）。行は hrow が出す <tr><td（見出し行は <tr><th）。
+  let rows2 = -1
+  if (m2) {
+    const e2 = packS.indexOf('<h2>', m2.index + m2[0].length)
+    rows2 = (packS.slice(m2.index, e2 < 0 ? undefined : e2).match(/<tr><td/g) || []).length
+  }
   if (!m2 || !m6) bad.push('有料資料の2章・6章の見出しが読めない')
   else {
+    if (rows2 !== Number(m2[1].replace(/,/g, ''))) bad.push(`有料資料の2章の見出し（${m2[1]}件）と表の行数（${rows2}行）が違う（node scripts/koei-nerai.mjs ${key} を回し直す）`)
     if (!free.includes(`のものだけ<strong>${m2[1]}件</strong>`)) bad.push(`/${key}/moushikomisaki/ のカードが資料の2章（${m2[1]}件）と違う`)
     if (!free.includes(`全申込先の索引${m6[1]}件`)) bad.push(`/${key}/moushikomisaki/ のカードが資料の索引（${m6[1]}件）と違う`)
     const i = free.indexOf('<div class="peek"')
@@ -69,7 +77,7 @@ for (const key of keys) {
     if ((free.match(/data-buy/g) || []).length !== 1) bad.push(`/${key}/moushikomisaki/ の買うボタンが1つでない`)
   }
   if (bad.length) { console.error(`${C.city}：KV に入れません：\n- ` + bad.join('\n- ')); process.exit(1) }
-  console.log(`${C.city} 突き合わせ OK：資料（2章 ${m2[1]}件・索引 ${m6[1]}件）＝/${key}/moushikomisaki/ の売り場カードと抜粋`)
+  console.log(`${C.city} 突き合わせ OK：資料（2章 ${m2[1]}件＝表 ${rows2}行・索引 ${m6[1]}件）＝/${key}/moushikomisaki/ の売り場カードと抜粋`)
   const gz = zlib.gzipSync(html)
   console.log(`  ${(html.length / 1024).toFixed(0)}KB → gzip ${(gz.length / 1024).toFixed(0)}KB`)
   bulk.push({ key: `pack:${key}`, value: gz.toString('base64'), base64: true })
