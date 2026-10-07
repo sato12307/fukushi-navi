@@ -25,6 +25,10 @@
 // ★数字の出どころは艦隊の中にある
 //   電気代＝発電ベンチ（hatsudenbench.com）が持っている家計調査の県庁所在市別。
 //   東京の町ごとの暮らし＝住環境データ東京（living-environments.com）。どちらへも導線を張る。
+//
+// ★末尾で assets/ev.js（段の計測）を読む（2026-10-07）。この面は offerHub() で売り場
+//   （/<市>/moushikomisaki/・/pack/・/toei/）へリンクしているのに計測が入っておらず、押されても数えていなかった。
+//   版（?v=）は手書きの記事とそろえる。
 // ─────────────────────────────────────────────────────────────────────────────
 import fs from 'node:fs'
 import path from 'node:path'
@@ -287,6 +291,7 @@ ${rows.slice(-5).map((r, i) => `      <tr><td>${rows.length - 4 + i}</td><th>${r
 </footer>
 
 <script>${JS}</script>
+<script src="../assets/ev.js?v=20261007a" defer></script>
 </body>
 </html>
 `

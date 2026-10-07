@@ -99,8 +99,9 @@ export function jumpToei() {
 //   ∴ 面の最初の答えのすぐ下（① の見出しの前）に、3系統の入口を1枚にまとめて置く。
 // ★売り場は独自ページだけ（2026-09-19 ユーザー裁定）を崩さない
 //   置くのはリンクだけ。買うボタン・抜粋・data-offer は置かない（buy.js に拾わせない／「売り場に着いた」段を
-//   消さない）。押されると assets/ev.js が to_pack / to_toei を立て、着いた先で pack_view / toei_view /
-//   <市>_view が立つ。段の定義（tools/buy-funnel-ships.mjs）はそのまま使える。
+//   消さない）。押されると assets/ev.js が to_pack / to_toei / to_<市>（2026-10-07〜）を立て、着いた先で
+//   pack_view / toei_view / <市>_view が立つ。段の定義（tools/buy-funnel-ships.mjs）はそのまま使える。
+//   ★この入口を置く面には ev.js（埋め込みか src）が要る。無いと押されても数えない（生活保護の2面で実際にそうだった）。
 // ★見た目はトップの「このサイトで売っているもの」と同じ .offer.gold（有料の案内だけ金色＝艦隊で揃えた色）。
 //   新しい class は作らない。.offer でも data-offer が無ければ buy.js は触らない。
 // ★面ごとに違うのは「見出し・読者に向けた一言・並べる順」だけ（HUB_TOPIC）。商品の名前はここ1か所。
