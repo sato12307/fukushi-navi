@@ -32,7 +32,7 @@
 // ─────────────────────────────────────────────────────────────────────────────
 import fs from 'node:fs'
 import path from 'node:path'
-import { page, esc, SITE } from './shogai-kojo-page.mjs'
+import { page, esc, SITE, readPrev, pageDiff } from './shogai-kojo-page.mjs'
 import { offerToeiLeaf, jumpToei } from './offer-block.mjs'
 import {
   ROOT, MIN_N, SUKI, MIN_CITY, JIKO, READ_AT, SRC, ROUNDS, rows, houses, enough,
@@ -592,15 +592,16 @@ for (const w of WAKUS) write(`articles/toei-waku-${w.slug}.html`, wakuPage(w))
   ]
   H.splice(open[1], end - open[1] + 1, ...block)
   const next = JSON.stringify(data, null, 2) + '\n'
-  if (next !== raw) write('data/koei-cities.json', next)
+  if (pageDiff(raw, next) !== 'same') write('data/koei-cities.json', next)   // 改行だけの違いでは書き直さない
 }
 
 // ── 書き出し ────────────────────────────────────────────────────────────────
+// ★2026-10-08 改行と計測の埋め込みをそろえて比べる（shogai-kojo-page.mjs の pageDiff）。読んだそのままと比べていたので、
+//   git が取り出して CRLF になった面や、ev.js の埋め込みだけが違う面まで「中身が変わった」と数え、lastmod を今日にしていた。
 const ROOTS = new Set(pending.map(([rel]) => rel))
 const changed = []
 for (const [rel, html] of pending) {
-  const p = path.join(ROOT, rel)
-  if (!fs.existsSync(p) || fs.readFileSync(p, 'utf8') !== html) changed.push(rel)
+  if (pageDiff(readPrev(path.join(ROOT, rel)), html) === 'changed') changed.push(rel)
 }
 
 // ★出す前に検算する。作った面が壊れていても、件数だけ見ていると何日も気づけない。

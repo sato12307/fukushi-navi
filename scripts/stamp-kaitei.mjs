@@ -18,6 +18,7 @@
 //   「たぶんこの値」で金額の決定日を書くと、誤情報を出典つきで配ることになる。
 import fs from 'node:fs'
 import { kaiteiBlock, kaiteiCoverage } from './kaitei-block.mjs'
+import { pageDiff } from './shogai-kojo-page.mjs'
 
 const TARGETS = {
   // 生活保護＝4行すべてが一次情報で埋まる唯一の制度（告示本文がHTMLで読める）。
@@ -60,7 +61,8 @@ for (const f of Object.keys(TARGETS)) {
   s = s.replace(t.before, (m) => `${block(t)}\n\n${m}`)
   had ? moved++ : inserted++
   const out = crlf ? s.replace(/\n/g, '\r\n') : s
-  if (out !== raw) changedFiles.push(f)
+  // 変わったかは改行をそろえて比べる（shogai-kojo-page.mjs の pageDiff・stamp-offers.mjs と同じ・2026-10-08）
+  if (pageDiff(raw, s) === 'changed') changedFiles.push(f)
   fs.writeFileSync(p, out)
 }
 if (failed.length) { console.error('位置が見つからない:', failed.join(', ')); process.exit(1) }

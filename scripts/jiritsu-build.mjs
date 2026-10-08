@@ -19,7 +19,7 @@ import fs from 'node:fs'
 import zlib from 'node:zlib'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
-import { page, esc, SITE } from './shogai-kojo-page.mjs'
+import { page, esc, SITE, readPrev, pageDiff } from './shogai-kojo-page.mjs'
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..')
 const D = JSON.parse(fs.readFileSync(path.join(ROOT, 'data', 'jiritsu.json'), 'utf8'))
@@ -206,12 +206,18 @@ if (DRY) { console.log(`ページ ${pages.length}（入口1・一覧を載せる
 if (ON_SITE && ON_SITE > ledgerMax) die(`手元の jiritsu-ledger（${ledgerMax}）が公開中の版（${ON_SITE}）より古い。git -C ../jiritsu-ledger pull してから`)
 
 // ── 書き出しと sitemap（lastmod は中身が変わった日だけ進める）──────────────────────────
+// ★2026-10-08 改行と計測の埋め込みをそろえて比べる（shogai-kojo-page.mjs の pageDiff）。読んだそのままと比べていたので、
+//   git が取り出して CRLF になった面や、ev.js の埋め込みだけが違う面まで lastmod を今日にしていた。
 const changed = new Set()
+let embedN = 0
 for (const [rel, loc, html] of pages) {
   const f = path.join(ROOT, rel)
-  if (fs.existsSync(f) && fs.readFileSync(f, 'utf8') === html) continue
-  fs.mkdirSync(path.dirname(f), { recursive: true }); fs.writeFileSync(f, html); changed.add(loc)
+  const kind = pageDiff(readPrev(f), html)
+  if (kind === 'same') continue
+  fs.mkdirSync(path.dirname(f), { recursive: true }); fs.writeFileSync(f, html)
+  if (kind === 'embed') embedN++; else changed.add(loc)
 }
+if (embedN) console.log(`計測の埋め込みだけ変わった面 ${embedN}枚（書き直したが lastmod は進めない）`)
 const smPath = path.join(ROOT, 'sitemap.xml')
 const sm = fs.readFileSync(smPath, 'utf8')
 const prevMod = new Map([...sm.matchAll(/<url><loc>([^<]+)<\/loc><lastmod>([^<]+)<\/lastmod>/g)].map((m) => [m[1], m[2]]))

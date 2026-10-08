@@ -22,7 +22,7 @@
 import fs from 'node:fs'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
-import { page, esc, SITE } from './shogai-kojo-page.mjs'
+import { page, esc, SITE, pageDiff } from './shogai-kojo-page.mjs'
 import { offerKoeiLeaf, jumpKoei, offerKoeiSell } from './offer-block.mjs'
 import { load, loadFrom, OSAKA_FU, CITIES, MIN_N, SUKI, BURE, MIN_GROUP, PRICE, r1, num, pct, WA } from './koei-lib.mjs'
 import { kanryoScript } from './kanryo-script.mjs'
@@ -418,7 +418,10 @@ ${LIMITS}
         ? ['  <p>募集回ごとの<strong>回全体の倍率の推移</strong>（前の回まで何回・何倍だったか）を市ごとに並べた表は <a href="../koei/bairitsu-suii/">市営住宅の倍率の推移</a> にあります。</p>'] : []),
     ].join('\n')
     const next = page.replace(new RegExp(`${S}[\\s\\S]*?${E}`), `${S}\n${body}\n  ${E}`)
-    if (next !== page) {
+    // ★改行だけの違いでは書き直さない（2026-10-08）。git が取り出した記事は CRLF なので、読んだそのままと比べると毎回
+    //   「差し込みました」になり、CRLF と LF の混ざった記事を書いていた（混ざった記事は、10-08 より前の stamp-offers.mjs の
+    //   比べ方だと「変わった」になり、lastmod が進む）。
+    if (pageDiff(page, next) !== 'same') {
       fs.writeFileSync(hub, next)
       console.log(`\n■ ハブ記事に実測${rows.length}市の表を差し込みました（articles/koei-jutaku-bairitsu.html）`)
     }

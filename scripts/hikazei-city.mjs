@@ -25,7 +25,7 @@ import fs from 'node:fs'
 import path from 'node:path'
 import vm from 'node:vm'
 import { fileURLToPath } from 'node:url'
-import { page, esc, SITE } from './shogai-kojo-page.mjs'
+import { page, esc, SITE, readPrev, pageDiff } from './shogai-kojo-page.mjs'
 import { offerHub } from './offer-block.mjs'
 import { D, L, NS, maxIncome, maxPension, kintouLim, shotokuLim, SPECIAL_LIM, man, manT, selfCheck } from './hikazei-lib.mjs'
 import { K as KK, selfCheck as kokuhoCheck, lines as kLines, annual as kAnnual, setOf as kSetOf, yen, rateTxt, lvTxt } from './kokuho-lib.mjs'
@@ -760,16 +760,16 @@ const changedLocs = new Set()
 // ★計測の埋め込み（assets/ev.js を page() が <script> に入れたもの）と buy.js の版だけが違う面は、
 //   書き直しはするが lastmod は進めない（2026-09-30）。ev.js に売り場を1行足した日に、読み手に見える中身は
 //   同じなのに全1,791枚の lastmod が今日になりかけた（県営の売り場を足した日に実測）。
-const readable = (h) => h.replace(/<script>[\s\S]*?<\/script>/g, '').replace(/assets\/buy\.js\?v=\w+/g, 'assets/buy.js')
+// ★改行コードを揃えて比べる（2026-09-29）。git の checkout（autocrlf）で手元の面が CRLF になっていると、
+//   中身が同じでも全1,791枚を「変わった」と数え、sitemap の lastmod を全部今日にしていた。
+//   どちらの判定も shogai-kojo-page.mjs の pageDiff に1か所にまとめた（2026-10-08）。
 for (const [rel, loc, html] of out) {
   const p = path.join(ROOT, rel)
-  // ★改行コードを揃えて比べる（2026-09-29）。git の checkout（autocrlf）で手元の面が CRLF になっていると、
-  //   中身が同じでも全1,791枚を「変わった」と数え、sitemap の lastmod を全部今日にしていた。
-  const old = fs.existsSync(p) ? fs.readFileSync(p, 'utf8').replace(/\r\n/g, '\n') : null
-  if (old === html) continue
+  const kind = pageDiff(readPrev(p), html)
+  if (kind === 'same') continue
   fs.mkdirSync(path.dirname(p), { recursive: true })
   fs.writeFileSync(p, html)
-  if (old !== null && readable(old) === readable(html)) { scriptOnlyN++; continue }
+  if (kind === 'embed') { scriptOnlyN++; continue }
   changedN++; changedLocs.add(loc)
 }
 if (scriptOnlyN) console.log(`計測の埋め込みだけ変わった面 ${scriptOnlyN}枚（書き直したが lastmod は進めない）`)

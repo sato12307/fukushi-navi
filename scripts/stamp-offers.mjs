@@ -18,6 +18,7 @@
 import fs from 'node:fs'
 import path from 'node:path'
 import { offerPackLeaf, offerToeiLeaf, jumpPack, jumpToei, offerHub } from './offer-block.mjs'
+import { pageDiff } from './shogai-kojo-page.mjs'
 import { CITIES } from './koei-lib.mjs'
 
 // ★2026-09-08(2) 東京都以外の記事から都営の売り場を外した
@@ -189,7 +190,10 @@ for (const f of files) {
   } else if (had) { s = s.replace(marked, `\n\n${block(t)}\n\n`); replaced++ }
   else { failed.push(f); continue }
   const out = crlf ? s.replace(/\n/g, '\r\n') : s
-  if (out !== raw) changedFiles.push(f)
+  // ★変わったかは改行をそろえて比べる（shogai-kojo-page.mjs の pageDiff・2026-10-08）。書き戻した out と raw を比べていたので、
+  //   CRLF と LF の混ざった記事（koei-nerai.mjs が CRLF の記事に LF の表を差し込んでいた）は、中身が同じでも lastmod が進む
+  //   （koei-jutaku-bairitsu.html。git が取り出した写しで koei-nerai → stamp-offers の順に回して再現）。
+  if (pageDiff(raw, s) === 'changed') changedFiles.push(f)
   fs.writeFileSync(p, out)
 }
 // 撒き餌の面の入口。上のカードを貼り終えたあとの記事に入れる（同じ記事に両方ある面がある）。
@@ -203,7 +207,7 @@ for (const [f, h] of Object.entries(HUBS)) {
   s = s.replace(h.before, (m) => `<!-- hub:${h.topic} -->\n${offerHub(h.topic, { up: '../' })}\n  <!-- /hub -->\n\n${m}`)
   hubbed++
   const out = crlf ? s.replace(/\n/g, '\r\n') : s
-  if (out !== raw && !changedFiles.includes(f)) changedFiles.push(f)
+  if (pageDiff(raw, s) === 'changed' && !changedFiles.includes(f)) changedFiles.push(f)
   fs.writeFileSync(p, out)
 }
 if (failed.length) { console.error('位置が見つからない:', failed.join(', ')); process.exit(1) }

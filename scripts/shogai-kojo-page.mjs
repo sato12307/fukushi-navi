@@ -16,7 +16,8 @@ export const esc = (s) => String(s ?? '').replace(/[&<>"]/g, (c) => ({ '&': '&am
 // ── 共通の枠 ────────────────────────────────────────────────────────────────
 // noindex は「購入者だけが来る画面」に使う（/pack/kanryo/）。
 // 特商法表記と規約は買う前に読めることが要件なので、こちらは索引させる。
-// buyVer … assets/buy.js の版（キャッシュよけ）。★既定を上げると全ページが「変わった」扱いになり sitemap の lastmod が一斉に進む。
+// buyVer … assets/buy.js の版（キャッシュよけ）。★既定を上げると全ページの書き直しになる（版だけの違いは下の pageDiff が
+//   「変わった」と数えないので lastmod は進まない）。
 //   新しい商品を buy.js に足したときは、その売り場を作る生成器だけが新しい版を渡す（2026-09-30 県営）。
 export const page = ({ title, desc, canonical, depth, body, jsonld, noindex, buyVer = '20260917a' }) => {
   // depth は「サイト根からの階層」。/pack/kanryo/ のような2階層下で '../' を使うと
@@ -79,5 +80,27 @@ ${/* 記事の中の売り場（.offer[data-offer]）の決済と計測。カー
 </body>
 </html>
 `
+}
+
+// ── 置いてある面と新しく作った面を比べる（sitemap の lastmod を進めるかどうか）──────────────
+// ★改行をそろえてから比べる。この作業ツリーは core.autocrlf=true で、git が取り出した面（checkout・restore・pull）は
+//   手元で CRLF になる。生成器が作る中身は LF なので、読んだそのままの文字列と比べると中身が同じでも「変わった」になり、
+//   lastmod が今日に進んでいた（2026-09-29 /hikazei/ の1,791枚、2026-10-08 /toei/）。
+// ★計測の埋め込み（上の page() が <script> に入れる assets/ev.js）と buy.js の版（?v=）だけの違いは「変わった」と数えない。
+//   読み手に見える中身は同じ（assets/ev.js の先頭の決まり）。
+// ★この判定は生成器ごとに書かない。ここ1か所に置いて呼ぶ。2026-10-08 まで、lastmod を決める比べ方が10の生成器に
+//   別々に書かれていて、改行をそろえていたのは4つ、計測の埋め込みまで外していたのは2つだけだった。[[same-question-two-implementations]]
+const readable = (h) => h.replace(/<script>[\s\S]*?<\/script>/g, '').replace(/assets\/buy\.js\?v=\w+/g, 'assets/buy.js')
+// 置いてある面を読む。まだ無ければ null。
+export const readPrev = (p) => (fs.existsSync(p) ? fs.readFileSync(p, 'utf8') : null)
+// 戻り値　'same'＝改行をそろえると同じ（書き直さなくてよい）
+// 　　　　'embed'＝計測の埋め込みと buy.js の版だけが違う（書き直すが lastmod は進めない）
+// 　　　　'changed'＝読み手に見える中身が違う、または面がまだ無い（lastmod を今日にする）
+// norm … その面で「違い」と数えない所を消す関数（例：koei-suii-build.mjs の最終更新の日付）。
+export const pageDiff = (prev, html, norm = (h) => h) => {
+  if (prev == null) return 'changed'
+  const a = norm(prev.replace(/\r\n/g, '\n')), b = norm(html.replace(/\r\n/g, '\n'))
+  if (a === b) return 'same'
+  return readable(a) === readable(b) ? 'embed' : 'changed'
 }
 

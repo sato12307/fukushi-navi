@@ -14,7 +14,7 @@
 // ─────────────────────────────────────────────────────────────────────────────
 import fs from 'node:fs'
 import path from 'node:path'
-import { page, esc, SITE } from './shogai-kojo-page.mjs'
+import { page, esc, SITE, readPrev, pageDiff } from './shogai-kojo-page.mjs'
 import { peekBox } from './peek-box.mjs'
 import { kanryoScript } from './kanryo-script.mjs'
 import {
@@ -576,6 +576,8 @@ export const TOEI_FACTS = ${JSON.stringify({ minN: MIN_N, suki: SUKI, rounds: F.
 //   ★2026-09-13 lastmod を「倍率表の読み取り日」から「/toei/ の中身が変わった日」に変えた。読み取り日のままだと、
 //     母数や注記を変えて作り直しても8月の日付のまま残る。中身が変わらなければ前の日付を保つ。
 //   ★行を消して末尾に付け直すのをやめ、その場で置き換える（毎回行が動いて差分が読めなくなるため）。
+//   ★2026-10-08 改行と計測の埋め込みをそろえて比べる（shogai-kojo-page.mjs の pageDiff）。読んだそのままと比べていたので、
+//     git が取り出して CRLF になった面や、ev.js の埋め込みだけが違う面でも lastmod が今日に進んでいた（10-08 に実際に進んだ）。
 {
   const smPath = path.join(ROOT, 'sitemap.xml')
   const sm = fs.readFileSync(smPath, 'utf8')
@@ -587,7 +589,7 @@ export const TOEI_FACTS = ${JSON.stringify({ minN: MIN_N, suki: SUKI, rounds: F.
   const prevLastmod = (/<lastmod>([^<]+)<\/lastmod>/.exec(old) || [])[1] || ''
   const freePath = path.join(ROOT, 'toei', 'index.html')
   const freeNew = pending.find(([rel]) => rel === 'toei/index.html')[1]
-  const changed = !fs.existsSync(freePath) || fs.readFileSync(freePath, 'utf8') !== freeNew
+  const changed = pageDiff(readPrev(freePath), freeNew) === 'changed'
   const today = new Date(Date.now() + 9 * 3600e3).toISOString().slice(0, 10)   // 日本時間の日付
   const entry = `<url><loc>${SITE}/toei/</loc><lastmod>${changed ? today : (prevLastmod || READ_AT)}</lastmod><priority>0.9</priority></url>`
   const next = old ? sm.slice(0, at) + entry + sm.slice(at + old.length) : sm.replace('</urlset>', `  ${entry}\n</urlset>`)

@@ -18,7 +18,7 @@
 import fs from 'node:fs'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
-import { page, esc, SITE } from './shogai-kojo-page.mjs'
+import { page, esc, SITE, readPrev, pageDiff } from './shogai-kojo-page.mjs'
 import { WA, load, loadFrom, OSAKA_FU, MIN_N, SUKI, BURE, PRICE, num, r1 } from './koei-lib.mjs'
 import { offerKoeiLeaf, jumpKoei } from './offer-block.mjs'
 import { FREE, freePage, houseTable, kosupaSection, LEGEND, SHIGA_KEN, walkMin, WALK_MAX } from './kenei-free.mjs'   // 三大都市圏の外の県＝申込先ごとの一覧まで無料（2026-10-01）
@@ -53,15 +53,14 @@ for (const r of AI.rounds) {
 const cell = (m, k, unit) => `<td class="num"><strong>${bai(m, k)}倍</strong><br><small>${n(k)}戸・${n(m)}${unit}</small></td>`
 const jsonld = (title, desc, url, checked) => ({ '@context': 'https://schema.org', '@type': 'Article', headline: title.split('｜')[0], description: desc, inLanguage: 'ja', url: `${SITE}${url}`, datePublished: '2026-09-29', dateModified: checked, author: { '@type': 'Organization', name: 'フクシル' }, publisher: { '@type': 'Organization', name: 'フクシル' } })
 // 書き出し。戻り値＝中身（読み手に見える部分）が変わったか。計測の埋め込み（ev.js）と buy.js の版だけの違いは書き直すが、
-// 変わったとは数えない（sitemap の lastmod を進めない）＝hikazei-city.mjs と同じ判定（2026-10-01）。
-const readable = (h) => h.replace(/<script>[\s\S]*?<\/script>/g, '').replace(/assets\/buy\.js\?v=\w+/g, 'assets/buy.js')
+// 変わったとは数えない（sitemap の lastmod を進めない）＝hikazei-city.mjs と同じ判定（2026-10-01）。判定は shogai-kojo-page.mjs の pageDiff。
 const write = (dir, html) => {
   const p = path.join(ROOT, dir, 'index.html')
   fs.mkdirSync(path.dirname(p), { recursive: true })
-  const old = fs.existsSync(p) ? fs.readFileSync(p, 'utf8').replace(/\r\n/g, '\n') : null
-  if (old === html) return false
+  const kind = pageDiff(readPrev(p), html)
+  if (kind === 'same') return false
   fs.writeFileSync(p, html)
-  return old === null || readable(old) !== readable(html)
+  return kind === 'changed'
 }
 
 // ── 有料の一覧への案内（冒頭の1行・混んでいる申込先・申込先ごとの一覧へのリンク）────────────────

@@ -21,7 +21,7 @@
 import fs from 'node:fs'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
-import { page, esc, SITE } from './shogai-kojo-page.mjs'
+import { page, esc, SITE, readPrev, pageDiff } from './shogai-kojo-page.mjs'
 // 有料の資料への入口（2026-09-28 ユーザー指示「撒き餌の面から有料への導線を目立つところに」）。文面は offer-block.mjs。
 import { offerHub } from './offer-block.mjs'
 
@@ -185,7 +185,9 @@ const smPath = path.join(ROOT, 'sitemap.xml')
 const sm = fs.readFileSync(smPath, 'utf8')
 const loc = `<loc>${SITE}/mitoshi/kogaku/</loc>`
 const outPath = path.join(ROOT, OUT_REL)
-const changed = !fs.existsSync(outPath) || fs.readFileSync(outPath, 'utf8') !== html
+// 改行と計測の埋め込みだけの違いでは lastmod を進めない（shogai-kojo-page.mjs の pageDiff・2026-10-08）
+const kind = pageDiff(readPrev(outPath), html)
+const changed = kind === 'changed'
 const entry = `<url>${loc}<lastmod>${changed ? TODAY : ((/<lastmod>([^<]+)<\/lastmod>/.exec(sm.slice(sm.indexOf(loc))) || [])[1] || TODAY)}</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>`
 let smNext
 if (sm.includes(loc)) {
@@ -196,4 +198,4 @@ if (sm.includes(loc)) {
 fs.mkdirSync(path.dirname(outPath), { recursive: true })
 fs.writeFileSync(outPath, html)
 if (smNext !== sm) fs.writeFileSync(smPath, smNext)
-console.log(`${OUT_REL}（${changed ? '更新' : '変更なし'}）／ 当初案より低く決まった ${lowerN}区分・高く ${higherN}区分・最大の差 ${maxGapB.label} ${yen(maxGap)}`)
+console.log(`${OUT_REL}（${changed ? '更新' : kind === 'embed' ? '計測の埋め込みだけ更新・lastmod は据え置き' : '変更なし'}）／ 当初案より低く決まった ${lowerN}区分・高く ${higherN}区分・最大の差 ${maxGapB.label} ${yen(maxGap)}`)

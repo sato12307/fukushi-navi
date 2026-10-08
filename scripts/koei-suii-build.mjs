@@ -14,7 +14,7 @@
 import fs from 'node:fs'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
-import { page, esc, SITE } from './shogai-kojo-page.mjs'
+import { page, esc, SITE, readPrev, pageDiff } from './shogai-kojo-page.mjs'
 import { suiiAll, suiiSummary, suiiTable, suiiDropped, yokohamaYugu, YOKOHAMA_YUGU, SMALL } from './koei-suii-lib.mjs'
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..')
@@ -42,10 +42,10 @@ const json = {
 }
 const jsonPath = path.join(ROOT, 'data', 'koei-suii.json')
 const jsonText = JSON.stringify(json, null, 1) + '\n'
-const prevJson = fs.existsSync(jsonPath) ? fs.readFileSync(jsonPath, 'utf8') : ''
-// 日付だけの差では書き直さない（lastmod を動かさない）
+// 日付だけの差（と改行だけの差）では書き直さない（lastmod を動かさない）
 const strip = (t) => t.replace(/"updated": "[^"]*"/, '')
-if (strip(prevJson) !== strip(jsonText)) fs.writeFileSync(jsonPath, jsonText)
+const jsonKind = pageDiff(readPrev(jsonPath), jsonText, strip)
+if (jsonKind !== 'same') fs.writeFileSync(jsonPath, jsonText)
 
 // ── 看板 ────────────────────────────────────────────────────────────────────
 const rank = shown.slice().sort((a, b) => b.stats.med - a.stats.med)
@@ -115,10 +115,15 @@ const html = page({
 })
 const out = path.join(ROOT, 'koei', 'bairitsu-suii', 'index.html')
 fs.mkdirSync(path.dirname(out), { recursive: true })
-const prev = fs.existsSync(out) ? fs.readFileSync(out, 'utf8') : ''
-const noDate = (t) => t.replace(/最終更新：\d{4}-\d{2}-\d{2}/, '').replace(/"dateModified": "[^"]*"/, '')
-const changed = noDate(prev) !== noDate(html)
+// 日付（最終更新・dateModified）だけの差は「同じ」と数えて書き直さない。改行と計測の埋め込みだけの差は書き直すが、
+// lastmod も面の日付も前のまま残す（sitemap と面の「最終更新」を食い違わせない）。比べ方は shogai-kojo-page.mjs の pageDiff（2026-10-08）。
+const prev = readPrev(out)
+const DATES = [/最終更新：\d{4}-\d{2}-\d{2}/, /"dateModified": "[^"]*"/]
+const noDate = (t) => DATES.reduce((s, re) => s.replace(re, ''), t)
+const kind = pageDiff(prev, html, noDate)
+const changed = kind === 'changed'
 if (changed) fs.writeFileSync(out, html)
+else if (kind === 'embed') fs.writeFileSync(out, DATES.reduce((h, re) => h.replace(re, (m) => (re.exec(prev) || [m])[0]), html))
 
 // ── sitemap（中身が変わったときだけ lastmod を進める）────────────────────────────
 {
@@ -133,6 +138,6 @@ if (changed) fs.writeFileSync(out, html)
   if (next !== sm) fs.writeFileSync(smPath, next)
 }
 
-console.log(`■ 看板 /koei/bairitsu-suii/ ${changed ? '書き出し' : '変化なし'}（載せた市 ${shown.length}：${rank.map((s) => `${s.city}${s.stats.n}回`).join('・')}）`)
+console.log(`■ 看板 /koei/bairitsu-suii/ ${changed ? '書き出し' : kind === 'embed' ? '計測の埋め込みだけ書き直し・lastmod は据え置き' : '変化なし'}（載せた市 ${shown.length}：${rank.map((s) => `${s.city}${s.stats.n}回`).join('・')}）`)
 console.log(`  載せていない市：${notShown.map((s) => s.city).join('・') || 'なし'}`)
-console.log(`  data/koei-suii.json ${strip(prevJson) !== strip(jsonText) ? '書き出し' : '変化なし'}`)
+console.log(`  data/koei-suii.json ${jsonKind !== 'same' ? '書き出し' : '変化なし'}`)
