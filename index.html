@@ -34,12 +34,12 @@
     <a class="brand" href="index.html">フクシル <small>知らないと損する、街ごとの福祉</small></a>
     <nav class="site-nav" aria-label="主要">
       <a href="index.html">トップ</a>
-      <a href="articles/jichitai-transport-medical.html">自治体の福祉</a>
-      <a href="articles/shinkansen-airplane-discount.html">交通割引</a>
+      <a href="articles/seikatsuhogo-keisanki.html">生活保護</a>
+      <a href="articles/juminzei-hikazei-check.html">住民税非課税</a>
+      <a href="articles/kougaku-ryouyouhi-2026.html">高額療養費</a>
+      <a href="articles/shogaisha-kojo-tax.html">障害者控除</a>
       <a href="articles/koei-jutaku-bairitsu.html">公営住宅</a>
       <a href="articles/shogai-nenkin-basics.html">障害年金</a>
-      <a href="articles/shogaisha-kojo-tax.html">障害者控除</a>
-      <a href="articles/shurou-ikou-koyou.html">就労・雇用</a>
     </nav>
   </div>
 </header>
@@ -69,87 +69,36 @@
     <p class="fine">どちらも買わずに調べるだけで済む方が多いはずです。無料の範囲で足りるならそれで構いません。</p>
   </div>
 
-  <h2>まず計算してみる（シミュレーター）</h2>
+  <!-- ★2026-10-08 カードを読まれている順に並べ直した（ユーザー「人気のない記事ばかり陳列してる」）。
+       それまでは32枚のカードを書いた順に並べていて、先頭の6枚（地域包括・認定基準・都営・川崎・静岡・横浜）と
+       「記事一覧」の先頭（介護事業所）は、28日の実閲覧が0〜17・Bing の表示が0〜180しかない面だった。
+       逆に実閲覧の9割を占める生活保護の計算（2,437）と非課税の判定（2,171）は7枚目と12枚目に埋もれ、
+       Bing で表示がある大阪・名古屋・札幌の公営住宅の記事はトップから1本もつながっていなかった。
+       並べ方の物差し＝Cloudflare の実閲覧（28日・人だけ）と Bing のページ別の表示回数（GetPageStats）。
+       カードは需要のある16枚だけにし、残りは下の一覧に文字のリンクで残す（トップからのリンクは1本も消さない
+       ＝地域包括や介護事業所のように、トップからしかつながっていない面を孤児にしない）。
+       ★数字が入れ替わったら並びも入れ替える。生成器は無い（手書き）。 -->
+  <h2>よく使われている計算と記事</h2>
   <div class="cards">
-    <a class="card" href="houkatsu/">
-      <span class="cat">介護</span>
-      <h3>町名から担当の地域包括支援センターを探す</h3>
-      <p>介護の最初の相談先は住所ごとに担当が決まっています。厚労省のシステムは所在地検索で町名からは引けないため、自治体の公表資料を町丁目の側から並べ替えました。番地で担当が分かれる町丁目もそのまま掲載。</p>
-    </a>
-    <a class="card" href="shogai-kojo/">
-      <span class="cat">税金・介護・一部有料</span>
-      <h3>障害者控除の認定基準は街ごとに違う</h3>
-      <p>要介護なら手帳がなくても所得税27万円・特別障害者40万円の控除。ただし認定基準は市区町村ごとにバラバラで、同じ状態でも街によって結論が変わります。<strong>全国437自治体の基準は無料。申請手順をまとめた市区町村別の手引きが500円です。</strong></p>
-    </a>
-    <a class="card" href="toei/">
-      <span class="cat">住まい・一部有料</span>
-      <h3>都営住宅で毎回すいている申込先はどこか</h3>
-      <p>定期募集16回・14,782件を住宅と募集区分ごとに名寄せしました。倍率の中央値は4.5倍で、1,456件の申込先のうち753件（52%）は5倍未満。<strong>区市町ごとの相場と条件別の効き目は無料。住宅名つきの一覧が500円です。</strong></p>
-    </a>
-    <a class="card" href="kawasaki/">
-      <span class="cat">公営住宅</span>
-      <h3>川崎市営住宅で「毎回すいている申込先」はどこか</h3>
-      <p>川崎市は募集回ごとの応募状況表しか出さず、回をまたいで並べた集計は公表していません。定期募集27回・2,775件を住宅と募集区分ごとに名寄せしました。募集区分ごとの相場と混んでいる住宅の実名は無料、住宅名つきの一覧が500円です。</p>
-    </a>
-    <a class="card" href="shizuoka/">
-      <span class="cat">公営住宅</span>
-      <h3>静岡市営住宅で「毎回すいている申込先」はどこか</h3>
-      <p>定期募集44回・1,217件を団地と間取りごとに名寄せしました。区ごとの相場（葵・駿河・清水）と混んでいる団地の実名は無料、団地ごとの一覧が500円です。4件以上観測できた94件のうち76件が5倍未満でした。</p>
-    </a>
-    <a class="card" href="yokohama/">
-      <span class="cat">公営住宅</span>
-      <h3>横浜市営住宅で「毎回すいている申込先」はどこか</h3>
-      <p>定期募集9回・2,193件を18区と募集区分ごとに名寄せしました。資料の凡例にある単身可（※）とエレベーターの印（□△×）も拾っています。区ごとの相場と混んでいる住宅の実名は無料、申込先ごとの一覧が500円です。</p>
-    </a>
     <a class="card" href="articles/seikatsuhogo-keisanki.html">
       <span class="cat">生活保護</span>
       <h3>生活保護はいくらもらえる？自動計算</h3>
       <p>厚労省の令和8年度基準の計算式そのままで最低生活費を計算。12都市の家賃上限に対応、働いた場合の差額支給も。</p>
-    </a>
-    <a class="card" href="articles/seikatsuhogo-jisshitsu.html">
-      <span class="cat">生活保護</span>
-      <h3>生活保護費の「実質」はどこが厚いか</h3>
-      <p>生活扶助の差は4.8%。でも電気代の差は1.9倍あります。52市について物価と電気代で割り戻すと、実質では月12,129円ひらきました。級地の指定は昭和62年から替わっていません。</p>
-    </a>
-    <a class="card" href="articles/seikatsuhogo-shinsei-jichitai.html">
-      <span class="cat">生活保護</span>
-      <h3>生活保護の却下率、自治体でこれだけ違う</h3>
-      <p>厚労省が毎年出しているのに誰も並べていない数字。都道府県・指定都市・中核市129機関の申請・取下げ・却下を令和6年度ぶん一覧に。全国の却下率は6年連続で上昇中。</p>
-    </a>
-    <a class="card" href="articles/shakkin-kakei-soudan.html">
-      <span class="cat">お金の相談</span>
-      <h3>借金と家計の相談は、どこまで受けてもらえるのか</h3>
-      <p>市区町村の「家計改善支援事業」は借金と家計を無料で相談できる公的な窓口。令和6年度の利用は全国20,573件で過去最多。ところが使われ方は自治体で桁が違い、人口10万人あたり0件〜246件。129機関の実績を一覧に。</p>
-    </a>
-    <a class="card" href="articles/jiko-hasan-chizu.html">
-      <span class="cat">お金の相談</span>
-      <h3>自己破産が多い県は、弁護士が多い県ではなかった</h3>
-      <p>「破産が多い地域は相談できる人が近くにいるから」を司法統計で検証。成り立ちませんでした。結びついていたのは弁護士の数ではなく生活保護率（r=+0.64）。47都道府県の破産・個人再生・弁護士数の表つき。</p>
     </a>
     <a class="card" href="articles/juminzei-hikazei-check.html">
       <span class="cat">税と保険料</span>
       <h3>住民税非課税世帯になる年収は？判定</h3>
       <p>2026年度から単身110万円に。収入・世帯構成・地域から自動判定し、非課税世帯の12のメリットも一覧で。</p>
     </a>
-    <a class="card" href="hikazei/">
-      <span class="cat">税と保険料</span>
-      <h3>住民税非課税の年収を、住んでいる市区町村から</h3>
-      <p>全国1,741市区町村ごとに、世帯人数別・給与と年金で。線は級地で3段に分かれ、2級地では市が条例で丸めていることも。令和9年度の見通しつき。</p>
+    <a class="card" href="articles/shogaisha-kojo-tax.html">
+      <span class="cat">税・控除</span>
+      <h3>障害者控除で税金はいくら戻る？</h3>
+      <p>所得税・住民税の控除額、特別障害者・同居特別障害者、年末調整／確定申告での申告方法。</p>
     </a>
     <a class="card" href="articles/kougaku-ryouyouhi-2026.html">
       <span class="cat">医療費</span>
       <h3>高額療養費の上限は？【2026年8月改正】</h3>
-      <p>今月から上限が約7%引き上げ。年収と医療費を入れるだけで新旧の上限額・多数回該当・年間上限を計算。</p>
-    </a>
-    <a class="card" href="jiritsu/">
-      <span class="cat">医療費</span>
-      <h3>自立支援医療（精神通院）の上限と、使える病院・薬局</h3>
-      <p>精神科の通院が1割・月の上限は0〜2万円。受給者証に書いた指定医療機関でだけ使えます。47都道府県と20の指定都市の一覧への入口つき。</p>
-    </a>
-    <a class="card" href="articles/shogai-nenkin-keisanki.html">
-      <span class="cat">障害年金</span>
-      <h3>障害年金はいくら？計算機</h3>
-      <p>受給額・更新リスク・遡及請求・暮らしに回る実額まで、公的データにもとづいて計算。</p>
+      <p>8月から上限が約7%引き上げ。年収と医療費を入れるだけで新旧の上限額・多数回該当・年間上限を計算。</p>
     </a>
     <a class="card" href="articles/koei-shunyu-kijun.html">
       <span class="cat">住まい</span>
@@ -161,10 +110,55 @@
       <h3>市営住宅の家賃はいくら？自動計算</h3>
       <p>公営住宅の家賃は相場ではなく法定の掛け算。家賃算定基礎額の8区分（34,400円〜91,100円）を全額公開し、床面積・築年数から概算します。</p>
     </a>
+    <a class="card" href="articles/shinkansen-airplane-discount.html">
+      <span class="cat">交通割引</span>
+      <h3>新幹線・飛行機の障害者割引ガイド</h3>
+      <p>JR・新幹線・ANA/JALの割引と買い方。2025年から精神障害者保健福祉手帳も鉄道割引の対象に。</p>
+    </a>
+    <a class="card" href="articles/koei-tokyo.html">
+      <span class="cat">住まい</span>
+      <h3>都営住宅の倍率は何倍？（東京都）</h3>
+      <p>令和7年5月定期募集の平均5.6倍を、募集区分別（世帯向・子育て向・単身向）と区市町別（千代田区49.7倍〜町田市1.1倍）で一覧に。住戸別の実例と当選確率シミュレーターつき。</p>
+    </a>
     <a class="card" href="articles/shogai-service-futan.html">
       <span class="cat">就労・福祉サービス</span>
       <h3>障害福祉サービスの利用料はいくら？</h3>
       <p>就労移行支援・B型・グループホーム・ホームヘルプの自己負担は「1割かつ月の上限まで」。非課税なら0円、一般1は9,300円。18歳以上は親の所得を見ないので、あきらめる前に判定を。</p>
+    </a>
+    <a class="card" href="jiritsu/">
+      <span class="cat">医療費</span>
+      <h3>自立支援医療（精神通院）の上限と、使える病院・薬局</h3>
+      <p>精神科の通院が1割・月の上限は0〜2万円。受給者証に書いた指定医療機関でだけ使えます。47都道府県と20の指定都市の一覧への入口つき。</p>
+    </a>
+    <a class="card" href="hikazei/">
+      <span class="cat">税と保険料</span>
+      <h3>住民税非課税の年収を、住んでいる市区町村から</h3>
+      <p>全国1,741市区町村ごとに、世帯人数別・給与と年金で。線は級地で3段に分かれ、2級地では市が条例で丸めていることも。令和9年度の見通しつき。</p>
+    </a>
+    <a class="card" href="shogai-kojo/">
+      <span class="cat">税金・介護・一部有料</span>
+      <h3>障害者控除の認定基準は街ごとに違う</h3>
+      <p>要介護なら手帳がなくても所得税27万円・特別障害者40万円の控除。ただし認定基準は市区町村ごとにバラバラで、同じ状態でも街によって結論が変わります。<strong>全国437自治体の基準は無料。申請手順をまとめた市区町村別の手引きが500円です。</strong></p>
+    </a>
+    <a class="card" href="articles/shogai-nenkin-basics.html">
+      <span class="cat">障害年金</span>
+      <h3>障害年金の基礎と「更新」当事者ガイド</h3>
+      <p>仕組み・金額の考え方と、更新（障害状態確認届）で級落ち・支給停止を防ぐポイント。</p>
+    </a>
+    <a class="card" href="articles/shogai-nenkin-keisanki.html">
+      <span class="cat">障害年金・計算機</span>
+      <h3>障害年金はいくら？計算機</h3>
+      <p>受給額・遡及請求で戻る額・更新で級落ちする確率・医療費/交通/家賃/税まで合算した「暮らしに回る実額」を1ページで計算。</p>
+    </a>
+    <a class="card" href="articles/koei-osaka.html">
+      <span class="cat">住まい</span>
+      <h3>大阪市の市営住宅 当選倍率と入りやすい住戸</h3>
+      <p>住戸別の実データで、最高は勝山第1住宅（天王寺区）189倍、応募が付きにくいのは長吉長原東住宅（平野区）0倍。同じ市でも住戸で大きく違います。障害者・ひとり親の優遇での当選確率シミュレーターつき。</p>
+    </a>
+    <a class="card" href="articles/koei-hairiyasui.html">
+      <span class="cat">住まい</span>
+      <h3>市営住宅に入りやすい人とは？</h3>
+      <p>優遇される世帯（障害者・高齢者・ひとり親など）と、倍率優遇・ポイント方式・落選回数優遇の違い。単身入居の条件と当選確率を上げる方法。</p>
     </a>
   </div>
 
@@ -172,73 +166,26 @@
     <p><span class="tag">はじめに</span>当サイトは<strong>同じ立場の人の助け合い</strong>を目的にした情報共有サイトです。一般的な制度情報と体験の共有を扱い、<strong>個別の可否判定や、医療・法律の個別助言は行いません</strong>。正確な手続きは各窓口・公式情報でご確認ください。</p>
   </div>
 
-  <h2>記事一覧</h2>
-  <div class="cards">
-    <a class="card" href="articles/kaigo-jigyosho-genshou.html">
-      <span class="cat">介護</span>
-      <h3>介護事業所はどれだけ消えたか</h3>
-      <p>厚労省のオープンデータ2断面を突き合わせた実測。5年で165,442事業所のうち36,535件（22.1%）が一覧から消えました。都道府県別・サービス種別で集計（事業所名は掲載していません）。</p>
-    </a>
-    <a class="card" href="articles/jichitai-transport-medical.html">
-      <span class="cat">自治体の福祉</span>
-      <h3>交通・医療費はどこまで無料？三大都市比較</h3>
-      <p>名古屋・東京・大阪で「地下鉄/バス無料」「医療費助成」がどう違うか。引っ越し前に知りたい格差。</p>
-    </a>
-    <a class="card" href="articles/shinkansen-airplane-discount.html">
-      <span class="cat">交通割引</span>
-      <h3>新幹線・飛行機の障害者割引ガイド</h3>
-      <p>JR・新幹線・ANA/JALの割引と買い方。2025年から精神障害者保健福祉手帳も鉄道割引の対象に。</p>
-    </a>
-    <a class="card" href="articles/koei-jutaku-bairitsu.html">
-      <span class="cat">住まい</span>
-      <h3>公営住宅の当選倍率まとめ</h3>
-      <p>都営・県営・市営の応募倍率を主要都市ぶん出典つきで（順次拡充）。障害者・ひとり親が当選しやすくなる優遇の仕組みも。</p>
-    </a>
-    <a class="card" href="articles/koei-danchi-ranking.html">
-      <span class="cat">住まい</span>
-      <h3>団地別 応募倍率ランキング（12市82住戸）</h3>
-      <p>12市が公表した団地・住戸別の倍率を1枚に集約。最高292倍（仙台）から応募ゼロの34住戸まで、市平均の何倍かつきで一覧。CSV配布。</p>
-    </a>
-    <a class="card" href="articles/koei-tokyo.html">
-      <span class="cat">住まい</span>
-      <h3>都営住宅の倍率は何倍？（東京都）</h3>
-      <p>令和7年5月定期募集の平均5.6倍を、募集区分別（世帯向・子育て向・単身向）と区市町別（千代田区49.7倍〜町田市1.1倍）で一覧に。住戸別の実例と当選確率シミュレーターつき。</p>
-    </a>
-    <a class="card" href="articles/koei-hairiyasui.html">
-      <span class="cat">住まい</span>
-      <h3>市営住宅に入りやすい人とは？</h3>
-      <p>優遇される世帯（障害者・高齢者・ひとり親など）と、倍率優遇・ポイント方式・落選回数優遇の違い。単身入居の条件と当選確率を上げる方法。</p>
-    </a>
-    <a class="card" href="articles/shogai-nenkin-keisanki.html">
-      <span class="cat">障害年金・計算機</span>
-      <h3>障害年金はいくら？計算機</h3>
-      <p>受給額・遡及請求で戻る額・更新で級落ちする確率・医療費/交通/家賃/税まで合算した「暮らしに回る実額」を1ページで計算。</p>
-    </a>
-    <a class="card" href="articles/shogai-nenkin-basics.html">
-      <span class="cat">障害年金</span>
-      <h3>障害年金の基礎と「更新」当事者ガイド</h3>
-      <p>仕組み・金額の考え方と、更新（障害状態確認届）で級落ち・支給停止を防ぐポイント。</p>
-    </a>
-    <a class="card" href="articles/shogai-nenkin-toukei.html">
-      <span class="cat">障害年金・統計</span>
-      <h3>数字で見る障害年金（更新の継続96.7%）</h3>
-      <p>初回は厳しく、更新はほぼ落ちない——不支給の地域差と再認定データ（継続96.7%・悪化約1.9%）を出典つきで。</p>
-    </a>
-    <a class="card" href="articles/shogaisha-kojo-tax.html">
-      <span class="cat">税・控除</span>
-      <h3>障害者控除で税金はいくら戻る？</h3>
-      <p>所得税・住民税の控除額、特別障害者・同居特別障害者、年末調整／確定申告での申告方法。</p>
-    </a>
-    <a class="card" href="articles/shurou-ikou-koyou.html">
-      <span class="cat">就労・雇用</span>
-      <h3>障がい者雇用と就労移行支援の仕組み</h3>
-      <p>障害者雇用枠と一般枠の違い、就労移行支援・A型/B型、使う前に知っておきたいこと。</p>
-    </a>
-    <a class="card" href="about.html">
-      <span class="cat">このサイト</span>
-      <h3>フクシルについて・体験の寄せ方</h3>
-      <p>運営方針・免責・あなたの街の制度や体験をどう共有するか。</p>
-    </a>
+  <h2>公営住宅の倍率を都市ごとに</h2>
+  <div class="related">
+    <ul>
+      <li><a href="articles/koei-jutaku-bairitsu.html">公営住宅の当選倍率まとめ</a>（都営・県営・市営を主要都市ぶん。優遇の仕組みも）</li>
+      <li>都市別：<a href="articles/koei-tokyo.html" style="white-space:nowrap">東京都営</a>／<a href="articles/koei-osaka.html" style="white-space:nowrap">大阪</a>／<a href="articles/koei-nagoya.html" style="white-space:nowrap">名古屋</a>／<a href="articles/koei-sapporo.html" style="white-space:nowrap">札幌</a>／<a href="articles/koei-kawasaki.html" style="white-space:nowrap">川崎</a>／<a href="articles/koei-fukuoka.html" style="white-space:nowrap">福岡</a>（ほかの都市はまとめから）</li>
+      <li><a href="koei/bairitsu-suii/">市営住宅の倍率の推移</a>（札幌・川崎・相模原・横浜の募集回ごとの実際の倍率）／<a href="articles/koei-danchi-ranking.html">団地別 応募倍率ランキング（12市82住戸）</a></li>
+      <li>毎回すいている申込先（区ごとの相場と混んでいる住宅の実名は無料）：<a href="toei/" style="white-space:nowrap">都営住宅</a>／<a href="yokohama/" style="white-space:nowrap">横浜市営</a>／<a href="kawasaki/" style="white-space:nowrap">川崎市営</a>／<a href="shizuoka/" style="white-space:nowrap">静岡市営</a></li>
+    </ul>
+  </div>
+
+  <h2>そのほかの記事</h2>
+  <div class="related">
+    <ul>
+      <li>生活保護：<a href="articles/seikatsuhogo-shinsei-jichitai.html">却下率、自治体でこれだけ違う（129機関）</a>／<a href="articles/seikatsuhogo-jisshitsu.html">生活保護費の「実質」はどこが厚いか</a></li>
+      <li>お金の相談：<a href="articles/shakkin-kakei-soudan.html">借金と家計の相談は、どこまで受けてもらえるのか</a>／<a href="articles/jiko-hasan-chizu.html">自己破産が多い県は、弁護士が多い県ではなかった</a></li>
+      <li>介護：<a href="houkatsu/">町名から担当の地域包括支援センターを探す</a>／<a href="articles/kaigo-jigyosho-genshou.html">介護事業所はどれだけ消えたか</a></li>
+      <li>障害年金：<a href="articles/shogai-nenkin-toukei.html">数字で見る障害年金（更新の継続96.7%）</a></li>
+      <li>自治体・就労：<a href="articles/jichitai-transport-medical.html">交通・医療費はどこまで無料？三大都市比較</a>／<a href="articles/shurou-ikou-koyou.html">障がい者雇用と就労移行支援の仕組み</a></li>
+      <li><a href="about.html">フクシルについて・体験の寄せ方</a></li>
+    </ul>
   </div>
 
   <section class="contribute">
