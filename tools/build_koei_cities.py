@@ -426,7 +426,7 @@ PAGE = r"""<!DOCTYPE html>
 </footer>
 @@CALCJS@@
 <script src="../assets/aff.js" defer></script>
-<script src="../assets/ev.js?v=20260908a" defer></script>
+<script src="../assets/ev.js?v=20261007a" defer></script>
 <script src="../assets/buy.js?v=20260917a" defer></script>
 </body>
 </html>
