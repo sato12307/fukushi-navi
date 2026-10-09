@@ -333,8 +333,17 @@ ${annualRows(rs, hh)}
   <p class="mini-note">使った料率（${esc(rs.nendo)}・${esc(rs.name)}）：</p>
   <ul class="mini-note">
   ${rateList(rs)}
-  </ul>`
+  </ul>
+  ${taishokuLink(r)}`
 }
+// 退職後の国保しらべ（taishoku-kokuho.com・同じ運営・式はこの kokuho-lib を使う）。料率を確かめた東京都・大阪府の区市町村は、
+// その区市町村のページ（会社都合の軽減の年額・任意継続とどちらが安いか）へ直接つなぐ。
+// ★2026-10-09：退職後の国保しらべの区市町村のページを Bing がまだ1枚も見つけていない（Bing が読んでいるのはトップの数枚だけ）。
+//   Bing がよく読むこの面から同じ区市町村のページへ道を付ける。退職後の国保しらべが扱うのは東京都と大阪府だけ＝それ以外は付けない
+const TAISHOKU = 'https://taishoku-kokuho.com'
+const taishokuLink = (r) => (/^(13|27)/.test(r.code) && kSetOf(r.code)
+  ? `<div class="callout note"><p><span class="tag">会社を辞めて国保に入る人</span>倒産・解雇・雇止めなどで離職した65歳未満の人は、前年の給与を3割として国保を計算してもらえます（届け出が必要）。<a href="${TAISHOKU}/shi/${r.code}/">${esc(r.city)}の会社都合の軽減の年額</a>と、<a href="${TAISHOKU}/ninkei/?c=${r.code}">任意継続とどちらが安いか</a>は、退職後の国保しらべ（同じ運営）にあります。</p></div>`
+  : '')
 
 // ── 7. 市区町村のページ ─────────────────────────────────────────────────────────
 const muniPage = (r) => {
@@ -370,7 +379,7 @@ const muniPage = (r) => {
   const life = []
   life.push(`<li><strong>生活保護の級地</strong>：${esc(r.kyuchi)}。生活保護の基準額（生活扶助・住宅扶助）もこの級地で決まります（<a href="${up}articles/seikatsuhogo-keisanki.html">生活保護の計算機</a>）。</li>`)
   const sr = seihoOf(r)
-  if (sr) life.push(`<li><strong>生活扶助（単身・30歳）</strong>：月${sr.seikatsu.toLocaleString('ja-JP')}円（令和8年4月の基準）。電気代や物価と並べた比較は<a href="${up}articles/seikatsuhogo-jisshitsu.html">生活保護費の「実質」比較</a>。</li>`)
+  if (sr) life.push(`<li><strong>生活扶助（単身・30歳）</strong>：月${sr.seikatsu.toLocaleString('ja-JP')}円（令和8年10月からの基準・特例加算2,500円を含む）。電気代や物価と並べた比較は<a href="${up}articles/seikatsuhogo-jisshitsu.html">生活保護費の「実質」比較</a>。</li>`)
   const jf = jutakuOf(r)
   if (jf) {
     const y = jf.row.yen

@@ -42,6 +42,8 @@ const OUT = path.join(ROOT, 'articles', 'seikatsuhogo-jisshitsu.html')
 const DRY = process.argv.includes('--dry')
 // ★toISOString() はUTC。日本時間の朝は前日の日付になる（実際に1日ずれた）。JSTに直す。
 const TODAY = new Date(Date.now() + 9 * 3600 * 1000).toISOString().slice(0, 10)
+// 公開日は最初に出した日のまま（作り直すたびに今日にしない）。初回は 2026-09-28
+const PUBLISHED = '2026-09-28'
 
 const D = JSON.parse(fs.readFileSync(SRC, 'utf8'))
 const num = (n) => Number(Math.round(n)).toLocaleString('ja-JP')
@@ -163,7 +165,7 @@ const html = `<!DOCTYPE html>
   "headline": "生活保護費の「実質」はどこが厚いか【${rows.length}市・物価と電気代で割り戻し】",
   "description": "生活扶助を地域の消費者物価地域差指数で割り戻し、電気代を差し引いた実質額を全国${rows.length}市で比較した。",
   "inLanguage": "ja",
-  "datePublished": "${TODAY}",
+  "datePublished": "${PUBLISHED}",
   "dateModified": "${TODAY}",
   "author": { "@type": "Organization", "name": "フクシル" },
   "publisher": { "@type": "Organization", "name": "フクシル" },
@@ -265,7 +267,7 @@ ${rows.slice(-5).map((r, i) => `      <tr><td>${rows.length - 4 + i}</td><th>${r
   </div>
 
   <div class="callout note">
-    <p><span class="tag">あわせて読みたい</span>ご自身の世帯の額は<a href="seikatsuhogo-keisanki.html">生活保護の支給額シミュレーター</a>（全国の市区町村に対応）。申請が通るかどうかは<a href="seikatsuhogo-shinsei-jichitai.html">自治体別の却下率</a>で。家賃を下げるなら<a href="koei-jutaku-bairitsu.html">公営住宅の倍率データ</a>もどうぞ。</p>
+    <p><span class="tag">あわせて読みたい</span>ご自身の世帯の額は<a href="seikatsuhogo-keisanki.html">生活保護の支給額シミュレーター</a>（全国の市区町村に対応）。申請が通るかどうかは<a href="seikatsuhogo-shinsei-jichitai.html">自治体別の却下率</a>で。施設を紹介されたら<a href="muryou-teigaku-shukuhakusho.html">無料低額宿泊所とは（手元に残る額）</a>。家賃を下げるなら<a href="koei-jutaku-bairitsu.html">公営住宅の倍率データ</a>もどうぞ。</p>
   </div>
 
   <h2>出典</h2>
