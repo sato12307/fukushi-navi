@@ -1,0 +1,38 @@
+{
+ "note": "追加給付の申出先一覧（data/tsuika-jichitai.json）の URL のうち、開けなかったもの。scripts/tsuika-linkcheck.mjs が書く。status 0 はつながらなかったもの。",
+ "checkedAt": "2026-10-09",
+ "listUpdated": "10月２日更新",
+ "checked": 785,
+ "bad": [
+  {
+   "name": "宜野湾市",
+   "url": "https://sandbox-ttzk.graffer.jp/city-ginowan/smart-apply/apply-procedure/5839976613282727997",
+   "status": 401
+  },
+  {
+   "name": "朝倉市",
+   "url": "https://www.city.asakura.lg.jp/soshiki/21/13162.html",
+   "status": 404
+  },
+  {
+   "name": "小平市",
+   "url": "https://www.city.kodaira.tokyo.jp/kurashi/129/129591.html",
+   "status": 404
+  },
+  {
+   "name": "三島市",
+   "url": "https://www.city.mishima.shizuoka.jp/page/35337.html",
+   "status": 404
+  },
+  {
+   "name": "直方市",
+   "url": "https://www.city.nogata.fukuoka.jp/kenko/_1208/_2175/_16835.html",
+   "status": 404
+  },
+  {
+   "name": "鶴岡市",
+   "url": "https://www.city.tsuruoka.lg.jp/kenko/seikatsuhogo/seikatsuhogo/fukushi0120260618.html",
+   "status": 404
+  }
+ ]
+}

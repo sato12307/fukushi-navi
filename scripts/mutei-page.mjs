@@ -146,8 +146,7 @@ const CSS = `table.fit{min-width:0;font-size:.86rem}table.fit th,table.fit td{pa
 .mt-form select{flex:1 1 200px}
 .mt-res{border-left:5px solid #0b6b45;background:#f3faf6;border-radius:10px;padding:10px 14px;margin:10px 0}
 .mt-big{font-size:1.08rem;margin:0 0 6px}.mt-big strong{font-size:1.3rem;color:#0b6b45}
-.fac h3{margin-top:22px}
-@media (prefers-color-scheme: dark){.mt-form{background:#181e26;border-color:#28313d}.mt-form select,.mt-form input{background:#10141a;color:#eef2f7;border-color:#28313d}.mt-res{background:#122a22}.mt-big strong{color:#5fd6a0}}`
+.fac h3{margin-top:22px}`
 
 const esc = (s) => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;')
 const TITLE = '無料低額宿泊所とは？救護施設・日常生活支援住居施設との違いと、生活保護費から手元に残る額【2026年度】'
@@ -283,7 +282,7 @@ ${JSON.stringify({ '@context': 'https://schema.org', '@type': 'FAQPage', mainEnt
   ${FAQ.map(([q, ans]) => `<h3>${esc(q)}</h3>\n  <p>${esc(ans)}</p>`).join('\n  ')}
 
   <div class="callout note">
-    <p><span class="tag">あわせて読みたい</span>世帯の人数や加算を入れた保護費は<a href="seikatsuhogo-keisanki.html">生活保護の支給額シミュレーター</a>。申請が通るかどうかの目安は<a href="seikatsuhogo-shinsei-jichitai.html">自治体別の却下率</a>。施設を出て自分の住まいに移るなら<a href="koei-jutaku-bairitsu.html">公営住宅の倍率データ</a>もどうぞ。</p>
+    <p><span class="tag">あわせて読みたい</span>2013年8月〜2026年3月に保護を受けていた人は<a href="seikatsuhogo-tsuika-kyufu.html">生活保護の追加給付（対象・いくら・申出先）</a>を確かめてください。世帯の人数や加算を入れた保護費は<a href="seikatsuhogo-keisanki.html">生活保護の支給額シミュレーター</a>。申請が通るかどうかの目安は<a href="seikatsuhogo-shinsei-jichitai.html">自治体別の却下率</a>。施設を出て自分の住まいに移るなら<a href="koei-jutaku-bairitsu.html">公営住宅の倍率データ</a>もどうぞ。</p>
   </div>
 
   <h2>出典</h2>
@@ -314,7 +313,8 @@ console.log(`確かめ：計算機の早見表・生活保護の実質のデー�
 if (DRY) process.exit(0)
 
 // 中身が同じなら書き直さない（lastmod を進めない）。比べるのは「最終更新」と dateModified を除いた本文
-const strip = (s) => s.replace(/最終更新：\d{4}-\d{2}-\d{2}/, '').replace(/"dateModified": "\d{4}-\d{2}-\d{2}"/, '')
+// 改行コードの違い（core.autocrlf で取り出すと CRLF になる）は変更と数えない
+const strip = (s) => s.replace(/\r/g, '').replace(/最終更新：\d{4}-\d{2}-\d{2}/, '').replace(/"dateModified": "\d{4}-\d{2}-\d{2}"/, '')
 const prev = fs.existsSync(OUT) ? fs.readFileSync(OUT, 'utf8') : null
 const changed = !prev || strip(prev) !== strip(html)
 if (changed) fs.writeFileSync(OUT, html)
