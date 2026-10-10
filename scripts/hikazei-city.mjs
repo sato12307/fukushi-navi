@@ -25,7 +25,7 @@ import fs from 'node:fs'
 import path from 'node:path'
 import vm from 'node:vm'
 import { fileURLToPath } from 'node:url'
-import { page, esc, SITE, readPrev, pageDiff } from './shogai-kojo-page.mjs'
+import { page, esc, SITE, readPrev, pageDiff, readSitemap, writeSitemap, sitemapLastmods, putUrls } from './shogai-kojo-page.mjs'
 import { offerHub } from './offer-block.mjs'
 import { D, L, NS, maxIncome, maxPension, kintouLim, shotokuLim, SPECIAL_LIM, man, manT, selfCheck } from './hikazei-lib.mjs'
 import { K as KK, selfCheck as kokuhoCheck, lines as kLines, annual as kAnnual, setOf as kSetOf, yen, rateTxt, lvTxt } from './kokuho-lib.mjs'
@@ -909,20 +909,15 @@ const strays = fs.readdirSync(path.join(ROOT, 'hikazei')).filter((d) => /^\d{5}$
 if (strays.length) console.warn(`一覧に無い市区町村のページが残っています（手で確かめて消す）: ${strays.join(', ')}`)
 
 // sitemap.xml：lastmod は中身が変わった日だけ進める（ビルドした日にしない）。[[bing-index-coverage-gap]]
-const smPath = path.join(ROOT, 'sitemap.xml')
-const sm = fs.readFileSync(smPath, 'utf8')
-const prevMod = new Map([...sm.matchAll(/<url><loc>([^<]+)<\/loc><lastmod>([^<]+)<\/lastmod>/g)].map((m) => [m[1], m[2]]))
+// ★読み書きと行の入れ替えは shogai-kojo-page.mjs の readSitemap・putUrls・writeSitemap（改行を LF にそろえる・2026-10-11）。
+//   CRLF のまま読んでいたので、行末の `\n?` が \r で外れ、1回回すたびに1URLごとの空行（1,791行）を作っていた。
+const sm = readSitemap()
+const prevMod = sitemapLastmods(sm)
 const entry = (loc, pri) => {
   const full = `${SITE}${loc}`
   const lm = changedLocs.has(loc) || !prevMod.has(full) ? TODAY : prevMod.get(full)
   return `<url><loc>${full}</loc><lastmod>${lm}</lastmod><changefreq>monthly</changefreq><priority>${pri}</priority></url>`
 }
-const ours = new Map(out.map(([, loc, , pri]) => [`${SITE}${loc}`, entry(loc, pri)]))
-let smNext = sm.replace(/[ \t]*<url><loc>([^<]+)<\/loc>[\s\S]*?<\/url>\n?/g, (whole, loc) => {
-  if (!ours.has(loc)) return whole
-  const e = ours.get(loc); ours.delete(loc)
-  return `  ${e}\n`
-})
-if (ours.size) smNext = smNext.replace('</urlset>', `${[...ours.values()].map((e) => `  ${e}`).join('\n')}\n</urlset>`)
-if (smNext !== sm) fs.writeFileSync(smPath, smNext)
+const smNext = putUrls(sm, out.map(([, loc, , pri]) => [`${SITE}${loc}`, entry(loc, pri)]))
+writeSitemap(smNext)
 console.log(`書き出し ${changedN}枚 ／ sitemap ${smNext !== sm ? '更新' : '変更なし'}（${[...smNext.matchAll(/<loc>/g)].length}URL）`)

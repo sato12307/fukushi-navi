@@ -14,7 +14,7 @@
 import fs from 'node:fs'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
-import { page, esc, SITE, readPrev, pageDiff } from './shogai-kojo-page.mjs'
+import { page, esc, SITE, readPrev, pageDiff, writePage, readSitemap, writeSitemap } from './shogai-kojo-page.mjs'
 import { suiiAll, suiiSummary, suiiTable, suiiDropped, yokohamaYugu, YOKOHAMA_YUGU, SMALL } from './koei-suii-lib.mjs'
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..')
@@ -114,28 +114,24 @@ const html = page({
   },
 })
 const out = path.join(ROOT, 'koei', 'bairitsu-suii', 'index.html')
-fs.mkdirSync(path.dirname(out), { recursive: true })
 // 日付（最終更新・dateModified）だけの差は「同じ」と数えて書き直さない。改行と計測の埋め込みだけの差は書き直すが、
 // lastmod も面の日付も前のまま残す（sitemap と面の「最終更新」を食い違わせない）。比べ方は shogai-kojo-page.mjs の pageDiff（2026-10-08）。
-const prev = readPrev(out)
+// ★2026-10-11 この書き出し方を shogai-kojo-page.mjs の writePage に移し、面に日付を入れるほかの生成器と共通にした。
 const DATES = [/最終更新：\d{4}-\d{2}-\d{2}/, /"dateModified": "[^"]*"/]
-const noDate = (t) => DATES.reduce((s, re) => s.replace(re, ''), t)
-const kind = pageDiff(prev, html, noDate)
+const kind = writePage(out, html, DATES)
 const changed = kind === 'changed'
-if (changed) fs.writeFileSync(out, html)
-else if (kind === 'embed') fs.writeFileSync(out, DATES.reduce((h, re) => h.replace(re, (m) => (re.exec(prev) || [m])[0]), html))
 
 // ── sitemap（中身が変わったときだけ lastmod を進める）────────────────────────────
+// ★読み書きは shogai-kojo-page.mjs の readSitemap・writeSitemap（改行を LF にそろえる・2026-10-11）
 {
-  const smPath = path.join(ROOT, 'sitemap.xml')
-  const sm = fs.readFileSync(smPath, 'utf8')
+  const sm = readSitemap()
   const loc = `${SITE}/koei/bairitsu-suii/`
   const entry = `<url><loc>${loc}</loc><lastmod>${today}</lastmod><changefreq>monthly</changefreq><priority>0.9</priority></url>`
   const re = new RegExp(`<url><loc>${loc.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}</loc>[\\s\\S]*?</url>`)
   let next = sm
   if (!re.test(sm)) next = sm.replace('</urlset>', `  ${entry}\n</urlset>`)
   else if (changed) next = sm.replace(re, entry)
-  if (next !== sm) fs.writeFileSync(smPath, next)
+  writeSitemap(next)
 }
 
 console.log(`■ 看板 /koei/bairitsu-suii/ ${changed ? '書き出し' : kind === 'embed' ? '計測の埋め込みだけ書き直し・lastmod は据え置き' : '変化なし'}（載せた市 ${shown.length}：${rank.map((s) => `${s.city}${s.stats.n}回`).join('・')}）`)

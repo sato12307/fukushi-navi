@@ -21,7 +21,7 @@
 import fs from 'node:fs'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
-import { page, esc, SITE, readPrev, pageDiff } from './shogai-kojo-page.mjs'
+import { page, esc, SITE, readPrev, pageDiff, readSitemap, writeSitemap } from './shogai-kojo-page.mjs'
 // 有料の資料への入口（2026-09-28 ユーザー指示「撒き餌の面から有料への導線を目立つところに」）。文面は offer-block.mjs。
 import { offerHub } from './offer-block.mjs'
 
@@ -181,8 +181,8 @@ if (DRY) {
 }
 
 // sitemap（手書きで育てたもの。/mitoshi/kogaku/ の1行だけ足す・置き換える）
-const smPath = path.join(ROOT, 'sitemap.xml')
-const sm = fs.readFileSync(smPath, 'utf8')
+// 読み書きは shogai-kojo-page.mjs の readSitemap・writeSitemap（改行を LF にそろえる・2026-10-11）
+const sm = readSitemap()
 const loc = `<loc>${SITE}/mitoshi/kogaku/</loc>`
 const outPath = path.join(ROOT, OUT_REL)
 // 改行と計測の埋め込みだけの違いでは lastmod を進めない（shogai-kojo-page.mjs の pageDiff・2026-10-08）
@@ -197,5 +197,5 @@ if (sm.includes(loc)) {
 
 fs.mkdirSync(path.dirname(outPath), { recursive: true })
 fs.writeFileSync(outPath, html)
-if (smNext !== sm) fs.writeFileSync(smPath, smNext)
+writeSitemap(smNext)
 console.log(`${OUT_REL}（${changed ? '更新' : kind === 'embed' ? '計測の埋め込みだけ更新・lastmod は据え置き' : '変更なし'}）／ 当初案より低く決まった ${lowerN}区分・高く ${higherN}区分・最大の差 ${maxGapB.label} ${yen(maxGap)}`)

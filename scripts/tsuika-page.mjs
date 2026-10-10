@@ -24,6 +24,7 @@ import fs from 'node:fs'
 import path from 'node:path'
 import crypto from 'node:crypto'
 import { fileURLToPath } from 'node:url'
+import { writePage, readSitemap, writeSitemap, sitemapLastmods, putUrls } from './shogai-kojo-page.mjs'
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..')
 const DRY = process.argv.includes('--dry')
@@ -627,20 +628,21 @@ console.log(`  面 ${PAGES.length}枚・最大 ${(Math.max(...sizes) / 1024).toF
 if (DRY) process.exit(0)
 
 // 改行コードの違い（core.autocrlf で取り出すと CRLF になる）は変更と数えない
-const strip = (s) => s.replace(/\r/g, '').replace(/最終更新：\d{4}-\d{2}-\d{2}/, '').replace(/"dateModified": "\d{4}-\d{2}-\d{2}"/g, '')
-const SM = path.join(ROOT, 'sitemap.xml')
-let sm = fs.readFileSync(SM, 'utf8')
+// ★比べ方と書き出しは shogai-kojo-page.mjs の writePage（pageDiff）、sitemap の読み書きと行の入れ替えも同じ所（改行を LF に
+//   そろえる）にまとめた（2026-10-11）。比べるときに外すのは、回した日が入る「最終更新」と dateModified。
+const DATES = [/最終更新：\d{4}-\d{2}-\d{2}/, /"dateModified": "\d{4}-\d{2}-\d{2}"/g]
+const sm = readSitemap()
+const prevMod = sitemapLastmods(sm)
 let wrote = 0, smAdd = 0, smBump = 0
-for (const p of PAGES) {
-  const prev = fs.existsSync(p.file) ? fs.readFileSync(p.file, 'utf8') : null
-  const changed = !prev || strip(prev) !== strip(p.html)
-  if (changed) { fs.mkdirSync(path.dirname(p.file), { recursive: true }); fs.writeFileSync(p.file, p.html); wrote++ }
-  const line = `  <url><loc>${p.url}</loc><lastmod>${TODAY}</lastmod><priority>${p.pri}</priority></url>`
-  const re = new RegExp(`  <url><loc>${p.url.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}</loc><lastmod>[^<]+</lastmod>[^\\n]*</url>`)
-  if (!re.test(sm)) { sm = sm.replace('</urlset>', `${line}\n</urlset>`); smAdd++ }
-  else if (changed) { sm = sm.replace(re, line); smBump++ }
-}
-if (smAdd || smBump) fs.writeFileSync(SM, sm)
+const rows = PAGES.map((p) => {
+  const kind = writePage(p.file, p.html, DATES)
+  if (kind !== 'same') wrote++
+  const prev = prevMod.get(p.url)
+  if (!prev) smAdd++
+  else if (kind === 'changed') smBump++
+  return [p.url, `<url><loc>${p.url}</loc><lastmod>${kind === 'changed' || !prev ? TODAY : prev}</lastmod><priority>${p.pri}</priority></url>`]
+})
+writeSitemap(putUrls(sm, rows))
 const IDXF = path.join(ROOT, 'assets', 'tsuika-index.js')
 if (!fs.existsSync(IDXF) || fs.readFileSync(IDXF, 'utf8') !== SEARCH_JS) fs.writeFileSync(IDXF, SEARCH_JS)
 console.log(`書いた面 ${wrote}枚／${PAGES.length}・sitemap に足した ${smAdd}行・lastmod を進めた ${smBump}行`)

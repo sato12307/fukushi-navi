@@ -16,7 +16,7 @@
 import fs from 'node:fs'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
-import { page, esc, SITE } from './shogai-kojo-page.mjs'
+import { page, esc, SITE, writePage, readSitemap, writeSitemap, sitemapLastmods, putUrls } from './shogai-kojo-page.mjs'
 import { kanryoScript } from './kanryo-script.mjs'
 // ★特商法表記に並べる商品の一覧は、政令市の正典（koei-lib の CITIES）から引く。
 //   ここに市名を書き写すと、市を足したときに**表記だけが古いまま残る**。
@@ -69,11 +69,11 @@ const options = [...byPref.entries()].map(([pref, list]) =>
     ? `<option value="${i.code}" data-nokijun="1" data-name="${esc(i.pref)}${esc(i.city)}">${esc(i.pref)}${esc(i.city)}${NOKIJUN_LABEL}</option>`
     : `<option value="${i.code}">${esc(i.pref)}${esc(i.city)}</option>`)).join('')}</optgroup>`).join('')
 
-const write = (rel, html) => {
-  const p = path.join(ROOT, rel)
-  fs.mkdirSync(path.dirname(p), { recursive: true })
-  fs.writeFileSync(p, html)
-}
+// ★中身が変わった面だけ書き直し、sitemap の lastmod もそのときだけ今日にする（2026-10-11）。それまで4枚を毎回書き直し、
+//   3行の lastmod を毎回今日にしていた。/pack/ の「最終更新」は回した日なので、比べるときは外す（shogai-kojo-page.mjs の
+//   writePage。日付だけ違う面は書き直さず、面の日付も lastmod も前のまま）。
+const kinds = {}
+const write = (rel, html) => { kinds[rel] = writePage(path.join(ROOT, rel), html, [/最終更新：\d{4}-\d{2}-\d{2}/]) }
 
 // ── /pack/ ──────────────────────────────────────────────────────────────────
 write('pack/index.html', page({
@@ -356,17 +356,18 @@ write('kiyaku/index.html', page({
 // ── sitemap に載せる（kanryo は購入者専用なので載せない）────────────────────
 // ★自分のぶんだけ入れ替える。build.mjs が /shogai-kojo/ を、こちらが /pack/ 等を持つ。
 //   互いのぶんを消さないよう、対象のパスを限定して置換すること。
-// ★改行は元のファイルに合わせる（2026-10-06）。手元の作業コピーは core.autocrlf=true で CRLF のことがあり、
-//   LF 決め打ちで消して足すと、消した行の CR が残ったり CRLF と LF の行が混ざったりして、回すたびに手で戻していた。
-//   多いほうの改行で足し、消す行は行末の改行ごと消す。
-const smPath = path.join(ROOT, 'sitemap.xml')
-let sm = fs.readFileSync(smPath, 'utf8')
-const nCrlf = (sm.match(/\r\n/g) || []).length
-const EOL = nCrlf > (sm.match(/\n/g) || []).length - nCrlf ? '\r\n' : '\n'
-sm = sm.replace(/^[ \t]*<url>(?:(?!<\/url>)[\s\S])*\/(?:pack|tokushoho|kiyaku)\/[\s\S]*?<\/url>[ \t]*\r?\n?/gm, '')
-const add = ['/pack/', '/tokushoho/', '/kiyaku/']
-  .map((u) => `  <url><loc>${SITE}${u}</loc><lastmod>${TODAY}</lastmod><priority>0.7</priority></url>`)
-sm = sm.replace('</urlset>', add.join(EOL) + EOL + '</urlset>')
-fs.writeFileSync(smPath, sm)
+// ★改行の扱いは shogai-kojo-page.mjs の readSitemap・writeSitemap にまとめた（LF にそろえて読み、LF で書く・2026-10-11）。
+//   2026-10-06 に、手元の CRLF に合わせて足す形にしていた（消した行の CR が残ったり、CRLF と LF の行が混ざったりしたため）。
+// ★行はその場で入れ替える（putUrls・2026-10-11）。消してから末尾に足していたので、ほかの生成器が後ろに足した行と
+//   順番が毎回入れ替わっていた。
+{
+  const sm = readSitemap()
+  const prevMod = sitemapLastmods(sm)
+  const rows = [['/pack/', 'pack/index.html'], ['/tokushoho/', 'tokushoho/index.html'], ['/kiyaku/', 'kiyaku/index.html']].map(([u, rel]) => {
+    const loc = `${SITE}${u}`
+    return [loc, `<url><loc>${loc}</loc><lastmod>${kinds[rel] === 'changed' || !prevMod.has(loc) ? TODAY : prevMod.get(loc)}</lastmod><priority>0.7</priority></url>`]
+  })
+  writeSitemap(putUrls(sm, rows, (loc) => ['/pack/', '/tokushoho/', '/kiyaku/'].some((u) => loc.startsWith(`${SITE}${u}`))))
+}
 
 console.log(`販売ページ 4枚（/pack/ ・/pack/kanryo/ ・/tokushoho/ ・/kiyaku/）／ 選択できる市区町村 ${items.length}`)

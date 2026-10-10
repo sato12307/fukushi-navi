@@ -15,6 +15,7 @@
 import fs from 'node:fs'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
+import { readSitemap } from './shogai-kojo-page.mjs'
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..')
 const CHECK = process.argv.includes('--check')
@@ -58,7 +59,9 @@ const walk = (dir) => {
 walk(ROOT)
 
 // 2. Google 用のサイトマップ（型の面を抜く）
-const sm = fs.readFileSync(path.join(ROOT, 'sitemap.xml'), 'utf8')
+//   読むのは shogai-kojo-page.mjs の readSitemap（改行を LF にそろえる・2026-10-11）。手元で CRLF のまま読むと、下の `.*\n` が
+//   \r で外れて1行も抜けない（Actions は LF で取り出すので本番には出ていなかった）。
+const sm = readSitemap()
 let dropped = 0
 const out = sm.replace(/^\s*<url><loc>([^<]+)<\/loc>.*\n/gm, (line, loc) => {
   const rel = loc.startsWith(SITE) ? loc.slice(SITE.length) : loc

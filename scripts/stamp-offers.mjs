@@ -18,7 +18,7 @@
 import fs from 'node:fs'
 import path from 'node:path'
 import { offerPackLeaf, offerToeiLeaf, jumpPack, jumpToei, offerHub } from './offer-block.mjs'
-import { pageDiff } from './shogai-kojo-page.mjs'
+import { pageDiff, readCommitted, stampBefore, readSitemap, writeSitemap } from './shogai-kojo-page.mjs'
 import { CITIES } from './koei-lib.mjs'
 
 // ★2026-09-08(2) 東京都以外の記事から都営の売り場を外した
@@ -177,15 +177,22 @@ for (const f of files) {
   //   すでに入っている面は永久に古いままになる（売り場カードで同じ穴を踏んでいる）。
   const jumpMark = /\n*<!-- jump -->[\s\S]*?<!-- \/jump -->\n*/
   s = s.replace(jumpMark, '\n\n')
+  // ★箱は shogai-kojo-page.mjs の stampBefore で入れる（箱の前後の空行を1つにそろえる・2026-10-11）。
+  //   月次の Actions で build_koei_cities.py が書き直した koei-tokyo.html は見出しの前に空行が2つあり、そこへ貼ると2つ、
+  //   手元で貼り直すと1つになって、中身が同じでも「変わった」になっていた。
   if (t.jumpBefore) {
-    if (!t.jumpBefore.test(s)) { failed.push(`${f}（冒頭の案内の位置）`); continue }
-    s = s.replace(t.jumpBefore, (m) => `<!-- jump -->\n${jump(t.kind)}\n  <!-- /jump -->\n\n${m}`)
+    const next = stampBefore(s, t.jumpBefore, `<!-- jump -->\n${jump(t.kind)}\n  <!-- /jump -->`)
+    if (next == null) { failed.push(`${f}（冒頭の案内の位置）`); continue }
+    s = next
     jumped++
   }
   if (t.before) {
     if (had) s = s.replace(marked, '\n\n')            // いま貼ってある場所から剥がす
-    if (!t.before.test(s)) { failed.push(f); continue }
-    s = s.replace(t.before, (m) => `${block(t)}\n\n${m}`)
+    // ★②の見出しの直前に入れる。stamp-kaitei.mjs の箱（<!-- kaitei:… -->）が同じ見出しの前にある記事では、
+    //   向こうが売り場の箱の前に入れるので「kaitei → この箱 → ②」の並びになる（2026-10-11 に並びを1つに決めた）。
+    const next = stampBefore(s, t.before, block(t))
+    if (next == null) { failed.push(f); continue }
+    s = next
     had ? moved++ : inserted++
   } else if (had) { s = s.replace(marked, `\n\n${block(t)}\n\n`); replaced++ }
   else { failed.push(f); continue }
@@ -193,7 +200,9 @@ for (const f of files) {
   // ★変わったかは改行をそろえて比べる（shogai-kojo-page.mjs の pageDiff・2026-10-08）。書き戻した out と raw を比べていたので、
   //   CRLF と LF の混ざった記事（koei-nerai.mjs が CRLF の記事に LF の表を差し込んでいた）は、中身が同じでも lastmod が進む
   //   （koei-jutaku-bairitsu.html。git が取り出した写しで koei-nerai → stamp-offers の順に回して再現）。
-  if (pageDiff(raw, s) === 'changed') changedFiles.push(f)
+  // ★比べる相手は取り込み済みの版（git の HEAD。無ければ置いてある記事・2026-10-11）。月次の Actions では、置いてある
+  //   koei-tokyo.html が build_koei_cities.py の書き直した箱なしの形なので、それと比べると毎月「変わった」になっていた。
+  if (pageDiff(readCommitted(p) ?? raw, s) === 'changed') changedFiles.push(f)
   fs.writeFileSync(p, out)
 }
 // 撒き餌の面の入口。上のカードを貼り終えたあとの記事に入れる（同じ記事に両方ある面がある）。
@@ -202,12 +211,11 @@ for (const [f, h] of Object.entries(HUBS)) {
   const p = 'articles/' + f
   const raw = fs.readFileSync(p, 'utf8')
   const crlf = raw.includes('\r\n')
-  let s = raw.replace(/\r\n/g, '\n').replace(hubMark, '\n\n')
-  if (!h.before.test(s)) { failed.push(`${f}（入口の位置）`); continue }
-  s = s.replace(h.before, (m) => `<!-- hub:${h.topic} -->\n${offerHub(h.topic, { up: '../' })}\n  <!-- /hub -->\n\n${m}`)
+  const s = stampBefore(raw.replace(/\r\n/g, '\n').replace(hubMark, '\n\n'), h.before, `<!-- hub:${h.topic} -->\n${offerHub(h.topic, { up: '../' })}\n  <!-- /hub -->`)
+  if (s == null) { failed.push(`${f}（入口の位置）`); continue }
   hubbed++
   const out = crlf ? s.replace(/\n/g, '\r\n') : s
-  if (pageDiff(raw, s) === 'changed' && !changedFiles.includes(f)) changedFiles.push(f)
+  if (pageDiff(readCommitted(p) ?? raw, s) === 'changed' && !changedFiles.includes(f)) changedFiles.push(f)
   fs.writeFileSync(p, out)
 }
 if (failed.length) { console.error('位置が見つからない:', failed.join(', ')); process.exit(1) }
@@ -215,8 +223,9 @@ if (failed.length) { console.error('位置が見つからない:', failed.join('
 // ★2026-09-13 中身が変わった記事は sitemap.xml の lastmod を今日（日本時間）にする。
 //   売り場の抜粋（件数・列）を貼り直しても記事の lastmod は古いままで、/toei/ だけ新しい日付になっていた。
 //   変わらなかった記事の日付は動かさない。sitemap に載っていない記事は名前を出すだけで、行は足さない。
+//   読み書きは shogai-kojo-page.mjs の readSitemap・writeSitemap（改行を LF にそろえる・2026-10-11）。
 if (changedFiles.length) {
-  const smRaw = fs.readFileSync('sitemap.xml', 'utf8')
+  const smRaw = readSitemap()
   const today = new Date(Date.now() + 9 * 3600e3).toISOString().slice(0, 10)
   let sm = smRaw
   const notIn = []
@@ -225,7 +234,7 @@ if (changedFiles.length) {
     if (!re.test(sm)) { notIn.push(f); continue }
     sm = sm.replace(re, (_, a, _d, c) => a + today + c)
   }
-  if (sm !== smRaw) fs.writeFileSync('sitemap.xml', sm)
+  writeSitemap(sm)
   console.log(`中身が変わった記事 ${changedFiles.length}枚 → sitemap の lastmod を ${today} に${notIn.length ? `（sitemap に無い：${notIn.join(', ')}）` : ''}`)
 }
 

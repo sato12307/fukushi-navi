@@ -20,7 +20,7 @@ import { createHash } from 'node:crypto'
 import fs from 'node:fs'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
-import { page, esc, SITE } from './shogai-kojo-page.mjs'
+import { page, esc, SITE, writePage, readSitemap, writeSitemap, sitemapLastmods, putUrls } from './shogai-kojo-page.mjs'
 
 const ROOT = path.join(path.dirname(fileURLToPath(import.meta.url)), '..')
 const DATA = JSON.parse(fs.readFileSync(path.join(ROOT, 'data', 'calendar.json'), 'utf8'))
@@ -161,25 +161,25 @@ ${secs}
 })();
 </script>`
 
-fs.writeFileSync(path.join(OUT, 'index.html'), page({
+// ★中身が変わったときだけ書き直し、sitemap の lastmod もそのときだけ今日にする（2026-10-11）。それまで毎回書き直して
+//   lastmod を今日にしていた。面の「ページの生成日」は回した日なので、比べるときは外す（shogai-kojo-page.mjs の writePage。
+//   日付だけ違うときは書き直さず、面の生成日も lastmod も前のまま）。
+const kind = writePage(path.join(OUT, 'index.html'), page({
   title: 'くらしの福祉の予定表｜年金の支給日・制度が変わる日・公営住宅の募集をカレンダーに',
   desc: '年金の支給日（偶数月15日／土日祝は直前の平日）、生活保護の特例加算が変わる日、都営住宅や市営住宅の募集日程を、カレンダーに登録できる形（.ics）で配っています。無料・登録不要。出典つき。',
   canonical: '/calendar/',
   depth: 1,
   body,
-}))
+}), [/ページの生成日：\d{4}-\d{2}-\d{2}/])
 
-// ── sitemap に1行だけ足す（無ければ）
-const smPath = path.join(ROOT, 'sitemap.xml')
-let sm = fs.readFileSync(smPath, 'utf8')
-if (!sm.includes('<loc>https://fukushiru.com/calendar/</loc>')) {
-  sm = sm.replace(/(\s*)<\/urlset>/, `$1<url><loc>https://fukushiru.com/calendar/</loc><lastmod>${TODAY}</lastmod><changefreq>weekly</changefreq><priority>0.7</priority></url>$1</urlset>`)
-  fs.writeFileSync(smPath, sm)
-  console.log('sitemap に /calendar/ を追加')
-} else {
-  sm = sm.replace(/(<loc>https:\/\/fukushiru\.com\/calendar\/<\/loc><lastmod>)[^<]*(<\/lastmod>)/, `$1${TODAY}$2`)
-  fs.writeFileSync(smPath, sm)
-  console.log('sitemap の /calendar/ の lastmod を更新')
+// ── sitemap の1行（無ければ足す・読み書きと入れ替えは shogai-kojo-page.mjs の readSitemap・putUrls・writeSitemap）
+{
+  const sm = readSitemap()
+  const loc = `${SITE}/calendar/`
+  const prev = sitemapLastmods(sm).get(loc)
+  const lm = kind === 'changed' || !prev ? TODAY : prev
+  writeSitemap(putUrls(sm, [[loc, `<url><loc>${loc}</loc><lastmod>${lm}</lastmod><changefreq>weekly</changefreq><priority>0.7</priority></url>`]]))
+  console.log(`/calendar/ ${kind === 'changed' ? '書き出し' : kind === 'embed' ? '計測の埋め込みだけ書き直し' : '変わらず'}（sitemap の lastmod ${lm}）`)
 }
 
 console.log(`カレンダー ${DATA.calendars.length}本 / 予定 ${total}件 → calendar/`)

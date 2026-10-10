@@ -32,7 +32,7 @@
 // ─────────────────────────────────────────────────────────────────────────────
 import fs from 'node:fs'
 import path from 'node:path'
-import { page, esc, SITE, readPrev, pageDiff } from './shogai-kojo-page.mjs'
+import { page, esc, SITE, readPrev, pageDiff, readSitemap, writeSitemap } from './shogai-kojo-page.mjs'
 import { offerToeiLeaf, jumpToei } from './offer-block.mjs'
 import {
   ROOT, MIN_N, SUKI, MIN_CITY, JIKO, READ_AT, SRC, ROUNDS, rows, houses, enough,
@@ -146,8 +146,13 @@ const WAKU_LEAD = (() => {
 // ── 区市町ごとの実測 ────────────────────────────────────────────────────────
 // ★作った日は面ごとに違う。既存11本は2026-08-24、今回足した37本は今日。
 //   全部を同じ日にすると、検索側に「37本が8月からあった」と申告することになる。
+// ★2026-10-11 作った日は、今の面にある datePublished を引き継ぐ。面がまだ無いときだけ下の決まり（11本は08-24・ほかは今日）。
+//   それまで37本は回した日（TODAY）を毎回入れていたので、日が変わるたびに構造化データが変わり、中身が同じでも
+//   sitemap の lastmod が進んでいた（37本の datePublished が、出した日の 09-17 ではなく最後に回した 10-02 なのもそのため）。
 const BORN_2608 = new Set(['adachi', 'fuchu', 'hachioji', 'higashimurayama', 'itabashi', 'katsushika', 'kiyose', 'kodaira', 'koto', 'machida', 'nerima'])
 const TODAY = new Date(Date.now() + 9 * 3600e3).toISOString().slice(0, 10)
+const publishedOf = (slug) => /"datePublished": "(\d{4}-\d{2}-\d{2})"/.exec(readPrev(path.join(ROOT, 'articles', `toei-${slug}.html`)) || '')?.[1]
+  || (BORN_2608.has(slug) ? '2026-08-24' : TODAY)
 
 const stat = (city) => {
   const rs = rows.filter((r) => r.city === city)
@@ -175,7 +180,7 @@ const stat = (city) => {
   const ev = { yes: rs.filter((r) => r.ev === '有').length, no: rs.filter((r) => r.ev === '無').length }
   const ippan = en.filter((h) => !h.jiko)
   return {
-    city, slug: SLUG[city], rows: rs, houses: hs, enough: en, published: BORN_2608.has(SLUG[city]) ? '2026-08-24' : TODAY,
+    city, slug: SLUG[city], rows: rs, houses: hs, enough: en, published: publishedOf(SLUG[city]),
     zero: z.length, zeroKoho: z.reduce((a, x) => a + (x.koho || 0), 0), zHouses, ippan,
     byRound, ev,
     med: ippan.length ? r1(med(ippan.map((h) => h.med))) : null,
@@ -639,9 +644,9 @@ for (const [rel, html] of pending) {
 // ── sitemap.xml ─────────────────────────────────────────────────────────────
 //   ★中身が変わった面だけ lastmod を今日にする。変わらなかった面の日付は動かさない
 //     （毎回ぜんぶ今日にすると「いつ変わったか」が二度と分からなくなる）。
+//   ★読み書きは shogai-kojo-page.mjs の readSitemap・writeSitemap（改行を LF にそろえる・2026-10-11）。
 {
-  const smPath = path.join(ROOT, 'sitemap.xml')
-  let sm = fs.readFileSync(smPath, 'utf8')
+  let sm = readSitemap()
   const today = new Date(Date.now() + 9 * 3600e3).toISOString().slice(0, 10)
   let added = 0, touched = 0
   const entries = pending.map(([rel]) => rel).filter((rel) => rel.startsWith('articles/toei-'))
@@ -655,7 +660,7 @@ for (const [rel, html] of pending) {
       added++
     }
   }
-  fs.writeFileSync(smPath, sm)
+  writeSitemap(sm)
   // 検算：作った面がぜんぶ sitemap にあること
   const miss = entries.filter((rel) => !sm.includes(`${SITE}/${rel}<`.replace('<', '</loc>')) && !sm.includes(`<loc>${SITE}/${rel}</loc>`))
   if (miss.length) die(`sitemap に載っていない面があります: ${miss.join(', ')}`)

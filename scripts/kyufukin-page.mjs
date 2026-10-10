@@ -16,6 +16,7 @@
 import fs from 'node:fs'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
+import { writePage, readSitemap, writeSitemap, sitemapLastmods, putUrls } from './shogai-kojo-page.mjs'
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..')
 const DRY = process.argv.includes('--dry')
@@ -232,14 +233,13 @@ console.log(`確かめ：拡充の額＝非課税の額×1/3・1/4（10円単位
 if (DRY) process.exit(0)
 
 // 中身が同じなら書き直さない（lastmod を進めない）。改行コードの違いは変更と数えない
-const strip = (s) => s.replace(/\r/g, '').replace(/最終更新：\d{4}-\d{2}-\d{2}/, '').replace(/"dateModified": "\d{4}-\d{2}-\d{2}"/, '')
-const prev = fs.existsSync(OUT) ? fs.readFileSync(OUT, 'utf8') : null
-const changed = !prev || strip(prev) !== strip(html)
-if (changed) { fs.mkdirSync(path.dirname(OUT), { recursive: true }); fs.writeFileSync(OUT, html) }
-const SM = path.join(ROOT, 'sitemap.xml')
-let sm = fs.readFileSync(SM, 'utf8')
-const line = `  <url><loc>${URL}</loc><lastmod>${TODAY}</lastmod><priority>0.8</priority></url>`
-const re = new RegExp(`  <url><loc>${URL.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}</loc><lastmod>[^<]+</lastmod>[^\\n]*</url>`)
-if (!re.test(sm)) { sm = sm.replace('</urlset>', `${line}\n</urlset>`); fs.writeFileSync(SM, sm); console.log('sitemap に1行足した') }
-else if (changed) { sm = sm.replace(re, line); fs.writeFileSync(SM, sm); console.log('sitemap の lastmod を進めた') }
-console.log(`${changed ? '書いた' : '変わらず'}: ${OUT}（${(html.length / 1024).toFixed(1)}KB）`)
+// ★比べ方と書き出しは shogai-kojo-page.mjs の writePage（pageDiff）、sitemap の読み書きと行の入れ替えも同じ所（改行を LF に
+//   そろえる）にまとめた（2026-10-11）。比べるときに外すのは、回した日が入る「最終更新」と dateModified。
+const kind = writePage(OUT, html, [/最終更新：\d{4}-\d{2}-\d{2}/, /"dateModified": "\d{4}-\d{2}-\d{2}"/])
+const changed = kind === 'changed'
+const sm = readSitemap()
+const prev = sitemapLastmods(sm).get(URL)
+writeSitemap(putUrls(sm, [[URL, `<url><loc>${URL}</loc><lastmod>${changed || !prev ? TODAY : prev}</lastmod><priority>0.8</priority></url>`]]))
+if (!prev) console.log('sitemap に1行足した')
+else if (changed) console.log('sitemap の lastmod を進めた')
+console.log(`${changed ? '書いた' : kind === 'embed' ? '計測の埋め込みだけ書き直した' : '変わらず'}: ${OUT}（${(html.length / 1024).toFixed(1)}KB）`)

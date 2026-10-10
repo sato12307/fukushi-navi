@@ -14,7 +14,7 @@
 // ─────────────────────────────────────────────────────────────────────────────
 import fs from 'node:fs'
 import path from 'node:path'
-import { page, esc, SITE, readPrev, pageDiff } from './shogai-kojo-page.mjs'
+import { page, esc, SITE, readPrev, pageDiff, readSitemap } from './shogai-kojo-page.mjs'
 import { peekBox } from './peek-box.mjs'
 import { kanryoScript } from './kanryo-script.mjs'
 import { toeiTopCards } from './toei-top-card.mjs'
@@ -588,9 +588,9 @@ let topCard = 'なし（文字のリンクだけ）'
 //   ★行を消して末尾に付け直すのをやめ、その場で置き換える（毎回行が動いて差分が読めなくなるため）。
 //   ★2026-10-08 改行と計測の埋め込みをそろえて比べる（shogai-kojo-page.mjs の pageDiff）。読んだそのままと比べていたので、
 //     git が取り出して CRLF になった面や、ev.js の埋め込みだけが違う面でも lastmod が今日に進んでいた（10-08 に実際に進んだ）。
+//   ★2026-10-11 sitemap.xml は shogai-kojo-page.mjs の readSitemap で読む（改行を LF にそろえる。書き出しは下の flush で LF のまま）。
 {
-  const smPath = path.join(ROOT, 'sitemap.xml')
-  const sm = fs.readFileSync(smPath, 'utf8')
+  const sm = readSitemap()
   const head = `<url><loc>${SITE}/toei/</loc>`
   const count = sm.split(head).length - 1
   if (count > 1) die(`sitemap.xml に /toei/ が ${count} 行あります（1行のはず）。`)

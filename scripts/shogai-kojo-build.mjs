@@ -41,7 +41,7 @@ import { offerPackLeaf, jumpPack } from './offer-block.mjs'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { NINCHI, NETAKIRI, KAIGO, rank } from './shogai-kojo-lib.mjs'
-import { page, esc, SITE } from './shogai-kojo-page.mjs'
+import { page, esc, SITE, readSitemap, writeSitemap, putUrls } from './shogai-kojo-page.mjs'
 import { SEED_READ_DATE, asOf, latestOf } from './shogai-kojo-readdate.mjs'
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..')
@@ -420,19 +420,21 @@ for (const f of fs.readdirSync(OUT)) {
 
 // ── ④ sitemap.xml を更新する ───────────────────────────────────────────────
 // ★この艦の sitemap は手書きで育ててきたもの。作り直さない。
-//   /shogai-kojo/ のぶんだけ入れ替える（毎回消してから足すので何度回しても増えない）。
+//   /shogai-kojo/ のぶんだけ入れ替える（作らなくなった面の行は消すので、何度回しても増えない）。
 //   [[stale-production-build-drift]] 生成したのに sitemap に載っていない面は、
 //   索引されないまま残る。ここを忘れると416ページが丸ごと無かったことになる。
-const smPath = path.join(ROOT, 'sitemap.xml')
-let sm = fs.readFileSync(smPath, 'utf8')
-sm = sm.replace(/^\s*<url>(?:(?!<\/url>)[\s\S])*\/shogai-kojo\/[\s\S]*?<\/url>\n?/gm, '')
-// lastmod もビルド日にしない。取り直していない面まで「今日更新した」と申告すると、
-// 毎回の再クロールを促しておいて中身が同じ、という信号を送り続けることになる。
-const urls = [`  <url><loc>${SITE}/shogai-kojo/</loc><lastmod>${LATEST}</lastmod><priority>0.9</priority></url>`]
-  .concat([...ok, ...notPublished].map((r) =>
-    `  <url><loc>${SITE}/shogai-kojo/${r.code}.html</loc><lastmod>${idouOf(r.code) && IDOU.checked > readAt(r) ? IDOU.checked : readAt(r)}</lastmod><priority>0.6</priority></url>`))
-sm = sm.replace('</urlset>', urls.join('\n') + '\n</urlset>')
-fs.writeFileSync(smPath, sm)
+// ★2026-10-11 行はその場で入れ替える（shogai-kojo-page.mjs の putUrls）。消してから末尾に足していたので、ほかの生成器が
+//   後ろに足した行と438行の順番が毎回入れ替わっていた。読み書きも同じ所の readSitemap・writeSitemap（改行を LF にそろえる）。
+//   CRLF のまま読んでいたので、消した行の \r が1行ごとに残っていた。
+const urls = [[`${SITE}/shogai-kojo/`, `<url><loc>${SITE}/shogai-kojo/</loc><lastmod>${LATEST}</lastmod><priority>0.9</priority></url>`]]
+  .concat([...ok, ...notPublished].map((r) => {
+    // lastmod もビルド日にしない。取り直していない面まで「今日更新した」と申告すると、
+    // 毎回の再クロールを促しておいて中身が同じ、という信号を送り続けることになる。
+    const loc = `${SITE}/shogai-kojo/${r.code}.html`
+    return [loc, `<url><loc>${loc}</loc><lastmod>${idouOf(r.code) && IDOU.checked > readAt(r) ? IDOU.checked : readAt(r)}</lastmod><priority>0.6</priority></url>`]
+  }))
+const sm = putUrls(readSitemap(), urls, (loc) => loc.startsWith(`${SITE}/shogai-kojo/`))
+writeSitemap(sm)
 const total = (sm.match(/<url>/g) || []).length
 
 console.log(`自治体別 ${made}ページ ＋ 比較表1ページ → shogai-kojo/（取り残し ${pruned}件を削除）`)

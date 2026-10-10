@@ -22,16 +22,24 @@ import fs from 'node:fs'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { byTown } from './houkatsu-lib.mjs'
-import { page, esc, SITE } from './shogai-kojo-page.mjs'
+import { page, esc, SITE, writePage, readSitemap, writeSitemap, sitemapLastmods, putUrls } from './shogai-kojo-page.mjs'
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..')
 const DATA = path.join(ROOT, 'data', 'houkatsu')
 const OUT = path.join(ROOT, 'houkatsu')
-const TODAY = new Date().toISOString().slice(0, 10)
+// 日本時間の日付（2026-10-11 まで UTC で切っていて、朝9時前に回すと前の日になっていた）
+const TODAY = new Date(Date.now() + 9 * 3600e3).toISOString().slice(0, 10)
 
-// ★取り残しを消す。上書きだけだと、収録をやめた自治体のページが公開され続ける。
-// [[build-must-prune-stale-pages]]
-fs.rmSync(OUT, { recursive: true, force: true })
+// ★面は中身が変わったときだけ書き直し、sitemap の lastmod もそのときだけ今日にする（2026-10-11）。
+//   それまで全部の面を毎回書き直し、lastmod も全部今日にしていた。面の「生成日」は回した日なので、比べるときは外す
+//   （shogai-kojo-page.mjs の writePage。日付だけ違う面は書き直さず、面の生成日も lastmod も前のまま）。
+const DATES = [/生成日：\d{4}-\d{2}-\d{2}/]
+const made = new Set()      // この回で作った面（houkatsu/ の中のファイル名）
+const changedLocs = new Set()
+const put = (name, loc, html) => {
+  made.add(name)
+  if (writePage(path.join(OUT, name), html, DATES) === 'changed') changedLocs.add(loc)
+}
 fs.mkdirSync(OUT, { recursive: true })
 
 const files = fs.readdirSync(DATA).filter((f) => f.endsWith('.json'))
@@ -126,7 +134,7 @@ ${table}
 })();
 </script>
 `
-  fs.writeFileSync(path.join(OUT, `${j.code}.html`), page({
+  put(`${j.code}.html`, `${SITE}/houkatsu/${j.code}.html`, page({
     title, desc, canonical: `/houkatsu/${j.code}.html`, depth: 1, body,
   }))
   built.push({ code: j.code, place, muni: `${j.pref}${j.muni || j.city}`, centers: j.centers.length, towns: rows.length, multi, grain: j.grain })
@@ -180,24 +188,32 @@ ${list}
 <p class="updated">生成日：${esc(TODAY)}／出典は各自治体のページに明記しています。</p>
 `
 
-fs.writeFileSync(path.join(OUT, 'index.html'), page({
+put('index.html', `${SITE}/houkatsu/`, page({
   title: '町名から担当の地域包括支援センターを探す｜フクシル',
   desc: `町丁目から担当の地域包括支援センターを引ける一覧。${munis}市区・${totalCenters}か所・町丁目${totalTowns}件を自治体の公表資料から収録。厚労省のシステムは所在地検索で町名からの逆引きができないため作りました。`,
   canonical: '/houkatsu/index.html', depth: 1, body: hubBody,
 }))
 
+// ★取り残しを消す。上書きだけだと、収録をやめた自治体のページが公開され続ける。
+// [[build-must-prune-stale-pages]]
+//   2026-10-11 まで最初に houkatsu/ を丸ごと消してから作っていた。それだと前の面と比べられないので、作り終えてから
+//   この回で作らなかったものだけを消す。
+for (const f of fs.readdirSync(OUT)) if (!made.has(f)) fs.rmSync(path.join(OUT, f), { recursive: true, force: true })
+
 // ── sitemap.xml を更新する ────────────────────────────────────────────────────
 // ★この艦の sitemap は手書きで育ててきたもの。作り直さない。
-//   /houkatsu/ のぶんだけ入れ替える（毎回消してから足すので何度回しても増えない）。
+//   /houkatsu/ のぶんだけ入れ替える（作らなくなった面の行は消すので、何度回しても増えない）。
 //   生成したのに sitemap に載っていない面は索引されないまま残る。
 //   [[stale-production-build-drift]]
-const smPath = path.join(ROOT, 'sitemap.xml')
-let sm = fs.readFileSync(smPath, 'utf8')
-sm = sm.replace(/^\s*<url>(?:(?!<\/url>)[\s\S])*\/houkatsu\/[\s\S]*?<\/url>\n?/gm, '')
-const urls = [`  <url><loc>${SITE}/houkatsu/</loc><lastmod>${TODAY}</lastmod><priority>0.8</priority></url>`]
-  .concat(built.map((b) => `  <url><loc>${SITE}/houkatsu/${b.code}.html</loc><lastmod>${TODAY}</lastmod><priority>0.6</priority></url>`))
-sm = sm.replace('</urlset>', urls.join('\n') + '\n</urlset>')
-fs.writeFileSync(smPath, sm)
+// ★2026-10-11 行はその場で入れ替える（shogai-kojo-page.mjs の putUrls）。消してから末尾に足していたので、ほかの生成器が
+//   後ろに足した行と順番が毎回入れ替わっていた。読み書きも同じ所（改行を LF にそろえる）。lastmod は中身が変わった面だけ今日。
+{
+  const sm = readSitemap()
+  const prevMod = sitemapLastmods(sm)
+  const row = (loc, pri) => [loc, `<url><loc>${loc}</loc><lastmod>${changedLocs.has(loc) || !prevMod.has(loc) ? TODAY : prevMod.get(loc)}</lastmod><priority>${pri}</priority></url>`]
+  const rows = [row(`${SITE}/houkatsu/`, '0.8'), ...built.map((b) => row(`${SITE}/houkatsu/${b.code}.html`, '0.6'))]
+  writeSitemap(putUrls(sm, rows, (loc) => loc.startsWith(`${SITE}/houkatsu/`)))
+}
 
 console.log('地域包括支援センターの逆引き面')
 for (const b of built) console.log(`  ${b.place}\t${b.centers}センター\t町丁目${b.towns}\t担当が分かれる${b.multi}`)

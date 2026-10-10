@@ -22,7 +22,7 @@
 import fs from 'node:fs'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
-import { page, esc, SITE, pageDiff } from './shogai-kojo-page.mjs'
+import { page, esc, SITE, readPrev, pageDiff, readSitemap, writeSitemap, sitemapLastmods, putUrls } from './shogai-kojo-page.mjs'
 import { offerKoeiLeaf, jumpKoei, offerKoeiSell } from './offer-block.mjs'
 import { load, loadFrom, OSAKA_FU, CITIES, MIN_N, SUKI, BURE, MIN_GROUP, PRICE, r1, num, pct, WA } from './koei-lib.mjs'
 import { kanryoScript } from './kanryo-script.mjs'
@@ -350,6 +350,9 @@ ${LIMITS}
     if (!flat(packHtml).includes(flat(PEEK))) die(`${C.city}：抜粋が有料資料の本文と一致しません（抜粋の作り方を確認）。`)
   }
 
+  // /<市>/ の中身が変わったか（書き出す前に、置いてある面と比べる）。lastmod はこれが 'changed' のときだけ今日にする
+  const freeRel = `${C.key}/index.html`
+  const freeKind = C.freePage !== false ? pageDiff(readPrev(path.join(ROOT, freeRel)), pending.find(([rel]) => rel === freeRel)[1]) : null
   for (const [rel, html] of pending) {
     const p = path.join(ROOT, rel)
     fs.mkdirSync(path.dirname(p), { recursive: true })
@@ -358,15 +361,15 @@ ${LIMITS}
 
   // ── sitemap（/<市>/ の1行。kanryo は購入者専用なので載せない）────────────
   // ★県営（freePage: false）の /<key>/ の行は scripts/kenei-build.mjs が持つ。ここで書くと lastmod が今日に戻る
+  // ★2026-10-11 lastmod は /<市>/ の中身が変わったときだけ今日にする（変わらなければ載っている日付のまま）。それまで比べずに
+  //   毎回今日にしていた。読み書きと行の入れ替えは shogai-kojo-page.mjs の readSitemap・putUrls・writeSitemap。
   if (C.freePage !== false) {
-    const smPath = path.join(ROOT, 'sitemap.xml')
-    const sm = fs.readFileSync(smPath, 'utf8')
+    const sm = readSitemap()
     const loc = `${SITE}/${C.key}/`
     const today = new Date(Date.now() + 9 * 3600e3).toISOString().slice(0, 10)
-    const entry = `<url><loc>${loc}</loc><lastmod>${today}</lastmod><changefreq>monthly</changefreq><priority>0.9</priority></url>`
-    const re = new RegExp(`<url><loc>${loc.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}</loc>[\\s\\S]*?</url>`)
-    const next = re.test(sm) ? sm.replace(re, entry) : sm.replace('</urlset>', `  ${entry}\n</urlset>`)
-    if (next !== sm) fs.writeFileSync(smPath, next)
+    const prev = sitemapLastmods(sm).get(loc)
+    const entry = `<url><loc>${loc}</loc><lastmod>${freeKind === 'changed' || !prev ? today : prev}</lastmod><changefreq>monthly</changefreq><priority>0.9</priority></url>`
+    writeSitemap(putUrls(sm, [[loc, entry]]))
   }
 
   console.log(`■ ${C.city}  /${C.key}/ と購入後画面・有料資料 .dist/${C.key}-pack.html（${(Buffer.byteLength(packHtml) / 1024).toFixed(0)}KB）`)

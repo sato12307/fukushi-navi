@@ -19,7 +19,7 @@ import fs from 'node:fs'
 import zlib from 'node:zlib'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
-import { page, esc, SITE, readPrev, pageDiff } from './shogai-kojo-page.mjs'
+import { page, esc, SITE, readPrev, pageDiff, readSitemap, writeSitemap, sitemapLastmods, putUrls } from './shogai-kojo-page.mjs'
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..')
 const D = JSON.parse(fs.readFileSync(path.join(ROOT, 'data', 'jiritsu.json'), 'utf8'))
@@ -218,11 +218,10 @@ for (const [rel, loc, html] of pages) {
   if (kind === 'embed') embedN++; else changed.add(loc)
 }
 if (embedN) console.log(`計測の埋め込みだけ変わった面 ${embedN}枚（書き直したが lastmod は進めない）`)
-const smPath = path.join(ROOT, 'sitemap.xml')
-const sm = fs.readFileSync(smPath, 'utf8')
-const prevMod = new Map([...sm.matchAll(/<url><loc>([^<]+)<\/loc><lastmod>([^<]+)<\/lastmod>/g)].map((m) => [m[1], m[2]]))
-const ours = new Map(pages.map(([, loc, , pri]) => { const full = `${SITE}${loc}`; const lm = changed.has(loc) || !prevMod.has(full) ? TODAY : prevMod.get(full); return [full, `<url><loc>${full}</loc><lastmod>${lm}</lastmod><changefreq>monthly</changefreq><priority>${pri}</priority></url>`] }))
-let smNext = sm.replace(/[ \t]*<url><loc>([^<]+)<\/loc>[\s\S]*?<\/url>\n?/g, (whole, loc) => { if (!ours.has(loc)) return whole; const e = ours.get(loc); ours.delete(loc); return `  ${e}\n` })
-if (ours.size) smNext = smNext.replace('</urlset>', `${[...ours.values()].map((e) => `  ${e}`).join('\n')}\n</urlset>`)
-if (smNext !== sm) fs.writeFileSync(smPath, smNext)
+// ★2026-10-11 sitemap.xml は shogai-kojo-page.mjs の readSitemap・putUrls・writeSitemap で読み書きする（改行を LF にそろえる）。
+//   CRLF のまま読んでいたので、行末の `\n?` が \r で外れ、1回回すたびに1URLごとの空行（201行）を作っていた。
+const sm = readSitemap()
+const prevMod = sitemapLastmods(sm)
+const smNext = putUrls(sm, pages.map(([, loc, , pri]) => { const full = `${SITE}${loc}`; const lm = changed.has(loc) || !prevMod.has(full) ? TODAY : prevMod.get(full); return [full, `<url><loc>${full}</loc><lastmod>${lm}</lastmod><changefreq>monthly</changefreq><priority>${pri}</priority></url>`] }))
+writeSitemap(smNext)
 console.log(`書き出し ${changed.size}枚（入口1・一覧 ${hostedList.length}機関）／ sitemap ${smNext !== sm ? '更新' : '変更なし'}`)

@@ -12,13 +12,17 @@
 // ★置く位置の規則は売り場と同じ＝「その面の問いに答えている要素の直後」。
 //   金額を受け取った直後に賞味期限が目に入らないと、置いた意味がほとんど消える。
 //   どの記事も「① 早見表／結論」→「② 自動計算」という作りなので、②の見出しの直前に入れる。
+//   ★売り場の箱（stamp-offers.mjs の <!-- offer:… -->）が②の見出しのすぐ前にあるときは、その箱の前に入れる（2026-10-11）。
+//     どちらも②の見出しの直前に入れていたので、後から回したほうが見出しの側に来て、回すたびに2つの箱の順番が入れ替わり、
+//     出来上がりが前と同じでも lastmod が進んでいた（seikatsuhogo-keisanki・juminzei-hikazei-check・shogaisha-kojo-tax の3枚）。
+//     並びは「この箱 → 売り場の箱 → ②」に決める（10-11 の本番の並び）。stamp-offers.mjs は②の直前に入れるので、この並びは崩れない。
 //
 // ★対象は5枚だけ。一次情報で値の裏が取れた制度しか載せない（2026-09-14 の検証結果）。
 //   高額療養費・障害年金・障害福祉サービスの負担上限は、今回一次情報に当たっていないので対象外。
 //   「たぶんこの値」で金額の決定日を書くと、誤情報を出典つきで配ることになる。
 import fs from 'node:fs'
 import { kaiteiBlock, kaiteiCoverage } from './kaitei-block.mjs'
-import { pageDiff } from './shogai-kojo-page.mjs'
+import { pageDiff, readCommitted, stampBefore, readSitemap, writeSitemap } from './shogai-kojo-page.mjs'
 
 const TARGETS = {
   // 生活保護＝4行すべてが一次情報で埋まる唯一の制度（告示本文がHTMLで読める）。
@@ -40,6 +44,8 @@ const TARGETS = {
 }
 
 const block = (t) => `<!-- kaitei:${t.key} -->\n${kaiteiBlock(t.key)}\n  <!-- /kaitei -->`
+// 売り場の箱（stamp-offers.mjs）。②の見出しのすぐ前にあれば、この箱ごと見出しとみなして、その前に入れる
+const OFFER_BOX = /<!-- offer:(?:pack|toei) -->(?:(?!<!-- \/offer -->)[\s\S])*<!-- \/offer -->\n+/
 
 const files = fs.readdirSync('articles').filter((f) => f.endsWith('.html'))
 const missing = Object.keys(TARGETS).filter((f) => !files.includes(f))
@@ -57,19 +63,22 @@ for (const f of Object.keys(TARGETS)) {
   const marked = /\n*<!-- kaitei:[a-z-]+ -->[\s\S]*?<!-- \/kaitei -->\n*/
   const had = marked.test(s)
   if (had) s = s.replace(marked, '\n\n')          // いま貼ってある場所から剥がす
-  if (!t.before.test(s)) { failed.push(f); continue }
-  s = s.replace(t.before, (m) => `${block(t)}\n\n${m}`)
+  const next = stampBefore(s, new RegExp(`(?:${OFFER_BOX.source})?${t.before.source}`), block(t))
+  if (next == null) { failed.push(f); continue }
+  s = next
   had ? moved++ : inserted++
   const out = crlf ? s.replace(/\n/g, '\r\n') : s
   // 変わったかは改行をそろえて比べる（shogai-kojo-page.mjs の pageDiff・stamp-offers.mjs と同じ・2026-10-08）
-  if (pageDiff(raw, s) === 'changed') changedFiles.push(f)
+  // ★比べる相手は取り込み済みの版（git の HEAD）。無ければ置いてある記事（shogai-kojo-page.mjs の readCommitted・2026-10-11）
+  if (pageDiff(readCommitted(p) ?? raw, s) === 'changed') changedFiles.push(f)
   fs.writeFileSync(p, out)
 }
 if (failed.length) { console.error('位置が見つからない:', failed.join(', ')); process.exit(1) }
 
 // 中身が変わった記事は sitemap.xml の lastmod を今日（日本時間）にする。
+// 読み書きは shogai-kojo-page.mjs の readSitemap・writeSitemap（改行を LF にそろえる・2026-10-11）
 if (changedFiles.length) {
-  const smRaw = fs.readFileSync('sitemap.xml', 'utf8')
+  const smRaw = readSitemap()
   const today = new Date(Date.now() + 9 * 3600e3).toISOString().slice(0, 10)
   let sm = smRaw
   const notIn = []
@@ -78,7 +87,7 @@ if (changedFiles.length) {
     if (!re.test(sm)) { notIn.push(f); continue }
     sm = sm.replace(re, (_, a, _d, c) => a + today + c)
   }
-  if (sm !== smRaw) fs.writeFileSync('sitemap.xml', sm)
+  writeSitemap(sm)
   console.log(`中身が変わった記事 ${changedFiles.length}枚 → sitemap の lastmod を ${today} に${notIn.length ? `（sitemap に無い：${notIn.join(', ')}）` : ''}`)
 }
 

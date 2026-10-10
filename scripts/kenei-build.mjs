@@ -18,7 +18,7 @@
 import fs from 'node:fs'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
-import { page, esc, SITE, readPrev, pageDiff } from './shogai-kojo-page.mjs'
+import { page, esc, SITE, readPrev, pageDiff, readSitemap, writeSitemap, sitemapLastmods, putUrls } from './shogai-kojo-page.mjs'
 import { WA, load, loadFrom, OSAKA_FU, MIN_N, SUKI, BURE, PRICE, num, r1 } from './koei-lib.mjs'
 import { offerKoeiLeaf, jumpKoei } from './offer-block.mjs'
 import { FREE, freePage, houseTable, kosupaSection, LEGEND, SHIGA_KEN, walkMin, WALK_MAX } from './kenei-free.mjs'   // 三大都市圏の外の県＝申込先ごとの一覧まで無料（2026-10-01）
@@ -495,17 +495,15 @@ const changed = out.filter(([dir, p]) => write(dir, p.html)).map(([dir]) => dir)
 // sitemap：この2面のぶんだけ入れ替える。lastmod は、この回で中身が変わった面だけ今日（日本時間）にし、
 // 変わらなかった面は前の値を残す（初めて載せるときはデータの確認日）。ビルドしただけの日にはしない。
 // ★2026-09-30 有料の一覧への案内と混んでいる申込先の表を足した日に、確認日のまま据え置かれていたので直した。
+// 載っている面はその場で置き換える（消して末尾に足すと、shogai-kojo-sell.mjs の行と順番が入れ替わり、毎回差分が出る）。
+// ★2026-10-11 読み書きと入れ替えは shogai-kojo-page.mjs の readSitemap・putUrls・writeSitemap（改行を LF にそろえる）。
+//   CRLF のまま読んでいたので、行を探す正規表現の `.*\n` が \r で外れて見つからず、6面の行を末尾に重ねて足していた。
 const TODAY = new Date(Date.now() + 9 * 3600e3).toISOString().slice(0, 10)
-const smPath = path.join(ROOT, 'sitemap.xml')
-let sm = fs.readFileSync(smPath, 'utf8')
-for (const [dir, , checked] of out) {
+const sm = readSitemap()
+const prevMod = sitemapLastmods(sm)
+writeSitemap(putUrls(sm, out.map(([dir, , checked]) => {
   const loc = `${SITE}/${dir}/`
-  const re = new RegExp(`^\\s*<url><loc>${loc.replace(/[.*+?^${}()|[\]\\/]/g, '\\$&')}</loc><lastmod>([^<]+)</lastmod>.*\\n`, 'm')
-  const prev = re.exec(sm)?.[1]
-  const lm = changed.includes(dir) ? TODAY : (prev || checked)
-  // 載っている面はその場で置き換える（消して末尾に足すと、shogai-kojo-sell.mjs の行と順番が入れ替わり、毎回差分が出る）
-  const line = `  <url><loc>${loc}</loc><lastmod>${lm}</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>\n`
-  sm = re.test(sm) ? sm.replace(re, () => line) : sm.replace('</urlset>', () => `${line}</urlset>`)
-}
-fs.writeFileSync(smPath, sm)
+  const lm = changed.includes(dir) ? TODAY : (prevMod.get(loc) || checked)
+  return [loc, `<url><loc>${loc}</loc><lastmod>${lm}</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>`]
+})))
 console.log(`県営住宅の面：${out.map(([d]) => d).join('・')}（書き換え ${changed.length}枚）`)

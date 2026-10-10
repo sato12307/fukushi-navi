@@ -21,7 +21,7 @@
 import fs from 'node:fs'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
-import { page, esc, SITE, readPrev, pageDiff } from './shogai-kojo-page.mjs'
+import { page, esc, SITE, readPrev, pageDiff, readSitemap, writeSitemap } from './shogai-kojo-page.mjs'
 // 有料の資料への入口（2026-09-28 ユーザー指示「撒き餌の面から有料への導線を目立つところに」）。文面は offer-block.mjs。
 import { offerHub } from './offer-block.mjs'
 // 式と材料は hikazei-lib.mjs の1か所だけ（/hikazei/ の市区町村ごとの早見表と共有）
@@ -161,8 +161,8 @@ const html = page({
   ],
 })
 
-const smPath = path.join(ROOT, 'sitemap.xml')
-const sm = fs.readFileSync(smPath, 'utf8')
+// sitemap.xml の読み書きは shogai-kojo-page.mjs の readSitemap・writeSitemap（改行を LF にそろえる・2026-10-11）
+const sm = readSitemap()
 const loc = `<loc>${SITE}/mitoshi/hikazei/</loc>`
 const outPath = path.join(ROOT, OUT_REL)
 // 改行と計測の埋め込みだけの違いでは lastmod を進めない（shogai-kojo-page.mjs の pageDiff・2026-10-08）
@@ -177,5 +177,5 @@ if (sm.includes(loc)) {
 } else smNext = sm.replace('</urlset>', `  ${entry}\n</urlset>`)
 fs.mkdirSync(path.dirname(outPath), { recursive: true })
 fs.writeFileSync(outPath, html)
-if (smNext !== sm) fs.writeFileSync(smPath, smNext)
+writeSitemap(smNext)
 console.log(`${OUT_REL}（${changed ? '更新' : kind === 'embed' ? '計測の埋め込みだけ更新・lastmod は据え置き' : '変更なし'}）／ 動く世帯 ${moved.map((n) => WHO[n]).join('・')}／動かない ${still.map((n) => WHO[n]).join('・')}`)
