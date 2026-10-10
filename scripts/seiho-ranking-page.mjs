@@ -8,7 +8,7 @@
 // ★この面で言っていること
 //   生活扶助の額は級地で決まる。級地は昭和62年から指定替えがされていない。
 //   一方で物価も電気代も動く。だから「同じ級地でも実際に買える量は違う」。
-//   ・生活扶助そのものの幅は 72,930〜76,420円（4.8%）しかない。
+//   ・生活扶助そのものの幅は 73,930〜77,220円（4.5%・2026-10-10 告示の現行の表）しかない。
 //   ・**電気代の幅は 9,610〜17,974円（1.87倍）** で、こちらのほうがずっと大きい。
 //   ・電気代を払ったあとを全国平均の物価に直すと 55,000〜67,000円台まで開く。
 //
@@ -16,9 +16,8 @@
 //   ①「ここに住めば得」— 生活保護は住む場所を選べる制度ではない。引っ越しには
 //     福祉事務所の判断が要る。この面は**制度のゆがみを見るための物差し**であって、
 //     引っ越し先の推薦ではない。そう書く。
-//   ②**冬季加算を含んでいない**。11月〜3月などに地区別で上乗せがある。
-//     寒い地域ほど厚いので、この表は寒冷地を実際より低く見せている。金額は出さない
-//     （地区別の表を一次情報で取れていないため。推定して書かない）。
+//   ②冬季加算と12月の期末一時扶助は「冬も入れた実質」の列にだけ入れる（2026-10-10・告示の表＝data/seiho-kokuji.json の単身の額を
+//     1年にならした月額）。それまでは一次情報の表を取れておらず「含んでいない」と書いていた。並べ替えの既定は電気代を引いた実質のまま。
 //   ③電気代は家計調査の**二人以上世帯**の値で、単身の額ではない。地域を比べるための
 //     ものさしとして使っている。使用量の差（寒い地域は多く使う）も入っている。
 //
@@ -53,7 +52,8 @@ const rows = D.rows.map((r) => ({
   ...r,
   real: r.seikatsu / (r.bukka / 100),                                   // 物価で割り戻した生活扶助
   afterE: r.denkiMonth ? (r.seikatsu - r.denkiMonth) / (r.bukka / 100) : null, // 電気代を払ったあと
-})).filter((r) => r.afterE != null)
+  winter: Math.round((r.touki * r.toukiMonths + r.kimatsu) / 12),       // 冬季加算と期末一時扶助を1年にならした月額（単身）
+})).filter((r) => r.afterE != null).map((r) => ({ ...r, afterEW: (r.seikatsu + r.winter - r.denkiMonth) / (r.bukka / 100) }))
 rows.sort((a, b) => b.afterE - a.afterE)
 
 const top = rows[0]
@@ -72,6 +72,9 @@ for (const a of rows) {
   if (flip) break
 }
 const withRent = rows.filter((r) => r.jutaku)
+// 冬も入れた実質の順位（電気代を引いた実質の順位から、いちばん上がった市）
+const rankW = new Map([...rows].sort((a, b) => b.afterEW - a.afterEW).map((r, i) => [r.city, i + 1]))
+const riser = rows.map((r, i) => ({ r, from: i + 1, to: rankW.get(r.city) })).sort((a, b) => (b.from - b.to) - (a.from - a.to))[0]
 
 if (DRY) {
   console.log(`${rows.length}市 / 電気代を引いた実質 ${num(bottom.afterE)}〜${num(top.afterE)}（差 ${num(gap)}円）`)
@@ -84,7 +87,7 @@ if (DRY) {
 const payload = JSON.stringify({
   rows: rows.map((r) => ({
     c: r.city, p: r.pref, k: r.kyuchi, s: r.seikatsu, b: r.bukka,
-    e: r.denkiMonth, j: r.jutaku, u: r.jukyo, r: Math.round(r.real), a: Math.round(r.afterE),
+    e: r.denkiMonth, j: r.jutaku, u: r.jukyo, r: Math.round(r.real), a: Math.round(r.afterE), w: r.winter, aw: Math.round(r.afterEW),
   })),
 })
 
@@ -94,7 +97,7 @@ const CSS = `
 .stat b { display: block; font-size: 1.4rem; font-weight: 800; color: var(--brand-dark); font-variant-numeric: tabular-nums; }
 .stat span { font-size: .82rem; color: var(--sub); }
 #rt-wrap { max-height: 72vh; overflow: auto; border: 1px solid var(--line); border-radius: 8px; }
-#rt { width: 100%; border-collapse: collapse; font-size: .85rem; min-width: 700px; }
+#rt { width: 100%; border-collapse: collapse; font-size: .85rem; min-width: 860px; }
 #rt th, #rt td { border-bottom: 1px solid var(--line); padding: 5px 6px; }
 #rt thead th { position: sticky; top: 0; z-index: 1; background: var(--brand); color: #fff; cursor: pointer; white-space: nowrap; font-size: .8rem; line-height: 1.35; }
 #rt thead th.sorted::after { content: " \\25BC"; font-size: .7em; }
@@ -124,6 +127,7 @@ var R = ${payload}.rows;
       return '<tr><td class="n">' + (i + 1) + '</td><th>' + r.c + '</th><td>' + r.k + '</td>'
         + '<td class="n">' + ja(r.s) + '</td><td class="n">' + r.b + '</td><td class="n">' + ja(r.r) + '</td>'
         + '<td class="n">' + ja(r.e) + '</td><td class="n big">' + ja(r.a) + '</td>'
+        + '<td class="n">' + ja(r.w) + '</td><td class="n">' + ja(r.aw) + '</td>'
         + '<td class="n">' + ja(r.j) + '</td><td class="n">' + (r.u == null ? '—' : r.u) + '</td></tr>';
     }).join('');
   }
@@ -195,7 +199,7 @@ const html = `<!DOCTYPE html>
   <p class="breadcrumb"><a href="../index.html">トップ</a> ＞ 生活保護 ＞ 実質の比較</p>
 
   <h1>生活保護費の「実質」は<br>どこが厚いか</h1>
-  <p class="updated">最終更新：${TODAY} ／ 生活扶助＝厚生労働省 令和8年度基準（単身30歳）、物価＝総務省 小売物価統計調査（構造編）2024年、電気代＝総務省 家計調査（<a href="https://hatsudenbench.com/denkidai/">発電ベンチ</a>の集計）</p>
+  <p class="updated">最終更新：${TODAY} ／ 生活扶助＝生活保護法による保護の基準（告示の現行の表・単身30歳。冬季加算と期末一時扶助は「冬も入れた実質」の列）、物価＝総務省 小売物価統計調査（構造編）2024年、電気代＝総務省 家計調査（<a href="https://hatsudenbench.com/denkidai/">発電ベンチ</a>の集計）</p>
 
   <p class="lead">生活扶助の額は<strong>級地</strong>で決まります。ところが級地の指定は<strong>昭和62年から替わっていません</strong>。物価も電気代もその間に動いています。そこで、全国${rows.length}市について<strong>生活扶助を地域の物価で割り戻し、電気代を払ったあとに何円残るか</strong>を並べました。</p>
 
@@ -208,7 +212,7 @@ const html = `<!DOCTYPE html>
 
   <div class="callout warn">
     <p><span class="tag">先に読んでください</span><strong>これは「どこに住めば得か」の表ではありません。</strong>生活保護は住む場所を選べる制度ではなく、転居には福祉事務所の判断が要ります。この表は<strong>「同じ制度なのに、実際に買える量がどれだけ違うか」を見るための物差し</strong>です。</p>
-    <p><strong>冬季加算を含んでいません。</strong>11月〜3月などの期間、地区別に暖房費の上乗せがあります。寒い地域ほど厚いので、<strong>この表は寒冷地を実際より低く見せています</strong>。金額は地区と世帯人員で決まるため、ここでは金額を出していません（一次情報で地区別の表を確認できていないので、推定して書きません）。お住まいの地区の額は福祉事務所で確認してください。</p>
+    <p><strong>冬季加算と12月の期末一時扶助は、表の右側の「冬も入れた実質」の列に入れています。</strong>生活保護法による保護の基準（告示）の表の単身の額を、1年にならして月あたりにしたものです。冬季加算は寒い地域ほど厚く（北海道・青森・秋田は月12,780円を10月〜4月、東京・大阪などは月2,630円を11月〜3月）、電気代の差の一部が埋まります。</p>
   </div>
 
 ${offerHub('seiho', { up: '../' })}
@@ -218,7 +222,7 @@ ${offerHub('seiho', { up: '../' })}
   ${flip ? `<p>その結果、<strong>級地が下なのに実質は上</strong>という組み合わせが起きます。たとえば<strong>${flip[0].city}（${flip[0].kyuchi}）は${num(flip[0].afterE)}円</strong>で、<strong>${flip[1].city}（${flip[1].kyuchi}）の${num(flip[1].afterE)}円</strong>を上回ります。級地は${flip[1].city}のほうが上なのに、電気代と物価まで見ると逆になります。</p>` : ''}
 
   <h2>② ${rows.length}市の表（見出しを押すと並べ替わります）</h2>
-  <p>「実質の生活扶助」は<strong>生活扶助 ÷ 物価指数</strong>。「電気代を引いた実質」は<strong>（生活扶助 − 電気代）÷ 物価指数</strong>です。物価指数は全国平均を100とした値で、家賃を除いた総合を使っています（家賃は住宅扶助で別に出るため）。</p>
+  <p>「実質の生活扶助」は<strong>生活扶助 ÷ 物価指数</strong>。「電気代を引いた実質」は<strong>（生活扶助 − 電気代）÷ 物価指数</strong>、「冬も入れた実質」は<strong>（生活扶助 ＋ 冬季加算と期末一時扶助の1年ならし − 電気代）÷ 物価指数</strong>です。物価指数は全国平均を100とした値で、家賃を除いた総合を使っています（家賃は住宅扶助で別に出るため）。</p>
   <div id="rt-wrap">
   <table id="rt">
     <thead><tr>
@@ -230,6 +234,8 @@ ${offerHub('seiho', { up: '../' })}
       <th data-k="r">実質の<br>生活扶助</th>
       <th data-k="e">電気代<br>(月)</th>
       <th data-k="a">電気代を<br>引いた実質</th>
+      <th data-k="w">冬季加算等<br>(年ならし)</th>
+      <th data-k="aw">冬も入れた<br>実質</th>
       <th data-k="j">家賃上限<br>(単身)</th>
       <th data-k="u">住居の<br>物価</th>
     </tr></thead>
@@ -250,11 +256,11 @@ ${rows.slice(-5).map((r, i) => `      <tr><td>${rows.length - 4 + i}</td><th>${r
     </tbody>
   </table>
   </div>
-  <p class="mini-note">下位に並ぶのは雪の多い地域です。<strong>ここには冬季加算が乗ります</strong>（この表には入れていません）。上の差がそのまま暮らしの差になるわけではない、という点は繰り返しておきます。</p>
+  <p class="mini-note">下位に並ぶのは雪の多い地域です。冬季加算と期末一時扶助を1年にならして足すと（②の表の「冬も入れた実質」）、<strong>${riser.r.city}は${riser.from}位から${riser.to}位</strong>になります。上の差がそのまま暮らしの差になるわけではない、という点は繰り返しておきます。</p>
 
   <h2>④ この数字の限界</h2>
   <ul>
-    <li><strong>冬季加算を含んでいません。</strong>寒い地域ほど上乗せがあるので、寒冷地は実際より低く出ています。</li>
+    <li><strong>冬季加算は1年にならした額です。</strong>実際は冬の5〜7か月にまとめて上乗せされ、12月には期末一時扶助が加わります（月額は地区と世帯人数で決まります。表は<a href="seikatsuhogo-keisanki.html#touki">計算機のページ</a>）。</li>
     <li><strong>電気代は二人以上世帯の値です。</strong>単身の額ではありません。また価格差だけでなく<strong>使用量の差</strong>（寒い地域は多く使う）も入っています。</li>
     <li><strong>物価指数と電気代は一部が重なります。</strong>「家賃を除く総合」には光熱・水道の価格も含まれるので、電気代を実額で引いたうえで物価で割ると、電気の価格差がやや二重に効きます。だから<strong>電気代を引く前の「実質の生活扶助」も並べて</strong>います。</li>
     <li><strong>対象は県庁所在市と政令市だけです。</strong>物価の地域差指数がこの単位でしか公表されていないためです。</li>

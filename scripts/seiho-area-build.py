@@ -50,36 +50,26 @@ DRY = "--dry" in sys.argv
 
 KYUCHI6 = ["1級地-1", "1級地-2", "2級地-1", "2級地-2", "3級地-1", "3級地-2"]
 
-# ─ 令和8年4月 生活扶助基準額（articles/seikatsuhogo-keisanki.html と同じ表。改定時は両方直す）
-K1 = [  # 第1類（年齢帯 × 級地6段階）
-    (2, [44580, 43240, 41460, 39680, 39230, 37000]),
-    (5, [44580, 43240, 41460, 39680, 39230, 37000]),
-    (11, [46460, 45060, 43200, 41350, 40880, 38560]),
-    (17, [49270, 47790, 45820, 43850, 43360, 40900]),
-    (19, [46930, 45520, 43640, 41760, 41290, 38950]),
-    (40, [46930, 45520, 43640, 41760, 41290, 38950]),
-    (59, [46930, 45520, 43640, 41760, 41290, 38950]),
-    (64, [46930, 45520, 43640, 41760, 41290, 38950]),
-    (69, [46460, 45060, 43200, 41350, 40880, 38560]),
-    (74, [46460, 45060, 43200, 41350, 40880, 38560]),
-    (999, [39890, 38690, 37100, 35500, 35100, 33110]),
-]
-K2 = [27790, 38060, 44730, 48900, 49180]  # 第2類（1〜5人）
-TOKUREI = 2500  # 特例加算（1人あたり）。令和8年10月1日から2,500円（令和8年6月11日 厚生労働省告示第245号）。それまで1,500円
-# 経過的加算（単身世帯・年齢帯index × 級地6段階）。★これを落とすと計算機と答えが合わない
-# （35歳単身の1級地-1で200円ぶん少なくなる）。計算機の KEIKA[1] と同じ表。
-KEIKA1 = [
-    [0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0],
-    [830, 0, 0, 410, 0, 0], [200, 0, 0, 410, 0, 0], [1020, 0, 0, 410, 0, 0],
-    [660, 0, 0, 410, 0, 0], [1130, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0],
-    [2720, 840, 0, 680, 0, 0],
-]
+# ─ 生活扶助の基準額表は data/seiho-kokuji.json（告示の現行の本文を scripts/seiho-kokuji-fetch.py が読んだもの）から読む。
+#   ★ここに表を写さない（2026-10-10：写した表が告示とずれていた＝令和8年10月の告示第245号で経過的加算が1人最大1,000円下がったのを
+#   取り込めていなかった）。計算機（articles/seikatsuhogo-keisanki.html）も同じ JSON から scripts/keisanki-sync.mjs が書き出す。
+KOKUJI = json.load(open(os.path.join(ROOT, "data", "seiho-kokuji.json"), encoding="utf-8"))
+AGE_MAX = [2, 5, 11, 17, 19, 40, 59, 64, 69, 74, 999]
+TOKUREI = KOKUJI["tokurei"]  # 特例加算（1人あたり月額）
 
 
 def seikatsu_tanshin(ki, age=30):
-    """単身（既定は30歳）の生活扶助。第1類＋第2類＋経過的加算＋特例加算。"""
-    ai = next(i for i, (mx, _) in enumerate(K1) if age <= mx)
-    return K1[ai][1][ki] + K2[0] + KEIKA1[ai][ki] + TOKUREI
+    """単身（既定は30歳）の生活扶助。告示の算式＝第1類×逓減率（1人は1.0）＋第2類＋経過的加算（10円未満は切り上げ）＋特例加算。"""
+    ai = next(i for i, mx in enumerate(AGE_MAX) if age <= mx)
+    base = KOKUJI["k1"][ki][ai] * KOKUJI["teigen"][0] + KOKUJI["k2"][0] + KOKUJI["keika"][ki][ai][0]
+    return int(-(-base // 10) * 10) + TOKUREI
+
+
+def touki_tanshin(pref):
+    """単身の冬季加算（月額）と期間の月数。地区は都道府県で決まる（告示の地区の区分の表）。"""
+    t = KOKUJI["touki"][KOKUJI["areas"][pref]]
+    m = re.match(r"^(\d+)月から(\d+)月まで$", t["period"])
+    return t["v"][0], (int(m.group(2)) - int(m.group(1))) % 12 + 1, KOKUJI["areas"][pref]
 
 
 def kyuchi_of(ky, pref, city):
@@ -201,11 +191,14 @@ def main():
             org = "東京都"
         hit = rent.get(org, {}).get("k", {}).get(k6.split("-")[0])
         seikatsu = seikatsu_tanshin(ki)
+        touki, touki_n, area = touki_tanshin(pref)
         pb = bukka.get(pref, {})
         d = denki.get("pref", {}).get(pref, {})
         rank.append({
             "city": name, "pref": pref, "kyuchi": k6,
             "seikatsu": seikatsu,
+            "touki": touki, "toukiMonths": touki_n, "toukiArea": area,
+            "kimatsu": KOKUJI["kimatsu"][ki][0],
             "jutaku": hit["yen"][0] if hit else None,
             "jutakuSrc": (hit or {}).get("src"),
             "bukka": b.get("家賃を除く総合"),
@@ -226,7 +219,8 @@ def main():
                 "   r=住宅扶助[1人,2人,3〜5人,6人,7人以上] / s=その出典 */\n")
         f.write("window.SEIHO_AREA=" + json.dumps(js, ensure_ascii=False, separators=(",", ":")) + ";\n")
     json.dump({
-        "note": "生活保護費と地域の物価・電気代を並べたもの。単身（30歳）の生活扶助は令和8年4月基準（特例加算は令和8年10月からの2,500円）。"
+        "note": "生活保護費と地域の物価・電気代を並べたもの。単身（30歳）の生活扶助は告示の現行の表（data/seiho-kokuji.json・令和8年10月から）。"
+                "touki＝単身の冬季加算の月額・toukiMonths＝その月数・toukiArea＝地区・kimatsu＝単身の12月の期末一時扶助。"
                 "物価は総務省 小売物価統計調査（構造編）2024年の消費者物価地域差指数（全国平均=100）。"
                 "電気代は発電ベンチ（hatsudenbench.com）が持つ家計調査の県庁所在市別・二人以上世帯の月額。",
         "rows": sorted(ok, key=lambda r: r["city"]),

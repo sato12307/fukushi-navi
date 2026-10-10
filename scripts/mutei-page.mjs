@@ -33,7 +33,7 @@ const yen = (n) => `${num(n)}円`
 
 // ── 生活扶助の基準額表（生活保護の計算機のページから読み込む）─────────────────────────────
 const KEISAN = fs.readFileSync(path.join(ROOT, 'articles', 'seikatsuhogo-keisanki.html'), 'utf8').replace(/\r/g, '')
-const a = KEISAN.indexOf('// ====== 令和8年4月 生活扶助基準額')
+const a = KEISAN.indexOf('// ====== 生活扶助基準額（告示')
 const b = KEISAN.indexOf('// ====== 地域（級地と家賃上限）', a)
 const f = KEISAN.indexOf('function ageIdx(age)', b)
 if (a < 0 || b < 0 || f < 0) die('計算機のページから基準額表を切り出せません（見出しの文が変わった？）')
