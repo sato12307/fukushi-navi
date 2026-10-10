@@ -216,6 +216,10 @@ def source_rows(data):
     return "\n".join(out), len(seen)
 
 
+# ★2026-10-11 「あわせて読みたい」の末尾2本（生活保護費の自動計算・住民税非課税の年収）を型へ移した。
+#   2026-10-02（2e4940a7）に記事の HTML へ手で足したリンクで、この生成器は記事を丸ごと書き直すため、
+#   毎月1日の Actions（koei-jutaku.yml）で消えるところだった（git の写しで回して2行減るのを確かめた）。
+#   ∴ この記事にリンクを足すときは、記事ではなくこの型に書く。
 PAGE = r"""<!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -377,6 +381,8 @@ PAGE = r"""<!DOCTYPE html>
       <li><a href="koei-shunyu-kijun.html">公営住宅の収入基準は年収いくらまで？（政令月収の自動判定）</a></li>
       <li><a href="koei-yachin-keisan.html">市営住宅・公営住宅の家賃はいくら？自動計算</a></li>
 @@CITYLINKS@@
+      <li><a href="seikatsuhogo-keisanki.html">生活保護費はいくらもらえる？支給額の自動計算（障害者加算つき）</a></li>
+      <li><a href="juminzei-hikazei-check.html">住民税非課税世帯の年収はいくらまで？条件と早見表</a></li>
     </ul>
   </section>
 
