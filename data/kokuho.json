@@ -1,6 +1,16 @@
 {
   "checked": "2026-09-27",
   "note": "国民健康保険（国保）の7割・5割・2割軽減の判定の線と、市区町村（または府県の統一保険料）の料率。式は scripts/kokuho-lib.mjs の1か所だけ。料率は公式ページの数字を写し、別の市のページの同じ数字と突き合わせてから載せる。",
+  "shienkinKenpo": {
+    "note": "子ども・子育て支援金（いわゆる独身税）の入口 /hikazei/kodomo-shienkin/ で、国保と会社員を並べるためだけに使う。国保の子ども・子育て支援金分は各料率の parts の kodomo。",
+    "nendo": "令和8年度",
+    "from": "令和8年4月分から",
+    "rate": 23,
+    "unit": "100分の1パーセント（23＝0.23%）。標準報酬月額×率を会社と本人で半分ずつ",
+    "name": "全国健康保険協会（協会けんぽ）「令和8年度保険料額表」（子ども・子育て支援金率0.23%・47支部とも同じ）",
+    "url": "https://www.kyoukaikenpo.or.jp/about/business/insurance_rate/premium_prefectures/r08",
+    "checkedAt": "2026-10-09"
+  },
   "keigen": {
     "nendo": "令和8年度",
     "years": "2026年4月〜2027年3月",

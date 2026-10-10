@@ -247,9 +247,16 @@ const HH = [
   { id: 'pen2', title: '夫婦2人・65〜74歳・年金は1人だけ（もう1人は年金110万円以下）', mk: (x) => [{ age: 70, pen: x }, { age: 70 }], L: KL.pen[1], rows: [1000000, KL.pen[1][7], KL.pen[1][5], KL.pen[1][2], 3500000] },
 ]
 const tagOf = (hh, x) => (x === hh.L[7] ? '7割の上限' : x === hh.L[5] ? '5割の上限' : x === hh.L[2] ? '2割の上限' : '')
+// 子ども・子育て支援金分（令和8年度から。いわゆる「独身税」）＝年額のうちの1区分。料率の組にこの区分が無ければ止める
+//   （表の列と文が「0円」と言ってしまうため）。18歳未満は均等割がかからない（adultsOnly）ことも前提にしている。
+for (const [id, rs] of Object.entries(KK.rateSets)) {
+  const p = rs.parts.find((x) => x.id === 'kodomo')
+  if (!p || !p.adultsOnly) die(`国保：${id} に子ども・子育て支援金分（18歳以上だけの均等割）がありません`)
+}
+const kodomoOf = (a) => a.parts.find((p) => p.id === 'kodomo').yen
 const annualRows = (rs, hh) => hh.rows.map((x) => {
   const a = kAnnual(rs, hh.mk(x)), tag = tagOf(hh, x)
-  return `<tr><th scope="row">${x ? manT(x) : '0円'}${tag ? `<br><small>${tag}</small>` : ''}</th><td>${lvTxt(a.lv)}</td><td class="num">${yen(a.total)}</td></tr>`
+  return `<tr><th scope="row">${x ? manT(x) : '0円'}${tag ? `<br><small>${tag}</small>` : ''}</th><td>${lvTxt(a.lv)}</td><td class="num">${yen(a.total)}</td><td class="num">${yen(kodomoOf(a))}</td></tr>`
 }).join('\n')
 const rateList = (rs) => rs.parts.map((p) => `<li>${esc(p.label)}：所得割 ${rateTxt(p.rate)}・均等割 ${yen(p.kintou)}${p.kintou18 ? `＋18歳以上均等割 ${yen(p.kintou18)}（18歳以上1人あたり${yen(p.kintou + p.kintou18)}・18歳未満は全額軽減）` : p.adultsOnly ? '（18歳以上1人あたり）' : ''}${p.byodo ? `・平等割 ${yen(p.byodo)}` : '・平等割なし'}・年の上限 ${man(p.cap)}${p.ages ? `（${p.ages[0]}〜${p.ages[1]}歳の人だけ）` : ''}</li>`).join('\n  ')
 // 年額を出せる範囲。東京は区市ごとに料率が違い、料率の組の名前を並べると長くなるので、都道府県ごとに数えて言う。
@@ -296,6 +303,16 @@ const kokuhoPrefNote = (p2, pref) => {
   const z = kAnnual(rs, [{ age: 45 }])
   return `<p class="mini-note">国保：${esc(pref)}は国保の保険料を${esc(rs.short)}で統一しています（${esc(rs.nendo)}）。単身・40〜64歳の年額の目安は収入0円で${yen(z.total)}（7割軽減）。市町村名を押すと、国保が7割・5割・2割軽くなる年収と、年収ごとの年額の目安が出ます。</p>`
 }
+// 子ども・子育て支援金分（いわゆる「独身税」）の1節。数は全部 annual から出す（手で書かない）
+const SK_SAL = [0, 2000000, 4000000]
+const skSingle = (rs, x) => kodomoOf(kAnnual(rs, [{ age: 45, ...(x ? { sal: x } : {}) }]))
+const shienkinCity = (r, rs, kw) => {
+  const p = rs.parts.find((x) => x.id === 'kodomo')
+  const v = SK_SAL.map((x) => skSingle(rs, x))
+  return `<h3 id="shienkin">「独身税」と呼ばれる子ども・子育て支援金は、${esc(r.city)}の${kw}でいくら？</h3>
+  <p>${esc(KG.nendo)}（2026年4月分）から、医療保険の保険料に<strong>子ども・子育て支援金</strong>が加わりました。国保の人は${kw}の一部（子ども・子育て支援金分）として納めます。上の表の「うち子ども・子育て支援金」がその額で、単身・40〜64歳なら収入0円で<strong>年${yen(v[0])}</strong>、給与200万円で年${yen(v[1])}、給与400万円で<strong>年${yen(v[2])}</strong>です。</p>
+  <p class="mini-note">${esc(rs.scope)}の子ども・子育て支援金分は、所得割 ${rateTxt(p.rate)}・均等割は18歳以上1人あたり${yen(p.kintou + (p.kintou18 || 0))}・年の上限 ${man(p.cap)}です。<strong>18歳未満の子どもは、この区分の均等割がかかりません</strong>（全額軽減・申請はいりません）。子どもの分がかからず、子育ての支援に使われるので「独身税」と呼ばれますが、独身の人だけにかかるものではなく、子どもがいる世帯の大人も同じ料率で納めます。<a href="../../hikazei/kodomo-shienkin/">東京都と大阪府の区市町村で並べた表と、会社員の額</a></p>`
+}
 const kokuhoSection = (r, Ls) => {
   const rs = kSetOf(r.code), s = Ls[0].sal8, pn = Ls[0].p65
   const vs = (s > K7SAL
@@ -324,11 +341,12 @@ const kokuhoSection = (r, Ls) => {
   ${rankLine}
   ${HH.map((hh) => `<p><strong>${esc(hh.title)}</strong></p>
   <div class="table-wrap"><table class="fit">
-  <thead><tr><th>年収</th><th>軽減</th><th class="num">年額</th></tr></thead>
+  <thead><tr><th>年収</th><th>軽減</th><th class="num">年額</th><th class="num">うち子ども・<br>子育て支援金</th></tr></thead>
   <tbody>
 ${annualRows(rs, hh)}
   </tbody></table></div>`).join('\n  ')}
   <p>線を1円でも超えると軽減が1段下がり、保険料が段差で上がります。給与だけの単身（40〜64歳）なら、${man(L1[7])}を超えると年${yen(cliff(L1[7]))}、${man(L1[5])}を超えると年${yen(cliff(L1[5]))}、${man(L1[2])}を超えると年${yen(cliff(L1[2]))}上がります。</p>
+  ${shienkinCity(r, rs, kw)}
   <p class="mini-note">39歳以下の人は介護分がかかりません（収入0円の単身で年${yen(kaigo0)}安い）。65〜74歳の人も国保の介護分はかからず、そのかわり介護保険料を別に納めます（この表に入っていません）。<strong>所得を申告していないと軽減されず、収入0円の単身（40〜64歳）でも年${yen(zeroFull.total)}</strong>になります。表は${esc(KG.incomeYear)}がこの収入だけで、ほかの世帯の人は収入なし（夫婦のもう1人は年金110万円以下）、後期高齢者医療に移った人はいない、減免なしとして計算した目安です。端数は${esc(rs.rounding)}。実際の額は${esc(r.city)}から届く決定通知書で確かめてください。</p>
   <p class="mini-note">使った料率（${esc(rs.nendo)}・${esc(rs.name)}）：</p>
   <ul class="mini-note">
@@ -559,7 +577,7 @@ ${grid}
   <h2 id="kokuho">国民健康保険（国保）が7割・5割・2割軽くなる年収（全国共通・${esc(KG.nendo)}）</h2>
   <p>国保の保険料のうち人数と世帯にかかる部分（均等割・平等割）は、前の年の所得が少ないと7割・5割・2割軽くなります。この線は国の政令で決まっていて全国共通です。住民税の非課税の線とは別の物差しで、たとえば給与だけの単身は、1級地で住民税が非課税になるのは${man(STDLINES['1'][0].sal8)}以下ですが、国保の7割軽減は${man(K7SAL)}以下です。</p>
   ${kokuhoLines()}
-  <p>国保料の年額の目安は、料率を公式ページで確かめた市区町村のページに載せています（いまは${esc(COVERED)}）。${TK.length ? `東京都は区市ごとに料率が違うので、<a href="${up}hikazei/kokuho-tokyo/">${TK.length}区市の年額を同じ世帯で並べた比較</a>も作りました。` : ''}</p>
+  <p>国保料の年額の目安は、料率を公式ページで確かめた市区町村のページに載せています（いまは${esc(COVERED)}）。${TK.length ? `東京都は区市ごとに料率が違うので、<a href="${up}hikazei/kokuho-tokyo/">${TK.length}区市の年額を同じ世帯で並べた比較</a>も作りました。${esc(KG.nendo)}から国保に加わった子ども・子育て支援金分（いわゆる「独身税」）は、<a href="${up}hikazei/kodomo-shienkin/">区市町村ごとの額と会社員の額</a>にまとめています。` : ''}</p>
   <h2>都道府県から探す</h2>
   <ul class="links">
 ${prefLinks}
@@ -646,6 +664,9 @@ ${t1}
   <tbody>
 ${t2}
   </tbody></table></div>
+
+  <h2 id="shienkin">うち子ども・子育て支援金分（いわゆる「独身税」）</h2>
+  <p>${esc(KG.nendo)}から、国保の年額には<strong>子ども・子育て支援金分</strong>が入っています。単身・40〜64歳で、収入0円なら年${yen(Math.min(...TK_ROWS.map((x) => skSingle(x.rs, 0))))}〜${yen(Math.max(...TK_ROWS.map((x) => skSingle(x.rs, 0))))}、給与400万円なら年${yen(Math.min(...TK_ROWS.map((x) => skSingle(x.rs, 4000000))))}〜${yen(Math.max(...TK_ROWS.map((x) => skSingle(x.rs, 4000000))))}です。18歳未満の子どもには、この区分の均等割がかかりません。<a href="${up}hikazei/kodomo-shienkin/">区市ごとの額と、会社員との比べ方</a></p>
 
   <h2 id="notes">この表の決まりごと</h2>
   <ul>
@@ -747,9 +768,109 @@ ${sections}
   return page({ title, desc, canonical: '/hikazei/nenkin-ranking/', depth: 2, body, jsonld: ld })
 }
 
+// ── 9d. 子ども・子育て支援金（いわゆる「独身税」）の入口 /hikazei/kodomo-shienkin/ ─────────────────────
+//   ★2026-10-10 ユーザー裁定 v306（#3「いいよ」＝入口の title・見出しに「独身税」を使ってよい／d＝国保の支援金分の列）。
+//   国保の額は料率を公式の計算例と1円で合わせた区市町村（6c と同じ TK_ROWS）＋大阪府の統一保険料だけ。額は全部 annual から出す。
+//   会社員は協会けんぽの令和8年度の支援金率（data/kokuho.json の shienkinKenpo）×標準報酬月額÷2。年度が国保とずれたら止める。
+const SK_PUBLISHED = '2026-10-10'
+const SKK = KK.shienkinKenpo
+if (!SKK || SKK.nendo !== KG.nendo || !Number.isInteger(SKK.rate)) die(`子ども・子育て支援金：協会けんぽの支援金率（shienkinKenpo）が${KG.nendo}のものではありません`)
+const shienkinPage = () => {
+  const up = '../../'
+  const n = (y) => y.toLocaleString('ja-JP')
+  const osaka = KK.rateSets['osaka-pref']
+  const osakaN = M.filter((r) => pref2(r) === '27' && kSetOf(r.code)).length
+  const rows = [...TK_ROWS.map((x) => ({ name: tkName(x, up), plain: x.munis.length > 1 ? `23区の${tkGroupName(x)}` : x.munis[0].city, rs: x.rs, cnt: x.munis.length })),
+    ...(osaka ? [{ name: `<a href="${up}hikazei/ken/27/">大阪府</a><br><small>府内${osakaN}市町村が同じ額</small>`, plain: '大阪府', rs: osaka, cnt: osakaN }] : [])]
+    .map((x) => ({ ...x, v: SK_SAL.map((s) => skSingle(x.rs, s)), p: x.rs.parts.find((q) => q.id === 'kodomo') }))
+  const by = (i) => [...rows].sort((a, b) => a.v[i] - b.v[i] || a.plain.localeCompare(b.plain, 'ja'))
+  const rk = (i, row) => 1 + rows.filter((x) => x.v[i] < row.v[i]).reduce((a, x) => a + x.cnt, 0)
+  const lo = (i) => by(i)[0], hi = (i) => by(i).at(-1)
+  // 会社員（協会けんぽ）：標準報酬月額×支援金率を会社と本人で半分ずつ（本人の分）。賞与がない場合の年額
+  const STD = 340000   // 月給33万〜35万円の人の標準報酬月額（協会けんぽの等級）＝年408万円ほど
+  const kenpoM = Math.floor((STD * SKK.rate) / 10000 / 2), kenpoY = kenpoM * 12
+  const kokuho408 = rows.map((x) => kodomoOf(kAnnual(x.rs, [{ age: 45, sal: STD * 12 }])))
+  const kLo = Math.min(...kokuho408), kHi = Math.max(...kokuho408)
+  // 子どもがいても額が増えないこと（18歳未満は均等割がかからない）を、23区の統一保険料で確かめてから言う
+  const r23 = TK_ROWS.find((x) => x.munis.length > 1) || TK_ROWS[0]
+  const fam = kodomoOf(kAnnual(r23.rs, [{ age: 45, sal: 4000000 }, { age: 43 }, { age: 10 }, { age: 14 }]))
+  const cpl = kodomoOf(kAnnual(r23.rs, [{ age: 45, sal: 4000000 }, { age: 43 }]))
+  if (fam !== cpl) die(`子ども・子育て支援金：子どもがいる世帯の額（${fam}）が夫婦だけの額（${cpl}）と違います（文の前提が崩れた）`)
+  const capMax = Math.max(...rows.map((x) => x.p.cap))
+  const tb = by(2).map((x) => `<tr><th scope="row" class="nm">${rk(2, x)}．${x.name}</th><td class="num">${n(x.v[0])}</td><td class="num">${n(x.v[1])}</td><td class="num">${n(x.v[2])}</td></tr>`).join('\n')
+  const rateRows = by(2).map((x) => `<li>${esc(x.plain)}：所得割 ${rateTxt(x.p.rate)}・均等割 18歳以上1人${yen(x.p.kintou + (x.p.kintou18 || 0))}${x.p.byodo ? `・平等割 ${yen(x.p.byodo)}` : ''}・上限 ${man(x.p.cap)}</li>`).join('\n  ')
+  const nTok = TK.length
+
+  const title = `「独身税」はいくら？子ども・子育て支援金の国保の年額（東京都${nTok}区市・大阪府）と会社員の額｜${KG.nendo}｜フクシル`
+  const desc = `いわゆる「独身税」＝子ども・子育て支援金（${KG.nendo}・2026年4月分から）。国保では区市町村ごとに額が違い、単身・40〜64歳で収入0円なら年${yen(lo(0).v[0])}〜${yen(hi(0).v[0])}、給与400万円なら年${yen(lo(2).v[2])}〜${yen(hi(2).v[2])}。会社員（協会けんぽ）は月給34万円で月${yen(kenpoM)}。18歳未満の子どもは均等割がかかりません。公表の計算例と1円まで合わせた料率で計算。`
+  const items = [['ホーム', 'index.html'], ['住民税非課税の年収（市区町村別）', 'hikazei/'], ['子ども・子育て支援金（独身税）はいくら', null]]
+  const faq = [
+    ['「独身税」とは何ですか？', `${KG.nendo}（2026年4月分）から医療保険の保険料に上乗せして集められている「子ども・子育て支援金」の通称です。子育て世帯の支援に使われ、18歳未満の子どもの分の均等割がかからないため「独身税」と呼ばれますが、独身の人だけでなく、医療保険に入っている大人みんなが納めます。`],
+    ['国民健康保険（国保）の人の子ども・子育て支援金はいくらですか？', `区市町村で違います。フクシルが料率を確かめた東京都の${nTok}区市と大阪府では、単身・40〜64歳で収入0円（所得を申告して7割軽減）なら年${yen(lo(0).v[0])}〜${yen(hi(0).v[0])}、給与収入400万円なら年${yen(lo(2).v[2])}〜${yen(hi(2).v[2])}です（${KG.nendo}）。年の上限は${man(capMax)}です。`],
+    ['会社員の子ども・子育て支援金はいくらですか？', `協会けんぽの${KG.nendo}の支援金率は${rateTxt(SKK.rate * 10)}で、会社と本人が半分ずつ負担します。標準報酬月額34万円（月給33万〜35万円ほど）なら本人は月${yen(kenpoM)}、賞与がなければ年${yen(kenpoY)}です。`],
+    ['子どもがいると子ども・子育て支援金は増えますか？', `国保では、18歳未満の子どもには子ども・子育て支援金分の均等割がかかりません（全額軽減・申請不要）。たとえば東京23区（統一保険料）で給与400万円の世帯は、夫婦2人でも、夫婦と子ども2人でも、子ども・子育て支援金分は年${yen(cpl)}で同じです。`],
+  ]
+  const body = `${CSS}<style>table.rk td.num{white-space:nowrap;text-align:right}table.rk th.nm{white-space:normal;font-weight:400}table.rk thead th{font-size:.8rem;white-space:nowrap}.answer{border:2px solid var(--accent,#2a6);border-radius:8px;padding:10px 14px;margin:14px 0}.answer p{margin:.35em 0}</style>
+  ${crumbs(items, up)}
+  <p class="updated">最終確認：${esc(CHECKED)} ／ ${esc(KG.nendo)}（${esc(KG.years)}）の料率・${esc(KG.incomeYear)}で計算</p>
+  <h1>「独身税」はいくら？<br><small>子ども・子育て支援金を国保（東京都${nTok}区市・大阪府）と会社員で比べる（${esc(KG.nendo)}）</small></h1>
+  <p class="lead">${esc(KG.nendo)}（2026年4月分）から、医療保険の保険料に<strong>子ども・子育て支援金</strong>が上乗せされています。子育て世帯の支援に使われ、子どもの分の均等割がかからないことから「独身税」とも呼ばれますが、<strong>独身の人だけでなく、医療保険に入っている大人みんな</strong>が納めます。会社員は給与から（会社と半分ずつ）、国民健康保険（国保）の人は国保料（税）の一部として納め、<strong>国保の額は住んでいる区市町村で違います</strong>。</p>
+  <div class="answer">
+  <p><strong>国保・単身40〜64歳・収入0円</strong>（7割軽減）：年${yen(lo(0).v[0])}〜${yen(hi(0).v[0])}</p>
+  <p><strong>国保・単身40〜64歳・給与400万円</strong>：<strong>年${yen(lo(2).v[2])}〜${yen(hi(2).v[2])}</strong>（月${n(Math.round(lo(2).v[2] / 12))}〜${n(Math.round(hi(2).v[2] / 12))}円ほど）</p>
+  <p><strong>会社員（協会けんぽ）・月給34万円ほど</strong>：本人<strong>月${yen(kenpoM)}</strong>（賞与がなければ年${yen(kenpoY)}）</p>
+  </div>
+  <p>同じくらいの給与（年408万円・賞与なし）で比べると、会社員の本人負担は年${yen(kenpoY)}、国保の人は年${yen(kLo)}〜${yen(kHi)}です。<strong>国保には会社の負担がない</strong>ので、同じ収入なら国保の人のほうが多く納めます。</p>
+
+  <h2 id="kokuho">国保の子ども・子育て支援金分（安い順・給与400万円の額で並べた順位）</h2>
+  <p>単身・40〜64歳の年額です。区市名を押すと、その区市の国保料（税）の年額と、うち子ども・子育て支援金の額が年収ごとに出ます。</p>
+  <p class="mini-note">金額はどれも1年分（円）です。同じ額の区市は同じ順位です。</p>
+  <div class="table-wrap"><table class="fit rk">
+  <thead><tr><th>順位・区市</th><th class="num">収入<br>0円</th><th class="num">給与<br>200万</th><th class="num">給与<br>400万</th></tr></thead>
+  <tbody>
+${tb}
+  </tbody></table></div>
+  <p>差が出るのは、子ども・子育て支援金分の<strong>所得割の率</strong>（${rateTxt(Math.min(...rows.map((x) => x.p.rate)))}〜${rateTxt(Math.max(...rows.map((x) => x.p.rate)))}）と<strong>均等割</strong>（18歳以上1人${yen(Math.min(...rows.map((x) => x.p.kintou + (x.p.kintou18 || 0))))}〜${yen(Math.max(...rows.map((x) => x.p.kintou + (x.p.kintou18 || 0))))}）が区市町村ごとに違うためです。収入が少ないと均等割、収入が多いと所得割の率が効きます。</p>
+
+  <h2 id="kodomo">子どもがいる世帯は？</h2>
+  <p>国保では、<strong>18歳未満の子どもには子ども・子育て支援金分の均等割がかかりません</strong>（全額軽減・申請はいりません）。子どもの分は、18歳以上の人の均等割に少し上乗せする形（18歳以上均等割）でまかなわれています。たとえば東京23区（統一保険料）で給与400万円の世帯は、<strong>夫婦2人でも、夫婦と子ども2人でも年${yen(cpl)}</strong>で同じです。会社員の場合も、支援金は給与（標準報酬月額）にかかるので、扶養している子どもの数では変わりません。</p>
+
+  <h2 id="notes">この表の決まりごと</h2>
+  <ul>
+  <li>子ども・子育て支援金分にも、国保の<strong>7割・5割・2割の軽減</strong>が効きます（所得を申告している世帯）。収入0円の列は7割軽減のあとの額です。所得を申告していないと軽減されません。</li>
+  <li>年の上限は、子ども・子育て支援金分だけで${man(capMax)}です（国保料全体の上限とは別）。</li>
+  <li>65〜74歳の人も国保の子ども・子育て支援金分を納めます。75歳以上の人は後期高齢者医療制度の保険料に上乗せされます（この表には入っていません）。</li>
+  <li>会社員の額は協会けんぽの場合です。健康保険組合や共済に入っている人は、加入先の案内で確かめてください。賞与にも同じ率がかかります。</li>
+  <li>国保に入った月からの月割り、減免は計算に入れていません。実際の額は区市町村から届く決定通知書で確かめてください。</li>
+  </ul>
+  <p><a href="${up}hikazei/kokuho-tokyo/">東京都の${nTok}区市の国民健康保険料（税）の全体の比較</a> ／ <a href="${up}hikazei/#kokuho">国保が7割・5割・2割軽くなる年収（全国共通）</a></p>
+
+  <div class="sources">
+  <h2>出典と確かめ方</h2>
+  <ul>
+  <li>会社員の支援金率＝${esc(SKK.name)} <a href="${esc(SKK.url)}" rel="nofollow">${esc(SKK.url)}</a>（${esc(SKK.checkedAt)}に確認）</li>
+  <li>国保の子ども・子育て支援金分の料率（${esc(KG.nendo)}）：
+  <ul class="mini-note">
+  ${rateRows}
+  </ul></li>
+  <li>国保の料率は、各区市・大阪府が公表している計算例や早見表の額と1円まで一致することを確かめています（どの例と合わせたかは<a href="${up}hikazei/kokuho-tokyo/#notes">東京都の比較の出典</a>と各区市のページに）。</li>
+  <li>国保の軽減の線＝${esc(KG.law)}</li>
+  <li>額の計算は、全部の区市で同じ式（フクシルの国保の計算・1か所）を使っています。誤りを見つけられた場合は contact@fukushiru.com までご連絡ください。確かめて直します。</li>
+  </ul>
+  </div>
+`
+  const ld = [
+    { ...articleLd(title, desc, '/hikazei/kodomo-shienkin/'), datePublished: SK_PUBLISHED },
+    bcLd(items),
+    { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faq.map(([q, a]) => ({ '@type': 'Question', name: q, acceptedAnswer: { '@type': 'Answer', text: a } })) },
+  ]
+  return page({ title, desc, canonical: '/hikazei/kodomo-shienkin/', depth: 2, body, jsonld: ld })
+}
+
 // ── 10. 書き出し ──────────────────────────────────────────────────────────────
 const out = [['hikazei/index.html', '/hikazei/', hubPage(), '0.8']]
 if (TK.length) out.push(['hikazei/kokuho-tokyo/index.html', '/hikazei/kokuho-tokyo/', tokyoRankPage(), '0.8'])
+if (TK.length) out.push(['hikazei/kodomo-shienkin/index.html', '/hikazei/kodomo-shienkin/', shienkinPage(), '0.8'])
 out.push(['hikazei/nenkin-ranking/index.html', '/hikazei/nenkin-ranking/', nenkinRankPage(), '0.8'])
 for (const [p2, pref] of PREFS) out.push([`hikazei/ken/${p2}/index.html`, `/hikazei/ken/${p2}/`, prefPage(p2, pref), '0.7'])
 for (const r of M) out.push([`hikazei/${r.code}/index.html`, `/hikazei/${r.code}/`, muniPage(r), '0.6'])
