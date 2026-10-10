@@ -13,6 +13,7 @@ import zlib from 'node:zlib'
 import { execFileSync } from 'node:child_process'
 import { fileURLToPath } from 'node:url'
 import { TOEI_PEEK, TOEI_PEEK_NOTE, TOEI_PEEK_BODY, TOEI_PEEK_NEXT } from './toei-peek.mjs'
+import { toeiTopCards } from './toei-top-card.mjs'
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..')
 const WORKER = path.resolve(ROOT, '..', 'fukushiru-pay')
@@ -46,7 +47,11 @@ const html = fs.readFileSync(src)
     if (!free.includes(`当たりやすさと住みやすさが両方そろう申込先 ${m2[1]}件`)) bad.push(`/toei/ の説明が資料の2章（${m2[1]}件）と違う`)
     if (!free.includes(`条件を承知のうえで選ぶ申込先 ${m3[1]}件`)) bad.push(`/toei/ の説明が資料の3章（${m3[1]}件）と違う`)
     if (!free.includes(`${m6[1]}件すべての索引`)) bad.push(`/toei/ の説明が資料の索引（${m6[1]}件）と違う`)
-    if (!read('index.html').includes(`${m6[1]}件の申込先`)) bad.push(`トップの案内カードが資料の索引（${m6[1]}件）と違う`)
+    // ★2026-10-08 トップの並べ替え（4404d0d4）で /toei/ のカードが外れ、件数の無い文字のリンクになった。
+    //   カードがあるときだけ件数を確かめる（カードの数え方は scripts/toei-top-card.mjs。toei-nerai.mjs と同じもの）。
+    const top = read('index.html')
+    const topCards = toeiTopCards(top)
+    if (topCards && !top.includes(`${m6[1]}件の申込先`)) bad.push(`トップの案内カードが資料の索引（${m6[1]}件）と違う`)
     if (!TOEI_PEEK.includes(`両方そろう申込先（${m2[1]}件）`)) bad.push('scripts/toei-peek.mjs が資料と違う（node scripts/toei-nerai.mjs を回し直す）')
     // ★本体と「続きの区市町の見出し」を分けて確かめる。資料では見出しと見出しの間に表が挟まるので、
     //   つなげた1本の文字列は資料の本文と一致しない（まとめて確かめると必ず落ちる）。
@@ -69,7 +74,7 @@ const html = fs.readFileSync(src)
     if (!arts.length) bad.push('都営への案内が入った記事が0本（node scripts/stamp-offers.mjs）')
     const stale = arts.filter((f) => !read(`articles/${f}`).includes(`申込先${m2[1]}件`))
     if (stale.length) bad.push(`記事の案内が資料の2章（${m2[1]}件）と違う ${stale.length}本（node scripts/stamp-offers.mjs）：${stale.join(', ')}`)
-    if (!bad.length) console.log(`突き合わせ OK：資料（2章 ${m2[1]}件・3章 ${m3[1]}件・索引 ${m6[1]}件）＝/toei/＝トップのカード＝記事${arts.length}本の案内`)
+    if (!bad.length) console.log(`突き合わせ OK：資料（2章 ${m2[1]}件・3章 ${m3[1]}件・索引 ${m6[1]}件）＝/toei/${topCards ? '＝トップのカード' : ''}＝記事${arts.length}本の案内${topCards ? '' : '（トップは件数の無い文字のリンクだけ）'}`)
   }
   if (bad.length) { console.error('KV に入れません：\n- ' + bad.join('\n- ')); process.exit(1) }
   if (process.argv.includes('--check')) process.exit(0)

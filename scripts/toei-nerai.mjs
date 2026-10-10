@@ -17,6 +17,7 @@ import path from 'node:path'
 import { page, esc, SITE, readPrev, pageDiff } from './shogai-kojo-page.mjs'
 import { peekBox } from './peek-box.mjs'
 import { kanryoScript } from './kanryo-script.mjs'
+import { toeiTopCards } from './toei-top-card.mjs'
 import {
   ROOT,
   PRICE,
@@ -560,15 +561,24 @@ export const TOEI_FACTS = ${JSON.stringify({ minN: MIN_N, suki: SUKI, rounds: F.
 
 // ── トップページ（index.html・手書き）の /toei/ の案内カード ─────────────────────
 //   ★2026-09-13 カードの件数が手書きで、母数を戻したら /toei/ と食い違った（13,349件・1,320件・689件のまま）。
-//     カードの <p> だけをここで書き換える。見つからない・2つ以上あるときは止める（黙って古いまま出さない）。
+//     カードの <p> だけをここで書き換える。2枚以上あるとき・形が読めないときは止める（黙って古いまま出さない）。
+//   ★2026-10-08 トップの並べ替え（4404d0d4）で /toei/ はカードから外れ、件数の無い文字のリンクになった。
+//     それまでは「カードが1枚でなければ止める」だったので、それ以来ここで止まって何も書き出せなかった。
+//     カードが無いのは正常（書き換えるものが無いだけ）。カードを戻したら、またここで件数を合わせる。
+//     ★ここからカードをトップへ戻すことはしない（scripts/toei-top-card.mjs の先頭）。
+let topCard = 'なし（文字のリンクだけ）'
 {
   const top = fs.readFileSync(path.join(ROOT, 'index.html'), 'utf8')
-  const re = /(<a class="card" href="toei\/">\s*<span class="cat">[^<]*<\/span>\s*<h3>[^<]*<\/h3>\s*<p>)([\s\S]*?)(<\/p>\s*<\/a>)/g
-  const hits = top.match(re) || []
-  if (hits.length !== 1) die(`index.html の /toei/ の案内カードが ${hits.length} 個見つかりました（1個のはず）。`)
-  const card = `定期募集${F.rounds}回・${num(F.rows)}件を住宅と募集区分ごとに名寄せしました。倍率の中央値は${F.allMed}倍で、${num(F.enough)}件の申込先のうち${num(F.suki)}件（${F.sukiPct}%）は${SUKI}倍未満。<strong>区市町ごとの相場と条件別の効き目は無料。住宅名つきの一覧が${PRICE}円です。</strong>`
-  const next = top.replace(re, (_, a, _b, c) => a + card + c)
-  if (next !== top) write('index.html', next)
+  const cards = toeiTopCards(top)
+  if (cards > 1) die(`index.html に /toei/ の案内カードが ${cards} 枚あります（あっても1枚のはず）。`)
+  if (cards === 1) {
+    const re = /(<a class="card" href="toei\/">\s*<span class="cat">[^<]*<\/span>\s*<h3>[^<]*<\/h3>\s*<p>)([\s\S]*?)(<\/p>\s*<\/a>)/g
+    if ((top.match(re) || []).length !== 1) die('index.html の /toei/ の案内カードの形が読めません（件数を書く <p> が見つからない）。この節の正規表現をカードの形に合わせてください。')
+    const card = `定期募集${F.rounds}回・${num(F.rows)}件を住宅と募集区分ごとに名寄せしました。倍率の中央値は${F.allMed}倍で、${num(F.enough)}件の申込先のうち${num(F.suki)}件（${F.sukiPct}%）は${SUKI}倍未満。<strong>区市町ごとの相場と条件別の効き目は無料。住宅名つきの一覧が${PRICE}円です。</strong>`
+    const next = top.replace(re, (_, a, _b, c) => a + card + c)
+    if (next !== top) write('index.html', next)
+    topCard = next !== top ? '件数を書き換えた' : '変更なし'
+  }
 }
 
 // ── sitemap.xml（この艦のsitemapは手書きで育てたもの。/toei/ の1行だけ書き換える）──
@@ -609,7 +619,7 @@ console.log(`  行頭に区市町あり ${LEDGER.head}行のうち町丁目名�
   const lv = (list, l) => list.filter((e) => e && e.level === l).length
   const envs = [...byName.values()]
   const idx = enough.map((h) => h.env)
-  console.log(`  抜粋 scripts/toei-peek.mjs（2章の ${peekCities.map((c) => c.city).join("・")}＝${peekCities.reduce((n, c) => n + c.list.length, 0)}行＋見出し${PEEK_NEXT}件）／トップのカード・sitemap: ${pending.map(([rel]) => rel).filter((rel) => rel === 'index.html' || rel === 'sitemap.xml').join('・') || '変更なし'}`)
+  console.log(`  抜粋 scripts/toei-peek.mjs（2章の ${peekCities.map((c) => c.city).join("・")}＝${peekCities.reduce((n, c) => n + c.list.length, 0)}行＋見出し${PEEK_NEXT}件）／トップの /toei/ カード: ${topCard}／sitemap: ${pending.some(([rel]) => rel === 'sitemap.xml') ? '書き換えた' : '変更なし'}`)
   console.log(`  条件別の表の母数: ${cuts.map((c) => `${c.label} ${c.base}`).join('／')}・建築の年が混ざる ${F.eraMixed}件`)
   console.log(`  次に: node scripts/stamp-offers.mjs（記事12本の抜粋を貼り直す）。KV へは scripts/toei-put-pack.mjs（入れる前に資料・/toei/・トップ・記事を突き合わせる）`)
   console.log(`  住環境の数字: 索引${F.enough}件中 ${F.envEnough}件（頭の区市町名を外して ${enough.filter((h) => hasNum(h.env) && h.env.stem).length}・町丁目 ${lv(idx, 'area')}・町全体 ${lv(idx, 'town')}）・数字なし（町が広い ${lv(idx, 'wide')}・決められない ${lv(idx, 'ambiguous')}・見つからない ${idx.filter((e) => !e).length}）／区×住宅名 ${byName.size}件中 ${envs.filter(hasNum).length}件（町丁目 ${lv(envs, 'area')}・町全体 ${lv(envs, 'town')}・町が広い ${lv(envs, 'wide')}・決められない ${lv(envs, 'ambiguous')}）／無料ページの表 ${konde.slice(0, 10).filter((h) => hasNum(h.env)).length}/10`)
