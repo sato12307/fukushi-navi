@@ -144,11 +144,12 @@ const WAKU_LEAD = (() => {
 
 
 // ── 区市町ごとの実測 ────────────────────────────────────────────────────────
-// ★作った日は面ごとに違う。既存11本は2026-08-24、今回足した37本は今日。
+// ★作った日は面ごとに違う。既存11本は2026-08-24、2026-09-17 に足した37本はその日。
 //   全部を同じ日にすると、検索側に「37本が8月からあった」と申告することになる。
 // ★2026-10-11 作った日は、今の面にある datePublished を引き継ぐ。面がまだ無いときだけ下の決まり（11本は08-24・ほかは今日）。
 //   それまで37本は回した日（TODAY）を毎回入れていたので、日が変わるたびに構造化データが変わり、中身が同じでも
-//   sitemap の lastmod が進んでいた（37本の datePublished が、出した日の 09-17 ではなく最後に回した 10-02 なのもそのため）。
+//   sitemap の lastmod が進んでいた。37本の datePublished は最後に回した 10-02 になっていたので、同じ日に面のほうを
+//   出した日の 09-17（git log で最初に入った日）へ直した。
 const BORN_2608 = new Set(['adachi', 'fuchu', 'hachioji', 'higashimurayama', 'itabashi', 'katsushika', 'kiyose', 'kodaira', 'koto', 'machida', 'nerima'])
 const TODAY = new Date(Date.now() + 9 * 3600e3).toISOString().slice(0, 10)
 const publishedOf = (slug) => /"datePublished": "(\d{4}-\d{2}-\d{2})"/.exec(readPrev(path.join(ROOT, 'articles', `toei-${slug}.html`)) || '')?.[1]
