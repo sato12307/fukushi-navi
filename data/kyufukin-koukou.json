@@ -1,0 +1,743 @@
+{
+ "_note": "高校生等奨学給付金（奨学のための給付金）の令和8年度の給付額と判定の区分。ページは scripts/kyufukin-page.mjs が書く（gakko/kyufukin/）。額と区分は文部科学省のリーフレットと事業の概要の原文（PDF）から写した。都道府県の窓口は文部科学省の問合せ先一覧から機械で拾ったもの（2026-10-10）。拡充の実施と額は都道府県ごとに違いうる＝県の案内で確かめるよう書く。",
+ "nendo": "令和8年度",
+ "checkedAt": "2026-10-10",
+ "tiers": [
+  {
+   "id": "seiho",
+   "label": "生活保護世帯",
+   "short": "生活保護",
+   "nenshu": "",
+   "sub": "生業扶助（高等学校等就学費）を受けている世帯",
+   "zen": {
+    "koku": 32300,
+    "shi": 52600
+   },
+   "tsu": {
+    "koku": 32300,
+    "shi": 52600
+   }
+  },
+  {
+   "id": "hikazei",
+   "label": "住民税の所得割が非課税の世帯",
+   "short": "所得割が非課税",
+   "nenshu": "年収270万円未満",
+   "min": 0,
+   "max": 0,
+   "zen": {
+    "koku": 143700,
+    "shi": 152000
+   },
+   "tsu": {
+    "koku": 50500,
+    "shi": 52100
+   }
+  },
+  {
+   "id": "t1",
+   "label": "所得割額が100円以上105,500円未満の世帯",
+   "short": "所得割10万5,500円未満",
+   "nenshu": "年収270〜380万円",
+   "min": 100,
+   "max": 105499,
+   "share": "非課税の世帯の3分の1",
+   "zen": {
+    "koku": 47900,
+    "shi": 50670
+   },
+   "tsu": {
+    "koku": 16830,
+    "shi": 17370
+   }
+  },
+  {
+   "id": "t2",
+   "label": "所得割額が105,500円以上182,500円未満の世帯",
+   "short": "所得割18万2,500円未満",
+   "nenshu": "年収380〜490万円",
+   "min": 105500,
+   "max": 182499,
+   "share": "非課税の世帯の4分の1",
+   "zen": {
+    "koku": 35930,
+    "shi": 38000
+   },
+   "tsu": {
+    "koku": 12630,
+    "shi": 13030
+   }
+  }
+ ],
+ "nenshuModel": "両親のうちどちらか一方が働き、高校生1人（16歳以上）・中学生1人の4人世帯の目安（文部科学省）",
+ "sources": {
+  "leaflet": {
+   "name": "文部科学省「高校生等奨学給付金（奨学のための給付金）」リーフレット（令和8年度の給付額・対象世帯・所得割額の区分・家計急変）",
+   "url": "https://www.mext.go.jp/content/20260616-mxt_shuukyo03-100002595_18.pdf"
+  },
+  "gaiyou": {
+   "name": "文部科学省「高校生等奨学給付金（奨学のための給付金）」事業の概要（令和8年度予算・給付額・対象校種・対象者・補助割合 国1/2）",
+   "url": "https://www.mext.go.jp/content/20260408-mxt_shuukyo03-100002595_4.pdf"
+  },
+  "contacts": {
+   "name": "文部科学省「高校生等奨学給付金（専攻科含む）のお問合せ先一覧」",
+   "url": "https://www.mext.go.jp/a_menu/shotou/mushouka/detail/1353842.htm"
+  },
+  "mushouka": {
+   "name": "文部科学省「高校生等への修学支援」",
+   "url": "https://www.mext.go.jp/a_menu/shotou/mushouka/index.htm"
+  }
+ },
+ "prefs": [
+  {
+   "code": "01",
+   "name": "北海道",
+   "links": [
+    {
+     "url": "https://www.dokyoi.pref.hokkaido.lg.jp/hk/kki/syougakukyuufukin.html",
+     "kind": "国公立"
+    },
+    {
+     "url": "https://www.pref.hokkaido.lg.jp/sm/gkj/gakuji-hp/190806.html",
+     "kind": "私立"
+    }
+   ]
+  },
+  {
+   "code": "02",
+   "name": "青森県",
+   "links": [
+    {
+     "url": "https://www.pref.aomori.lg.jp/soshiki/kyoiku/e-shisetsu/shougakukyuufukin.html",
+     "kind": "国公立"
+    },
+    {
+     "url": "https://www.pref.aomori.lg.jp/soshiki/kyoiku/e-shisetsu/senkoukashougakukyuufukin.html",
+     "kind": "専攻科"
+    },
+    {
+     "url": "https://www.pref.aomori.lg.jp/soshiki/kodomo/kenmin/Aomori_syugakushien.html",
+     "kind": ""
+    }
+   ]
+  },
+  {
+   "code": "03",
+   "name": "岩手県",
+   "links": [
+    {
+     "url": "https://www.pref.iwate.jp/kyouikubunka/kyouiku/ippan/koho/1006269.html",
+     "kind": "国公立"
+    },
+    {
+     "url": "https://www.pref.iwate.jp/kyouikubunka/kyouiku/ippan/koho/1087024.html",
+     "kind": "専攻科"
+    },
+    {
+     "url": "https://www.pref.iwate.jp/kyouikubunka/kyouiku/shigaku/1006754.html",
+     "kind": "私立"
+    }
+   ]
+  },
+  {
+   "code": "04",
+   "name": "宮城県",
+   "links": [
+    {
+     "url": "https://www.pref.miyagi.jp/site/sub-jigyou/2022syougakukyufu.html",
+     "kind": "国公立"
+    },
+    {
+     "url": "https://www.pref.miyagi.jp/site/shigaku/kyufu.html",
+     "kind": "私立"
+    }
+   ]
+  },
+  {
+   "code": "05",
+   "name": "秋田県",
+   "links": [
+    {
+     "url": "https://www.pref.akita.lg.jp/pages/genre/15405",
+     "kind": ""
+    },
+    {
+     "url": "https://www.pref.akita.lg.jp/pages/archive/11051",
+     "kind": "私立"
+    },
+    {
+     "url": "https://www.pref.akita.lg.jp/pages/genre/koutoukyouiku",
+     "kind": ""
+    }
+   ]
+  },
+  {
+   "code": "06",
+   "name": "山形県",
+   "links": [
+    {
+     "url": "https://www.pref.yamagata.jp/700013/koko/220825syougakukyuufukin.html",
+     "kind": "国公立"
+    },
+    {
+     "url": "https://www.pref.yamagata.jp/020023/bunkyo/kyoiku/shingakushien/siritsushougaku2.html",
+     "kind": "私立"
+    }
+   ]
+  },
+  {
+   "code": "07",
+   "name": "福島県",
+   "links": [
+    {
+     "url": "https://www.pref.fukushima.lg.jp/site/edu/koukoukyoiku22.html",
+     "kind": ""
+    }
+   ]
+  },
+  {
+   "code": "08",
+   "name": "茨城県",
+   "links": [
+    {
+     "url": "https://kyoiku.pref.ibaraki.jp/gakko/highschool/scholarship/kyufukin/",
+     "kind": ""
+    },
+    {
+     "url": "https://kyoiku.pref.ibaraki.jp/gakko/private-schools/school-attendance-support/benefits/",
+     "kind": ""
+    }
+   ]
+  },
+  {
+   "code": "09",
+   "name": "栃木県",
+   "links": [
+    {
+     "url": "https://www.pref.tochigi.lg.jp/m01/education/gakkoukyouiku/koutou/kyuufukin_k.html",
+     "kind": "国公立"
+    }
+   ]
+  },
+  {
+   "code": "10",
+   "name": "群馬県",
+   "links": [
+    {
+     "url": "https://www.pref.gunma.jp/site/kyouiku/4650.html",
+     "kind": "国公立"
+    },
+    {
+     "url": "https://www.pref.gunma.jp/site/hojokin/3561.html",
+     "kind": "私立"
+    }
+   ]
+  },
+  {
+   "code": "11",
+   "name": "埼玉県",
+   "links": [
+    {
+     "url": "https://www.pref.saitama.lg.jp/f2204/j-s/s-kyuhukin.html",
+     "kind": ""
+    },
+    {
+     "url": "https://www.pref.saitama.lg.jp/a0204/kyuhukin.html",
+     "kind": "私立"
+    }
+   ]
+  },
+  {
+   "code": "12",
+   "name": "千葉県",
+   "links": [
+    {
+     "url": "https://www.pref.chiba.lg.jp/kyouiku/zaimu/jugyouryoutou/syougakunotamenokyuuhukin.html",
+     "kind": "国公立"
+    },
+    {
+     "url": "https://www.pref.chiba.lg.jp/gakuji/shiritsutou/gakuhi-josei/josei-kyuufukin.html",
+     "kind": "私立"
+    }
+   ]
+  },
+  {
+   "code": "13",
+   "name": "東京都",
+   "links": [
+    {
+     "url": "https://www.kyoiku.metro.tokyo.lg.jp/admission/tuition/tuition/scholarship_public_school.html",
+     "kind": "国公立"
+    },
+    {
+     "url": "https://www.soumu.metro.tokyo.lg.jp/08daigaku/kyuuhukin.html",
+     "kind": ""
+    },
+    {
+     "url": "https://shigaku-tokyo.or.jp/pa_shougaku.html",
+     "kind": "私立"
+    }
+   ]
+  },
+  {
+   "code": "14",
+   "name": "神奈川県",
+   "links": [
+    {
+     "url": "https://www.pref.kanagawa.jp/docs/en7/cnt/f531013/",
+     "kind": "国公立"
+    },
+    {
+     "url": "https://www.pref.kanagawa.jp/docs/v3e/jyosei/gakuhisien/syougakukyuuhukinn.html",
+     "kind": "私立"
+    }
+   ]
+  },
+  {
+   "code": "15",
+   "name": "新潟県",
+   "links": [
+    {
+     "url": "https://www.pref.niigata.lg.jp/sec/kyoikuzaimu/syugakushienn2020.html",
+     "kind": ""
+    },
+    {
+     "url": "https://www.pref.niigata.lg.jp/sec/daigaku/1356820534591.html",
+     "kind": "私立"
+    }
+   ]
+  },
+  {
+   "code": "16",
+   "name": "富山県",
+   "links": [
+    {
+     "url": "https://www.pref.toyama.jp/3003/kurashi/kyouiku/gakkou/shuugakushien/kj00014616.html",
+     "kind": ""
+    },
+    {
+     "url": "https://www.pref.toyama.jp/1119/kurashi/kyouiku/gakkou/shuugakushien/kj00014545.html",
+     "kind": "私立"
+    }
+   ]
+  },
+  {
+   "code": "17",
+   "name": "石川県",
+   "links": [
+    {
+     "url": "https://www.pref.ishikawa.lg.jp/kyoiku/seisaku/shugaku/futankeigen.html",
+     "kind": "国公立"
+    },
+    {
+     "url": "https://www.pref.ishikawa.lg.jp/soumu/tethuzuki/gakko76.html",
+     "kind": "私立"
+    }
+   ]
+  },
+  {
+   "code": "18",
+   "name": "福井県",
+   "links": [
+    {
+     "url": "https://www.pref.fukui.lg.jp/doc/gakushin/kyuuhukin.html",
+     "kind": ""
+    },
+    {
+     "url": "https://www.pref.fukui.lg.jp/doc/daishi/syougakukyuufu.html",
+     "kind": "私立"
+    }
+   ]
+  },
+  {
+   "code": "19",
+   "name": "山梨県",
+   "links": [
+    {
+     "url": "https://www.pref.yamanashi.jp/koukoukyo/documents/shougakukyuufukinn.html",
+     "kind": "国公立"
+    }
+   ]
+  },
+  {
+   "code": "20",
+   "name": "長野県",
+   "links": [
+    {
+     "url": "https://www.pref.nagano.lg.jp/kyoiku/koko/gakko/gakko/hi-kyuhukin.html",
+     "kind": ""
+    },
+    {
+     "url": "https://www.pref.nagano.lg.jp/ken-manabi/kyoiku/gakko/shiritsu/annai/kyufu.html",
+     "kind": "私立"
+    }
+   ]
+  },
+  {
+   "code": "21",
+   "name": "岐阜県",
+   "links": [
+    {
+     "url": "https://www.pref.gifu.lg.jp/kyoiku/kennai-gakko/koto-gakko/17773/koukousei-syougakukyuuhu.html",
+     "kind": ""
+    },
+    {
+     "url": "https://www.pref.gifu.lg.jp/page/61422.html",
+     "kind": "私立"
+    }
+   ]
+  },
+  {
+   "code": "22",
+   "name": "静岡県",
+   "links": [
+    {
+     "url": "https://www.pref.shizuoka.jp/kodomokyoiku/school/kyoiku/1003777/1003792/1003892/1031865.html",
+     "kind": ""
+    },
+    {
+     "url": "https://www.pref.shizuoka.jp/kodomokyoiku/school/1002738/1054891.html",
+     "kind": "私立"
+    }
+   ]
+  },
+  {
+   "code": "23",
+   "name": "愛知県",
+   "links": [
+    {
+     "url": "https://www.pref.aichi.jp/soshiki/kotogakko/0000082860.html",
+     "kind": "国公立"
+    },
+    {
+     "url": "https://www.pref.aichi.jp/soshiki/shigaku/shigaku-syougakukyuhukin.html",
+     "kind": "私立"
+    }
+   ]
+  },
+  {
+   "code": "24",
+   "name": "三重県",
+   "links": [
+    {
+     "url": "https://www.pref.mie.lg.jp/KYOZAIMU/HP/singakusien/84767018109.htm",
+     "kind": ""
+    },
+    {
+     "url": "https://www.pref.mie.lg.jp/SIGAKU/HP/shigaku/84765021364.htm",
+     "kind": "私立"
+    }
+   ]
+  },
+  {
+   "code": "25",
+   "name": "滋賀県",
+   "links": [
+    {
+     "url": "https://www.pref.shiga.lg.jp/edu/nyuushi/syogaku/105625.html",
+     "kind": "国公立"
+    },
+    {
+     "url": "https://www.pref.shiga.lg.jp/ippan/kosodatekyouiku/kyouiku/11034.html",
+     "kind": "私立"
+    }
+   ]
+  },
+  {
+   "code": "26",
+   "name": "京都府",
+   "links": [
+    {
+     "url": "https://www.kyoto-be.ne.jp/koukyou/cms/?p=445",
+     "kind": ""
+    },
+    {
+     "url": "https://www.pref.kyoto.jp/bunkyo/syogakukyufukin.html",
+     "kind": ""
+    }
+   ]
+  },
+  {
+   "code": "27",
+   "name": "大阪府",
+   "links": [
+    {
+     "url": "https://www.pref.osaka.lg.jp/kyoishisetsu/kyufukin/index.html",
+     "kind": "国公立"
+    },
+    {
+     "url": "https://www.pref.osaka.lg.jp/shigaku/shigakumushouka/syougaku_kyuuhu.html",
+     "kind": "私立"
+    }
+   ]
+  },
+  {
+   "code": "28",
+   "name": "兵庫県",
+   "links": [
+    {
+     "url": "https://www2.hyogo-c.ed.jp/hpe/zaimu/shougakukyuhukin/",
+     "kind": ""
+    },
+    {
+     "url": "https://web.pref.hyogo.lg.jp/kk35/shougakukyuuhukinn.html",
+     "kind": "私立"
+    }
+   ]
+  },
+  {
+   "code": "29",
+   "name": "奈良県",
+   "links": [
+    {
+     "url": "https://www.pref.nara.jp/47191.htm",
+     "kind": "国公立"
+    },
+    {
+     "url": "https://www.pref.nara.jp/60687.htm",
+     "kind": ""
+    },
+    {
+     "url": "https://www.pref.nara.jp/40219.htm",
+     "kind": "私立"
+    }
+   ]
+  },
+  {
+   "code": "30",
+   "name": "和歌山県",
+   "links": [
+    {
+     "url": "https://www.pref.wakayama.lg.jp/prefg/500600/d00153447.html",
+     "kind": ""
+    },
+    {
+     "url": "https://www.pref.wakayama.lg.jp/prefg/022100/gakkou/kyuhukin0.html",
+     "kind": ""
+    }
+   ]
+  },
+  {
+   "code": "31",
+   "name": "鳥取県",
+   "links": [
+    {
+     "url": "https://www.pref.tottori.lg.jp/item/872943.htm#itemid872943",
+     "kind": ""
+    }
+   ]
+  },
+  {
+   "code": "32",
+   "name": "島根県",
+   "links": [
+    {
+     "url": "https://www.pref.shimane.lg.jp/gakkokikaku/syougaku.html",
+     "kind": "国公立"
+    },
+    {
+     "url": "https://www.pref.shimane.lg.jp/education/kyoiku/shiritu/shiritu/shiritsu_shogaku_kyufukin.html",
+     "kind": "専攻科"
+    }
+   ]
+  },
+  {
+   "code": "33",
+   "name": "岡山県",
+   "links": [
+    {
+     "url": "https://www.pref.okayama.jp/site/16/564414.html",
+     "kind": ""
+    },
+    {
+     "url": "https://www.pref.okayama.jp/page/394294.html",
+     "kind": ""
+    }
+   ]
+  },
+  {
+   "code": "34",
+   "name": "広島県",
+   "links": [
+    {
+     "url": "https://www.pref.hiroshima.lg.jp/site/kyouiku09/06senior-2nd-syougakukyuufukin.html",
+     "kind": ""
+    },
+    {
+     "url": "https://www.pref.hiroshima.lg.jp/soshiki/44/syougakunotamenokyuuhukin.html",
+     "kind": "私立"
+    }
+   ]
+  },
+  {
+   "code": "35",
+   "name": "山口県",
+   "links": [
+    {
+     "url": "https://www.pref.yamaguchi.lg.jp/cms/a50100/osirase/shougakukyuuhu.html",
+     "kind": "国公立"
+    },
+    {
+     "url": "https://www.pref.yamaguchi.lg.jp/soshiki/3/12053.html",
+     "kind": "私立"
+    }
+   ]
+  },
+  {
+   "code": "36",
+   "name": "徳島県",
+   "links": [
+    {
+     "url": "https://www.pref.tokushima.lg.jp/ippannokata/kyoiku/gakkokyoiku/7215503/",
+     "kind": ""
+    }
+   ]
+  },
+  {
+   "code": "37",
+   "name": "香川県",
+   "links": [
+    {
+     "url": "https://www.pref.kagawa.lg.jp/somugakuji/sigaku/keigen/shogakukyuhukin.html",
+     "kind": ""
+    }
+   ]
+  },
+  {
+   "code": "38",
+   "name": "愛媛県",
+   "links": [
+    {
+     "url": "https://www.pref.ehime.jp/page/3913.html",
+     "kind": ""
+    },
+    {
+     "url": "https://www.pref.ehime.jp/page/5130.html",
+     "kind": "私立"
+    }
+   ]
+  },
+  {
+   "code": "39",
+   "name": "高知県",
+   "links": [
+    {
+     "url": "https://www.pref.kochi.lg.jp/doc/2023062700198/",
+     "kind": ""
+    },
+    {
+     "url": "https://www.pref.kochi.lg.jp/soshiki/140901/2021080300178.html",
+     "kind": ""
+    }
+   ]
+  },
+  {
+   "code": "40",
+   "name": "福岡県",
+   "links": [
+    {
+     "url": "https://www.pref.fukuoka.lg.jp/site/kyouiku/syougakukyuuhukin.html",
+     "kind": "国公立"
+    },
+    {
+     "url": "https://www.pref.fukuoka.lg.jp/contents/h26-shogakukyuhukin.html",
+     "kind": "私立"
+    }
+   ]
+  },
+  {
+   "code": "41",
+   "name": "佐賀県",
+   "links": [
+    {
+     "url": "https://www.pref.saga.lg.jp/kiji00332377/index.html",
+     "kind": ""
+    }
+   ]
+  },
+  {
+   "code": "42",
+   "name": "長崎県",
+   "links": [
+    {
+     "url": "https://www.pref.nagasaki.jp/bunrui/kanko-kyoiku-bunka/shochuko/koutougakkoutoushougakukyuufukin/",
+     "kind": "国公立"
+    },
+    {
+     "url": "https://www.pref.nagasaki.jp/bunrui/kanko-kyoiku-bunka/gakkokyoiku/kyufukin/kyufukin-kyufukin/",
+     "kind": "私立"
+    }
+   ]
+  },
+  {
+   "code": "43",
+   "name": "熊本県",
+   "links": [
+    {
+     "url": "https://www.pref.kumamoto.jp/site/kyouiku/9171.html",
+     "kind": ""
+    },
+    {
+     "url": "https://www.pref.kumamoto.jp/soshiki/11/50827.html",
+     "kind": ""
+    }
+   ]
+  },
+  {
+   "code": "44",
+   "name": "大分県",
+   "links": [
+    {
+     "url": "https://www.pref.oita.jp/site/kyoiku/post-98.html",
+     "kind": ""
+    },
+    {
+     "url": "https://www.pref.oita.jp/soshiki/11830/shogakukyuhukin.html",
+     "kind": "私立"
+    }
+   ]
+  },
+  {
+   "code": "45",
+   "name": "宮崎県",
+   "links": [
+    {
+     "url": "https://www.pref.miyazaki.lg.jp/kokokyoiku/kyoikukosodate/kyoiku/page00126.html",
+     "kind": "国公立"
+    },
+    {
+     "url": "https://www.pref.miyazaki.lg.jp/miyazaki-bunkashinko/kyoikukosodate/kyoiku/page00459.html",
+     "kind": "私立"
+    }
+   ]
+  },
+  {
+   "code": "46",
+   "name": "鹿児島県",
+   "links": [
+    {
+     "url": "https://www.pref.kagoshima.jp/ba05/shougakukyuhukin.html",
+     "kind": "国公立"
+    },
+    {
+     "url": "https://www.pref.kagoshima.jp/ab04/kyoiku-bunka/school/shiritu/kyuhukin.html",
+     "kind": "私立"
+    }
+   ]
+  },
+  {
+   "code": "47",
+   "name": "沖縄県",
+   "links": [
+    {
+     "url": "https://www.pref.okinawa.jp/kyoiku/edu/1008819/1008843/1008848.html",
+     "kind": ""
+    },
+    {
+     "url": "https://www.pref.okinawa.jp/kyoiku/gakko/1023180/1018620/index.html",
+     "kind": "私立"
+    }
+   ]
+  }
+ ]
+}
