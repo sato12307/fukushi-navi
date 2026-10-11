@@ -24,7 +24,7 @@
   "description": "2026年8月診療分からの高額療養費制度改正（自己負担限度額の引き上げ・年間上限の新設・多数回該当の据え置き）に対応した自己負担上限額の計算機と早見表。",
   "inLanguage": "ja",
   "datePublished": "2026-08-03",
-  "dateModified": "2026-10-10",
+  "dateModified": "2026-10-11",
   "author": { "@type": "Organization", "name": "フクシル" },
   "publisher": { "@type": "Organization", "name": "フクシル" },
   "url": "https://fukushiru.com/articles/kougaku-ryouyouhi-2026.html",
@@ -56,6 +56,11 @@
       "@type": "Question",
       "name": "高額医療費と高額療養費は違う制度ですか？",
       "acceptedAnswer": { "@type": "Answer", "text": "同じ制度です。正式な名前は「高額療養費」で、「高額医療費」は一般によく使われる呼び方です。1か月の医療費の自己負担が上限額を超えたとき、超えた分が払い戻される（または限度額適用認定証などで窓口の支払いが上限までになる）仕組みで、上限額は年収（所得区分）と年齢で決まります。" }
+    },
+    {
+      "@type": "Question",
+      "name": "70歳以上の高額療養費の上限はいくらですか？",
+      "acceptedAnswer": { "@type": "Answer", "text": "2026年8月診療分から、70歳以上で一般（年収約370万円まで）の人は、通院だけの月が1人22,000円（8月〜翌7月で216,000円まで）、入院を含む世帯の上限が61,500円です（改定前は18,000円・57,600円）。住民税非課税の人は通院11,000円・世帯25,700円、所得が一定以下の人は通院8,000円・世帯15,700円です。年収約370万円以上の現役並み所得の人は、70歳未満と同じ額です（厚生労働省）。" }
     }
   ]
 }
@@ -75,6 +80,7 @@
 .limit-table td, .limit-table th { text-align: center; font-size: .92rem; }
 .limit-table td.big { font-weight: 700; }
 .limit-table .up { color: #b00020; font-weight: 700; }
+table.fit{min-width:0;font-size:.86rem}table.fit th,table.fit td{padding:6px 5px;white-space:nowrap}table.fit tbody th{text-align:left}
 </style>
 </head>
 <body>
@@ -96,12 +102,96 @@
   <p class="breadcrumb"><a href="../index.html">トップ</a> ＞ 医療費 ＞ 高額療養費の計算機</p>
 
   <h1>高額療養費<span class="h1-alias">（高額医療費）</span>は<br>いくらまで？計算機【2026年8月改正対応】</h1>
-  <p class="updated">最終更新：2026-10-10 ／ <strong>2026年8月診療分から新しい上限額が適用されています</strong>（70歳未満）。すべて概算です</p>
+  <p class="updated">最終更新：2026-10-11 ／ <strong>2026年8月診療分から新しい上限額が適用されています</strong>（70歳未満・70歳以上）。すべて概算です</p>
 
   <p class="lead">どんなに医療費がかかっても月の自己負担には上限がある——それが<strong>高額療養費制度</strong>です（「<strong>高額医療費制度</strong>」とも呼ばれますが、同じ制度です。正式な名前は高額療養費）。その上限額が<strong>2026年8月診療分から約7%引き上げ</strong>られました。一方で、がん治療など長期の通院者を守るために<strong>4回目以降（多数回該当）の据え置き</strong>と<strong>年間上限の新設</strong>という緩和もセットです。このページでは、<strong>年収とその月の医療費を入れるだけ</strong>で、新旧の上限額・いくら増えたか・多数回該当・年間上限まで自動計算します。</p>
 
   <div class="callout point">
     <p><span class="tag">今月からの変更まとめ</span>①月の上限額を所得区分ごとに<strong>約7%引き上げ</strong>　②4回目以降の<strong>多数回該当は据え置き</strong>（慢性疾患・がん患者への配慮）　③<strong>年間上限を新設</strong>（区分ウで53万円）　④2027年8月には所得区分の細分化（第2段階）が決まっています（政令で確定済み）。</p>
+  </div>
+
+  <h2>① 早見表：月の自己負担上限額【70歳未満】</h2>
+  <div class="table-wrap">
+  <table class="limit-table">
+    <caption>70歳未満の自己負担限度額（2026年8月診療分〜）</caption>
+    <thead><tr><th>区分</th><th>年収の目安</th><th>〜2026年7月</th><th>2026年8月〜</th><th>多数回該当<br>（4回目以降）</th><th>年間上限<br>（新設）</th></tr></thead>
+    <tbody>
+      <tr><th>ア</th><td>約1,160万円〜</td><td>252,600円＋(医療費−842,000円)×1%</td><td class="up">270,300円＋(医療費−901,000円)×1%</td><td>140,100円</td><td>168万円</td></tr>
+      <tr><th>イ</th><td>約770〜1,160万円</td><td>167,400円＋(医療費−558,000円)×1%</td><td class="up">179,100円＋(医療費−597,000円)×1%</td><td>93,000円</td><td>111万円</td></tr>
+      <tr><th>ウ</th><td>約370〜770万円</td><td>80,100円＋(医療費−267,000円)×1%</td><td class="up">85,800円＋(医療費−286,000円)×1%</td><td>44,400円</td><td>53万円</td></tr>
+      <tr><th>エ</th><td>〜約370万円</td><td>57,600円</td><td class="up">61,500円</td><td>44,400円</td><td>53万円<br><small>（※）</small></td></tr>
+      <tr><th>オ</th><td><a href="juminzei-hikazei-check.html">住民税非課税世帯</a></td><td>35,400円</td><td class="up">36,900円</td><td>24,600円</td><td>29万円</td></tr>
+    </tbody>
+  </table>
+  </div>
+  <p class="mini-note">「医療費」は10割の総額（窓口で払う3割の元の金額）。70歳以上は<a href="#70ijo">下の表</a>（外来特例あり）です。年間上限は8月〜翌7月の12か月間の自己負担合計に対する上限で、超えた分が支給されます。（※）区分エのうち年収約200万円以下（健保＝標準報酬月額15万円以下、国保＝旧ただし書き所得86万円以下）と確認できた人は年間上限が41万円で、2027年8月以降に払い戻されます。金額は厚生労働省「高額療養費の上限額（令和8年8月〜）」の表と照合しました（2026-09-22）。</p>
+  <!-- kogaku70:start -->
+  <h3 id="70ijo">70歳以上の上限額（2026年8月診療分〜・外来特例あり）</h3>
+  <p>70歳以上（75歳以上の後期高齢者医療を含む）は、70歳未満と区分が違います。<strong>一般と住民税非課税の人には、通院だけの月に1人ずつかかる「外来」の上限</strong>（外来特例）があり、入院した月や家族の分と合わせるときは「世帯」の上限で計算します。2026年8月から、外来・世帯とも上がりました。</p>
+  <div class="table-wrap"><table class="fit">
+    <caption>70歳以上の自己負担限度額（月額・〜2026年7月→2026年8月〜。小さい字の「年」は8月〜翌7月の年間上限）</caption>
+    <thead><tr><th>区分</th><th>外来<br>（1人）</th><th>世帯<br>（入院も）</th><th>多数回<br>該当</th></tr></thead>
+    <tbody>
+      <tr><th>一般<br><small>〜約370万円</small></th><td>18,000円<br>→<strong>22,000円</strong><br><small>年21.6万円</small></td><td>57,600円<br>→<strong>61,500円</strong><br><small>年53万円（※）</small></td><td>44,400円</td></tr>
+      <tr><th>住民税<br>非課税<br><small>低所得Ⅱ</small></th><td>8,000円<br>→<strong>11,000円</strong><br><small>年9.6万円</small></td><td>24,600円<br>→<strong>25,700円</strong><br><small>年29万円</small></td><td>24,600円<br><small>新設</small></td></tr>
+      <tr><th>非課税で<br>所得なし<br><small>低所得Ⅰ</small></th><td>8,000円<br><small>据え置き</small></td><td>15,000円<br>→<strong>15,700円</strong><br><small>年18万円</small></td><td>—</td></tr>
+    </tbody>
+  </table></div>
+  <p class="mini-note">年収約370万円以上（課税所得145万円以上）の<strong>現役並み所得</strong>の人は外来特例がなく、上限は70歳未満と同じです（現役並みⅢ＝区分ア・Ⅱ＝イ・Ⅰ＝ウ。窓口の負担は3割）。一般と住民税非課税の人の窓口の負担は、70〜74歳が2割・75歳以上が1割（75歳以上でも一定以上の所得があれば2割）です。外来の年間上限は8月〜翌7月の外来の合計に対する上限です。（※）一般のうち年収約200万円以下（健保＝標準報酬月額15万円以下、国保・後期＝課税所得28万円未満）と確かめられた人は、年間上限が41万円で、2027年8月以降に払い戻されます。2027年8月からは一般の区分がさらに細かく分かれ、外来の上限が変わる人がいます（<a href="../mitoshi/kogaku/">上限額の移り変わり</a>）。出典：<a href="https://www.mhlw.go.jp/content/001726232.pdf" rel="nofollow">厚生労働省「高額療養費制度の見直しについて」（患者負担割合及び高額療養費自己負担限度額）</a>（2026-10-11 照合）。</p>
+<!-- kogaku70:end -->
+  <div class="callout note"><p><span class="tag">上限額の移り変わり</span>この上限額は、2025年1月の当初案が3月に見合わせになり、作り直した案で決まったものです。2027年8月には区分をさらに細かく分けた2段目があります。<strong>当初案・見合わせ・決定の各版の額を、年収13区分ごとに並べた記録</strong>を<a href="../mitoshi/kogaku/">高額療養費の上限額はどう動いたか</a>にまとめました。</p></div>
+
+<!-- offer:pack -->
+  <p class="offer-lead">重い医療費が<strong>要介護認定を受けている親御さん</strong>の分なら、税のほうでも取り戻せることがあります。障害者手帳がなくても、市区町村の認定を受ければ障害者控除の対象になり、申告していなかった分は<strong>過去5年分までさかのぼれます</strong>（<a href="shogaisha-kojo-tax.html">制度の説明</a>と<a href="../shogai-kojo/">自治体別の認定基準</a>は無料です）。</p>
+  <div class="offer-link" id="offer-pack">
+  <p>ここまでが無料で読めるところです。ここから先＝認定書をもらい、還付額を試算し、更正の請求か還付申告を出すまでを、お住まいの市区町村の基準に合わせて1つにまとめた<a href="../pack/"><strong>手順書（500円・買い切り）</strong>があります</a>。</p>
+  <p class="fine"><strong>買わなくても手続きはできます。</strong>迷ったら先に<a href="../shogai-kojo/">自治体別の一覧</a>で、自分の街の基準だけ確かめてください。制度の説明は<a href="../articles/shogaisha-kojo-tax.html">こちらの記事</a>で全部無料です。</p>
+  </div>
+  <!-- /offer -->
+
+  <h2>② あなたの上限額は？【自動計算】</h2>
+  <div class="calc" role="group" aria-label="高額療養費の自己負担上限計算機">
+    <h4>自己負担上限額 計算機（70歳未満・70歳以上）</h4>
+    <div class="row">
+      <label for="k-age">年齢</label>
+      <select id="k-age">
+        <option value="u70" selected>70歳未満</option>
+        <option value="o70">70歳以上（75歳以上の後期高齢者医療も）</option>
+      </select>
+    </div>
+    <div class="row">
+      <label for="k-bracket">所得区分（年収の目安）</label>
+      <select id="k-bracket">
+        <option value="a">ア：年収 約1,160万円〜</option>
+        <option value="i">イ：年収 約770〜1,160万円</option>
+        <option value="u" selected>ウ：年収 約370〜770万円</option>
+        <option value="e">エ：年収 〜約370万円</option>
+        <option value="o">オ：住民税非課税世帯</option>
+      </select>
+    </div>
+    <div class="row" id="k-kind-row" style="display:none">
+      <label for="k-kind">その月の受診</label>
+      <select id="k-kind">
+        <option value="all" selected>入院もした・家族の分と合わせる（世帯の上限）</option>
+        <option value="gairai">通院だけ（外来・1人ごとの上限）</option>
+      </select>
+    </div>
+    <div class="row">
+      <label for="k-cost">その月の医療費（10割の総額）</label>
+      <input type="number" id="k-cost" inputmode="numeric" min="0" step="10000" placeholder="例: 1000000"> 円
+      <span class="mini-note">窓口で払った額しかわからなければ、3割負担なら×3.33・2割なら×5・1割なら×10 が目安</span>
+    </div>
+    <div class="row">
+      <label for="k-tasu">直近12か月で上限に達した月</label>
+      <select id="k-tasu">
+        <option value="0" selected>3回以下（通常）</option>
+        <option value="1">すでに3回ある（今月は4回目以降＝多数回該当）</option>
+      </select>
+    </div>
+    <div class="out" aria-live="polite">
+      <div>今月の自己負担上限：<span class="total" id="k-out">—</span></div>
+      <div class="bd" id="k-bd"></div>
+    </div>
   </div>
 
 <!-- hub:kogaku -->
@@ -118,62 +208,6 @@
   <p class="fine"><strong>買わなくても手続き・申し込みはできます。</strong>このページも、制度の説明も全部無料です。</p>
   </div>
   <!-- /hub -->
-
-  <h2>① 早見表：月の自己負担上限額【70歳未満】</h2>
-  <div class="table-wrap">
-  <table class="limit-table">
-    <caption>70歳未満の自己負担限度額（2026年8月診療分〜）</caption>
-    <thead><tr><th>区分</th><th>年収の目安</th><th>〜2026年7月</th><th>2026年8月〜</th><th>多数回該当<br>（4回目以降）</th><th>年間上限<br>（新設）</th></tr></thead>
-    <tbody>
-      <tr><th>ア</th><td>約1,160万円〜</td><td>252,600円＋(医療費−842,000円)×1%</td><td class="up">270,300円＋(医療費−901,000円)×1%</td><td>140,100円</td><td>168万円</td></tr>
-      <tr><th>イ</th><td>約770〜1,160万円</td><td>167,400円＋(医療費−558,000円)×1%</td><td class="up">179,100円＋(医療費−597,000円)×1%</td><td>93,000円</td><td>111万円</td></tr>
-      <tr><th>ウ</th><td>約370〜770万円</td><td>80,100円＋(医療費−267,000円)×1%</td><td class="up">85,800円＋(医療費−286,000円)×1%</td><td>44,400円</td><td>53万円</td></tr>
-      <tr><th>エ</th><td>〜約370万円</td><td>57,600円</td><td class="up">61,500円</td><td>44,400円</td><td>53万円<br><small>（※）</small></td></tr>
-      <tr><th>オ</th><td><a href="juminzei-hikazei-check.html">住民税非課税世帯</a></td><td>35,400円</td><td class="up">36,900円</td><td>24,600円</td><td>29万円</td></tr>
-    </tbody>
-  </table>
-  </div>
-  <p class="mini-note">「医療費」は10割の総額（窓口で払う3割の元の金額）。70歳以上は別の区分表（外来特例あり）で、こちらも同時期に改定されています。年間上限は8月〜翌7月の12か月間の自己負担合計に対する上限で、超えた分が支給されます。（※）区分エのうち年収約200万円以下（健保＝標準報酬月額15万円以下、国保＝旧ただし書き所得86万円以下）と確認できた人は年間上限が41万円で、2027年8月以降に払い戻されます。金額は厚生労働省「高額療養費の上限額（令和8年8月〜）」の表と照合しました（2026-09-22）。</p>
-  <div class="callout note"><p><span class="tag">上限額の移り変わり</span>この上限額は、2025年1月の当初案が3月に見合わせになり、作り直した案で決まったものです。2027年8月には区分をさらに細かく分けた2段目があります。<strong>当初案・見合わせ・決定の各版の額を、年収13区分ごとに並べた記録</strong>を<a href="../mitoshi/kogaku/">高額療養費の上限額はどう動いたか</a>にまとめました。</p></div>
-
-<!-- offer:pack -->
-  <p class="offer-lead">重い医療費が<strong>要介護認定を受けている親御さん</strong>の分なら、税のほうでも取り戻せることがあります。障害者手帳がなくても、市区町村の認定を受ければ障害者控除の対象になり、申告していなかった分は<strong>過去5年分までさかのぼれます</strong>（<a href="shogaisha-kojo-tax.html">制度の説明</a>と<a href="../shogai-kojo/">自治体別の認定基準</a>は無料です）。</p>
-  <div class="offer-link" id="offer-pack">
-  <p>ここまでが無料で読めるところです。ここから先＝認定書をもらい、還付額を試算し、更正の請求か還付申告を出すまでを、お住まいの市区町村の基準に合わせて1つにまとめた<a href="../pack/"><strong>手順書（500円・買い切り）</strong>があります</a>。</p>
-  <p class="fine"><strong>買わなくても手続きはできます。</strong>迷ったら先に<a href="../shogai-kojo/">自治体別の一覧</a>で、自分の街の基準だけ確かめてください。制度の説明は<a href="../articles/shogaisha-kojo-tax.html">こちらの記事</a>で全部無料です。</p>
-  </div>
-  <!-- /offer -->
-
-  <h2>② あなたの上限額は？【自動計算】</h2>
-  <div class="calc" role="group" aria-label="高額療養費の自己負担上限計算機">
-    <h4>自己負担上限額 計算機（70歳未満）</h4>
-    <div class="row">
-      <label for="k-bracket">所得区分（年収の目安）</label>
-      <select id="k-bracket">
-        <option value="a">ア：年収 約1,160万円〜</option>
-        <option value="i">イ：年収 約770〜1,160万円</option>
-        <option value="u" selected>ウ：年収 約370〜770万円</option>
-        <option value="e">エ：年収 〜約370万円</option>
-        <option value="o">オ：住民税非課税世帯</option>
-      </select>
-    </div>
-    <div class="row">
-      <label for="k-cost">その月の医療費（10割の総額）</label>
-      <input type="number" id="k-cost" inputmode="numeric" min="0" step="10000" placeholder="例: 1000000"> 円
-      <span class="mini-note">窓口3割負担の額しかわからなければ ×3.33 が目安</span>
-    </div>
-    <div class="row">
-      <label for="k-tasu">直近12か月で上限に達した月</label>
-      <select id="k-tasu">
-        <option value="0" selected>3回以下（通常）</option>
-        <option value="1">すでに3回ある（今月は4回目以降＝多数回該当）</option>
-      </select>
-    </div>
-    <div class="out" aria-live="polite">
-      <div>今月の自己負担上限：<span class="total" id="k-out">—</span></div>
-      <div class="bd" id="k-bd"></div>
-    </div>
-  </div>
 
   <h2>③ 窓口で大金を払わないために</h2>
   <ul>
@@ -208,7 +242,7 @@
   </ul>
 
   <div class="disclaimer">
-    <strong>ご注意：</strong>このページの計算は公開情報にもとづく<strong>概算</strong>です。所得区分は正確には標準報酬月額（会社員）・旧ただし書き所得（国保）で判定され、年収の目安とはずれることがあります。健保組合によっては付加給付でさらに低い上限が設定されています。70歳以上の方・複数月合算・世帯合算の詳細は、加入している医療保険者にご確認ください。
+    <strong>ご注意：</strong>このページの計算は公開情報にもとづく<strong>概算</strong>です。所得区分は正確には標準報酬月額（会社員）・旧ただし書き所得（国保）で判定され、年収の目安とはずれることがあります。健保組合によっては付加給付でさらに低い上限が設定されています。複数月合算・世帯合算の詳細は、加入している医療保険者にご確認ください。
   </div>
 </main>
 
@@ -221,46 +255,81 @@
 </footer>
 
 <script>
-// ====== 高額療養費（70歳未満）: 2026年8月診療分〜の新基準と旧基準 ======
+// kogaku:start
+// ====== 高額療養費の月の上限（data/kogaku-gendogaku.json から scripts/kogaku-sync.mjs が書く。手で直さない）======
+// old＝〜2026年7月、new＝2026年8月〜。fix＝定額、th があれば「fix＋(医療費−th)×1%」。tasu＝多数回該当、gairai＝70歳以上の外来（1人ごと）、year＝年間上限
 var BRACKETS = {
-  a: { name: 'ア', oldFix: 252600, oldTh: 842000, newFix: 270300, newTh: 901000, tasu: 140100, yearCap: '168万円' },
-  i: { name: 'イ', oldFix: 167400, oldTh: 558000, newFix: 179100, newTh: 597000, tasu: 93000,  yearCap: '111万円' },
-  u: { name: 'ウ', oldFix: 80100,  oldTh: 267000, newFix: 85800,  newTh: 286000, tasu: 44400,  yearCap: '53万円' },
-  e: { name: 'エ', oldFix: 57600,  oldTh: null,   newFix: 61500,  newTh: null,   tasu: 44400,  yearCap: '53万円（年収約200万円以下と確認できた人は41万円）' },
-  o: { name: 'オ', oldFix: 35400,  oldTh: null,   newFix: 36900,  newTh: null,   tasu: 24600,  yearCap: '29万円' }
+  a: { name: 'ア', label: 'ア：年収 約1,160万円〜', share: '3割', old: { fix: 252600, th: 842000, tasu: 140100 }, new: { fix: 270300, th: 901000, tasu: 140100, year: 1680000 } },
+  i: { name: 'イ', label: 'イ：年収 約770〜1,160万円', share: '3割', old: { fix: 167400, th: 558000, tasu: 93000 }, new: { fix: 179100, th: 597000, tasu: 93000, year: 1110000 } },
+  u: { name: 'ウ', label: 'ウ：年収 約370〜770万円', share: '3割', old: { fix: 80100, th: 267000, tasu: 44400 }, new: { fix: 85800, th: 286000, tasu: 44400, year: 530000 } },
+  e: { name: 'エ', label: 'エ：年収 〜約370万円', share: '3割', old: { fix: 57600, tasu: 44400 }, new: { fix: 61500, tasu: 44400, year: 530000, yearLow: 410000 } },
+  o: { name: 'オ', label: 'オ：住民税非課税世帯', share: '3割', old: { fix: 35400, tasu: 24600 }, new: { fix: 36900, tasu: 24600, year: 290000 } }
 };
+var BRACKETS70 = {
+  g3: { name: '現役並みⅢ', label: '現役並みⅢ：年収 約1,160万円〜（3割）', share: '3割', old: { fix: 252600, th: 842000, tasu: 140100 }, new: { fix: 270300, th: 901000, tasu: 140100, year: 1680000 } },
+  g2: { name: '現役並みⅡ', label: '現役並みⅡ：年収 約770〜1,160万円（3割）', share: '3割', old: { fix: 167400, th: 558000, tasu: 93000 }, new: { fix: 179100, th: 597000, tasu: 93000, year: 1110000 } },
+  g1: { name: '現役並みⅠ', label: '現役並みⅠ：年収 約370〜770万円（3割）', share: '3割', old: { fix: 80100, th: 267000, tasu: 44400 }, new: { fix: 85800, th: 286000, tasu: 44400, year: 530000 } },
+  ip: { name: '一般', label: '一般：年収 〜約370万円（1〜2割）', share: '70〜74歳2割・75歳以上1割', old: { fix: 57600, tasu: 44400, gairai: 18000, gairaiYear: 144000 }, new: { fix: 61500, tasu: 44400, gairai: 22000, gairaiYear: 216000, year: 530000, yearLow: 410000 } },
+  t2: { name: '住民税非課税', label: '住民税非課税の世帯（低所得Ⅱ）', share: '70〜74歳2割・75歳以上1割', old: { fix: 24600, tasu: null, gairai: 8000 }, new: { fix: 25700, tasu: 24600, gairai: 11000, gairaiYear: 96000, year: 290000 } },
+  t1: { name: '住民税非課税（所得が一定以下）', label: '住民税非課税で所得が一定以下（低所得Ⅰ）', share: '70〜74歳2割・75歳以上1割', old: { fix: 15000, tasu: null, gairai: 8000 }, new: { fix: 15700, tasu: null, gairai: 8000, year: 180000 } }
+};
+// kogaku:end
 function yen(n){ return Math.round(n).toLocaleString('ja-JP') + '円'; }
+function man(n){ return (n / 10000).toLocaleString('ja-JP') + '万円'; }
 (function(){
-  var br = document.getElementById('k-bracket'), cost = document.getElementById('k-cost'),
-      tasu = document.getElementById('k-tasu'),
+  var age = document.getElementById('k-age'), br = document.getElementById('k-bracket'), cost = document.getElementById('k-cost'),
+      tasu = document.getElementById('k-tasu'), kind = document.getElementById('k-kind'), kindRow = document.getElementById('k-kind-row'),
       out = document.getElementById('k-out'), bd = document.getElementById('k-bd');
-  function limit(b, c, isNew){
-    var fix = isNew ? b.newFix : b.oldFix, th = isNew ? b.newTh : b.oldTh;
-    if (th === null) return fix;
-    return fix + Math.max(0, c - th) * 0.01;
+  function table(){ return age.value === 'o70' ? BRACKETS70 : BRACKETS; }
+  // 年齢を替えたら、所得区分の選びを入れ替える（70歳以上は外来特例のある区分がある）
+  function fillBrackets(){
+    var T = table(), cur = br.value, html = '';
+    Object.keys(T).forEach(function(k){ html += '<option value="' + k + '">' + T[k].label + '</option>'; });
+    br.innerHTML = html;
+    br.value = T[cur] ? cur : (age.value === 'o70' ? 'ip' : 'u');
+  }
+  function limit(v, c){ return v.th ? v.fix + Math.max(0, c - v.th) * 0.01 : v.fix; }
+  function yearText(v){
+    return v.year ? '年間（8月〜翌7月）の自己負担が<strong>' + man(v.year) + '</strong>'
+      + (v.yearLow ? '（年収約200万円以下と確かめられた人は' + man(v.yearLow) + '）' : '') + 'を超えた分も支給されます。' : '';
   }
   function calc(){
-    var b = BRACKETS[br.value];
-    var c = parseInt(cost.value, 10);
-    var hasCost = !isNaN(c) && c > 0;
-    if (tasu.value === '1'){
-      out.textContent = yen(b.tasu);
-      bd.innerHTML = '多数回該当（直近12か月で4回目以降）のため<strong>据え置きの上限 ' + yen(b.tasu) + '</strong>が適用されます。今回の改正で多数回該当は引き上げられていません。';
+    var T = table(), b = T[br.value];
+    if (!b){ fillBrackets(); b = T[br.value]; }
+    var o70 = age.value === 'o70', hasGairai = o70 && !!b.new.gairai;
+    kindRow.style.display = hasGairai ? '' : 'none';
+    var c = parseInt(cost.value, 10), hasCost = !isNaN(c) && c > 0;
+    if (hasGairai && kind.value === 'gairai'){
+      out.textContent = yen(b.new.gairai);
+      bd.innerHTML = '通院だけの月は、1人ごとの外来の上限<strong>' + yen(b.new.gairai) + '</strong>（2026年7月までは' + yen(b.old.gairai) + '）。'
+        + (b.new.gairaiYear ? '8月〜翌7月の外来の合計は<strong>' + yen(b.new.gairaiYear) + '</strong>までです。' : '')
+        + '入院もした月や、家族の分と合わせる月は、世帯の上限 ' + yen(b.new.fix) + ' で計算します。';
       return;
     }
+    if (tasu.value === '1' && b.new.tasu){
+      out.textContent = yen(b.new.tasu);
+      bd.innerHTML = '多数回該当（直近12か月で4回目以降）のため<strong>上限 ' + yen(b.new.tasu) + '</strong>が適用されます。'
+        + (b.old.tasu ? '多数回該当の額は改正の前後で同じです。' : 'この区分の多数回該当は2026年8月に新しくできました。') + yearText(b.new);
+      return;
+    }
+    var noTasu = tasu.value === '1' && !b.new.tasu ? 'この区分には多数回該当はありません（ふつうの上限で計算しています）。' : '';
     if (!hasCost){
-      out.textContent = yen(b.newFix) + (b.newTh ? '〜' : '');
-      bd.innerHTML = '区分' + b.name + 'の基本上限（2026年8月〜）。医療費が' + (b.newTh ? yen(b.newTh) + 'を超えると超過分の1%が上乗せされます。医療費を入力すると正確に計算します。' : 'いくらでもこの定額が上限です。');
+      out.textContent = yen(b.new.fix) + (b.new.th ? '〜' : '');
+      bd.innerHTML = '区分「' + b.name + '」の基本の上限（2026年8月〜）。'
+        + (b.new.th ? '医療費が' + yen(b.new.th) + 'を超えると、超えた分の1%が上乗せされます。医療費を入れると正確に計算します。' : '医療費がいくらでも、この定額が上限です。') + noTasu;
       return;
     }
-    var nw = limit(b, c, true), old = limit(b, c, false);
+    var nw = limit(b.new, c), old = limit(b.old, c), rate = o70 && b.share !== '3割' ? 0.2 : 0.3;
     out.textContent = '約' + yen(nw);
     bd.innerHTML = '医療費' + yen(c) + '（10割）に対する上限。改正前は約' + yen(old)
       + ' → <strong>差額 ＋約' + yen(nw - old) + '/月</strong>。'
-      + '窓口で3割（約' + yen(c * 0.3) + '）を払った場合、約' + yen(Math.max(0, c * 0.3 - nw)) + 'が払い戻されます。'
-      + (b.yearCap ? '年間（8月〜翌7月）の自己負担が<strong>' + b.yearCap + '</strong>を超えた分も新たに支給対象です。' : '');
+      + '窓口で' + (rate * 10) + '割（約' + yen(c * rate) + '）を払った場合、約' + yen(Math.max(0, c * rate - nw)) + 'が払い戻されます。'
+      + (rate === 0.2 ? '75歳以上で1割負担の人は、窓口の額が約' + yen(c * 0.1) + 'です。' : '')
+      + noTasu + yearText(b.new);
   }
-  [br, cost, tasu].forEach(function(e){ e.addEventListener('input', calc); e.addEventListener('change', calc); });
+  age.addEventListener('change', function(){ fillBrackets(); calc(); });
+  [br, cost, tasu, kind].forEach(function(e){ e.addEventListener('input', calc); e.addEventListener('change', calc); });
+  fillBrackets();
   calc();
 })();
 </script>

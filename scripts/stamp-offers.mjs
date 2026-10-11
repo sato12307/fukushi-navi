@@ -140,7 +140,9 @@ const jump = (kind) => (kind === 'toei' ? jumpToei() : jumpPack())
 const HUBS = {
   'juminzei-hikazei-check.html': { topic: 'hikazei', before: /  <h2[^>]*>① 早見表：非課税になる収入ライン/ },
   'seikatsuhogo-keisanki.html': { topic: 'seiho', before: /  <h2[^>]*>① まず結論：単身なら月いくら？/ },
-  'kougaku-ryouyouhi-2026.html': { topic: 'kogaku', before: /  <h2[^>]*>① 早見表：月の自己負担上限額/ },
+  // ★2026-10-11（v308 b）この面だけ ③ の前（計算機の下）へ。「高額療養費制度 自己負担限度額表」で来た人（Bing 9.4位・クリック率1.5%）が
+  //   最初に見る位置で、案内の箱が早見表の手前に挟まっていた。答えの表と計算機を先に見せる。
+  'kougaku-ryouyouhi-2026.html': { topic: 'kogaku', before: /  <h2>③ 窓口で大金を払わないために<\/h2>/ },
   'koei-shunyu-kijun.html': { topic: 'koei', before: /  <h2[^>]*>① 早見表：収入基準に収まる年収の目安/ },
   'koei-yachin-keisan.html': { topic: 'koei', before: /  <h2[^>]*>① 公営住宅の家賃は/ },
   'koei-jutaku-bairitsu.html': { topic: 'koei', before: /  <h2 id="toukei">公営住宅の応募倍率 統計データ/ },
