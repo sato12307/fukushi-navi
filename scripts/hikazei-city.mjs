@@ -361,11 +361,10 @@ ${annualRows(rs, hh)}
 // 退職後の国保しらべ（taishoku-kokuho.com・同じ運営・式はこの kokuho-lib を使う）。料率を確かめた東京都・大阪府の区市町村は、
 // その区市町村のページ（会社都合の軽減の年額・任意継続とどちらが安いか）へ直接つなぐ。
 // ★2026-10-09：退職後の国保しらべの区市町村のページを Bing がまだ1枚も見つけていない（Bing が読んでいるのはトップの数枚だけ）。
-//   Bing がよく読むこの面から同じ区市町村のページへ道を付ける。退職後の国保しらべが扱うのは東京都・大阪府と、政令市のうち
-//   TAISHOKU_SEIREI の市だけ＝それ以外は付けない（taishoku-kokuho/scripts/build.mjs の AREAS の seirei と同じ市を並べる。2026-10-11 福岡市・名古屋市）
+//   Bing がよく読むこの面から同じ区市町村のページへ道を付ける。退職後の国保しらべは、料率の組（data/kokuho.json）がある区市町村を
+//   全部載せる（料率があるのに地域の区分が無いと、あちらのビルドが止まる）＝料率の組があれば付ける（2026-10-11 政令市7市まで）
 const TAISHOKU = 'https://taishoku-kokuho.com'
-const TAISHOKU_SEIREI = ['40130', '23100']
-const taishokuLink = (r) => ((/^(13|27)/.test(r.code) || TAISHOKU_SEIREI.includes(r.code)) && kSetOf(r.code)
+const taishokuLink = (r) => (kSetOf(r.code)
   ? `<div class="callout note"><p><span class="tag">会社を辞めて国保に入る人</span>倒産・解雇・雇止めなどで離職した65歳未満の人は、前年の給与を3割として国保を計算してもらえます（届け出が必要）。<a href="${TAISHOKU}/shi/${r.code}/">${esc(r.city)}の会社都合の軽減の年額</a>と、<a href="${TAISHOKU}/ninkei/?c=${r.code}">任意継続とどちらが安いか</a>は、退職後の国保しらべ（同じ運営）にあります。</p></div>`
   : '')
 
