@@ -16,27 +16,13 @@ import fs from 'node:fs'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { readSitemap } from './shogai-kojo-page.mjs'
+// 型の面の判定（BULK・KEEP）は bulk-pages.mjs の1か所（2026-10-11 から AdSense のタグ・robots.txt と共有）
+import { isBulk } from './bulk-pages.mjs'
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..')
 const CHECK = process.argv.includes('--check')
 const SITE = 'https://fukushiru.com/'
 const META = '<meta name="googlebot" content="noindex">'
-// 型の面（サイトの根からの道）
-const BULK = [
-  /^hikazei\/\d{5}\/$/,            // 住民税非課税の年収の目安（市区町村）
-  /^hikazei\/ken\/\d{2}\/$/,       // 同（都道府県）
-  /^shogai-kojo\/\d{6}\.html$/,    // 障害者控除の手順（市区町村）
-  /^jiritsu\/ken\/\d{2}\/((\d{5,6}|yakkyoku|houmon)\/)?$/, // 自立支援医療（都道府県・市区町村・薬局・訪問看護）
-  /^houkatsu\/\d{6}\.html$/,       // 地域包括支援センター（市区町村）
-  /^tsuika\/\d{2}\/$/,             // 生活保護の追加給付の申出先（都道府県・2026-10-09）。入口の /tsuika/ と本文の記事は Google にも見せる
-]
-// Google にも見せる型の面：Bing で需要が見えた3枚（2026-10-02 GetPageStats）と、Google に登録済みだった8枚（同日の URL検査の台帳）。
-//   登録済みの面まで外すと、取れている評価を自分で捨てることになる
-const KEEP = new Set(['shogai-kojo/272248.html', 'shogai-kojo/252131.html', 'hikazei/44210/',
-  'shogai-kojo/012351.html', 'shogai-kojo/114642.html', 'shogai-kojo/131075.html', 'shogai-kojo/131118.html',
-  'shogai-kojo/131121.html', 'shogai-kojo/261009.html', 'shogai-kojo/342122.html', 'houkatsu/221309.html'])
-
-export const isBulk = (rel) => !KEEP.has(rel) && BULK.some((re) => re.test(rel))
 
 // 1. 面に googlebot の noindex を入れる
 let stamped = 0, already = 0

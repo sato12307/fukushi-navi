@@ -9,16 +9,23 @@
 //   ★リポジトリの HTML には入らない（手元で開いた面にはタグが無い）。本番で確かめること。
 // ★入れない面：購入後の閲覧画面（/<商品>/kanryo/）。買った資料をその場に開く画面で、広告を出す場所ではない。
 // ★同じタグが既にある面には入れない（何度流しても1個）。
+// ★2026-10-11 型の面（bulk-pages.mjs の isBulk・約2,400枚）にも入れない。さらに robots.txt で AdSense のクローラ
+//   （Mediapartners-Google）に型の面を見せない。審査が「有用性の低いコンテンツ」で不合格だったため。理由は bulk-pages.mjs の冒頭。
+//   robots.txt の該当の段は、この script が毎回いまの面から作り直す（型の面を足しても書き足し忘れが起きない）。
+//   node scripts/stamp-adsense.mjs --robots-only … robots.txt の段だけ書く（手元のリポジトリの robots.txt を本番とそろえるとき）
 import fs from 'node:fs'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
+import { isBulk, relOf, disallowPrefixes } from './bulk-pages.mjs'
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..')
 const CHECK = process.argv.includes('--check')
+const ROBOTS_ONLY = process.argv.includes('--robots-only')
 const CLIENT = 'ca-pub-8371489006990116'
 const TAG = `<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${CLIENT}" crossorigin="anonymous"></script>`
 const SKIP_DIR = new Set(['.git', '.github', '.cache', '.dist', 'node_modules', 'scripts', 'tools', 'data'])
-const SKIP_PAGE = /(^|\/)kanryo\//
+// 購入後の閲覧画面と、404（エラーの画面に広告を出さない）
+const SKIP_PAGE = /(^|\/)kanryo\/|^404\.html$/
 
 const files = []
 const walk = (dir) => {
@@ -28,11 +35,32 @@ const walk = (dir) => {
 }
 walk(ROOT)
 
-let added = 0, already = 0, skipped = 0
+// ── robots.txt：AdSense のクローラに型の面を見せない（2026-10-11）──────────────────────────
+//   Mediapartners-Google は自分の名前の段があると「*」の段を読まない。段に書くのは Disallow だけ（ほかはすべて許可のまま）。
+//   接頭辞は bulk-pages.mjs の disallowPrefixes が「型の面だけを覆う最短の頭」として作る。作ったあと、全部の面で
+//   「覆われる＝型の面」になっているかを Google の読み方（最長一致・末尾の $）で確かめ、ずれたら止める。
+const BEGIN = '# >>> AdSense のクローラ（Mediapartners-Google）：型の面を見せない。scripts/stamp-adsense.mjs が毎回書き直す。手で直さない'
+const END = '# <<< AdSense のクローラ'
+const rels = files.map((f) => relOf(ROOT, f))
+const prefixes = disallowPrefixes(rels)
+const blocked = (rel) => prefixes.some((p) => (p.endsWith('$') ? '/' + rel === p.slice(0, -1) : ('/' + rel).startsWith(p)))
+const wrong = rels.filter((r) => blocked(r) !== isBulk(r))
+if (wrong.length) { console.error('★robots.txt の接頭辞が型の面とずれた：' + wrong.slice(0, 10).join(', ')); process.exit(1) }
+const robotsPath = path.join(ROOT, 'robots.txt')
+const robots = fs.readFileSync(robotsPath, 'utf8').replace(/\r\n/g, '\n')
+const block = [BEGIN, 'User-agent: Mediapartners-Google', ...prefixes.map((p) => `Disallow: ${p}`), END].join('\n')
+const re = new RegExp(`${BEGIN.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}[\\s\\S]*?${END}`)
+const nextRobots = re.test(robots) ? robots.replace(re, block) : robots.replace(/\n*$/, '\n\n') + block + '\n'
+if (!CHECK) fs.writeFileSync(robotsPath, nextRobots)
+console.log(`robots.txt：AdSense のクローラに見せない型の面 ${rels.filter(isBulk).length}枚を Disallow ${prefixes.length}行で覆う${CHECK ? '（--check：書いていない）' : ''}`)
+if (ROBOTS_ONLY) process.exit(0)
+
+let added = 0, already = 0, skipped = 0, bulk = 0
 const noHead = []
 for (const f of files) {
   const rel = path.relative(ROOT, f).replace(/\\/g, '/')
   if (SKIP_PAGE.test(rel)) { skipped++; continue }
+  if (isBulk(relOf(ROOT, f))) { bulk++; continue }
   const html = fs.readFileSync(f, 'utf8')
   if (html.includes('pagead2.googlesyndication.com/pagead/js/adsbygoogle.js')) { already++; continue }
   const i = html.search(/<\/head>/i)
@@ -40,7 +68,7 @@ for (const f of files) {
   if (!CHECK) fs.writeFileSync(f, html.slice(0, i) + TAG + '\n' + html.slice(i))
   added++
 }
-console.log(`AdSense のタグ：${CHECK ? '入れる予定' : '入れた'} ${added}枚 ／ 既にある ${already}枚 ／ 入れない（購入後の画面）${skipped}枚 ／ HTML 全${files.length}枚`)
+console.log(`AdSense のタグ：${CHECK ? '入れる予定' : '入れた'} ${added}枚 ／ 既にある ${already}枚 ／ 入れない（購入後の画面）${skipped}枚・（型の面）${bulk}枚 ／ HTML 全${files.length}枚`)
 // </head> の無い HTML は Google の確認用ファイル（google*.html）のような断片だけのはず。それ以外が出たら止める。
 const odd = noHead.filter((r) => !/^google[0-9a-f]+\.html$/.test(r))
 if (noHead.length) console.log(`<head> の無い HTML ${noHead.length}枚：${noHead.slice(0, 5).join(', ')}`)
@@ -73,7 +101,8 @@ for (const f of files) {
   const foot = html.slice(s, e)
   // フッターの中の法務リンクの位置（無ければ -1）。相対パスの深さは面ごとに違うので、../ の数は問わない。
   const at = LEGAL.map(([href, label]) => {
-    const m = new RegExp(`<a href="(?:\\./|(?:\\.\\./)*)${reEsc(href)}">${reEsc(label)}</a>`).exec(foot)
+    // 根からの道（/about.html）も同じリンクと数える（404.html はどの道でも出るので / で書いている）
+    const m = new RegExp(`<a href="(?:\\./|/|(?:\\.\\./)*)${reEsc(href)}">${reEsc(label)}</a>`).exec(foot)
     return m ? { end: m.index + m[0].length } : null
   })
   const missing = LEGAL.filter((_, i) => !at[i])

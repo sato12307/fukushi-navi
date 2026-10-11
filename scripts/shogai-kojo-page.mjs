@@ -25,6 +25,8 @@ export const page = ({ title, desc, canonical, depth, body, jsonld, noindex, buy
   // depth は「サイト根からの階層」。/pack/kanryo/ のような2階層下で '../' を使うと
   // /pack/assets/style.css を見にいって404になる。[[relative-asset-paths-subpages]]
   const up = depth === 0 ? './' : '../'.repeat(depth)
+  // ★下の上部メニュー（site-nav）とロゴの添え書きは、本番ではデプロイの直前に scripts/stamp-site-nav.mjs が1つの形に
+  //   書き換える（2026-10-11）。メニューを変えるときは stamp-site-nav.mjs の NAV を直す（ここを直しても本番には出ない）。
   return `<!DOCTYPE html>
 <html lang="ja">
 <head>

@@ -31,18 +31,36 @@ jobs:
         uses: actions/checkout@v4
       - name: Configure Pages
         uses: actions/configure-pages@v5
+      # 記事と計算機の一覧（/articles/）を、いまある記事から作り直す（2026-10-11）。記事を足した日に手元で回し忘れても本番は最新になる。
+      #   sitemap.xml に /articles/ の行も入れるので、下の Google 用サイトマップより先に回す。
+      - name: Build the article index
+        run: node scripts/articles-index.mjs
       # AdSense の読み込みタグを全ページの <head> に入れる（2026-09-28）。ページを書く生成器が12か所あり、
       # 月次の Actions も面を作り直すので、公開の直前のここ1か所で入れる（理由は scripts/stamp-adsense.mjs の冒頭）。
+      #   2026-10-11 から型の面には入れず、robots.txt で AdSense のクローラ（Mediapartners-Google）に型の面を見せない。
       - name: Stamp AdSense tag
         run: node scripts/stamp-adsense.mjs
       # 量産の面（市区町村・都道府県ごとの型の面）を Google にだけ noindex にし、Google 用の sitemap-google.xml を作る（2026-10-02）。
       #   Bing には全部入りの sitemap.xml と IndexNow で見せたまま（理由は scripts/stamp-google-noindex.mjs の冒頭）。
       - name: Google-only noindex for bulk pages
         run: node scripts/stamp-google-noindex.mjs
-      - name: Upload artifact (site root)
+      # 全ページの上部メニューとロゴの添え書きを1つにそろえる（2026-10-11・生成器ごとに13通りに割れていた）
+      - name: Unify the site menu
+        run: node scripts/stamp-site-nav.mjs
+      # 公開するファイルだけを _site に集める（2026-10-11）。それまではリポジトリの根をそのまま公開しており、
+      #   README.md（立ち上げ時の作業メモ）・scripts/・tools/・indexnow.env まで誰でも開けた。
+      #   data/ は記事からダウンロードのリンクを張っている（CSV・JSON）ので公開のまま。IndexNow の鍵のファイル（<鍵>.txt）も残す。
+      - name: Assemble the public files
+        run: |
+          rsync -a --exclude='.*' --exclude='/_site/' --exclude='/scripts/' --exclude='/tools/' \
+            --exclude='*.md' --exclude='*.py' --exclude='__pycache__/' --exclude='/indexnow.env' ./ _site/
+          test -f _site/index.html && test -f _site/404.html && test -f _site/robots.txt && test -f _site/ads.txt
+          test ! -e _site/README.md && test ! -e _site/scripts
+          echo "公開するファイル：$(find _site -type f | wc -l)"
+      - name: Upload artifact (public files only)
         uses: actions/upload-pages-artifact@v3
         with:
-          path: "."
+          path: "_site"
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
