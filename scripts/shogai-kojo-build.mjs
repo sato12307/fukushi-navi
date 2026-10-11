@@ -334,6 +334,18 @@ const prefBlocks = [...byPref.entries()].map(([pref, list]) => {
 <div class="table-wrap"><table><thead><tr><th>市区町村</th><th>障害者になる下限</th><th>特別障害者になる下限</th></tr></thead><tbody>${rows}</tbody></table></div>`
 }).join('\n')
 
+// ★2026-10-11（v308 c）「障害者控除対象者認定書」で来た人（Bing 90日1,015回・この面は9位で表示19）は、自分の街の基準を見に来る。
+//   ところが一覧は表の下（43,590px の表の中）にしか無かった。冒頭で都道府県→市区町村を選び、その街のページへ進めるようにする。
+const MACHI = {}
+for (const r of [...ok, ...notPublished]) (MACHI[r.pref] ||= []).push([r.code, r.city])
+const machiBox = `  <div class="callout point" id="machi"><p><span class="tag">あなたの街の基準へ</span>都道府県と市区町村を選ぶと、その街の認定の基準（どの要介護度・日常生活自立度から対象になるか）と、原文へのリンクのあるページへ進めます。</p>
+  <p><select id="mk-pref" aria-label="都道府県"><option value="">都道府県</option>${Object.keys(MACHI).map((p) => `<option>${esc(p)}</option>`).join('')}</select>
+  <select id="mk-city" aria-label="市区町村"><option value="">市区町村</option></select>
+  <a id="mk-go" href="#ichiran">基準を見る →</a></p></div>
+  <script>(function(){var C=${JSON.stringify(MACHI)};var p=document.getElementById('mk-pref'),c=document.getElementById('mk-city'),g=document.getElementById('mk-go');
+  p.addEventListener('change',function(){var l=C[p.value]||[],h='<option value="">市区町村</option>';for(var i=0;i<l.length;i++)h+='<option value="'+l[i][0]+'">'+l[i][1]+'</option>';c.innerHTML=h;g.href='#ichiran';});
+  c.addEventListener('change',function(){g.href=c.value?'./'+c.value+'.html':'#ichiran';});})();</script>
+`
 const hubBody = `  <p class="breadcrumb"><a href="../index.html">トップ</a> ＞ 障害者控除の認定基準（自治体別）</p>
   <h1>障害者控除対象者認定書とは？もらえる条件は、街によってこれだけ違う</h1>
   <p class="updated">最終更新：${LATEST} ／ ${all.length}自治体を収録（うち基準を読み取れたもの ${ok.length}）</p>
@@ -350,6 +362,7 @@ const hubBody = `  <p class="breadcrumb"><a href="../index.html">トップ</a> �
   <li>どの要介護度・日常生活自立度から対象になるか（認定の基準）は<strong>市区町村ごとに違います</strong>。下の表と一覧で、お住まいの街の基準を確かめてください。</li>
   </ul></div>
 
+${machiBox}
   <p class="lead">65歳以上で要介護認定を受けている方は、<strong>障害者手帳がなくても</strong>市区町村の認定を受ければ
   所得税・住民税の障害者控除が使えます。ところが<strong>その認定基準は市区町村がそれぞれ決めており、全国で統一されていません</strong>。
   同じ状態の親を持っていても、住んでいる街によって<strong>40万円の控除・27万円の控除・対象外</strong>に分かれます。
@@ -375,7 +388,7 @@ ${jumpPack()}
 
 ${offerPackLeaf({ peek: 'rank', up: '../' })}
 
-${citeBlock}  <h2>自治体別の一覧</h2>
+${citeBlock}  <h2 id="ichiran">自治体別の一覧</h2>
   <p class="note">「下限」は、その値<strong>以上</strong>であれば対象になり得るという意味です。表に無い自治体は、例規を公表していないか、当サイトがまだ収録できていません。</p>
 ${prefBlocks}
 
