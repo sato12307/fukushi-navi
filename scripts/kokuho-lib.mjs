@@ -115,8 +115,18 @@ const floorTo = (yen, unit) => (unit ? Math.floor(yen / unit) * unit : yen)
 //   opt.lv を渡すと軽減の割合を決め打ちする（0＝所得の申告をしていなくて軽減されない場合の額を出すとき）。
 //   opt.preschool＝6歳未満の子を入れてよい（公表の計算例との突き合わせだけで使う）。未就学児の均等割は、7・5・2割の軽減の
 //   あとの額の5割を軽減する（日野市・町田市の説明）。ページの表は大人だけの世帯なので、ここを通らない。
+//   市の独自控除（名古屋市・2026-10-11）
+//   rs.shotokuKojo＝所得割の独自控除。人ごとに（扶養家族 fuyo×33万円＋障害者控除の対象の扶養家族 fuyoShogai×86万円
+//     ＋本人が障害者控除・寡婦控除・ひとり親控除の対象 honnin なら92万円）×料率を、その人の所得割から引く（その人の所得割が上限）。
+//     扶養家族＝住民税の申告の同一生計配偶者・扶養親族（16歳未満も含む）。★扶養の数で額が変わるので、2人以上の世帯は
+//     誰かに fuyo を書かないと止める（書き忘れて「扶養なし」の額を黙って出さない）。
+//   p.kintouKojo＝7・5・2割の軽減がかかる世帯の均等割から、その区分の被保険者1人につき引く額（名古屋市は医療分だけ2,000円）。
 export const annual = (rs, members, opt = {}) => {
   if (!opt.preschool && members.some((m) => m.age < 6)) throw new Error('6歳未満の子どもがいる世帯はこの計算では扱いません（未就学児の軽減）')
+  const SK = rs.shotokuKojo
+  if (SK && members.length > 1 && members.every((m) => m.fuyo == null && m.fuyoShogai == null)) throw new Error(`${rs.name}：扶養の数（fuyo）が書いてありません（所得割の独自控除が扶養の数で変わる）`)
+  if (SK && rs.round && rs.round.person) throw new Error('1人ずつ切り捨てる料率に所得割の独自控除は扱いません')
+  const kojoBase = (m) => (SK ? SK.fuyo * (m.fuyo || 0) + SK.fuyoShogai * (m.fuyoShogai || 0) + (m.honnin ? SK.honnin : 0) : 0)
   const lv = opt.lv ?? keigenOf(members)
   const R = rs.round || {}
   const parts = rs.parts.map((p) => {
@@ -134,11 +144,15 @@ export const annual = (rs, members, opt = {}) => {
     const kintou = inPart.reduce((a, m) => a + kintouOf(m), 0)
     const byodo = p.byodo ? cut(p.byodo, lv) : 0
     if (R.person && byodo) throw new Error('1人ずつ切り捨てる料率に平等割は扱いません')
+    // 独自控除（名古屋市）。所得割の独自控除は人ごとにその人の所得割が上限、均等割の独自控除は軽減のある世帯だけ
+    const ownWari = (m) => Math.floor((Math.max(0, shotoku(m) - G.base) * p.rate) / 100000)
+    const dedWari = SK ? inPart.reduce((a, m) => a + Math.min(ownWari(m), Math.floor((kojoBase(m) * p.rate) / 100000)), 0) : 0
+    const dedKintou = p.kintouKojo && lv > 0 ? Math.min(kintou, p.kintouKojo * inPart.length) : 0
     const sum = R.person
       ? inPart.reduce((a, m) => a + floorTo(Math.floor((Math.max(0, shotoku(m) - G.base) * p.rate) / 100000) + kintouOf(m), R.person), 0)
-      : shotokuwari + kintou + byodo
+      : shotokuwari - dedWari + kintou - dedKintou + byodo
     const yen = floorTo(Math.min(p.cap, sum), R.part)
-    return { id: p.id, label: p.label, yen, shotokuwari, kintou, byodo, capped: sum > p.cap }
+    return { id: p.id, label: p.label, yen, shotokuwari, kintou, byodo, capped: sum > p.cap, ...(dedWari || dedKintou ? { dedWari, dedKintou } : {}) }
   })
   return { lv, total: floorTo(parts.reduce((a, p) => a + p.yen, 0), R.total), parts }
 }

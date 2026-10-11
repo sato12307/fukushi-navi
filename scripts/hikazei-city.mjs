@@ -244,7 +244,8 @@ ${lineRows(KL.pen)}
 const HH = [
   { id: 'sal', title: '単身・40〜64歳・給与だけ', mk: (x) => [{ age: 45, sal: x }], L: KL.sal[0], rows: [0, KL.sal[0][7], KL.sal[0][5], KL.sal[0][2], 2000000, 3000000] },
   { id: 'pen1', title: '単身・65〜74歳・年金だけ', mk: (x) => [{ age: 70, pen: x }], L: KL.pen[0], rows: [1000000, KL.pen[0][7], KL.pen[0][5], KL.pen[0][2], 3000000] },
-  { id: 'pen2', title: '夫婦2人・65〜74歳・年金は1人だけ（もう1人は年金110万円以下）', mk: (x) => [{ age: 70, pen: x }, { age: 70 }], L: KL.pen[1], rows: [1000000, KL.pen[1][7], KL.pen[1][5], KL.pen[1][2], 3500000] },
+  //   fuyo: 1＝もう1人（年金110万円以下＝所得0円）は年金をもらう人の税の扶養（同一生計配偶者）。名古屋市の所得割の独自控除がこの数で変わる
+  { id: 'pen2', title: '夫婦2人・65〜74歳・年金は1人だけ（もう1人は年金110万円以下）', mk: (x) => [{ age: 70, pen: x, fuyo: 1 }, { age: 70 }], L: KL.pen[1], rows: [1000000, KL.pen[1][7], KL.pen[1][5], KL.pen[1][2], 3500000] },
 ]
 const tagOf = (hh, x) => (x === hh.L[7] ? '7割の上限' : x === hh.L[5] ? '5割の上限' : x === hh.L[2] ? '2割の上限' : '')
 // 子ども・子育て支援金分（令和8年度から。いわゆる「独身税」）＝年額のうちの1区分。料率の組にこの区分が無ければ止める
@@ -277,7 +278,7 @@ const TK = M.filter((r) => pref2(r) === '13' && kSetOf(r.code))
 const RANK_PEN = STDLINES['1'][1].p65   // 1級地で、配偶者を扶養する65歳以上の年金の世帯が住民税非課税になる上限
 const RANK_HH = [
   { id: 'zero', label: '単身・40〜64歳・収入0円', short: '収入0円の単身', mk: () => [{ age: 45 }] },
-  { id: 'pen2', label: `夫婦2人・65〜74歳・年金${man(RANK_PEN)}（もう1人は年金なし）`, short: `年金${man(RANK_PEN)}の夫婦`, mk: () => [{ age: 70, pen: RANK_PEN }, { age: 70 }] },
+  { id: 'pen2', label: `夫婦2人・65〜74歳・年金${man(RANK_PEN)}（もう1人は年金なし）`, short: `年金${man(RANK_PEN)}の夫婦`, mk: () => [{ age: 70, pen: RANK_PEN, fuyo: 1 }, { age: 70 }] },
   { id: 'sal400', label: '単身・40〜64歳・給与収入400万円', short: '給与400万円の単身', mk: () => [{ age: 45, sal: 4000000 }] },
 ]
 const TK_ROWS = [...TK.reduce((m, r) => { const id = kSetOf(r.code).id; if (!m.has(id)) m.set(id, []); m.get(id).push(r); return m }, new Map())]
@@ -339,7 +340,7 @@ const kokuhoSection = (r, Ls) => {
   const rankLine = tr ? `<p>${esc(r.pref)}で料率を確かめた${TK.length}区市の中で、${RANK_HH.slice(0, 2).map((h) => `${esc(h.short)}は<strong>安いほうから${tkRank(h.id, tr)}番目</strong>（年${yen(tr.v[h.id])}）`).join('、')}です（同じ額の区市は同じ順番）。<a href="../../hikazei/kokuho-tokyo/">${TK.length}区市の比較の表</a></p>` : ''
   return `${head}
   <h3>${esc(r.city)}の${kw}の年額の目安（${esc(rs.nendo)}）</h3>
-  <p>${esc(rs.scope)}の${rs.kind === '保険税' ? '税率' : '料率'}で計算した、<strong>大人だけの世帯</strong>の年額です。<strong>収入が0円でも、国保は0円になりません</strong>（7割軽減でも${rs.parts.some((p) => p.byodo) ? '均等割・平等割' : '均等割'}の3割はかかります）。単身・40〜64歳なら、収入0円で年${yen(zero.total)}です。</p>
+  <p>${esc(rs.scope)}の${rs.kind === '保険税' ? '税率' : '料率'}で計算した、<strong>大人だけの世帯</strong>の年額です。<strong>収入が0円でも、国保は0円になりません</strong>（7割軽減でも${rs.parts.some((p) => p.byodo) ? '均等割・平等割' : '均等割'}の3割${rs.parts.some((p) => p.kintouKojo) ? 'から市独自の控除を引いた額' : ''}はかかります）。単身・40〜64歳なら、収入0円で年${yen(zero.total)}です。</p>
   ${rankLine}
   ${HH.map((hh) => `<p><strong>${esc(hh.title)}</strong></p>
   <div class="table-wrap"><table class="fit">
@@ -353,15 +354,18 @@ ${annualRows(rs, hh)}
   <p class="mini-note">使った料率（${esc(rs.nendo)}・${esc(rs.name)}）：</p>
   <ul class="mini-note">
   ${rateList(rs)}
+  ${rs.kojoNote ? `<li>${esc(rs.kojoNote)}（表の夫婦の世帯は、もう1人を税の扶養に入れているとして計算）</li>` : ''}
   </ul>
   ${taishokuLink(r)}`
 }
 // 退職後の国保しらべ（taishoku-kokuho.com・同じ運営・式はこの kokuho-lib を使う）。料率を確かめた東京都・大阪府の区市町村は、
 // その区市町村のページ（会社都合の軽減の年額・任意継続とどちらが安いか）へ直接つなぐ。
 // ★2026-10-09：退職後の国保しらべの区市町村のページを Bing がまだ1枚も見つけていない（Bing が読んでいるのはトップの数枚だけ）。
-//   Bing がよく読むこの面から同じ区市町村のページへ道を付ける。退職後の国保しらべが扱うのは東京都と大阪府だけ＝それ以外は付けない
+//   Bing がよく読むこの面から同じ区市町村のページへ道を付ける。退職後の国保しらべが扱うのは東京都・大阪府と、政令市のうち
+//   TAISHOKU_SEIREI の市だけ＝それ以外は付けない（taishoku-kokuho/scripts/build.mjs の AREAS の seirei と同じ市を並べる。2026-10-11 福岡市・名古屋市）
 const TAISHOKU = 'https://taishoku-kokuho.com'
-const taishokuLink = (r) => (/^(13|27)/.test(r.code) && kSetOf(r.code)
+const TAISHOKU_SEIREI = ['40130', '23100']
+const taishokuLink = (r) => ((/^(13|27)/.test(r.code) || TAISHOKU_SEIREI.includes(r.code)) && kSetOf(r.code)
   ? `<div class="callout note"><p><span class="tag">会社を辞めて国保に入る人</span>倒産・解雇・雇止めなどで離職した65歳未満の人は、前年の給与を3割として国保を計算してもらえます（届け出が必要）。<a href="${TAISHOKU}/shi/${r.code}/">${esc(r.city)}の会社都合の軽減の年額</a>と、<a href="${TAISHOKU}/ninkei/?c=${r.code}">任意継続とどちらが安いか</a>は、退職後の国保しらべ（同じ運営）にあります。</p></div>`
   : '')
 
@@ -795,8 +799,8 @@ const shienkinPage = () => {
   const kLo = Math.min(...kokuho408), kHi = Math.max(...kokuho408)
   // 子どもがいても額が増えないこと（18歳未満は均等割がかからない）を、23区の統一保険料で確かめてから言う
   const r23 = TK_ROWS.find((x) => x.munis.length > 1) || TK_ROWS[0]
-  const fam = kodomoOf(kAnnual(r23.rs, [{ age: 45, sal: 4000000 }, { age: 43 }, { age: 10 }, { age: 14 }]))
-  const cpl = kodomoOf(kAnnual(r23.rs, [{ age: 45, sal: 4000000 }, { age: 43 }]))
+  const fam = kodomoOf(kAnnual(r23.rs, [{ age: 45, sal: 4000000, fuyo: 3 }, { age: 43 }, { age: 10 }, { age: 14 }]))
+  const cpl = kodomoOf(kAnnual(r23.rs, [{ age: 45, sal: 4000000, fuyo: 1 }, { age: 43 }]))
   if (fam !== cpl) die(`子ども・子育て支援金：子どもがいる世帯の額（${fam}）が夫婦だけの額（${cpl}）と違います（文の前提が崩れた）`)
   const capMax = Math.max(...rows.map((x) => x.p.cap))
   const tb = by(2).map((x) => `<tr><th scope="row" class="nm">${rk(2, x)}．${x.name}</th><td class="num">${n(x.v[0])}</td><td class="num">${n(x.v[1])}</td><td class="num">${n(x.v[2])}</td></tr>`).join('\n')
