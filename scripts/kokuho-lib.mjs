@@ -158,12 +158,16 @@ export const annual = (rs, members, opt = {}) => {
     //   p.preschoolFree＝未就学児の均等割の残り5割も市が軽くして0円にする区分（立川市の医療分・支援分）
     //   opt.noKintou18＝18歳以上均等割を除いた額（中野区の運営協議会の表は「18歳以上追加負担分は除く」と注記している）
     const half = (m) => m.age < 6 || (p.childHalf && m.age < 18)
-    const own0 = (m) => (m.age < 6 && p.preschoolFree ? 0 : half(m) ? Math.floor(cut(p.kintou, lv) / 2) : cut(p.kintou, lv))
+    //   R.keigenUp＝軽減する額（7・5・2割の額と未就学児の5割の額）を何円未満切り上げるか（秋田市＝10円。22,960円の2割＝4,592円→4,600円）。
+    //   書いていない料率は今までどおり（軽減後の額の1円未満切り捨て）
+    const ck = (yen) => (R.keigenUp ? yen - Math.ceil((yen * lv) / (10 * R.keigenUp)) * R.keigenUp : cut(yen, lv))
+    const halfOf = (yen) => (R.keigenUp ? yen - Math.ceil(yen / (2 * R.keigenUp)) * R.keigenUp : Math.floor(yen / 2))
+    const own0 = (m) => (m.age < 6 && p.preschoolFree ? 0 : half(m) ? halfOf(ck(p.kintou)) : ck(p.kintou))
     const own = (m) => (rs.childFree && m.age < 18 ? 0 : own0(m))
-    const k18 = (m) => (p.kintou18 && m.age >= 18 && !opt.noKintou18 ? cut(p.kintou18, lv) : 0)
+    const k18 = (m) => (p.kintou18 && m.age >= 18 && !opt.noKintou18 ? ck(p.kintou18) : 0)
     const kintouOf = (m) => (payers.includes(m) ? own(m) : 0) + k18(m)
     const kintou = inPart.reduce((a, m) => a + kintouOf(m), 0)
-    const byodo = p.byodo ? cut(p.byodo, lv) : 0
+    const byodo = p.byodo ? ck(p.byodo) : 0
     //   所得が一定額以下の減免（仙台市）の、この区分の額＝もとの均等割・18歳以上均等割・平等割の2割（減免のあとが0円を下回らない分だけ）
     const gen = g2 ? inPart.reduce((a, m) => a + (payers.includes(m) ? Math.min(own(m), off2(p.kintou)) : 0) + (k18(m) ? Math.min(k18(m), off2(p.kintou18)) : 0), 0) + (byodo ? Math.min(byodo, off2(p.byodo)) : 0) : 0
     if (R.person && byodo) throw new Error('1人ずつ切り捨てる料率に平等割は扱いません')
