@@ -24,7 +24,7 @@
   "description": "住民税非課税世帯の判定基準（均等割・所得割の非課税限度額）を年収・世帯構成・級地から自動判定するシミュレーターと、非課税世帯で受けられる主なメリットのまとめ。",
   "inLanguage": "ja",
   "datePublished": "2026-08-03",
-  "dateModified": "2026-10-10",
+  "dateModified": "2026-10-11",
   "author": { "@type": "Organization", "name": "フクシル" },
   "publisher": { "@type": "Organization", "name": "フクシル" },
   "url": "https://fukushiru.com/articles/juminzei-hikazei-check.html",
@@ -93,7 +93,7 @@
   <p class="breadcrumb"><a href="../index.html">トップ</a> ＞ 税と保険料 ＞ 住民税非課税の判定</p>
 
   <h1>住民税非課税世帯の年収はいくらまで？<br>条件・早見表と判定シミュレーター【2026年度】</h1>
-  <p class="updated">最終更新：2026-10-10 ／ 2025年（令和7年）税制改正を反映した2026年度（令和8年度）住民税の基準で判定します</p>
+  <p class="updated">最終更新：2026-10-11 ／ 2025年（令和7年）税制改正を反映した2026年度（令和8年度）住民税の基準で判定します（源泉徴収票の「給与所得控除後の金額」でも判定できます）</p>
 
   <p class="lead">「住民税非課税世帯」は、給付金の対象・医療費や入院食事代の減額・介護保険料・大学無償化まで、<strong>日本の福祉制度の多くで「優遇の入口」になっている境界線</strong>です。2025年の税制改正で給与所得控除が引き上げられ、<strong>2026年度からは単身の給与収入ラインが100万円→110万円に上がりました</strong>。このページでは、あなたの世帯が非課税になるかを<strong>収入・世帯構成・地域（級地）から自動判定</strong>し、非課税世帯で受けられるメリットをまとめます。</p>
 
@@ -163,15 +163,17 @@
       <label for="h-type">収入の種類</label>
       <select id="h-type">
         <option value="salary" selected>給与（パート・アルバイト含む）</option>
+        <option value="gensen">源泉徴収票の「給与所得控除後の金額」を入れる</option>
         <option value="pension65">公的年金（65歳以上）</option>
         <option value="pension64">公的年金（65歳未満）</option>
         <option value="shotoku">所得金額を直接入れる（自営業など）</option>
       </select>
     </div>
     <div class="row">
-      <label for="h-income">年間収入（額面）</label>
+      <label for="h-income" id="h-income-label">年間収入（額面）</label>
       <input type="number" id="h-income" inputmode="numeric" min="0" step="1" placeholder="例: 150"> 万円
     </div>
+    <p class="mini-note" id="h-gensen-note" style="display:none">源泉徴収票のいちばん上の段、「支払金額」の右どなりの欄です（1,234,000円なら 123.4 と万円で入れます）。給与のほかに収入がない人は、この額がそのまま所得です。給与所得控除の改正もこの欄に入っているので、2027年1月に届く令和8年分の源泉徴収票なら、そのまま令和9年度（2027年6月〜）の住民税の判定に使えます。</p>
     <div class="row">
       <label for="h-fuyo">扶養している家族の人数</label>
       <select id="h-fuyo">
@@ -333,7 +335,7 @@ function genkaiShotokuwari(fuyo){
     if (type.value === 'salary') shotoku = salaryShotoku(man);
     else if (type.value === 'pension65') shotoku = pensionShotoku(man, true);
     else if (type.value === 'pension64') shotoku = pensionShotoku(man, false);
-    else shotoku = man;
+    else shotoku = man;   // 'shotoku'（所得を直接）と 'gensen'（源泉徴収票の給与所得控除後の金額＝給与だけの人の所得）
     // 比べるのは円の整数どうし（万円の小数のまま比べると 18.9 のような額で浮動小数の誤差が出る）。表示だけ0.1万円に丸める。
     var yen = function (m) { return Math.round(m * 10000); };
     var sYen = yen(shotoku);
@@ -358,7 +360,16 @@ function genkaiShotokuwari(fuyo){
       + (specialOK ? '。<strong>障害者・ひとり親等の特例（所得135万円以下）に該当するため非課税</strong>' : '')
       + '。この判定は世帯の一人分です。<strong>世帯全員が非課税なら「住民税非課税世帯」</strong>になります。';
   }
+  // 源泉徴収票の欄で入れるときは、欄の名前と場所を出す（数字はそのまま所得として比べる）
+  var incomeLabel = document.getElementById('h-income-label'), gensenNote = document.getElementById('h-gensen-note');
+  function relabel(){
+    var g = type.value === 'gensen', s = type.value === 'shotoku';
+    incomeLabel.textContent = g ? '給与所得控除後の金額（源泉徴収票）' : (s ? '所得金額（年間）' : '年間収入（額面）');
+    gensenNote.style.display = g ? '' : 'none';
+  }
+  type.addEventListener('change', relabel);
   [type, income, fuyo, kyuchi, special].forEach(function(e){ e.addEventListener('input', calc); e.addEventListener('change', calc); });
+  relabel();
   calc();
 })();
 </script>
