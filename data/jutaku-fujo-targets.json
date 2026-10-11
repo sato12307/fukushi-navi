@@ -60,6 +60,25 @@
      "kyuchi": "3級地",
      "city": "舞鶴市",
      "url": "https://www.city.maizuru.kyoto.jp/kurashi/0000015259.html"
+    },
+    {
+     "kyuchi": "2級地",
+     "city": "京田辺市",
+     "url": "https://www.city.kyotanabe.lg.jp/0000003744.html"
+    }
+   ],
+   "pins": [
+    {
+     "kyuchi": "3級地",
+     "url": "https://www.city.maizuru.kyoto.jp/kurashi/0000015259.html",
+     "yen": [
+      36000,
+      43000,
+      47000,
+      50000,
+      56000
+     ],
+     "quote": "(※2)支給上限額(円) 単身世帯 2人世帯 3人世帯 4人世帯 5人世帯 6人世帯 7人世帯 36,000 43,000 47,000 47,000 47,000 50,000 56,000"
     }
    ]
   },
@@ -185,6 +204,11 @@
      "kyuchi": "2級地",
      "city": "野田市",
      "url": "https://www.city.noda.chiba.jp/kurashi/seikatsu/kurashi/1025835.html"
+    },
+    {
+     "kyuchi": "3級地",
+     "city": "木更津市",
+     "url": "https://www.city.kisarazu.lg.jp/soshiki/fukushi/fukushisodan/1/1830.html"
     }
    ]
   },
@@ -288,6 +312,20 @@
      "city": "阪南市",
      "url": "https://www.city.hannan.lg.jp/material/files/group/15/5jukyokakuho.pdf"
     }
+   ],
+   "pins": [
+    {
+     "kyuchi": "3級地",
+     "url": "https://www.city.hannan.lg.jp/material/files/group/15/5jukyokakuho.pdf",
+     "yen": [
+      29000,
+      35000,
+      38000,
+      null,
+      null
+     ],
+     "quote": "※阪南市の例(自治体により額は異なります) (単位:円)単身世帯 2人世帯 3人世帯 □収入基準額(月額) 107,000 150,000 178,000支給家賃額(上限額) 29,000 35,000 38,000"
+    }
    ]
   },
   {
@@ -315,6 +353,11 @@
      "kyuchi": "2級地",
      "city": "生駒市",
      "url": "https://www.city.ikoma.lg.jp/0000024709.html"
+    },
+    {
+     "kyuchi": "3級地",
+     "city": "葛城市",
+     "url": "https://www.city.katsuragi.nara.jp/soshiki/shakaifukushika/9/1341.html"
     }
    ]
   },
@@ -357,14 +400,14 @@
    "name": "宮崎県",
    "level": "都道府県",
    "pref": "宮崎県",
-   "status": "B",
-   "note": "023127ea.html:限度額の表が見つからない; 7b0cf38c.html:限度額の表が見つからない",
+   "status": "A",
+   "note": null,
    "checked": "2026-10-11",
    "urls": [
     "http://www.pref.miyazaki.lg.jp/mina-terasu/juukyokakuho.html",
     "https://www.pref.miyazaki.lg.jp/mina-terasu/juukyokakuho.html"
    ],
-   "picked": null,
+   "picked": "県内の市の公表ページから（各行の via を参照）",
    "kyuchi_groups": [
     "3級地"
    ],
@@ -378,6 +421,11 @@
      "kyuchi": "3級地",
      "city": "延岡市",
      "url": "https://www.city.nobeoka.miyazaki.jp/soshiki/29/2704.html"
+    },
+    {
+     "kyuchi": "3級地",
+     "city": "西都市",
+     "url": "https://www.city.saito.lg.jp/kenko_kyoiku/2420.html"
     }
    ]
   },
@@ -410,17 +458,24 @@
    "name": "山口県",
    "level": "都道府県",
    "pref": "山口県",
-   "status": "B",
-   "note": "456d8877.pdf:限度額の表が見つからない; 6eeefca6.html:限度額の表が見つからない",
+   "status": "A",
+   "note": null,
    "checked": "2026-10-11",
    "urls": [
     "https://www.pref.yamaguchi.lg.jp/soshiki/44/18183.html",
     "https://www.pref.yamaguchi.lg.jp/uploaded/attachment/235883.pdf"
    ],
-   "picked": null,
+   "picked": "県内の市の公表ページから（各行の via を参照）",
    "kyuchi_groups": [
     "2級地",
     "3級地"
+   ],
+   "helpers": [
+    {
+     "kyuchi": "2級地",
+     "city": "山口市",
+     "url": "https://www.city.yamaguchi.lg.jp/soshiki/54/83005.html"
+    }
    ]
   },
   {
@@ -459,28 +514,35 @@
    "name": "山梨県",
    "level": "都道府県",
    "pref": "山梨県",
-   "status": "B",
-   "note": "6a07fdfa.html:限度額の表が見つからない",
+   "status": "A",
+   "note": null,
    "checked": "2026-10-11",
    "urls": [
     "https://www.pref.yamanashi.jp/hokensom/40_030.html"
    ],
-   "picked": null,
+   "picked": "県内の市の公表ページから（各行の via を参照）",
    "kyuchi_groups": [
     "3級地"
+   ],
+   "helpers": [
+    {
+     "kyuchi": "3級地",
+     "city": "笛吹市",
+     "url": "https://www.city.fuefuki.yamanashi.jp/sekatsueng/jyuukyokakuhokyuufukinnosikyu.html"
+    }
    ]
   },
   {
    "name": "岐阜県",
    "level": "都道府県",
    "pref": "岐阜県",
-   "status": "B",
-   "note": "7213e33c.html:限度額の表が見つからない; 7da79cad.html:限度額の表が見つからない",
+   "status": "A",
+   "note": null,
    "checked": "2026-10-11",
    "urls": [
     "https://www.pref.gifu.lg.jp/page/13214.html"
    ],
-   "picked": null,
+   "picked": "県内の市の公表ページから（各行の via を参照）",
    "kyuchi_groups": [
     "2級地",
     "3級地"
@@ -495,6 +557,25 @@
      "kyuchi": "3級地",
      "city": "高山市",
      "url": "https://www.city.takayama.lg.jp/kurashi/1000017/1004896/1012185.html"
+    },
+    {
+     "kyuchi": "2級地",
+     "city": "大垣市",
+     "url": "https://www.city.ogaki.lg.jp/0000049746.html"
+    }
+   ],
+   "pins": [
+    {
+     "kyuchi": "3級地",
+     "url": "https://www.city.takayama.lg.jp/kurashi/1000017/1004896/1012185.html",
+     "yen": [
+      29000,
+      35000,
+      37700,
+      null,
+      null
+     ],
+     "quote": "上限額 世帯人数 単身世帯 2人世帯 3~5人世帯 上限額 29,000円 35,000円 37,700円"
     }
    ]
   },
@@ -519,6 +600,11 @@
      "kyuchi": "3級地",
      "city": "笠岡市",
      "url": "https://www.city.kasaoka.okayama.jp/soshiki/20/47482.html"
+    },
+    {
+     "kyuchi": "2級地",
+     "city": "玉野市",
+     "url": "https://www.city.tamano.lg.jp/site/coronavirus/1523.html"
     }
    ]
   },
@@ -588,6 +674,11 @@
      "kyuchi": "2級地",
      "city": "三原市",
      "url": "https://www.city.mihara.hiroshima.jp/soshiki/14/182000.html"
+    },
+    {
+     "kyuchi": "3級地",
+     "city": "東広島市",
+     "url": "https://www.city.higashihiroshima.lg.jp/soshiki/kenkofukushi/5/9/2966.html"
     }
    ]
   },
@@ -595,13 +686,13 @@
    "name": "徳島県",
    "level": "都道府県",
    "pref": "徳島県",
-   "status": "B",
-   "note": "88e07adb.pdf:限度額の表が見つからない; c54f116a.html:限度額の表が見つからない",
+   "status": "A",
+   "note": null,
    "checked": "2026-10-11",
    "urls": [
     "https://www.pref.tokushima.lg.jp/ippannokata/kenko/chiikifukushi/7215727"
    ],
-   "picked": null,
+   "picked": "https://www.pref.tokushima.lg.jp/ippannokata/kenko/chiikifukushi/7215727",
    "kyuchi_groups": [
     "2級地",
     "3級地"
@@ -616,6 +707,20 @@
      "kyuchi": "2級地",
      "city": "徳島市",
      "url": "https://www.city.tokushima.tokushima.jp/smph/kurashi/soudan/jukyo_kakuho.html"
+    }
+   ],
+   "pins": [
+    {
+     "kyuchi": "3級地",
+     "url": "https://www.pref.tokushima.lg.jp/ippannokata/kenko/chiikifukushi/7215727",
+     "yen": [
+      29000,
+      35000,
+      38000,
+      null,
+      null
+     ],
+     "quote": "単身世帯 107,000円以内 (収入7.8万+家賃上限2.9万) 468,000円以内 2人世帯 150,000円以内 (収入11.5万+家賃上限3.5万) 690,000円以内 3人世帯 178,000円以内 (収入14.0万+家賃上限3.8万)"
     }
    ]
   },
@@ -695,6 +800,11 @@
      "kyuchi": "3級地",
      "city": "湯沢町",
      "url": "https://www.pref.niigata.lg.jp/sec/fukushihoken/1356808846955.html"
+    },
+    {
+     "kyuchi": "2級地",
+     "city": "長岡市",
+     "url": "https://www.city.nagaoka.niigata.jp/fukushi/cate04/housing.html"
     }
    ]
   },
@@ -719,13 +829,13 @@
    "name": "栃木県",
    "level": "都道府県",
    "pref": "栃木県",
-   "status": "B",
-   "note": "763033e2.html:限度額の表が見つからない",
+   "status": "A",
+   "note": null,
    "checked": "2026-10-11",
    "urls": [
     "https://www.pref.tochigi.lg.jp/e01/documents/juukyokakuho.html"
    ],
-   "picked": null,
+   "picked": "https://www.city.tochigi-sakura.lg.jp/medical/000032/000201/p002020.html",
    "kyuchi_groups": [
     "2級地",
     "3級地"
@@ -735,6 +845,25 @@
      "kyuchi": "2級地",
      "city": "足利市",
      "url": "https://www.city.ashikaga.tochigi.jp/health/000056/000293/000689/index.html"
+    },
+    {
+     "kyuchi": "3級地",
+     "city": "さくら市",
+     "url": "https://www.city.tochigi-sakura.lg.jp/medical/000032/000201/p002020.html"
+    }
+   ],
+   "pins": [
+    {
+     "kyuchi": "3級地",
+     "url": "https://www.city.tochigi-sakura.lg.jp/medical/000032/000201/p002020.html",
+     "yen": [
+      32200,
+      39000,
+      41800,
+      45000,
+      50200
+     ],
+     "quote": "1名 86,000円 32,200円 118,200円 2名 124,000円 39,000円 163,000円 3名 147,000円 41,800円 188,800円 4名 175,000円 41,800円 216,800円 5名 209,000円 41,800円 250,800円 6名 242,000円 45,000円 287,000円 7名 275,000円 50,200円 325,200円"
     }
    ]
   },
@@ -790,13 +919,13 @@
    "name": "熊本県",
    "level": "都道府県",
    "pref": "熊本県",
-   "status": "B",
-   "note": "3e2a1b61.html:限度額の表が見つからない; 5a3fd69b.html:限度額の表が見つからない",
+   "status": "A",
+   "note": null,
    "checked": "2026-10-11",
    "urls": [
     "https://www.pref.kumamoto.jp/site/kennan/8414.html"
    ],
-   "picked": null,
+   "picked": "県内の市の公表ページから（各行の via を参照）",
    "kyuchi_groups": [
     "2級地",
     "3級地"
@@ -806,6 +935,25 @@
      "kyuchi": "2級地",
      "city": "荒尾市",
      "url": "https://www.city.arao.lg.jp/kana/oshirase/kurashi/sumai/page17143.html"
+    },
+    {
+     "kyuchi": "3級地",
+     "city": "人吉市",
+     "url": "https://www.city.hitoyoshi.lg.jp/fukushi_kaigo/kenko/32942"
+    }
+   ],
+   "pins": [
+    {
+     "kyuchi": "2級地",
+     "url": "https://www.city.arao.lg.jp/kana/oshirase/kurashi/sumai/page17143.html",
+     "yen": [
+      35000,
+      42000,
+      46000,
+      null,
+      null
+     ],
+     "quote": "単身 ( たんしん ) 世帯 ( せたい )  81,000 円 ( えん )  35,000 円 ( えん )   二 ( に ) 人 ( にん ) 世帯 ( せたい )  123,000 円 ( えん )  42,000 円 ( えん )   三 ( さん ) 人 ( にん ) 世帯 ( せたい )  157,000 円 ( えん )  46,000 円 ( えん )"
     }
    ]
   },
@@ -863,6 +1011,11 @@
      "kyuchi": "2級地",
      "city": "伊勢原市",
      "url": "https://www.city.isehara.kanagawa.jp/docs/2018061200015/"
+    },
+    {
+     "kyuchi": "2級地",
+     "city": "海老名市",
+     "url": "https://www.city.ebina.kanagawa.jp/guide/shakaifukushi/1011613/1011615/1017913/index.html"
     }
    ]
   },
@@ -890,13 +1043,13 @@
    "name": "福岡県",
    "level": "都道府県",
    "pref": "福岡県",
-   "status": "B",
-   "note": "16015b79.pdf:限度額の表が見つからない; 2135a03d.html:限度額の表が見つからない; 222c403f.pdf:限度額の表が見つからない; 2a0495cc.html:限度額の表が見つからない; 4d772923.html:限度額の表が見つからない; 62407bda.html:生活保護の書類ではない; 6c1445cc.html:生活保護の書類ではない; 7bf35745",
+   "status": "A",
+   "note": null,
    "checked": "2026-10-11",
    "urls": [
     "https://www.pref.fukuoka.lg.jp/contents/jyukyokakuho.html"
    ],
-   "picked": null,
+   "picked": "https://www.city.nogata.fukuoka.jp/kenko/_1208/kyufukin_copy_copy_2_copy/jukyokakuho.html",
    "kyuchi_groups": [
     "2級地",
     "3級地"
@@ -916,6 +1069,20 @@
      "kyuchi": "2級地",
      "city": "直方市",
      "url": "https://www.city.nogata.fukuoka.jp/kenko/_1208/kyufukin_copy_copy_2_copy/jukyokakuho.html"
+    }
+   ],
+   "pins": [
+    {
+     "kyuchi": "2級地",
+     "url": "https://www.city.nogata.fukuoka.jp/kenko/_1208/kyufukin_copy_copy_2_copy/jukyokakuho.html",
+     "yen": [
+      32000,
+      38000,
+      41100,
+      null,
+      null
+     ],
+     "quote": "基準額(※3) 89,000円 131,000円 157,000円 194,000円 232,000円 支給額(上限額) 32,000円 38,000円 41,100円"
     }
    ]
   },
@@ -996,14 +1163,14 @@
    "name": "茨城県",
    "level": "都道府県",
    "pref": "茨城県",
-   "status": "B",
-   "note": "279564d0.html:生活保護の書類ではない; 5ea792e9.html:限度額の表が見つからない",
+   "status": "A",
+   "note": null,
    "checked": "2026-10-11",
    "urls": [
     "https://www.pref.ibaraki.jp/hokenfukushi/fukushi/hogo/seikatsuhogoukeru.html",
     "https://www.pref.ibaraki.jp/hokenfukushi/fukushi/hogo/konkyuusya/documents/jyuukyokakuhokyuuhukinn.pdf"
    ],
-   "picked": null,
+   "picked": "県内の市の公表ページから（各行の via を参照）",
    "kyuchi_groups": [
     "2級地",
     "3級地"
@@ -1018,6 +1185,11 @@
      "kyuchi": "3級地",
      "city": "龍ケ崎市",
      "url": "https://www.city.ryugasaki.ibaraki.jp/fukushi/seikatsu_shien/jukyokyufu.html"
+    },
+    {
+     "kyuchi": "3級地",
+     "city": "守谷市",
+     "url": "https://www.city.moriya.ibaraki.jp/kenkou_fukushi/shakai_fukushi/1010902/1010908.html"
     }
    ]
   },
@@ -1065,6 +1237,20 @@
      "kyuchi": "2級地",
      "city": "上田市",
      "url": "https://www.city.ueda.nagano.jp/soshiki/fukusi/2094.html"
+    }
+   ],
+   "pins": [
+    {
+     "kyuchi": "3級地",
+     "url": "https://www.city.iida.lg.jp/soshiki/11/jukyokakuhokyufukin.html",
+     "yen": [
+      31800,
+      38000,
+      41300,
+      null,
+      null
+     ],
+     "quote": "収入基準額(月額) 109,800円 153,000円 181,300円 支給上限額 31,800円 38,000円 41,300円"
     }
    ]
   },
@@ -1837,16 +2023,30 @@
    "name": "寝屋川市",
    "level": "中核市",
    "pref": "大阪府",
-   "status": "B",
-   "note": "c54845da.pdf:限度額の表が見つからない; d6f8de4c.html:限度額の表が見つからない",
+   "status": "A",
+   "note": null,
    "checked": "2026-10-11",
    "urls": [
     "https://www.city.neyagawa.osaka.jp/organization_list/fukushi/hogo/seikatsukonkyu/1587459655417.html",
     "https://www.city.neyagawa.osaka.jp/material/files/group/124/jukyokakuhokyuhukin-tenkyohozyo.pdf"
    ],
-   "picked": null,
+   "picked": "https://www.city.neyagawa.osaka.jp/organization_list/fukushi/hogo/seikatsukonkyu/1587459655417.html",
    "kyuchi_groups": [
     "1級地"
+   ],
+   "pins": [
+    {
+     "kyuchi": null,
+     "url": "https://www.city.neyagawa.osaka.jp/organization_list/fukushi/hogo/seikatsukonkyu/1587459655417.html",
+     "yen": [
+      39000,
+      47000,
+      51000,
+      null,
+      null
+     ],
+     "quote": "家賃の上限 39,000円 47,000円 51,000円"
+    }
    ]
   },
   {

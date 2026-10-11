@@ -39,6 +39,7 @@ const readJson = (rel) => JSON.parse(fs.readFileSync(path.join(ROOT, rel), 'utf8
 const M = readJson('data/muni-master.json').rows
 const CK = readJson('data/hikazei-city-checks.json')
 const JF = readJson('data/jutaku-fujo.json')
+const JFT = readJson('data/jutaku-fujo-targets.json')   // 県の欄を出した市の名前（helpers）を引く
 const HS = readJson('data/hogo-shinsei.json')
 const SR = readJson('data/seiho-ranking.json')
 // 水道・下水道の福祉減免（2026-09-29・v280 #173）。公式の原文で確かめた市区町村だけ（東京23区と大阪府の一部。一覧は data/suido-genmen.json）。
@@ -159,8 +160,14 @@ const jutakuOf = (r) => {
   const pf = JF.orgs[r.pref]
   if (!pf || pf.level !== '都道府県') return null
   const row = pf.rows.find((x) => x.kyuchi === `${r.zeiKyuchi}級地`)
-  return row ? { org: r.pref, row, source: pf.source, how: `${r.pref}の表・${r.zeiKyuchi}級地` } : null
+  if (!row) return null
+  //   ★県の欄を県内の市のページから取ったとき（--via・固定読み）は、行ごとの出典 row.via を使う。
+  //     県の source は「県内の市の公表ページから（各行の via を参照）」という説明文でURLではない
+  //     （2026-10-11 まで、この文字列がリンク先になって1,050枚でリンクが開けなかった）。札は出した市の名前にする
+  const city = row.via ? viaCity(r.pref, row.via) : null
+  return { org: city ? (city === r.city ? city : `県内の${city}`) : r.pref, row, source: row.via || pf.source, how: `${r.pref}の表・${r.zeiKyuchi}級地` }
 }
+const viaCity = (pref, url) => { const t = JFT.targets.find((x) => x.name === pref); const h = t && (t.helpers || []).find((x) => x.url === url); return h ? h.city : null }
 const seihoOf = (r) => SR.rows.find((x) => x.city === r.city && x.pref === r.pref) || null
 const KOEI = { '東京都': ['toei/', '都営住宅の倍率と申込先'], '神奈川県|川崎市': ['kawasaki/', '川崎市営住宅の倍率と申込先'], '神奈川県|横浜市': ['yokohama/', '横浜市営住宅の倍率と申込先'], '兵庫県|神戸市': ['kobe/', '神戸市営住宅の倍率と申込先'], '静岡県|静岡市': ['shizuoka/', '静岡市営住宅の倍率と申込先'], '神奈川県|相模原市': ['sagamihara/', '相模原市営住宅の倍率と申込先'], '埼玉県': ['saitama-ken/', '埼玉県営住宅の倍率（募集回ごと・住宅種別ごと）'], '愛知県': ['aichi-ken/', '愛知県営住宅の倍率（定期募集の回ごと）'], '高知県': ['kochi-ken/', '高知県営住宅の倍率と申込先ごとの一覧（無料）', 'free'], '宮城県': ['miyagi-ken/', '宮城県営住宅の倍率と申込先ごとの一覧（無料）', 'free'], '大阪府': ['osaka-fu/', '大阪府営住宅の倍率と申込先ごとの一覧（無料）', 'free'], '滋賀県': ['shiga-ken/', '滋賀県営住宅の倍率と申込先ごとの一覧（無料）', 'free'] }
 // ★県営（埼玉・愛知）は 2026-09-30 から売り場（/<key>/moushikomisaki/）がある。3つ目に 'free' と書いた面は、売り場の無い無料ページとして offerHub に渡さない（三大都市圏の外の県＝scripts/kenei-free.mjs、大阪府＝2026-10-01 ユーザー「あえての無料公開」）
@@ -406,7 +413,7 @@ const muniPage = (r) => {
   const jf = jutakuOf(r)
   if (jf) {
     const y = jf.row.yen
-    life.push(`<li><strong>住宅扶助（家賃）の上限</strong>：1人 月${y[0].toLocaleString('ja-JP')}円・2人 月${y[1].toLocaleString('ja-JP')}円・3〜5人 月${y[2].toLocaleString('ja-JP')}円（${esc(jf.how)}。<a href="${esc(jf.source)}" rel="nofollow">${esc(jf.org)}の公表</a>）。</li>`)
+    life.push(`<li><strong>住宅扶助（家賃）の上限</strong>：1人 月${y[0].toLocaleString('ja-JP')}円・2人 月${y[1].toLocaleString('ja-JP')}円・3〜5人 月${y[2].toLocaleString('ja-JP')}円（${esc(jf.how)}。${/^https?:\/\//.test(jf.source || '') ? `<a href="${esc(jf.source)}" rel="nofollow">${esc(jf.org)}の公表</a>` : `${esc(jf.org)}の公表`}）。</li>`)
   }
   const kh = koeiOf(r)
   if (kh && exists(`${kh[0]}index.html`)) life.push(`<li><strong>公営住宅</strong>：<a href="${up}${kh[0]}">${esc(kh[1])}</a>。収入の基準は住民税とは別の物差し（政令月収）です（<a href="${up}articles/koei-jutaku-bairitsu.html">公営住宅の倍率と収入基準</a>）。</li>`)
