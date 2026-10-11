@@ -15,11 +15,16 @@
 import fs from 'node:fs'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
+import { KISO_SRC, kisoKojo, checkRows } from './kinro-kojo-lib.mjs'
+import { SITE, readSitemap, writeSitemap, sitemapLastmods, putUrls } from './shogai-kojo-page.mjs'
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..')
 const DRY = process.argv.includes('--dry')
 const FILE = path.join(ROOT, 'articles', 'seikatsuhogo-keisanki.html')
 const D = JSON.parse(fs.readFileSync(path.join(ROOT, 'data', 'seiho-kokuji.json'), 'utf8'))
+// ⑥ 勤労控除（2026-10-11 v308 a）：次官通知の別表「基礎控除額表」を写した data/kinro-kojo.json と、式の1か所 scripts/kinro-kojo-lib.mjs。
+//   原典との照合は scripts/kinro-kojo-check.mjs（画像の sha1・本文の額）。ここでは式と表の全行の一致だけ確かめてから書く。
+const KJ = JSON.parse(fs.readFileSync(path.join(ROOT, 'data', 'kinro-kojo.json'), 'utf8'))
 const TODAY = new Date(Date.now() + 9 * 3600 * 1000).toISOString().slice(0, 10)
 const die = (m) => { console.error(m); console.error('何も書き出していません。'); process.exit(1) }
 const num = (n) => Math.round(n).toLocaleString('ja-JP')
@@ -34,6 +39,8 @@ if (D.keika.length !== 6 || D.keika.some((g) => g.length !== 11 || g.some((r) =>
 for (const a of AREAS) if (!D.touki[a] || D.touki[a].v.length !== 10) die(`冬季加算 ${a} の表の形が違います`)
 if (Object.keys(D.areas).length !== 47) die('冬季加算の地区の区分が47都道府県ではありません')
 if (!(D.tokurei > 0)) die('特例加算が読めていません')
+{ const bad = checkRows(KJ); if (bad.length) die('勤労控除の式が基礎控除額表と合いません：' + bad.slice(0, 5).join('／')) }
+if (!(KJ.shinki.amount > 0 && KJ.miman20.amount > 0)) die('新規就労控除・20歳未満控除の額が読めません')
 
 // ── 計算（HTML の calc() と同じ式。早見表とよくある質問の数字に使う）
 const byN = (arr, n) => (n <= 9 ? arr[n - 1] : arr[8] + (n - 9) * arr[9])
@@ -138,7 +145,7 @@ const man = (y) => (y / 10000).toFixed(1)
 const c = (name) => CITIES.find((x) => x.city === name)
 const FAQ = [
   ['生活保護は単身だと月いくらもらえますか？', `20〜40歳の単身の場合、生活費（生活扶助）は東京23区など1級地-1で月約${num(Math.round(tok.s / 1000) * 1000)}円、これに家賃の実費（上限あり・東京23区単身${num(tok.rent)}円）が住宅扶助として加わります。合計の目安は東京23区で月約${man(tok.total)}万円、大阪市で約${man(c('大阪市').total)}万円、名古屋市で約${man(c('名古屋市').total)}万円、札幌市・福岡市で約${man(sap.total)}万円です（令和8年10月からの基準・冬季加算は別）。`],
-  ['働いて収入があっても生活保護は受けられますか？', '受けられます。収入が最低生活費を下回っていれば、その差額が支給されます。働いた収入には勤労控除（最低でも月15,200円）があり、その分は収入として数えられないため、働いたほうが手元に残るお金は必ず増える仕組みです。'],
+  ['働いて収入があっても生活保護は受けられますか？', `受けられます。収入が最低生活費を下回っていれば、その差額が支給されます。働いた収入には勤労控除があり、月15,199円までは全額、それより多いときも収入に応じた額（月8万円なら${num(kisoKojo(80000, false))}円、10万円なら${num(kisoKojo(100000, false))}円）が収入として数えられません。働いたほうが手元に残るお金は必ず増える仕組みです（厚生事務次官通知の基礎控除額表）。`],
   ['2026年10月から生活保護費は上がりますか？', `特例加算が2026年10月1日から1人あたり月1,500円から${num(D.tokurei)}円に引き上げられました（令和8年6月11日 厚生労働省告示第245号）。ただし同じ告示で経過的加算が1人あたり最大1,000円下がった世帯があり、増える額は世帯で違います（例：1級地-1の単身で20〜40歳は月800円増え、75歳以上は増えません）。このページの計算機と早見表は告示の現行の表で計算しています。`],
   ['貯金や持ち家があると生活保護は受けられませんか？', '資産の活用が先に求められます。おおむね最低生活費の半月〜1か月分を超える預貯金は先に生活費に充てる扱いです。ただし持ち家は住み続けながら受給できる場合があり（ローン残がある場合は原則不可）、自動車も障害や仕事で必要と認められれば保有できる例外があります。一律に「ゼロでないとダメ」ではありません。'],
   ['生活保護の冬季加算はいくらですか？', `住んでいる都道府県の地区（Ⅰ区〜Ⅵ区）と世帯の人数で決まり、級地では変わりません。単身なら北海道・青森県・秋田県（Ⅰ区）で月${num(TOUKI['Ⅰ区'].v[0])}円（${TOUKI['Ⅰ区'].m}）、東京都・大阪府などのⅥ区で月${num(TOUKI['Ⅵ区'].v[0])}円（${TOUKI['Ⅵ区'].m}）です。4人世帯ならⅠ区で月${num(byN(TOUKI['Ⅰ区'].v, 4))}円、Ⅵ区で月${num(byN(TOUKI['Ⅵ区'].v, 4))}円です（生活保護法による保護の基準・告示）。`],
@@ -149,6 +156,35 @@ const fA = html.indexOf('"@type": "FAQPage"'), fS = html.lastIndexOf('<script ty
 if (fA < 0 || fS < 0 || fE < 0) die('よくある質問の JSON-LD が見つかりません')
 html = html.slice(0, fS) + '<script type="application/ld+json">\n' + ld + '\n' + html.slice(fE)
 
+// ── ⑥ 勤労控除（③ 差額支給の計算機の式と、その下の注記・早見表）
+const KINRO_JS = `// kinro:start
+// 勤労控除（data/kinro-kojo.json と scripts/kinro-kojo-lib.mjs から scripts/keisanki-sync.mjs が書く。手で直さない）
+var KINRO_SHINKI = ${KJ.shinki.amount}; // 新規就労控除（月額・働き始めて6か月）
+var KINRO_U20 = ${KJ.miman20.amount}; // 20歳未満控除（月額）
+${KISO_SRC}
+// kinro:end`
+const kjA = html.indexOf('// kinro:start'), kjB = html.indexOf('// kinro:end')
+if (kjA < 0 || kjB < kjA) die('script の中の勤労控除の目印（// kinro:start 〜 // kinro:end）が見つかりません')
+html = html.slice(0, kjA) + KINRO_JS + html.slice(kjB + '// kinro:end'.length)
+const KW = [10000, 30000, 50000, 80000, 100000, 120000, 150000, 200000]
+const KINRO_HTML = `<!-- kinro:start -->
+  <p class="mini-note">勤労控除は、厚生事務次官通知「生活保護法による保護の実施要領について」の別表「基礎控除額表」の<strong>1人目の欄</strong>どおりに計算しています（収入4,000円ごとの段）。新規就労控除（月${num(KJ.shinki.amount)}円）と20歳未満控除（月${num(KJ.miman20.amount)}円）は、当てはまるときだけ上のチェックで足せます。</p>
+  <h3 id="kinro-kojo">働いた収入のうち、いくらが「なかったこと」になる？（勤労控除の早見表）</h3>
+  <p>給料は<strong>基礎控除</strong>を引いた残りだけが収入として数えられます。年金や仕送りは引かれず、全額が数えられます。たとえば同じ月8万円でも、給料なら${num(kisoKojo(80000, false))}円を引いた<strong>${num(80000 - kisoKojo(80000, false))}円</strong>だけ、年金なら<strong>8万円すべて</strong>が収入として数えられます。</p>
+  <div class="table-wrap"><table class="fit">
+    <caption>基礎控除の月額と、収入として数えられる額（円）</caption>
+    <thead><tr><th>働いた<br>収入</th><th>基礎控除<br>（1人目）</th><th>収入として<br>数える額</th><th>2人目以降の<br>基礎控除</th></tr></thead>
+    <tbody>
+      ${KW.map((w) => `<tr><th>${num(w)}</th><td>${num(kisoKojo(w, false))}</td><td>${num(w - kisoKojo(w, false))}</td><td>${num(kisoKojo(w, true))}</td></tr>`).join('\n      ')}
+    </tbody>
+  </table></div>
+  <p class="mini-note">世帯で2人以上が働いているときは、収入がいちばん多い人に1人目の欄、ほかの人に2人目以降の欄を使います。収入は通勤費などを引く前の額です（自営や農業は、必要な経費を引いたあとの額）。${num(KJ.above.from)}円からは、4,000円ふえるごとに1人目は${num(KJ.above.first)}円、2人目以降は${num(KJ.above.second)}円ずつ控除がふえます。新規就労控除は、中学校・高等学校などを卒業して続けて働く仕事に就いたときや、入院などでおおむね3年以上働けなかった人が続けて働く仕事に就いたときに、6か月間だけ足されます。20歳未満控除は、単身の人や、配偶者・自分の子とだけで暮らしている人には足されません。出典：<a href="${KJ.source.url}" rel="nofollow">生活保護法による保護の実施要領について（厚生事務次官通知）別表「基礎控除額表」</a>（${KJ.source.checkedAt} 確認）。</p>
+<!-- kinro:end -->`
+const khA = html.indexOf('<!-- kinro:start -->'), khB = html.indexOf('<!-- kinro:end -->')
+if (khA < 0 || khB < khA) die('勤労控除の注記の目印（<!-- kinro:start --> 〜 <!-- kinro:end -->）が見つかりません')
+html = html.slice(0, khA) + KINRO_HTML + html.slice(khB + '<!-- kinro:end -->'.length)
+for (const old of ['最低でも月15,200円', '概算（15,200円']) if (html.includes(old)) die(`勤労控除の古い言い方「${old}」が残っています`)
+
 // ── ① の書き込み（script の中の表）
 let sA = html.indexOf('// ====== 生活扶助基準額（告示')
 if (sA < 0) sA = html.indexOf('// ====== 令和8年4月 生活扶助基準額')
@@ -157,15 +193,31 @@ if (sA < 0 || sB < 0) die('script の中の基準額表の目印が見つかり�
 html = html.slice(0, sA) + TABLE_JS + html.slice(sB)
 
 // ── 確かめ：calc() が使う名前がそろっているか
-for (const nm of ['byN(K2, n)', 'KEIKA[Math.min(n, 10)]', 'TOUKI_AREA[prefSel.value]', 'byN(KIMATSU[k], n)', "getElementById('g-winter')"]) if (!html.includes(nm)) die(`calc() に ${nm} がありません（HTML の計算の式が古い）`)
+for (const nm of ['byN(K2, n)', 'KEIKA[Math.min(n, 10)]', 'TOUKI_AREA[prefSel.value]', 'byN(KIMATSU[k], n)', "getElementById('g-winter')", 'kisoKojo(w, false)', 'KINRO_SHINKI', 'KINRO_U20']) if (!html.includes(nm)) die(`calc() に ${nm} がありません（HTML の計算の式が古い）`)
+console.log(`  勤労控除（基礎控除・1人目）${KW.map((w) => `${num(w)}→${num(kisoKojo(w, false))}`).join('・')}`)
 
 console.log(`確かめ：早見表 ${CITIES.map((x) => `${x.city}${num(x.s)}`).join('・')}`)
 console.log(`  冬季加算 単身 ${AREAS.map((a) => `${a}${num(TOUKI[a].v[0])}(${TOUKI[a].m})`).join('・')}／期末一時扶助 単身 1級地-1 ${num(D.kimatsu[0][0])}`)
 if (DRY) process.exit(0)
-const strip = (s) => s.replace(/\r/g, '').replace(/最終更新：\d{4}-\d{2}-\d{2}[^／]*／/, '').replace(/"dateModified": "\d{4}-\d{2}-\d{2}"/g, '')
+// 「最終更新」の行は <strong> を含むので、次の </p> までを置き換える（2026-10-11 まで [^<]* で合わず、10-10 の更新でも日付が 10-09 のままだった）
+const UPDATED = /最終更新：\d{4}-\d{2}-\d{2}[^／]*／.*?<\/p>/
+if (!UPDATED.test(html)) die('「最終更新」の行が見つかりません')
+const withMeta = (h) => h.replace(UPDATED, `最終更新：${TODAY}（告示の現行の表で計算・勤労控除を基礎控除額表どおりに）／ 厚生労働省「生活保護法による保護の基準」（告示）と実施要領（次官通知）の表をそのまま実装。すべて<strong>概算</strong>です</p>`).replace(/"dateModified": "\d{4}-\d{2}-\d{2}"/, `"dateModified": "${TODAY}"`)
+const strip = (s) => s.replace(/\r/g, '').replace(/最終更新：\d{4}-\d{2}-\d{2}/, '').replace(/"dateModified": "\d{4}-\d{2}-\d{2}"/g, '')
 const prev = fs.readFileSync(FILE, 'utf8')
-if (strip(prev) === strip(html)) { console.log('変わらず:', FILE); process.exit(0) }
-html = html.replace(/最終更新：\d{4}-\d{2}-\d{2}[^／]*／[^<]*<\/p>/, `最終更新：${TODAY}（告示の現行の表で計算・冬季加算と12月の期末一時扶助を追加）／ 厚生労働省「生活保護法による保護の基準」（告示）の表をそのまま実装。すべて<strong>概算</strong>です</p>`)
-html = html.replace(/"dateModified": "\d{4}-\d{2}-\d{2}"/, `"dateModified": "${TODAY}"`)
+html = withMeta(html)
+// sitemap の lastmod は、ページの dateModified（中身が変わった日）にそろえる（2026-10-11 まで書いておらず、10-10 の更新のあとも 10-09 のままだった）
+const syncSitemap = (page) => {
+  const URL = `${SITE}/articles/seikatsuhogo-keisanki.html`
+  const dm = (page.match(/"dateModified": "(\d{4}-\d{2}-\d{2})"/) || [])[1]
+  const sm = readSitemap(), lm = sitemapLastmods(sm).get(URL)
+  if (!dm || !lm) die('sitemap の行かページの dateModified が見つかりません')
+  if (dm <= lm) return
+  const row = sm.match(new RegExp(`<url><loc>${URL.replace(/[.]/g, '\\.')}</loc>.*?</url>`))[0]
+  writeSitemap(putUrls(sm, [[URL, row.replace(/<lastmod>[^<]+<\/lastmod>/, `<lastmod>${dm}</lastmod>`)]]))
+  console.log(`sitemap の lastmod を ${lm} → ${dm} に進めた`)
+}
+if (strip(prev) === strip(html)) { if (!DRY) syncSitemap(prev); console.log('変わらず:', FILE); process.exit(0) }
 fs.writeFileSync(FILE, html)
+syncSitemap(html)
 console.log('書いた:', FILE)
