@@ -6133,6 +6133,545 @@
           "expectLv": 5
         }
       ]
+    },
+    "yamagata-06201": {
+      "checkedAt": "2026-10-11",
+      "name": "山形市の国民健康保険税",
+      "short": "山形市",
+      "scope": "山形市",
+      "nendo": "令和8年度",
+      "kind": "保険税",
+      "rounding": "区分ごとに100円未満切り捨て（山形市の計算例2例と一致）",
+      "round": {
+        "part": 100
+      },
+      "parts": [
+        {
+          "id": "iryo",
+          "label": "医療分",
+          "rate": 9420,
+          "kintou": 22800,
+          "byodo": 26700,
+          "cap": 670000
+        },
+        {
+          "id": "shien",
+          "label": "後期高齢者支援金分",
+          "rate": 2790,
+          "kintou": 6700,
+          "byodo": 8400,
+          "cap": 260000
+        },
+        {
+          "id": "kaigo",
+          "label": "介護分",
+          "rate": 2080,
+          "kintou": 13600,
+          "byodo": 0,
+          "cap": 170000,
+          "ages": [
+            40,
+            64
+          ]
+        },
+        {
+          "id": "kodomo",
+          "label": "子ども・子育て支援金分",
+          "rate": 290,
+          "kintou": 1200,
+          "kintou18": 100,
+          "byodo": 900,
+          "cap": 30000,
+          "adultsOnly": true
+        }
+      ],
+      "sources": [
+        {
+          "name": "山形市「国民健康保険税について」（令和8年度の税率・課税限度額）",
+          "url": "https://www.city.yamagata-yamagata.lg.jp/kurashi/kokuho/1006489/1006493/1003906.html"
+        },
+        {
+          "name": "山形市「国民健康保険税の計算例」",
+          "url": "https://www.city.yamagata-yamagata.lg.jp/kurashi/kokuho/1006489/1006493/1003905.html"
+        }
+      ],
+      "checks": [
+        {
+          "src": "山形市「国民健康保険税の計算例」計算例1（42歳・営業所得200万円／妻39歳・給与収入120万円／子13歳）",
+          "members": [
+            {
+              "age": 42,
+              "inc": 2000000
+            },
+            {
+              "age": 39,
+              "sal": 1200000
+            },
+            {
+              "age": 13
+            }
+          ],
+          "expect": 384400,
+          "expectLv": 0,
+          "expectParts": {
+            "iryo": 254200,
+            "shien": 75600,
+            "kaigo": 46200,
+            "kodomo": 8400
+          }
+        },
+        {
+          "src": "山形市「国民健康保険税の計算例」計算例2（67歳・年金収入200万円／妻66歳・年金収入79万円・5割軽減）",
+          "members": [
+            {
+              "age": 67,
+              "pen": 2000000
+            },
+            {
+              "age": 66,
+              "pen": 790000
+            }
+          ],
+          "expect": 107500,
+          "expectLv": 5,
+          "expectParts": {
+            "iryo": 80400,
+            "shien": 24000,
+            "kodomo": 3100
+          }
+        }
+      ]
+    },
+    "matsuyama-38201": {
+      "checkedAt": "2026-10-11",
+      "name": "松山市の国民健康保険料",
+      "short": "松山市",
+      "scope": "松山市",
+      "nendo": "令和8年度",
+      "kind": "保険料",
+      "rounding": "区分ごとに10円未満切り捨て（松山市の計算例と一致）",
+      "round": {
+        "part": 10
+      },
+      "parts": [
+        {
+          "id": "iryo",
+          "label": "医療分",
+          "rate": 7600,
+          "kintou": 25200,
+          "byodo": 19920,
+          "cap": 670000
+        },
+        {
+          "id": "shien",
+          "label": "後期高齢者支援金分",
+          "rate": 3200,
+          "kintou": 9600,
+          "byodo": 7800,
+          "cap": 260000
+        },
+        {
+          "id": "kaigo",
+          "label": "介護分",
+          "rate": 2700,
+          "kintou": 9960,
+          "byodo": 5880,
+          "cap": 170000,
+          "ages": [
+            40,
+            64
+          ]
+        },
+        {
+          "id": "kodomo",
+          "label": "子ども・子育て支援金分",
+          "rate": 220,
+          "kintou": 996,
+          "byodo": 600,
+          "cap": 30000,
+          "adultsOnly": true,
+          "kintouNote": "均等割は18歳から74歳の加入者1人につき996円（松山市の表記）"
+        }
+      ],
+      "sources": [
+        {
+          "name": "松山市「令和8年度 松山市国保料」（最高限度額）",
+          "url": "https://www.city.matsuyama.ehime.jp/kurashi/tetsuzuki/kokuho/kokuhoryokinn/r8kokuhoryou.html"
+        },
+        {
+          "name": "松山市「令和8年度国保料を試算してみよう」（料率・計算の具体例）",
+          "url": "https://www.city.matsuyama.ehime.jp/kurashi/tetsuzuki/kokuho/kokuhoryokinn/r8kokuhoryousisann.html"
+        }
+      ],
+      "checks": [
+        {
+          "src": "松山市「令和8年度国保料を試算してみよう」の具体例（42歳・給与収入320万円／妻38歳／子・中学生）",
+          "members": [
+            {
+              "age": 42,
+              "sal": 3200000
+            },
+            {
+              "age": 38
+            },
+            {
+              "age": 13
+            }
+          ],
+          "expect": 387900,
+          "expectLv": 0,
+          "expectParts": {
+            "iryo": 227000,
+            "shien": 91960,
+            "kaigo": 62550,
+            "kodomo": 6390
+          }
+        }
+      ]
+    },
+    "kagoshima-46201": {
+      "checkedAt": "2026-10-11",
+      "name": "鹿児島市の国民健康保険税",
+      "short": "鹿児島市",
+      "scope": "鹿児島市",
+      "nendo": "令和8年度",
+      "kind": "保険税",
+      "rounding": "区分ごとに100円未満切り捨て（鹿児島市のモデルケース2例と一致。合計だけを切り捨てると合わない）",
+      "round": {
+        "part": 100
+      },
+      "kojoNote": "鹿児島市独自の減額を含む：小学生以下の子の均等割（医療分・後期高齢者支援金分）を5割減額（国の未就学児の5割軽減を小学生まで広げたもの・申請不要）",
+      "parts": [
+        {
+          "id": "iryo",
+          "label": "医療分",
+          "rate": 8260,
+          "kintou": 34600,
+          "byodo": 23000,
+          "cap": 670000,
+          "childHalf": 13
+        },
+        {
+          "id": "shien",
+          "label": "後期高齢者支援金分",
+          "rate": 2940,
+          "kintou": 12200,
+          "byodo": 8100,
+          "cap": 260000,
+          "childHalf": 13
+        },
+        {
+          "id": "kaigo",
+          "label": "介護分",
+          "rate": 2470,
+          "kintou": 12000,
+          "byodo": 6100,
+          "cap": 170000,
+          "ages": [
+            40,
+            64
+          ]
+        },
+        {
+          "id": "kodomo",
+          "label": "子ども・子育て支援金分",
+          "rate": 290,
+          "kintou": 1200,
+          "kintou18": 90,
+          "byodo": 800,
+          "cap": 30000,
+          "adultsOnly": true
+        }
+      ],
+      "sources": [
+        {
+          "name": "鹿児島市「国保税の計算方法・所得申告と国保税」（令和8年度の税率・課税限度額・子どもの均等割額の減額）",
+          "url": "https://www.city.kagoshima.lg.jp/shimin/shiminbunka/kokuho/kurashi/hoken/hoken/kokuho/ze.html"
+        },
+        {
+          "name": "鹿児島市「国や県の方針を踏まえ国民健康保険税の税率を改定しました」（モデルケースでの国保税の試算）",
+          "url": "https://www.city.kagoshima.lg.jp/shimin/shiminbunka/kokuho/7kaitei.html"
+        },
+        {
+          "name": "鹿児島市「子どもの均等割額の減額対象者を拡充しました」",
+          "url": "https://www.city.kagoshima.lg.jp/shimin/shiminbunka/kokuho/kurashi/hoken/hoken/kodomo.html"
+        }
+      ],
+      "checks": [
+        {
+          "src": "鹿児島市のモデルケース「給与所得200万円・40代夫婦・中学生1人、小学生1人」（2割軽減と小学生の5割減額）",
+          "members": [
+            {
+              "age": 45,
+              "inc": 2000000,
+              "worker": true
+            },
+            {
+              "age": 43
+            },
+            {
+              "age": 14
+            },
+            {
+              "age": 10
+            }
+          ],
+          "expect": 401600,
+          "expectLv": 2
+        },
+        {
+          "src": "鹿児島市のモデルケース「年金所得100万円・65歳以上の夫婦」（年金収入210万円＝年金所得100万円・5割軽減）",
+          "members": [
+            {
+              "age": 70,
+              "pen": 2100000
+            },
+            {
+              "age": 70
+            }
+          ],
+          "expect": 129400,
+          "expectLv": 5
+        }
+      ]
+    },
+    "fukui-18201": {
+      "checkedAt": "2026-10-11",
+      "name": "福井市の国民健康保険税",
+      "short": "福井市",
+      "scope": "福井市",
+      "nendo": "令和8年度",
+      "kind": "保険税",
+      "rounding": "区分ごとに100円未満切り捨て（福井市の計算例と一致）",
+      "round": {
+        "part": 100
+      },
+      "parts": [
+        {
+          "id": "iryo",
+          "label": "医療分",
+          "rate": 6150,
+          "kintou": 27000,
+          "byodo": 16400,
+          "cap": 670000
+        },
+        {
+          "id": "shien",
+          "label": "後期高齢者支援金分",
+          "rate": 2800,
+          "kintou": 10000,
+          "byodo": 6200,
+          "cap": 260000
+        },
+        {
+          "id": "kaigo",
+          "label": "介護分",
+          "rate": 2720,
+          "kintou": 11400,
+          "byodo": 6000,
+          "cap": 170000,
+          "ages": [
+            40,
+            64
+          ]
+        },
+        {
+          "id": "kodomo",
+          "label": "子ども・子育て支援金分",
+          "rate": 150,
+          "kintou": 560,
+          "kintou18": 40,
+          "byodo": 400,
+          "cap": 30000,
+          "adultsOnly": true
+        }
+      ],
+      "sources": [
+        {
+          "name": "福井市「国民健康保険税について」（令和8年度の税率・最高限度額・計算例）",
+          "url": "https://www.city.fukui.lg.jp/fukusi/hoken/tax/kokuhofuka2012.html"
+        }
+      ],
+      "checks": [
+        {
+          "src": "福井市「国民健康保険税について」の計算例（40歳代夫婦・夫の給与所得243万円／妻は所得なし）",
+          "members": [
+            {
+              "age": 45,
+              "inc": 2430000,
+              "worker": true
+            },
+            {
+              "age": 43
+            }
+          ],
+          "expect": 363400,
+          "expectLv": 0,
+          "expectParts": {
+            "iryo": 193400,
+            "shien": 82200,
+            "kaigo": 83200,
+            "kodomo": 4600
+          }
+        }
+      ]
+    },
+    "kanazawa-17201": {
+      "checkedAt": "2026-10-11",
+      "name": "金沢市の国民健康保険料",
+      "short": "金沢市",
+      "scope": "金沢市",
+      "nendo": "令和8年度",
+      "kind": "保険料",
+      "rounding": "1円未満切り捨て（10円・100円の切り捨てはしない。金沢市の目安表と同じ）",
+      "checkNote": "目安表224欄（給与168・年金56）のうち198欄が一致。残る26欄は表のほうが1円高く、どれも所得割に0.5円が出る欄（表は区分ごとの所得割を小数のまま足して四捨五入して見せている。そう計算すると224欄すべて一致）。表は軽減を入れずに作ってある（限度額は入っている）ので、照合には実際にも軽減がかからない欄を使った。市のページには年額の端数の扱いが書かれていない",
+      "parts": [
+        {
+          "id": "iryo",
+          "label": "医療分",
+          "rate": 9080,
+          "kintou": 24000,
+          "byodo": 25200,
+          "cap": 660000
+        },
+        {
+          "id": "shien",
+          "label": "後期高齢者支援金分",
+          "rate": 2740,
+          "kintou": 11280,
+          "byodo": 7440,
+          "cap": 260000
+        },
+        {
+          "id": "kaigo",
+          "label": "介護分",
+          "rate": 2420,
+          "kintou": 12360,
+          "byodo": 6000,
+          "cap": 170000,
+          "ages": [
+            40,
+            64
+          ]
+        },
+        {
+          "id": "kodomo",
+          "label": "子ども・子育て支援金分",
+          "rate": 290,
+          "kintou": 1320,
+          "byodo": 720,
+          "cap": 30000,
+          "adultsOnly": true,
+          "kintouNote": "均等割は18歳になる年度の年度末まではかからない（金沢市の表記）"
+        }
+      ],
+      "sources": [
+        {
+          "name": "金沢市「国民健康保険料について」（令和8年度の保険料率・賦課限度額）",
+          "url": "https://www4.city.kanazawa.lg.jp/soshikikarasagasu/iryohokenka/gyomuannai/1/2/7154.html"
+        },
+        {
+          "name": "金沢市「令和８年度 国民健康保険料 目安表」（PDF・給与等／年金）",
+          "url": "https://www4.city.kanazawa.lg.jp/material/files/group/54/meyasu_r8.pdf"
+        }
+      ],
+      "checks": [
+        {
+          "src": "金沢市「令和８年度 国民健康保険料 目安表」（給与等）：給与収入180万円・1人・その他",
+          "members": [
+            {
+              "age": 30,
+              "sal": 1800000
+            }
+          ],
+          "expect": 157152,
+          "expectLv": 0
+        },
+        {
+          "src": "金沢市「令和８年度 国民健康保険料 目安表」（給与等）：給与収入300万円・1人・介護あり",
+          "members": [
+            {
+              "age": 50,
+              "sal": 3000000
+            }
+          ],
+          "expect": 319347,
+          "expectLv": 0
+        },
+        {
+          "src": "金沢市「令和８年度 国民健康保険料 目安表」（給与等）：給与収入250万円・2人・介護あり",
+          "members": [
+            {
+              "age": 50,
+              "sal": 2500000
+            },
+            {
+              "age": 50
+            }
+          ],
+          "expect": 317452,
+          "expectLv": 0
+        },
+        {
+          "src": "金沢市「令和８年度 国民健康保険料 目安表」（給与等）：給与収入500万円・3人・その他",
+          "members": [
+            {
+              "age": 30,
+              "sal": 5000000
+            },
+            {
+              "age": 30
+            },
+            {
+              "age": 30
+            }
+          ],
+          "expect": 522203,
+          "expectLv": 0
+        },
+        {
+          "src": "金沢市「令和８年度 国民健康保険料 目安表」（給与等）：給与収入850万円・4人・その他",
+          "members": [
+            {
+              "age": 30,
+              "sal": 8500000
+            },
+            {
+              "age": 30
+            },
+            {
+              "age": 30
+            },
+            {
+              "age": 30
+            }
+          ],
+          "expect": 903996,
+          "expectLv": 0
+        },
+        {
+          "src": "金沢市「令和８年度 国民健康保険料 目安表」（給与等）：給与収入1,000万円・1人・介護あり",
+          "members": [
+            {
+              "age": 50,
+              "sal": 10000000
+            }
+          ],
+          "expect": 1081646,
+          "expectLv": 0
+        },
+        {
+          "src": "金沢市「令和８年度 国民健康保険料 目安表」（年金・65歳以上）：年金収入240万円・1人",
+          "members": [
+            {
+              "age": 70,
+              "pen": 2400000
+            }
+          ],
+          "expect": 175317,
+          "expectLv": 0
+        }
+      ]
     }
   },
   "prefSets": {
@@ -6185,6 +6724,8 @@
     "14150": "sagamihara-14150",
     "15100": "niigata-15100",
     "16201": "toyama-16201",
+    "17201": "kanazawa-17201",
+    "18201": "fukui-18201",
     "20201": "nagano-20201",
     "22130": "hamamatsu-22130",
     "23100": "nagoya-23100",
@@ -6192,12 +6733,15 @@
     "33100": "okayama-33100",
     "34100": "hiroshima-34100",
     "35203": "yamaguchi-35203",
+    "38201": "matsuyama-38201",
     "40130": "fukuoka-40130",
     "43100": "kumamoto-43100",
     "44201": "oita-44201",
+    "46201": "kagoshima-46201",
     "01100": "sapporo-01100",
     "04100": "sendai-04100",
-    "05201": "akita-05201"
+    "05201": "akita-05201",
+    "06201": "yamagata-06201"
   },
   "muniSetsNote": "東京都：料率は東京都保健医療局の一覧（令和8年4月1日現在）から書き起こし、各区市が公表している計算例と1円まで一致した区市だけ載せる。一覧にあっても計算例が見つからない・合わない区市（江戸川区・八王子市・府中市・小平市・福生市・狛江市・東大和市）と、町村・島しょはまだ載せない。",
   "pending": {

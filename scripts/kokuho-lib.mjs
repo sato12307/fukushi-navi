@@ -154,10 +154,11 @@ export const annual = (rs, members, opt = {}) => {
     const base = floorTo(inPart.reduce((a, m) => a + Math.max(0, shotoku(m) - G.base), 0), R.base)
     const shotokuwari = Math.floor((base * p.rate) / 100000)      // 率は10万分の1の整数（9.50%＝9500）
     const payers = p.adultsOnly ? inPart.filter((m) => m.age >= 18) : inPart
-    //   p.childHalf＝市の独自の減免で、18歳未満の子（未就学児を除く）の均等割も5割にする区分（昭島市の医療分・支援分）
+    //   p.childHalf＝市の独自の減免で、18歳未満の子（未就学児を除く）の均等割も5割にする区分（昭島市の医療分・支援分）。
+    //     数を書くとその年齢未満の子だけ（鹿児島市＝13＝小学生以下。法定軽減のあとの額をさらに5割）
     //   p.preschoolFree＝未就学児の均等割の残り5割も市が軽くして0円にする区分（立川市の医療分・支援分）
     //   opt.noKintou18＝18歳以上均等割を除いた額（中野区の運営協議会の表は「18歳以上追加負担分は除く」と注記している）
-    const half = (m) => m.age < 6 || (p.childHalf && m.age < 18)
+    const half = (m) => m.age < 6 || (p.childHalf && m.age < (p.childHalf === true ? 18 : p.childHalf))
     //   R.keigenUp＝軽減する額（7・5・2割の額と未就学児の5割の額）を何円未満切り上げるか（秋田市＝10円。22,960円の2割＝4,592円→4,600円）。
     //   書いていない料率は今までどおり（軽減後の額の1円未満切り捨て）
     const ck = (yen) => (R.keigenUp ? yen - Math.ceil((yen * lv) / (10 * R.keigenUp)) * R.keigenUp : cut(yen, lv))
