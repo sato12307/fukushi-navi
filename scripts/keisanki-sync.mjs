@@ -87,6 +87,14 @@ function byN(arr, n){ return n <= 9 ? arr[n - 1] : arr[8] + (n - 9) * arr[9]; }
 // ── ② 早見表（12都市・単身30歳）
 const CITY_PREF = { 東京23区: '東京都', 川崎市: '神奈川県', 横浜市: '神奈川県', さいたま市: '埼玉県', 京都市: '京都府', 大阪市: '大阪府', 神戸市: '兵庫県', 千葉市: '千葉県', 名古屋市: '愛知県', 仙台市: '宮城県', 札幌市: '北海道', 福岡市: '福岡県' }
 let html = fs.readFileSync(FILE, 'utf8').replace(/\r/g, '')
+// ── ⑥ 家賃の上限（住宅扶助）が自動で入る市区町村の数。assets/seiho-area.js（seiho-area-build.py の出力）から数える
+//   ★2026-10-11 まで本文に「237市区町村（人口でみると約4割）」と手で書いていて、住宅扶助を81機関に広げたあとも古いままになるところだった
+const AREA_JS = fs.readFileSync(path.join(ROOT, 'assets', 'seiho-area.js'), 'utf8')
+const CV = AREA_JS.match(/"cover":(\d+),"total":(\d+)/)
+if (!CV) die('assets/seiho-area.js に cover・total がありません（seiho-area-build.py を先に）')
+const jcA = html.indexOf('<!-- jfcover:start -->'), jcB = html.indexOf('<!-- jfcover:end -->')
+if (jcA < 0 || jcB < jcA) die('家賃の上限の市区町村数の目印（<!-- jfcover:start --> 〜 <!-- jfcover:end -->）が見つかりません')
+html = html.slice(0, jcA) + `<!-- jfcover:start -->公表を確認できた<strong>${num(+CV[1])}市区町村</strong>（全${num(+CV[2])}のうち・指定都市と中核市は市の額、ほかは県の額を級地で当てています）で自動的に入ります<!-- jfcover:end -->` + html.slice(jcB + '<!-- jfcover:end -->'.length)
 const tbA = html.indexOf('<table class="city-table">'), tbB = html.indexOf('<tbody>', tbA), tbC = html.indexOf('</tbody>', tbB)
 if (tbA < 0 || tbB < 0 || tbC < 0) die('早見表が見つかりません')
 const rows = [...html.slice(tbB, tbC).matchAll(/<tr><th>([^<]+)<\/th><td>([^<]+)<\/td><td>[\d,]+円<\/td><td>([\d,]+)円<\/td><td class="big">[\d,]+円<\/td><\/tr>/g)]

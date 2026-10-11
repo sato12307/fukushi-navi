@@ -194,7 +194,9 @@ def runs(line):
 
 # 「3~5人」の 5 は直前が ~ なので、空白だけを区切りにすると拾えない（京都市で実際に落ちた）。
 # 「単身世帯」を1人と書く自治体もある（名古屋市）。
-NIN = re.compile(r"(?:^|[\s~～〜ー\-－・、,])(\d{1,2})\s*人(以上)?|(単身)")
+# ★人数の前に来る字は決め打ちしない（「【1人世帯】」佐世保市・「◆2人世帯」金沢市で落ちた・2026-10-11）。
+#   数の途中（「11人」の「1人」・「1,000人」）だけを避ける＝直前が数字・カンマ・小数点なら人数とみなさない。
+NIN = re.compile(r"(?<![\d,，.．])(\d{1,2})\s*人(以上)?|(単身)")
 BARE = re.compile(r"(?<![(（\d])(\d{1,3}(?:,\d{3})+)(?![)）])")
 BARE_ANY = re.compile(r"(\d{1,3}(?:,\d{3})+)")
 # 金額が先・世帯の別があとに括弧で来る書き方（神戸市）
@@ -225,7 +227,9 @@ def vertical(lines):
     for l in lines:
         # 「3~5人」は下限の3で数える。そのままだと ~ の直後の 5 を拾って
         # 3人の欄が空になる（京都市で実際に落ちた）。
-        l = re.sub(r"(\d)\s*[~～〜ー\-－]\s*(\d)\s*人", r"\1人", l)
+        #   「3人から5人世帯」「3人~5人」と書く紙もある（相模原市・2026-10-11）。
+        #   ★範囲のあとの「以上」は捨てる。「3人~5人以上世帯」（福山市）を「3人以上」と読むと7人以上の欄に入る
+        l = re.sub(r"(\d)\s*人?\s*(?:[~～〜ー\-－]|から)\s*(\d)\s*人(?:以上)?", r"\1人", l)
         # ★1行に全部が入っている面がある（広島市:
         #   「単身世帯:38,000円、2人世帯:46,000円、3人~5人世帯:49,000円、…」）。
         #   ラベルの後ろを行末まで候補にすると、単身の欄に2人以降の金額まで入り、
@@ -241,7 +245,8 @@ def vertical(lines):
                 if not 1 <= n <= 7:
                     continue
                 # 3人・4人・5人は同じ band（3〜5人）。人員ごとに分けて書く自治体があるので畳む。
-                key = 7 if m.group(2) or n >= 7 else (3 if 3 <= n <= 5 else n)
+                # ★「以上」で7人以上の欄にするのは7人からだけ。「3人以上 51,000円」（吹田市）は3〜5人の欄
+                key = 7 if n >= 7 else (3 if 3 <= n <= 5 else n)
             # ★行の最初の数字だけを採ると落ちる。川崎市は
             #     「1人 92,000円 家賃額(53,700円) 145,700円」
             #   と収入基準額が先に来て、限度額は**括弧の中**にある。
@@ -266,28 +271,46 @@ def vertical(lines):
                 if not mm:
                     continue
                 n = int(mm.group(1))
-                key = 7 if mm.group(2) or n >= 7 else (3 if 3 <= n <= 5 else n)
+                key = 7 if n >= 7 else (3 if 3 <= n <= 5 else n)
             got.setdefault(key, []).append(v)
     need = [1, 2, 3, 6, 7]  # 1人 / 2人 / 3〜5人 / 6人 / 7人以上
     # ★住居確保給付金の案内は4人世帯までしか出さないことがある（名古屋市）。
     #   1・2・3〜5人が揃えば、残りは None のまま採る（欠けているものを埋めない）。
     if not all(k in got for k in need[:3]):
         return []
+    # ★単身の候補を小さい順に試して最初に通ったものを採ると、別の場所の数字を拾う
+    #   （高松市で 35,000 を単身として通した。正しくは 37,000＝紙の別の段の数字だった・2026-10-11）。
+    #   ∴ 候補の組み合わせを全部作り、全国共通の倍率（RATIO）からのずれがいちばん小さい組を採る。
+    RATIO = {2: 1.19, 3: 1.30, 6: 1.40, 7: 1.56}
+    best, best_score = None, None
     for c0 in sorted(set(got[1])):
         if not TANSHIN_LO <= c0 <= TANSHIN_HI:
             continue
         chain = [c0]
         for k in need[1:]:
-            nxt = [v for v in sorted(set(got.get(k, []))) if v >= chain[-1]]
-            chain.append(nxt[0] if nxt else None)
+            # ★6人の欄が無い紙で、None と大小を比べて落ちていた（大津市・2026-10-11）。比べるのは埋まっている最後の欄
+            prev = [v for v in chain if v is not None][-1]
+            nxt = [v for v in set(got.get(k, [])) if v >= prev]
+            chain.append(min(nxt, key=lambda v: (abs(v / c0 - RATIO[k]), v)) if nxt else None)
         if chain[1] is None or chain[2] is None:
             continue
-        if shape_ok(chain):
-            return [chain]
-    return []
+        # 6人・7人以上の欄は書いていない紙が多く、拾った数が別の表のものなら空に戻す（1〜5人は残す）
+        for i, (lo, hi) in ((3, (1.32, 1.50)), (4, (1.44, 1.72))):
+            if chain[i] is not None and not lo <= chain[i] / c0 <= hi:
+                chain[i:] = [None] * (5 - i)
+                break
+        if not shape_ok(chain):
+            continue
+        devs = [(chain[i] / c0 - RATIO[k]) ** 2 for i, k in enumerate(need) if i and chain[i] is not None]
+        score = sum(devs) / len(devs)   # 平均で比べる（欄の少ない組が和で有利にならないように）
+        if best_score is None or score < best_score:
+            best, best_score = chain, score
+    return [best] if best else []
 
 
 MANEN = re.compile(r"(\d{1,3}(?:\.\d{1,2})?)\s*万\s*円")
+# 「4万1,000円」「13万9,000円」＝万と千の位を分けて書く紙（相模原市・2026-10-11）。先にこちらを円へ直す
+MANSEN = re.compile(r"(\d{1,3})\s*万\s*(\d{1},?\d{3})\s*円")
 
 
 def yen_notation(s):
@@ -300,7 +323,13 @@ def yen_notation(s):
     def rep(m):
         v = int(round(float(m.group(1)) * 10000))
         return f"{v:,}円"
-    return MANEN.sub(rep, s)
+    def rep2(m):
+        v = int(m.group(1)) * 10000 + int(m.group(2).replace(",", ""))
+        return f"{v:,}円"
+    # 「３,９万円（単身世帯）」＝小数点をカンマで書いた紙（大津市・2026-10-11）。カンマのあとが1〜2桁で「万円」が来るなら
+    # 千の位の区切りではあり得ないので小数点として読む（そのままだと「9万円」だけが円に直り 3,90,000円 になる）
+    s = re.sub(r"(\d)[,，](\d{1,2})\s*万\s*円", r"\1.\2万円", s)
+    return MANEN.sub(rep, MANSEN.sub(rep2, s))
 
 
 def parse_text(text):
@@ -413,6 +442,38 @@ def parse_org(name, verbose=False):
     return best, best_url, None
 
 
+def _norm(s):
+    return re.sub(r"[\s\x01\x02]+", "", yen_notation(z2h(s)))
+
+
+def pinned(t):
+    """固定読み（pins）＝機械で読めない形の表を、人が原典を読んで額を決めたもの。
+
+    ★旭川市の表は「世帯員数 1人 2人 3人 4人 5人 6人」の見出しに対して家賃上限額が4つしかない
+      （3〜5人を1つのセルにまとめている）。数字の並びの性質だけでは列の対応が決まらない。
+    ★固定読みは「引用の一文が、落としてある原典に今もある」ときだけ使う。原典が書き換わったら
+      引用が見つからずに止まる（B に落ちて人が見直す）。額は自動読みと同じ型の検査（100円単位・倍率）も通す。
+    """
+    out, errs = [], []
+    d = os.path.join(CACHE, t["name"])
+    up = os.path.join(d, "urls.json")
+    umap = json.load(open(up, encoding="utf-8")) if os.path.exists(up) else {}
+    for pin in t.get("pins") or []:
+        f = next((k for k, u in umap.items() if u == pin["url"]), None)
+        if not f or not os.path.exists(os.path.join(d, f)):
+            errs.append(f"固定読みの原典が落としてない（{pin['url']}）")
+            continue
+        if _norm(pin["quote"]) not in _norm(read_file(os.path.join(d, f))):
+            errs.append(f"固定読みの引用が原典に見つからない（原典が変わった？）：{pin['quote'][:40]}")
+            continue
+        y = pin["yen"]
+        if not (len(y) == 5 and all(y[:3]) and all(v is None or v % 100 == 0 for v in y) and shape_ok(y)):
+            errs.append(f"固定読みの額が型に合わない：{y}")
+            continue
+        out.append({"kyuchi": pin.get("kyuchi"), "yen": y, "via": pin["url"]})
+    return out, errs
+
+
 def main():
     L = json.load(open(LEDGER, encoding="utf-8"))
     if WHY:
@@ -429,7 +490,30 @@ def main():
             t["status"] = "未調査"
             stat["未調査"] += 1
             continue
+        # ★hold＝読めても載せない機関（人が原典を見て、額が確かめられなかったもの）。理由を note に残す。
+        #   青森市は市のページが「単身31,000・2人43,000・3人47,000」と書くが、2人の倍率（1.39）が全国の型（≒1.19）から外れ、
+        #   別の公式資料でも確かめられない。読み取りは計算例の 36,000 を拾ってしまう（2026-10-11）。
+        if t.get("hold"):
+            t["status"] = "B"
+            t["note"] = f"保留：{t['hold']}"
+            t["picked"] = None
+            stat["B"] += 1
+            print(f"B  {t['name']:8s} 保留：{t['hold']}")
+            continue
         rows, url, err = parse_org(t["name"])
+        pins, perr = pinned(t)
+        if perr:
+            t["status"] = "B"
+            t["note"] = "; ".join(perr)[:200]
+            t["picked"] = None
+            stat["B"] += 1
+            print(f"B  {t['name']:8s} {t['note']}")
+            continue
+        if pins:
+            # 固定読みは同じ級地の自動読みより優先する（自動読みが計算例の数字を拾うことがある＝青森市）。
+            # 市（級地が1つ）は固定読みの1行だけにする
+            keep = [r for r in (rows or []) if t["level"] == "都道府県" and r["kyuchi"] and r["kyuchi"] not in {p["kyuchi"] for p in pins}]
+            rows, url, err = keep + pins, pins[0]["via"] if not keep else url, None
         # ★都道府県は県内に級地が何段階もある。級地の書いていない行を採ると
         #   「どの級地の額か分からない数字」を県の値として置くことになる
         #   （北海道で振興局のページから 25,000… を拾って実際にそうなった）。

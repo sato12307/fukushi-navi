@@ -42,6 +42,11 @@ const ARGS = process.argv.slice(2)
 const FORCE = ARGS.includes('--force')
 const TODO = ARGS.includes('--todo')
 const ONLY = ARGS.includes('--only') ? ARGS[ARGS.indexOf('--only') + 1] : null
+// --new        … 読めた（A）機関は飛ばす。★既定では A の機関も毎回リンクをたどり直し、
+//                1回で10分を超えた（2026-10-11：広島市・札幌市の目次を延々とたどった）
+// --depth <n>  … リンクをたどる深さ（既定 2）。検索で当たりのページが取れているなら 0 で足りる
+const NEW_ONLY = ARGS.includes('--new')
+const DEPTH_ARG = ARGS.includes('--depth') ? Number(ARGS[ARGS.indexOf('--depth') + 1]) : null
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms))
 
 const L = JSON.parse(fs.readFileSync(LEDGER, 'utf8'))
@@ -97,7 +102,7 @@ const DEEP_WORD = /住宅扶助|住居確保|基準額|基準表|しおり|保�
 //     1ページあたり6本に絞って、最大 6+36=42ページで止める（サイト全体のクロールにしない）。
 const NAV_MAX = 6
 const NAV_WORD = /生活困窮|住居確保|生活保護|自立支援|福祉|くらし|暮らし|生活支援|しおり/
-const MAX_DEPTH = 2
+const MAX_DEPTH = DEPTH_ARG ?? 2
 const deepLinks = (html, base, depth = 0) => {
   const out = []
   const word = depth <= 1 ? NAV_WORD : DEEP_WORD
@@ -119,7 +124,7 @@ const deepLinks = (html, base, depth = 0) => {
 }
 
 const main = async () => {
-  const list = L.targets.filter((t) => (t.urls.length || (t.helpers || []).length) && (!ONLY || t.name === ONLY))
+  const list = L.targets.filter((t) => (t.urls.length || (t.helpers || []).length) && (!ONLY || t.name === ONLY) && (!NEW_ONLY || t.status !== 'A'))
   if (!list.length) { console.log('候補URLの入った機関がまだ無い。--todo で穴を見る。'); return }
   let ok = 0
   let ng = 0
@@ -128,7 +133,8 @@ const main = async () => {
     // helpers＝県が金額を出していないときに、県内の市のページから取るための候補。
     // どのファイルがどの級地のものかを helpers.json に残し、parse がそれを見て級地を付ける。
     const hmap = {}
-    const queue = [...t.urls.map((u) => [u, 0]), ...(t.helpers || []).map((h) => [h.url, 0, h.kyuchi])]
+    //   helpers を先に並べる。同じURLが urls にもあると、先に来た級地なしのほうで seen になり級地が付かない
+    const queue = [...(t.helpers || []).map((h) => [h.url, 0, h.kyuchi]), ...t.urls.map((u) => [u, 0])]
     const seen = new Set()
     while (queue.length) {
       const [u, depth, hky] = queue.shift()
@@ -137,6 +143,9 @@ const main = async () => {
       const have = already(t, u)
       if (!FORCE && have) {
         skip++
+        // ★落としてあるファイルを後から helper（級地つき）にしたときも級地を残す。
+        //   残さないと、県の本体の候補として先に落としたページ（北海道の留萌管内の町村の額）が級地なしのまま読まれる（2026-10-11）
+        if (hky) hmap[path.basename(have)] = hky
         // 既に落としてあるHTMLからも、まだ辿っていないリンクは拾う
         if (depth < MAX_DEPTH && have.endsWith('.html')) {
           for (const l of deepLinks(fs.readFileSync(have, 'utf8'), u, depth)) queue.push([l, depth + 1, hky])

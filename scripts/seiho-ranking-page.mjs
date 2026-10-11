@@ -34,6 +34,7 @@ import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 // 有料の資料への入口（2026-09-28 ユーザー指示「撒き餌の面から有料への導線を目立つところに」）。文面は offer-block.mjs。
 import { offerHub } from './offer-block.mjs'
+import { SITE, readSitemap, writeSitemap, sitemapLastmods, putUrls } from './shogai-kojo-page.mjs'
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..')
 const SRC = path.join(ROOT, 'data', 'seiho-ranking.json')
@@ -304,5 +305,26 @@ ${rows.slice(-5).map((r, i) => `      <tr><td>${rows.length - 4 + i}</td><th>${r
 </html>
 `
 
-fs.writeFileSync(OUT, html)
-console.log(`書いた: ${OUT}  (${(html.length / 1024).toFixed(1)}KB / ${rows.length}市)`)
+// ★中身が同じなら書かない（日付だけ進めると、検索エンジンに「変わった」と言うことになる）。
+//   書いたときは sitemap の lastmod も今日にそろえる（2026-10-11 まで書いておらず、10-10・10-11 の更新のあとも 10-09 のままだった）
+const strip = (h) => h.replace(/\r/g, '').replace(/最終更新：\d{4}-\d{2}-\d{2}/g, '').replace(/"dateModified": "\d{4}-\d{2}-\d{2}"/g, '')
+const prev = fs.existsSync(OUT) ? fs.readFileSync(OUT, 'utf8') : ''
+const same = strip(prev) === strip(html)
+if (same) console.log(`変わらず: ${OUT}`)
+else {
+  fs.writeFileSync(OUT, html)
+  console.log(`書いた: ${OUT}  (${(html.length / 1024).toFixed(1)}KB / ${rows.length}市)`)
+}
+{
+  // sitemap の lastmod は、書いてあるページの dateModified（中身が変わった日）にそろえる
+  const page = same ? prev : html
+  const dm = (page.match(/"dateModified": "(\d{4}-\d{2}-\d{2})"/) || [])[1]
+  const URL = `${SITE}/articles/seikatsuhogo-jisshitsu.html`
+  const sm = readSitemap(), lm = sitemapLastmods(sm).get(URL)
+  if (!lm || !dm) { console.error('sitemap の行かページの dateModified がありません'); process.exit(1) }
+  if (lm < dm) {
+    const row = sm.match(new RegExp(`<url><loc>${URL.replace(/[.]/g, '\\.')}</loc>.*?</url>`))[0]
+    writeSitemap(putUrls(sm, [[URL, row.replace(/<lastmod>[^<]+<\/lastmod>/, `<lastmod>${dm}</lastmod>`)]]))
+    console.log(`sitemap の lastmod を ${lm} → ${dm} に進めた`)
+  }
+}

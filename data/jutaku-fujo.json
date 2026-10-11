@@ -2,6 +2,114 @@
  "note": "生活保護の住宅扶助（家賃・間代等）の限度額。実施機関（都道府県・指定都市・中核市）ごとに厚生労働大臣が告示で定める額を、各機関の公表ページから取ったもの。額は［1人 / 2人 / 3〜5人 / 6人 / 7人以上］の順。",
  "updated": "2026-09-17",
  "orgs": {
+  "三重県": {
+   "level": "都道府県",
+   "pref": "三重県",
+   "source": "県内の市の公表ページから（各行の via を参照）",
+   "rows": [
+    {
+     "kyuchi": "2級地",
+     "yen": [
+      35200,
+      42000,
+      45800,
+      49000,
+      55000
+     ],
+     "via": "https://www.city.yokkaichi.lg.jp/www/contents/1761091550850/files/202607jyukyokakuhogoannai.pdf"
+    }
+   ]
+  },
+  "京都府": {
+   "level": "都道府県",
+   "pref": "京都府",
+   "source": "県内の市の公表ページから（各行の via を参照）",
+   "rows": [
+    {
+     "kyuchi": "1級地",
+     "yen": [
+      40000,
+      48000,
+      52000,
+      56000,
+      62000
+     ],
+     "via": "https://www.city.uji.kyoto.jp/soshiki/70/26554.html"
+    }
+   ]
+  },
+  "佐賀県": {
+   "level": "都道府県",
+   "pref": "佐賀県",
+   "source": "県内の市の公表ページから（各行の via を参照）",
+   "rows": [
+    {
+     "kyuchi": "2級地",
+     "yen": [
+      30300,
+      36000,
+      39400,
+      null,
+      null
+     ],
+     "via": "https://www.city.saga.lg.jp/kenko-fukushi/fukushi/7/3848.html"
+    }
+   ]
+  },
+  "兵庫県": {
+   "level": "都道府県",
+   "pref": "兵庫県",
+   "source": "県内の市の公表ページから（各行の via を参照）",
+   "rows": [
+    {
+     "kyuchi": "1級地",
+     "yen": [
+      40000,
+      48000,
+      52000,
+      56000,
+      62000
+     ],
+     "via": "https://www.city.takarazuka.hyogo.jp/1060682/1060706/seikatsushien/1051449/1059912.html"
+    }
+   ]
+  },
+  "北海道": {
+   "level": "都道府県",
+   "pref": "北海道",
+   "source": "県内の市の公表ページから（各行の via を参照）",
+   "rows": [
+    {
+     "kyuchi": "3級地",
+     "yen": [
+      25000,
+      30000,
+      33000,
+      null,
+      null
+     ],
+     "via": "https://www.rumoi.pref.hokkaido.lg.jp/hk/syf/129011.html"
+    }
+   ]
+  },
+  "千葉県": {
+   "level": "都道府県",
+   "pref": "千葉県",
+   "source": "県内の市の公表ページから（各行の via を参照）",
+   "rows": [
+    {
+     "kyuchi": "1級地",
+     "yen": [
+      46000,
+      55000,
+      59800,
+      64000,
+      71800
+     ],
+     "via": "https://www.city.ichikawa.lg.jp/page/3823.html"
+    }
+   ]
+  },
   "埼玉県": {
    "level": "都道府県",
    "pref": "埼玉県",
@@ -39,6 +147,42 @@
     }
    ]
   },
+  "大阪府": {
+   "level": "都道府県",
+   "pref": "大阪府",
+   "source": "県内の市の公表ページから（各行の via を参照）",
+   "rows": [
+    {
+     "kyuchi": "1級地",
+     "yen": [
+      39000,
+      47000,
+      51000,
+      null,
+      null
+     ],
+     "via": "https://www.city.ibaraki.osaka.jp/kikou/kenkof/fukushiseisakuka/menu/seikatsu_shien/1434352823652.html"
+    }
+   ]
+  },
+  "富山県": {
+   "level": "都道府県",
+   "pref": "富山県",
+   "source": "県内の市の公表ページから（各行の via を参照）",
+   "rows": [
+    {
+     "kyuchi": "2級地",
+     "yen": [
+      29000,
+      35000,
+      38000,
+      41000,
+      46000
+     ],
+     "via": "https://www.city.takaoka.toyama.jp/soshiki/shakaifukushika/2/6/1/5017.html"
+    }
+   ]
+  },
   "岩手県": {
    "level": "都道府県",
    "pref": "岩手県",
@@ -53,6 +197,70 @@
       null,
       null
      ]
+    }
+   ]
+  },
+  "愛媛県": {
+   "level": "都道府県",
+   "pref": "愛媛県",
+   "source": "https://www.pref.ehime.jp/page/14626.html",
+   "rows": [
+    {
+     "kyuchi": "3級地",
+     "yen": [
+      32000,
+      38000,
+      42000,
+      45000,
+      50000
+     ]
+    }
+   ]
+  },
+  "愛知県": {
+   "level": "都道府県",
+   "pref": "愛知県",
+   "source": "県内の市の公表ページから（各行の via を参照）",
+   "rows": [
+    {
+     "kyuchi": "2級地",
+     "yen": [
+      37000,
+      44000,
+      48100,
+      null,
+      null
+     ],
+     "via": "https://www.city.kasugai.lg.jp/kenko/fukushi/saikatsuenjo/1013909/1002201.html"
+    },
+    {
+     "kyuchi": "3級地",
+     "yen": [
+      36000,
+      43000,
+      46600,
+      null,
+      null
+     ],
+     "via": "https://www.pref.aichi.jp/soshiki/chiikifukushi/0000083363.html"
+    }
+   ]
+  },
+  "新潟県": {
+   "level": "都道府県",
+   "pref": "新潟県",
+   "source": "県内の市の公表ページから（各行の via を参照）",
+   "rows": [
+    {
+     "kyuchi": "3級地",
+     "yen": [
+      32000,
+      38000,
+      42000,
+      45000,
+      50000
+     ],
+     "via": "https://www.pref.niigata.lg.jp/sec/fukushihoken/1356808846955.html"
     }
    ]
   },
@@ -93,6 +301,23 @@
     }
    ]
   },
+  "福島県": {
+   "level": "都道府県",
+   "pref": "福島県",
+   "source": "https://www.pref.fukushima.lg.jp/uploaded/attachment/759714.pdf",
+   "rows": [
+    {
+     "kyuchi": "3級地",
+     "yen": [
+      33000,
+      40000,
+      43000,
+      46000,
+      51000
+     ]
+    }
+   ]
+  },
   "秋田県": {
    "level": "都道府県",
    "pref": "秋田県",
@@ -111,6 +336,24 @@
     }
    ]
   },
+  "群馬県": {
+   "level": "都道府県",
+   "pref": "群馬県",
+   "source": "県内の市の公表ページから（各行の via を参照）",
+   "rows": [
+    {
+     "kyuchi": "2級地",
+     "yen": [
+      30000,
+      36000,
+      39000,
+      42000,
+      47000
+     ],
+     "via": "https://www.city.kiryu.lg.jp/_res/projects/default_project/_page_/001/023/895/2.pdf"
+    }
+   ]
+  },
   "青森県": {
    "level": "都道府県",
    "pref": "青森県",
@@ -125,6 +368,24 @@
       null,
       null
      ]
+    }
+   ]
+  },
+  "静岡県": {
+   "level": "都道府県",
+   "pref": "静岡県",
+   "source": "県内の市の公表ページから（各行の via を参照）",
+   "rows": [
+    {
+     "kyuchi": "2級地",
+     "yen": [
+      37000,
+      44000,
+      48000,
+      null,
+      null
+     ],
+     "via": "https://www.city.numazu.shizuoka.jp/kurashi/fukushi/seikatsu/jyukyokakuho1.htm"
     }
    ]
   },
@@ -315,6 +576,23 @@
     }
    ]
   },
+  "新潟市": {
+   "level": "指定都市",
+   "pref": "新潟県",
+   "source": "https://www.city.niigata.lg.jp/iryo/kenfuku/konkyusyashien/konkyusyashien.files/leaflet20260701.pdf",
+   "rows": [
+    {
+     "kyuchi": null,
+     "yen": [
+      35500,
+      43000,
+      46200,
+      null,
+      null
+     ]
+    }
+   ]
+  },
   "札幌市": {
    "level": "指定都市",
    "pref": "北海道",
@@ -383,6 +661,23 @@
     }
    ]
   },
+  "相模原市": {
+   "level": "指定都市",
+   "pref": "神奈川県",
+   "source": "https://www.city.sagamihara.kanagawa.jp/kosodate/fukushi/1026642/1006553/1024112.html",
+   "rows": [
+    {
+     "kyuchi": null,
+     "yen": [
+      41000,
+      49000,
+      53000,
+      57000,
+      64000
+     ]
+    }
+   ]
+  },
   "神戸市": {
    "level": "指定都市",
    "pref": "兵庫県",
@@ -417,10 +712,726 @@
     }
    ]
   },
+  "いわき市": {
+   "level": "中核市",
+   "pref": "福島県",
+   "source": "https://www.city.iwaki.lg.jp/www/contents/1001000000290/index.html",
+   "rows": [
+    {
+     "kyuchi": null,
+     "yen": [
+      35000,
+      42000,
+      46000,
+      49000,
+      55000
+     ]
+    }
+   ]
+  },
+  "一宮市": {
+   "level": "中核市",
+   "pref": "愛知県",
+   "source": "https://www.city.ichinomiya.aichi.jp/fukushi/fukushisoumu/1044105/1010390/1001163.html",
+   "rows": [
+    {
+     "kyuchi": null,
+     "yen": [
+      37000,
+      44000,
+      48100,
+      52000,
+      58000
+     ]
+    }
+   ]
+  },
+  "久留米市": {
+   "level": "中核市",
+   "pref": "福岡県",
+   "source": "https://www.city.kurume.fukuoka.jp/1070kenkou/2010fukushi/3090sonotafukushi/jukyokakuhokyuhukin20200420.html",
+   "rows": [
+    {
+     "kyuchi": null,
+     "yen": [
+      31000,
+      37000,
+      40000,
+      43000,
+      48000
+     ]
+    }
+   ]
+  },
+  "佐世保市": {
+   "level": "中核市",
+   "pref": "長崎県",
+   "source": "https://www.city.sasebo.lg.jp/documents/9081/r8jyuuykokakuhokyuuhukinn.pdf",
+   "rows": [
+    {
+     "kyuchi": null,
+     "yen": [
+      32000,
+      38000,
+      42000,
+      null,
+      null
+     ]
+    }
+   ]
+  },
+  "八尾市": {
+   "level": "中核市",
+   "pref": "大阪府",
+   "source": "https://www.city.yao.osaka.jp/kurashi_tetsuzuki/soudan/1003616/1019981.html",
+   "rows": [
+    {
+     "kyuchi": null,
+     "yen": [
+      39000,
+      47000,
+      51000,
+      55000,
+      null
+     ]
+    }
+   ]
+  },
+  "八王子市": {
+   "level": "中核市",
+   "pref": "東京都",
+   "source": "https://www.city.hachioji.tokyo.jp/kurashi/welfare/007/001/p026589.html",
+   "rows": [
+    {
+     "kyuchi": null,
+     "yen": [
+      53700,
+      64000,
+      69800,
+      null,
+      null
+     ]
+    }
+   ]
+  },
+  "函館市": {
+   "level": "中核市",
+   "pref": "北海道",
+   "source": "https://www.city.hakodate.hokkaido.jp/docs/2015060800017/",
+   "rows": [
+    {
+     "kyuchi": null,
+     "yen": [
+      30000,
+      36000,
+      39000,
+      42000,
+      47000
+     ]
+    }
+   ]
+  },
+  "吹田市": {
+   "level": "中核市",
+   "pref": "大阪府",
+   "source": "https://www.city.suita.osaka.jp/kenko/1018735/1018736/1014741.html",
+   "rows": [
+    {
+     "kyuchi": null,
+     "yen": [
+      39000,
+      47000,
+      51000,
+      null,
+      null
+     ]
+    }
+   ]
+  },
+  "呉市": {
+   "level": "中核市",
+   "pref": "広島県",
+   "source": "https://www.city.kure.lg.jp/soshiki/57/seikatukonnkyuu-juukyo.html",
+   "rows": [
+    {
+     "kyuchi": null,
+     "yen": [
+      35000,
+      42000,
+      46000,
+      null,
+      null
+     ]
+    }
+   ]
+  },
+  "和歌山市": {
+   "level": "中核市",
+   "pref": "和歌山県",
+   "source": "https://www.city.wakayama.wakayama.jp/_res/projects/default_project/_page_/001/049/408/yachinhozyo2026.7.pdf",
+   "rows": [
+    {
+     "kyuchi": null,
+     "yen": [
+      34000,
+      41000,
+      44000,
+      null,
+      null
+     ],
+     "via": "https://www.city.wakayama.wakayama.jp/_res/projects/default_project/_page_/001/049/408/yachinhozyo2026.7.pdf"
+    }
+   ]
+  },
+  "大分市": {
+   "level": "中核市",
+   "pref": "大分県",
+   "source": "https://www.city.oita.oita.jp/o090/kenko/fukushi/jyukyokakuho.html",
+   "rows": [
+    {
+     "kyuchi": null,
+     "yen": [
+      29000,
+      35000,
+      38000,
+      41000,
+      45000
+     ]
+    }
+   ]
+  },
+  "大津市": {
+   "level": "中核市",
+   "pref": "滋賀県",
+   "source": "https://www.city.otsu.lg.jp/material/files/group/236/jukyokakuhokyufukinyachinhojo.pdf",
+   "rows": [
+    {
+     "kyuchi": null,
+     "yen": [
+      39000,
+      47000,
+      51000,
+      55000,
+      61000
+     ]
+    }
+   ]
+  },
+  "奈良市": {
+   "level": "中核市",
+   "pref": "奈良県",
+   "source": "https://www.city.nara.lg.jp/soshiki/33/242970.html",
+   "rows": [
+    {
+     "kyuchi": null,
+     "yen": [
+      38000,
+      46000,
+      49000,
+      53000,
+      59000
+     ]
+    }
+   ]
+  },
+  "姫路市": {
+   "level": "中核市",
+   "pref": "兵庫県",
+   "source": "https://www.city.himeji.lg.jp/kurashi/cmsfiles/contents/0000001/1386/yachinhojo(jukyokakuhokyufukin)shiori(R8.7.1).pdf",
+   "rows": [
+    {
+     "kyuchi": null,
+     "yen": [
+      38000,
+      46000,
+      49000,
+      53000,
+      59000
+     ]
+    }
+   ]
+  },
+  "宇都宮市": {
+   "level": "中核市",
+   "pref": "栃木県",
+   "source": "https://www.city.utsunomiya.lg.jp/kenko/seikatsushien/soudan/1043743.html",
+   "rows": [
+    {
+     "kyuchi": null,
+     "yen": [
+      38100,
+      46000,
+      49500,
+      53000,
+      59400
+     ]
+    }
+   ]
+  },
+  "富山市": {
+   "level": "中核市",
+   "pref": "富山県",
+   "source": "https://www.city.toyama.lg.jp/health/covid19/c_shien_shimin/1004454.html",
+   "rows": [
+    {
+     "kyuchi": null,
+     "yen": [
+      33000,
+      40000,
+      43000,
+      46000,
+      51000
+     ]
+    }
+   ]
+  },
+  "尼崎市": {
+   "level": "中核市",
+   "pref": "兵庫県",
+   "source": "https://www.city.amagasaki.hyogo.jp/kurashi/seikatusien/1001977/132juutakushien.html",
+   "rows": [
+    {
+     "kyuchi": null,
+     "yen": [
+      42500,
+      51000,
+      55300,
+      60000,
+      null
+     ]
+    }
+   ]
+  },
+  "山形市": {
+   "level": "中核市",
+   "pref": "山形県",
+   "source": "https://www.city.yamagata-yamagata.lg.jp/kenkofukushi/fukushi/1006663/1004828.html",
+   "rows": [
+    {
+     "kyuchi": null,
+     "yen": [
+      35000,
+      42000,
+      46000,
+      null,
+      null
+     ]
+    }
+   ]
+  },
+  "岐阜市": {
+   "level": "中核市",
+   "pref": "岐阜県",
+   "source": "https://www.city.gifu.lg.jp/kenko/seikathushien/1034614.html",
+   "rows": [
+    {
+     "kyuchi": null,
+     "yen": [
+      32000,
+      38000,
+      41600,
+      45000,
+      50000
+     ]
+    }
+   ]
+  },
+  "川口市": {
+   "level": "中核市",
+   "pref": "埼玉県",
+   "source": "https://www.city.kawaguchi.lg.jp/material/files/group/40/R8yachinnhojoshiori.pdf",
+   "rows": [
+    {
+     "kyuchi": null,
+     "yen": [
+      47700,
+      57000,
+      62000,
+      67000,
+      74400
+     ]
+    }
+   ]
+  },
+  "川越市": {
+   "level": "中核市",
+   "pref": "埼玉県",
+   "source": "https://www.city.kawagoe.saitama.jp/kenko/fukushi/1006983/1007011.html",
+   "rows": [
+    {
+     "kyuchi": null,
+     "yen": [
+      42000,
+      50000,
+      55000,
+      59000,
+      66000
+     ]
+    }
+   ]
+  },
+  "旭川市": {
+   "level": "中核市",
+   "pref": "北海道",
+   "source": "https://www.city.asahikawa.hokkaido.jp/kurashi/135/189/191/d052371_d/fil/yachinhozyo.pdf",
+   "rows": [
+    {
+     "kyuchi": null,
+     "yen": [
+      28000,
+      34000,
+      36000,
+      39000,
+      null
+     ],
+     "via": "https://www.city.asahikawa.hokkaido.jp/kurashi/135/189/191/d052371_d/fil/yachinhozyo.pdf"
+    }
+   ]
+  },
+  "明石市": {
+   "level": "中核市",
+   "pref": "兵庫県",
+   "source": "https://www.city.akashi.lg.jp/fukushi/seikatsu_fu_ka/seikatukonkyu/jutaku.html",
+   "rows": [
+    {
+     "kyuchi": null,
+     "yen": [
+      40000,
+      48000,
+      52000,
+      null,
+      null
+     ]
+    }
+   ]
+  },
+  "東大阪市": {
+   "level": "中核市",
+   "pref": "大阪府",
+   "source": "https://www.city.higashiosaka.lg.jp/0000002896.html",
+   "rows": [
+    {
+     "kyuchi": null,
+     "yen": [
+      38000,
+      46000,
+      49000,
+      53000,
+      59000
+     ]
+    }
+   ]
+  },
   "松山市": {
    "level": "中核市",
    "pref": "愛媛県",
    "source": "https://www.city.matsuyama.ehime.jp/kurashi/fukushi/shakai/ziritsushien/zyuukyo/jyukyokakuho2.html",
+   "rows": [
+    {
+     "kyuchi": null,
+     "yen": [
+      32000,
+      38000,
+      42000,
+      45000,
+      50000
+     ]
+    }
+   ]
+  },
+  "松本市": {
+   "level": "中核市",
+   "pref": "長野県",
+   "source": "https://www.city.matsumoto.nagano.jp/uploaded/attachment/80228.pdf",
+   "rows": [
+    {
+     "kyuchi": null,
+     "yen": [
+      35000,
+      42000,
+      46000,
+      null,
+      null
+     ]
+    }
+   ]
+  },
+  "枚方市": {
+   "level": "中核市",
+   "pref": "大阪府",
+   "source": "https://www.city.hirakata.osaka.jp/0000029011.html",
+   "rows": [
+    {
+     "kyuchi": null,
+     "yen": [
+      38000,
+      46000,
+      49000,
+      53000,
+      59000
+     ]
+    }
+   ]
+  },
+  "柏市": {
+   "level": "中核市",
+   "pref": "千葉県",
+   "source": "https://www.city.kashiwa.lg.jp/documents/2305/shiori.pdf",
+   "rows": [
+    {
+     "kyuchi": null,
+     "yen": [
+      41000,
+      49000,
+      53000,
+      null,
+      null
+     ]
+    }
+   ]
+  },
+  "横須賀市": {
+   "level": "中核市",
+   "pref": "神奈川県",
+   "source": "https://www.city.yokosuka.kanagawa.jp/2630/jiritsusien.html",
+   "rows": [
+    {
+     "kyuchi": null,
+     "yen": [
+      44000,
+      53000,
+      57000,
+      null,
+      null
+     ]
+    }
+   ]
+  },
+  "水戸市": {
+   "level": "中核市",
+   "pref": "茨城県",
+   "source": "https://www.city.mito.lg.jp/page/3536.html",
+   "rows": [
+    {
+     "kyuchi": null,
+     "yen": [
+      35400,
+      42000,
+      46000,
+      50000,
+      55000
+     ]
+    }
+   ]
+  },
+  "福山市": {
+   "level": "中核市",
+   "pref": "広島県",
+   "source": "https://www.city.fukuyama.hiroshima.jp/uploaded/attachment/341164.pdf",
+   "rows": [
+    {
+     "kyuchi": null,
+     "yen": [
+      34000,
+      41000,
+      44000,
+      null,
+      null
+     ]
+    }
+   ]
+  },
+  "福島市": {
+   "level": "中核市",
+   "pref": "福島県",
+   "source": "https://www.city.fukushima.fukushima.jp/material/files/group/44/r8_jyuukyo_yatin.pdf",
+   "rows": [
+    {
+     "kyuchi": null,
+     "yen": [
+      36000,
+      43000,
+      47000,
+      50000,
+      null
+     ]
+    }
+   ]
+  },
+  "秋田市": {
+   "level": "中核市",
+   "pref": "秋田県",
+   "source": "https://www.city.akita.lg.jp/_res/projects/default_project/_page_/001/025/008/checkyatin2026pdf.pdf",
+   "rows": [
+    {
+     "kyuchi": null,
+     "yen": [
+      32000,
+      38000,
+      42000,
+      null,
+      null
+     ]
+    }
+   ]
+  },
+  "船橋市": {
+   "level": "中核市",
+   "pref": "千葉県",
+   "source": "https://www.city.funabashi.lg.jp/kenkou/fukushi/012/p048334.html",
+   "rows": [
+    {
+     "kyuchi": null,
+     "yen": [
+      43000,
+      52000,
+      56000,
+      null,
+      null
+     ]
+    }
+   ]
+  },
+  "西宮市": {
+   "level": "中核市",
+   "pref": "兵庫県",
+   "source": "https://www.nishi.or.jp/kenko/shakaifukushi/seikatsuhogo/juukyokakuhokakudai.html",
+   "rows": [
+    {
+     "kyuchi": null,
+     "yen": [
+      42500,
+      51000,
+      55300,
+      null,
+      null
+     ]
+    }
+   ]
+  },
+  "豊中市": {
+   "level": "中核市",
+   "pref": "大阪府",
+   "source": "https://www.city.toyonaka.osaka.jp/kurashi/roudou/kurashi_topix/jyuukyo.html",
+   "rows": [
+    {
+     "kyuchi": null,
+     "yen": [
+      42000,
+      50000,
+      55000,
+      59000,
+      66000
+     ]
+    }
+   ]
+  },
+  "越谷市": {
+   "level": "中核市",
+   "pref": "埼玉県",
+   "source": "https://www.city.koshigaya.saitama.jp/kurashi_shisei/fukushi/syakaihukusi/komaru/juukyokakuho.html",
+   "rows": [
+    {
+     "kyuchi": null,
+     "yen": [
+      43000,
+      52000,
+      56000,
+      null,
+      null
+     ]
+    }
+   ]
+  },
+  "那覇市": {
+   "level": "中核市",
+   "pref": "沖縄県",
+   "source": "https://www.city.naha.okinawa.jp/_res/projects/default_project/_page_/001/003/448/20260710_tenkyo.pdf",
+   "rows": [
+    {
+     "kyuchi": null,
+     "yen": [
+      32000,
+      38000,
+      41800,
+      45000,
+      50000
+     ]
+    }
+   ]
+  },
+  "郡山市": {
+   "level": "中核市",
+   "pref": "福島県",
+   "source": "https://www.city.koriyama.lg.jp/soshiki/63/164083.html",
+   "rows": [
+    {
+     "kyuchi": null,
+     "yen": [
+      30000,
+      36000,
+      39000,
+      42000,
+      47000
+     ]
+    }
+   ]
+  },
+  "金沢市": {
+   "level": "中核市",
+   "pref": "石川県",
+   "source": "https://www4.city.kanazawa.lg.jp/material/files/group/50/20260701_jukyokakuho-goannai.pdf",
+   "rows": [
+    {
+     "kyuchi": null,
+     "yen": [
+      33000,
+      40000,
+      43000,
+      46000,
+      51000
+     ]
+    }
+   ]
+  },
+  "高松市": {
+   "level": "中核市",
+   "pref": "香川県",
+   "source": "https://www.city.takamatsu.kagawa.jp/smph/kurashi/kenkou/seikatsuhogo/jiritsushien.html",
+   "rows": [
+    {
+     "kyuchi": null,
+     "yen": [
+      37000,
+      44000,
+      48000,
+      null,
+      null
+     ]
+    }
+   ]
+  },
+  "高槻市": {
+   "level": "中核市",
+   "pref": "大阪府",
+   "source": "https://www.city.takatsuki.osaka.jp/soshiki/35/142378.html",
+   "rows": [
+    {
+     "kyuchi": null,
+     "yen": [
+      39000,
+      47000,
+      51000,
+      null,
+      null
+     ]
+    }
+   ]
+  },
+  "高知市": {
+   "level": "中核市",
+   "pref": "高知県",
+   "source": "https://www.city.kochi.kochi.jp/soshiki/30/234.html",
    "rows": [
     {
      "kyuchi": null,

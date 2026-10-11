@@ -41,6 +41,7 @@ import openpyxl
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 KY = os.path.join(ROOT, "data", "kyuchi.json")
 JF = os.path.join(ROOT, "data", "jutaku-fujo.json")
+JFT = os.path.join(ROOT, "data", "jutaku-fujo-targets.json")
 MUNI = os.path.join(ROOT, ".cache", "hogo-shinsei", "muni-code.xlsx")
 BUKKA = os.path.join(ROOT, ".cache", "bukka", "000040286464.xlsx")
 DENKI = os.path.join(ROOT, "..", "solar-bench", "data", "kakei-denki.json")
@@ -130,6 +131,19 @@ def main():
                 d[k] = {"yen": row["yen"], "src": row.get("via") or v.get("source")}
         rent[org] = {"level": v["level"], "pref": v["pref"], "k": d}
 
+    # ★当て先（2026-10-11）。指定都市・中核市は自分の表だけを使い、県の表で代用しない（市の額は県と違う＝千葉市と千葉県）。
+    #   前は「市の額が無ければ県の額」にしていて、まだ読めていない中核市に県の級地の額が出ていた
+    #   （hikazei-city.mjs の jutakuOf は前から代用していなかった＝同じ判定が2か所でずれていた）。
+    #   名前だけで引くと別の県の同名の市に当たるので、県も合っているときだけ市の表を使う。
+    majors = {(t["pref"], t["name"]) for t in json.load(open(JFT, encoding="utf-8"))["targets"] if t["level"] != "都道府県"}
+    def rent_org(pref, city):
+        own = rent.get(city)
+        if own and own["pref"] == pref and own["level"] != "都道府県":
+            return city
+        if (pref, city) in majors:
+            return None
+        return pref
+
     # 住宅扶助の額は重複が多い（大阪市・京都市・神戸市が同じ額）ので番号で持つ。
     # ★出典は額といっしょにまとめてはいけない。まとめると、大阪市の欄に
     #   「京都市の公表値」と出る（実際にそう出た）。**出典は自治体ごとに別で持つ。**
@@ -153,7 +167,7 @@ def main():
     for code, pref, city in munis:
         k6 = kyuchi_of(ky, pref, city)
         k3 = k6.split("-")[0]
-        src_org = city if city in rent else pref
+        src_org = rent_org(pref, city)
         hit = rent.get(src_org, {}).get("k", {}).get(k3)
         rk = rent_key(hit["yen"]) if hit else -1
         sk = src_key(src_org, hit["src"]) if hit else -1
@@ -186,7 +200,7 @@ def main():
             continue
         k6 = kyuchi_of(ky, pref, "千代田区" if city == "東京都区部" else city)
         ki = KYUCHI6.index(k6)
-        org = city if city in rent else pref
+        org = rent_org(pref, city)
         if city == "東京都区部":
             org = "東京都"
         hit = rent.get(org, {}).get("k", {}).get(k6.split("-")[0])
