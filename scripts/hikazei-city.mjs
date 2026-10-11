@@ -325,8 +325,10 @@ const kokuhoSection = (r, Ls) => {
   <p>国保に入っている世帯は、前の年の所得が少ないと、保険料のうち人数と世帯にかかる部分（<strong>均等割・平等割</strong>）が7割・5割・2割軽くなります。線は国の政令で決まっていて<strong>全国共通</strong>、申請はいりません。${esc(KG.nendo)}（${esc(KG.years)}の保険料）は${esc(KG.incomeYear)}で決まります。</p>
   <p>${vs}</p>
   ${kokuhoLines()}`
+  // ★2026-10-11 載せている市区町村をここで列挙すると、市を1つ足すたびに1,600枚超が書き換わり sitemap の lastmod が一斉に動く
+  //   （福岡市を足したときに1,657枚が動いた）。列挙は入口（/hikazei/）の #kokuho-hani の1か所にだけ置き、ここはそこへ結ぶ。
   if (!rs) return `${head}
-  <p class="mini-note">${esc(r.city)}の国保料の年額（料率を使った計算）は、まだ載せていません。料率を公式ページで確かめた市区町村から順に足しています（いまは${esc(COVERED)}）。</p>`
+  <p class="mini-note">${esc(r.city)}の国保料の年額（料率を使った計算）は、まだ載せていません。料率を公式ページで確かめた市区町村から順に足しています（載せている市区町村は<a href="../../hikazei/#kokuho-hani">こちら</a>）。</p>`
   const zero = kAnnual(rs, [{ age: 45 }]), zeroFull = kAnnual(rs, [{ age: 45 }], { lv: 0 })
   const kaigo0 = zero.parts.find((p) => p.id === 'kaigo').yen
   const cliff = (x) => kAnnual(rs, [{ age: 45, sal: x + 1 }]).total - kAnnual(rs, [{ age: 45, sal: x }]).total
@@ -577,7 +579,7 @@ ${grid}
   <h2 id="kokuho">国民健康保険（国保）が7割・5割・2割軽くなる年収（全国共通・${esc(KG.nendo)}）</h2>
   <p>国保の保険料のうち人数と世帯にかかる部分（均等割・平等割）は、前の年の所得が少ないと7割・5割・2割軽くなります。この線は国の政令で決まっていて全国共通です。住民税の非課税の線とは別の物差しで、たとえば給与だけの単身は、1級地で住民税が非課税になるのは${man(STDLINES['1'][0].sal8)}以下ですが、国保の7割軽減は${man(K7SAL)}以下です。</p>
   ${kokuhoLines()}
-  <p>国保料の年額の目安は、料率を公式ページで確かめた市区町村のページに載せています（いまは${esc(COVERED)}）。${TK.length ? `東京都は区市ごとに料率が違うので、<a href="${up}hikazei/kokuho-tokyo/">${TK.length}区市の年額を同じ世帯で並べた比較</a>も作りました。${esc(KG.nendo)}から国保に加わった子ども・子育て支援金分（いわゆる「独身税」）は、<a href="${up}hikazei/kodomo-shienkin/">区市町村ごとの額と会社員の額</a>にまとめています。` : ''}</p>
+  <p id="kokuho-hani">国保料の年額の目安は、料率を公式ページで確かめた市区町村のページに載せています（いまは${esc(COVERED)}）。${TK.length ? `東京都は区市ごとに料率が違うので、<a href="${up}hikazei/kokuho-tokyo/">${TK.length}区市の年額を同じ世帯で並べた比較</a>も作りました。${esc(KG.nendo)}から国保に加わった子ども・子育て支援金分（いわゆる「独身税」）は、<a href="${up}hikazei/kodomo-shienkin/">区市町村ごとの額と会社員の額</a>にまとめています。` : ''}</p>
   <h2>都道府県から探す</h2>
   <ul class="links">
 ${prefLinks}
