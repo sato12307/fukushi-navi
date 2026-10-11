@@ -21,6 +21,11 @@
      "kyuchi": "2級地",
      "city": "四日市市",
      "url": "https://www.city.yokkaichi.lg.jp/www/contents/1761091550850/files/202607jyukyokakuhogoannai.pdf"
+    },
+    {
+     "kyuchi": "3級地",
+     "city": "伊賀市",
+     "url": "https://www.city.iga.lg.jp/0000007629.html"
     }
    ]
   },
@@ -45,6 +50,16 @@
      "kyuchi": "1級地",
      "city": "宇治市",
      "url": "https://www.city.uji.kyoto.jp/soshiki/70/26554.html"
+    },
+    {
+     "kyuchi": "2級地",
+     "city": "八幡市",
+     "url": "https://www.city.yawata.kyoto.jp/0000006221.html"
+    },
+    {
+     "kyuchi": "3級地",
+     "city": "舞鶴市",
+     "url": "https://www.city.maizuru.kyoto.jp/kurashi/0000015259.html"
     }
    ]
   },
@@ -93,6 +108,16 @@
      "kyuchi": "1級地",
      "city": "宝塚市",
      "url": "https://www.city.takarazuka.hyogo.jp/1060682/1060706/seikatsushien/1051449/1059912.html"
+    },
+    {
+     "kyuchi": "3級地",
+     "city": "豊岡市",
+     "url": "https://www.city.toyooka.lg.jp/_res/projects/default_project/_page_/001/011/166/goannai202304.pdf"
+    },
+    {
+     "kyuchi": "3級地",
+     "city": "赤穂市",
+     "url": "https://www.city.ako.lg.jp/kenkou/ikigai_fukushi/konnkyuusya.html"
     }
    ]
   },
@@ -119,6 +144,11 @@
      "kyuchi": "3級地",
      "city": "増毛町",
      "url": "https://www.rumoi.pref.hokkaido.lg.jp/hk/syf/129011.html"
+    },
+    {
+     "kyuchi": "2級地",
+     "city": "釧路市",
+     "url": "https://www.city.kushiro.lg.jp/kenfuku/fukushi/1005014/1005016.html"
     }
    ]
   },
@@ -150,6 +180,11 @@
      "kyuchi": "1級地",
      "city": "市川市",
      "url": "https://www.city.ichikawa.lg.jp/page/3823.html"
+    },
+    {
+     "kyuchi": "2級地",
+     "city": "野田市",
+     "url": "https://www.city.noda.chiba.jp/kurashi/seikatsu/kurashi/1025835.html"
     }
    ]
   },
@@ -157,13 +192,20 @@
    "name": "和歌山県",
    "level": "都道府県",
    "pref": "和歌山県",
-   "status": "未調査",
+   "status": "A",
    "note": null,
-   "checked": null,
+   "checked": "2026-10-11",
    "urls": [],
-   "picked": null,
+   "picked": "県内の市の公表ページから（各行の via を参照）",
    "kyuchi_groups": [
     "3級地"
+   ],
+   "helpers": [
+    {
+     "kyuchi": "3級地",
+     "city": "海南市",
+     "url": "https://www.city.kainan.lg.jp/kakubusho/kurashibu/shakaifukushika/oshirase/seikatukonkyuusyaziritusienseido/1447311558575.html"
+    }
    ]
   },
   {
@@ -187,11 +229,11 @@
    "name": "大分県",
    "level": "都道府県",
    "pref": "大分県",
-   "status": "B",
-   "note": "421faa43.html:限度額の表が見つからない",
+   "status": "A",
+   "note": null,
    "checked": "2026-10-11",
    "urls": [],
-   "picked": null,
+   "picked": "県内の市の公表ページから（各行の via を参照）",
    "kyuchi_groups": [
     "2級地",
     "3級地"
@@ -201,6 +243,11 @@
      "kyuchi": "2級地",
      "city": "別府市",
      "url": "https://www.city.beppu.oita.jp/seikatu/fukusi/konkyuu/konkyujiritu.html"
+    },
+    {
+     "kyuchi": "3級地",
+     "city": "中津市",
+     "url": "https://www.city-nakatsu.jp/doc/2020041400063/"
     }
    ]
   },
@@ -225,6 +272,21 @@
      "kyuchi": "1級地",
      "city": "茨木市",
      "url": "https://www.city.ibaraki.osaka.jp/kikou/kenkof/fukushiseisakuka/menu/seikatsu_shien/1434352823652.html"
+    },
+    {
+     "kyuchi": "2級地",
+     "city": "泉佐野市",
+     "url": "https://www.city.izumisano.lg.jp/kakuka/kenkou/shogai/menu/konkyu-main/15516.html"
+    },
+    {
+     "kyuchi": "3級地",
+     "city": "阪南市",
+     "url": "https://www.city.hannan.lg.jp/kakuka/fukushi/seikatsu_s/seikatsukonkyuu/1587792564301.html"
+    },
+    {
+     "kyuchi": "3級地",
+     "city": "阪南市",
+     "url": "https://www.city.hannan.lg.jp/material/files/group/15/5jukyokakuho.pdf"
     }
    ]
   },
@@ -232,13 +294,13 @@
    "name": "奈良県",
    "level": "都道府県",
    "pref": "奈良県",
-   "status": "B",
-   "note": "22b2ae20.html:限度額の表が見つからない; acc30c4a.html:限度額の表が見つからない",
+   "status": "A",
+   "note": null,
    "checked": "2026-10-11",
    "urls": [
     "https://www.pref.nara.lg.jp/n063/52049.html"
    ],
-   "picked": null,
+   "picked": "県内の市の公表ページから（各行の via を参照）",
    "kyuchi_groups": [
     "2級地",
     "3級地"
@@ -248,6 +310,11 @@
      "kyuchi": "2級地",
      "city": "橿原市",
      "url": "https://www.city.kashihara.nara.jp/soshiki/1034/gyomu/3/1204.html"
+    },
+    {
+     "kyuchi": "2級地",
+     "city": "生駒市",
+     "url": "https://www.city.ikoma.lg.jp/0000024709.html"
     }
    ]
   },
@@ -255,15 +322,15 @@
    "name": "宮城県",
    "level": "都道府県",
    "pref": "宮城県",
-   "status": "B",
-   "note": "03e42edc.html:限度額の表が見つからない; 0e7eef90.html:生活保護の書類ではない; 0f45455d.html:限度額の表が見つからない; 11d48ae9.html:限度額の表が見つからない; 13430301.html:限度額の表が見つからない; 2439fdf9.html:限度額の表が見つからない; 3142e33f.html:限度額の表が見つからない; 347b3",
+   "status": "A",
+   "note": null,
    "checked": "2026-10-11",
    "urls": [
     "https://www.pref.miyagi.jp/soshiki/ks-health/seiho03.html",
     "https://www.pref.miyagi.jp/soshiki/syahuku/jyoho5-2.html",
     "https://www.pref.miyagi.jp/soshiki/syahuku/jyukyokakuho.html"
    ],
-   "picked": null,
+   "picked": "県内の市の公表ページから（各行の via を参照）",
    "kyuchi_groups": [
     "2級地",
     "3級地"
@@ -273,6 +340,16 @@
      "kyuchi": "2級地",
      "city": "名取市",
      "url": "https://www.city.natori.miyagi.jp/page/3833.html"
+    },
+    {
+     "kyuchi": "3級地",
+     "city": "石巻市",
+     "url": "https://www.city.ishinomaki.lg.jp/cont/10403000/1464/20210108zyukyokakuho.html"
+    },
+    {
+     "kyuchi": "2級地",
+     "city": "多賀城市",
+     "url": "https://www.city.tagajo.miyagi.jp/sien/juukyo.html"
     }
    ]
   },
@@ -281,7 +358,7 @@
    "level": "都道府県",
    "pref": "宮崎県",
    "status": "B",
-   "note": "キャッシュが無い（fetch がまだ）",
+   "note": "023127ea.html:限度額の表が見つからない; 7b0cf38c.html:限度額の表が見つからない",
    "checked": "2026-10-11",
    "urls": [
     "http://www.pref.miyazaki.lg.jp/mina-terasu/juukyokakuho.html",
@@ -290,6 +367,18 @@
    "picked": null,
    "kyuchi_groups": [
     "3級地"
+   ],
+   "helpers": [
+    {
+     "kyuchi": "3級地",
+     "city": "都城市",
+     "url": "https://www.city.miyakonojo.miyazaki.jp/soshiki/34/57106.html"
+    },
+    {
+     "kyuchi": "3級地",
+     "city": "延岡市",
+     "url": "https://www.city.nobeoka.miyazaki.jp/soshiki/29/2704.html"
+    }
    ]
   },
   {
@@ -338,13 +427,13 @@
    "name": "山形県",
    "level": "都道府県",
    "pref": "山形県",
-   "status": "B",
-   "note": "03aedc53.html:限度額の表が見つからない; 0ac6f3bd.html:限度額の表が見つからない; 22f61a3d.html:限度額の表が見つからない; 2c36966c.html:限度額の表が見つからない; 391a715c.html:生活保護の書類ではない; 46b244bc.html:限度額の表が見つからない; 4f01696e.html:限度額の表が見つからない; 5ea68",
+   "status": "A",
+   "note": null,
    "checked": "2026-10-11",
    "urls": [
     "https://www.pref.yamagata.jp/090014/kenfuku/fukushi/seikatsuhogo/jiritsushien.html"
    ],
-   "picked": null,
+   "picked": "県内の市の公表ページから（各行の via を参照）",
    "kyuchi_groups": [
     "3級地"
    ],
@@ -358,6 +447,11 @@
      "kyuchi": "3級地",
      "city": "米沢市",
      "url": "https://www.city.yonezawa.yamagata.jp/2807.html"
+    },
+    {
+     "kyuchi": "3級地",
+     "city": "鶴岡市",
+     "url": "https://www.city.tsuruoka.lg.jp/kenko/seikatsuhogo/konkyusya/fukushi01zutakukyuf.html"
     }
    ]
   },
@@ -381,7 +475,7 @@
    "level": "都道府県",
    "pref": "岐阜県",
    "status": "B",
-   "note": "7da79cad.html:限度額の表が見つからない",
+   "note": "7213e33c.html:限度額の表が見つからない; 7da79cad.html:限度額の表が見つからない",
    "checked": "2026-10-11",
    "urls": [
     "https://www.pref.gifu.lg.jp/page/13214.html"
@@ -396,6 +490,11 @@
      "kyuchi": "2級地",
      "city": "大垣市",
      "url": "https://www.city.ogaki.lg.jp/cmsfiles/contents/0000049/49746/zyutakukakuhokyufukin.pdf"
+    },
+    {
+     "kyuchi": "3級地",
+     "city": "高山市",
+     "url": "https://www.city.takayama.lg.jp/kurashi/1000017/1004896/1012185.html"
     }
    ]
   },
@@ -403,17 +502,24 @@
    "name": "岡山県",
    "level": "都道府県",
    "pref": "岡山県",
-   "status": "B",
-   "note": "0ed9a208.html:限度額の表が見つからない; 1782aba3.html:生活保護の書類ではない; 1af99e94.html:生活保護の書類ではない; 1bcd84ea.html:生活保護の書類ではない; 31b3d91a.html:生活保護の書類ではない; 439edcbb.html:限度額の表が見つからない; 70f8fabb.html:生活保護の書類ではない; 7db316ce.",
+   "status": "A",
+   "note": null,
    "checked": "2026-10-11",
    "urls": [
     "https://www.pref.okayama.jp/page/detail-54694.html",
     "https://www.pref.okayama.jp/uploaded/life/1042760_10090339_misc.pdf"
    ],
-   "picked": null,
+   "picked": "県内の市の公表ページから（各行の via を参照）",
    "kyuchi_groups": [
     "2級地",
     "3級地"
+   ],
+   "helpers": [
+    {
+     "kyuchi": "3級地",
+     "city": "笠岡市",
+     "url": "https://www.city.kasaoka.okayama.jp/soshiki/20/47482.html"
+    }
    ]
   },
   {
@@ -436,7 +542,7 @@
    "level": "都道府県",
    "pref": "島根県",
    "status": "B",
-   "note": "26b680b9.pdf:限度額の表が見つからない; 3aa8a747.html:限度額の表が見つからない",
+   "note": "26b680b9.pdf:限度額の表が見つからない; 3aa8a747.html:限度額の表が見つからない; 422a2023.html:限度額の表が見つからない",
    "checked": "2026-10-11",
    "urls": [
     "https://www.pref.shimane.lg.jp/medical/fukushi/chiiki/shien/",
@@ -445,17 +551,24 @@
    "picked": null,
    "kyuchi_groups": [
     "3級地"
+   ],
+   "helpers": [
+    {
+     "kyuchi": "3級地",
+     "city": "浜田市",
+     "url": "https://www.city.hamada.shimane.jp/www/contents/1591227940660/index.html"
+    }
    ]
   },
   {
    "name": "広島県",
    "level": "都道府県",
    "pref": "広島県",
-   "status": "B",
-   "note": "キャッシュが無い（fetch がまだ）",
+   "status": "A",
+   "note": null,
    "checked": "2026-10-11",
    "urls": [],
-   "picked": null,
+   "picked": "県内の市の公表ページから（各行の via を参照）",
    "kyuchi_groups": [
     "2級地",
     "3級地"
@@ -465,6 +578,16 @@
      "kyuchi": "1級地",
      "city": "府中町",
      "url": "https://www.town.fuchu.hiroshima.jp/site/korona/22986.html"
+    },
+    {
+     "kyuchi": "3級地",
+     "city": "竹原市",
+     "url": "https://www.city.takehara.lg.jp/soshikikarasagasu/shakaifukushika/gyomuannai/7/1477.html"
+    },
+    {
+     "kyuchi": "2級地",
+     "city": "三原市",
+     "url": "https://www.city.mihara.hiroshima.jp/soshiki/14/182000.html"
     }
    ]
   },
@@ -473,7 +596,7 @@
    "level": "都道府県",
    "pref": "徳島県",
    "status": "B",
-   "note": "c54f116a.html:限度額の表が見つからない",
+   "note": "88e07adb.pdf:限度額の表が見つからない; c54f116a.html:限度額の表が見つからない",
    "checked": "2026-10-11",
    "urls": [
     "https://www.pref.tokushima.lg.jp/ippannokata/kenko/chiikifukushi/7215727"
@@ -482,6 +605,18 @@
    "kyuchi_groups": [
     "2級地",
     "3級地"
+   ],
+   "helpers": [
+    {
+     "kyuchi": "3級地",
+     "city": "鳴門市",
+     "url": "https://www.city.naruto.lg.jp/docs/2025061900012/file_contents/20260501.pdf"
+    },
+    {
+     "kyuchi": "2級地",
+     "city": "徳島市",
+     "url": "https://www.city.tokushima.tokushima.jp/smph/kurashi/soudan/jukyo_kakuho.html"
+    }
    ]
   },
   {
@@ -607,26 +742,33 @@
    "name": "沖縄県",
    "level": "都道府県",
    "pref": "沖縄県",
-   "status": "B",
-   "note": "815ced50.html:限度額の表が見つからない",
+   "status": "A",
+   "note": null,
    "checked": "2026-10-11",
    "urls": [
     "https://www.pref.okinawa.lg.jp/kyoiku/seikatufukushi/1007920/1007903.html"
    ],
-   "picked": null,
+   "picked": "県内の市の公表ページから（各行の via を参照）",
    "kyuchi_groups": [
     "3級地"
+   ],
+   "helpers": [
+    {
+     "kyuchi": "3級地",
+     "city": "宜野湾市",
+     "url": "https://www.city.ginowan.lg.jp/soshiki/fukushi/6/1/3/6280.html"
+    }
    ]
   },
   {
    "name": "滋賀県",
    "level": "都道府県",
    "pref": "滋賀県",
-   "status": "B",
-   "note": "58f9acb8.html:生活保護の書類ではない",
+   "status": "A",
+   "note": null,
    "checked": "2026-10-11",
    "urls": [],
-   "picked": null,
+   "picked": "県内の市の公表ページから（各行の via を参照）",
    "kyuchi_groups": [
     "2級地",
     "3級地"
@@ -636,6 +778,11 @@
      "kyuchi": "3級地",
      "city": "甲賀市",
      "url": "https://www.city.koka.lg.jp/secure/23469/siori0703.pdf"
+    },
+    {
+     "kyuchi": "3級地",
+     "city": "彦根市",
+     "url": "https://www.city.hikone.lg.jp/kakuka/fukushi_hoken/5/2/3/3/13414.html"
     }
    ]
   },
@@ -667,7 +814,7 @@
    "level": "都道府県",
    "pref": "石川県",
    "status": "B",
-   "note": "635f8e7e.html:限度額の表が見つからない",
+   "note": "635f8e7e.html:限度額の表が見つからない; 8b9dac64.html:限度額の表が見つからない",
    "checked": "2026-10-11",
    "urls": [
     "https://www.pref.ishikawa.lg.jp/kousei/safetynet/zyuukyokakuho.html"
@@ -676,19 +823,26 @@
    "kyuchi_groups": [
     "2級地",
     "3級地"
+   ],
+   "helpers": [
+    {
+     "kyuchi": "3級地",
+     "city": "加賀市",
+     "url": "https://www.city.kaga.ishikawa.jp/soshiki/kenkouhukusi/soudanshien/2405.html"
+    }
    ]
   },
   {
    "name": "神奈川県",
    "level": "都道府県",
    "pref": "神奈川県",
-   "status": "B",
-   "note": "8f1b2b8a.html:限度額の表が見つからない; d2f52568.html:限度額の表が見つからない",
+   "status": "A",
+   "note": null,
    "checked": "2026-10-11",
    "urls": [
     "https://www.pref.kanagawa.jp/docs/r6w/konkyu/jukyokakuhokyufukin.html"
    ],
-   "picked": null,
+   "picked": "県内の市の公表ページから（各行の via を参照）",
    "kyuchi_groups": [
     "1級地",
     "2級地",
@@ -699,6 +853,16 @@
      "kyuchi": "1級地",
      "city": "藤沢市",
      "url": "https://www.city.fujisawa.kanagawa.jp/koreifu/konkyu/sumaisoudan/sumaisoudan_keizaiteki.html"
+    },
+    {
+     "kyuchi": "1級地",
+     "city": "平塚市",
+     "url": "https://www.city.hiratsuka.kanagawa.jp/fukushi/page-c_00292.html"
+    },
+    {
+     "kyuchi": "2級地",
+     "city": "伊勢原市",
+     "url": "https://www.city.isehara.kanagawa.jp/docs/2018061200015/"
     }
    ]
   },
@@ -706,13 +870,20 @@
    "name": "福井県",
    "level": "都道府県",
    "pref": "福井県",
-   "status": "未調査",
+   "status": "A",
    "note": null,
-   "checked": null,
+   "checked": "2026-10-11",
    "urls": [],
-   "picked": null,
+   "picked": "県内の市の公表ページから（各行の via を参照）",
    "kyuchi_groups": [
     "3級地"
+   ],
+   "helpers": [
+    {
+     "kyuchi": "3級地",
+     "city": "敦賀市",
+     "url": "https://www.city.tsuruga.lg.jp/page/1573.html"
+    }
    ]
   },
   {
@@ -720,7 +891,7 @@
    "level": "都道府県",
    "pref": "福岡県",
    "status": "B",
-   "note": "16015b79.pdf:限度額の表が見つからない; 2135a03d.html:限度額の表が見つからない; 222c403f.pdf:限度額の表が見つからない; 2a0495cc.html:限度額の表が見つからない; 4d772923.html:限度額の表が見つからない; 62407bda.html:生活保護の書類ではない; 6c1445cc.html:生活保護の書類ではない; 8b7f7a63",
+   "note": "16015b79.pdf:限度額の表が見つからない; 2135a03d.html:限度額の表が見つからない; 222c403f.pdf:限度額の表が見つからない; 2a0495cc.html:限度額の表が見つからない; 4d772923.html:限度額の表が見つからない; 62407bda.html:生活保護の書類ではない; 6c1445cc.html:生活保護の書類ではない; 7bf35745",
    "checked": "2026-10-11",
    "urls": [
     "https://www.pref.fukuoka.lg.jp/contents/jyukyokakuho.html"
@@ -729,6 +900,23 @@
    "kyuchi_groups": [
     "2級地",
     "3級地"
+   ],
+   "helpers": [
+    {
+     "kyuchi": "2級地",
+     "city": "大牟田市",
+     "url": "https://www.city.omuta.lg.jp/dynamic/faq2/pub/detail.aspx?c_id=44&id=449&pg=1&mst=100"
+    },
+    {
+     "kyuchi": "3級地",
+     "city": "八女市",
+     "url": "https://www.city.yame.fukuoka.jp/soshiki/8/5/fukuso/1587345431685.html"
+    },
+    {
+     "kyuchi": "2級地",
+     "city": "直方市",
+     "url": "https://www.city.nogata.fukuoka.jp/kenko/_1208/kyufukin_copy_copy_2_copy/jukyokakuho.html"
+    }
    ]
   },
   {
@@ -796,6 +984,11 @@
      "kyuchi": "2級地",
      "city": "桐生市",
      "url": "https://www.city.kiryu.lg.jp/_res/projects/default_project/_page_/001/023/895/2.pdf"
+    },
+    {
+     "kyuchi": "3級地",
+     "city": "伊勢崎市",
+     "url": "https://www.city.isesaki.lg.jp/iryo_kenko_fukushi/seikatsufukushi/17102.html"
     }
    ]
   },
@@ -804,7 +997,7 @@
    "level": "都道府県",
    "pref": "茨城県",
    "status": "B",
-   "note": "279564d0.html:生活保護の書類ではない",
+   "note": "279564d0.html:生活保護の書類ではない; 5ea792e9.html:限度額の表が見つからない",
    "checked": "2026-10-11",
    "urls": [
     "https://www.pref.ibaraki.jp/hokenfukushi/fukushi/hogo/seikatsuhogoukeru.html",
@@ -814,6 +1007,18 @@
    "kyuchi_groups": [
     "2級地",
     "3級地"
+   ],
+   "helpers": [
+    {
+     "kyuchi": "2級地",
+     "city": "土浦市",
+     "url": "https://www.city.tsuchiura.lg.jp/kenko-fukushi-iryo/kenko-iryo/yobosesshu/covid19/news/seikatsushien-keizaitaisaku/shiminnominasama/syunyugensho-sitsugyo/page013408.html"
+    },
+    {
+     "kyuchi": "3級地",
+     "city": "龍ケ崎市",
+     "url": "https://www.city.ryugasaki.ibaraki.jp/fukushi/seikatsu_shien/jukyokyufu.html"
+    }
    ]
   },
   {
@@ -841,14 +1046,26 @@
    "name": "長野県",
    "level": "都道府県",
    "pref": "長野県",
-   "status": "未調査",
+   "status": "A",
    "note": null,
-   "checked": null,
+   "checked": "2026-10-11",
    "urls": [],
-   "picked": null,
+   "picked": "県内の市の公表ページから（各行の via を参照）",
    "kyuchi_groups": [
     "2級地",
     "3級地"
+   ],
+   "helpers": [
+    {
+     "kyuchi": "3級地",
+     "city": "飯田市",
+     "url": "https://www.city.iida.lg.jp/soshiki/11/jukyokakuhokyufukin.html"
+    },
+    {
+     "kyuchi": "2級地",
+     "city": "上田市",
+     "url": "https://www.city.ueda.nagano.jp/soshiki/fukusi/2094.html"
+    }
    ]
   },
   {
@@ -886,6 +1103,11 @@
      "kyuchi": "2級地",
      "city": "沼津市",
      "url": "https://www.city.numazu.shizuoka.jp/kurashi/fukushi/seikatsu/jyukyokakuho1.htm"
+    },
+    {
+     "kyuchi": "3級地",
+     "city": "富士宮市",
+     "url": "https://www.city.fujinomiya.lg.jp/1035300000/p001590.html"
     }
    ]
   },
@@ -919,28 +1141,42 @@
    "name": "鳥取県",
    "level": "都道府県",
    "pref": "鳥取県",
-   "status": "未調査",
+   "status": "A",
    "note": null,
-   "checked": null,
+   "checked": "2026-10-11",
    "urls": [],
-   "picked": null,
+   "picked": "県内の市の公表ページから（各行の via を参照）",
    "kyuchi_groups": [
     "3級地"
+   ],
+   "helpers": [
+    {
+     "kyuchi": "3級地",
+     "city": "米子市",
+     "url": "https://www.city.yonago.lg.jp/43076.htm"
+    }
    ]
   },
   {
    "name": "鹿児島県",
    "level": "都道府県",
    "pref": "鹿児島県",
-   "status": "B",
-   "note": "aeff9770.html:限度額の表が見つからない",
+   "status": "A",
+   "note": null,
    "checked": "2026-10-11",
    "urls": [
     "https://www.pref.kagoshima.jp/ae04/kenko-fukushi/syogai-syakai/seiho/04003003.html"
    ],
-   "picked": null,
+   "picked": "県内の市の公表ページから（各行の via を参照）",
    "kyuchi_groups": [
     "3級地"
+   ],
+   "helpers": [
+    {
+     "kyuchi": "3級地",
+     "city": "鹿屋市",
+     "url": "https://www.city.kanoya.lg.jp/hogo1/sinsei.html"
+    }
    ]
   },
   {

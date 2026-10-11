@@ -17,6 +17,17 @@
       55000
      ],
      "via": "https://www.city.yokkaichi.lg.jp/www/contents/1761091550850/files/202607jyukyokakuhogoannai.pdf"
+    },
+    {
+     "kyuchi": "3級地",
+     "yen": [
+      33400,
+      40000,
+      43400,
+      47000,
+      52100
+     ],
+     "via": "https://www.city.iga.lg.jp/0000007629.html"
     }
    ]
   },
@@ -71,6 +82,17 @@
       62000
      ],
      "via": "https://www.city.takarazuka.hyogo.jp/1060682/1060706/seikatsushien/1051449/1059912.html"
+    },
+    {
+     "kyuchi": "3級地",
+     "yen": [
+      32300,
+      39000,
+      42000,
+      45000,
+      50400
+     ],
+     "via": "https://www.city.ako.lg.jp/kenkou/ikigai_fukushi/konnkyuusya.html"
     }
    ]
   },
@@ -79,6 +101,17 @@
    "pref": "北海道",
    "source": "県内の市の公表ページから（各行の via を参照）",
    "rows": [
+    {
+     "kyuchi": "2級地",
+     "yen": [
+      30000,
+      36000,
+      39000,
+      null,
+      null
+     ],
+     "via": "https://www.city.kushiro.lg.jp/kenfuku/fukushi/1005014/1005016.html"
+    },
     {
      "kyuchi": "3級地",
      "yen": [
@@ -107,6 +140,35 @@
       71800
      ],
      "via": "https://www.city.ichikawa.lg.jp/page/3823.html"
+    },
+    {
+     "kyuchi": "2級地",
+     "yen": [
+      41000,
+      49000,
+      53000,
+      null,
+      null
+     ],
+     "via": "https://www.city.noda.chiba.jp/kurashi/seikatsu/kurashi/1025835.html"
+    }
+   ]
+  },
+  "和歌山県": {
+   "level": "都道府県",
+   "pref": "和歌山県",
+   "source": "県内の市の公表ページから（各行の via を参照）",
+   "rows": [
+    {
+     "kyuchi": "3級地",
+     "yen": [
+      32000,
+      38000,
+      42000,
+      null,
+      null
+     ],
+     "via": "https://www.city.kainan.lg.jp/kakubusho/kurashibu/shakaifukushika/oshirase/seikatukonkyuusyaziritusienseido/1447311558575.html"
     }
    ]
   },
@@ -147,6 +209,24 @@
     }
    ]
   },
+  "大分県": {
+   "level": "都道府県",
+   "pref": "大分県",
+   "source": "県内の市の公表ページから（各行の via を参照）",
+   "rows": [
+    {
+     "kyuchi": "3級地",
+     "yen": [
+      26600,
+      32000,
+      34600,
+      37000,
+      null
+     ],
+     "via": "https://www.city-nakatsu.jp/doc/2020041400063/"
+    }
+   ]
+  },
   "大阪府": {
    "level": "都道府県",
    "pref": "大阪府",
@@ -162,6 +242,53 @@
       null
      ],
      "via": "https://www.city.ibaraki.osaka.jp/kikou/kenkof/fukushiseisakuka/menu/seikatsu_shien/1434352823652.html"
+    },
+    {
+     "kyuchi": "2級地",
+     "yen": [
+      38000,
+      46000,
+      49000,
+      null,
+      null
+     ],
+     "via": "https://www.city.izumisano.lg.jp/kakuka/kenkou/shogai/menu/konkyu-main/15516.html"
+    }
+   ]
+  },
+  "奈良県": {
+   "level": "都道府県",
+   "pref": "奈良県",
+   "source": "県内の市の公表ページから（各行の via を参照）",
+   "rows": [
+    {
+     "kyuchi": "2級地",
+     "yen": [
+      36000,
+      43000,
+      47000,
+      50000,
+      56000
+     ],
+     "via": "https://www.city.ikoma.lg.jp/0000024709.html"
+    }
+   ]
+  },
+  "宮城県": {
+   "level": "都道府県",
+   "pref": "宮城県",
+   "source": "県内の市の公表ページから（各行の via を参照）",
+   "rows": [
+    {
+     "kyuchi": "2級地",
+     "yen": [
+      35000,
+      42000,
+      45100,
+      49000,
+      55000
+     ],
+     "via": "https://www.city.tagajo.miyagi.jp/sien/juukyo.html"
     }
    ]
   },
@@ -183,6 +310,42 @@
     }
    ]
   },
+  "山形県": {
+   "level": "都道府県",
+   "pref": "山形県",
+   "source": "県内の市の公表ページから（各行の via を参照）",
+   "rows": [
+    {
+     "kyuchi": "3級地",
+     "yen": [
+      35000,
+      42000,
+      46000,
+      49000,
+      55000
+     ],
+     "via": "https://www.city.tsuruoka.lg.jp/kenko/seikatsuhogo/konkyusya/fukushi01zutakukyuf.html"
+    }
+   ]
+  },
+  "岡山県": {
+   "level": "都道府県",
+   "pref": "岡山県",
+   "source": "県内の市の公表ページから（各行の via を参照）",
+   "rows": [
+    {
+     "kyuchi": "3級地",
+     "yen": [
+      31000,
+      37000,
+      40000,
+      null,
+      null
+     ],
+     "via": "https://www.city.kasaoka.okayama.jp/soshiki/20/47482.html"
+    }
+   ]
+  },
   "岩手県": {
    "level": "都道府県",
    "pref": "岩手県",
@@ -197,6 +360,24 @@
       null,
       null
      ]
+    }
+   ]
+  },
+  "広島県": {
+   "level": "都道府県",
+   "pref": "広島県",
+   "source": "県内の市の公表ページから（各行の via を参照）",
+   "rows": [
+    {
+     "kyuchi": "2級地",
+     "yen": [
+      35000,
+      42000,
+      46000,
+      49000,
+      55000
+     ],
+     "via": "https://www.city.mihara.hiroshima.jp/soshiki/14/182000.html"
     }
    ]
   },
@@ -301,6 +482,78 @@
     }
    ]
   },
+  "沖縄県": {
+   "level": "都道府県",
+   "pref": "沖縄県",
+   "source": "県内の市の公表ページから（各行の via を参照）",
+   "rows": [
+    {
+     "kyuchi": "3級地",
+     "yen": [
+      32000,
+      38000,
+      41000,
+      45000,
+      49000
+     ],
+     "via": "https://www.city.ginowan.lg.jp/soshiki/fukushi/6/1/3/6280.html"
+    }
+   ]
+  },
+  "滋賀県": {
+   "level": "都道府県",
+   "pref": "滋賀県",
+   "source": "県内の市の公表ページから（各行の via を参照）",
+   "rows": [
+    {
+     "kyuchi": "3級地",
+     "yen": [
+      35000,
+      42000,
+      46000,
+      49000,
+      55000
+     ],
+     "via": "https://www.city.hikone.lg.jp/kakuka/fukushi_hoken/5/2/3/3/13414.html"
+    }
+   ]
+  },
+  "神奈川県": {
+   "level": "都道府県",
+   "pref": "神奈川県",
+   "source": "県内の市の公表ページから（各行の via を参照）",
+   "rows": [
+    {
+     "kyuchi": "1級地",
+     "yen": [
+      41000,
+      49000,
+      53000,
+      57000,
+      64000
+     ],
+     "via": "https://www.city.hiratsuka.kanagawa.jp/fukushi/page-c_00292.html"
+    }
+   ]
+  },
+  "福井県": {
+   "level": "都道府県",
+   "pref": "福井県",
+   "source": "県内の市の公表ページから（各行の via を参照）",
+   "rows": [
+    {
+     "kyuchi": "3級地",
+     "yen": [
+      30000,
+      36000,
+      39000,
+      42000,
+      null
+     ],
+     "via": "https://www.city.tsuruga.lg.jp/page/1573.html"
+    }
+   ]
+  },
   "福島県": {
    "level": "都道府県",
    "pref": "福島県",
@@ -351,6 +604,35 @@
       47000
      ],
      "via": "https://www.city.kiryu.lg.jp/_res/projects/default_project/_page_/001/023/895/2.pdf"
+    },
+    {
+     "kyuchi": "3級地",
+     "yen": [
+      30700,
+      37000,
+      39900,
+      43000,
+      47900
+     ],
+     "via": "https://www.city.isesaki.lg.jp/iryo_kenko_fukushi/seikatsufukushi/17102.html"
+    }
+   ]
+  },
+  "長野県": {
+   "level": "都道府県",
+   "pref": "長野県",
+   "source": "県内の市の公表ページから（各行の via を参照）",
+   "rows": [
+    {
+     "kyuchi": "2級地",
+     "yen": [
+      35000,
+      42000,
+      46000,
+      49000,
+      55000
+     ],
+     "via": "https://www.city.ueda.nagano.jp/soshiki/fukusi/2094.html"
     }
    ]
   },
@@ -386,6 +668,53 @@
       null
      ],
      "via": "https://www.city.numazu.shizuoka.jp/kurashi/fukushi/seikatsu/jyukyokakuho1.htm"
+    },
+    {
+     "kyuchi": "3級地",
+     "yen": [
+      37200,
+      45000,
+      48300,
+      52000,
+      58000
+     ],
+     "via": "https://www.city.fujinomiya.lg.jp/1035300000/p001590.html"
+    }
+   ]
+  },
+  "鳥取県": {
+   "level": "都道府県",
+   "pref": "鳥取県",
+   "source": "県内の市の公表ページから（各行の via を参照）",
+   "rows": [
+    {
+     "kyuchi": "3級地",
+     "yen": [
+      34000,
+      41000,
+      44000,
+      null,
+      null
+     ],
+     "via": "https://www.city.yonago.lg.jp/43076.htm"
+    }
+   ]
+  },
+  "鹿児島県": {
+   "level": "都道府県",
+   "pref": "鹿児島県",
+   "source": "県内の市の公表ページから（各行の via を参照）",
+   "rows": [
+    {
+     "kyuchi": "3級地",
+     "yen": [
+      24200,
+      29000,
+      31500,
+      null,
+      null
+     ],
+     "via": "https://www.city.kanoya.lg.jp/hogo1/sinsei.html"
     }
    ]
   },
