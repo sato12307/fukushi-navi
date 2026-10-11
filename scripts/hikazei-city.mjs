@@ -257,7 +257,7 @@ for (const [id, rs] of Object.entries(KK.rateSets)) {
 const kodomoOf = (a) => a.parts.find((p) => p.id === 'kodomo').yen
 const annualRows = (rs, hh) => hh.rows.map((x) => {
   const a = kAnnual(rs, hh.mk(x)), tag = tagOf(hh, x)
-  return `<tr><th scope="row">${x ? manT(x) : '0円'}${tag ? `<br><small>${tag}</small>` : ''}</th><td>${lvTxt(a.lv)}</td><td class="num">${yen(a.total)}</td><td class="num">${yen(kodomoOf(a))}</td></tr>`
+  return `<tr><th scope="row">${x ? manT(x) : '0円'}${tag ? `<br><small>${tag}</small>` : ''}</th><td>${lvTxt(a.lv)}${a.genmen2 ? '<br><small>＋市の2割減免</small>' : ''}</td><td class="num">${yen(a.total)}</td><td class="num">${yen(kodomoOf(a))}</td></tr>`
 }).join('\n')
 const rateList = (rs) => rs.parts.map((p) => `<li>${esc(p.label)}：所得割 ${rateTxt(p.rate)}・均等割 ${yen(p.kintou)}${p.kintou18 ? `＋18歳以上均等割 ${yen(p.kintou18)}（18歳以上1人あたり${yen(p.kintou + p.kintou18)}・18歳未満は全額軽減）` : p.adultsOnly ? '（18歳以上1人あたり）' : ''}${p.byodo ? `・平等割 ${yen(p.byodo)}` : '・平等割なし'}・年の上限 ${man(p.cap)}${p.ages ? `（${p.ages[0]}〜${p.ages[1]}歳の人だけ）` : ''}</li>`).join('\n  ')
 // 年額を出せる範囲。東京は区市ごとに料率が違い、料率の組の名前を並べると長くなるので、都道府県ごとに数えて言う。
@@ -354,7 +354,7 @@ ${annualRows(rs, hh)}
   <p class="mini-note">使った料率（${esc(rs.nendo)}・${esc(rs.name)}）：</p>
   <ul class="mini-note">
   ${rateList(rs)}
-  ${rs.kojoNote ? `<li>${esc(rs.kojoNote)}（表の夫婦の世帯は、もう1人を税の扶養に入れているとして計算）</li>` : ''}
+  ${rs.kojoNote ? `<li>${esc(rs.kojoNote)}${rs.shotokuKojo ? '（表の夫婦の世帯は、もう1人を税の扶養に入れているとして計算）' : ''}</li>` : ''}
   </ul>
   ${taishokuLink(r)}`
 }

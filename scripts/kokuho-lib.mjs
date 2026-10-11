@@ -121,6 +121,22 @@ const floorTo = (yen, unit) => (unit ? Math.floor(yen / unit) * unit : yen)
 //     扶養家族＝住民税の申告の同一生計配偶者・扶養親族（16歳未満も含む）。★扶養の数で額が変わるので、2人以上の世帯は
 //     誰かに fuyo を書かないと止める（書き忘れて「扶養なし」の額を黙って出さない）。
 //   p.kintouKojo＝7・5・2割の軽減がかかる世帯の均等割から、その区分の被保険者1人につき引く額（名古屋市は医療分だけ2,000円）。
+//   市の独自の減免（仙台市・2026-10-11）
+//   rs.childFree＝18歳未満の人の均等割を全額減免（子育て世帯の減免。法定軽減・未就学児の軽減と合わせて10割まで）
+//   rs.genmen2＝所得が一定額以下の世帯の減免（申請不要）。2割軽減の世帯か、軽減の無い世帯で所得の合計が
+//     base[人数]＋給与所得者等の数×perWorker 未満なら、均等割・18歳以上均等割・平等割の2割相当を減免（7割・5割の世帯は対象外）。
+//     所得は軽減の判定と同じ合計で、非自発的失業の特例は外して数える（仙台市の注記）。base に無い人数は止める。
+const genmen2Of = (rs, members, lv) => {
+  const G2 = rs.genmen2
+  if (!G2) return false
+  if (lv === 7 || lv === 5) return false
+  if (lv === 2) return true
+  const n = members.length
+  if (G2.base[n] == null) throw new Error(`${rs.name}：所得が一定額以下の減免の基準が${n}人の世帯について分かりません`)
+  const plain = members.map((m) => ({ ...m, hikoji: false }))
+  const total = plain.reduce((a, m) => a + hanteiShotoku(m), 0)
+  return total < G2.base[n] + G2.perWorker * plain.filter(isWorker).length
+}
 export const annual = (rs, members, opt = {}) => {
   if (!opt.preschool && members.some((m) => m.age < 6)) throw new Error('6歳未満の子どもがいる世帯はこの計算では扱いません（未就学児の軽減）')
   const SK = rs.shotokuKojo
@@ -128,6 +144,9 @@ export const annual = (rs, members, opt = {}) => {
   if (SK && rs.round && rs.round.person) throw new Error('1人ずつ切り捨てる料率に所得割の独自控除は扱いません')
   const kojoBase = (m) => (SK ? SK.fuyo * (m.fuyo || 0) + SK.fuyoShogai * (m.fuyoShogai || 0) + (m.honnin ? SK.honnin : 0) : 0)
   const lv = opt.lv ?? keigenOf(members)
+  const g2 = !opt.noGenmen && genmen2Of(rs, members, lv)
+  //   2割相当の減免＝もとの額の2割（1円未満切り捨て）を、法定軽減のあとの額から引く（0円より下げない）
+  const off2 = (yen) => (g2 ? Math.floor((yen * 2) / 10) : 0)
   const R = rs.round || {}
   const parts = rs.parts.map((p) => {
     const inPart = p.ages ? members.filter((m) => m.age >= p.ages[0] && m.age <= p.ages[1]) : members
@@ -139,10 +158,14 @@ export const annual = (rs, members, opt = {}) => {
     //   p.preschoolFree＝未就学児の均等割の残り5割も市が軽くして0円にする区分（立川市の医療分・支援分）
     //   opt.noKintou18＝18歳以上均等割を除いた額（中野区の運営協議会の表は「18歳以上追加負担分は除く」と注記している）
     const half = (m) => m.age < 6 || (p.childHalf && m.age < 18)
-    const own = (m) => (m.age < 6 && p.preschoolFree ? 0 : half(m) ? Math.floor(cut(p.kintou, lv) / 2) : cut(p.kintou, lv))
-    const kintouOf = (m) => (payers.includes(m) ? own(m) : 0) + (p.kintou18 && m.age >= 18 && !opt.noKintou18 ? cut(p.kintou18, lv) : 0)
+    const own0 = (m) => (m.age < 6 && p.preschoolFree ? 0 : half(m) ? Math.floor(cut(p.kintou, lv) / 2) : cut(p.kintou, lv))
+    const own = (m) => (rs.childFree && m.age < 18 ? 0 : own0(m))
+    const k18 = (m) => (p.kintou18 && m.age >= 18 && !opt.noKintou18 ? cut(p.kintou18, lv) : 0)
+    const kintouOf = (m) => (payers.includes(m) ? own(m) : 0) + k18(m)
     const kintou = inPart.reduce((a, m) => a + kintouOf(m), 0)
     const byodo = p.byodo ? cut(p.byodo, lv) : 0
+    //   所得が一定額以下の減免（仙台市）の、この区分の額＝もとの均等割・18歳以上均等割・平等割の2割（減免のあとが0円を下回らない分だけ）
+    const gen = g2 ? inPart.reduce((a, m) => a + (payers.includes(m) ? Math.min(own(m), off2(p.kintou)) : 0) + (k18(m) ? Math.min(k18(m), off2(p.kintou18)) : 0), 0) + (byodo ? Math.min(byodo, off2(p.byodo)) : 0) : 0
     if (R.person && byodo) throw new Error('1人ずつ切り捨てる料率に平等割は扱いません')
     // 独自控除（名古屋市）。所得割の独自控除は人ごとにその人の所得割が上限、均等割の独自控除は軽減のある世帯だけ
     const ownWari = (m) => Math.floor((Math.max(0, shotoku(m) - G.base) * p.rate) / 100000)
@@ -151,10 +174,13 @@ export const annual = (rs, members, opt = {}) => {
     const sum = R.person
       ? inPart.reduce((a, m) => a + floorTo(Math.floor((Math.max(0, shotoku(m) - G.base) * p.rate) / 100000) + kintouOf(m), R.person), 0)
       : shotokuwari - dedWari + kintou - dedKintou + byodo
-    const yen = floorTo(Math.min(p.cap, sum), R.part)
-    return { id: p.id, label: p.label, yen, shotokuwari, kintou, byodo, capped: sum > p.cap, ...(dedWari || dedKintou ? { dedWari, dedKintou } : {}) }
+    const yen0 = floorTo(Math.min(p.cap, sum), R.part)
+    //   ★仙台市は減免を区分ごとに切り捨てたあとの額から引き、合計で10円未満を切り捨てる（目安表の40欄がこの順でだけ合う）
+    const yen = yen0 - gen
+    return { id: p.id, label: p.label, yen, shotokuwari, kintou, byodo, capped: sum > p.cap, ...(dedWari || dedKintou ? { dedWari, dedKintou } : {}), ...(gen ? { genmen: gen } : {}) }
   })
-  return { lv, total: floorTo(parts.reduce((a, p) => a + p.yen, 0), R.total), parts }
+  const sumYen = parts.reduce((a, p) => a + p.yen, 0)
+  return { lv, total: floorTo(sumYen, g2 ? rs.genmen2.round : R.total), parts, ...(g2 ? { genmen2: true } : {}) }
 }
 
 // ── 表示 ────────────────────────────────────────────────────────────────────
