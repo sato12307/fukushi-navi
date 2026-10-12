@@ -407,7 +407,7 @@ const muniPage = (r) => {
 
   // 暮らしの線
   const life = []
-  life.push(`<li><strong>生活保護の級地</strong>：${esc(r.kyuchi)}。生活保護の基準額（生活扶助・住宅扶助）もこの級地で決まります（<a href="${up}articles/seikatsuhogo-keisanki.html">生活保護の計算機</a>）。</li>`)
+  life.push(`<li><strong>生活保護の級地</strong>：${esc(r.kyuchi)}。生活保護の基準額（生活扶助・住宅扶助）もこの級地で決まります（<a href="${up}seiho/${r.code}/">${esc(r.city)}の生活保護費の目安</a>・<a href="${up}articles/seikatsuhogo-keisanki.html">生活保護の計算機</a>）。</li>`)
   const sr = seihoOf(r)
   if (sr) life.push(`<li><strong>生活扶助（単身・30歳）</strong>：月${sr.seikatsu.toLocaleString('ja-JP')}円（令和8年10月からの基準・特例加算2,500円を含む）。電気代や物価と並べた比較は<a href="${up}articles/seikatsuhogo-jisshitsu.html">生活保護費の「実質」比較</a>。</li>`)
   const jf = jutakuOf(r)

@@ -23,7 +23,7 @@ const URL = `${SITE}/articles/`
 
 // 分野ごとの並び。items＝1行ずつ（題＋説明）、groups＝地名だけを1行に並べる束（同じ型の都市別・区別の面）
 const CATS = [
-  { id: 'seikatsuhogo', name: '生活保護', items: ['articles/seikatsuhogo-keisanki.html', 'articles/seikatsuhogo-tsuika-kyufu.html', 'tsuika/', 'articles/seikatsuhogo-shinsei-jichitai.html', 'articles/seikatsuhogo-jisshitsu.html', 'articles/muryou-teigaku-shukuhakusho.html'] },
+  { id: 'seikatsuhogo', name: '生活保護', items: ['articles/seikatsuhogo-keisanki.html', 'seiho/', 'articles/seikatsuhogo-tsuika-kyufu.html', 'tsuika/', 'articles/seikatsuhogo-shinsei-jichitai.html', 'articles/seikatsuhogo-jisshitsu.html', 'articles/muryou-teigaku-shukuhakusho.html'] },
   { id: 'zei', name: '税と保険料（住民税非課税・国保・控除）', items: ['articles/juminzei-hikazei-check.html', 'hikazei/', 'mitoshi/hikazei/', 'hikazei/kokuho-tokyo/', 'hikazei/kodomo-shienkin/', 'hikazei/nenkin-ranking/', 'articles/shogaisha-kojo-tax.html', 'shogai-kojo/'] },
   { id: 'iryo', name: '医療費', items: ['articles/kougaku-ryouyouhi-2026.html', 'mitoshi/kogaku/', 'jiritsu/'] },
   { id: 'shogai', name: '障害年金・障害福祉サービス・就労', items: ['articles/shogai-nenkin-keisanki.html', 'articles/shogai-nenkin-basics.html', 'articles/shogai-nenkin-toukei.html', 'articles/shogai-service-futan.html', 'articles/shurou-ikou-koyou.html'] },
