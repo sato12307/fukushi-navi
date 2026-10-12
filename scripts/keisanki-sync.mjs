@@ -201,7 +201,9 @@ if (sA < 0 || sB < 0) die('script の中の基準額表の目印が見つかり�
 html = html.slice(0, sA) + TABLE_JS + html.slice(sB)
 
 // ── 確かめ：calc() が使う名前がそろっているか
-for (const nm of ['byN(K2, n)', 'KEIKA[Math.min(n, 10)]', 'TOUKI_AREA[prefSel.value]', 'byN(KIMATSU[k], n)', "getElementById('g-winter')", 'kisoKojo(w, false)', 'KINRO_SHINKI', 'KINRO_U20']) if (!html.includes(nm)) die(`calc() に ${nm} がありません（HTML の計算の式が古い）`)
+//   2026-10-12 基準額の計算を calc() から seihoKijun()（seiho-kijun:start〜end・/seiho/ の生成器と共有）へ切り出した。
+//   冬季加算の地区は seihoKijun が o.pref で引き、calc() は画面の都道府県を pref: prefSel.value で渡す。
+for (const nm of ['byN(K2, n)', 'KEIKA[Math.min(n, 10)]', 'TOUKI_AREA[o.pref]', 'pref: AREA ? prefSel.value : null', 'byN(KIMATSU[k], n)', '// seiho-kijun:start', '// seiho-kijun:end', "getElementById('g-winter')", 'kisoKojo(w, false)', 'KINRO_SHINKI', 'KINRO_U20']) if (!html.includes(nm)) die(`calc() に ${nm} がありません（HTML の計算の式が古い）`)
 console.log(`  勤労控除（基礎控除・1人目）${KW.map((w) => `${num(w)}→${num(kisoKojo(w, false))}`).join('・')}`)
 
 console.log(`確かめ：早見表 ${CITIES.map((x) => `${x.city}${num(x.s)}`).join('・')}`)

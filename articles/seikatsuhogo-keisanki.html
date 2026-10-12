@@ -380,7 +380,7 @@ table.fit{min-width:0;font-size:.86rem}table.fit th,table.fit td{padding:6px 5px
   </ul>
 
   <div class="callout note">
-    <p><span class="tag">あわせて読みたい</span>同じ金額でも地域によって実際に買える量は違います。<a href="seikatsuhogo-jisshitsu.html">物価と電気代で割り戻した実質の比較</a>もどうぞ（電気代の地域差は<a href="https://hatsudenbench.com/denkidai/">発電ベンチ</a>の集計）。申請が通るかどうかが気になる方は<a href="seikatsuhogo-shinsei-jichitai.html">自治体別の却下率</a>へ。住まいを失いかけて施設を紹介されたら<a href="muryou-teigaku-shukuhakusho.html">無料低額宿泊所とは（救護施設との違いと、手元に残る額）</a>へ。家賃を下げて生活を安定させるなら<a href="koei-jutaku-bairitsu.html">公営住宅の倍率データ</a>と<a href="koei-hairiyasui.html">入りやすい人の条件</a>も参考に。生活保護までは必要ないけれど税負担を軽くしたい方は<a href="juminzei-hikazei-check.html">住民税非課税の判定シミュレーター</a>、医療費が心配な方は<a href="kougaku-ryouyouhi-2026.html">高額療養費の計算機（2026年8月改正対応）</a>へ。障害のある方は<a href="shogai-nenkin-keisanki.html">障害年金の計算機</a>もどうぞ。</p>
+    <p><span class="tag">あわせて読みたい</span>住んでいる市区町村の額を世帯の形ごとに一覧で見るなら<a href="../seiho/">生活保護費の目安（全国1,741市区町村）</a>へ。同じ金額でも地域によって実際に買える量は違います。<a href="seikatsuhogo-jisshitsu.html">物価と電気代で割り戻した実質の比較</a>もどうぞ（電気代の地域差は<a href="https://hatsudenbench.com/denkidai/">発電ベンチ</a>の集計）。申請が通るかどうかが気になる方は<a href="seikatsuhogo-shinsei-jichitai.html">自治体別の却下率</a>へ。住まいを失いかけて施設を紹介されたら<a href="muryou-teigaku-shukuhakusho.html">無料低額宿泊所とは（救護施設との違いと、手元に残る額）</a>へ。家賃を下げて生活を安定させるなら<a href="koei-jutaku-bairitsu.html">公営住宅の倍率データ</a>と<a href="koei-hairiyasui.html">入りやすい人の条件</a>も参考に。生活保護までは必要ないけれど税負担を軽くしたい方は<a href="juminzei-hikazei-check.html">住民税非課税の判定シミュレーター</a>、医療費が心配な方は<a href="kougaku-ryouyouhi-2026.html">高額療養費の計算機（2026年8月改正対応）</a>へ。障害のある方は<a href="shogai-nenkin-keisanki.html">障害年金の計算機</a>もどうぞ。</p>
   </div>
 
   <h2 id="taberumono">⑤ 今日、食べるものがないとき</h2>
@@ -496,6 +496,47 @@ var CUR = { k: 0, rent: null, name: '', src: null };   // いま選ばれてい�
 
 function yen(n){ return Math.round(n).toLocaleString('ja-JP') + '円'; }
 function ageIdx(age){ for (var i=0;i<K1.length;i++){ if (age <= K1[i].max) return i; } return K1.length-1; }
+// seiho-kijun:start
+// 世帯の基準額（生活扶助・冬季加算・期末一時扶助・加算・教育扶助）を、画面に触らずに計算する。下の calc() はこれを呼ぶ。
+// ★scripts/seiho-city.mjs（市区町村ごとの生活保護費の目安 /seiho/）が、この関数をそのまま読み込んで使う（2026-10-12）。
+//   式はここ1か所だけ。直すときはここを直せば、計算機と市区町村ごとのページの両方に効く。
+//   k＝級地index（0=1級地-1〜5=3級地-2）／ages＝世帯員の年齢の配列／o.pref＝都道府県名（冬季加算の地区を引く。無ければ冬季加算0）
+//   o.shogai＝'g12'|'g3'|''（障害者加算）／o.single＝ひとり親か／o.school＝{e:小学生, j:中学生, h:高校生} の人数
+function seihoKijun(k, ages, o){
+  o = o || {};
+  var n = ages.length;
+  var kg = k < 2 ? 0 : (k < 4 ? 1 : 2); // 級地グループ(1/2/3級地)
+  // 告示の算式＝第1類の合計×逓減率＋第2類＋経過的加算。10円未満は10円に切り上げ、そのあと特例加算を1人ずつ足す
+  var k1sum = 0;
+  ages.forEach(function(a){ k1sum += K1[ageIdx(a)].v[k]; });
+  var k2 = byN(K2, n);
+  var keika = 0, kt = KEIKA[Math.min(n, 10)];
+  ages.forEach(function(a){ keika += kt[ageIdx(a)][k]; });
+  var base = Math.ceil((k1sum * TEIGEN[Math.min(n, 10) - 1] + k2 + keika) / 10) * 10;
+  var k1 = base - k2 - keika;   // 表示用（第1類×逓減率。切り上げの端数をここに含める）
+  var tokurei = TOKUREI * n;
+  var seikatsu = base + tokurei;
+  // 冬季加算（地区は都道府県で決まる・級地では変わらない）と12月の期末一時扶助
+  var area = o.pref ? (TOUKI_AREA[o.pref] || null) : null;
+  var touki = area ? byN(TOUKI[area].v, n) : 0;
+  var kimatsu = byN(KIMATSU[k], n);
+  // 加算
+  var kasan = 0, kasanParts = [];
+  if (o.shogai === 'g12'){ kasan += SHOGAI.g12[kg]; kasanParts.push(['障害者加算', SHOGAI.g12[kg]]); }
+  if (o.shogai === 'g3'){ kasan += SHOGAI.g3[kg]; kasanParts.push(['障害者加算', SHOGAI.g3[kg]]); }
+  var children = ages.filter(function(a){ return a <= 18; }).length;
+  if (o.single && children > 0){
+    var b = children === 1 ? BOSHI.c1[kg] : BOSHI.c2[kg] + Math.max(0, children - 2) * BOSHI.c3p[kg];
+    kasan += b; kasanParts.push(['母子加算', b]);
+  }
+  if (children > 0){ var jy = JIDO_YOIKU * children; kasan += jy; kasanParts.push(['児童養育加算', jy]); }
+  // 教育扶助
+  var sc = o.school || {};
+  var kyoiku = (sc.e || 0) * KYOIKU.e + (sc.j || 0) * KYOIKU.j + (sc.h || 0) * KYOIKU.h;
+  return { n: n, kg: kg, k1: k1, k2: k2, keika: keika, tokurei: tokurei, base: base, seikatsu: seikatsu,
+    area: area, touki: touki, kimatsu: kimatsu, kasan: kasan, kasanParts: kasanParts, kyoiku: kyoiku };
+}
+// seiho-kijun:end
 var seikatsuTotal = 0; // ③で使う
 
 (function(){
@@ -531,40 +572,18 @@ var seikatsuTotal = 0; // ③で使う
 
   function calc(){
     var k = AREA ? CUR.k : parseInt(kyuchiSel.value, 10);
-    var kg = k < 2 ? 0 : (k < 4 ? 1 : 2); // 級地グループ(1/2/3級地)
-
     var ages = [].map.call(list.querySelectorAll('select'), function(s){ return parseInt(s.value, 10); });
-    var n = ages.length;
 
-    // 告示の算式＝第1類の合計×逓減率＋第2類＋経過的加算。10円未満は10円に切り上げ、そのあと特例加算を1人ずつ足す
-    var k1sum = 0;
-    ages.forEach(function(a){ k1sum += K1[ageIdx(a)].v[k]; });
-    var k2 = byN(K2, n);
-    var keika = 0, kt = KEIKA[Math.min(n, 10)];
-    ages.forEach(function(a){ keika += kt[ageIdx(a)][k]; });
-    var base = Math.ceil((k1sum * TEIGEN[Math.min(n, 10) - 1] + k2 + keika) / 10) * 10;
-    var k1 = base - k2 - keika;   // 表示用（第1類×逓減率。切り上げの端数をここに含める）
-    var tokurei = TOKUREI * n;
-    var seikatsu = base + tokurei;
-
-    // 冬季加算（地区は都道府県で決まる・級地では変わらない）と12月の期末一時扶助
-    var area = AREA ? TOUKI_AREA[prefSel.value] : null;
-    var touki = area ? byN(TOUKI[area].v, n) : 0;
-    var kimatsu = byN(KIMATSU[k], n);
-
-    // 加算
-    var kasan = 0, kasanParts = [];
-    if (shogaiSel.value === 'g12'){ kasan += SHOGAI.g12[kg]; kasanParts.push('障害者加算 ' + yen(SHOGAI.g12[kg])); }
-    if (shogaiSel.value === 'g3'){ kasan += SHOGAI.g3[kg]; kasanParts.push('障害者加算 ' + yen(SHOGAI.g3[kg])); }
-    var children = ages.filter(function(a){ return a <= 18; }).length;
-    if (singleSel.value === 'yes' && children > 0){
-      var b = children === 1 ? BOSHI.c1[kg] : BOSHI.c2[kg] + Math.max(0, children - 2) * BOSHI.c3p[kg];
-      kasan += b; kasanParts.push('母子加算 ' + yen(b));
-    }
-    if (children > 0){ var jy = JIDO_YOIKU * children; kasan += jy; kasanParts.push('児童養育加算 ' + yen(jy)); }
-
-    // 教育扶助
-    var kyoiku = parseInt(se.value,10)*KYOIKU.e + parseInt(sj.value,10)*KYOIKU.j + parseInt(sh.value,10)*KYOIKU.h;
+    // 基準額の計算は seihoKijun() の1か所（上の seiho-kijun:start〜end）。ここは画面の値を渡して、答えを並べるだけ
+    var R = seihoKijun(k, ages, {
+      pref: AREA ? prefSel.value : null,
+      shogai: shogaiSel.value,
+      single: singleSel.value === 'yes',
+      school: { e: parseInt(se.value, 10), j: parseInt(sj.value, 10), h: parseInt(sh.value, 10) }
+    });
+    var n = R.n, k1 = R.k1, k2 = R.k2, keika = R.keika, tokurei = R.tokurei, seikatsu = R.seikatsu;
+    var area = R.area, touki = R.touki, kimatsu = R.kimatsu, kasan = R.kasan, kyoiku = R.kyoiku;
+    var kasanParts = R.kasanParts.map(function(p){ return p[0] + ' ' + yen(p[1]); });
 
     // 住宅扶助。台帳の額は [1人, 2人, 3〜5人, 6人, 7人以上]。
     // 6人・7人以上が空の自治体があるので、その手前の段で止める（勝手に伸ばさない）。
