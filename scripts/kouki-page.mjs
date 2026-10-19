@@ -16,27 +16,18 @@ import fs from 'node:fs'
 import path from 'node:path'
 import { ROOT, esc, num, yen, die, toolPage, writeTool } from './tool-page.mjs'
 import { CASES } from './kouki-cases.mjs'
+import { SHOTOKU_CORE } from './shotoku-core.mjs'
 
 const DRY = process.argv.includes('--dry')
 const REL = 'kouki/'
 const D = JSON.parse(fs.readFileSync(path.join(ROOT, 'data', 'kouki-hokenryo.json'), 'utf8'))
 const PREF = Object.fromEntries(D.prefs.map((p) => [p.pref, p]))
 
-// ── 計算の式（ここだけ）。ブラウザでもそのまま動く書き方にする ─────────────────────────────
-const CORE = `function koukiCalc(P, D, ps, head) {
+// ── 計算の式（ここだけ）。収入→所得は shotoku-core.mjs（児童扶養手当と共通）。ブラウザでもそのまま動く書き方にする ─────────────────────────────
+const CORE = `${SHOTOKU_CORE}
+function koukiCalc(P, D, ps, head) {
   var fl = Math.floor;
-  function kyuyoShotoku(r) { var s; if (r <= 0) return 0;
-    if (r <= 1900000) s = r - 650000;
-    else if (r < 6600000) { var a = fl(r / 4000) * 4000; s = r <= 3600000 ? fl(a * 70 / 100) - 80000 : fl(a * 80 / 100) - 440000; }
-    else if (r <= 8500000) s = fl(r * 90 / 100) - 1100000;
-    else s = r - 1950000;
-    return Math.max(0, s); }
-  function nenkinShotoku(r, other) { var s, b; if (r <= 0) return 0; b = other <= 10000000 ? 0 : other <= 20000000 ? 100000 : 200000;
-    if (r <= 1100000 - b) s = 0; else if (r < 3300000) s = r - (1100000 - b);
-    else if (r < 4100000) s = fl(r * 75 / 100) - (275000 - b); else if (r < 7700000) s = fl(r * 85 / 100) - (685000 - b);
-    else if (r < 10000000) s = fl(r * 95 / 100) - (1455000 - b); else s = r - (1955000 - b);
-    return Math.max(0, s); }
-  function shotoku(p, age65) { var ky = kyuyoShotoku(p.kyuyo || 0), sonota = p.sonota || 0, nk = age65 ? nenkinShotoku(p.nenkin || 0, ky + sonota) : 0;
+  function shotoku(p, age65) { var ky = kyuyoShotoku(p.kyuyo || 0), sonota = p.sonota || 0, nk = age65 ? nenkinShotoku(p.nenkin || 0, ky + sonota, true) : 0;
     var adj = ky > 0 && nk > 0 ? Math.max(0, Math.min(ky, 100000) + Math.min(nk, 100000) - 100000) : 0;
     var sou = nk + ky - adj + sonota;
     return { ky: ky, nk: nk, sou: sou, hantei: sou - Math.min(nk, D.nenkinTokurei),

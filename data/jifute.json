@@ -1,0 +1,23 @@
+{
+ "_note": "児童扶養手当の計算機 /teate/jido-fuyo/ の数字。原典は児童扶養手当法・同施行令（e-Gov 現行版＝令和8年政令第55号・2026-04-01 施行）と、こども家庭庁・日本年金機構の資料。手当の額は施行令第2条の2、一部支給の係数は第2条の4第3項・第4項（1千万分の1で持つ：0.0264029＝264029）、所得制限限度額は第2条の4第1項・第2項・第7項（2024年11月分から）、所得の計算は第4条、年金との調整は第6条の3〜第6条の6。scripts/teate-jifute-page.mjs が公式の計算例（神戸市・草加市・東京都中央区・吹田市）と境目の値に通して円まで合うか確かめる。2026-10-20 に写した。",
+ "checkedAt": "2026-10-20",
+ "nendo": {
+  "R8": { "label": "令和8年度（2026年4月分〜2027年3月分）", "zen": 48050, "kasan": 11350, "c1": 264029, "c2": 40719 },
+  "R7": { "label": "令和7年度（2025年4月分〜2026年3月分）", "zen": 46690, "kasan": 11030, "c1": 256619, "c2": 39568 }
+ },
+ "limit": { "zen": 690000, "ichibu": 2080000, "gimu": 2360000, "per": 380000, "rojin": 100000, "tokutei": 150000, "gimuRojin": 60000 },
+ "kojo": { "shaho": 80000, "kyuyoNenkin": 100000, "shogai": 270000, "tokubetsu": 400000, "kafu": 270000, "hitorioya": 350000, "kinro": 270000 },
+ "youikuhi": 80,
+ "shogaiKasan": { "first2": 243800, "after": 81300 },
+ "caps": [5000, 3000],
+ "shikyu": "1月・3月・5月・7月・9月・11月に、それぞれ前月までの2か月分",
+ "sources": [
+  { "name": "児童扶養手当法 e-Gov 法令検索", "url": "https://laws.e-gov.go.jp/law/336AC0000000238" },
+  { "name": "児童扶養手当法施行令（第2条の2＝手当の額・第2条の4＝所得制限と一部支給・第4条＝所得の計算・第6条の3〜第6条の6＝年金との調整）e-Gov 法令検索", "url": "https://laws.e-gov.go.jp/law/336CO0000000405" },
+  { "name": "こども家庭庁「児童扶養手当について」", "url": "https://www.cfa.go.jp/policies/hitori-oya/fuyou-teate" },
+  { "name": "こども家庭庁「障害基礎年金等を受給しているひとり親のご家庭の皆さま」", "url": "https://www.cfa.go.jp/assets/contents/node/basic_page/field_ref_resources/71de338f-5ed2-4c95-9848-3fd387d0b4d7/6ef3718a/20230401_policies_hitori-oya_fuyou-teate_02.pdf" },
+  { "name": "日本年金機構「障害基礎年金の受給要件・請求時期・年金額」（子の加算額）", "url": "https://www.nenkin.go.jp/service/jukyu/seido/shougainenkin/jukyu-yoken/20150514.html" },
+  { "name": "神戸市「児童扶養手当と公的年金給付の併給」（計算例）", "url": "https://www.city.kobe.lg.jp/a32986/kosodate/shien/family/teate/jifute/jifute-nenkin.html" },
+  { "name": "国税庁 タックスアンサー No.1410 給与所得控除・No.1600 公的年金等の課税関係", "url": "https://www.nta.go.jp/taxes/shiraberu/taxanswer/shotoku/1410.htm" }
+ ]
+}
