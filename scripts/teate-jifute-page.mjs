@@ -33,7 +33,7 @@ function jifuteCalc(D, nk, x) {
     var nkS = nenkinShotoku(x.nenkinShunyu || 0, ky + so, !!x.age65);
     var gn = ky + nkS, base = (gn > 0 ? Math.max(0, gn - K.kyuyoNenkin) : 0) + so;
     if (!yoiku) base += Math.round((x.youikuhi || 0) * D.youikuhi / 100);
-    var kj = K.shaho + K.shogai * (x.shogai || 0) + K.tokubetsu * (x.tokubetsu || 0) + (x.kinro ? K.kinro : 0) + (x.jitsugaku || 0);
+    var kj = K.shaho + K.shogai * Math.max(0, (x.shogai || 0) - (x.tokubetsu || 0)) + K.tokubetsu * (x.tokubetsu || 0) + (x.kinro ? K.kinro : 0) + (x.jitsugaku || 0);
     if (yoiku) kj += (x.kafu ? K.kafu : 0) + (x.hitorioya ? K.hitorioya : 0);
     sho = Math.max(0, base - kj);
   }
@@ -87,6 +87,7 @@ for (const c of CASES) {
   const r = jifuteCalc(D, c.nk, c.x)
   if (r.total !== c.want || (c.kubun && r.kubun !== c.kubun) || (c.sho != null && r.sho !== c.sho)) die(`${c.src} が合いません：公式 ${c.want}${c.kubun ? '・' + c.kubun : ''}${c.sho != null ? '・所得' + c.sho : ''}／計算 ${r.total}・${r.kubun}・所得${r.sho}`)
 }
+{ const r = jifuteCalc(D, 'R8', { jukyu: 'haha', kodomo: 1, kyuyo: 2000000, fuyou: 1, shogai: 1, tokubetsu: 1 }); if (r.sho !== 740000) die(`障害者控除（特別障害者1人＝40万円）の引き方が違います：${r.sho}`) }
 { // 吹田市2：老人扶養1人（48万円で数える）と特定扶養1人（53万円）の限度額＝170万円・309万円
   const r = jifuteCalc(D, 'R8', { jukyu: 'haha', kodomo: 1, shotokuGaku: 0, fuyou: 2, rojin: 1, tokutei: 1 })
   if (r.zenLim !== 1700000 || r.ichiLim !== 3090000) die(`吹田市2の限度額（170万円・309万円）と合いません：${r.zenLim}・${r.ichiLim}`)

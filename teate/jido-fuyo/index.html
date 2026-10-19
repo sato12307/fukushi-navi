@@ -285,7 +285,7 @@ function jifuteCalc(D, nk, x) {
     var nkS = nenkinShotoku(x.nenkinShunyu || 0, ky + so, !!x.age65);
     var gn = ky + nkS, base = (gn > 0 ? Math.max(0, gn - K.kyuyoNenkin) : 0) + so;
     if (!yoiku) base += Math.round((x.youikuhi || 0) * D.youikuhi / 100);
-    var kj = K.shaho + K.shogai * (x.shogai || 0) + K.tokubetsu * (x.tokubetsu || 0) + (x.kinro ? K.kinro : 0) + (x.jitsugaku || 0);
+    var kj = K.shaho + K.shogai * Math.max(0, (x.shogai || 0) - (x.tokubetsu || 0)) + K.tokubetsu * (x.tokubetsu || 0) + (x.kinro ? K.kinro : 0) + (x.jitsugaku || 0);
     if (yoiku) kj += (x.kafu ? K.kafu : 0) + (x.hitorioya ? K.hitorioya : 0);
     sho = Math.max(0, base - kj);
   }
