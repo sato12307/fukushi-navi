@@ -40,6 +40,10 @@ jobs:
       #   2026-10-11 から型の面には入れず、robots.txt で AdSense のクローラ（Mediapartners-Google）に型の面を見せない。
       - name: Stamp AdSense tag
         run: node scripts/stamp-adsense.mjs
+      # アフィリエイト（A8.net）のバナーを、来訪の多い記事の決めた位置に入れる（2026-10-19）。
+      #   この記事には部分を書き換える台本が多くかかるので、AdSense と同じく公開の直前に入れる（理由は scripts/stamp-affiliate.mjs の冒頭）。
+      - name: Stamp affiliate banners
+        run: node scripts/stamp-affiliate.mjs
       # 量産の面（市区町村・都道府県ごとの型の面）を Google にだけ noindex にし、Google 用の sitemap-google.xml を作る（2026-10-02）。
       #   Bing には全部入りの sitemap.xml と IndexNow で見せたまま（理由は scripts/stamp-google-noindex.mjs の冒頭）。
       - name: Google-only noindex for bulk pages
