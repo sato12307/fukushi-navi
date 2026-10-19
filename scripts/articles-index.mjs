@@ -25,7 +25,8 @@ const URL = `${SITE}/articles/`
 const CATS = [
   { id: 'seikatsuhogo', name: '生活保護', items: ['articles/seikatsuhogo-keisanki.html', 'seiho/', 'articles/seikatsuhogo-tsuika-kyufu.html', 'tsuika/', 'articles/seikatsuhogo-shinsei-jichitai.html', 'articles/seikatsuhogo-jisshitsu.html', 'articles/muryou-teigaku-shukuhakusho.html'] },
   { id: 'zei', name: '税と保険料（住民税非課税・国保・控除）', items: ['articles/juminzei-hikazei-check.html', 'hikazei/', 'mitoshi/hikazei/', 'hikazei/kokuho-tokyo/', 'hikazei/kodomo-shienkin/', 'hikazei/nenkin-ranking/', 'articles/shogaisha-kojo-tax.html', 'shogai-kojo/'] },
-  { id: 'iryo', name: '医療費', items: ['articles/kougaku-ryouyouhi-2026.html', 'mitoshi/kogaku/', 'jiritsu/'] },
+  { id: 'iryo', name: '医療費と医療の保険料', items: ['articles/kougaku-ryouyouhi-2026.html', 'mitoshi/kogaku/', 'kouki/', 'jiritsu/', 'judo-iryo/'] },
+  { id: 'teate', name: '手当（児童扶養手当・障害のある子と家族の手当）', items: ['teate/jido-fuyo/', 'teate/shogai/'] },
   { id: 'shogai', name: '障害年金・障害福祉サービス・就労', items: ['articles/shogai-nenkin-keisanki.html', 'articles/shogai-nenkin-basics.html', 'articles/shogai-nenkin-toukei.html', 'articles/shogai-service-futan.html', 'articles/shurou-ikou-koyou.html'] },
   { id: 'sumai', name: '住まい（公営住宅）', items: ['articles/koei-jutaku-bairitsu.html', 'articles/koei-hairiyasui.html', 'articles/koei-shunyu-kijun.html', 'articles/koei-yachin-keisan.html', 'articles/koei-danchi-ranking.html', 'koei/bairitsu-suii/', 'toei/', 'articles/toei-waku.html'],
     groups: [
@@ -35,7 +36,7 @@ const CATS = [
       { label: '都営住宅の倍率（区市町別）', re: /^articles\/toei-(?!waku)[a-z]+\.html$/, name: (t) => t.split('の都営住宅')[0] },
     ] },
   { id: 'kotsu', name: '障害者手帳の割引と自治体の助成', items: ['articles/shinkansen-airplane-discount.html', 'articles/jichitai-transport-medical.html'] },
-  { id: 'okane', name: 'お金の相談（借金・破産）', items: ['articles/shakkin-kakei-soudan.html', 'articles/jiko-hasan-chizu.html'] },
+  { id: 'okane', name: 'お金の相談（借金・差し押さえ・破産）', items: ['sashiosae/', 'articles/shakkin-kakei-soudan.html', 'articles/jiko-hasan-chizu.html'] },
   { id: 'kaigo', name: '介護', items: ['houkatsu/', 'articles/kaigo-jigyosho-genshou.html'] },
   { id: 'kodomo', name: '学校・子ども', items: ['gakko/kyufukin/'] },
   { id: 'yotei', name: '制度が変わる日', items: ['calendar/'] },
