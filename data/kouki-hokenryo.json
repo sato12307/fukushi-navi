@@ -1,0 +1,630 @@
+{
+ "_note": "後期高齢者医療保険料（令和8年度）の計算機 /kouki/ の数字。料率は厚生労働省「後期高齢者医療制度の令和８・９年度の保険料率について」（令和8年4月10日・PDF 001689077）の47行を写したもの（医療分は令和8・9年度、子ども・子育て支援金分は令和8年度）。rateBp・kodomoBp は所得割率を1万分の1で（11.61%＝1161）。model84＝厚労省の表の「基礎年金受給者（年金収入84万円）の医療分の月額」で、kouki-page.mjs が均等割の写し間違いを確かめるのに使う。round＝その広域連合の端数の決まり（h100＝医療分・子ども分それぞれ100円未満切捨て／miyazaki＝軽減後の均等割を100円未満切捨てしてから所得割を足し、合計を100円未満切捨て／y10＝10円未満切捨て／y1＝1円単位／null＝未確認）。verified＝例＝公式の計算例と円まで合った、決まり＝端数の決まりは公式で確かめたが計算例は無い、null＝未照合。2026-10-20 に写した。",
+ "checkedAt": "2026-10-20",
+ "nendo": "令和8年度",
+ "shotokuNen": "令和7年",
+ "gendo": {
+  "iryo": 850000,
+  "kodomo": 21000
+ },
+ "keigen": {
+  "kiso": 430000,
+  "perKyuyo": 100000,
+  "go": 310000,
+  "ni": 570000,
+  "nana": {
+   "iryo": 28,
+   "kodomo": 30
+  },
+  "go_": 50,
+  "ni_": 80
+ },
+ "kyuyoSha": {
+  "kyuyo": 550000,
+  "nenkin65": 1250000
+ },
+ "nenkinTokurei": 150000,
+ "tokyo": {
+  "p50": 150000,
+  "p25": 200000
+ },
+ "fuyou": {
+  "rate": 50
+ },
+ "prefs": [
+  {
+   "pref": "北海道",
+   "kin": 59963,
+   "rateBp": 1161,
+   "rate": "11.61",
+   "kodomoKin": 1364,
+   "kodomoBp": 28,
+   "kodomoRate": "0.28",
+   "model84": 1392,
+   "round": "h100",
+   "verified": "決まり"
+  },
+  {
+   "pref": "青森県",
+   "kin": 50500,
+   "rateBp": 900,
+   "rate": "9.00",
+   "kodomoKin": 1300,
+   "kodomoBp": 20,
+   "kodomoRate": "0.20",
+   "model84": 1175,
+   "round": null,
+   "verified": null
+  },
+  {
+   "pref": "岩手県",
+   "kin": 48800,
+   "rateBp": 850,
+   "rate": "8.50",
+   "kodomoKin": 1366,
+   "kodomoBp": 26,
+   "kodomoRate": "0.26",
+   "model84": 1133,
+   "round": null,
+   "verified": null
+  },
+  {
+   "pref": "宮城県",
+   "kin": 52200,
+   "rateBp": 912,
+   "rate": "9.12",
+   "kodomoKin": 1370,
+   "kodomoBp": 25,
+   "kodomoRate": "0.25",
+   "model84": 1216,
+   "round": null,
+   "verified": null
+  },
+  {
+   "pref": "秋田県",
+   "kin": 55996,
+   "rateBp": 973,
+   "rate": "9.73",
+   "kodomoKin": 1350,
+   "kodomoBp": 25,
+   "kodomoRate": "0.25",
+   "model84": 1300,
+   "round": null,
+   "verified": null
+  },
+  {
+   "pref": "山形県",
+   "kin": 52500,
+   "rateBp": 963,
+   "rate": "9.63",
+   "kodomoKin": 1373,
+   "kodomoBp": 25,
+   "kodomoRate": "0.25",
+   "model84": 1225,
+   "round": null,
+   "verified": null
+  },
+  {
+   "pref": "福島県",
+   "kin": 49000,
+   "rateBp": 924,
+   "rate": "9.24",
+   "kodomoKin": 1400,
+   "kodomoBp": 25,
+   "kodomoRate": "0.25",
+   "model84": 1143,
+   "round": null,
+   "verified": null
+  },
+  {
+   "pref": "茨城県",
+   "kin": 49500,
+   "rateBp": 932,
+   "rate": "9.32",
+   "kodomoKin": 1400,
+   "kodomoBp": 28,
+   "kodomoRate": "0.28",
+   "model84": 1155,
+   "round": null,
+   "verified": null
+  },
+  {
+   "pref": "栃木県",
+   "kin": 49100,
+   "rateBp": 900,
+   "rate": "9.00",
+   "kodomoKin": 1300,
+   "kodomoBp": 25,
+   "kodomoRate": "0.25",
+   "model84": 1146,
+   "round": null,
+   "verified": null
+  },
+  {
+   "pref": "群馬県",
+   "kin": 54600,
+   "rateBp": 978,
+   "rate": "9.78",
+   "kodomoKin": 1400,
+   "kodomoBp": 25,
+   "kodomoRate": "0.25",
+   "model84": 1267,
+   "round": null,
+   "verified": null
+  },
+  {
+   "pref": "埼玉県",
+   "kin": 52370,
+   "rateBp": 949,
+   "rate": "9.49",
+   "kodomoKin": 1330,
+   "kodomoBp": 25,
+   "kodomoRate": "0.25",
+   "model84": 1217,
+   "round": null,
+   "verified": null
+  },
+  {
+   "pref": "千葉県",
+   "kin": 51000,
+   "rateBp": 940,
+   "rate": "9.40",
+   "kodomoKin": 1310,
+   "kodomoBp": 25,
+   "kodomoRate": "0.25",
+   "model84": 1183,
+   "round": null,
+   "verified": null
+  },
+  {
+   "pref": "東京都",
+   "kin": 53300,
+   "rateBp": 988,
+   "rate": "9.88",
+   "kodomoKin": 1300,
+   "kodomoBp": 26,
+   "kodomoRate": "0.26",
+   "model84": 1242,
+   "round": "h100",
+   "verified": "例"
+  },
+  {
+   "pref": "神奈川県",
+   "kin": 52531,
+   "rateBp": 1030,
+   "rate": "10.30",
+   "kodomoKin": 1330,
+   "kodomoBp": 25,
+   "kodomoRate": "0.25",
+   "model84": 1225,
+   "round": "y10",
+   "verified": "決まり"
+  },
+  {
+   "pref": "新潟県",
+   "kin": 49200,
+   "rateBp": 861,
+   "rate": "8.61",
+   "kodomoKin": 1354,
+   "kodomoBp": 26,
+   "kodomoRate": "0.26",
+   "model84": 1148,
+   "round": null,
+   "verified": null
+  },
+  {
+   "pref": "富山県",
+   "kin": 55800,
+   "rateBp": 1019,
+   "rate": "10.19",
+   "kodomoKin": 1373,
+   "kodomoBp": 26,
+   "kodomoRate": "0.26",
+   "model84": 1302,
+   "round": null,
+   "verified": null
+  },
+  {
+   "pref": "石川県",
+   "kin": 57300,
+   "rateBp": 1114,
+   "rate": "11.14",
+   "kodomoKin": 1360,
+   "kodomoBp": 24,
+   "kodomoRate": "0.24",
+   "model84": 1337,
+   "round": null,
+   "verified": null
+  },
+  {
+   "pref": "福井県",
+   "kin": 54140,
+   "rateBp": 1083,
+   "rate": "10.83",
+   "kodomoKin": 1300,
+   "kodomoBp": 26,
+   "kodomoRate": "0.26",
+   "model84": 1263,
+   "round": null,
+   "verified": null
+  },
+  {
+   "pref": "山梨県",
+   "kin": 52610,
+   "rateBp": 944,
+   "rate": "9.44",
+   "kodomoKin": 1330,
+   "kodomoBp": 25,
+   "kodomoRate": "0.25",
+   "model84": 1228,
+   "round": null,
+   "verified": null
+  },
+  {
+   "pref": "長野県",
+   "kin": 48827,
+   "rateBp": 880,
+   "rate": "8.80",
+   "kodomoKin": 1339,
+   "kodomoBp": 25,
+   "kodomoRate": "0.25",
+   "model84": 1139,
+   "round": null,
+   "verified": null
+  },
+  {
+   "pref": "岐阜県",
+   "kin": 55385,
+   "rateBp": 971,
+   "rate": "9.71",
+   "kodomoKin": 1374,
+   "kodomoBp": 25,
+   "kodomoRate": "0.25",
+   "model84": 1292,
+   "round": null,
+   "verified": null
+  },
+  {
+   "pref": "静岡県",
+   "kin": 51100,
+   "rateBp": 935,
+   "rate": "9.35",
+   "kodomoKin": 1400,
+   "kodomoBp": 25,
+   "kodomoRate": "0.25",
+   "model84": 1192,
+   "round": null,
+   "verified": null
+  },
+  {
+   "pref": "愛知県",
+   "kin": 56130,
+   "rateBp": 1048,
+   "rate": "10.48",
+   "kodomoKin": 1362,
+   "kodomoBp": 25,
+   "kodomoRate": "0.25",
+   "model84": 1308,
+   "round": "h100",
+   "verified": "例"
+  },
+  {
+   "pref": "三重県",
+   "kin": 54843,
+   "rateBp": 953,
+   "rate": "9.53",
+   "kodomoKin": 1370,
+   "kodomoBp": 25,
+   "kodomoRate": "0.25",
+   "model84": 1280,
+   "round": null,
+   "verified": null
+  },
+  {
+   "pref": "滋賀県",
+   "kin": 55380,
+   "rateBp": 1013,
+   "rate": "10.13",
+   "kodomoKin": 1340,
+   "kodomoBp": 25,
+   "kodomoRate": "0.25",
+   "model84": 1292,
+   "round": null,
+   "verified": null
+  },
+  {
+   "pref": "京都府",
+   "kin": 59590,
+   "rateBp": 1015,
+   "rate": "10.15",
+   "kodomoKin": 1350,
+   "kodomoBp": 25,
+   "kodomoRate": "0.25",
+   "model84": 1390,
+   "round": null,
+   "verified": null
+  },
+  {
+   "pref": "大阪府",
+   "kin": 64931,
+   "rateBp": 1151,
+   "rate": "11.51",
+   "kodomoKin": 1373,
+   "kodomoBp": 24,
+   "kodomoRate": "0.24",
+   "model84": 1515,
+   "round": "y1",
+   "verified": "例"
+  },
+  {
+   "pref": "兵庫県",
+   "kin": 58427,
+   "rateBp": 1077,
+   "rate": "10.77",
+   "kodomoKin": 1351,
+   "kodomoBp": 24,
+   "kodomoRate": "0.24",
+   "model84": 1363,
+   "round": null,
+   "verified": null
+  },
+  {
+   "pref": "奈良県",
+   "kin": 57100,
+   "rateBp": 1063,
+   "rate": "10.63",
+   "kodomoKin": 1400,
+   "kodomoBp": 25,
+   "kodomoRate": "0.25",
+   "model84": 1325,
+   "round": null,
+   "verified": null
+  },
+  {
+   "pref": "和歌山県",
+   "kin": 58748,
+   "rateBp": 1036,
+   "rate": "10.36",
+   "kodomoKin": 1385,
+   "kodomoBp": 25,
+   "kodomoRate": "0.25",
+   "model84": 1371,
+   "round": null,
+   "verified": null
+  },
+  {
+   "pref": "鳥取県",
+   "kin": 52138,
+   "rateBp": 1064,
+   "rate": "10.64",
+   "kodomoKin": 1363,
+   "kodomoBp": 25,
+   "kodomoRate": "0.25",
+   "model84": 1217,
+   "round": null,
+   "verified": null
+  },
+  {
+   "pref": "島根県",
+   "kin": 57170,
+   "rateBp": 1002,
+   "rate": "10.02",
+   "kodomoKin": 1370,
+   "kodomoBp": 26,
+   "kodomoRate": "0.26",
+   "model84": 1334,
+   "round": null,
+   "verified": null
+  },
+  {
+   "pref": "岡山県",
+   "kin": 60100,
+   "rateBp": 1088,
+   "rate": "10.88",
+   "kodomoKin": 1400,
+   "kodomoBp": 25,
+   "kodomoRate": "0.25",
+   "model84": 1400,
+   "round": null,
+   "verified": null
+  },
+  {
+   "pref": "広島県",
+   "kin": 55090,
+   "rateBp": 993,
+   "rate": "9.93",
+   "kodomoKin": 1337,
+   "kodomoBp": 25,
+   "kodomoRate": "0.25",
+   "model84": 1285,
+   "round": null,
+   "verified": null
+  },
+  {
+   "pref": "山口県",
+   "kin": 63513,
+   "rateBp": 1136,
+   "rate": "11.36",
+   "kodomoKin": 1354,
+   "kodomoBp": 24,
+   "kodomoRate": "0.24",
+   "model84": 1482,
+   "round": null,
+   "verified": null
+  },
+  {
+   "pref": "徳島県",
+   "kin": 60976,
+   "rateBp": 1091,
+   "rate": "10.91",
+   "kodomoKin": 1356,
+   "kodomoBp": 25,
+   "kodomoRate": "0.25",
+   "model84": 1423,
+   "round": null,
+   "verified": null
+  },
+  {
+   "pref": "香川県",
+   "kin": 58000,
+   "rateBp": 993,
+   "rate": "9.93",
+   "kodomoKin": 1300,
+   "kodomoBp": 25,
+   "kodomoRate": "0.25",
+   "model84": 1353,
+   "round": null,
+   "verified": null
+  },
+  {
+   "pref": "愛媛県",
+   "kin": 55630,
+   "rateBp": 979,
+   "rate": "9.79",
+   "kodomoKin": 1320,
+   "kodomoBp": 25,
+   "kodomoRate": "0.25",
+   "model84": 1298,
+   "round": null,
+   "verified": null
+  },
+  {
+   "pref": "高知県",
+   "kin": 60400,
+   "rateBp": 1031,
+   "rate": "10.31",
+   "kodomoKin": 1393,
+   "kodomoBp": 24,
+   "kodomoRate": "0.24",
+   "model84": 1409,
+   "round": null,
+   "verified": null
+  },
+  {
+   "pref": "福岡県",
+   "kin": 66340,
+   "rateBp": 1170,
+   "rate": "11.70",
+   "kodomoKin": 1339,
+   "kodomoBp": 25,
+   "kodomoRate": "0.25",
+   "model84": 1548,
+   "round": null,
+   "verified": null
+  },
+  {
+   "pref": "佐賀県",
+   "kin": 68700,
+   "rateBp": 1179,
+   "rate": "11.79",
+   "kodomoKin": 1400,
+   "kodomoBp": 24,
+   "kodomoRate": "0.24",
+   "model84": 1603,
+   "round": null,
+   "verified": null
+  },
+  {
+   "pref": "長崎県",
+   "kin": 56200,
+   "rateBp": 959,
+   "rate": "9.59",
+   "kodomoKin": 1300,
+   "kodomoBp": 25,
+   "kodomoRate": "0.25",
+   "model84": 1308,
+   "round": null,
+   "verified": null
+  },
+  {
+   "pref": "熊本県",
+   "kin": 63000,
+   "rateBp": 1106,
+   "rate": "11.06",
+   "kodomoKin": 1400,
+   "kodomoBp": 25,
+   "kodomoRate": "0.25",
+   "model84": 1470,
+   "round": null,
+   "verified": null
+  },
+  {
+   "pref": "大分県",
+   "kin": 64200,
+   "rateBp": 1125,
+   "rate": "11.25",
+   "kodomoKin": 1400,
+   "kodomoBp": 24,
+   "kodomoRate": "0.24",
+   "model84": 1492,
+   "round": null,
+   "verified": null
+  },
+  {
+   "pref": "宮崎県",
+   "kin": 56300,
+   "rateBp": 1008,
+   "rate": "10.08",
+   "kodomoKin": 1356,
+   "kodomoBp": 25,
+   "kodomoRate": "0.25",
+   "model84": 1300,
+   "round": "miyazaki",
+   "verified": "例"
+  },
+  {
+   "pref": "鹿児島県",
+   "kin": 69800,
+   "rateBp": 1172,
+   "rate": "11.72",
+   "kodomoKin": 1400,
+   "kodomoBp": 25,
+   "kodomoRate": "0.25",
+   "model84": 1625,
+   "round": null,
+   "verified": null
+  },
+  {
+   "pref": "沖縄県",
+   "kin": 61000,
+   "rateBp": 1081,
+   "rate": "10.81",
+   "kodomoKin": 1290,
+   "kodomoBp": 26,
+   "kodomoRate": "0.26",
+   "model84": 1423,
+   "round": null,
+   "verified": null
+  }
+ ],
+ "sources": [
+  {
+   "name": "厚生労働省「後期高齢者医療制度の令和８・９年度の保険料率について」（令和8年4月10日）",
+   "url": "https://www.mhlw.go.jp/stf/newpage_72371.html"
+  },
+  {
+   "name": "同 資料（47広域連合の保険料率）",
+   "url": "https://www.mhlw.go.jp/content/12403500/001689077.pdf"
+  },
+  {
+   "name": "厚生労働省 通知「後期高齢者医療の調整交付金の交付額の算定に関する省令第６条第９号に関する交付基準について」（令和8年4月17日・7.2割軽減）",
+   "url": "https://www.mhlw.go.jp/hourei/doc/tsuchi/T260421S0070.pdf"
+  },
+  {
+   "name": "高齢者の医療の確保に関する法律施行令（第18条＝賦課限度額と均等割の軽減・附則第3条＝年金所得の15万円の特例）e-Gov 法令検索",
+   "url": "https://laws.e-gov.go.jp/law/419CO0000000318"
+  },
+  {
+   "name": "国税庁 タックスアンサー No.1600 公的年金等の課税関係（公的年金等控除）",
+   "url": "https://www.nta.go.jp/taxes/shiraberu/taxanswer/shotoku/1600.htm"
+  },
+  {
+   "name": "国税庁 タックスアンサー No.1410 給与所得控除",
+   "url": "https://www.nta.go.jp/taxes/shiraberu/taxanswer/shotoku/1410.htm"
+  },
+  {
+   "name": "国税庁 タックスアンサー No.1411 所得金額調整控除",
+   "url": "https://www.nta.go.jp/taxes/shiraberu/taxanswer/shotoku/1411.htm"
+  }
+ ]
+}
