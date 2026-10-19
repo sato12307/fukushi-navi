@@ -1,0 +1,38 @@
+{
+ "_note": "差し押さえで手元に残る額の計算機 /sashiosae/ の数字。民事は民事執行法152条・同施行令2条（2005年から額は変わっていない）、税は国税徴収法76条・同施行令34条（2026年4月1日以降の支給分は本人10万7千円＋生計を一にする親族1人4万8千円＝令和8年政令第97号。それより前は10万円・4万5千円）と国税徴収法基本通達第76条関係3（期間が1月以上は、給料等は千円未満切捨て・各号の額は千円未満切上げ）。原文は e-Gov 法令検索（2026-10-20 取得）と国税庁の通達。scripts/sashiosae-page.mjs が公式の計算例（東京地裁民事第21部の別紙4件・豊田市・常総市）に通して円まで合うか確かめる。",
+ "checkedAt": "2026-10-20",
+ "minji": { "L": { "month": 330000, "half": 165000, "jun": 110000, "day": 11000, "bonus": 330000 }, "keep": { "ippan": [3, 4], "yoiku": [1, 2] } },
+ "zei": { "from": "2026-04-01", "base": 107000, "add": 48000, "oldBase": 100000, "oldAdd": 45000, "rate5": 20, "unit": 1000 },
+ "kinshi": [
+  { "name": "国民年金（障害基礎年金・遺族基礎年金など）", "law": "国民年金法24条", "zei": "老齢基礎年金・付加年金は、税の滞納処分では給料と同じ式で差し押さえられる" },
+  { "name": "厚生年金（障害厚生年金・遺族厚生年金など）", "law": "厚生年金保険法41条1項", "zei": "老齢厚生年金は、税の滞納処分では給料と同じ式で差し押さえられる" },
+  { "name": "生活保護費", "law": "生活保護法58条", "zei": "差し押さえられない" },
+  { "name": "児童手当", "law": "児童手当法15条", "zei": "差し押さえられない" },
+  { "name": "児童扶養手当", "law": "児童扶養手当法24条", "zei": "差し押さえられない" },
+  { "name": "雇用保険の失業等給付（失業手当など）", "law": "雇用保険法11条", "zei": "差し押さえられない" },
+  { "name": "労災保険の給付", "law": "労働者災害補償保険法12条の5第2項", "zei": "差し押さえられない" },
+  { "name": "健康保険の給付（傷病手当金など）", "law": "健康保険法61条", "zei": "差し押さえられない" },
+  { "name": "国民健康保険の給付", "law": "国民健康保険法67条", "zei": "差し押さえられない" },
+  { "name": "介護保険の給付", "law": "介護保険法25条", "zei": "差し押さえられない" },
+  { "name": "後期高齢者医療の給付", "law": "高齢者の医療の確保に関する法律62条", "zei": "差し押さえられない" }
+ ],
+ "moushitate": { "stampTokyo": 4740, "stampOsaka": 5000, "kyuyoWeeks": 4, "yokinWeeks": 1 },
+ "houterasu": { "tel": "0570-078374", "telIp": "03-6745-5600", "hours": "平日9時〜21時・土曜9時〜17時", "income": [[1, 182000, 200200], [2, 251000, 276100], [3, 272000, 299200], [4, 299000, 328900]], "asset": [[1, 1800000], [2, 2500000], [3, 2700000], [4, 3000000]] },
+ "sources": [
+  { "name": "民事執行法（152条＝差押禁止債権・153条＝範囲の変更・155条＝取立て）e-Gov 法令検索", "url": "https://laws.e-gov.go.jp/law/354AC0000000004" },
+  { "name": "民事執行法施行令（2条＝差押禁止の政令の額）e-Gov 法令検索", "url": "https://laws.e-gov.go.jp/law/355CO0000000230" },
+  { "name": "国税徴収法（76条＝給与の差押禁止・77条＝年金・151条の2〜153条＝猶予と停止）e-Gov 法令検索", "url": "https://laws.e-gov.go.jp/law/334AC0000000147" },
+  { "name": "国税徴収法施行令（34条＝給与の差押禁止の額）e-Gov 法令検索", "url": "https://laws.e-gov.go.jp/law/334CO0000000329" },
+  { "name": "国税庁 国税徴収法基本通達 第76条関係（端数の扱い・計算例）", "url": "https://www.nta.go.jp/law/tsutatsu/kihon/chosyu/05/01/06/076/01.htm" },
+  { "name": "財務省「令和８年度税制改正の大綱」（給料等の差押禁止額の見直し）", "url": "https://www.mof.go.jp/tax_policy/tax_reform/outline/fy2026/08taikou_07.htm" },
+  { "name": "地方税法（331条6項ほか＝国税徴収法の例による）e-Gov 法令検索", "url": "https://laws.e-gov.go.jp/law/325AC0000000226" },
+  { "name": "東京地方裁判所民事第21部「債務者（所有者）の方へ」（差押範囲変更の申立て）", "url": "https://www.courts.go.jp/tokyo/saiban/minzi_section21/saimusya_saiken/index.html" },
+  { "name": "大阪地方裁判所「債務名義に基づく差押え」（差押禁止債権の範囲変更申立てＱ＆Ａ）", "url": "https://www.courts.go.jp/osaka/saiban/tetuzuki_minji14/sasiosae/index.html" },
+  { "name": "法務省「民事執行法…の一部を改正する法律について」（令和2年4月1日施行・4週間への伸長）", "url": "https://www.moj.go.jp/MINJI/minji07_00247.html" },
+  { "name": "国税庁 税務大学校論叢第101号（児童手当が振り込まれた口座の差押えの判決の紹介）", "url": "https://www.nta.go.jp/about/organization/ntc/kenkyu/ronsou/101/04/04.pdf" },
+  { "name": "法テラス「お電話でのお問合せ（法テラス・サポートダイヤル）」", "url": "https://www.houterasu.or.jp/site/soudanmadoguchi-houseido/support-dial.html" },
+  { "name": "法テラス「無料法律相談のご利用の流れ」（収入と資産の基準）", "url": "https://www.houterasu.or.jp/site/soudan-tatekae/goriyounonagare.html" },
+  { "name": "金融庁「多重債務についての相談窓口」", "url": "https://www.fsa.go.jp/soudan/index.html" },
+  { "name": "国税庁 タックスアンサー No.9206 国税を期限内に納付できないとき", "url": "https://www.nta.go.jp/taxes/shiraberu/taxanswer/osirase/9206.htm" }
+ ]
+}
