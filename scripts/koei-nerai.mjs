@@ -24,13 +24,13 @@ import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { page, esc, SITE, readPrev, pageDiff, readSitemap, writeSitemap, sitemapLastmods, putUrls } from './shogai-kojo-page.mjs'
 import { offerKoeiLeaf, jumpKoei, offerKoeiSell } from './offer-block.mjs'
-import { load, loadFrom, OSAKA_FU, CITIES, MIN_N, SUKI, BURE, MIN_GROUP, PRICE, r1, num, pct, WA } from './koei-lib.mjs'
+import { load, loadFrom, OSAKA_FU, KOEI_ALL, MIN_N, SUKI, BURE, MIN_GROUP, PRICE, r1, num, pct, WA } from './koei-lib.mjs'
 import { kanryoScript } from './kanryo-script.mjs'
 import { suiiOf, suiiSection, SUII_KEYS } from './koei-suii-lib.mjs'
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..')
 const args = process.argv.slice(2)
-const keys = args.includes('--all') ? Object.keys(CITIES) : args.filter((a) => !a.startsWith('-'))
+const keys = args.includes('--all') ? Object.keys(KOEI_ALL) : args.filter((a) => !a.startsWith('-'))
 if (!keys.length) {
   console.error('市を指定してください: node scripts/koei-nerai.mjs kawasaki shizuoka yokohama ／ --all')
   process.exit(1)
@@ -179,6 +179,48 @@ ${peekList.slice(0, PEEK_ROWS).map((h) => `    ${hrow(h)}`).join('\n')}
   }
   const OFFER = offerKoeiLeaf({ up: '../', facts })
 
+  // ── 無料にした市（C.free・2026-10-20〜）：売っていた一覧の中身（2・3・4・6章）を /<市>/ にそのまま出す ──────────
+  //   ユーザー「公営住宅の有料ラインナップを一部無料開放しよう。そのページに就労支援のアフィリエイトを貼ってみて、様子をみましょう」。
+  //   表は有料資料と同じ行（hrow・table・filterBlock）から作る。資料の箱（.box・.wrap）はサイトの部品（.callout・.table-wrap）に置き換える。
+  //   アフィリエイトのバナーは scripts/stamp-affiliate.mjs が公開の直前に③の前へ入れる。
+  const OPEN = !!C.free
+  //   ★表は1行に収めて横にスクロールさせる（資料と同じ・売り場の抜粋と同じ）。折り返すと320px幅で1行が300px超になる（toei-check.mjs が検知）。
+  const fwrap = (s) => s.replace(/<div class="wrap">/g, '<div class="table-wrap">').replace(/<table class="grid"( id="idx")?>/g, '<table class="grid"$1 style="white-space:nowrap">').replace('<div class="box" id="flt">', '<div class="callout note" id="flt">')
+  const EVWARN = `  <div class="callout warn"><p><span class="tag">先に知っておいてください</span>
+  <strong>倍率が低い申込先だけを並べると、空いている理由がそのまま集まります。</strong>
+  都営住宅では同じ集計で確かめられました——毎回すいている595件のうち59%は、エレベーターが無いか築39年より古い住宅でした
+  （<a href="../toei/">都営住宅のページ</a>）。<strong>${C.evNote ? esc(C.evNote) : `${C.city}の応募状況表には、エレベーターの有無も建てられた年も載っていません。`}</strong>
+  ${C.key === 'shizuoka' || C.key === 'kobe' ? '階だけは資料にありますが、実測では倍率とほとんど関係がありませんでした（エレベーターの有無が分からないため、階だけでは住みやすさを測れません）。' : ''}
+  ∴ この一覧は<strong>当たりやすさだけを並べたもの</strong>で、設備や築年数で選り分けてはいません。
+  気になる申込先が見つかったら、<strong>その回の募集案内と現地で、エレベーターの有無・階・築年数を必ず確かめてください。</strong></p></div>`
+  const JUMP = OPEN
+    ? `  <p><strong>申込先ごとの一覧まで、このページで全部無料で読めます。</strong>→ <a href="#suki">毎回すいている申込先（${num(F.suki)}件）</a> ／ <a href="#konde">混んでいる申込先</a> ／ <a href="#bure">回によって動く申込先</a> ／ <a href="#zero">申込者ゼロが出た申込先</a> ／ <a href="#all">申込先の索引（${num(F.enough)}件）</a></p>`
+    : jumpKoei({ ...facts, up: '../' })
+  const SEC_LIST = OPEN
+    ? `  <h2 id="suki">② 毎回すいている申込先（${num(F.suki)}件・無料）</h2>
+  <p>${SEC2_LEAD}${esc(C.axis.label)}ごとに分けています。</p>
+  <p class="note">申込資格（${esc(C.shikaku ? `${C.shikaku}・世帯構成` : '市内在住・収入基準・世帯構成')}）を満たしていなければ、倍率がいくら低くても申し込めません。資格は${esc(facts.guideOrg)}の募集案内でご確認ください。<strong>対象は${esc(facts.only)}</strong>で、${esc(facts.notIn)}は入っていません。</p>
+${EVWARN}
+${fwrap(sukiByGroup)}${sukiOther ? `\n${fwrap(sukiOther)}` : ''}`
+    : `  <h2 id="pack">② 申込先ごとの一覧（${PRICE}円）</h2>
+  <p class="offer-lead"><strong>申込書に書けるのは基本的に1回につき1つ</strong>です。${esc(C.axis.label)}ごとの相場が分かっても、最後は申込先を1つに決めることになります。そこだけは申込先ごとの実測が要ります。</p>
+${OFFER}`
+  const SEC_REST = OPEN
+    ? fwrap(`
+  <h2 id="bure">回によって当たりやすさが動く申込先（${F.buread}件）</h2>
+  <p>最高と最低が${BURE}倍以上ひらいた申込先です。この相手には「住宅を変える」より<strong>「出す回を変える」</strong>ほうが効きます。最低の欄が実際に起きた一番すいていた回の倍率です。</p>
+  <div class="table-wrap">${table(buread.slice().sort((a, b) => (b.max / b.min) - (a.max / a.min)))}</div>
+
+  <h2 id="zero">申込者ゼロが出た申込先（${F.zeroHousesEnough}件）</h2>
+  <p>誰も申し込まなかった回がある申込先です。「申込0」の欄がその回数。<strong>0件は「この読み取りでは確認できなかった」という意味</strong>で、その回に募集割れが無かったと確定させるものではありません。</p>
+  <div class="table-wrap">${table(enough.filter((h) => h.zero > 0).sort((a, b) => b.zero - a.zero || a.med - b.med))}</div>
+
+  <h2 id="all">観測できた申込先の索引（${num(F.enough)}件）</h2>
+  <p>中央値の低い順。上の表に出ていない申込先もここには載っています。表の列は、中央値・最低・最高が倍率、観測が募集件数、申込0が申込者ゼロだった回数、のべ戸数が募集戸数の合計です。</p>
+${C.filter ? filterBlock(D) : `<div class="wrap">${table(enough)}</div>`}
+`)
+    : ''
+
   // ── 無料ページ ──────────────────────────────────────────────────────────
   const body = `  <p class="breadcrumb"><a href="../index.html">トップ</a> ＞ <a href="../articles/koei-jutaku-bairitsu.html">公営住宅</a> ＞ ${esc(C.city)}営住宅 申込先えらび</p>
 
@@ -191,15 +233,13 @@ ${peekList.slice(0, PEEK_ROWS).map((h) => `    ${hrow(h)}`).join('\n')}
     <p><span class="tag">数字だけ</span>観測できた募集は<strong>${num(F.rows)}件</strong>、申込先で<strong>${num(F.all)}件</strong>。${MIN_N}件以上観測できた<strong>${num(F.enough)}件</strong>の倍率の中央値は<strong>${F.allMed}倍</strong>で、<strong>${F.suki}件（${F.sukiPct}%）</strong>が${SUKI}倍未満でした。申込者ゼロの募集は<strong>${num(F.zeroRows)}件・${F.zeroHouses}住宅</strong>で出ています。</p>
   </div>
 
-${jumpKoei({ ...facts, up: '../' })}
+${JUMP}
 
   <h2 id="axis">① まず「${esc(C.axis.label)}」で倍率が変わる（無料）</h2>
   <p>個々の住宅を選ぶ前に、ここを確かめてください。${RANGE}の全${num(F.rows)}件を${esc(C.axis.label)}ごとに分けると、<strong>${esc(LO.label)}の中央値${LO.med}倍に対して${esc(HI.label)}は${HI.med}倍</strong>で、<strong>${RATIO}倍</strong>ひらいています。申込先が${MIN_GROUP}件以上ある${esc(C.axis.label)}だけを倍率の低い順に並べました。</p>
 ${groupTable}
 
-  <h2 id="pack">② 申込先ごとの一覧（${PRICE}円）</h2>
-  <p class="offer-lead"><strong>申込書に書けるのは基本的に1回につき1つ</strong>です。${esc(C.axis.label)}ごとの相場が分かっても、最後は申込先を1つに決めることになります。そこだけは申込先ごとの実測が要ります。</p>
-${OFFER}
+${SEC_LIST}
 
   <h2 id="konde">③ 混んでいる申込先（実名・無料）</h2>
   <p>避けるべき相手も無料で出します。${MIN_N}件以上観測できた申込先を、倍率の中央値が高い順に12件。</p>
@@ -209,18 +249,12 @@ ${kondeTable}
   <p>倍率は回によって動きます。どの回が狙い目だったかの目安。</p>
 ${roundTable}
 ${SUII_KEYS.includes(C.key) ? suiiSection(suiiOf(C.key), { up: '../' }) : ''}
-
+${SEC_REST}
   <h2>出典と、この数字の限界</h2>
   <ul>
 ${LIMITS}
   </ul>
-  <div class="callout warn"><p><span class="tag">先に知っておいてください</span>
-  <strong>倍率が低い申込先だけを並べると、空いている理由がそのまま集まります。</strong>
-  都営住宅では同じ集計で確かめられました——毎回すいている595件のうち59%は、エレベーターが無いか築39年より古い住宅でした
-  （<a href="../toei/">都営住宅のページ</a>）。<strong>${C.evNote ? esc(C.evNote) : `${C.city}の応募状況表には、エレベーターの有無も建てられた年も載っていません。`}</strong>
-  ${C.key === 'shizuoka' || C.key === 'kobe' ? '階だけは資料にありますが、実測では倍率とほとんど関係がありませんでした（エレベーターの有無が分からないため、階だけでは住みやすさを測れません）。' : ''}
-  ∴ この一覧は<strong>当たりやすさだけを並べたもの</strong>で、設備や築年数で選り分けてはいません。
-  気になる申込先が見つかったら、<strong>その回の募集案内と現地で、エレベーターの有無・階・築年数を必ず確かめてください。</strong></p></div>
+${OPEN ? '' : EVWARN}
 
   <p class="note"><strong>「倍率が低い＝誰でも入れる」ではありません。</strong>申込資格（市内在住・収入基準・住宅困窮要件など）を満たすことが前提で、同じ住宅でも回によって募集の有無・戸数・間取り・入居人数の条件が変わります。<strong>過去にあまった住宅が次回も募集に出るとはかぎりません。</strong>申し込む前に、その回の募集案内で必ず条件を確認してください。</p>
   <p class="note">内容の誤りを見つけられた場合は contact@fukushiru.com までご連絡ください。訂正します。</p>`
@@ -228,7 +262,24 @@ ${LIMITS}
   // ── 売り場（1市＝1ページ・2026-09-19 ユーザー裁定）────────────────────────
   //   市の無料ページに埋めていた購入カードをここへ移した。無料ページにはリンクだけ。
   //   ★ここに着いた回数が <市>_view。カードが画面に入っただけの <市>_offer_seen は廃止した。
-  write(`${C.key}/moushikomisaki/index.html`, page({
+  // ★無料にした市（C.free）は、古いリンク用の転送（noindex）だけを残す（大阪府営 /osaka-fu/moushikomisaki/ と同じ形）。
+  if (OPEN) write(`${C.key}/moushikomisaki/index.html`, `<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>${esc(C.city)}営住宅の申込先ごとの一覧は無料になりました｜フクシル</title>
+<meta name="robots" content="noindex, follow">
+<link rel="canonical" href="${SITE}/${C.key}/">
+<meta http-equiv="refresh" content="0; url=../#suki">
+</head>
+<body>
+<!-- 2026-10-20 ユーザー「公営住宅の有料ラインナップを一部無料開放しよう」。売り場を畳み、一覧は /${C.key}/ に無料で出した。古いリンク用の転送だけを残す。 -->
+<p>${esc(C.city)}営住宅の申込先ごとの一覧は、無料で公開しました。<a href="../#suki">${esc(C.city)}営住宅で毎回すいている申込先の一覧へ</a></p>
+</body>
+</html>
+`)
+  else write(`${C.key}/moushikomisaki/index.html`, page({
     title: `${C.city}営住宅の申込先ごとの一覧（${PRICE}円）｜${BOSHU}${F.rounds}回の実測｜フクシル`,
     desc: `${C.city}営住宅の${C.doc || '応募状況表'}${F.rounds}回分を申込先ごとに名寄せし、倍率の中央値で「毎回すいている申込先」${num(F.suki)}件を選り分けた一覧です。${C.axis.label}ごとの相場と混んでいる申込先の実名は無料。${PRICE}円。`,
     canonical: `/${C.key}/moushikomisaki/`, depth: 2,
@@ -244,8 +295,10 @@ ${offerKoeiSell({ up: '../../', peek: PEEK, facts })}
   }))
 
   if (C.freePage !== false) write(`${C.key}/index.html`, page({
-    title: `${C.city}営住宅で毎回すいている申込先はどこか｜${BOSHU}${F.rounds}回の実測｜フクシル`,
-    desc: `${C.city}営住宅の${C.doc || '応募状況表'}${F.rounds}回分（${RANGE}）を申込先ごとに名寄せしました。観測できた募集${num(F.rows)}件、倍率の中央値は${F.allMed}倍で、${MIN_N}件以上観測できた${num(F.enough)}件のうち${F.suki}件が${SUKI}倍未満。${C.axis.label}ごとの相場と混んでいる申込先の実名は無料、申込先ごとの一覧は${PRICE}円です。`,
+    title: OPEN
+      ? `${C.city}営住宅の倍率と、毎回すいている申込先（${BOSHU}${F.rounds}回の実測・一覧まで無料）｜フクシル`
+      : `${C.city}営住宅で毎回すいている申込先はどこか｜${BOSHU}${F.rounds}回の実測｜フクシル`,
+    desc: `${C.city}営住宅の${C.doc || '応募状況表'}${F.rounds}回分（${RANGE}）を申込先ごとに名寄せしました。観測できた募集${num(F.rows)}件、倍率の中央値は${F.allMed}倍で、${MIN_N}件以上観測できた${num(F.enough)}件のうち${F.suki}件が${SUKI}倍未満。${OPEN ? `毎回すいている申込先${num(F.suki)}件と、申込先ごとの索引${num(F.enough)}件まで全部無料です。` : `${C.axis.label}ごとの相場と混んでいる申込先の実名は無料、申込先ごとの一覧は${PRICE}円です。`}`,
     canonical: `/${C.key}/`, depth: 1, body,
     jsonld: {
       '@context': 'https://schema.org', '@type': 'Article',
@@ -342,7 +395,7 @@ ${LIMITS}
 開けない・内容が説明と著しく異なる・二重に決済された場合は、購入から14日以内のご連絡で全額を返金します。</p>
 </body></html>
 `
-  write(`.dist/${C.key}-pack.html`, packHtml)
+  if (!OPEN) write(`.dist/${C.key}-pack.html`, packHtml)   // 無料にした市は資料を作らない（中身は /<市>/ に出ている）
 
   // ── 関所：抜粋が有料資料の本文とそのまま一致するか ──────────────────────
   {
@@ -372,12 +425,12 @@ ${LIMITS}
     writeSitemap(putUrls(sm, [[loc, entry]]))
   }
 
-  console.log(`■ ${C.city}  /${C.key}/ と購入後画面・有料資料 .dist/${C.key}-pack.html（${(Buffer.byteLength(packHtml) / 1024).toFixed(0)}KB）`)
+  console.log(OPEN ? `■ ${C.city}  /${C.key}/（一覧まで無料・${(Buffer.byteLength(pending.find(([rel]) => rel === freeRel)[1]) / 1024).toFixed(0)}KB）` : `■ ${C.city}  /${C.key}/ と購入後画面・有料資料 .dist/${C.key}-pack.html（${(Buffer.byteLength(packHtml) / 1024).toFixed(0)}KB）`)
   console.log(`   募集${num(F.rows)}件 → 申込先${F.all}件（${MIN_N}件以上観測 ${F.enough}件）`)
   console.log(`   すいている ${F.suki}件（${F.sukiPct}%）・ぶれる ${F.buread}件・申込0あり ${F.zeroHousesEnough}件`)
   console.log(`   軸＝${C.axis.label} ${F.groups}区分（面に出すのは ${shownGroups.length}）／ ${LO.label} ${LO.med}倍 ↔ ${HI.label} ${HI.med}倍 ＝ ${RATIO}倍`)
   console.log(`   読み取り: 使えた${F.rounds}回${F.skippedRounds.length ? ` ／ 使えない${F.skippedRounds.length}回（${F.skippedRounds.join('・')}）` : ''}${F.matched ? ` ／ 公表合計と一致${F.matched}回・差が説明できる${F.explained}回` : ''}`)
-  console.log(`   次に: node scripts/koei-put-pack.mjs ${C.key}`)
+  console.log(OPEN ? '   無料（free）：売り場は /moushikomisaki/ の転送だけ・資料と KV は作らない' : `   次に: node scripts/koei-put-pack.mjs ${C.key}`)
 }
 
 // ── ハブ記事へ「実測がそろっている市」の表を差し込む ─────────────────────────
@@ -396,7 +449,7 @@ ${LIMITS}
     // 面が実際にある市だけ載せる（作っていない市を案内しない）
     // ★売っていない面（大阪府営＝2026-10-01「あえての無料公開」、三大都市圏の外の県＝kenei-free の FREE）も同じ数え方なので並べる
     const { FREE, SHIGA_KEN } = await import('./kenei-free.mjs')
-    const cfgs = [...Object.values(CITIES), OSAKA_FU, SHIGA_KEN, ...FREE.filter((c) => !c.hold)]
+    const cfgs = [...Object.values(KOEI_ALL), OSAKA_FU, SHIGA_KEN, ...FREE.filter((c) => !c.hold)]
     const rows = cfgs.filter((c) => fs.existsSync(path.join(ROOT, c.key, 'index.html'))).map((c) => {
       const D = loadFrom(c)
       return { k: c.key, C: c, F: D.F, RANGE: D.RANGE }

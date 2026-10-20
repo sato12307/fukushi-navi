@@ -23,7 +23,7 @@ import { execFileSync } from 'node:child_process'
 import fs from 'node:fs'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
-import { CITIES } from './koei-lib.mjs'
+import { KOEI_ALL as CITIES } from './koei-lib.mjs'   // 無料にした市（free）も月次で取り直す
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..')
 const args = process.argv.slice(2)
@@ -93,7 +93,7 @@ if (!grew.length) {
   console.log(`\n▶ 増えた ${grew.length}市の面と有料資料を作り直します`)
   for (const g of grew) {
     run('node', ['scripts/koei-nerai.mjs', g.key])
-    run('node', ['scripts/koei-put-pack.mjs', g.key])
+    if (!CITIES[g.key].free) run('node', ['scripts/koei-put-pack.mjs', g.key])   // 無料にした市（2026-10-20〜）は売らないので KV に入れない
     console.log(`  ✓ ${g.city}  ${g.before} → ${g.after}回`)
   }
   // ★回が増えたら、市営住宅の倍率の推移（看板 /koei/bairitsu-suii/・data/koei-suii.json・市別の記事の節）も作り直す（2026-10-04〜）。

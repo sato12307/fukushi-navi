@@ -33,9 +33,14 @@ export const PRICE = 500
 //   axis     … 相場の表の軸。行の中のどの欄で切るか（label はその見出し）
 //   keyOf    … 申込先の名寄せの鍵。ここに入れた欄が違えば別の申込先として数える
 //   extra    … 索引の表に足す欄（資料にある分だけ）
-export const CITIES = {
+//   free     … 売らずに申込先ごとの一覧まで /<key>/ に無料で出す（2026-10-20〜）
+// ★2026-10-20 ユーザー「公営住宅の有料ラインナップを一部無料開放しよう。そのページに就労支援のアフィリエイトを貼って様子をみる」
+//   （地域は任された）。神奈川県の3市（横浜・川崎・相模原）と神戸市を free にした。根拠＝発売（09-17）から買う押0・決済0
+//   （売り場に着いた 横浜7・川崎6・相模原4・神戸0）。都営（着いた52）・埼玉県営（10-19 に他人の買う押1）・愛知県営・静岡は売り続け、比べる側にする。
+//   ★KOEI_ALL＝数え方の設定の全部（読み取り・推移・月次の取り直しはこちら）。CITIES＝売っている商品の表（特商法・有料の案内・KV への投入）。
+export const KOEI_ALL = {
   kawasaki: {
-    key: 'kawasaki', city: '川崎市', short: '川崎',
+    key: 'kawasaki', city: '川崎市', short: '川崎', free: true,
     src: '川崎市が募集回ごとに公表する「市営住宅入居者募集に係る抽選結果」の応募状況表PDF',
     // ★区が資料に無い。∴ 区ごとの相場は作れない。軸は募集区分にする。
     axis: { label: '募集区分', of: (r) => `${r.kind}／${r.cat}` },
@@ -59,7 +64,7 @@ export const CITIES = {
     note: '同じ団地でも間取りと募集区分が違えば別に数えています。募集されるのは住戸単位で間取りが違えば倍率もまるで違い、募集区分（一般・子育て支援・車いす・シルバーハウジング・事故部屋）は申し込める人がそもそも違うためです。実測でも申込者ゼロの割合は一般24%に対し、車いす82%・子育て支援81%・事故部屋54%と大きく違います。',
   },
   yokohama: {
-    key: 'yokohama', city: '横浜市', short: '横浜',
+    key: 'yokohama', city: '横浜市', short: '横浜', free: true,
     src: '横浜市が募集回ごとに公表する記者発表「横浜市営住宅の抽選結果について」の応募状況表PDF',
     // ★横浜は18区と募集区分の両方がある。軸は区（読者が住む場所で選ぶため）。
     // ★全市単位（住宅を決めずに申し込む枠）は区が無い。区の相場には入れず「（全市単位）」として別に数える。
@@ -86,7 +91,7 @@ export const CITIES = {
     },
   },
   kobe: {
-    key: 'kobe', city: '神戸市', short: '神戸',
+    key: 'kobe', city: '神戸市', short: '神戸', free: true,
     src: '神戸市住宅供給公社が定時募集の回ごとに公表する「当選・補欠抽選番号一覧」PDF',
     // ★神戸だけ、募集されるのが**住戸そのもの**（棟と部屋番号まで出る）。
     //   空いた部屋は一度きりしか出ないので、住戸を鍵にすると1回ずつの観測になり
@@ -113,7 +118,7 @@ export const CITIES = {
     },
   },
   sagamihara: {
-    key: 'sagamihara', city: '相模原市', short: '相模原',
+    key: 'sagamihara', city: '相模原市', short: '相模原', free: true,
     src: '相模原市が募集回ごとに公表する「入居者募集結果（過去の応募状況）」PDF',
     // ★相模原は市の1ページに13回ぶんがまとめて並んでいる（消えない側）。
     //   ただし団地が39しかなく、他の3市より母数が小さい。「毎回すいている申込先」は
@@ -134,7 +139,7 @@ export const CITIES = {
     // ★母数が薄いことを面に書く。他市と同じ顔で出すと、同じ厚みがあるように見える。
     // ★数字は直書きしない。回が増えれば動く（実際に44→48件へ動いて古くなった）。
     //   比べる他市の件数も同じ。直書きの「横浜114件」が、読み取りを直した後（262件）も残っていた（2026-10-08）。
-    thin: (F) => `相模原市営住宅は<strong>団地が39しかなく</strong>、他市より母数が小さい資料です。${MIN_N}件以上観測できた申込先は<strong>${F.enough}件</strong>で、${['kawasaki', 'kobe', 'yokohama'].map((k) => `${CITIES[k].short}${num(loadFrom(CITIES[k]).F.enough)}件`).join('・')}と比べるとはっきり薄いことを承知のうえでご覧ください。`,
+    thin: (F) => `相模原市営住宅は<strong>団地が39しかなく</strong>、他市より母数が小さい資料です。${MIN_N}件以上観測できた申込先は<strong>${F.enough}件</strong>で、${['kawasaki', 'kobe', 'yokohama'].map((k) => `${KOEI_ALL[k].short}${num(loadFrom(KOEI_ALL[k]).F.enough)}件`).join('・')}と比べるとはっきり薄いことを承知のうえでご覧ください。`,
   },
   // ── 県営（2026-09-30 ユーザー裁定「県営も売りに出そうか」）────────────────────
   // ★無料ページは scripts/kenei-build.mjs が作る（回×区分の倍率＝第154回 #171 の本体）。
@@ -175,6 +180,10 @@ export const CITIES = {
     check: { text: (F) => `${F.rounds}回とも、読み取った行の和が、抽選結果表にある<strong>管理事務所・支所ごとの合計行と一の位まで合う</strong>ことを確かめています。${F.noNameRows ? `住宅名を読み取れなかった${F.noNameRows}行（${F.noNameKoho}戸）は、申込先ごとの集計に入れていません。` : ''}` },
   },
 }
+// 売っている商品の表（free を除く）。特商法・有料の案内（offer-block・stamp-offers）・KV への投入（koei-put-pack）はこちらを読む。
+export const CITIES = Object.fromEntries(Object.entries(KOEI_ALL).filter(([, c]) => !c.free))
+// 無料で一覧まで出す政令市（2026-10-20〜）
+export const FREE_CITIES = Object.fromEntries(Object.entries(KOEI_ALL).filter(([, c]) => c.free))
 
 // ── 大阪府営（2026-10-01 ユーザー「粒度がいい狙い目の県を追加」）──────────────
 // ★同日ユーザー「大阪府はあえての無料公開にしましょう」。∴ CITIES（＝売っている商品の表）から外した。
@@ -217,7 +226,7 @@ export const normName = (s) => String(s ?? '').normalize('NFKC').replace(/[\s　
 export const isZero = (r) => r.moushikomi === 0
 
 export function load(key) {
-  const C = CITIES[key]
+  const C = KOEI_ALL[key]
   if (!C) throw new Error(`知らない市です: ${key}`)
   return loadFrom(C)
 }

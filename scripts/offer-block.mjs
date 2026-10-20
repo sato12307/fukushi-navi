@@ -17,7 +17,7 @@
 import { TOEI_PEEK, TOEI_PEEK_NOTE, TOEI_FACTS } from './toei-peek.mjs'
 import { peekBox } from './peek-box.mjs'
 // 政令市の市営住宅（商品の一覧と値段）の正典。ここに市名を書き写すと、市を足したときに入口だけ古いまま残る。
-import { CITIES, PRICE as KOEI_PRICE } from './koei-lib.mjs'
+import { CITIES, FREE_CITIES, PRICE as KOEI_PRICE } from './koei-lib.mjs'
 
 export const PACK_PRICE = 500
 export const TOEI_PRICE = 500
@@ -157,6 +157,14 @@ const hubItem = {
   },
 }
 
+// ★2026-10-20 売るのをやめて一覧まで無料にした政令市（koei-lib の free＝横浜・川崎・相模原・神戸）。
+//   有料の一覧からは外れるが、入口から消すと行き先を失うので、カードの中に「無料で読める」1行で残す。
+const freeKoeiLine = (up) => {
+  const cs = Object.values(FREE_CITIES)
+  return cs.length ? `  <p class="fine">${cs.map((c) => `<a href="${up}${c.key}/">${esc(c.city)}</a>`).join('・')}の市営住宅は、毎回すいている申込先の一覧まで<strong>無料</strong>で読めます。</p>
+` : ''
+}
+
 /**
  * 撒き餌の面に置く「有料の資料」の入口。topic … HUB_TOPIC のキー　up … ルートへの相対
  * local … 市区町村のページ（/hikazei/<5桁>/）用。{ city, code, pack, toei, koei }
@@ -187,7 +195,7 @@ export function offerHub(topic, { up = '../', local = null } = {}) {
   <ul>
 ${order.map((k) => hubItem[k]({ up, local })).join('\n')}
   </ul>
-  <p class="fine"><strong>買わなくても手続き・申し込みはできます。</strong>このページも、制度の説明も全部無料です。</p>
+${order.includes('koei') && !local ? freeKoeiLine(up) : ''}  <p class="fine"><strong>買わなくても手続き・申し込みはできます。</strong>このページも、制度の説明も全部無料です。</p>
   </div>`
 }
 

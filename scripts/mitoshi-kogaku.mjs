@@ -45,7 +45,12 @@ const shortLabel = (s) => s.replace(/^年収 /, '').replace('住民税非課税'
 // ── 既存の計算機と額が一致するか（2026年8月の額は2か所にある）──────────────
 {
   const art = fs.readFileSync(path.join(ROOT, 'articles', 'kougaku-ryouyouhi-2026.html'), 'utf8')
-  const pick = (k) => { const m = new RegExp(`${k}: \\{[^}]*newFix:\\s*(\\d+),\\s*newTh:\\s*(\\d+|null)`).exec(art); return m ? [Number(m[1]), m[2] === 'null' ? null : Number(m[2])] : null }
+  // ★2026-10-11（8dcfe208）に計算機の持ち方が newFix・newTh から new: { fix, th } に変わり、ここが読めずに止まっていた（10-20 に気づいて直した）。両方を読む。
+  const pick = (k) => {
+    //   定額の区分（エ・オ）は th を持たない＝null。
+    const m = new RegExp(`${k}: \\{[^\\n]*?new: \\{\\s*fix:\\s*(\\d+)(?:,\\s*th:\\s*(\\d+|null))?`).exec(art) || new RegExp(`${k}: \\{[^}]*newFix:\\s*(\\d+),\\s*newTh:\\s*(\\d+|null)`).exec(art)
+    return m ? [Number(m[1]), m[2] == null || m[2] === 'null' ? null : Number(m[2])] : null
+  }
   const want = { a: 'ア', i: 'イ', u: 'ウ', e: 'エ', o: 'オ' }
   for (const [k, kubun] of Object.entries(want)) {
     const got = pick(k)

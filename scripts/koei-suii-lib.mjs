@@ -20,7 +20,7 @@
 import fs from 'node:fs'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
-import { CITIES, WA, med, r1 } from './koei-lib.mjs'
+import { KOEI_ALL as CITIES, WA, med, r1 } from './koei-lib.mjs'   // 無料にした市（free）も推移を出す
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..')
 

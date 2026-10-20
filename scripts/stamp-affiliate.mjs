@@ -6,6 +6,7 @@
 // ★トップ3＝Cloudflare の直近14日・日本からの訪問の入口（2026-10-19 `node tools/cf-analytics.mjs --site fukushiru.com --days 14 --jp`）：
 //   住民税非課税の判定 770・生活保護の計算機 550・障害者控除 170。記事を入れ替えるときは下の SLOTS を直す。
 //   2026-10-20 に高額療養費の記事と障害福祉サービスの負担の記事を足して5記事にした（ユーザー指示）。
+//   同じ日に、一覧まで無料にした市営住宅の4面（横浜・川崎・相模原・神戸）にも入れて9面にした（ユーザー指示）。
 // ★なぜデプロイの直前に入れるか：この3記事には部分を書き換える台本（keisanki-sync・kinro-kojo-lib・hikazei-lib・stamp-offers など）が
 //   多くかかっており、リポジトリの HTML に書くとどれかに剥がされうる。AdSense のタグ（stamp-adsense.mjs）と同じく、公開の直前の1か所で入れる。
 //   ＝リポジトリの HTML には入らない（手元で開いた面にはバナーが無い）。本番で確かめること。
@@ -44,6 +45,10 @@ const SLOTS = [
   { file: 'articles/kougaku-ryouyouhi-2026.html', before: /^\s*<h2[^>]*>\s*コメント/m, html: SHURO },
   // 「③ 「1割」ではなく「1割かつ上限まで」」の後、「④ 上限とは別にかかる実費」の前
   { file: 'articles/shogai-service-futan.html', before: /^\s*<h2[^>]*>\s*④\s*上限とは別にかかる実費/m, html: SHURO },
+  // ★2026-10-20 ユーザー「公営住宅の有料ラインナップを一部無料開放しよう。そしてそのページに就労支援のアフィリエイトを貼ってみて、様子をみましょう」。
+  // 売るのをやめて一覧まで無料にした4市（koei-lib の free）。「② 毎回すいている申込先」の表の後、「③ 混んでいる申込先」の前。
+  //   比べる相手＝売り続けている静岡市・埼玉県営・愛知県営・都営（有料のまま・バナーなし）。
+  ...['yokohama', 'kawasaki', 'sagamihara', 'kobe'].map((k) => ({ file: `${k}/index.html`, before: /^\s*<h2 id="konde">/m, html: SHURO })),
 ]
 
 let ok = 0
