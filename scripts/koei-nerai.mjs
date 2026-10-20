@@ -24,7 +24,7 @@ import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { page, esc, SITE, readPrev, pageDiff, readSitemap, writeSitemap, sitemapLastmods, putUrls } from './shogai-kojo-page.mjs'
 import { offerKoeiLeaf, jumpKoei, offerKoeiSell } from './offer-block.mjs'
-import { load, loadFrom, OSAKA_FU, KOEI_ALL, MIN_N, SUKI, BURE, MIN_GROUP, PRICE, r1, num, pct, WA } from './koei-lib.mjs'
+import { load, loadFrom, OSAKA_FU, KOEI_ALL, MIN_N, SUKI, BURE, MIN_GROUP, PRICE, r1, num, pct, WA, normName } from './koei-lib.mjs'
 import { kanryoScript } from './kanryo-script.mjs'
 import { suiiOf, suiiSection, SUII_KEYS } from './koei-suii-lib.mjs'
 
@@ -40,6 +40,41 @@ const die = (msg) => { console.error(msg); console.error('何も書き出して�
 const tw = (inner) => `  <div class="table-wrap">\n${inner}\n  </div>`
 const tbl = (head, body) => tw(`  <table class="grid">\n  <thead><tr>${head}</tr></thead>\n  <tbody>\n${body}\n  </tbody></table>`)
 
+// ── 団地の条件（無料にした市・2026-10-20〜）───────────────────────────────────
+//   data/joken-<市>.json … 市の団地一覧から読んだ条件（建設年度・エレベーター・住所）と、倍率側の名前→団地の対応（nameMap）
+//   data/joken-geo.json  … 住所から測った最寄り駅と直線距離（scripts/joken-geo.mjs）
+//   どちらかが無い市は null（＝条件の列も節も出さない。いままでどおりの面）。
+const DIST_MAX = 1000   // 「駅に近い」の線＝ホームまで直線1km（道のりにすると約1.2km＝歩いて15分前後の目安）
+const distLabel = (m) => (m == null ? '' : m < 1000 ? `${Math.max(10, Math.round(m / 10) * 10)}m` : `${(Math.round(m / 100) / 10).toFixed(1)}km`)
+function loadJoken (C) {
+  const pj = path.join(ROOT, 'data', `joken-${C.key}.json`)
+  const pg = path.join(ROOT, 'data', 'joken-geo.json')
+  if (!fs.existsSync(pj) || !fs.existsSync(pg)) return null
+  const J = JSON.parse(fs.readFileSync(pj, 'utf8'))
+  const G = JSON.parse(fs.readFileSync(pg, 'utf8')).cities?.[C.key]
+  if (!G) return null
+  const byName = new Map(J.rows.map((r) => [r.name, r]))
+  // nameMap の鍵は倍率側の名前（横浜だけ「区|名前」）。申込先の欄は normName 済みなので、鍵もそろえる
+  const map = new Map()
+  for (const [k, v] of Object.entries(J.nameMap || {})) {
+    if (!v) continue
+    if (!byName.has(v)) die(`${C.city}：nameMap の行き先「${v}」が団地一覧（data/joken-${C.key}.json）に無い`)
+    map.set(k.split('|').map(normName).join('|'), v)
+  }
+  const withKu = Object.keys(J.nameMap || {}).some((k) => k.includes('|'))
+  return {
+    builtLabel: J.builtLabel || '建設年度', J, G,
+    of (h) {
+      const v = map.get(withKu ? `${h.ku || ''}|${h.name}` : h.name)
+      if (!v) return null
+      const r = byName.get(v), g = G.rows[v]
+      return { name: v, built: r.built ?? null, builtNew: r.builtNew ?? null, ev: r.ev ?? null, station: g?.station ?? null, line: g?.line ?? null, distM: g?.level === 'ooaza' ? null : g?.distM ?? null, level: g?.level ?? null,   // 大字の代表点は距離に使わない（joken-geo.mjs）
+        // 一覧の備考で「全戸退去済」「返還予定」（借上の返還）の団地。もう募集に出ないか出なくなるので、条件がいい申込先には入れない
+        gone: /全戸退去|返還/.test(r.note || '') ? r.note : null }
+    },
+  }
+}
+
 for (const key of keys) {
   const D = load(key)
   const { C, F, RANGE, READ_AT, INDEX_URL, SRC_NAME, enough, suki, buread, konde, shownGroups, BY_ROUND } = D
@@ -48,6 +83,7 @@ for (const key of keys) {
   const U = C.byRounds ? '回' : '件'   // 「毎回」の数え方（byRounds＝募集回の数）
   const BOSHU = C.boshu || '定期募集'   // 募集の呼び方（大阪府営は「総合募集」）
   const write = (rel, html) => pending.push([rel, html])
+  const OPEN = !!C.free   // 無料にした市（2026-10-20〜）。下の「無料にした市」の節を参照
 
   // ── 軸ごとの相場（無料）──────────────────────────────────────────────────
   const groupTable = tbl(
@@ -57,10 +93,24 @@ for (const key of keys) {
   const HI = shownGroups[shownGroups.length - 1]
   const RATIO = Math.round(HI.med / Math.max(LO.med, 0.1))
 
+  // ── 団地の条件（無料にした市だけ・2026-10-20〜）────────────────────────────
+  //   ユーザー「エレベーターや築年数、徒歩何分などの変数と倍率を比較したうえでコスパのいい住宅ランキング…既存の有料公営住宅
+  //   コンテンツにもいい見本になる」。応募状況表には条件が載っていないので、市の団地一覧（data/joken-<市>.json・scripts/joken-<市>.py）
+  //   と、住所から測った最寄り駅までの直線距離（data/joken-geo.json・scripts/joken-geo.mjs）を団地の名前でつなぐ。
+  //   ★名前のつなぎは読み取りの段で決めた nameMap だけを使う（ここで似た名前に寄せない＝別の団地の条件を見せない）。
+  const J = OPEN ? loadJoken(C) : null
+  const jcell = (h) => {
+    const a = J && J.of(h)
+    if (!a) return '<td></td><td class="num"></td><td></td>'
+    const st = a.station ? (a.level === 'ooaza' ? `${esc(a.station)}（距離は測れず）` : `${esc(a.station)} ${distLabel(a.distM)}${a.level === 'choume' ? '†' : ''}`) : ''
+    return `<td>${st}</td><td class="num">${a.built ? `${a.built}${a.builtNew && a.builtNew !== a.built ? '〜' : ''}` : ''}</td><td>${esc(a.ev || '')}</td>`
+  }
+
   // ── 表の部品（有料資料と、売り場の抜粋の両方で使う）──────────────────────
   const TH = C.cols.map(([, label]) => `<th>${esc(label)}</th>`).join('') +
+    (J ? `<th>最寄り駅（直線）</th><th class="num">${esc(J.builtLabel)}</th><th>エレベーター</th>` : '') +
     '<th class="num">中央値</th><th class="num">最低</th><th class="num">最高</th><th class="num">観測</th><th class="num">申込0</th><th class="num">のべ戸数</th><th class="num">最後の募集</th>'
-  const hrow = (h) => '<tr>' + C.cols.map(([f]) => `<td>${esc(h[f] || '')}</td>`).join('') +
+  const hrow = (h) => '<tr>' + C.cols.map(([f]) => `<td>${esc(h[f] || '')}</td>`).join('') + (J ? jcell(h) : '') +
     `<td class="num">${r1(h.med)}</td><td class="num">${r1(h.min)}</td><td class="num">${r1(h.max)}</td><td class="num">${h.n}</td><td class="num">${h.zero || ''}</td><td class="num">${h.koho}</td><td class="num">${W(h.last)}</td></tr>`
   const table = (list) => `<table class="grid"><thead><tr>${TH}</tr></thead><tbody>\n${list.map(hrow).join('\n')}\n</tbody></table>`
 
@@ -154,7 +204,9 @@ ${C.thin ? `  <li>${C.thin(F)}</li>
   <li>「観測」の単位は募集件数で、募集回の数ではありません。同じ回に同じ住宅で複数の区分・住戸が募集されることがあり、その1件ずつを数えています。${C.byRounds ? `ただし「毎回すいている」の対象は、<strong>${MIN_N}回以上の募集で観測できた申込先</strong>だけです（同じ回に何戸出ても1回と数えます）。` : ''}</li>
   <li>${esc(C.note)}</li>
   <li>本資料は公表表の転載・改変ではなく、公表された数値から当方が計算した指標（中央値・最低・最高・件数）を、当方の区分で並べたものです。</li>
-  <li>当サイトは${esc(C.orgs || C.city)}とは関係のない個人が運営しています。制度・資格・募集内容は必ず公式の募集案内でご確認ください。</li>`
+${J ? `  <li>団地の条件（${esc(J.builtLabel)}・エレベーター・所在地）は、${J.J.sources.map((x) => `<a href="${esc(x.url)}" rel="nofollow">${esc(x.name)}</a>（${esc(x.asof || '')}）`).join('・')}から当方が団地ごとにまとめたものです。棟によって違う団地は、${esc(J.builtLabel)}はいちばん古い棟、エレベーターは全部の棟にあれば「あり」・一部の棟だけなら「一部」としています。応募状況表の住宅名と団地一覧の名前は当方が突き合わせており、つなげられなかった申込先は条件の欄が空いています。</li>
+  <li>最寄り駅と直線距離は、団地の所在地を国土交通省「位置参照情報」で位置に直し、国土交通省「国土数値情報（鉄道データ）」の駅のホームまでを測ったものです（どちらも当方で加工）。道のりや所要時間ではありません。</li>
+` : ''}  <li>当サイトは${esc(C.orgs || C.city)}とは関係のない個人が運営しています。制度・資格・募集内容は必ず公式の募集案内でご確認ください。</li>`
 
   // ── 売り場のカード ──────────────────────────────────────────────────────
   //   抜粋は有料資料の本文からそのまま切る。下で突き合わせて、違えば止める。
@@ -183,7 +235,6 @@ ${peekList.slice(0, PEEK_ROWS).map((h) => `    ${hrow(h)}`).join('\n')}
   //   ユーザー「公営住宅の有料ラインナップを一部無料開放しよう。そのページに就労支援のアフィリエイトを貼ってみて、様子をみましょう」。
   //   表は有料資料と同じ行（hrow・table・filterBlock）から作る。資料の箱（.box・.wrap）はサイトの部品（.callout・.table-wrap）に置き換える。
   //   アフィリエイトのバナーは scripts/stamp-affiliate.mjs が公開の直前に③の前へ入れる。
-  const OPEN = !!C.free
   //   ★表は1行に収めて横にスクロールさせる（資料と同じ・売り場の抜粋と同じ）。折り返すと320px幅で1行が300px超になる（toei-check.mjs が検知）。
   const fwrap = (s) => s.replace(/<div class="wrap">/g, '<div class="table-wrap">').replace(/<table class="grid"( id="idx")?>/g, '<table class="grid"$1 style="white-space:nowrap">').replace('<div class="box" id="flt">', '<div class="callout note" id="flt">')
   const EVWARN = `  <div class="callout warn"><p><span class="tag">先に知っておいてください</span>
@@ -193,14 +244,73 @@ ${peekList.slice(0, PEEK_ROWS).map((h) => `    ${hrow(h)}`).join('\n')}
   ${C.key === 'shizuoka' || C.key === 'kobe' ? '階だけは資料にありますが、実測では倍率とほとんど関係がありませんでした（エレベーターの有無が分からないため、階だけでは住みやすさを測れません）。' : ''}
   ∴ この一覧は<strong>当たりやすさだけを並べたもの</strong>で、設備や築年数で選り分けてはいません。
   気になる申込先が見つかったら、<strong>その回の募集案内と現地で、エレベーターの有無・階・築年数を必ず確かめてください。</strong></p></div>`
+  // 条件をつないだ市は、注意書きを「条件の列を足した・条件もそろう申込先はこちら」に替える
+  const EVWARN_J = J ? `  <div class="callout warn"><p><span class="tag">先に知っておいてください</span>
+  <strong>倍率が低い申込先だけを並べると、空いている理由がそのまま集まります。</strong>
+  都営住宅では同じ集計で確かめられました——毎回すいている595件のうち59%は、エレベーターが無いか築39年より古い住宅でした（<a href="../toei/">都営住宅のページ</a>）。
+  ${esc(C.city)}の応募状況表にはエレベーターの有無も建てられた年も載っていないので、<strong>${esc(C.city)}の団地一覧から${esc(J.builtLabel)}とエレベーターを、住所から最寄り駅までの直線距離を</strong>当方で足しました（表の「最寄り駅（直線）」「${esc(J.builtLabel)}」「エレベーター」の欄）。
+  倍率と条件の両方がそろう申込先は <a href="#kosupa">倍率のわりに条件がいい申込先</a> にまとめています。
+  条件の欄は団地全体の値で、<strong>申し込む住戸の階やエレベーターの止まり方とは限りません</strong>。その回の募集案内と現地で必ず確かめてください。</p></div>` : ''
+
+  // ── 倍率のわりに条件がいい申込先（条件をつないだ市だけ）─────────────────────
+  //   県営の無料ページ（kenei-free.mjs の kosupaSection）と同じ考え方：点数は付けず、条件を全部満たすかで切って、倍率の低い順。
+  //   ★条件の線：中央値${SUKI}倍未満・駅のホームまで直線${DIST_MAX}m以内・建てた年が真ん中より新しい側・全部の棟にエレベーター。
+  //   ★事故住宅（横浜は令和5年10月から「特別空家」）は空いている理由が別にあるので除く。
+  let KOSUPA = '', kosupaN = 0
+  if (J) {
+    const base = enough.filter((h) => !/事故|特別空家/.test(`${h.cat || ''}${h.kind || ''}`))
+    const withJ = base.map((h) => [h, J.of(h)]).filter(([, a]) => a)
+    const ys = withJ.map(([, a]) => a.built).filter(Boolean).sort((a, b) => a - b)
+    const yMed = ys[Math.floor((ys.length - 1) / 2)]
+    // 3つの条件。どれを満たすかを申込先ごとに持つ（★点数にはしない。そろった数と、欠けた条件の名前だけ）
+    const CONDS = [
+      { k: 'near', ok: (a) => a.distM != null && a.distM <= DIST_MAX, head: '新しくてエレベーターもあるが、駅からは遠い（直線1kmより先）' },
+      { k: 'new', ok: (a) => a.built != null && a.built >= yMed, head: `駅に近くてエレベーターもあるが、古い（${J.builtLabel}が${yMed}年より前）` },
+      { k: 'ev', ok: (a) => a.ev === 'あり', head: '駅に近くて新しいが、エレベーターが無い棟がある' },
+    ]
+    const cand = withJ.filter(([h, a]) => h.med < SUKI && !a.gone && a.distM != null)   // 距離を測れなかった申込先は「遠い」とも言えないので入れない
+      .map(([h, a]) => ({ h, a, met: CONDS.filter((c) => c.ok(a)) }))
+    const noDist = withJ.filter(([h, a]) => h.med < SUKI && !a.gone && a.distM == null).length
+    const byMed = (x, y) => x.h.med - y.h.med || (x.a.distM ?? 9e9) - (y.a.distM ?? 9e9)
+    const all3 = cand.filter((x) => x.met.length === 3).sort(byMed)
+    // ★エレベーターが一覧に載っていない団地（横浜の借上住宅など）は「無い」ではなく「分からない」。
+    //   「エレベーターが無い棟がある」の表に入れず、駅に近くて新しいものだけ別の表に出す
+    const two = cand.filter((x) => x.met.length === 2 && !(x.a.ev == null && !x.met.some((c) => c.k === 'ev'))).sort(byMed)
+    const evUnk = cand.filter((x) => x.a.ev == null && x.met.length === 2 && !x.met.some((c) => c.k === 'ev')).sort(byMed)
+    const sukiN = base.filter((h) => h.med < SUKI).length
+    const shown = [...all3, ...two, ...evUnk]
+    const zero = shown.filter((x) => x.h.med === 0).length
+    const choumeN = shown.filter((x) => x.a.level === 'choume').length
+    kosupaN = shown.length
+    const T = (xs) => tw(table(xs.map((x) => x.h)).replace('<table class="grid">', '<table class="grid" style="white-space:nowrap">'))
+    const twoGroups = CONDS.map((c) => {
+      const xs = two.filter((x) => !x.met.includes(c))
+      return xs.length ? `  <h3>${c.head}（${xs.length}件）</h3>\n${T(xs)}` : ''
+    }).filter(Boolean).join('\n') + (evUnk.length
+      ? `\n  <h3>駅に近くて新しいが、エレベーターの有無が団地一覧に載っていない（${evUnk.length}件）</h3>\n  <p class="note">民間の建物を市が借り上げた住宅などは、市の資料にエレベーターの台数が載っていません。「無い」という意味ではないので、募集案内で確かめてください。</p>\n${T(evUnk)}`
+      : '')
+    KOSUPA = `  <h2 id="kosupa">倍率のわりに条件がいい申込先（${num(shown.length)}件・無料）</h2>
+  <p>倍率の低い順に並べるだけだと、<strong>駅から遠い・階段しかない・古い</strong>といった「空いている理由」のある住宅ばかりが上に来ます。そこで都営住宅の一覧と同じ考え方で、<strong>倍率が比較的ましな申込先</strong>（${MIN_N}${U}以上の募集に出て、倍率の中央値が${SUKI}倍未満。1回だけたまたま空いた住宅は入りません）に、住む条件を3つ当てました。</p>
+  <ol>
+  <li><strong>駅に近い</strong>：駅のホームまで直線${num(DIST_MAX)}m以内（道のりにするとおおむね1.2km＝歩いて15分前後の目安。住所の位置から測った直線距離で、坂や線路の渡り方は入っていません）</li>
+  <li><strong>新しい</strong>：${esc(J.builtLabel)}が${yMed}年以降（条件をつなげられた申込先の真ん中より新しい側。棟によって違う団地は、いちばん古い棟で判定）</li>
+  <li><strong>エレベーターあり</strong>：全部の棟にエレベーターがある（一部の棟だけの団地は入れていません）</li>
+  </ol>
+  <p>${MIN_N}${U}以上観測できた申込先${num(base.length)}件（事故住宅を除く）のうち、団地の条件をつなげられたのが${num(withJ.length)}件、倍率の中央値が${SUKI}倍未満なのは${num(sukiN)}件。そのうち<strong>3つともそろうのが${num(all3.length)}件</strong>、2つそろうのが${num(two.length + evUnk.length)}件です。どちらも倍率の中央値の低い順、同じなら駅に近い順です。${zero ? `中央値が0倍の${zero}件は、<strong>募集された住戸の半分以上で応募が1件も無かった</strong>申込先です。` : ''}${choumeN ? `駅までの距離に†が付いた${choumeN}件は、番地まで位置が当たらず丁目の代表点から測ったもので、数百mずれることがあります。` : ''}${noDist ? `中央値${SUKI}倍未満のうち${noDist}件は、所在地が大字までしか分からず駅までの距離を測れなかったので入れていません（索引の「最寄り駅」の欄に「距離は測れず」と出ています）。` : ''}</p>
+  <h3>3つともそろう（${all3.length}件）</h3>
+${all3.length ? T(all3) : '  <p>いまの読み取りでは、3つともそろう申込先はありませんでした。下の「2つそろう」から、ご自身にとって欠けても困らない条件の表を見てください。</p>'}
+${twoGroups}
+  <p class="note">点数は付けていません。どの条件が大事かは読む人によって違う（階段がつらい人にはエレベーター、車の無い人には駅）ので、そろった条件の数と、欠けた条件の名前で分けています。条件の欄は団地全体の値で、申し込む住戸の階やエレベーターの止まり方とは限りません。${esc(C.axis.label)}によって申し込める世帯が違うので、ご自身が申し込める区分かどうかを必ず確かめてください。</p>
+`
+  }
   const JUMP = OPEN
-    ? `  <p><strong>申込先ごとの一覧まで、このページで全部無料で読めます。</strong>→ <a href="#suki">毎回すいている申込先（${num(F.suki)}件）</a> ／ <a href="#konde">混んでいる申込先</a> ／ <a href="#bure">回によって動く申込先</a> ／ <a href="#zero">申込者ゼロが出た申込先</a> ／ <a href="#all">申込先の索引（${num(F.enough)}件）</a></p>`
+    ? `  <p><strong>申込先ごとの一覧まで、このページで全部無料で読めます。</strong>→ ${J ? `<a href="#kosupa">倍率のわりに条件がいい申込先（${num(kosupaN)}件）</a> ／ ` : ''}<a href="#suki">毎回すいている申込先（${num(F.suki)}件）</a> ／ <a href="#konde">混んでいる申込先</a> ／ <a href="#bure">回によって動く申込先</a> ／ <a href="#zero">申込者ゼロが出た申込先</a> ／ <a href="#all">申込先の索引（${num(F.enough)}件）</a></p>`
     : jumpKoei({ ...facts, up: '../' })
   const SEC_LIST = OPEN
     ? `  <h2 id="suki">② 毎回すいている申込先（${num(F.suki)}件・無料）</h2>
   <p>${SEC2_LEAD}${esc(C.axis.label)}ごとに分けています。</p>
   <p class="note">申込資格（${esc(C.shikaku ? `${C.shikaku}・世帯構成` : '市内在住・収入基準・世帯構成')}）を満たしていなければ、倍率がいくら低くても申し込めません。資格は${esc(facts.guideOrg)}の募集案内でご確認ください。<strong>対象は${esc(facts.only)}</strong>で、${esc(facts.notIn)}は入っていません。</p>
-${EVWARN}
+${J ? EVWARN_J : EVWARN}
 ${fwrap(sukiByGroup)}${sukiOther ? `\n${fwrap(sukiOther)}` : ''}`
     : `  <h2 id="pack">② 申込先ごとの一覧（${PRICE}円）</h2>
   <p class="offer-lead"><strong>申込書に書けるのは基本的に1回につき1つ</strong>です。${esc(C.axis.label)}ごとの相場が分かっても、最後は申込先を1つに決めることになります。そこだけは申込先ごとの実測が要ります。</p>
@@ -239,7 +349,7 @@ ${JUMP}
   <p>個々の住宅を選ぶ前に、ここを確かめてください。${RANGE}の全${num(F.rows)}件を${esc(C.axis.label)}ごとに分けると、<strong>${esc(LO.label)}の中央値${LO.med}倍に対して${esc(HI.label)}は${HI.med}倍</strong>で、<strong>${RATIO}倍</strong>ひらいています。申込先が${MIN_GROUP}件以上ある${esc(C.axis.label)}だけを倍率の低い順に並べました。</p>
 ${groupTable}
 
-${SEC_LIST}
+${KOSUPA}${SEC_LIST}
 
   <h2 id="konde">③ 混んでいる申込先（実名・無料）</h2>
   <p>避けるべき相手も無料で出します。${MIN_N}件以上観測できた申込先を、倍率の中央値が高い順に12件。</p>

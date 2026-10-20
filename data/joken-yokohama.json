@@ -1,0 +1,4183 @@
+{
+ "city": "横浜市",
+ "updated": "2026-10-20",
+ "sources": [
+  {
+   "name": "横浜市 市営住宅一覧",
+   "url": "https://www.city.yokohama.lg.jp/kurashi/sumai-kurashi/jutaku/joho/sieiitiran.html",
+   "asof": "2026年5月1日更新",
+   "used": "団地名・区・所在地（番地まで）・種類（直接建設／借上／改良）。建設年度は棟データに無い団地だけ着工年度で埋めた（builtSrc=着工）"
+  },
+  {
+   "name": "横浜市 区別の住宅・管理設備等詳細データ（市営住宅等指定管理者の公募資料・Excel 18本）",
+   "url": "https://www.city.yokohama.lg.jp/kurashi/sumai-kurashi/jutaku/joho/jutakukanri/shiteikanri/r05sentei.html",
+   "asof": "令和5年4月1日現在（2023年5月公表）",
+   "used": "棟データの竣功年度（built・builtNew）・階層（floorsMax）・エレベーター台数（ev）、団地データの棟数（buildings）"
+  },
+  {
+   "name": "横浜市 昇降機設置状況一覧（同じ公募資料・PDF）",
+   "url": "https://www.city.yokohama.lg.jp/kurashi/sumai-kurashi/jutaku/joho/jutakukanri/shiteikanri/r05sentei.files/409_syoukoukisecchijyoukyou.pdf",
+   "asof": "令和５年３月31日時点",
+   "used": "エレベーターのある市有の棟（ev。棟データの台数と多いほうを採る）。棟データに階層の無い団地の floorsMax"
+  }
+ ],
+ "builtLabel": "竣功年度",
+ "rows": [
+  {
+   "name": "梶山住宅",
+   "ku": "鶴見区",
+   "addr": "横浜市鶴見区梶山二丁目12番４号",
+   "built": 1996,
+   "builtSrc": "竣功",
+   "builtNew": 1996,
+   "floorsMax": 8,
+   "buildings": 1,
+   "ev": "あり",
+   "kind": [
+    "公営住宅（直接建設）"
+   ]
+  },
+  {
+   "name": "駒岡住宅",
+   "ku": "鶴見区",
+   "addr": "横浜市鶴見区駒岡四丁目28番",
+   "built": 2002,
+   "builtSrc": "竣功",
+   "builtNew": 2002,
+   "floorsMax": 4,
+   "buildings": 4,
+   "ev": "一部",
+   "kind": [
+    "公営住宅（直接建設）"
+   ]
+  },
+  {
+   "name": "鶴見中央住宅",
+   "ku": "鶴見区",
+   "addr": "横浜市鶴見区鶴見中央三丁目28番9号",
+   "built": 2002,
+   "builtSrc": "竣功",
+   "builtNew": 2002,
+   "floorsMax": 7,
+   "buildings": 1,
+   "ev": "あり",
+   "kind": [
+    "公営住宅（直接建設）",
+    "改良住宅"
+   ]
+  },
+  {
+   "name": "生麦住宅",
+   "ku": "鶴見区",
+   "addr": "横浜市鶴見区生麦一丁目3番1号",
+   "built": 1977,
+   "builtSrc": "竣功",
+   "builtNew": 1977,
+   "floorsMax": 10,
+   "buildings": 1,
+   "ev": "あり",
+   "kind": [
+    "公営住宅（直接建設）"
+   ]
+  },
+  {
+   "name": "矢向住宅",
+   "ku": "鶴見区",
+   "addr": "横浜市鶴見区矢向五丁目12番14号",
+   "built": 1976,
+   "builtSrc": "竣功",
+   "builtNew": 1976,
+   "floorsMax": 5,
+   "buildings": 1,
+   "ev": "なし",
+   "kind": [
+    "公営住宅（直接建設）"
+   ]
+  },
+  {
+   "name": "矢向第二住宅",
+   "ku": "鶴見区",
+   "addr": "横浜市鶴見区矢向四丁目32番11号",
+   "built": 1996,
+   "builtSrc": "竣功",
+   "builtNew": 1996,
+   "floorsMax": 6,
+   "buildings": 1,
+   "ev": "あり",
+   "kind": [
+    "公営住宅（直接建設）"
+   ]
+  },
+  {
+   "name": "神大寺ハイツ",
+   "ku": "神奈川区",
+   "addr": "横浜市神奈川区神大寺二丁目2番",
+   "built": 1986,
+   "builtSrc": "竣功",
+   "builtNew": 1986,
+   "floorsMax": 4,
+   "buildings": 2,
+   "ev": "なし",
+   "kind": [
+    "公営住宅（直接建設）"
+   ]
+  },
+  {
+   "name": "栗田谷ヒルズ",
+   "ku": "神奈川区",
+   "addr": "横浜市神奈川区栗田谷44番34号",
+   "built": 2006,
+   "builtSrc": "竣功",
+   "builtNew": 2006,
+   "floorsMax": 5,
+   "buildings": 2,
+   "ev": "あり",
+   "kind": [
+    "公営住宅（直接建設）"
+   ]
+  },
+  {
+   "name": "グリーンヒル三ツ沢",
+   "ku": "神奈川区",
+   "addr": "横浜市神奈川区三ツ沢中町29番",
+   "built": 1997,
+   "builtSrc": "竣功",
+   "builtNew": 1997,
+   "floorsMax": 4,
+   "buildings": 7,
+   "ev": "なし",
+   "kind": [
+    "公営住宅（直接建設）"
+   ]
+  },
+  {
+   "name": "菅田ハイツ",
+   "ku": "神奈川区",
+   "addr": "横浜市神奈川区菅田町1622番地",
+   "built": 1989,
+   "builtSrc": "竣功",
+   "builtNew": 1989,
+   "floorsMax": 3,
+   "buildings": 18,
+   "ev": "なし",
+   "kind": [
+    "公営住宅（直接建設）"
+   ]
+  },
+  {
+   "name": "西台町住宅",
+   "ku": "神奈川区",
+   "addr": "横浜市神奈川区菅田町966番地",
+   "built": 1980,
+   "builtSrc": "竣功",
+   "builtNew": 1980,
+   "floorsMax": 5,
+   "buildings": 1,
+   "ev": "なし",
+   "kind": [
+    "公営住宅（直接建設）"
+   ]
+  },
+  {
+   "name": "三ツ沢中町ハイツ",
+   "ku": "神奈川区",
+   "addr": "横浜市神奈川区三ツ沢中町14番",
+   "built": 1993,
+   "builtSrc": "竣功",
+   "builtNew": 1993,
+   "floorsMax": 4,
+   "buildings": 6,
+   "ev": "なし",
+   "kind": [
+    "公営住宅（直接建設）"
+   ]
+  },
+  {
+   "name": "藤棚ハイツ",
+   "ku": "西区",
+   "addr": "横浜市西区藤棚町2丁目198番地",
+   "built": 1996,
+   "builtSrc": "竣功",
+   "builtNew": 1996,
+   "floorsMax": 11,
+   "buildings": 2,
+   "ev": "あり",
+   "kind": [
+    "公営住宅（直接建設）",
+    "改良住宅"
+   ]
+  },
+  {
+   "name": "尾張屋橋住宅",
+   "ku": "西区",
+   "addr": "横浜市西区西平沼町７番４号",
+   "built": 2024,
+   "builtSrc": "着工",
+   "builtNew": 2024,
+   "floorsMax": null,
+   "buildings": null,
+   "ev": null,
+   "kind": [
+    "公営住宅（直接建設）",
+    "改良住宅（更新住宅）"
+   ]
+  },
+  {
+   "name": "ビューコート小港",
+   "ku": "中区",
+   "addr": "横浜市中区小港町1丁目1番地の5",
+   "built": 1997,
+   "builtSrc": "竣功",
+   "builtNew": 1997,
+   "floorsMax": 11,
+   "buildings": 1,
+   "ev": "あり",
+   "kind": [
+    "公営住宅（直接建設）"
+   ]
+  },
+  {
+   "name": "不老町住宅",
+   "ku": "中区",
+   "addr": "横浜市中区不老町3丁目15番地の2",
+   "built": 1996,
+   "builtSrc": "竣功",
+   "builtNew": 1996,
+   "floorsMax": 9,
+   "buildings": 1,
+   "ev": "あり",
+   "kind": [
+    "公営住宅（直接建設）"
+   ]
+  },
+  {
+   "name": "ベイサイド新山下",
+   "ku": "中区",
+   "addr": "横浜市中区新山下三丁目14番1号",
+   "built": 1989,
+   "builtSrc": "竣功",
+   "builtNew": 2002,
+   "floorsMax": 11,
+   "buildings": 7,
+   "ev": "あり",
+   "kind": [
+    "公営住宅（直接建設）",
+    "改良住宅"
+   ]
+  },
+  {
+   "name": "寿町スカイハイツ",
+   "ku": "中区",
+   "addr": "横浜市中区寿町四丁目14番地",
+   "built": 2018,
+   "builtSrc": "竣功",
+   "builtNew": 2018,
+   "floorsMax": 9,
+   "buildings": 1,
+   "ev": "あり",
+   "kind": [
+    "公営住宅（直接建設）"
+   ]
+  },
+  {
+   "name": "清水ヶ丘ハイツ",
+   "ku": "南区",
+   "addr": "横浜市南区清水ケ丘197番地の1",
+   "built": 1999,
+   "builtSrc": "竣功",
+   "builtNew": 1999,
+   "floorsMax": 5,
+   "buildings": 2,
+   "ev": "あり",
+   "kind": [
+    "公営住宅（直接建設）"
+   ]
+  },
+  {
+   "name": "永田山王台住宅",
+   "ku": "南区",
+   "addr": "横浜市南区永田山王台34番",
+   "built": 1984,
+   "builtSrc": "竣功",
+   "builtNew": 1984,
+   "floorsMax": 3,
+   "buildings": 3,
+   "ev": "なし",
+   "kind": [
+    "公営住宅（直接建設）"
+   ]
+  },
+  {
+   "name": "中村町住宅",
+   "ku": "南区",
+   "addr": "横浜市南区中村町３丁目211番地",
+   "built": 2023,
+   "builtSrc": "着工",
+   "builtNew": 2023,
+   "floorsMax": null,
+   "buildings": null,
+   "ev": null,
+   "kind": [
+    "公営住宅（直接建設）",
+    "改良住宅（更新住宅）"
+   ]
+  },
+  {
+   "name": "野庭住宅",
+   "ku": "港南区",
+   "addr": "横浜市港南区野庭町635番地",
+   "built": 1973,
+   "builtSrc": "竣功",
+   "builtNew": 1983,
+   "floorsMax": 5,
+   "buildings": 88,
+   "ev": "なし",
+   "kind": [
+    "公営住宅（直接建設）"
+   ]
+  },
+  {
+   "name": "日野住宅",
+   "ku": "港南区",
+   "addr": "横浜市港南区日野南三丁目１番１号",
+   "built": 1982,
+   "builtSrc": "竣功",
+   "builtNew": 1982,
+   "floorsMax": 5,
+   "buildings": 1,
+   "ev": "なし",
+   "kind": [
+    "公営住宅（直接建設）"
+   ]
+  },
+  {
+   "name": "岩井町第二住宅",
+   "ku": "保土ケ谷区",
+   "addr": "横浜市保土ケ谷区岩井町238番地",
+   "built": 1992,
+   "builtSrc": "竣功",
+   "builtNew": 1992,
+   "floorsMax": 4,
+   "buildings": 1,
+   "ev": "なし",
+   "kind": [
+    "公営住宅（直接建設）"
+   ]
+  },
+  {
+   "name": "岩崎町住宅",
+   "ku": "保土ケ谷区",
+   "addr": "横浜市保土ケ谷区岩崎町37番",
+   "built": 1995,
+   "builtSrc": "竣功",
+   "builtNew": 1995,
+   "floorsMax": 4,
+   "buildings": 4,
+   "ev": "あり",
+   "kind": [
+    "公営住宅（直接建設）"
+   ]
+  },
+  {
+   "name": "霞台グリーンハイツ",
+   "ku": "保土ケ谷区",
+   "addr": "横浜市保土ケ谷区霞台4番1号",
+   "built": 1998,
+   "builtSrc": "竣功",
+   "builtNew": 2001,
+   "floorsMax": 4,
+   "buildings": 3,
+   "ev": "あり",
+   "kind": [
+    "公営住宅（直接建設）"
+   ]
+  },
+  {
+   "name": "川辺町住宅",
+   "ku": "保土ケ谷区",
+   "addr": "横浜市保土ケ谷区川辺町4番地の2",
+   "built": 1972,
+   "builtSrc": "竣功",
+   "builtNew": 1972,
+   "floorsMax": 15,
+   "buildings": 1,
+   "ev": "あり",
+   "kind": [
+    "公営住宅（直接建設）"
+   ]
+  },
+  {
+   "name": "川辺町第二住宅",
+   "ku": "保土ケ谷区",
+   "addr": "横浜市保土ケ谷区川辺町4番地の3",
+   "built": 1993,
+   "builtSrc": "竣功",
+   "builtNew": 1993,
+   "floorsMax": 10,
+   "buildings": 2,
+   "ev": "あり",
+   "kind": [
+    "公営住宅（直接建設）"
+   ]
+  },
+  {
+   "name": "コンフォール明神台",
+   "ku": "保土ケ谷区",
+   "addr": "横浜市保土ケ谷区明神台2番",
+   "built": 2002,
+   "builtSrc": "竣功",
+   "builtNew": 2006,
+   "floorsMax": 14,
+   "buildings": 2,
+   "ev": "あり",
+   "kind": [
+    "公営住宅（直接建設）"
+   ]
+  },
+  {
+   "name": "桜ケ丘グリーンハイツ",
+   "ku": "保土ケ谷区",
+   "addr": "横浜市保土ケ谷区岩崎町12番",
+   "built": 2007,
+   "builtSrc": "竣功",
+   "builtNew": 2008,
+   "floorsMax": 3,
+   "buildings": 9,
+   "ev": "あり",
+   "kind": [
+    "公営住宅（直接建設）"
+   ]
+  },
+  {
+   "name": "西原グリーンハイツ",
+   "ku": "保土ケ谷区",
+   "addr": "横浜市保土ケ谷区川島町1505番地",
+   "built": 1989,
+   "builtSrc": "竣功",
+   "builtNew": 1989,
+   "floorsMax": 5,
+   "buildings": 3,
+   "ev": "なし",
+   "kind": [
+    "公営住宅（直接建設）"
+   ]
+  },
+  {
+   "name": "初音が丘住宅",
+   "ku": "保土ケ谷区",
+   "addr": "横浜市保土ケ谷区初音ケ丘41番",
+   "built": 1981,
+   "builtSrc": "竣功",
+   "builtNew": 1981,
+   "floorsMax": 3,
+   "buildings": 4,
+   "ev": "なし",
+   "kind": [
+    "公営住宅（直接建設）"
+   ]
+  },
+  {
+   "name": "法泉ハイツ",
+   "ku": "保土ケ谷区",
+   "addr": "横浜市保土ケ谷区法泉三丁目22番",
+   "built": 1986,
+   "builtSrc": "竣功",
+   "builtNew": 1988,
+   "floorsMax": 3,
+   "buildings": 19,
+   "ev": "なし",
+   "kind": [
+    "公営住宅（直接建設）"
+   ]
+  },
+  {
+   "name": "旭グリーンハイツ",
+   "ku": "旭区",
+   "addr": "横浜市旭区中希望が丘242番地",
+   "built": 1982,
+   "builtSrc": "竣功",
+   "builtNew": 1982,
+   "floorsMax": 3,
+   "buildings": 3,
+   "ev": "なし",
+   "kind": [
+    "公営住宅（直接建設）"
+   ]
+  },
+  {
+   "name": "今宿ハイツ",
+   "ku": "旭区",
+   "addr": "横浜市旭区今宿東町807番地",
+   "built": 1990,
+   "builtSrc": "竣功",
+   "builtNew": 1991,
+   "floorsMax": 5,
+   "buildings": 13,
+   "ev": "なし",
+   "kind": [
+    "公営住宅（直接建設）"
+   ]
+  },
+  {
+   "name": "川井本町住宅",
+   "ku": "旭区",
+   "addr": "横浜市旭区川井本町57番地の8",
+   "built": 1997,
+   "builtSrc": "竣功",
+   "builtNew": 1997,
+   "floorsMax": 7,
+   "buildings": 3,
+   "ev": "一部",
+   "kind": [
+    "公営住宅（直接建設）"
+   ]
+  },
+  {
+   "name": "グリーンヒル上白根",
+   "ku": "旭区",
+   "addr": "横浜市旭区上白根町112番地",
+   "built": 1996,
+   "builtSrc": "竣功",
+   "builtNew": 1996,
+   "floorsMax": 11,
+   "buildings": 7,
+   "ev": "あり",
+   "kind": [
+    "公営住宅（直接建設）"
+   ]
+  },
+  {
+   "name": "笹野台住宅",
+   "ku": "旭区",
+   "addr": "横浜市旭区笹野台二丁目42番",
+   "built": 2001,
+   "builtSrc": "竣功",
+   "builtNew": 2001,
+   "floorsMax": 7,
+   "buildings": 5,
+   "ev": "あり",
+   "kind": [
+    "公営住宅（直接建設）"
+   ]
+  },
+  {
+   "name": "善部町住宅",
+   "ku": "旭区",
+   "addr": "横浜市旭区善部町27番地の2",
+   "built": 2003,
+   "builtSrc": "竣功",
+   "builtNew": 2003,
+   "floorsMax": 4,
+   "buildings": 1,
+   "ev": "あり",
+   "kind": [
+    "公営住宅（直接建設）"
+   ]
+  },
+  {
+   "name": "鶴ケ峰南住宅",
+   "ku": "旭区",
+   "addr": "横浜市旭区鶴ケ峰一丁目76番地の1",
+   "built": 2002,
+   "builtSrc": "竣功",
+   "builtNew": 2004,
+   "floorsMax": 7,
+   "buildings": 5,
+   "ev": "あり",
+   "kind": [
+    "公営住宅（直接建設）"
+   ]
+  },
+  {
+   "name": "中希望が丘ハイツ",
+   "ku": "旭区",
+   "addr": "横浜市旭区中希望が丘225番地",
+   "built": 1996,
+   "builtSrc": "竣功",
+   "builtNew": 1996,
+   "floorsMax": 3,
+   "buildings": 1,
+   "ev": "あり",
+   "kind": [
+    "公営住宅（直接建設）"
+   ]
+  },
+  {
+   "name": "東希望が丘ハイツ",
+   "ku": "旭区",
+   "addr": "横浜市旭区東希望が丘229番地",
+   "built": 1994,
+   "builtSrc": "竣功",
+   "builtNew": 1994,
+   "floorsMax": 7,
+   "buildings": 2,
+   "ev": "一部",
+   "kind": [
+    "公営住宅（直接建設）"
+   ]
+  },
+  {
+   "name": "ひかりが丘住宅",
+   "ku": "旭区",
+   "addr": "横浜市旭区上白根町795番地",
+   "built": 1969,
+   "builtSrc": "竣功",
+   "builtNew": 1993,
+   "floorsMax": 5,
+   "buildings": 57,
+   "ev": "一部",
+   "kind": [
+    "公営住宅（直接建設）"
+   ]
+  },
+  {
+   "name": "二俣川宮沢住宅",
+   "ku": "旭区",
+   "addr": "横浜市旭区二俣川2丁目31番地の1",
+   "built": 1996,
+   "builtSrc": "竣功",
+   "builtNew": 1996,
+   "floorsMax": 3,
+   "buildings": 2,
+   "ev": "一部",
+   "kind": [
+    "公営住宅（直接建設）"
+   ]
+  },
+  {
+   "name": "磯子住宅",
+   "ku": "磯子区",
+   "addr": "横浜市磯子区森三丁目1番19号",
+   "built": 1984,
+   "builtSrc": "竣功",
+   "builtNew": 1986,
+   "floorsMax": 6,
+   "buildings": 2,
+   "ev": "あり",
+   "kind": [
+    "公営住宅（直接建設）"
+   ]
+  },
+  {
+   "name": "岡村住宅",
+   "ku": "磯子区",
+   "addr": "横浜市磯子区岡村八丁目17番",
+   "built": 1984,
+   "builtSrc": "竣功",
+   "builtNew": 1984,
+   "floorsMax": 5,
+   "buildings": 8,
+   "ev": "なし",
+   "kind": [
+    "公営住宅（直接建設）"
+   ]
+  },
+  {
+   "name": "杉田住宅",
+   "ku": "磯子区",
+   "addr": "横浜市磯子区杉田三丁目25番",
+   "built": 1991,
+   "builtSrc": "竣功",
+   "builtNew": 1991,
+   "floorsMax": 4,
+   "buildings": 2,
+   "ev": "なし",
+   "kind": [
+    "公営住宅（直接建設）"
+   ]
+  },
+  {
+   "name": "滝頭住宅",
+   "ku": "磯子区",
+   "addr": "横浜市磯子区滝頭三丁目8番6号",
+   "built": 1979,
+   "builtSrc": "竣功",
+   "builtNew": 1979,
+   "floorsMax": 7,
+   "buildings": 1,
+   "ev": "あり",
+   "kind": [
+    "公営住宅（直接建設）"
+   ]
+  },
+  {
+   "name": "滝頭第二住宅",
+   "ku": "磯子区",
+   "addr": "横浜市磯子区滝頭三丁目1番33号",
+   "built": 1980,
+   "builtSrc": "竣功",
+   "builtNew": 1980,
+   "floorsMax": 5,
+   "buildings": 1,
+   "ev": "なし",
+   "kind": [
+    "公営住宅（直接建設）"
+   ]
+  },
+  {
+   "name": "滝頭第三住宅",
+   "ku": "磯子区",
+   "addr": "横浜市磯子区滝頭三丁目1番53号",
+   "built": 1982,
+   "builtSrc": "竣功",
+   "builtNew": 1982,
+   "floorsMax": 5,
+   "buildings": 1,
+   "ev": "なし",
+   "kind": [
+    "公営住宅（直接建設）"
+   ]
+  },
+  {
+   "name": "洋光台住宅",
+   "ku": "磯子区",
+   "addr": "横浜市磯子区洋光台五丁目5番",
+   "built": 1972,
+   "builtSrc": "竣功",
+   "builtNew": 1972,
+   "floorsMax": 5,
+   "buildings": 20,
+   "ev": "なし",
+   "kind": [
+    "公営住宅（直接建設）"
+   ]
+  },
+  {
+   "name": "金沢柴町住宅",
+   "ku": "金沢区",
+   "addr": "横浜市金沢区柴町366番地",
+   "built": 1988,
+   "builtSrc": "竣功",
+   "builtNew": 1988,
+   "floorsMax": 5,
+   "buildings": 6,
+   "ev": "なし",
+   "kind": [
+    "公営住宅（直接建設）"
+   ]
+  },
+  {
+   "name": "金沢住宅",
+   "ku": "金沢区",
+   "addr": "横浜市金沢区並木一丁目5番",
+   "built": 1978,
+   "builtSrc": "竣功",
+   "builtNew": 1978,
+   "floorsMax": 11,
+   "buildings": 7,
+   "ev": "一部",
+   "kind": [
+    "公営住宅（直接建設）"
+   ]
+  },
+  {
+   "name": "金沢第二住宅",
+   "ku": "金沢区",
+   "addr": "横浜市金沢区並木一丁目1番",
+   "built": 1980,
+   "builtSrc": "竣功",
+   "builtNew": 1980,
+   "floorsMax": 7,
+   "buildings": 5,
+   "ev": "あり",
+   "kind": [
+    "公営住宅（直接建設）"
+   ]
+  },
+  {
+   "name": "金沢第三住宅",
+   "ku": "金沢区",
+   "addr": "横浜市金沢区並木三丁目18番",
+   "built": 1981,
+   "builtSrc": "竣功",
+   "builtNew": 1981,
+   "floorsMax": 5,
+   "buildings": 12,
+   "ev": "なし",
+   "kind": [
+    "公営住宅（直接建設）"
+   ]
+  },
+  {
+   "name": "釜利谷東ハイツ",
+   "ku": "金沢区",
+   "addr": "横浜市金沢区釜利谷東一丁目34番5号",
+   "built": 1998,
+   "builtSrc": "竣功",
+   "builtNew": 2004,
+   "floorsMax": 3,
+   "buildings": 15,
+   "ev": "一部",
+   "kind": [
+    "公営住宅（直接建設）"
+   ]
+  },
+  {
+   "name": "瀬戸橋住宅",
+   "ku": "金沢区",
+   "addr": "横浜市金沢区洲崎町３番７号",
+   "built": 2022,
+   "builtSrc": "着工",
+   "builtNew": 2022,
+   "floorsMax": null,
+   "buildings": null,
+   "ev": null,
+   "kind": [
+    "公営住宅（直接建設）",
+    "改良住宅（更新住宅）"
+   ]
+  },
+  {
+   "name": "富岡西ハイツ",
+   "ku": "金沢区",
+   "addr": "横浜市金沢区富岡西七丁目16番",
+   "built": 2000,
+   "builtSrc": "竣功",
+   "builtNew": 2000,
+   "floorsMax": 4,
+   "buildings": 2,
+   "ev": "あり",
+   "kind": [
+    "公営住宅（直接建設）"
+   ]
+  },
+  {
+   "name": "谷津坂住宅",
+   "ku": "金沢区",
+   "addr": "横浜市金沢区能見台東13番",
+   "built": 1986,
+   "builtSrc": "竣功",
+   "builtNew": 1988,
+   "floorsMax": 7,
+   "buildings": 7,
+   "ev": "一部",
+   "kind": [
+    "公営住宅（直接建設）"
+   ]
+  },
+  {
+   "name": "サンヴァリエ日吉",
+   "ku": "港北区",
+   "addr": "横浜市港北区下田町四丁目1番",
+   "built": 1997,
+   "builtSrc": "竣功",
+   "builtNew": 1997,
+   "floorsMax": 8,
+   "buildings": 2,
+   "ev": "あり",
+   "kind": [
+    "公営住宅（直接建設）"
+   ]
+  },
+  {
+   "name": "日吉本町ハイツ",
+   "ku": "港北区",
+   "addr": "横浜市港北区日吉本町三丁目18番17号",
+   "built": 1997,
+   "builtSrc": "竣功",
+   "builtNew": 1997,
+   "floorsMax": 5,
+   "buildings": 1,
+   "ev": "あり",
+   "kind": [
+    "公営住宅（直接建設）"
+   ]
+  },
+  {
+   "name": "大豆戸町住宅",
+   "ku": "港北区",
+   "addr": "横浜市港北区大豆戸町316番地の13",
+   "built": 2000,
+   "builtSrc": "竣功",
+   "builtNew": 2000,
+   "floorsMax": 3,
+   "buildings": 1,
+   "ev": "あり",
+   "kind": [
+    "公営住宅（直接建設）"
+   ]
+  },
+  {
+   "name": "南日吉住宅",
+   "ku": "港北区",
+   "addr": "横浜市港北区日吉本町四丁目10番",
+   "built": 2007,
+   "builtSrc": "竣功",
+   "builtNew": 2008,
+   "floorsMax": 4,
+   "buildings": 3,
+   "ev": "あり",
+   "kind": [
+    "公営住宅（直接建設）"
+   ]
+  },
+  {
+   "name": "箕輪住宅",
+   "ku": "港北区",
+   "addr": "横浜市港北区箕輪町二丁目4番41号",
+   "built": 1985,
+   "builtSrc": "竣功",
+   "builtNew": 1985,
+   "floorsMax": 7,
+   "buildings": 1,
+   "ev": "あり",
+   "kind": [
+    "公営住宅（直接建設）"
+   ]
+  },
+  {
+   "name": "上の原グリーンハイツ",
+   "ku": "緑区",
+   "addr": "横浜市緑区長津田みなみ台七丁目33番地の15",
+   "built": 1993,
+   "builtSrc": "竣功",
+   "builtNew": 1993,
+   "floorsMax": 5,
+   "buildings": 10,
+   "ev": "なし",
+   "kind": [
+    "公営住宅（直接建設）"
+   ]
+  },
+  {
+   "name": "北八朔住宅",
+   "ku": "緑区",
+   "addr": "横浜市緑区北八朔町2194番地",
+   "built": 1998,
+   "builtSrc": "竣功",
+   "builtNew": 2000,
+   "floorsMax": 7,
+   "buildings": 8,
+   "ev": "あり",
+   "kind": [
+    "公営住宅（直接建設）"
+   ]
+  },
+  {
+   "name": "十日市場駅前住宅",
+   "ku": "緑区",
+   "addr": "横浜市緑区十日市場町808番地の3",
+   "built": 1985,
+   "builtSrc": "竣功",
+   "builtNew": 1985,
+   "floorsMax": 6,
+   "buildings": 1,
+   "ev": "なし",
+   "kind": [
+    "公営住宅（直接建設）"
+   ]
+  },
+  {
+   "name": "十日市場第二住宅",
+   "ku": "緑区",
+   "addr": "横浜市緑区十日市場町836番地の4",
+   "built": 1984,
+   "builtSrc": "竣功",
+   "builtNew": 1984,
+   "floorsMax": 5,
+   "buildings": 2,
+   "ev": "なし",
+   "kind": [
+    "公営住宅（直接建設）"
+   ]
+  },
+  {
+   "name": "十日市場ヒルタウン",
+   "ku": "緑区",
+   "addr": "横浜市緑区十日市場町1258番地",
+   "built": 1995,
+   "builtSrc": "竣功",
+   "builtNew": 2005,
+   "floorsMax": 12,
+   "buildings": 57,
+   "ev": "一部",
+   "kind": [
+    "公営住宅（直接建設）"
+   ]
+  },
+  {
+   "name": "長津田スカイハイツ",
+   "ku": "緑区",
+   "addr": "横浜市緑区長津田二丁目11番",
+   "built": 1995,
+   "builtSrc": "竣功",
+   "builtNew": 1995,
+   "floorsMax": 12,
+   "buildings": 5,
+   "ev": "一部",
+   "kind": [
+    "公営住宅（直接建設）"
+   ]
+  },
+  {
+   "name": "白山住宅",
+   "ku": "緑区",
+   "addr": "横浜市緑区白山一丁目10番1号",
+   "built": 1975,
+   "builtSrc": "竣功",
+   "builtNew": 1975,
+   "floorsMax": 7,
+   "buildings": 1,
+   "ev": "あり",
+   "kind": [
+    "公営住宅（直接建設）"
+   ]
+  },
+  {
+   "name": "三保グリーンハイツ",
+   "ku": "緑区",
+   "addr": "横浜市緑区三保町2334番地",
+   "built": 1991,
+   "builtSrc": "竣功",
+   "builtNew": 1991,
+   "floorsMax": 3,
+   "buildings": 8,
+   "ev": "なし",
+   "kind": [
+    "公営住宅（直接建設）"
+   ]
+  },
+  {
+   "name": "三保みどり台住宅",
+   "ku": "緑区",
+   "addr": "横浜市緑区三保町2570番地の2",
+   "built": 1987,
+   "builtSrc": "竣功",
+   "builtNew": 1988,
+   "floorsMax": 5,
+   "buildings": 10,
+   "ev": "なし",
+   "kind": [
+    "公営住宅（直接建設）"
+   ]
+  },
+  {
+   "name": "谷津田原ハイツ",
+   "ku": "緑区",
+   "addr": "横浜市緑区北八朔町1641番地の8",
+   "built": 1993,
+   "builtSrc": "竣功",
+   "builtNew": 1993,
+   "floorsMax": 5,
+   "buildings": 12,
+   "ev": "なし",
+   "kind": [
+    "公営住宅（直接建設）"
+   ]
+  },
+  {
+   "name": "谷津田原第二住宅",
+   "ku": "緑区",
+   "addr": "横浜市緑区北八朔町1508番地",
+   "built": 1998,
+   "builtSrc": "竣功",
+   "builtNew": 1999,
+   "floorsMax": 4,
+   "buildings": 3,
+   "ev": "あり",
+   "kind": [
+    "公営住宅（直接建設）"
+   ]
+  },
+  {
+   "name": "鴨志田住宅",
+   "ku": "青葉区",
+   "addr": "横浜市青葉区鴨志田町512番地",
+   "built": 1983,
+   "builtSrc": "竣功",
+   "builtNew": 1983,
+   "floorsMax": 3,
+   "buildings": 6,
+   "ev": "なし",
+   "kind": [
+    "公営住宅（直接建設）"
+   ]
+  },
+  {
+   "name": "山内住宅",
+   "ku": "青葉区",
+   "addr": "横浜市青葉区美しが丘五丁目26番地の1",
+   "built": 1986,
+   "builtSrc": "竣功",
+   "builtNew": 1986,
+   "floorsMax": 4,
+   "buildings": 3,
+   "ev": "なし",
+   "kind": [
+    "公営住宅（直接建設）"
+   ]
+  },
+  {
+   "name": "勝田住宅",
+   "ku": "都筑区",
+   "addr": "横浜市都筑区勝田町266番地の1",
+   "built": 1966,
+   "builtSrc": "竣功",
+   "builtNew": 1986,
+   "floorsMax": 5,
+   "buildings": 41,
+   "ev": "一部",
+   "kind": [
+    "公営住宅（直接建設）"
+   ]
+  },
+  {
+   "name": "つづきが丘住宅",
+   "ku": "都筑区",
+   "addr": "横浜市都筑区葛が谷１番",
+   "built": 1986,
+   "builtSrc": "竣功",
+   "builtNew": 1986,
+   "floorsMax": 8,
+   "buildings": 1,
+   "ev": "あり",
+   "kind": [
+    "公営住宅（直接建設）"
+   ]
+  },
+  {
+   "name": "戸塚原宿住宅",
+   "ku": "戸塚区",
+   "addr": "横浜市戸塚区原宿四丁目36番1号",
+   "built": 1999,
+   "builtSrc": "竣功",
+   "builtNew": 1999,
+   "floorsMax": 6,
+   "buildings": 1,
+   "ev": "あり",
+   "kind": [
+    "公営住宅（直接建設）"
+   ]
+  },
+  {
+   "name": "名瀬住宅",
+   "ku": "戸塚区",
+   "addr": "横浜市戸塚区名瀬町791番地",
+   "built": 1978,
+   "builtSrc": "竣功",
+   "builtNew": 1978,
+   "floorsMax": 5,
+   "buildings": 21,
+   "ev": "なし",
+   "kind": [
+    "公営住宅（直接建設）"
+   ]
+  },
+  {
+   "name": "名瀬第二住宅",
+   "ku": "戸塚区",
+   "addr": "横浜市戸塚区名瀬町795番地の3",
+   "built": 1998,
+   "builtSrc": "竣功",
+   "builtNew": 1998,
+   "floorsMax": 10,
+   "buildings": 2,
+   "ev": "あり",
+   "kind": [
+    "公営住宅（直接建設）"
+   ]
+  },
+  {
+   "name": "平戸住宅",
+   "ku": "戸塚区",
+   "addr": "横浜市戸塚区平戸二丁目33番58号",
+   "built": 1997,
+   "builtSrc": "竣功",
+   "builtNew": 1997,
+   "floorsMax": 5,
+   "buildings": 2,
+   "ev": "あり",
+   "kind": [
+    "公営住宅（直接建設）"
+   ]
+  },
+  {
+   "name": "プロムナード矢部",
+   "ku": "戸塚区",
+   "addr": "横浜市戸塚区矢部町321番地",
+   "built": 1998,
+   "builtSrc": "竣功",
+   "builtNew": 1998,
+   "floorsMax": 9,
+   "buildings": 2,
+   "ev": "あり",
+   "kind": [
+    "公営住宅（直接建設）"
+   ]
+  },
+  {
+   "name": "南戸塚住宅",
+   "ku": "戸塚区",
+   "addr": "横浜市戸塚区戸塚町2101番地",
+   "built": 1989,
+   "builtSrc": "竣功",
+   "builtNew": 1989,
+   "floorsMax": 7,
+   "buildings": 3,
+   "ev": "一部",
+   "kind": [
+    "公営住宅（直接建設）"
+   ]
+  },
+  {
+   "name": "吉田町住宅",
+   "ku": "戸塚区",
+   "addr": "横浜市戸塚区吉田町1229番地",
+   "built": 1994,
+   "builtSrc": "竣功",
+   "builtNew": 1994,
+   "floorsMax": 5,
+   "buildings": 1,
+   "ev": "あり",
+   "kind": [
+    "公営住宅（直接建設）"
+   ]
+  },
+  {
+   "name": "小菅が谷住宅",
+   "ku": "栄区",
+   "addr": "横浜市栄区小菅ケ谷一丁目3番",
+   "built": 1972,
+   "builtSrc": "竣功",
+   "builtNew": 1972,
+   "floorsMax": 7,
+   "buildings": 4,
+   "ev": "あり",
+   "kind": [
+    "公営住宅（直接建設）"
+   ]
+  },
+  {
+   "name": "小菅が谷第二住宅",
+   "ku": "栄区",
+   "addr": "横浜市栄区桂町125番地の1",
+   "built": 1976,
+   "builtSrc": "竣功",
+   "builtNew": 1976,
+   "floorsMax": 7,
+   "buildings": 1,
+   "ev": "あり",
+   "kind": [
+    "公営住宅（直接建設）"
+   ]
+  },
+  {
+   "name": "本郷台住宅",
+   "ku": "栄区",
+   "addr": "横浜市栄区小菅ケ谷一丁目1番1号",
+   "built": 1974,
+   "builtSrc": "竣功",
+   "builtNew": 1974,
+   "floorsMax": 15,
+   "buildings": 1,
+   "ev": "あり",
+   "kind": [
+    "公営住宅（直接建設）"
+   ]
+  },
+  {
+   "name": "上飯田住宅",
+   "ku": "泉区",
+   "addr": "横浜市泉区上飯田町1331番地",
+   "built": 1965,
+   "builtSrc": "竣功",
+   "builtNew": 1966,
+   "floorsMax": 5,
+   "buildings": 42,
+   "ev": "一部",
+   "kind": [
+    "公営住宅（直接建設）"
+   ]
+  },
+  {
+   "name": "上飯田第二住宅",
+   "ku": "泉区",
+   "addr": "横浜市泉区上飯田町1338番地の1",
+   "built": 1991,
+   "builtSrc": "竣功",
+   "builtNew": 1991,
+   "floorsMax": 8,
+   "buildings": 1,
+   "ev": "あり",
+   "kind": [
+    "公営住宅（直接建設）"
+   ]
+  },
+  {
+   "name": "新橋住宅",
+   "ku": "泉区",
+   "addr": "横浜市泉区新橋町1407番地",
+   "built": 1990,
+   "builtSrc": "竣功",
+   "builtNew": 1990,
+   "floorsMax": 4,
+   "buildings": 6,
+   "ev": "なし",
+   "kind": [
+    "公営住宅（直接建設）"
+   ]
+  },
+  {
+   "name": "新橋第二住宅",
+   "ku": "泉区",
+   "addr": "横浜市泉区新橋町1296番地の6",
+   "built": 1993,
+   "builtSrc": "竣功",
+   "builtNew": 1993,
+   "floorsMax": 3,
+   "buildings": 4,
+   "ev": "なし",
+   "kind": [
+    "公営住宅（直接建設）"
+   ]
+  },
+  {
+   "name": "阿久和向原住宅",
+   "ku": "瀬谷区",
+   "addr": "横浜市瀬谷区阿久和西一丁目23番地の1",
+   "built": 1994,
+   "builtSrc": "竣功",
+   "builtNew": 1994,
+   "floorsMax": 4,
+   "buildings": 2,
+   "ev": "なし",
+   "kind": [
+    "公営住宅（直接建設）"
+   ]
+  },
+  {
+   "name": "上瀬谷住宅",
+   "ku": "瀬谷区",
+   "addr": "横浜市瀬谷区上瀬谷町47番地の1",
+   "built": 2002,
+   "builtSrc": "竣功",
+   "builtNew": 2004,
+   "floorsMax": 14,
+   "buildings": 3,
+   "ev": "あり",
+   "kind": [
+    "公営住宅（直接建設）"
+   ]
+  },
+  {
+   "name": "瀬谷南住宅",
+   "ku": "瀬谷区",
+   "addr": "横浜市瀬谷区南台一丁目29番地の3",
+   "built": 1990,
+   "builtSrc": "竣功",
+   "builtNew": 1990,
+   "floorsMax": 3,
+   "buildings": 5,
+   "ev": "なし",
+   "kind": [
+    "公営住宅（直接建設）"
+   ]
+  },
+  {
+   "name": "橋戸ハイツ",
+   "ku": "瀬谷区",
+   "addr": "横浜市瀬谷区橋戸一丁目25番地の1",
+   "built": 1984,
+   "builtSrc": "竣功",
+   "builtNew": 1984,
+   "floorsMax": 5,
+   "buildings": 6,
+   "ev": "なし",
+   "kind": [
+    "公営住宅（直接建設）"
+   ]
+  },
+  {
+   "name": "橋戸原ハイツ",
+   "ku": "瀬谷区",
+   "addr": "横浜市瀬谷区橋戸一丁目31番地の1",
+   "built": 1985,
+   "builtSrc": "竣功",
+   "builtNew": 1985,
+   "floorsMax": 5,
+   "buildings": 13,
+   "ev": "なし",
+   "kind": [
+    "公営住宅（直接建設）"
+   ]
+  },
+  {
+   "name": "三ツ境ハイツ",
+   "ku": "瀬谷区",
+   "addr": "横浜市瀬谷区三ツ境56番地の5",
+   "built": 1999,
+   "builtSrc": "竣功",
+   "builtNew": 1999,
+   "floorsMax": 3,
+   "buildings": 21,
+   "ev": "なし",
+   "kind": [
+    "公営住宅（直接建設）"
+   ]
+  },
+  {
+   "name": "三ツ境南住宅",
+   "ku": "瀬谷区",
+   "addr": "横浜市瀬谷区三ツ境69番地の16",
+   "built": 2003,
+   "builtSrc": "竣功",
+   "builtNew": 2004,
+   "floorsMax": 4,
+   "buildings": 6,
+   "ev": "あり",
+   "kind": [
+    "公営住宅（直接建設）"
+   ]
+  },
+  {
+   "name": "南台ハイツ",
+   "ku": "瀬谷区",
+   "addr": "横浜市瀬谷区南台一丁目３番地の1",
+   "built": 1981,
+   "builtSrc": "竣功",
+   "builtNew": 1984,
+   "floorsMax": 7,
+   "buildings": 47,
+   "ev": "一部",
+   "kind": [
+    "公営住宅（直接建設）"
+   ]
+  },
+  {
+   "name": "楽老ハイツ",
+   "ku": "瀬谷区",
+   "addr": "横浜市瀬谷区二ツ橋町215番地",
+   "built": 1987,
+   "builtSrc": "竣功",
+   "builtNew": 1990,
+   "floorsMax": 5,
+   "buildings": 36,
+   "ev": "なし",
+   "kind": [
+    "公営住宅（直接建設）"
+   ]
+  },
+  {
+   "name": "アルト生麦",
+   "ku": "鶴見区",
+   "addr": "横浜市鶴見区生麦一丁目4番13号",
+   "built": 2002,
+   "builtSrc": "竣功",
+   "builtNew": 2002,
+   "floorsMax": 7,
+   "buildings": 1,
+   "ev": null,
+   "kind": [
+    "公営住宅（借上住宅）"
+   ]
+  },
+  {
+   "name": "ウィンドヒル鶴見",
+   "ku": "鶴見区",
+   "addr": "横浜市鶴見区北寺尾五丁目3番10号",
+   "built": 1997,
+   "builtSrc": "竣功",
+   "builtNew": 1997,
+   "floorsMax": 5,
+   "buildings": 1,
+   "ev": null,
+   "kind": [
+    "公営住宅（借上住宅）"
+   ]
+  },
+  {
+   "name": "エスポワールＦＲ",
+   "ku": "鶴見区",
+   "addr": "横浜市鶴見区生麦一丁目10番12号",
+   "built": 1996,
+   "builtSrc": "竣功",
+   "builtNew": 1996,
+   "floorsMax": 6,
+   "buildings": 1,
+   "ev": null,
+   "kind": [
+    "公営住宅（借上住宅）"
+   ]
+  },
+  {
+   "name": "コージーハウス潮田",
+   "ku": "鶴見区",
+   "addr": "横浜市鶴見区仲通2丁目60番地の2",
+   "built": 2002,
+   "builtSrc": "竣功",
+   "builtNew": 2002,
+   "floorsMax": 7,
+   "buildings": 1,
+   "ev": null,
+   "kind": [
+    "公営住宅（借上住宅）"
+   ]
+  },
+  {
+   "name": "駒岡・ヒルズ",
+   "ku": "鶴見区",
+   "addr": "横浜市鶴見区駒岡四丁目30番22号",
+   "built": 2005,
+   "builtSrc": "竣功",
+   "builtNew": 2005,
+   "floorsMax": null,
+   "buildings": 1,
+   "ev": null,
+   "kind": [
+    "公営住宅（借上住宅）"
+   ]
+  },
+  {
+   "name": "サザンコート",
+   "ku": "鶴見区",
+   "addr": "横浜市鶴見区本町通3丁目162番地の2",
+   "built": 2005,
+   "builtSrc": "竣功",
+   "builtNew": 2005,
+   "floorsMax": 6,
+   "buildings": 1,
+   "ev": null,
+   "kind": [
+    "公営住宅（借上住宅）"
+   ]
+  },
+  {
+   "name": "サンライフ生麦",
+   "ku": "鶴見区",
+   "addr": "横浜市鶴見区生麦四丁目５番14号",
+   "built": 2000,
+   "builtSrc": "竣功",
+   "builtNew": 2000,
+   "floorsMax": 5,
+   "buildings": 1,
+   "ev": null,
+   "kind": [
+    "公営住宅（借上住宅）"
+   ]
+  },
+  {
+   "name": "サンワイズ汐入館",
+   "ku": "鶴見区",
+   "addr": "横浜市鶴見区汐入町1丁目11番地の1",
+   "built": 2000,
+   "builtSrc": "竣功",
+   "builtNew": 2000,
+   "floorsMax": 5,
+   "buildings": 1,
+   "ev": null,
+   "kind": [
+    "公営住宅（借上住宅）"
+   ]
+  },
+  {
+   "name": "センターコート潮風",
+   "ku": "鶴見区",
+   "addr": "横浜市鶴見区仲通1丁目57番地の1",
+   "built": 2006,
+   "builtSrc": "竣功",
+   "builtNew": 2006,
+   "floorsMax": 7,
+   "buildings": 1,
+   "ev": null,
+   "kind": [
+    "公営住宅（借上住宅）"
+   ]
+  },
+  {
+   "name": "鶴見イーストリバー",
+   "ku": "鶴見区",
+   "addr": "横浜市鶴見区鶴見中央四丁目43番10号",
+   "built": 2001,
+   "builtSrc": "竣功",
+   "builtNew": 2001,
+   "floorsMax": 10,
+   "buildings": 1,
+   "ev": null,
+   "kind": [
+    "公営住宅（借上住宅）"
+   ]
+  },
+  {
+   "name": "ＴＫＳビル",
+   "ku": "鶴見区",
+   "addr": "横浜市鶴見区向井町4丁目84番地の13",
+   "built": 2006,
+   "builtSrc": "竣功",
+   "builtNew": 2006,
+   "floorsMax": 6,
+   "buildings": 1,
+   "ev": null,
+   "kind": [
+    "公営住宅（借上住宅）"
+   ]
+  },
+  {
+   "name": "ブリジャンテ北寺尾",
+   "ku": "鶴見区",
+   "addr": "横浜市鶴見区北寺尾二丁目13番5号",
+   "built": 2005,
+   "builtSrc": "竣功",
+   "builtNew": 2005,
+   "floorsMax": 4,
+   "buildings": 1,
+   "ev": null,
+   "kind": [
+    "公営住宅（借上住宅）"
+   ]
+  },
+  {
+   "name": "ブリッジレジデンス鶴見",
+   "ku": "鶴見区",
+   "addr": "横浜市鶴見区鶴見中央一丁目9番17号",
+   "built": 2003,
+   "builtSrc": "竣功",
+   "builtNew": 2003,
+   "floorsMax": 8,
+   "buildings": 1,
+   "ev": null,
+   "kind": [
+    "公営住宅（借上住宅）"
+   ]
+  },
+  {
+   "name": "フローリア横浜",
+   "ku": "鶴見区",
+   "addr": "横浜市鶴見区東寺尾四丁目5番1号",
+   "built": 2006,
+   "builtSrc": "竣功",
+   "builtNew": 2006,
+   "floorsMax": 6,
+   "buildings": 1,
+   "ev": null,
+   "kind": [
+    "公営住宅（借上住宅）"
+   ]
+  },
+  {
+   "name": "ユウユウ・本町",
+   "ku": "鶴見区",
+   "addr": "横浜市鶴見区本町通3丁目163番地の22",
+   "built": 2002,
+   "builtSrc": "竣功",
+   "builtNew": 2002,
+   "floorsMax": 3,
+   "buildings": 1,
+   "ev": null,
+   "kind": [
+    "公営住宅（借上住宅）"
+   ]
+  },
+  {
+   "name": "アンソレイユ片倉",
+   "ku": "神奈川区",
+   "addr": "横浜市神奈川区片倉四丁目14番14号",
+   "built": 2006,
+   "builtSrc": "竣功",
+   "builtNew": 2006,
+   "floorsMax": 3,
+   "buildings": 1,
+   "ev": null,
+   "kind": [
+    "公営住宅（借上住宅）"
+   ]
+  },
+  {
+   "name": "ウィナス新町",
+   "ku": "神奈川区",
+   "addr": "横浜市神奈川区新町5番地の5",
+   "built": 1999,
+   "builtSrc": "竣功",
+   "builtNew": 1999,
+   "floorsMax": 9,
+   "buildings": 1,
+   "ev": null,
+   "kind": [
+    "公営住宅（借上住宅）"
+   ]
+  },
+  {
+   "name": "カーサ敷島Ⅲ",
+   "ku": "神奈川区",
+   "addr": "横浜市神奈川区菅田町1553番地の2",
+   "built": 2000,
+   "builtSrc": "竣功",
+   "builtNew": 2000,
+   "floorsMax": 3,
+   "buildings": 1,
+   "ev": null,
+   "kind": [
+    "公営住宅（借上住宅）"
+   ]
+  },
+  {
+   "name": "カメリア",
+   "ku": "神奈川区",
+   "addr": "横浜市神奈川区三ツ沢上町4番14号",
+   "built": 2005,
+   "builtSrc": "竣功",
+   "builtNew": 2005,
+   "floorsMax": 5,
+   "buildings": 1,
+   "ev": null,
+   "kind": [
+    "公営住宅（借上住宅）"
+   ]
+  },
+  {
+   "name": "ぐうはうす高島台",
+   "ku": "神奈川区",
+   "addr": "横浜市神奈川区高島台13番地の4",
+   "built": 2003,
+   "builtSrc": "竣功",
+   "builtNew": 2003,
+   "floorsMax": 4,
+   "buildings": 1,
+   "ev": null,
+   "kind": [
+    "公営住宅（借上住宅）"
+   ]
+  },
+  {
+   "name": "グリーンピア片倉",
+   "ku": "神奈川区",
+   "addr": "横浜市神奈川区片倉二丁目1番34号",
+   "built": 2000,
+   "builtSrc": "竣功",
+   "builtNew": 2000,
+   "floorsMax": 4,
+   "buildings": 2,
+   "ev": null,
+   "kind": [
+    "公営住宅（借上住宅）"
+   ]
+  },
+  {
+   "name": "ケーラインセブン",
+   "ku": "神奈川区",
+   "addr": "横浜市神奈川区反町1丁目7番地の4",
+   "built": 2005,
+   "builtSrc": "竣功",
+   "builtNew": 2005,
+   "floorsMax": 9,
+   "buildings": 1,
+   "ev": null,
+   "kind": [
+    "公営住宅（借上住宅）"
+   ]
+  },
+  {
+   "name": "サウスヒルサイドテラス",
+   "ku": "神奈川区",
+   "addr": "横浜市神奈川区西寺尾三丁目22番4号",
+   "built": 1997,
+   "builtSrc": "竣功",
+   "builtNew": 1997,
+   "floorsMax": 5,
+   "buildings": 1,
+   "ev": null,
+   "kind": [
+    "公営住宅（借上住宅）"
+   ]
+  },
+  {
+   "name": "サンガーデン三ツ沢",
+   "ku": "神奈川区",
+   "addr": "横浜市神奈川区三ツ沢下町3番18号",
+   "built": 1999,
+   "builtSrc": "竣功",
+   "builtNew": 1999,
+   "floorsMax": 6,
+   "buildings": 1,
+   "ev": null,
+   "kind": [
+    "公営住宅（借上住宅）"
+   ]
+  },
+  {
+   "name": "サンハイム西寺尾",
+   "ku": "神奈川区",
+   "addr": "横浜市神奈川区西寺尾三丁目25番15号",
+   "built": 1999,
+   "builtSrc": "竣功",
+   "builtNew": 1999,
+   "floorsMax": 7,
+   "buildings": 1,
+   "ev": null,
+   "kind": [
+    "公営住宅（借上住宅）"
+   ]
+  },
+  {
+   "name": "シュガーベル",
+   "ku": "神奈川区",
+   "addr": "横浜市神奈川区子安通1丁目108番地の2",
+   "built": 2000,
+   "builtSrc": "竣功",
+   "builtNew": 2000,
+   "floorsMax": 7,
+   "buildings": 1,
+   "ev": null,
+   "kind": [
+    "公営住宅（借上住宅）"
+   ]
+  },
+  {
+   "name": "テラスハウス西大口",
+   "ku": "神奈川区",
+   "addr": "横浜市神奈川区西大口113番地の1",
+   "built": 2003,
+   "builtSrc": "竣功",
+   "builtNew": 2003,
+   "floorsMax": 5,
+   "buildings": 1,
+   "ev": null,
+   "kind": [
+    "公営住宅（借上住宅）"
+   ]
+  },
+  {
+   "name": "ドエルＦ",
+   "ku": "神奈川区",
+   "addr": "横浜市神奈川区三ツ沢上町6番10号",
+   "built": 2006,
+   "builtSrc": "竣功",
+   "builtNew": 2006,
+   "floorsMax": 5,
+   "buildings": 1,
+   "ev": null,
+   "kind": [
+    "公営住宅（借上住宅）"
+   ]
+  },
+  {
+   "name": "ドミーイグレックエス",
+   "ku": "神奈川区",
+   "addr": "横浜市神奈川区三ツ沢上町6番8号",
+   "built": 2003,
+   "builtSrc": "竣功",
+   "builtNew": 2003,
+   "floorsMax": 5,
+   "buildings": 1,
+   "ev": null,
+   "kind": [
+    "公営住宅（借上住宅）"
+   ]
+  },
+  {
+   "name": "ノースヒルサイドテラス",
+   "ku": "神奈川区",
+   "addr": "横浜市神奈川区西寺尾三丁目22番14号",
+   "built": 1996,
+   "builtSrc": "竣功",
+   "builtNew": 1996,
+   "floorsMax": 5,
+   "buildings": 1,
+   "ev": null,
+   "kind": [
+    "公営住宅（借上住宅）"
+   ]
+  },
+  {
+   "name": "ヒルズ神大寺",
+   "ku": "神奈川区",
+   "addr": "横浜市神奈川区神大寺三丁目2番8号",
+   "built": 1998,
+   "builtSrc": "竣功",
+   "builtNew": 1998,
+   "floorsMax": 4,
+   "buildings": 1,
+   "ev": null,
+   "kind": [
+    "公営住宅（借上住宅）"
+   ]
+  },
+  {
+   "name": "フローラ神大寺",
+   "ku": "神奈川区",
+   "addr": "横浜市神奈川区神大寺三丁目22番29号",
+   "built": 2002,
+   "builtSrc": "竣功",
+   "builtNew": 2002,
+   "floorsMax": 4,
+   "buildings": 1,
+   "ev": null,
+   "kind": [
+    "公営住宅（借上住宅）"
+   ]
+  },
+  {
+   "name": "ベルグランデ菅田",
+   "ku": "神奈川区",
+   "addr": "横浜市神奈川区菅田町1805番地",
+   "built": 2006,
+   "builtSrc": "竣功",
+   "builtNew": 2006,
+   "floorsMax": 5,
+   "buildings": 1,
+   "ev": null,
+   "kind": [
+    "公営住宅（借上住宅）"
+   ]
+  },
+  {
+   "name": "ボスケ・リオ・カーサ",
+   "ku": "神奈川区",
+   "addr": "横浜市神奈川区上反町1丁目10番地の11",
+   "built": 2001,
+   "builtSrc": "竣功",
+   "builtNew": 2001,
+   "floorsMax": 3,
+   "buildings": 1,
+   "ev": null,
+   "kind": [
+    "公営住宅（借上住宅）"
+   ]
+  },
+  {
+   "name": "松ケ丘レジデンス",
+   "ku": "神奈川区",
+   "addr": "横浜市神奈川区松ケ丘79番地の7",
+   "built": 1999,
+   "builtSrc": "竣功",
+   "builtNew": 1999,
+   "floorsMax": 3,
+   "buildings": 1,
+   "ev": null,
+   "kind": [
+    "公営住宅（借上住宅）"
+   ]
+  },
+  {
+   "name": "ラ・クラッセ西寺尾",
+   "ku": "神奈川区",
+   "addr": "横浜市神奈川区西寺尾三丁目25番19号",
+   "built": 1995,
+   "builtSrc": "竣功",
+   "builtNew": 1995,
+   "floorsMax": 8,
+   "buildings": 1,
+   "ev": null,
+   "kind": [
+    "公営住宅（借上住宅）"
+   ]
+  },
+  {
+   "name": "リステ羽沢",
+   "ku": "神奈川区",
+   "addr": "横浜市神奈川区羽沢町1604番地の3",
+   "built": 2006,
+   "builtSrc": "竣功",
+   "builtNew": 2006,
+   "floorsMax": 3,
+   "buildings": 1,
+   "ev": null,
+   "kind": [
+    "公営住宅（借上住宅）"
+   ]
+  },
+  {
+   "name": "ルグラン21",
+   "ku": "神奈川区",
+   "addr": "横浜市神奈川区菅田町908番地の1",
+   "built": 2004,
+   "builtSrc": "竣功",
+   "builtNew": 2004,
+   "floorsMax": 4,
+   "buildings": 1,
+   "ev": null,
+   "kind": [
+    "公営住宅（借上住宅）"
+   ]
+  },
+  {
+   "name": "サンヴィラージュ横浜",
+   "ku": "西区",
+   "addr": "横浜市西区浅間町3丁目183番地",
+   "built": 2006,
+   "builtSrc": "竣功",
+   "builtNew": 2006,
+   "floorsMax": 3,
+   "buildings": 1,
+   "ev": null,
+   "kind": [
+    "公営住宅（借上住宅）"
+   ]
+  },
+  {
+   "name": "山王メゾン野毛山",
+   "ku": "西区",
+   "addr": "横浜市西区西戸部町1丁目109番地",
+   "built": 2002,
+   "builtSrc": "竣功",
+   "builtNew": 2002,
+   "floorsMax": 5,
+   "buildings": 1,
+   "ev": null,
+   "kind": [
+    "公営住宅（借上住宅）"
+   ]
+  },
+  {
+   "name": "サンパレス横浜",
+   "ku": "西区",
+   "addr": "横浜市西区浅間町4丁目331番地の5",
+   "built": 2002,
+   "builtSrc": "竣功",
+   "builtNew": 2002,
+   "floorsMax": 7,
+   "buildings": 1,
+   "ev": null,
+   "kind": [
+    "公営住宅（借上住宅）"
+   ]
+  },
+  {
+   "name": "ひのき館",
+   "ku": "西区",
+   "addr": "横浜市西区西平沼町1番12号",
+   "built": 2002,
+   "builtSrc": "竣功",
+   "builtNew": 2002,
+   "floorsMax": 9,
+   "buildings": 1,
+   "ev": null,
+   "kind": [
+    "公営住宅（借上住宅）"
+   ]
+  },
+  {
+   "name": "ファーロ・ガイ",
+   "ku": "西区",
+   "addr": "横浜市西区岡野二丁目10番26号",
+   "built": 2002,
+   "builtSrc": "竣功",
+   "builtNew": 2002,
+   "floorsMax": 5,
+   "buildings": 1,
+   "ev": null,
+   "kind": [
+    "公営住宅（借上住宅）"
+   ]
+  },
+  {
+   "name": "リベルテ横浜",
+   "ku": "西区",
+   "addr": "横浜市西区浅間町2丁目95番地の8",
+   "built": 2003,
+   "builtSrc": "竣功",
+   "builtNew": 2003,
+   "floorsMax": 7,
+   "buildings": 1,
+   "ev": null,
+   "kind": [
+    "公営住宅（借上住宅）"
+   ]
+  },
+  {
+   "name": "ルピナス平沼",
+   "ku": "西区",
+   "addr": "横浜市西区平沼一丁目1番15号",
+   "built": 1998,
+   "builtSrc": "竣功",
+   "builtNew": 1998,
+   "floorsMax": 8,
+   "buildings": 1,
+   "ev": null,
+   "kind": [
+    "公営住宅（借上住宅）"
+   ]
+  },
+  {
+   "name": "レヂデンス・リバーストーン",
+   "ku": "西区",
+   "addr": "横浜市西区中央一丁目33番16号",
+   "built": 1996,
+   "builtSrc": "竣功",
+   "builtNew": 1996,
+   "floorsMax": 10,
+   "buildings": 1,
+   "ev": null,
+   "kind": [
+    "公営住宅（借上住宅）"
+   ]
+  },
+  {
+   "name": "アリエスヨコハマ",
+   "ku": "中区",
+   "addr": "横浜市中区常盤町2丁目11番地の2",
+   "built": 2003,
+   "builtSrc": "竣功",
+   "builtNew": 2003,
+   "floorsMax": 10,
+   "buildings": 1,
+   "ev": null,
+   "kind": [
+    "公営住宅（借上住宅）"
+   ]
+  },
+  {
+   "name": "エバーグレイス本牧",
+   "ku": "中区",
+   "addr": "横浜市中区北方町2丁目100番地",
+   "built": 2001,
+   "builtSrc": "竣功",
+   "builtNew": 2001,
+   "floorsMax": 6,
+   "buildings": 1,
+   "ev": null,
+   "kind": [
+    "公営住宅（借上住宅）"
+   ]
+  },
+  {
+   "name": "エムズ長者町",
+   "ku": "中区",
+   "addr": "横浜市中区長者町5丁目50番地",
+   "built": 1999,
+   "builtSrc": "竣功",
+   "builtNew": 1999,
+   "floorsMax": 9,
+   "buildings": 1,
+   "ev": null,
+   "kind": [
+    "公営住宅（借上住宅）"
+   ]
+  },
+  {
+   "name": "グリーンハイツ室橋",
+   "ku": "中区",
+   "addr": "横浜市中区本牧三之谷23番16号",
+   "built": 1996,
+   "builtSrc": "竣功",
+   "builtNew": 1996,
+   "floorsMax": 6,
+   "buildings": 1,
+   "ev": null,
+   "kind": [
+    "公営住宅（借上住宅）"
+   ]
+  },
+  {
+   "name": "コーポ元町",
+   "ku": "中区",
+   "addr": "横浜市中区山下町124番地の1",
+   "built": 2001,
+   "builtSrc": "竣功",
+   "builtNew": 2001,
+   "floorsMax": 9,
+   "buildings": 1,
+   "ev": null,
+   "kind": [
+    "公営住宅（借上住宅）"
+   ]
+  },
+  {
+   "name": "サンタハウス本牧",
+   "ku": "中区",
+   "addr": "横浜市中区本牧宮原1番5号",
+   "built": 2000,
+   "builtSrc": "竣功",
+   "builtNew": 2000,
+   "floorsMax": 7,
+   "buildings": 1,
+   "ev": null,
+   "kind": [
+    "公営住宅（借上住宅）"
+   ]
+  },
+  {
+   "name": "サンフラット関内",
+   "ku": "中区",
+   "addr": "横浜市中区住吉町6丁目66番地の2",
+   "built": 2001,
+   "builtSrc": "竣功",
+   "builtNew": 2001,
+   "floorsMax": 7,
+   "buildings": 1,
+   "ev": null,
+   "kind": [
+    "公営住宅（借上住宅）"
+   ]
+  },
+  {
+   "name": "セントラルシティ横浜",
+   "ku": "中区",
+   "addr": "横浜市中区山田町2番地の11",
+   "built": 2002,
+   "builtSrc": "竣功",
+   "builtNew": 2002,
+   "floorsMax": 9,
+   "buildings": 1,
+   "ev": null,
+   "kind": [
+    "公営住宅（借上住宅）"
+   ]
+  },
+  {
+   "name": "タウンコート山手",
+   "ku": "中区",
+   "addr": "横浜市中区麦田町2丁目63番地の1",
+   "built": 2002,
+   "builtSrc": "竣功",
+   "builtNew": 2002,
+   "floorsMax": 5,
+   "buildings": 1,
+   "ev": null,
+   "kind": [
+    "公営住宅（借上住宅）"
+   ]
+  },
+  {
+   "name": "ドリームタウン山手",
+   "ku": "中区",
+   "addr": "横浜市中区大和町2丁目31番地の1",
+   "built": 2000,
+   "builtSrc": "竣功",
+   "builtNew": 2000,
+   "floorsMax": 4,
+   "buildings": 1,
+   "ev": null,
+   "kind": [
+    "公営住宅（借上住宅）"
+   ]
+  },
+  {
+   "name": "ヒルサイドシップス",
+   "ku": "中区",
+   "addr": "横浜市中区新山下一丁目9番17号",
+   "built": 2001,
+   "builtSrc": "竣功",
+   "builtNew": 2001,
+   "floorsMax": 3,
+   "buildings": 1,
+   "ev": null,
+   "kind": [
+    "公営住宅（借上住宅）"
+   ]
+  },
+  {
+   "name": "フロレスタ本牧",
+   "ku": "中区",
+   "addr": "横浜市中区上野町2丁目68番地",
+   "built": 2005,
+   "builtSrc": "竣功",
+   "builtNew": 2005,
+   "floorsMax": 7,
+   "buildings": 1,
+   "ev": null,
+   "kind": [
+    "公営住宅（借上住宅）"
+   ]
+  },
+  {
+   "name": "ベルストーン本牧",
+   "ku": "中区",
+   "addr": "横浜市中区本牧宮原7番1号",
+   "built": 1995,
+   "builtSrc": "竣功",
+   "builtNew": 1995,
+   "floorsMax": 6,
+   "buildings": 1,
+   "ev": null,
+   "kind": [
+    "公営住宅（借上住宅）"
+   ]
+  },
+  {
+   "name": "ルミエール本牧",
+   "ku": "中区",
+   "addr": "横浜市中区本郷町2丁目40番地の1",
+   "built": 2003,
+   "builtSrc": "竣功",
+   "builtNew": 2003,
+   "floorsMax": 7,
+   "buildings": 1,
+   "ev": null,
+   "kind": [
+    "公営住宅（借上住宅）"
+   ]
+  },
+  {
+   "name": "アイディールⅡ",
+   "ku": "南区",
+   "addr": "横浜市南区真金町2丁目16番地",
+   "built": 1999,
+   "builtSrc": "竣功",
+   "builtNew": 1999,
+   "floorsMax": 7,
+   "buildings": 1,
+   "ev": null,
+   "kind": [
+    "公営住宅（借上住宅）"
+   ]
+  },
+  {
+   "name": "アベニュー弘明寺",
+   "ku": "南区",
+   "addr": "横浜市南区弘明寺町44番地の7",
+   "built": 2002,
+   "builtSrc": "竣功",
+   "builtNew": 2002,
+   "floorsMax": 5,
+   "buildings": 1,
+   "ev": null,
+   "kind": [
+    "公営住宅（借上住宅）"
+   ]
+  },
+  {
+   "name": "ヴィベール横濱",
+   "ku": "南区",
+   "addr": "横浜市南区白妙町3丁目34番地の11",
+   "built": 2000,
+   "builtSrc": "竣功",
+   "builtNew": 2000,
+   "floorsMax": 9,
+   "buildings": 1,
+   "ev": null,
+   "kind": [
+    "公営住宅（借上住宅）"
+   ]
+  },
+  {
+   "name": "エクセルハイム清水ケ丘",
+   "ku": "南区",
+   "addr": "横浜市南区清水ケ丘20番地の13",
+   "built": 2004,
+   "builtSrc": "竣功",
+   "builtNew": 2004,
+   "floorsMax": 5,
+   "buildings": 1,
+   "ev": null,
+   "kind": [
+    "公営住宅（借上住宅）"
+   ]
+  },
+  {
+   "name": "エーデル南",
+   "ku": "南区",
+   "addr": "横浜市南区宿町2丁目42番地の2",
+   "built": 2003,
+   "builtSrc": "竣功",
+   "builtNew": 2003,
+   "floorsMax": 7,
+   "buildings": 1,
+   "ev": null,
+   "kind": [
+    "公営住宅（借上住宅）"
+   ]
+  },
+  {
+   "name": "エトワール大岡",
+   "ku": "南区",
+   "addr": "横浜市南区大岡五丁目34番6号",
+   "built": 2006,
+   "builtSrc": "竣功",
+   "builtNew": 2006,
+   "floorsMax": 6,
+   "buildings": 1,
+   "ev": null,
+   "kind": [
+    "公営住宅（借上住宅）"
+   ]
+  },
+  {
+   "name": "グランドゥール・コート",
+   "ku": "南区",
+   "addr": "横浜市南区六ツ川四丁目1185番地の1",
+   "built": 2005,
+   "builtSrc": "竣功",
+   "builtNew": 2005,
+   "floorsMax": 7,
+   "buildings": 1,
+   "ev": null,
+   "kind": [
+    "公営住宅（借上住宅）"
+   ]
+  },
+  {
+   "name": "ケンズ・ハウス",
+   "ku": "南区",
+   "addr": "横浜市南区宿町2丁目46番地の2",
+   "built": 2002,
+   "builtSrc": "竣功",
+   "builtNew": 2002,
+   "floorsMax": 7,
+   "buildings": 1,
+   "ev": null,
+   "kind": [
+    "公営住宅（借上住宅）"
+   ]
+  },
+  {
+   "name": "コンソラール吉野町",
+   "ku": "南区",
+   "addr": "横浜市南区吉野町2丁目5番地",
+   "built": 2004,
+   "builtSrc": "竣功",
+   "builtNew": 2004,
+   "floorsMax": 10,
+   "buildings": 1,
+   "ev": null,
+   "kind": [
+    "公営住宅（借上住宅）"
+   ]
+  },
+  {
+   "name": "コンパーニョ紅三",
+   "ku": "南区",
+   "addr": "横浜市南区高根町1丁目4番地の17",
+   "built": 2006,
+   "builtSrc": "竣功",
+   "builtNew": 2006,
+   "floorsMax": 8,
+   "buildings": 1,
+   "ev": null,
+   "kind": [
+    "公営住宅（借上住宅）"
+   ]
+  },
+  {
+   "name": "サウスヴィラ横濱",
+   "ku": "南区",
+   "addr": "横浜市南区高根町4丁目25番地",
+   "built": 2003,
+   "builtSrc": "竣功",
+   "builtNew": 2003,
+   "floorsMax": 7,
+   "buildings": 1,
+   "ev": null,
+   "kind": [
+    "公営住宅（借上住宅）"
+   ]
+  },
+  {
+   "name": "サニーコート横浜",
+   "ku": "南区",
+   "addr": "横浜市南区中村町1丁目1番地の5",
+   "built": 2006,
+   "builtSrc": "竣功",
+   "builtNew": 2006,
+   "floorsMax": 7,
+   "buildings": 1,
+   "ev": null,
+   "kind": [
+    "公営住宅（借上住宅）"
+   ]
+  },
+  {
+   "name": "シルク花之木",
+   "ku": "南区",
+   "addr": "横浜市南区花之木町3丁目52番地の15",
+   "built": 2003,
+   "builtSrc": "竣功",
+   "builtNew": 2003,
+   "floorsMax": 6,
+   "buildings": 1,
+   "ev": null,
+   "kind": [
+    "公営住宅（借上住宅）"
+   ]
+  },
+  {
+   "name": "セレッサ弘明寺",
+   "ku": "南区",
+   "addr": "横浜市南区大橋町1丁目19番地",
+   "built": 2003,
+   "builtSrc": "竣功",
+   "builtNew": 2003,
+   "floorsMax": 6,
+   "buildings": 1,
+   "ev": null,
+   "kind": [
+    "公営住宅（借上住宅）"
+   ]
+  },
+  {
+   "name": "ＴＫゴーニーナナ",
+   "ku": "南区",
+   "addr": "横浜市南区吉野町5丁目27番地",
+   "built": 2001,
+   "builtSrc": "竣功",
+   "builtNew": 2001,
+   "floorsMax": 10,
+   "buildings": 1,
+   "ev": null,
+   "kind": [
+    "公営住宅（借上住宅）"
+   ]
+  },
+  {
+   "name": "フレアコート",
+   "ku": "南区",
+   "addr": "横浜市南区大岡五丁目16番8号",
+   "built": 2002,
+   "builtSrc": "竣功",
+   "builtNew": 2002,
+   "floorsMax": 5,
+   "buildings": 1,
+   "ev": null,
+   "kind": [
+    "公営住宅（借上住宅）"
+   ]
+  },
+  {
+   "name": "ベルチエ蒔田",
+   "ku": "南区",
+   "addr": "横浜市南区共進町2丁目37番地の3",
+   "built": 1997,
+   "builtSrc": "竣功",
+   "builtNew": 1997,
+   "floorsMax": 4,
+   "buildings": 1,
+   "ev": null,
+   "kind": [
+    "公営住宅（借上住宅）"
+   ]
+  },
+  {
+   "name": "ポルト横浜",
+   "ku": "南区",
+   "addr": "横浜市南区西中町1丁目3番地の1",
+   "built": 2005,
+   "builtSrc": "竣功",
+   "builtNew": 2005,
+   "floorsMax": 6,
+   "buildings": 1,
+   "ev": null,
+   "kind": [
+    "公営住宅（借上住宅）"
+   ]
+  },
+  {
+   "name": "ライトハウス別所",
+   "ku": "南区",
+   "addr": "横浜市南区別所五丁目7番35号",
+   "built": 2000,
+   "builtSrc": "竣功",
+   "builtNew": 2000,
+   "floorsMax": 4,
+   "buildings": 1,
+   "ev": null,
+   "kind": [
+    "公営住宅（借上住宅）"
+   ]
+  },
+  {
+   "name": "ラ・メゾン・ペジブル",
+   "ku": "南区",
+   "addr": "横浜市南区前里町4丁目102番地の1",
+   "built": 2001,
+   "builtSrc": "竣功",
+   "builtNew": 2001,
+   "floorsMax": 7,
+   "buildings": 1,
+   "ev": null,
+   "kind": [
+    "公営住宅（借上住宅）"
+   ]
+  },
+  {
+   "name": "リフレッシュ中村町",
+   "ku": "南区",
+   "addr": "横浜市南区中村町5丁目316番地の15",
+   "built": 2001,
+   "builtSrc": "竣功",
+   "builtNew": 2001,
+   "floorsMax": 4,
+   "buildings": 1,
+   "ev": null,
+   "kind": [
+    "公営住宅（借上住宅）"
+   ]
+  },
+  {
+   "name": "ル・パルクメゾン蒔田",
+   "ku": "南区",
+   "addr": "横浜市南区宿町1丁目14番地の2",
+   "built": 2004,
+   "builtSrc": "竣功",
+   "builtNew": 2004,
+   "floorsMax": 6,
+   "buildings": 1,
+   "ev": null,
+   "kind": [
+    "公営住宅（借上住宅）"
+   ]
+  },
+  {
+   "name": "レジデンス槇",
+   "ku": "南区",
+   "addr": "横浜市南区真金町2丁目19番地の6",
+   "built": 2000,
+   "builtSrc": "竣功",
+   "builtNew": 2000,
+   "floorsMax": 10,
+   "buildings": 1,
+   "ev": null,
+   "kind": [
+    "公営住宅（借上住宅）"
+   ]
+  },
+  {
+   "name": "ワイズ弘明寺",
+   "ku": "南区",
+   "addr": "横浜市南区大橋町3丁目54番地の3",
+   "built": 2001,
+   "builtSrc": "竣功",
+   "builtNew": 2001,
+   "floorsMax": 5,
+   "buildings": 1,
+   "ev": null,
+   "kind": [
+    "公営住宅（借上住宅）"
+   ]
+  },
+  {
+   "name": "エルーチェ上大岡",
+   "ku": "港南区",
+   "addr": "横浜市港南区最戸二丁目12番18号",
+   "built": 2003,
+   "builtSrc": "竣功",
+   "builtNew": 2003,
+   "floorsMax": 4,
+   "buildings": 1,
+   "ev": null,
+   "kind": [
+    "公営住宅（借上住宅）"
+   ]
+  },
+  {
+   "name": "上大岡Ｓ．Ｋ",
+   "ku": "港南区",
+   "addr": "横浜市港南区大久保一丁目7番4号",
+   "built": 2005,
+   "builtSrc": "竣功",
+   "builtNew": 2005,
+   "floorsMax": 4,
+   "buildings": 1,
+   "ev": null,
+   "kind": [
+    "公営住宅（借上住宅）"
+   ]
+  },
+  {
+   "name": "コンフォート・ハル",
+   "ku": "港南区",
+   "addr": "横浜市港南区下永谷四丁目2番9号",
+   "built": 2007,
+   "builtSrc": "竣功",
+   "builtNew": 2007,
+   "floorsMax": 5,
+   "buildings": 1,
+   "ev": null,
+   "kind": [
+    "公営住宅（借上住宅）"
+   ]
+  },
+  {
+   "name": "サンヒルズ港南台",
+   "ku": "港南区",
+   "addr": "横浜市港南区港南台七丁目9番40号",
+   "built": 2001,
+   "builtSrc": "竣功",
+   "builtNew": 2001,
+   "floorsMax": 3,
+   "buildings": 1,
+   "ev": null,
+   "kind": [
+    "公営住宅（借上住宅）"
+   ]
+  },
+  {
+   "name": "ドミール上永谷",
+   "ku": "港南区",
+   "addr": "横浜市港南区上永谷五丁目2番22号",
+   "built": 2004,
+   "builtSrc": "竣功",
+   "builtNew": 2004,
+   "floorsMax": 3,
+   "buildings": 1,
+   "ev": null,
+   "kind": [
+    "公営住宅（借上住宅）"
+   ]
+  },
+  {
+   "name": "ヒルトップ洋光台",
+   "ku": "港南区",
+   "addr": "横浜市港南区日野中央三丁目32番1号",
+   "built": 2004,
+   "builtSrc": "着工",
+   "builtNew": 2004,
+   "floorsMax": 5,
+   "buildings": 1,
+   "ev": null,
+   "kind": [
+    "公営住宅（借上住宅）"
+   ]
+  },
+  {
+   "name": "メゾンひまわり",
+   "ku": "港南区",
+   "addr": "横浜市港南区大久保一丁目18番6号",
+   "built": 2000,
+   "builtSrc": "竣功",
+   "builtNew": 2000,
+   "floorsMax": 5,
+   "buildings": 1,
+   "ev": null,
+   "kind": [
+    "公営住宅（借上住宅）"
+   ]
+  },
+  {
+   "name": "ワコルダー",
+   "ku": "港南区",
+   "addr": "横浜市港南区港南一丁目15番9号",
+   "built": 2000,
+   "builtSrc": "竣功",
+   "builtNew": 2000,
+   "floorsMax": 6,
+   "buildings": 1,
+   "ev": null,
+   "kind": [
+    "公営住宅（借上住宅）"
+   ]
+  },
+  {
+   "name": "グリーンヴェイル西谷",
+   "ku": "保土ケ谷区",
+   "addr": "横浜市保土ケ谷区西谷四丁目3番8号",
+   "built": 1996,
+   "builtSrc": "竣功",
+   "builtNew": 1996,
+   "floorsMax": 7,
+   "buildings": 1,
+   "ev": null,
+   "kind": [
+    "公営住宅（借上住宅）"
+   ]
+  },
+  {
+   "name": "グレースランド",
+   "ku": "保土ケ谷区",
+   "addr": "横浜市保土ケ谷区和田二丁目14番8号",
+   "built": 2001,
+   "builtSrc": "竣功",
+   "builtNew": 2001,
+   "floorsMax": 7,
+   "buildings": 1,
+   "ev": null,
+   "kind": [
+    "公営住宅（借上住宅）"
+   ]
+  },
+  {
+   "name": "権太坂スクエア",
+   "ku": "保土ケ谷区",
+   "addr": "横浜市保土ケ谷区権太坂三丁目1番2号",
+   "built": 2007,
+   "builtSrc": "竣功",
+   "builtNew": 2007,
+   "floorsMax": 7,
+   "buildings": 1,
+   "ev": null,
+   "kind": [
+    "公営住宅（借上住宅）"
+   ]
+  },
+  {
+   "name": "シャイニング横浜",
+   "ku": "保土ケ谷区",
+   "addr": "横浜市保土ケ谷区岩井町172番地の7",
+   "built": 2004,
+   "builtSrc": "竣功",
+   "builtNew": 2004,
+   "floorsMax": 5,
+   "buildings": 1,
+   "ev": null,
+   "kind": [
+    "公営住宅（借上住宅）"
+   ]
+  },
+  {
+   "name": "トレジャーハウス",
+   "ku": "保土ケ谷区",
+   "addr": "横浜市保土ケ谷区和田一丁目21番10号",
+   "built": 2004,
+   "builtSrc": "竣功",
+   "builtNew": 2004,
+   "floorsMax": 7,
+   "buildings": 1,
+   "ev": null,
+   "kind": [
+    "公営住宅（借上住宅）"
+   ]
+  },
+  {
+   "name": "ニューパース横浜権太坂",
+   "ku": "保土ケ谷区",
+   "addr": "横浜市保土ケ谷区権太坂一丁目45番9号",
+   "built": 2005,
+   "builtSrc": "竣功",
+   "builtNew": 2005,
+   "floorsMax": 6,
+   "buildings": 1,
+   "ev": null,
+   "kind": [
+    "公営住宅（借上住宅）"
+   ]
+  },
+  {
+   "name": "パークハイム星川",
+   "ku": "保土ケ谷区",
+   "addr": "横浜市保土ケ谷区星川一丁目4番5号",
+   "built": 1999,
+   "builtSrc": "竣功",
+   "builtNew": 1999,
+   "floorsMax": 6,
+   "buildings": 1,
+   "ev": null,
+   "kind": [
+    "公営住宅（借上住宅）"
+   ]
+  },
+  {
+   "name": "ヒルサイド西谷",
+   "ku": "保土ケ谷区",
+   "addr": "横浜市保土ケ谷区西谷三丁目17番26号",
+   "built": 2004,
+   "builtSrc": "竣功",
+   "builtNew": 2004,
+   "floorsMax": 5,
+   "buildings": 1,
+   "ev": null,
+   "kind": [
+    "公営住宅（借上住宅）"
+   ]
+  },
+  {
+   "name": "ヒルズ峰岡",
+   "ku": "保土ケ谷区",
+   "addr": "横浜市保土ケ谷区峰岡町3丁目359番地の4",
+   "built": 2005,
+   "builtSrc": "竣功",
+   "builtNew": 2005,
+   "floorsMax": 4,
+   "buildings": 1,
+   "ev": null,
+   "kind": [
+    "公営住宅（借上住宅）"
+   ]
+  },
+  {
+   "name": "ファーストリッチ",
+   "ku": "保土ケ谷区",
+   "addr": "横浜市保土ケ谷区仏向町241番地",
+   "built": 2006,
+   "builtSrc": "竣功",
+   "builtNew": 2006,
+   "floorsMax": 6,
+   "buildings": 1,
+   "ev": null,
+   "kind": [
+    "公営住宅（借上住宅）"
+   ]
+  },
+  {
+   "name": "ミカーサ横浜",
+   "ku": "保土ケ谷区",
+   "addr": "横浜市保土ケ谷区岩間町2丁目180番地の1",
+   "built": 2001,
+   "builtSrc": "竣功",
+   "builtNew": 2001,
+   "floorsMax": 7,
+   "buildings": 1,
+   "ev": null,
+   "kind": [
+    "公営住宅（借上住宅）"
+   ]
+  },
+  {
+   "name": "ライブリーさくら",
+   "ku": "保土ケ谷区",
+   "addr": "横浜市保土ケ谷区桜ケ丘二丁目2番18号",
+   "built": 2004,
+   "builtSrc": "竣功",
+   "builtNew": 2004,
+   "floorsMax": 4,
+   "buildings": 1,
+   "ev": null,
+   "kind": [
+    "公営住宅（借上住宅）"
+   ]
+  },
+  {
+   "name": "エムケイ・ドリーム笹野台",
+   "ku": "旭区",
+   "addr": "横浜市旭区笹野台一丁目31番6号",
+   "built": 1998,
+   "builtSrc": "竣功",
+   "builtNew": 1998,
+   "floorsMax": 6,
+   "buildings": 1,
+   "ev": null,
+   "kind": [
+    "公営住宅（借上住宅）"
+   ]
+  },
+  {
+   "name": "クレール白根",
+   "ku": "旭区",
+   "addr": "横浜市旭区白根三丁目15番12号",
+   "built": 1999,
+   "builtSrc": "竣功",
+   "builtNew": 1999,
+   "floorsMax": 4,
+   "buildings": 1,
+   "ev": null,
+   "kind": [
+    "公営住宅（借上住宅）"
+   ]
+  },
+  {
+   "name": "コリンデエスポワール",
+   "ku": "旭区",
+   "addr": "横浜市旭区善部町64番地の5",
+   "built": 1996,
+   "builtSrc": "竣功",
+   "builtNew": 1996,
+   "floorsMax": 4,
+   "buildings": 1,
+   "ev": null,
+   "kind": [
+    "公営住宅（借上住宅）"
+   ]
+  },
+  {
+   "name": "ハーヴェストコート",
+   "ku": "旭区",
+   "addr": "横浜市旭区市沢町167番地",
+   "built": 2004,
+   "builtSrc": "竣功",
+   "builtNew": 2004,
+   "floorsMax": 6,
+   "buildings": 1,
+   "ev": null,
+   "kind": [
+    "公営住宅（借上住宅）"
+   ]
+  },
+  {
+   "name": "ヒルズ東希望が丘",
+   "ku": "旭区",
+   "addr": "横浜市旭区東希望が丘138番地の8",
+   "built": 1999,
+   "builtSrc": "竣功",
+   "builtNew": 1999,
+   "floorsMax": 3,
+   "buildings": 2,
+   "ev": null,
+   "kind": [
+    "公営住宅（借上住宅）"
+   ]
+  },
+  {
+   "name": "ル・グラン下川井",
+   "ku": "旭区",
+   "addr": "横浜市旭区下川井町188番地の1",
+   "built": 1999,
+   "builtSrc": "竣功",
+   "builtNew": 1999,
+   "floorsMax": 3,
+   "buildings": 2,
+   "ev": null,
+   "kind": [
+    "公営住宅（借上住宅）"
+   ]
+  },
+  {
+   "name": "ルブワール",
+   "ku": "旭区",
+   "addr": "横浜市旭区本宿町22番地の12",
+   "built": 2004,
+   "builtSrc": "竣功",
+   "builtNew": 2004,
+   "floorsMax": 7,
+   "buildings": 1,
+   "ev": null,
+   "kind": [
+    "公営住宅（借上住宅）"
+   ]
+  },
+  {
+   "name": "アルカサーノ洋光台",
+   "ku": "磯子区",
+   "addr": "横浜市磯子区田中二丁目7番29号",
+   "built": 2004,
+   "builtSrc": "竣功",
+   "builtNew": 2004,
+   "floorsMax": 3,
+   "buildings": 1,
+   "ev": null,
+   "kind": [
+    "公営住宅（借上住宅）"
+   ]
+  },
+  {
+   "name": "エテルニテ(Ｎ)",
+   "ku": "磯子区",
+   "addr": "横浜市磯子区洋光台一丁目14番19号",
+   "built": 2001,
+   "builtSrc": "竣功",
+   "builtNew": 2001,
+   "floorsMax": 5,
+   "buildings": 1,
+   "ev": null,
+   "kind": [
+    "公営住宅（借上住宅）"
+   ]
+  },
+  {
+   "name": "サンテラス洋光台",
+   "ku": "磯子区",
+   "addr": "横浜市磯子区洋光台三丁目12番22号",
+   "built": 2001,
+   "builtSrc": "竣功",
+   "builtNew": 2001,
+   "floorsMax": 5,
+   "buildings": 1,
+   "ev": null,
+   "kind": [
+    "公営住宅（借上住宅）"
+   ]
+  },
+  {
+   "name": "ディアコート磯子台",
+   "ku": "磯子区",
+   "addr": "横浜市磯子区磯子台11番23号",
+   "built": 1999,
+   "builtSrc": "竣功",
+   "builtNew": 1999,
+   "floorsMax": 3,
+   "buildings": 1,
+   "ev": null,
+   "kind": [
+    "公営住宅（借上住宅）"
+   ]
+  },
+  {
+   "name": "ディライト・ファイブ",
+   "ku": "磯子区",
+   "addr": "横浜市磯子区磯子二丁目25番8号",
+   "built": 2002,
+   "builtSrc": "竣功",
+   "builtNew": 2002,
+   "floorsMax": 5,
+   "buildings": 1,
+   "ev": null,
+   "kind": [
+    "公営住宅（借上住宅）"
+   ]
+  },
+  {
+   "name": "ハイランド磯子Ⅱ",
+   "ku": "磯子区",
+   "addr": "横浜市磯子区森一丁目11番17号",
+   "built": 2000,
+   "builtSrc": "竣功",
+   "builtNew": 2000,
+   "floorsMax": 10,
+   "buildings": 1,
+   "ev": null,
+   "kind": [
+    "公営住宅（借上住宅）"
+   ]
+  },
+  {
+   "name": "プラム・ブラッサム池の端",
+   "ku": "磯子区",
+   "addr": "横浜市磯子区中原三丁目11番27号",
+   "built": 1997,
+   "builtSrc": "竣功",
+   "builtNew": 1997,
+   "floorsMax": 3,
+   "buildings": 1,
+   "ev": null,
+   "kind": [
+    "公営住宅（借上住宅）"
+   ]
+  },
+  {
+   "name": "ブルックハイツ磯子",
+   "ku": "磯子区",
+   "addr": "横浜市磯子区磯子三丁目4番10号",
+   "built": 1999,
+   "builtSrc": "竣功",
+   "builtNew": 1999,
+   "floorsMax": 8,
+   "buildings": 1,
+   "ev": null,
+   "kind": [
+    "公営住宅（借上住宅）"
+   ]
+  },
+  {
+   "name": "プレミール新杉田",
+   "ku": "磯子区",
+   "addr": "横浜市磯子区中原二丁目2番3号",
+   "built": 2003,
+   "builtSrc": "竣功",
+   "builtNew": 2003,
+   "floorsMax": 6,
+   "buildings": 1,
+   "ev": null,
+   "kind": [
+    "公営住宅（借上住宅）"
+   ]
+  },
+  {
+   "name": "ミュールバッハ上中里",
+   "ku": "磯子区",
+   "addr": "横浜市磯子区上中里町342番地",
+   "built": 2000,
+   "builtSrc": "竣功",
+   "builtNew": 2000,
+   "floorsMax": 5,
+   "buildings": 1,
+   "ev": null,
+   "kind": [
+    "公営住宅（借上住宅）"
+   ]
+  },
+  {
+   "name": "ランドピース根岸",
+   "ku": "磯子区",
+   "addr": "横浜市磯子区丸山二丁目3番6号",
+   "built": 2003,
+   "builtSrc": "竣功",
+   "builtNew": 2003,
+   "floorsMax": 6,
+   "buildings": 1,
+   "ev": null,
+   "kind": [
+    "公営住宅（借上住宅）"
+   ]
+  },
+  {
+   "name": "リバーパーク根岸",
+   "ku": "磯子区",
+   "addr": "横浜市磯子区馬場町1番46号",
+   "built": 2004,
+   "builtSrc": "竣功",
+   "builtNew": 2004,
+   "floorsMax": 6,
+   "buildings": 1,
+   "ev": null,
+   "kind": [
+    "公営住宅（借上住宅）"
+   ]
+  },
+  {
+   "name": "サンモール",
+   "ku": "金沢区",
+   "addr": "横浜市金沢区富岡西七丁目2番11号",
+   "built": 2004,
+   "builtSrc": "竣功",
+   "builtNew": 2004,
+   "floorsMax": 5,
+   "buildings": 1,
+   "ev": null,
+   "kind": [
+    "公営住宅（借上住宅）"
+   ]
+  },
+  {
+   "name": "ラマージュ",
+   "ku": "金沢区",
+   "addr": "横浜市金沢区釜利谷東六丁目7番16号",
+   "built": 2006,
+   "builtSrc": "竣功",
+   "builtNew": 2006,
+   "floorsMax": 4,
+   "buildings": 1,
+   "ev": null,
+   "kind": [
+    "公営住宅（借上住宅）"
+   ]
+  },
+  {
+   "name": "エクセルヴィラ妙蓮寺",
+   "ku": "港北区",
+   "addr": "横浜市港北区篠原東一丁目5番16号",
+   "built": 2004,
+   "builtSrc": "竣功",
+   "builtNew": 2004,
+   "floorsMax": 3,
+   "buildings": 1,
+   "ev": null,
+   "kind": [
+    "公営住宅（借上住宅）"
+   ]
+  },
+  {
+   "name": "オルミー日吉",
+   "ku": "港北区",
+   "addr": "横浜市港北区日吉三丁目15番14号",
+   "built": 2004,
+   "builtSrc": "竣功",
+   "builtNew": 2004,
+   "floorsMax": 5,
+   "buildings": 1,
+   "ev": null,
+   "kind": [
+    "公営住宅（借上住宅）"
+   ]
+  },
+  {
+   "name": "クラドール日吉",
+   "ku": "港北区",
+   "addr": "横浜市港北区日吉三丁目2番12号",
+   "built": 1999,
+   "builtSrc": "竣功",
+   "builtNew": 1999,
+   "floorsMax": 5,
+   "buildings": 1,
+   "ev": null,
+   "kind": [
+    "公営住宅（借上住宅）"
+   ]
+  },
+  {
+   "name": "グランジュ綱島",
+   "ku": "港北区",
+   "addr": "横浜市港北区新吉田東七丁目23番31号",
+   "built": 2006,
+   "builtSrc": "竣功",
+   "builtNew": 2006,
+   "floorsMax": 3,
+   "buildings": 1,
+   "ev": null,
+   "kind": [
+    "公営住宅（借上住宅）"
+   ]
+  },
+  {
+   "name": "グランドュール鳥山",
+   "ku": "港北区",
+   "addr": "横浜市港北区鳥山町649番地の1",
+   "built": 2000,
+   "builtSrc": "竣功",
+   "builtNew": 2000,
+   "floorsMax": 4,
+   "buildings": 1,
+   "ev": null,
+   "kind": [
+    "公営住宅（借上住宅）"
+   ]
+  },
+  {
+   "name": "コンフォール南日吉Ｄ棟",
+   "ku": "港北区",
+   "addr": "横浜市港北区日吉本町四丁目10番",
+   "built": 2007,
+   "builtSrc": "竣功",
+   "builtNew": 2007,
+   "floorsMax": 9,
+   "buildings": 1,
+   "ev": "あり",
+   "kind": [
+    "公営住宅（借上住宅）"
+   ]
+  },
+  {
+   "name": "シャインヴィラ妙蓮寺",
+   "ku": "港北区",
+   "addr": "横浜市港北区篠原東一丁目5番17号",
+   "built": 2003,
+   "builtSrc": "竣功",
+   "builtNew": 2003,
+   "floorsMax": 3,
+   "buildings": 1,
+   "ev": null,
+   "kind": [
+    "公営住宅（借上住宅）"
+   ]
+  },
+  {
+   "name": "ひかるコート横浜",
+   "ku": "港北区",
+   "addr": "横浜市港北区新横浜一丁目4番地の4",
+   "built": 1999,
+   "builtSrc": "竣功",
+   "builtNew": 1999,
+   "floorsMax": 14,
+   "buildings": 1,
+   "ev": null,
+   "kind": [
+    "公営住宅（借上住宅）"
+   ]
+  },
+  {
+   "name": "ポレポレ・Ｋ",
+   "ku": "港北区",
+   "addr": "横浜市港北区北新横浜二丁目6番地の5",
+   "built": 2005,
+   "builtSrc": "竣功",
+   "builtNew": 2005,
+   "floorsMax": 7,
+   "buildings": 1,
+   "ev": null,
+   "kind": [
+    "公営住宅（借上住宅）"
+   ]
+  },
+  {
+   "name": "ルミエール高田",
+   "ku": "港北区",
+   "addr": "横浜市港北区高田東四丁目22番32号",
+   "built": 2005,
+   "builtSrc": "竣功",
+   "builtNew": 2005,
+   "floorsMax": 4,
+   "buildings": 1,
+   "ev": null,
+   "kind": [
+    "公営住宅（借上住宅）"
+   ]
+  },
+  {
+   "name": "ロータス綱島",
+   "ku": "港北区",
+   "addr": "横浜市港北区綱島東一丁目21番25号",
+   "built": 2001,
+   "builtSrc": "竣功",
+   "builtNew": 2001,
+   "floorsMax": 6,
+   "buildings": 1,
+   "ev": null,
+   "kind": [
+    "公営住宅（借上住宅）"
+   ]
+  },
+  {
+   "name": "サニーコート弐番館",
+   "ku": "緑区",
+   "addr": "横浜市緑区三保町1849番地の1",
+   "built": 2000,
+   "builtSrc": "竣功",
+   "builtNew": 2000,
+   "floorsMax": 3,
+   "buildings": 1,
+   "ev": null,
+   "kind": [
+    "公営住宅（借上住宅）"
+   ]
+  },
+  {
+   "name": "サニーハウス",
+   "ku": "緑区",
+   "addr": "横浜市緑区十日市場町802番地の3",
+   "built": 2000,
+   "builtSrc": "竣功",
+   "builtNew": 2000,
+   "floorsMax": 6,
+   "buildings": 1,
+   "ev": null,
+   "kind": [
+    "公営住宅（借上住宅）"
+   ]
+  },
+  {
+   "name": "サンライズ中山",
+   "ku": "緑区",
+   "addr": "横浜市緑区中山一丁目17番1号",
+   "built": 1998,
+   "builtSrc": "竣功",
+   "builtNew": 1998,
+   "floorsMax": 6,
+   "buildings": 1,
+   "ev": null,
+   "kind": [
+    "公営住宅（借上住宅）"
+   ]
+  },
+  {
+   "name": "メルクマール敬愛",
+   "ku": "緑区",
+   "addr": "横浜市緑区台村町326番地の1",
+   "built": 2005,
+   "builtSrc": "竣功",
+   "builtNew": 2005,
+   "floorsMax": 7,
+   "buildings": 1,
+   "ev": null,
+   "kind": [
+    "公営住宅（借上住宅）"
+   ]
+  },
+  {
+   "name": "ソレーユ荏子田",
+   "ku": "青葉区",
+   "addr": "横浜市青葉区荏子田二丁目1番地の1",
+   "built": 2004,
+   "builtSrc": "竣功",
+   "builtNew": 2004,
+   "floorsMax": 3,
+   "buildings": 1,
+   "ev": null,
+   "kind": [
+    "公営住宅（借上住宅）"
+   ]
+  },
+  {
+   "name": "トゥエルブ市ケ尾",
+   "ku": "青葉区",
+   "addr": "横浜市青葉区市ケ尾町525番地の5",
+   "built": 2000,
+   "builtSrc": "竣功",
+   "builtNew": 2000,
+   "floorsMax": 3,
+   "buildings": 1,
+   "ev": null,
+   "kind": [
+    "公営住宅（借上住宅）"
+   ]
+  },
+  {
+   "name": "カスタムＡ棟",
+   "ku": "都筑区",
+   "addr": "横浜市都筑区中川三丁目36番10号",
+   "built": 1994,
+   "builtSrc": "竣功",
+   "builtNew": 1994,
+   "floorsMax": 5,
+   "buildings": 1,
+   "ev": null,
+   "kind": [
+    "公営住宅（借上住宅）"
+   ]
+  },
+  {
+   "name": "グレイス仲町台",
+   "ku": "都筑区",
+   "addr": "横浜市都筑区茅ケ崎南二丁目19番10号",
+   "built": 2000,
+   "builtSrc": "竣功",
+   "builtNew": 2000,
+   "floorsMax": 6,
+   "buildings": 1,
+   "ev": null,
+   "kind": [
+    "公営住宅（借上住宅）"
+   ]
+  },
+  {
+   "name": "ソレイアードⅢ",
+   "ku": "都筑区",
+   "addr": "横浜市都筑区茅ケ崎中央26番10号",
+   "built": 1997,
+   "builtSrc": "竣功",
+   "builtNew": 1997,
+   "floorsMax": 6,
+   "buildings": 1,
+   "ev": null,
+   "kind": [
+    "公営住宅（借上住宅）"
+   ]
+  },
+  {
+   "name": "ノーブル弐番館",
+   "ku": "都筑区",
+   "addr": "横浜市都筑区中川三丁目37番8号",
+   "built": 1995,
+   "builtSrc": "竣功",
+   "builtNew": 1995,
+   "floorsMax": 5,
+   "buildings": 1,
+   "ev": null,
+   "kind": [
+    "公営住宅（借上住宅）"
+   ]
+  },
+  {
+   "name": "アザレア館",
+   "ku": "戸塚区",
+   "addr": "横浜市戸塚区鳥が丘17番地の1",
+   "built": 1999,
+   "builtSrc": "竣功",
+   "builtNew": 1999,
+   "floorsMax": 4,
+   "buildings": 1,
+   "ev": null,
+   "kind": [
+    "公営住宅（借上住宅）"
+   ]
+  },
+  {
+   "name": "グリーンファーム秋葉",
+   "ku": "戸塚区",
+   "addr": "横浜市戸塚区秋葉町397番地の1",
+   "built": 1999,
+   "builtSrc": "竣功",
+   "builtNew": 1999,
+   "floorsMax": 3,
+   "buildings": 1,
+   "ev": null,
+   "kind": [
+    "公営住宅（借上住宅）"
+   ]
+  },
+  {
+   "name": "クレスト戸塚",
+   "ku": "戸塚区",
+   "addr": "横浜市戸塚区汲沢一丁目29番17号",
+   "built": 1995,
+   "builtSrc": "竣功",
+   "builtNew": 1995,
+   "floorsMax": 5,
+   "buildings": 1,
+   "ev": null,
+   "kind": [
+    "公営住宅（借上住宅）"
+   ]
+  },
+  {
+   "name": "サンステージ原宿",
+   "ku": "戸塚区",
+   "addr": "横浜市戸塚区原宿四丁目18番12号",
+   "built": 1999,
+   "builtSrc": "竣功",
+   "builtNew": 1999,
+   "floorsMax": 3,
+   "buildings": 3,
+   "ev": null,
+   "kind": [
+    "公営住宅（借上住宅）"
+   ]
+  },
+  {
+   "name": "Ｆｕｊｉビューグランドハイツ",
+   "ku": "戸塚区",
+   "addr": "横浜市戸塚区平戸町220番地の1",
+   "built": 1995,
+   "builtSrc": "竣功",
+   "builtNew": 1995,
+   "floorsMax": 3,
+   "buildings": 1,
+   "ev": null,
+   "kind": [
+    "公営住宅（借上住宅）"
+   ]
+  },
+  {
+   "name": "ベルドミール坂下",
+   "ku": "戸塚区",
+   "addr": "横浜市戸塚区平戸町686番地の1",
+   "built": 1997,
+   "builtSrc": "竣功",
+   "builtNew": 1997,
+   "floorsMax": 3,
+   "buildings": 1,
+   "ev": null,
+   "kind": [
+    "公営住宅（借上住宅）"
+   ]
+  },
+  {
+   "name": "ボナール戸塚",
+   "ku": "戸塚区",
+   "addr": "横浜市戸塚区上倉田町346番地の1",
+   "built": 1999,
+   "builtSrc": "竣功",
+   "builtNew": 1999,
+   "floorsMax": 5,
+   "buildings": 1,
+   "ev": null,
+   "kind": [
+    "公営住宅（借上住宅）"
+   ]
+  },
+  {
+   "name": "ラ・ハート横濱本郷台",
+   "ku": "栄区",
+   "addr": "横浜市栄区小菅ケ谷四丁目16番5号",
+   "built": 2002,
+   "builtSrc": "竣功",
+   "builtNew": 2002,
+   "floorsMax": 5,
+   "buildings": 1,
+   "ev": null,
+   "kind": [
+    "公営住宅（借上住宅）"
+   ]
+  },
+  {
+   "name": "アルブルⅡ",
+   "ku": "泉区",
+   "addr": "横浜市泉区中田西一丁目2番24号",
+   "built": 2003,
+   "builtSrc": "竣功",
+   "builtNew": 2003,
+   "floorsMax": 7,
+   "buildings": 1,
+   "ev": null,
+   "kind": [
+    "公営住宅（借上住宅）"
+   ]
+  },
+  {
+   "name": "アルブルⅢ",
+   "ku": "泉区",
+   "addr": "横浜市泉区中田西一丁目2番7号",
+   "built": 2005,
+   "builtSrc": "竣功",
+   "builtNew": 2005,
+   "floorsMax": 7,
+   "buildings": 1,
+   "ev": null,
+   "kind": [
+    "公営住宅（借上住宅）"
+   ]
+  },
+  {
+   "name": "グリーンヒルズ領家",
+   "ku": "泉区",
+   "addr": "横浜市泉区岡津町678番地の48",
+   "built": 2004,
+   "builtSrc": "竣功",
+   "builtNew": 2004,
+   "floorsMax": 3,
+   "buildings": 1,
+   "ev": null,
+   "kind": [
+    "公営住宅（借上住宅）"
+   ]
+  },
+  {
+   "name": "セントラルヒルズ",
+   "ku": "泉区",
+   "addr": "横浜市泉区新橋町1134番地の1",
+   "built": 2000,
+   "builtSrc": "竣功",
+   "builtNew": 2000,
+   "floorsMax": 3,
+   "buildings": 2,
+   "ev": null,
+   "kind": [
+    "公営住宅（借上住宅）"
+   ]
+  },
+  {
+   "name": "セントラルヒルズ壱番館",
+   "ku": "泉区",
+   "addr": "横浜市泉区新橋町1131番地の1",
+   "built": 1998,
+   "builtSrc": "竣功",
+   "builtNew": 1998,
+   "floorsMax": 3,
+   "buildings": 1,
+   "ev": null,
+   "kind": [
+    "公営住宅（借上住宅）"
+   ]
+  },
+  {
+   "name": "モンティクロ参番館",
+   "ku": "泉区",
+   "addr": "横浜市泉区中田西二丁目24番6号",
+   "built": 1998,
+   "builtSrc": "竣功",
+   "builtNew": 1998,
+   "floorsMax": 3,
+   "buildings": 1,
+   "ev": null,
+   "kind": [
+    "公営住宅（借上住宅）"
+   ]
+  },
+  {
+   "name": "ウインズ瀬戸",
+   "ku": "瀬谷区",
+   "addr": "横浜市瀬谷区二ツ橋町198番地の1",
+   "built": 1994,
+   "builtSrc": "竣功",
+   "builtNew": 1994,
+   "floorsMax": 4,
+   "buildings": 1,
+   "ev": null,
+   "kind": [
+    "公営住宅（借上住宅）"
+   ]
+  },
+  {
+   "name": "グランデュールプラザ",
+   "ku": "瀬谷区",
+   "addr": "横浜市瀬谷区橋戸二丁目31番地の3",
+   "built": 2003,
+   "builtSrc": "竣功",
+   "builtNew": 2003,
+   "floorsMax": 6,
+   "buildings": 1,
+   "ev": null,
+   "kind": [
+    "公営住宅（借上住宅）"
+   ]
+  },
+  {
+   "name": "グリーンヒルソウブ",
+   "ku": "瀬谷区",
+   "addr": "横浜市瀬谷区阿久和東三丁目39番地の3",
+   "built": 1997,
+   "builtSrc": "竣功",
+   "builtNew": 1997,
+   "floorsMax": 4,
+   "buildings": 1,
+   "ev": null,
+   "kind": [
+    "公営住宅（借上住宅）"
+   ]
+  },
+  {
+   "name": "パークヒル瀬谷",
+   "ku": "瀬谷区",
+   "addr": "横浜市瀬谷区下瀬谷二丁目18番地の9",
+   "built": 1998,
+   "builtSrc": "竣功",
+   "builtNew": 1998,
+   "floorsMax": 6,
+   "buildings": 1,
+   "ev": null,
+   "kind": [
+    "公営住宅（借上住宅）"
+   ]
+  },
+  {
+   "name": "レジデンス紫陽花",
+   "ku": "瀬谷区",
+   "addr": "横浜市瀬谷区本郷二丁目9番地の5",
+   "built": 2000,
+   "builtSrc": "竣功",
+   "builtNew": 2000,
+   "floorsMax": 3,
+   "buildings": 1,
+   "ev": null,
+   "kind": [
+    "公営住宅（借上住宅）"
+   ]
+  },
+  {
+   "name": "中村町南住宅",
+   "ku": "南区",
+   "addr": "横浜市南区中村町5丁目316番地の2",
+   "built": 2005,
+   "builtSrc": "竣功",
+   "builtNew": 2009,
+   "floorsMax": 5,
+   "buildings": 2,
+   "ev": "あり",
+   "kind": [
+    "改良住宅"
+   ]
+  },
+  {
+   "name": "岩井町住宅",
+   "ku": "保土ケ谷区",
+   "addr": "横浜市保土ケ谷区岩井町238番地",
+   "built": 1972,
+   "builtSrc": "竣功",
+   "builtNew": 1972,
+   "floorsMax": 5,
+   "buildings": 1,
+   "ev": "なし",
+   "kind": [
+    "改良住宅"
+   ]
+  },
+  {
+   "name": "塩場住宅",
+   "ku": "金沢区",
+   "addr": "横浜市金沢区六浦四丁目6番",
+   "built": 1966,
+   "builtSrc": "竣功",
+   "builtNew": 1968,
+   "floorsMax": 5,
+   "buildings": 6,
+   "ev": "なし",
+   "kind": [
+    "改良住宅"
+   ]
+  },
+  {
+   "name": "瀬ケ崎住宅",
+   "ku": "金沢区",
+   "addr": "横浜市金沢区六浦東一丁目25番",
+   "built": 1965,
+   "builtSrc": "竣功",
+   "builtNew": 1965,
+   "floorsMax": 5,
+   "buildings": 1,
+   "ev": "なし",
+   "kind": [
+    "改良住宅"
+   ]
+  },
+  {
+   "name": "南三双住宅",
+   "ku": "金沢区",
+   "addr": "横浜市金沢区六浦南一丁目29番16号",
+   "built": 1972,
+   "builtSrc": "竣功",
+   "builtNew": 1972,
+   "floorsMax": 5,
+   "buildings": 2,
+   "ev": "なし",
+   "kind": [
+    "改良住宅"
+   ]
+  },
+  {
+   "name": "本郷住宅",
+   "ku": "栄区",
+   "addr": "横浜市栄区桂町301番地",
+   "built": 1971,
+   "builtSrc": "竣功",
+   "builtNew": 1971,
+   "floorsMax": 5,
+   "buildings": 1,
+   "ev": "なし",
+   "kind": [
+    "改良住宅"
+   ]
+  }
+ ],
+ "nameMap": {
+  "|市内全域(3階以上)": null,
+  "|市内全域(1、2階又はEV付き住宅)": null,
+  "|市内全域(事故住宅)": null,
+  "旭区|（住宅を指定しない区の枠）": null,
+  "泉区|（住宅を指定しない区の枠）": null,
+  "磯子区|（住宅を指定しない区の枠）": null,
+  "神奈川区|（住宅を指定しない区の枠）": null,
+  "金沢区|（住宅を指定しない区の枠）": null,
+  "瀬谷区|（住宅を指定しない区の枠）": null,
+  "鶴見区|（住宅を指定しない区の枠）": null,
+  "保土ヶ谷区|（住宅を指定しない区の枠）": null,
+  "緑区|（住宅を指定しない区の枠）": null,
+  "旭区|グリーンヒル上白根": "グリーンヒル上白根",
+  "旭区|川井本町": "川井本町住宅",
+  "旭区|笹野台": "笹野台住宅",
+  "旭区|善部町": "善部町住宅",
+  "泉区|上飯田第二": "上飯田第二住宅",
+  "泉区|新橋": "新橋住宅",
+  "泉区|新橋第二": "新橋第二住宅",
+  "磯子区|岡村": "岡村住宅",
+  "神奈川区|菅田ハイツ": "菅田ハイツ",
+  "金沢区|釜利谷東ハイツ": "釜利谷東ハイツ",
+  "金沢区|金沢柴町": "金沢柴町住宅",
+  "金沢区|谷津坂": "谷津坂住宅",
+  "港北区|日吉本町ハイツ": "日吉本町ハイツ",
+  "瀬谷区|阿久和向原": "阿久和向原住宅",
+  "瀬谷区|楽老ハイツ": "楽老ハイツ",
+  "瀬谷区|三ツ境南": "三ツ境南住宅",
+  "瀬谷区|南台ハイツ": "南台ハイツ",
+  "戸塚区|南戸塚": "南戸塚住宅",
+  "戸塚区|名瀬第二": "名瀬第二住宅",
+  "戸塚区|戸塚原宿": "戸塚原宿住宅",
+  "戸塚区|平戸": "平戸住宅",
+  "戸塚区|プロムナード矢部": "プロムナード矢部",
+  "戸塚区|吉田町": "吉田町住宅",
+  "保土ヶ谷区|桜ケ丘グリーンハイツ": "桜ケ丘グリーンハイツ",
+  "保土ヶ谷区|岩崎町": "岩崎町住宅",
+  "保土ヶ谷区|霞台グリーンハイツ": "霞台グリーンハイツ",
+  "保土ヶ谷区|西原グリーンハイツ": "西原グリーンハイツ",
+  "保土ヶ谷区|法泉ハイツ": "法泉ハイツ",
+  "緑区|谷津田原ハイツ": "谷津田原ハイツ",
+  "緑区|十日市場第二": "十日市場第二住宅",
+  "緑区|十日市場ヒルタウン": "十日市場ヒルタウン",
+  "緑区|上の原グリーンハイツ": "上の原グリーンハイツ",
+  "南区|永田山王台": "永田山王台住宅",
+  "旭区|ハーヴェストコート": "ハーヴェストコート",
+  "旭区|ルブワール": "ルブワール",
+  "泉区|アルブルII": "アルブルⅡ",
+  "神奈川区|フローラ神大寺": "フローラ神大寺",
+  "港北区|オルミー日吉": "オルミー日吉",
+  "港北区|コンフォール南日吉D棟": "コンフォール南日吉Ｄ棟",
+  "瀬谷区|グランデュールプラザ": "グランデュールプラザ",
+  "旭区|今宿ハイツ": "今宿ハイツ",
+  "神奈川区|グリーンヒル三ツ沢": "グリーンヒル三ツ沢",
+  "瀬谷区|橋戸ハイツ": "橋戸ハイツ",
+  "中区|ベイサイド新山下": "ベイサイド新山下",
+  "磯子区|滝頭": "滝頭住宅",
+  "磯子区|滝頭第三": "滝頭第三住宅",
+  "金沢区|塩場": "塩場住宅",
+  "金沢区|南三双": "南三双住宅",
+  "栄区|本郷": "本郷住宅",
+  "瀬谷区|上瀬谷": "上瀬谷住宅",
+  "瀬谷区|橋戸原ハイツ": "橋戸原ハイツ",
+  "緑区|三保グリーンハイツ": "三保グリーンハイツ",
+  "緑区|三保みどり台": "三保みどり台住宅",
+  "青葉区|山内": "山内住宅",
+  "旭区|旭グリーンハイツ": "旭グリーンハイツ",
+  "旭区|東希望が丘ハイツ": "東希望が丘ハイツ",
+  "旭区|二俣川宮沢": "二俣川宮沢住宅",
+  "神奈川区|三ツ沢中町ハイツ": "三ツ沢中町ハイツ",
+  "港南区|日野": "日野住宅",
+  "瀬谷区|三ツ境ハイツ": "三ツ境ハイツ",
+  "青葉区|鴨志田": "鴨志田住宅",
+  "泉区|上飯田": "上飯田住宅",
+  "金沢区|釜利谷東": null,
+  "金沢区|金沢": "金沢住宅",
+  "金沢区|金沢第二": "金沢第二住宅",
+  "金沢区|金沢第三": "金沢第三住宅",
+  "栄区|小菅が谷第二": "小菅が谷第二住宅",
+  "栄区|本郷台": "本郷台住宅",
+  "栄区|小菅が谷": "小菅が谷住宅",
+  "瀬谷区|瀬谷南": "瀬谷南住宅",
+  "緑区|白山": "白山住宅",
+  "港南区|野庭": "野庭住宅",
+  "港北区|南日吉": "南日吉住宅",
+  "西区|藤棚ハイツ": "藤棚ハイツ",
+  "緑区|北八朔": "北八朔住宅",
+  "南区|清水ヶ丘ハイツ": "清水ヶ丘ハイツ",
+  "旭区|ル・グラン下川井": "ル・グラン下川井",
+  "泉区|セントラルヒルズ壱番館": "セントラルヒルズ壱番館",
+  "磯子区|ディライト・ファイブ": "ディライト・ファイブ",
+  "磯子区|ミュールバッハ上中里": "ミュールバッハ上中里",
+  "磯子区|アルカサーノ洋光台": "アルカサーノ洋光台",
+  "磯子区|プラム・ブラッサム池の端": "プラム・ブラッサム池の端",
+  "磯子区|リバーパーク根岸": "リバーパーク根岸",
+  "磯子区|ランドピース根岸": "ランドピース根岸",
+  "磯子区|ハイランド磯子II": "ハイランド磯子Ⅱ",
+  "磯子区|エテルニテ(N)": "エテルニテ(Ｎ)",
+  "神奈川区|ボスケ・リオ・カーサ": "ボスケ・リオ・カーサ",
+  "神奈川区|ヒルズ神大寺": "ヒルズ神大寺",
+  "神奈川区|ベルグランデ菅田": "ベルグランデ菅田",
+  "神奈川区|ぐうはうす高島台": "ぐうはうす高島台",
+  "神奈川区|松ケ丘レジデンス": "松ケ丘レジデンス",
+  "神奈川区|ドエルF": "ドエルＦ",
+  "神奈川区|こまどり": null,
+  "神奈川区|サン・三ツ沢": null,
+  "港南区|メゾンひまわり": "メゾンひまわり",
+  "港南区|ドミール上永谷": "ドミール上永谷",
+  "港南区|エルーチェ上大岡": "エルーチェ上大岡",
+  "港北区|グランドュ-ル鳥山": "グランドュール鳥山",
+  "瀬谷区|パークヒル瀬谷": "パークヒル瀬谷",
+  "瀬谷区|レジデンス紫陽花": "レジデンス紫陽花",
+  "鶴見区|駒岡・ヒルズ": "駒岡・ヒルズ",
+  "鶴見区|アルト生麦": "アルト生麦",
+  "鶴見区|サザンコート": "サザンコート",
+  "鶴見区|TKSビル": "ＴＫＳビル",
+  "金沢区|ラマージュ": "ラマージュ",
+  "港南区|コンフォート・ハル": "コンフォート・ハル",
+  "港北区|ポレポレ・K": "ポレポレ・Ｋ",
+  "港北区|ひかるコート横浜": "ひかるコート横浜",
+  "港北区|グランジュ綱島": "グランジュ綱島",
+  "港北区|ロータス綱島": "ロータス綱島",
+  "都筑区|ソレイアードIII": "ソレイアードⅢ",
+  "鶴見区|ウィンドヒル鶴見": "ウィンドヒル鶴見",
+  "鶴見区|ブリッジレジデンス鶴見": "ブリッジレジデンス鶴見",
+  "鶴見区|鶴見イーストリバー": "鶴見イーストリバー",
+  "鶴見区|コージーハウス潮田": "コージーハウス潮田",
+  "鶴見区|エスポワールFR": "エスポワールＦＲ",
+  "戸塚区|サンステージ原宿": "サンステージ原宿",
+  "中区|フロレスタ本牧": "フロレスタ本牧",
+  "中区|アリエスヨコハマ": "アリエスヨコハマ",
+  "中区|ルミエール本牧": "ルミエール本牧",
+  "中区|サンタハウス本牧": "サンタハウス本牧",
+  "中区|コーポ元町": "コーポ元町",
+  "中区|ドリームタウン山手": "ドリームタウン山手",
+  "西区|ファーロ・ガイ": "ファーロ・ガイ",
+  "保土ヶ谷区|シャイニング横浜": "シャイニング横浜",
+  "保土ヶ谷区|ニューパース横浜権太坂": "ニューパース横浜権太坂",
+  "保土ヶ谷区|ライブリーさくら": "ライブリーさくら",
+  "保土ヶ谷区|ヒルサイド西谷": "ヒルサイド西谷",
+  "南区|コンパーニョ紅三": "コンパーニョ紅三",
+  "南区|サウスヴィラ横濱": "サウスヴィラ横濱",
+  "南区|サニーコート横浜": "サニーコート横浜",
+  "南区|シルク花之木": "シルク花之木",
+  "南区|ラ・メゾン・ペジブル": "ラ・メゾン・ペジブル",
+  "南区|レジデンス槇": "レジデンス槇",
+  "南区|TKゴーニーナナ": "ＴＫゴーニーナナ",
+  "戸塚区|グリーンファーム秋葉": "グリーンファーム秋葉",
+  "戸塚区|ボナール戸塚": "ボナール戸塚",
+  "戸塚区|アザレア館": "アザレア館",
+  "戸塚区|Fujiビューグランドハイツ": "Ｆｕｊｉビューグランドハイツ",
+  "中区|エバーグレイス本牧": "エバーグレイス本牧",
+  "中区|ヒルサイドシップス": "ヒルサイドシップス",
+  "中区|サンフラット関内": "サンフラット関内",
+  "中区|ベルストーン本牧": "ベルストーン本牧",
+  "中区|セントラルシティ横浜": "セントラルシティ横浜",
+  "西区|リベルテ横浜": "リベルテ横浜",
+  "西区|サンヴィラージュ横浜": "サンヴィラージュ横浜",
+  "西区|ひのき館": "ひのき館",
+  "保土ヶ谷区|グリーンヴェイル西谷": "グリーンヴェイル西谷",
+  "保土ヶ谷区|パークハイム星川": "パークハイム星川",
+  "保土ヶ谷区|グレースランド": "グレースランド",
+  "南区|エトワール大岡": "エトワール大岡",
+  "南区|ケンズ・ハウス": "ケンズ・ハウス",
+  "南区|ラ・メゾン・ベジブル": "ラ・メゾン・ペジブル",
+  "緑区|長津田スカイハイツ": "長津田スカイハイツ",
+  "旭区|コリンデエスポワール": "コリンデエスポワール",
+  "泉区|アルブルIII": "アルブルⅢ",
+  "磯子区|ディアコート磯子台": "ディアコート磯子台",
+  "磯子区|プレミール新杉田": "プレミール新杉田",
+  "磯子区|サンテラス洋光台": "サンテラス洋光台",
+  "神奈川区|ケーラインセブン": "ケーラインセブン",
+  "神奈川区|テラスハウス西大口": "テラスハウス西大口",
+  "神奈川区|カメリア": "カメリア",
+  "|市内全域(3階以上でEV無し)": null,
+  "栄区|（住宅を指定しない区の枠）": null,
+  "旭区|ひかりが丘": "ひかりが丘住宅",
+  "磯子区|杉田": "杉田住宅",
+  "神奈川区|神大寺ハイツ": "神大寺ハイツ",
+  "金沢区|富岡西ハイツ": "富岡西ハイツ",
+  "港北区|サンヴァリエ日吉": "サンヴァリエ日吉",
+  "鶴見区|梶山": "梶山住宅",
+  "緑区|谷津田原第二": "谷津田原第二住宅",
+  "旭区|ソレーユ荏子田": null,
+  "神奈川区|アンソレイユ片倉": "アンソレイユ片倉",
+  "港北区|シャインヴィラ妙蓮寺": "シャインヴィラ妙蓮寺",
+  "栄区|ラ・ハート横濱本郷台": "ラ・ハート横濱本郷台",
+  "鶴見区|ブリジャンテ北寺尾": "ブリジャンテ北寺尾",
+  "保土ヶ谷区|トレジャーハウス": "トレジャーハウス",
+  "保土ヶ谷区|エクセルハイム清水ケ丘": null,
+  "磯子区|磯子": "磯子住宅",
+  "中区|中村町南": null,
+  "旭区|中希望が丘ハイツ": "中希望が丘ハイツ",
+  "鶴見区|矢向第二": "矢向第二住宅",
+  "保土ヶ谷区|コンフォール明神台": "コンフォール明神台",
+  "都筑区|勝田": "勝田住宅",
+  "中区|不老町": "不老町住宅",
+  "泉区|セントラルヒルズ参番館": "セントラルヒルズ",
+  "磯子区|ブルックハイツ磯子": "ブルックハイツ磯子",
+  "神奈川区|ウィナス新町": "ウィナス新町",
+  "神奈川区|カーサ敷島III": "カーサ敷島Ⅲ",
+  "神奈川区|サンハイム西寺尾": "サンハイム西寺尾",
+  "港南区|上大岡S.K": "上大岡Ｓ．Ｋ",
+  "港北区|グランドュール鳥山": "グランドュール鳥山",
+  "瀬谷区|グリーンヒルソウブ": "グリーンヒルソウブ",
+  "鶴見区|ユウユウ・本町": "ユウユウ・本町",
+  "西区|サンパレス横浜": "サンパレス横浜",
+  "西区|レヂデンス・リバーストーン": "レヂデンス・リバーストーン",
+  "南区|セレッサ弘明寺": "セレッサ弘明寺",
+  "南区|ワイズ弘明寺": "ワイズ弘明寺",
+  "南区|アベニュー弘明寺": "アベニュー弘明寺",
+  "南区|エーデル南": "エーデル南",
+  "南区|ヴィベール横濱": "ヴィベール横濱",
+  "南区|リフレッシュ中村町": "リフレッシュ中村町",
+  "南区|ポルト横浜": "ポルト横浜",
+  "南区|ライトハウス別所": "ライトハウス別所",
+  "神奈川区|栗田谷ヒルズ": "栗田谷ヒルズ",
+  "中区|寿町スカイハイツ": "寿町スカイハイツ",
+  "青葉区|トゥエルブ市ケ尾": "トゥエルブ市ケ尾",
+  "泉区|セントラルヒルズ弐番館": "セントラルヒルズ",
+  "泉区|ディアコート磯子台": null,
+  "泉区|アルカサーノ洋光台": null,
+  "神奈川区|グリーンピア片倉": "グリーンピア片倉",
+  "神奈川区|サンガーデン三ツ沢": "サンガーデン三ツ沢",
+  "港南区|ワコルダ―": "ワコルダー",
+  "港南区|サンヒルズ港南台": "サンヒルズ港南台",
+  "戸塚区|ベルドミール坂下": "ベルドミール坂下",
+  "中区|エムズ長者町": "エムズ長者町",
+  "西区|山王メゾン野毛山": "山王メゾン野毛山",
+  "保土ヶ谷区|ファーストリッチ": "ファーストリッチ",
+  "緑区|サニーコート弐番館": "サニーコート弐番館",
+  "南区|ベルチエ蒔田": "ベルチエ蒔田",
+  "南区|ル・パルクメゾン蒔田": "ル・パルクメゾン蒔田",
+  "南区|アイディールII": "アイディールⅡ",
+  "南区|グランドゥール・コート": "グランドゥール・コート",
+  "南区|コンソラール吉野町": "コンソラール吉野町",
+  "鶴見区|生麦": "生麦住宅",
+  "鶴見区|フローリア横浜": "フローリア横浜",
+  "神奈川区|サウスヒルサイドテラス": "サウスヒルサイドテラス",
+  "中区|ビューコート小港": "ビューコート小港",
+  "青葉区|ソレーユ荏子田": "ソレーユ荏子田",
+  "泉区|グリーンヒルズ領家": "グリーンヒルズ領家",
+  "神奈川区|ルグラン21": "ルグラン21",
+  "港南区|ヒルトップ洋光台": "ヒルトップ洋光台",
+  "港北区|コンフォール南日吉": "コンフォール南日吉Ｄ棟",
+  "保土ヶ谷区|ヒルズ峰岡": "ヒルズ峰岡",
+  "保土ヶ谷区|権太坂スクエア": "権太坂スクエア",
+  "保土ヶ谷区|岩井町": "岩井町住宅",
+  "旭区|鶴ケ峰南": "鶴ケ峰南住宅",
+  "神奈川区|西台町": "西台町住宅",
+  "鶴見区|駒岡": "駒岡住宅",
+  "旭区|ヒルズ東希望が丘": "ヒルズ東希望が丘",
+  "泉区|モンティクロ参番館": "モンティクロ参番館",
+  "都筑区|カスタムA棟": "カスタムＡ棟",
+  "都筑区|グレイス仲町台": "グレイス仲町台",
+  "西区|ルピナス平沼": "ルピナス平沼",
+  "緑区|サンライズ中山": "サンライズ中山",
+  "緑区|サニーハウス": "サニーハウス",
+  "神奈川区|ドミーイグレックエス": "ドミーイグレックエス",
+  "都筑区|ノーブル弐番館": "ノーブル弐番館",
+  "鶴見区|サンライフ生麦": "サンライフ生麦",
+  "保土ヶ谷区|ミカーサ横浜": "ミカーサ横浜",
+  "|市内全域(特別空家)": null,
+  "都筑区|つづきが丘": "つづきが丘住宅",
+  "鶴見区|センターコート潮風": "センターコート潮風",
+  "南区|エクセルハイム清水ケ丘": "エクセルハイム清水ケ丘",
+  "磯子区|滝頭第二": "滝頭第二住宅",
+  "鶴見区|矢向": "矢向住宅",
+  "鶴見区|鶴見中央": "鶴見中央住宅",
+  "戸塚区|名瀬": "名瀬住宅",
+  "港北区|箕輪": "箕輪住宅",
+  "保土ヶ谷区|初音が丘": "初音が丘住宅",
+  "港南区|ワコルダー": "ワコルダー",
+  "戸塚区|クレスト戸塚": "クレスト戸塚",
+  "旭区|クレール白根": "クレール白根",
+  "港北区|クラドール日吉": "クラドール日吉",
+  "瀬谷区|ウインズ瀬戸": "ウインズ瀬戸",
+  "|市内全域(2階以上でEV無し)": null,
+  "|市内全域(1階又はEV付き住宅)": null,
+  "神奈川区|リステ羽沢": "リステ羽沢",
+  "緑区|メルクマール敬愛": "メルクマール敬愛",
+  "南区|中村町南": "中村町南住宅",
+  "旭区|エムケイ・ドリーム笹野台": "エムケイ・ドリーム笹野台",
+  "鶴見区|サンワイズ汐入館": "サンワイズ汐入館",
+  "中区|タウンコート山手": "タウンコート山手",
+  "南区|フレアコート": "フレアコート",
+  "鶴見区|ウインドヒル鶴見": "ウィンドヒル鶴見",
+  "金沢区|瀬戸橋": "瀬戸橋住宅",
+  "南区|中村町": "中村町住宅",
+  "金沢区|サンモール": "サンモール",
+  "緑区|十日市場駅前": "十日市場駅前住宅",
+  "港北区|大豆戸町": "大豆戸町住宅",
+  "神奈川区|ノースヒルサイドテラス": "ノースヒルサイドテラス",
+  "|市内全域(1階又はEV付き)": null,
+  "西区|尾張屋橋": "尾張屋橋住宅",
+  "保土ヶ谷区|岩井町第二": "岩井町第二住宅",
+  "金沢区|瀬戸橋(改良)": "瀬戸橋住宅",
+  "中区|グリーンハイツ室橋": "グリーンハイツ室橋"
+ },
+ "unmatched": {
+  "|市内全域(3階以上)": "住宅を決めない枠（市内全域・区の枠）",
+  "|市内全域(1、2階又はEV付き住宅)": "住宅を決めない枠（市内全域・区の枠）",
+  "|市内全域(事故住宅)": "住宅を決めない枠（市内全域・区の枠）",
+  "旭区|（住宅を指定しない区の枠）": "住宅を決めない枠（市内全域・区の枠）",
+  "泉区|（住宅を指定しない区の枠）": "住宅を決めない枠（市内全域・区の枠）",
+  "磯子区|（住宅を指定しない区の枠）": "住宅を決めない枠（市内全域・区の枠）",
+  "神奈川区|（住宅を指定しない区の枠）": "住宅を決めない枠（市内全域・区の枠）",
+  "金沢区|（住宅を指定しない区の枠）": "住宅を決めない枠（市内全域・区の枠）",
+  "瀬谷区|（住宅を指定しない区の枠）": "住宅を決めない枠（市内全域・区の枠）",
+  "鶴見区|（住宅を指定しない区の枠）": "住宅を決めない枠（市内全域・区の枠）",
+  "保土ヶ谷区|（住宅を指定しない区の枠）": "住宅を決めない枠（市内全域・区の枠）",
+  "緑区|（住宅を指定しない区の枠）": "住宅を決めない枠（市内全域・区の枠）",
+  "金沢区|釜利谷東": "寄せない（自信が足りない）。2022-04回の子育て優遇の1行だけ。金沢区で「釜利谷東」で始まる団地は一覧・詳細データとも釜利谷東ハイツだけで、同じ回の別の区分には「釜利谷東ハイツ」と出るが、「ハイツ」が無いのは表記の小差を超える。寄せるなら「釜利谷東ハイツ」",
+  "神奈川区|こまどり": "2026-05-01更新の一覧に無い（令和5年4月の詳細データには「こまどり」（借上）として載る＝その後に借上の終了などで一覧から外れたとみられる）。倍率側で出るのは 2022-04・2022-10・2023-04・2024-04・2025-04 回",
+  "神奈川区|サン・三ツ沢": "2026-05-01更新の一覧に無い（令和5年4月の詳細データには「サン・三ツ沢」（借上）として載る＝その後に借上の終了などで一覧から外れたとみられる）。倍率側で出るのは 2022-04 回",
+  "|市内全域(3階以上でEV無し)": "住宅を決めない枠（市内全域・区の枠）",
+  "栄区|（住宅を指定しない区の枠）": "住宅を決めない枠（市内全域・区の枠）",
+  "旭区|ソレーユ荏子田": "区が合わない（一覧では青葉区の「ソレーユ荏子田」）。区をまたいでは寄せない。倍率側でこの区で出るのは 2022-10 回だけ",
+  "保土ヶ谷区|エクセルハイム清水ケ丘": "区が合わない（一覧では南区の「エクセルハイム清水ケ丘」）。区をまたいでは寄せない。倍率側でこの区で出るのは 2022-10 回だけ",
+  "中区|中村町南": "区が合わない（一覧では南区の「中村町南住宅」）。区をまたいでは寄せない。倍率側でこの区で出るのは 2022-10 回だけ",
+  "泉区|ディアコート磯子台": "区が合わない（一覧では磯子区の「ディアコート磯子台」）。区をまたいでは寄せない。倍率側でこの区で出るのは 2022-10 回だけ",
+  "泉区|アルカサーノ洋光台": "区が合わない（一覧では磯子区の「アルカサーノ洋光台」）。区をまたいでは寄せない。倍率側でこの区で出るのは 2022-10 回だけ",
+  "|市内全域(特別空家)": "住宅を決めない枠（市内全域・区の枠）",
+  "|市内全域(2階以上でEV無し)": "住宅を決めない枠（市内全域・区の枠）",
+  "|市内全域(1階又はEV付き住宅)": "住宅を決めない枠（市内全域・区の枠）",
+  "|市内全域(1階又はEV付き)": "住宅を決めない枠（市内全域・区の枠）"
+ }
+}
