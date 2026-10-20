@@ -121,6 +121,17 @@ CAT_BY = {akey(c): c for c in CATS}
 UNKNOWN = set()
 MISMATCH = []   # 当方の計算（応募者数÷募集戸数）と公表の倍率の列が違う行（読み取りのずれの検知）
 
+# ★公表表そのものの区の誤り（2026-10-21 に団地の条件の突き合わせで見つけ、PDF を目で確かめた）。
+#   区は住宅の場所なので、市の団地一覧（市営住宅一覧 2026-05-01更新）の区に直す。直さないと、同じ住宅の
+#   ほかの回の観測と別の申込先として数えられる。どの回のどの住宅かまで書く（似た名前を巻き込まない）。
+KU_FIX = {
+    ("2022-10", "エクセルハイム清水ケ丘"): ("南区", "PDFでは保土ケ谷区の結合セルの中。一覧・ほかの回は南区"),
+    ("2022-10", "中村町南"): ("南区", "PDFでは中区と表記。一覧（中村町南住宅・南区中村町）・ほかの回は南区"),
+    ("2022-10", "ディアコート磯子台"): ("磯子区", "PDFでは泉区の結合セルの中。一覧・ほかの回は磯子区"),
+    ("2022-10", "アルカサーノ洋光台"): ("磯子区", "PDFでは泉区の結合セルの中。一覧・ほかの回は磯子区"),
+}
+KU_FIXED = []
+
 
 def norm_unit(v):
     if not v:
@@ -244,11 +255,16 @@ def parse(pdf, round_key):
                 # ★数の欄が2行ぶん1つのセルに入り、下の行の同じ欄が空になる回がある（令和7年4月の
                 #   コーポ元町「3⏎3」とその下のサンパレス横浜の空欄）。そのまま読むと「33人」になり、
                 #   下の行は落ちる（合計が1戸・27人ずれていた）。下の空欄へ1行ずつ配り直す。
+                # ★区の欄も同じことが起きる（令和4年10月：ソレーユ荏子田の区の欄に「青葉区⏎旭区」、下のハーヴェストコートの
+                #   区が空。後ろの「旭区」を取って、青葉区の住宅を旭区に入れていた）。区の欄は、割った全部が「〇〇区」のときだけ配る
+                #   （全市単位の説明文の折り返しを区と取り違えないため）。
                 ext = [list(r) for r in ext]
                 for ri, r in enumerate(ext):
-                    for ci in (4, 5, 6):
+                    for ci in (2, 4, 5, 6):
                         if ci < len(r) and r[ci] and "\n" in r[ci].strip():
                             parts = [x for x in r[ci].strip().split("\n") if x.strip()]
+                            if ci == 2 and not all(re.fullmatch(r"\S{1,4}区", unicodedata.normalize("NFKC", x).strip()) for x in parts):
+                                continue
                             below = ext[ri + 1:ri + len(parts)]
                             if len(below) == len(parts) - 1 and all(ci < len(b) and not b[ci] for b in below):
                                 r[ci] = parts[0]
@@ -314,6 +330,10 @@ def parse(pdf, round_key):
                     o = int(oubo.replace(",", ""))
                     if k <= 0 or k > 500:
                         continue
+                    fix = KU_FIX.get((round_key, base))
+                    if fix and ku != fix[0]:
+                        KU_FIXED.append("%s %s：%s→%s（%s）" % (round_key, base, ku, fix[0], fix[1]))
+                        ku = fix[0]
                     if bold_mode:
                         tanshin = "可" if is_bold(name_rect, strokes) else ""
                         src = "太字"
@@ -497,6 +517,8 @@ def main():
     for l in ledger:
         if not l["used"]:
             print("  × %s  %s" % (l["round"], l.get("why")))
+    if KU_FIXED:
+        print("  区を市の団地一覧に直した行 %d：%s" % (len(KU_FIXED), " / ".join(KU_FIXED)))
     if MISMATCH:
         print("  ★公表の倍率の列と食い違う行 %d：%s" % (len(MISMATCH), " / ".join(MISMATCH[:8])))
     if UNKNOWN:
