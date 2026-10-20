@@ -5,6 +5,7 @@
 //
 // ★トップ3＝Cloudflare の直近14日・日本からの訪問の入口（2026-10-19 `node tools/cf-analytics.mjs --site fukushiru.com --days 14 --jp`）：
 //   住民税非課税の判定 770・生活保護の計算機 550・障害者控除 170。記事を入れ替えるときは下の SLOTS を直す。
+//   2026-10-20 に高額療養費の記事と障害福祉サービスの負担の記事を足して5記事にした（ユーザー指示）。
 // ★なぜデプロイの直前に入れるか：この3記事には部分を書き換える台本（keisanki-sync・kinro-kojo-lib・hikazei-lib・stamp-offers など）が
 //   多くかかっており、リポジトリの HTML に書くとどれかに剥がされうる。AdSense のタグ（stamp-adsense.mjs）と同じく、公開の直前の1か所で入れる。
 //   ＝リポジトリの HTML には入らない（手元で開いた面にはバナーが無い）。本番で確かめること。
@@ -38,6 +39,11 @@ const SLOTS = [
   { file: 'articles/seikatsuhogo-keisanki.html', before: /^\s*<h2[^>]*>\s*④\s*よくある誤解/m, html: SHURO },
   // 「⑤ 申告方法（年末調整・確定申告）」の後、「よくある質問（FAQ）」の前
   { file: 'articles/shogaisha-kojo-tax.html', before: /^\s*<h2[^>]*>\s*よくある質問（FAQ）/m, html: SHURO },
+  // ★2026-10-20 ユーザー「高額療養と障害福祉負担のページにもアフィリエイト入れといて」（直近14日の訪問 140・80）
+  // 「③ 窓口で大金を払わないために」の後、「コメント」の前（②の計算機の後ろの有料への案内 offer-hub からは③をはさんで離す）
+  { file: 'articles/kougaku-ryouyouhi-2026.html', before: /^\s*<h2[^>]*>\s*コメント/m, html: SHURO },
+  // 「③ 「1割」ではなく「1割かつ上限まで」」の後、「④ 上限とは別にかかる実費」の前
+  { file: 'articles/shogai-service-futan.html', before: /^\s*<h2[^>]*>\s*④\s*上限とは別にかかる実費/m, html: SHURO },
 ]
 
 let ok = 0
