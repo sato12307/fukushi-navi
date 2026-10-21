@@ -22,12 +22,14 @@ const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..')
 const CHECK = process.argv.includes('--check')
 
 // 就労支援（A8.net・2026-10-19 にユーザーから受け取ったコード）
+// ★2026-10-21 468×60 → 300×250（レクタングル）に差し替え（ユーザー「バナーサイズが小さいかな」）。468×60 はスマホで約340×44 に
+//   縮んでいた。300×250 はスマホの本文の幅（約343px）にも縮まずに収まる。直近14日の閲覧はパソコン約9割・スマホ約1割。
 const SHURO = `<!-- aff:shuro（scripts/stamp-affiliate.mjs が公開の直前に入れる） -->
 <aside class="aff" aria-label="広告" style="margin:28px 0;text-align:center">
 <p style="margin:0 0 4px;font-size:12px;color:#888;text-align:left">広告</p>
-<a href="https://px.a8.net/svt/ejp?a8mat=4B8097+6D7YZU+47GS+BYLJL" rel="nofollow sponsored">
-<img border="0" width="468" height="60" alt="就労支援サービス（広告）" src="https://www23.a8.net/svt/bgt?aid=260714059385&wid=004&eno=01&mid=s00000019630002009000&mc=1" style="max-width:100%;height:auto"></a>
-<img border="0" width="1" height="1" src="https://www19.a8.net/0.gif?a8mat=4B8097+6D7YZU+47GS+BYLJL" alt="">
+<a href="https://px.a8.net/svt/ejp?a8mat=4B8097+6D7YZU+47GS+BY641" rel="nofollow sponsored">
+<img border="0" width="300" height="250" alt="就労支援サービス（広告）" src="https://www20.a8.net/svt/bgt?aid=260714059385&wid=004&eno=01&mid=s00000019630002007000&mc=1" style="max-width:100%;height:auto"></a>
+<img border="0" width="1" height="1" src="https://www10.a8.net/0.gif?a8mat=4B8097+6D7YZU+47GS+BY641" alt="">
 </aside>
 <!-- /aff -->
 `
