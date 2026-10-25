@@ -22,7 +22,7 @@ concurrency:
 
 jobs:
   deploy:
-    runs-on: [self-hosted, linux, home-linux]   # 2026-10-25 ミニPC（WSL Ubuntu）の self-hosted runner に一本化
+    runs-on: ubuntu-latest   # 公開リポジトリは GitHub-hosted が無料。自宅の runner に載せると節約にならず、外から来るコードを自宅で走らせる危険だけが増えるので戻した（2026-10-25）
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
