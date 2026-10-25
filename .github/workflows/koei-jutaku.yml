@@ -15,7 +15,7 @@ permissions:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: [self-hosted, linux, home-linux]   # 2026-10-25 ミニPC（WSL Ubuntu）の self-hosted runner に一本化
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
