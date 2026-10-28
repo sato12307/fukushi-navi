@@ -24,7 +24,7 @@
  "description": "75歳以上の後期高齢者医療保険料を、令和8年度（2026年度）の都道府県の料率で計算します。年金収入・給与・世帯を入れると、均等割の軽減（7割・5割・2割、医療分は7.2割）と子ども・子育て支援金分を含めた年額が分かります。年金収入別の早見表と、47都道府県の均等割・所得割率の一覧つき。",
  "inLanguage": "ja",
  "datePublished": "2026-10-20",
- "dateModified": "2026-10-28",
+ "dateModified": "2026-10-29",
  "author": {
   "@type": "Organization",
   "name": "フクシル"
@@ -100,6 +100,14 @@
     "@type": "Answer",
     "text": "75歳になるまで会社の健康保険などの被扶養者だった人は、所得割がかからず、加入から2年を経過する月までは均等割が5割軽減されます（7割軽減に当たる人は7割〈令和8・9年度の医療分は7.2割〉が優先）。国民健康保険から移った人は対象外です。"
    }
+  },
+  {
+   "@type": "Question",
+   "name": "この計算機の額は公式の額と合いますか？",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "47都道府県のうち33は、広域連合や市が公表している令和8年度の計算例・早見表と公式の試算ツールの結果（計162例）に通して、1円まで合うことを確かめています。端数の決まりだけを確かめたのが10、どちらもまだ確かめられていないのが4です。合わない例は、このページの「都道府県ごとの検算」に理由を書いています。正式な額は、市区町村から届く保険料額の決定通知書で確かめてください。"
+   }
   }
  ]
 }
@@ -138,7 +146,7 @@ table.fit tr.hit td,table.fit tr.hit th{background:#fff4c2}
   <p class="breadcrumb"><a href="../index.html">トップ</a> ＞ 後期高齢者医療保険料の計算</p>
 
   <h1>後期高齢者医療保険料の計算（令和8年度）<br><small>年金収入から年額・軽減（7割・5割・2割）と47都道府県の保険料率</small></h1>
-  <p class="updated">最終更新：2026-10-28 ／ 令和8年度の保険料率（厚生労働省の発表）で計算</p>
+  <p class="updated">最終更新：2026-10-29 ／ 令和8年度の保険料率（厚生労働省の発表）で計算</p>
 
   <p class="lead"><strong>後期高齢者医療制度</strong>（75歳以上の人が入る医療保険）の保険料は、<strong>住んでいる都道府県の料率</strong>と<strong>前の年の所得</strong>で決まります。令和8年度（2026年度）は保険料率が改定され、新しく<strong>子ども・子育て支援金分</strong>も加わりました。年金収入などを入れると、令和8年度の年額を、均等割の軽減（7割・5割・2割）込みで計算します。</p>
 
@@ -169,6 +177,7 @@ table.fit tr.hit td,table.fit tr.hit th{background:#fff4c2}
     <div class="out" id="q-out" aria-live="polite"></div>
   </div>
   <p class="mini-note">世帯主が後期高齢者医療に入っていない人（同居の子など）でも、世帯主の所得は均等割の軽減の判定に入ります。保険料は4月1日の世帯の状況で判定し、年度の途中で加入した人は月割りになります。正式な額は、7月ごろに届く保険料額の決定通知書で確かめてください。</p>
+  <p class="mini-note">47都道府県のうち<strong>33</strong>は、広域連合や市が公表している令和8年度の計算例・早見表と公式の試算ツールの結果（計162例）に通して、1円まで合うことを確かめています。端数の決まりだけを確かめたのが10、どちらもまだ確かめられていないのが4です（<a href="#kenzan">都道府県ごとの検算</a>）。</p>
 
   <h2 id="hayami">年金収入別の早見表（単身・年金だけ）</h2>
   <div class="table-wrap"><table class="fit">
@@ -245,6 +254,63 @@ table.fit tr.hit td,table.fit tr.hit th{background:#fff4c2}
   </table></div>
   <p class="mini-note">子ども・子育て支援金分の令和9年度の率は、令和8年度末までに各広域連合の議会が決めます。出典：厚生労働省「後期高齢者医療制度の令和８・９年度の保険料率について」（<a href="https://www.mhlw.go.jp/stf/newpage_72371.html" rel="nofollow">https://www.mhlw.go.jp/stf/newpage_72371.html</a>）を加工して作成。</p>
 
+  <h2 id="kenzan">都道府県ごとの検算（公式の計算例と1円まで合うか）</h2>
+  <p>47都道府県のうち<strong>33</strong>は、広域連合や市が公表している令和8年度の計算例・早見表と公式の試算ツールの結果（計162例）に通して、1円まで合うことを確かめています。端数の決まりだけを確かめたのが10、どちらもまだ確かめられていないのが4です。資料の数字は、転載を断っている広域連合が多いので載せず、合った件数と資料の名前だけを書いています。</p>
+  <div class="table-wrap"><table class="fit">
+    <caption>令和8年度の保険料。確かめた日：2026年10月29日</caption>
+    <thead><tr><th>都道府県</th><th>照合の結果</th><th>端数の扱い</th><th>照らした資料</th></tr></thead>
+    <tbody>
+<tr><th>北海道</th><td>端数の決まりだけ確認</td><td>医療分・子ども分ごとに100円未満切捨て</td><td>札幌市「後期高齢者医療保険料の計算」</td></tr>
+<tr><th>青森県</th><td><strong>✓</strong> 公式の計算例 6例と一致</td><td>医療分・子ども分ごとに100円未満切捨て</td><td>青森県後期高齢者医療広域連合「保険料の計算例（令和8年度）」</td></tr>
+<tr><th>岩手県</th><td><strong>✓</strong> 公式の計算例 6例と一致</td><td>医療分・子ども分ごとに100円未満切捨て</td><td>岩手県後期高齢者医療広域連合「保険料の具体例（年額）令和8年度」</td></tr>
+<tr><th>宮城県</th><td><strong>✓</strong> 公式の計算例 1例と一致</td><td>医療分・子ども分ごとに100円未満切捨て</td><td>仙台市「保険料の計算方法」（令和8年度の計算例）</td></tr>
+<tr><th>秋田県</th><td>未確認</td><td>未確認（1円単位で表示）</td><td>—</td></tr>
+<tr><th>山形県</th><td>端数の決まりだけ確認</td><td>医療分・子ども分ごとに100円未満切捨て</td><td>山形県後期高齢者医療広域連合「保険料はどのように決まるの？」</td></tr>
+<tr><th>福島県</th><td>未確認</td><td>未確認（1円単位で表示）</td><td>—</td></tr>
+<tr><th>茨城県</th><td>端数の決まりだけ確認</td><td>医療分・子ども分ごとに100円未満切捨て</td><td>茨城県後期高齢者医療広域連合「保険料」</td></tr>
+<tr><th>栃木県</th><td>端数の決まりだけ確認</td><td>医療分・子ども分ごとに100円未満切捨て</td><td>栃木県後期高齢者医療広域連合「保険料について」</td></tr>
+<tr><th>群馬県</th><td><strong>✓</strong> 公式の計算例 4例と一致</td><td>医療分・子ども分ごとに100円未満切捨て</td><td>群馬県後期高齢者医療広域連合「保険料の計算例（令和8年度）」</td></tr>
+<tr><th>埼玉県</th><td><strong>✓</strong> 公式の計算例 6例と一致</td><td>医療分・子ども分ごとに100円未満切捨て</td><td>埼玉県後期高齢者医療広域連合「令和8年度の保険料額算定例」</td></tr>
+<tr><th>千葉県</th><td>端数の決まりだけ確認</td><td>医療分は100円未満・子ども分は10円未満切捨て</td><td>千葉県後期高齢者医療広域連合「保険料の算定方法」</td></tr>
+<tr><th>東京都</th><td><strong>✓</strong> 公式の計算例 28例と一致</td><td>医療分・子ども分ごとに100円未満切捨て</td><td>東京都後期高齢者医療広域連合「保険料計算例（令和8年度）」</td></tr>
+<tr><th>神奈川県</th><td><strong>✓</strong> 公式の計算例 1例と一致</td><td>10円未満切捨て</td><td>神奈川県後期高齢者医療広域連合「令和8・9年度保険料について」（保険料額の例）</td></tr>
+<tr><th>新潟県</th><td><strong>✓</strong> 公式の計算例 6例と一致</td><td>医療分・子ども分ごとに100円未満切捨て</td><td>新潟県後期高齢者医療広域連合「保険料の決まり方」（保険料額のめやす）</td></tr>
+<tr><th>富山県</th><td><strong>✓</strong> 公式の計算例 6例と一致</td><td>医療分・子ども分ごとに100円未満切捨て</td><td>富山県後期高齢者医療広域連合「年金収入のみの人の保険料のめやす」</td></tr>
+<tr><th>石川県</th><td><strong>✓</strong> 公式の計算例 2例と一致</td><td>1円未満切捨て（1円単位）</td><td>石川県後期高齢者医療広域連合「収入別保険料額の例」</td></tr>
+<tr><th>福井県</th><td><strong>✓</strong> 公式の計算例 4例と一致<br><span class="bd">案内の1例は、入力の書き方（年金250万円・給与300万円で「合計所得200万円」）が食い違うため照合から外しました。</span></td><td>医療分・子ども分ごとに100円未満切捨て</td><td>福井県後期高齢者医療広域連合「保険料の計算例」・同「保険料に関するご案内」（鯖江市が配布）</td></tr>
+<tr><th>山梨県</th><td>端数の決まりだけ確認</td><td>10円未満切捨て</td><td>山梨県後期高齢者医療広域連合「保険料について」</td></tr>
+<tr><th>長野県</th><td><strong>✓</strong> 公式の試算ツール 3件と一致</td><td>医療分・子ども分ごとに100円未満切捨て</td><td>長野県後期高齢者医療広域連合「保険料試算ページ 令和8年度」</td></tr>
+<tr><th>岐阜県</th><td>端数の決まりだけ確認</td><td>医療分・子ども分ごとに100円未満切捨て</td><td>岐阜県後期高齢者医療広域連合「保険料」</td></tr>
+<tr><th>静岡県</th><td><strong>✓</strong> 公式の計算例 8例と一致</td><td>医療分・子ども分ごとに100円未満切捨て</td><td>静岡県後期高齢者医療広域連合「令和8年度 後期高齢者医療制度のしおり」（保険料のめやす）</td></tr>
+<tr><th>愛知県</th><td><strong>✓</strong> 公式の計算例 2例と一致</td><td>医療分・子ども分ごとに100円未満切捨て</td><td>名古屋市「保険料の計算例」</td></tr>
+<tr><th>三重県</th><td><strong>✓</strong> 公式の計算例 8例と一致</td><td>1円未満切捨て（1円単位）</td><td>三重県後期高齢者医療広域連合「令和8年度のモデル世帯の保険料算定」</td></tr>
+<tr><th>滋賀県</th><td><strong>✓</strong> 公式の試算ツール 2件と一致</td><td>1円未満切捨て（1円単位）</td><td>滋賀県後期高齢者医療広域連合「令和8年度保険料試算」</td></tr>
+<tr><th>京都府</th><td><strong>✓</strong> 公式の計算例 6例と一致</td><td>1円未満切捨て（1円単位）</td><td>京都府後期高齢者医療広域連合「具体的な保険料のケース事例（令和8年度）」</td></tr>
+<tr><th>大阪府</th><td><strong>✓</strong> 公式の計算例 10例と一致</td><td>1円未満切捨て（1円単位）</td><td>大阪府後期高齢者医療広域連合「大阪府における年間保険料算定事例（令和8年度）」</td></tr>
+<tr><th>兵庫県</th><td><strong>✓</strong> 公式の計算例 5例と一致</td><td>1円未満切捨て（1円単位）</td><td>兵庫県後期高齢者医療広域連合「具体的な保険料のケース（令和8年度）」</td></tr>
+<tr><th>奈良県</th><td><strong>✓</strong> 公式の計算例 6例と一致<br><span class="bd">給与と年金の両方がある人の1例は、公式の例が所得金額調整控除（最大10万円）を引かずに計算していて、この計算機より高く出ます（引かずに計算すると1円まで合います）。</span></td><td>医療分・子ども分ごとに100円未満切捨て</td><td>奈良県後期高齢者医療広域連合「令和8年度 保険料計算例」</td></tr>
+<tr><th>和歌山県</th><td><strong>✓</strong> 公式の計算例 1例と一致</td><td>医療分・子ども分ごとに100円未満切捨て</td><td>海南市「和歌山県後期高齢者医療保険について」（チラシ）</td></tr>
+<tr><th>鳥取県</th><td><strong>✓</strong> 公式の計算例 3例と一致</td><td>医療分・子ども分ごとに100円未満切捨て</td><td>鳥取県後期高齢者医療広域連合「後期高齢者医療保険料（令和8年度）」の計算例</td></tr>
+<tr><th>島根県</th><td><strong>✓</strong> 公式の計算例 5例と一致</td><td>10円未満切捨て</td><td>島根県後期高齢者医療広域連合「後期高齢者医療制度のしおり」（年金収入のみの人の保険料）</td></tr>
+<tr><th>岡山県</th><td><strong>✓</strong> 公式の計算例 1例と一致</td><td>医療分・子ども分ごとに100円未満切捨て</td><td>岡山県後期高齢者医療広域連合「令和8・9年度の保険料について」（年間保険料の計算例）</td></tr>
+<tr><th>広島県</th><td><strong>✓</strong> 公式の計算例 1例と一致</td><td>1円未満切捨て（1円単位）</td><td>広島県後期高齢者医療広域連合「保険料について」（令和8年度年間保険料の計算例）</td></tr>
+<tr><th>山口県</th><td><strong>✓</strong> 公式の試算ツール 2件と一致</td><td>1円未満切捨て（1円単位）</td><td>山口県後期高齢者医療広域連合「令和8年度保険料試算」</td></tr>
+<tr><th>徳島県</th><td>端数の決まりだけ確認</td><td>医療分は100円未満・子ども分は10円未満切捨て</td><td>徳島県後期高齢者医療広域連合「保険料について」</td></tr>
+<tr><th>香川県</th><td>端数の決まりだけ確認</td><td>医療分・子ども分ごとに100円未満切捨て</td><td>香川県後期高齢者医療広域連合「保険料率及び保険料の算定方法」</td></tr>
+<tr><th>愛媛県</th><td><strong>✓</strong> 公式の計算例 6例と一致</td><td>10円未満切捨て</td><td>愛媛県後期高齢者医療広域連合「保険料試算パターン例【令和8年度】」</td></tr>
+<tr><th>高知県</th><td><strong>✓</strong> 公式の計算例 1例と一致<br><span class="bd">給与と年金の両方がある夫婦の1例は、公式の例が所得金額調整控除（最大10万円）を引かずに計算していて、この計算機より高く出ます（引かずに計算すると1円まで合います）。</span></td><td>医療分は100円未満・子ども分は10円未満切捨て</td><td>高知県後期高齢者医療広域連合「保険料の計算例」（令和8年度版 保険料のしおり）</td></tr>
+<tr><th>福岡県</th><td>端数の決まりだけ確認</td><td>10円未満切捨て</td><td>直方市「市報のおがた」（後期高齢者医療保険料の計算・令和8年度）</td></tr>
+<tr><th>佐賀県</th><td>未確認</td><td>未確認（1円単位で表示）</td><td>—</td></tr>
+<tr><th>長崎県</th><td>未確認</td><td>未確認（1円単位で表示）</td><td>—</td></tr>
+<tr><th>熊本県</th><td><strong>✓</strong> 公式の計算例 6例と一致<br><span class="bd">医療分だけの表です。夫婦の例は、表の年金収入の欄（223万円・142万円）で照らしました。</span></td><td>医療分・子ども分ごとに100円未満切捨て</td><td>熊本県後期高齢者医療広域連合「保険料はどうなるの？」（軽減の計算例）</td></tr>
+<tr><th>大分県</th><td><strong>✓</strong> 公式の計算例 6例と一致</td><td>医療分・子ども分ごとに100円未満切捨て</td><td>大分県後期高齢者医療広域連合「保険料について」（保険料の具体例・計算例）</td></tr>
+<tr><th>宮崎県</th><td><strong>✓</strong> 公式の試算ツール 2件と一致</td><td>軽減後の均等割と、医療分・子ども分ごとに100円未満切捨て</td><td>宮崎県後期高齢者医療広域連合「【令和8年度】保険料試算」</td></tr>
+<tr><th>鹿児島県</th><td><strong>✓</strong> 公式の試算ツール 2件と一致</td><td>軽減後の均等割と、医療分・子ども分ごとに100円未満切捨て</td><td>鹿児島県後期高齢者医療広域連合「令和8年度保険料試算シート」</td></tr>
+<tr><th>沖縄県</th><td><strong>✓</strong> 公式の計算例 6例と一致</td><td>1円未満切捨て（1円単位）</td><td>沖縄県後期高齢者医療広域連合「保険料について」（保険料の計算例）</td></tr>
+    </tbody>
+  </table></div>
+  <p class="mini-note">「端数の決まりだけ確認」の県は、公式の案内で確かめた端数の扱いで計算しています。「未確認」の県は1円単位で出しているため、実際の額は医療分と子ども分それぞれで最大99円ほど少ないことがあります。公式の計算例や決定通知書の額と合わないときは、都道府県と収入の条件を contact@fukushiru.com までお知らせください。確かめて直します。</p>
+
 
   <h2>よくある質問</h2>
   <h3>後期高齢者医療保険料はいくらですか？</h3>
@@ -257,6 +323,8 @@ table.fit tr.hit td,table.fit tr.hit th{background:#fff4c2}
   <p>令和8年度は、医療分が85万円、子ども・子育て支援金分が2万円で、合わせて年87万円が上限です（全国共通）。</p>
   <h3>会社の健康保険の扶養に入っていた人の保険料は？</h3>
   <p>75歳になるまで会社の健康保険などの被扶養者だった人は、所得割がかからず、加入から2年を経過する月までは均等割が5割軽減されます（7割軽減に当たる人は7割〈令和8・9年度の医療分は7.2割〉が優先）。国民健康保険から移った人は対象外です。</p>
+  <h3>この計算機の額は公式の額と合いますか？</h3>
+  <p>47都道府県のうち33は、広域連合や市が公表している令和8年度の計算例・早見表と公式の試算ツールの結果（計162例）に通して、1円まで合うことを確かめています。端数の決まりだけを確かめたのが10、どちらもまだ確かめられていないのが4です。合わない例は、このページの「都道府県ごとの検算」に理由を書いています。正式な額は、市区町村から届く保険料額の決定通知書で確かめてください。</p>
 
   <div class="callout note">
     <p><span class="tag">あわせて読みたい</span>75歳以上の医療費の上限と窓口の負担（1割・2割・3割）は<a href="../articles/kougaku-ryouyouhi-2026.html#75ijo">高額療養費の計算機</a>で、住民税が非課税になる年収は<a href="../articles/juminzei-hikazei-check.html">住民税非課税の判定</a>で、65〜74歳の人の介護保険料は<a href="../kaigo/hokenryo/">介護保険料の計算</a>で、介護サービスの月の上限は<a href="../kaigo/kogaku/">高額介護サービス費の計算</a>で、年金が少ない人の上乗せは<a href="../shien-kyufukin/">年金生活者支援給付金の計算</a>で確かめられます。</p>
@@ -321,18 +389,19 @@ function koukiCalc(P, D, ps, head) {
     if (P.round === 'h100') { iryo = f100(iryo); kodomo = f100(kodomo); }
     else if (P.round === 'miyazaki') { iryo = f100(Math.min(f100(kin) + sw, D.gendo.iryo)); kodomo = f100(Math.min(f100(kinK) + swK, D.gendo.kodomo)); }
     else if (P.round === 'y10') { iryo = f10(iryo); kodomo = f10(kodomo); }
+    else if (P.round === 'h100k10') { iryo = f100(iryo); kodomo = f10(kodomo); }
     return { iryo: iryo, kodomo: kodomo, total: iryo + kodomo, kin: kin, kinK: kinK, sw: sw, swK: swK, wI: wI, wK: wK, base: base, sou: s.sou, tg: tg, fuyou: fuyou };
   });
   return { kei: kei, S: S, n: n, k: k, persons: out };
 }
 (function(){var D={"keigen":{"kiso":430000,"perKyuyo":100000,"go":310000,"ni":570000,"nana":{"iryo":28,"kodomo":30},"go_":50,"ni_":80},"kyuyoSha":{"kyuyo":550000,"nenkin65":1250000},"nenkinTokurei":150000,"tokyo":{"p50":150000,"p25":200000},"fuyou":{"rate":50},"gendo":{"iryo":850000,"kodomo":21000}};
-var PR=[{"pref":"北海道","kin":59963,"rateBp":1161,"kodomoKin":1364,"kodomoBp":28,"round":"h100","verified":"決まり"},{"pref":"青森県","kin":50500,"rateBp":900,"kodomoKin":1300,"kodomoBp":20,"round":null,"verified":null},{"pref":"岩手県","kin":48800,"rateBp":850,"kodomoKin":1366,"kodomoBp":26,"round":null,"verified":null},{"pref":"宮城県","kin":52200,"rateBp":912,"kodomoKin":1370,"kodomoBp":25,"round":null,"verified":null},{"pref":"秋田県","kin":55996,"rateBp":973,"kodomoKin":1350,"kodomoBp":25,"round":null,"verified":null},{"pref":"山形県","kin":52500,"rateBp":963,"kodomoKin":1373,"kodomoBp":25,"round":null,"verified":null},{"pref":"福島県","kin":49000,"rateBp":924,"kodomoKin":1400,"kodomoBp":25,"round":null,"verified":null},{"pref":"茨城県","kin":49500,"rateBp":932,"kodomoKin":1400,"kodomoBp":28,"round":null,"verified":null},{"pref":"栃木県","kin":49100,"rateBp":900,"kodomoKin":1300,"kodomoBp":25,"round":null,"verified":null},{"pref":"群馬県","kin":54600,"rateBp":978,"kodomoKin":1400,"kodomoBp":25,"round":null,"verified":null},{"pref":"埼玉県","kin":52370,"rateBp":949,"kodomoKin":1330,"kodomoBp":25,"round":null,"verified":null},{"pref":"千葉県","kin":51000,"rateBp":940,"kodomoKin":1310,"kodomoBp":25,"round":null,"verified":null},{"pref":"東京都","kin":53300,"rateBp":988,"kodomoKin":1300,"kodomoBp":26,"round":"h100","verified":"例"},{"pref":"神奈川県","kin":52531,"rateBp":1030,"kodomoKin":1330,"kodomoBp":25,"round":"y10","verified":"決まり"},{"pref":"新潟県","kin":49200,"rateBp":861,"kodomoKin":1354,"kodomoBp":26,"round":null,"verified":null},{"pref":"富山県","kin":55800,"rateBp":1019,"kodomoKin":1373,"kodomoBp":26,"round":null,"verified":null},{"pref":"石川県","kin":57300,"rateBp":1114,"kodomoKin":1360,"kodomoBp":24,"round":null,"verified":null},{"pref":"福井県","kin":54140,"rateBp":1083,"kodomoKin":1300,"kodomoBp":26,"round":null,"verified":null},{"pref":"山梨県","kin":52610,"rateBp":944,"kodomoKin":1330,"kodomoBp":25,"round":null,"verified":null},{"pref":"長野県","kin":48827,"rateBp":880,"kodomoKin":1339,"kodomoBp":25,"round":null,"verified":null},{"pref":"岐阜県","kin":55385,"rateBp":971,"kodomoKin":1374,"kodomoBp":25,"round":null,"verified":null},{"pref":"静岡県","kin":51100,"rateBp":935,"kodomoKin":1400,"kodomoBp":25,"round":null,"verified":null},{"pref":"愛知県","kin":56130,"rateBp":1048,"kodomoKin":1362,"kodomoBp":25,"round":"h100","verified":"例"},{"pref":"三重県","kin":54843,"rateBp":953,"kodomoKin":1370,"kodomoBp":25,"round":null,"verified":null},{"pref":"滋賀県","kin":55380,"rateBp":1013,"kodomoKin":1340,"kodomoBp":25,"round":null,"verified":null},{"pref":"京都府","kin":59590,"rateBp":1015,"kodomoKin":1350,"kodomoBp":25,"round":null,"verified":null},{"pref":"大阪府","kin":64931,"rateBp":1151,"kodomoKin":1373,"kodomoBp":24,"round":"y1","verified":"例"},{"pref":"兵庫県","kin":58427,"rateBp":1077,"kodomoKin":1351,"kodomoBp":24,"round":null,"verified":null},{"pref":"奈良県","kin":57100,"rateBp":1063,"kodomoKin":1400,"kodomoBp":25,"round":null,"verified":null},{"pref":"和歌山県","kin":58748,"rateBp":1036,"kodomoKin":1385,"kodomoBp":25,"round":null,"verified":null},{"pref":"鳥取県","kin":52138,"rateBp":1064,"kodomoKin":1363,"kodomoBp":25,"round":null,"verified":null},{"pref":"島根県","kin":57170,"rateBp":1002,"kodomoKin":1370,"kodomoBp":26,"round":null,"verified":null},{"pref":"岡山県","kin":60100,"rateBp":1088,"kodomoKin":1400,"kodomoBp":25,"round":null,"verified":null},{"pref":"広島県","kin":55090,"rateBp":993,"kodomoKin":1337,"kodomoBp":25,"round":null,"verified":null},{"pref":"山口県","kin":63513,"rateBp":1136,"kodomoKin":1354,"kodomoBp":24,"round":null,"verified":null},{"pref":"徳島県","kin":60976,"rateBp":1091,"kodomoKin":1356,"kodomoBp":25,"round":null,"verified":null},{"pref":"香川県","kin":58000,"rateBp":993,"kodomoKin":1300,"kodomoBp":25,"round":null,"verified":null},{"pref":"愛媛県","kin":55630,"rateBp":979,"kodomoKin":1320,"kodomoBp":25,"round":null,"verified":null},{"pref":"高知県","kin":60400,"rateBp":1031,"kodomoKin":1393,"kodomoBp":24,"round":null,"verified":null},{"pref":"福岡県","kin":66340,"rateBp":1170,"kodomoKin":1339,"kodomoBp":25,"round":null,"verified":null},{"pref":"佐賀県","kin":68700,"rateBp":1179,"kodomoKin":1400,"kodomoBp":24,"round":null,"verified":null},{"pref":"長崎県","kin":56200,"rateBp":959,"kodomoKin":1300,"kodomoBp":25,"round":null,"verified":null},{"pref":"熊本県","kin":63000,"rateBp":1106,"kodomoKin":1400,"kodomoBp":25,"round":null,"verified":null},{"pref":"大分県","kin":64200,"rateBp":1125,"kodomoKin":1400,"kodomoBp":24,"round":null,"verified":null},{"pref":"宮崎県","kin":56300,"rateBp":1008,"kodomoKin":1356,"kodomoBp":25,"round":"miyazaki","verified":"例"},{"pref":"鹿児島県","kin":69800,"rateBp":1172,"kodomoKin":1400,"kodomoBp":25,"round":null,"verified":null},{"pref":"沖縄県","kin":61000,"rateBp":1081,"kodomoKin":1290,"kodomoBp":26,"round":null,"verified":null}];
+var PR=[{"pref":"北海道","kin":59963,"rateBp":1161,"kodomoKin":1364,"kodomoBp":28,"round":"h100","verified":"決まり","tool":false,"chosei":false},{"pref":"青森県","kin":50500,"rateBp":900,"kodomoKin":1300,"kodomoBp":20,"round":"h100","verified":"例","tool":false,"chosei":false},{"pref":"岩手県","kin":48800,"rateBp":850,"kodomoKin":1366,"kodomoBp":26,"round":"h100","verified":"例","tool":false,"chosei":false},{"pref":"宮城県","kin":52200,"rateBp":912,"kodomoKin":1370,"kodomoBp":25,"round":"h100","verified":"例","tool":false,"chosei":false},{"pref":"秋田県","kin":55996,"rateBp":973,"kodomoKin":1350,"kodomoBp":25,"round":null,"verified":null,"tool":false,"chosei":false},{"pref":"山形県","kin":52500,"rateBp":963,"kodomoKin":1373,"kodomoBp":25,"round":"h100","verified":"決まり","tool":false,"chosei":false},{"pref":"福島県","kin":49000,"rateBp":924,"kodomoKin":1400,"kodomoBp":25,"round":null,"verified":null,"tool":false,"chosei":false},{"pref":"茨城県","kin":49500,"rateBp":932,"kodomoKin":1400,"kodomoBp":28,"round":"h100","verified":"決まり","tool":false,"chosei":false},{"pref":"栃木県","kin":49100,"rateBp":900,"kodomoKin":1300,"kodomoBp":25,"round":"h100","verified":"決まり","tool":false,"chosei":false},{"pref":"群馬県","kin":54600,"rateBp":978,"kodomoKin":1400,"kodomoBp":25,"round":"h100","verified":"例","tool":false,"chosei":false},{"pref":"埼玉県","kin":52370,"rateBp":949,"kodomoKin":1330,"kodomoBp":25,"round":"h100","verified":"例","tool":false,"chosei":false},{"pref":"千葉県","kin":51000,"rateBp":940,"kodomoKin":1310,"kodomoBp":25,"round":"h100k10","verified":"決まり","tool":false,"chosei":false},{"pref":"東京都","kin":53300,"rateBp":988,"kodomoKin":1300,"kodomoBp":26,"round":"h100","verified":"例","tool":false,"chosei":false},{"pref":"神奈川県","kin":52531,"rateBp":1030,"kodomoKin":1330,"kodomoBp":25,"round":"y10","verified":"例","tool":false,"chosei":false},{"pref":"新潟県","kin":49200,"rateBp":861,"kodomoKin":1354,"kodomoBp":26,"round":"h100","verified":"例","tool":false,"chosei":false},{"pref":"富山県","kin":55800,"rateBp":1019,"kodomoKin":1373,"kodomoBp":26,"round":"h100","verified":"例","tool":false,"chosei":false},{"pref":"石川県","kin":57300,"rateBp":1114,"kodomoKin":1360,"kodomoBp":24,"round":"y1","verified":"例","tool":false,"chosei":false},{"pref":"福井県","kin":54140,"rateBp":1083,"kodomoKin":1300,"kodomoBp":26,"round":"h100","verified":"例","tool":false,"chosei":false},{"pref":"山梨県","kin":52610,"rateBp":944,"kodomoKin":1330,"kodomoBp":25,"round":"y10","verified":"決まり","tool":false,"chosei":false},{"pref":"長野県","kin":48827,"rateBp":880,"kodomoKin":1339,"kodomoBp":25,"round":"h100","verified":"例","tool":true,"chosei":false},{"pref":"岐阜県","kin":55385,"rateBp":971,"kodomoKin":1374,"kodomoBp":25,"round":"h100","verified":"決まり","tool":false,"chosei":false},{"pref":"静岡県","kin":51100,"rateBp":935,"kodomoKin":1400,"kodomoBp":25,"round":"h100","verified":"例","tool":false,"chosei":false},{"pref":"愛知県","kin":56130,"rateBp":1048,"kodomoKin":1362,"kodomoBp":25,"round":"h100","verified":"例","tool":false,"chosei":false},{"pref":"三重県","kin":54843,"rateBp":953,"kodomoKin":1370,"kodomoBp":25,"round":"y1","verified":"例","tool":false,"chosei":false},{"pref":"滋賀県","kin":55380,"rateBp":1013,"kodomoKin":1340,"kodomoBp":25,"round":"y1","verified":"例","tool":true,"chosei":false},{"pref":"京都府","kin":59590,"rateBp":1015,"kodomoKin":1350,"kodomoBp":25,"round":"y1","verified":"例","tool":false,"chosei":false},{"pref":"大阪府","kin":64931,"rateBp":1151,"kodomoKin":1373,"kodomoBp":24,"round":"y1","verified":"例","tool":false,"chosei":false},{"pref":"兵庫県","kin":58427,"rateBp":1077,"kodomoKin":1351,"kodomoBp":24,"round":"y1","verified":"例","tool":false,"chosei":false},{"pref":"奈良県","kin":57100,"rateBp":1063,"kodomoKin":1400,"kodomoBp":25,"round":"h100","verified":"例","tool":false,"chosei":true},{"pref":"和歌山県","kin":58748,"rateBp":1036,"kodomoKin":1385,"kodomoBp":25,"round":"h100","verified":"例","tool":false,"chosei":false},{"pref":"鳥取県","kin":52138,"rateBp":1064,"kodomoKin":1363,"kodomoBp":25,"round":"h100","verified":"例","tool":false,"chosei":false},{"pref":"島根県","kin":57170,"rateBp":1002,"kodomoKin":1370,"kodomoBp":26,"round":"y10","verified":"例","tool":false,"chosei":false},{"pref":"岡山県","kin":60100,"rateBp":1088,"kodomoKin":1400,"kodomoBp":25,"round":"h100","verified":"例","tool":false,"chosei":false},{"pref":"広島県","kin":55090,"rateBp":993,"kodomoKin":1337,"kodomoBp":25,"round":"y1","verified":"例","tool":false,"chosei":false},{"pref":"山口県","kin":63513,"rateBp":1136,"kodomoKin":1354,"kodomoBp":24,"round":"y1","verified":"例","tool":true,"chosei":false},{"pref":"徳島県","kin":60976,"rateBp":1091,"kodomoKin":1356,"kodomoBp":25,"round":"h100k10","verified":"決まり","tool":false,"chosei":false},{"pref":"香川県","kin":58000,"rateBp":993,"kodomoKin":1300,"kodomoBp":25,"round":"h100","verified":"決まり","tool":false,"chosei":false},{"pref":"愛媛県","kin":55630,"rateBp":979,"kodomoKin":1320,"kodomoBp":25,"round":"y10","verified":"例","tool":false,"chosei":false},{"pref":"高知県","kin":60400,"rateBp":1031,"kodomoKin":1393,"kodomoBp":24,"round":"h100k10","verified":"例","tool":false,"chosei":true},{"pref":"福岡県","kin":66340,"rateBp":1170,"kodomoKin":1339,"kodomoBp":25,"round":"y10","verified":"決まり","tool":false,"chosei":false},{"pref":"佐賀県","kin":68700,"rateBp":1179,"kodomoKin":1400,"kodomoBp":24,"round":null,"verified":null,"tool":false,"chosei":false},{"pref":"長崎県","kin":56200,"rateBp":959,"kodomoKin":1300,"kodomoBp":25,"round":null,"verified":null,"tool":false,"chosei":false},{"pref":"熊本県","kin":63000,"rateBp":1106,"kodomoKin":1400,"kodomoBp":25,"round":"h100","verified":"例","tool":false,"chosei":false},{"pref":"大分県","kin":64200,"rateBp":1125,"kodomoKin":1400,"kodomoBp":24,"round":"h100","verified":"例","tool":false,"chosei":false},{"pref":"宮崎県","kin":56300,"rateBp":1008,"kodomoKin":1356,"kodomoBp":25,"round":"miyazaki","verified":"例","tool":true,"chosei":false},{"pref":"鹿児島県","kin":69800,"rateBp":1172,"kodomoKin":1400,"kodomoBp":25,"round":"miyazaki","verified":"例","tool":true,"chosei":false},{"pref":"沖縄県","kin":61000,"rateBp":1081,"kodomoKin":1290,"kodomoBp":26,"round":"y1","verified":"例","tool":false,"chosei":false}];
 var SAMPLE=[80,100,125,150,168,180,200,220,250,300,400];
 var $=function(i){return document.getElementById(i)};function yen(n){return n.toLocaleString('ja-JP')+'円'}
 function v(i){var s=($(i).value||'').replace(/[,，円\s]/g,'');if(s==='')return 0;var x=parseFloat(s);return isFinite(x)&&x>0?Math.round(x*10000):0}
 function pref(){var p=$('q-pref').value;for(var i=0;i<PR.length;i++)if(PR[i].pref===p)return PR[i];return PR[12]}
 var KEI={7:'7割（医療分は7.2割）',5:'5割',2:'2割',0:'なし'};
-function note(P){if(P.verified==='例')return '<p class="check-mark">'+P.pref+'は、公式の計算例と1円まで合うことを確かめた式で計算しています。</p>';
+function note(P){if(P.verified==='例')return '<p class="check-mark">'+P.pref+'は、'+(P.tool?'公式の試算ツールの結果':'公式の計算例')+'と1円まで合うことを確かめた式で計算しています（<a href="#kenzan">都道府県ごとの検算</a>）。</p>'+(P.chosei?'<p class="bd">給与と年金の両方がある人の例は、'+P.pref+'の公式の計算例が所得金額調整控除（最大10万円）を引かずに計算していて、控除を引くこの計算機と差が出ます。実際の額は決定通知書で確かめてください。</p>':'');
  if(P.verified==='決まり')return '<p class="bd">'+P.pref+'は、端数の扱いを公式の案内で確かめましたが、公式の計算例と1円までは照らせていません。</p>';
  return '<p class="bd"><strong>'+P.pref+'は、公式の計算例と1円まで照らせていません。</strong>端数（100円未満を切り捨てるかなど）の決まりも確かめられていないため、ここでは1円単位で出しています。実際の額は、医療分と子ども分それぞれで最大99円ほど少ないことがあります。</p>'}
 function line(x,P){return yen(x.total)+'<span class="bd">（医療分 '+yen(x.iryo)+'＋子ども・子育て支援金分 '+yen(x.kodomo)+'）</span>'}

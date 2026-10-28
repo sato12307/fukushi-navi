@@ -7,15 +7,17 @@
 //   Bing 90日＝後期高齢者医療保険料 23,571・計算方法 2,567・計算 シュミレーション 569・計算シミュレーション 264・早見表 121。
 //   フクシルには後期高齢者の保険料の面が無かった。県名つきの語は広域連合の名前への道案内だけ＝県別の面は作らず、全国1枚で受ける。
 // ★数字はここに書かない。data/kouki-hokenryo.json（厚労省の47広域連合の料率表・施行令・国税庁の控除の表から写したもの）だけを読む。
-// ★計算の式は下の CORE の1か所だけ。node で公式の計算例42例（scripts/kouki-cases.mjs）に通して円まで合うか確かめ、
+// ★計算の式は下の CORE の1か所だけ。node で公式の計算例（scripts/kouki-cases.mjs）に通して円まで合うか確かめ、
 //   1円でも違えば止める。同じ CORE を面の <script> に埋め込む（式を2回書かない）。
-// ★端数の決まりが確かめられていない広域連合（41）と、計算例で照らせていない広域連合は、面にその旨を書く
+// ★端数の決まりが確かめられていない広域連合と、計算例で照らせていない広域連合は、面にその旨を書く
 //   （2026-10-20 ユーザー裁定 2「一円まで合わない場合のみその旨付記する」）。
+// ★2026-10-29 ユーザー「検算一致表を足す」＝41県の公式の計算例・試算ツールの結果・端数の決まりを集めて足し（33都道府県162例が円まで一致）、
+//   面に「都道府県ごとの検算」の表（#kenzan）を置いた。資料の数字とリンクは出さない（転載・深いリンクを断る広域連合が多い）。
 // ─────────────────────────────────────────────────────────────────────────────
 import fs from 'node:fs'
 import path from 'node:path'
 import { ROOT, esc, num, yen, die, toolPage, writeTool } from './tool-page.mjs'
-import { CASES } from './kouki-cases.mjs'
+import { CASES, KENZAN } from './kouki-cases.mjs'
 import { SHOTOKU_CORE } from './shotoku-core.mjs'
 
 const DRY = process.argv.includes('--dry')
@@ -49,6 +51,7 @@ function koukiCalc(P, D, ps, head) {
     if (P.round === 'h100') { iryo = f100(iryo); kodomo = f100(kodomo); }
     else if (P.round === 'miyazaki') { iryo = f100(Math.min(f100(kin) + sw, D.gendo.iryo)); kodomo = f100(Math.min(f100(kinK) + swK, D.gendo.kodomo)); }
     else if (P.round === 'y10') { iryo = f10(iryo); kodomo = f10(kodomo); }
+    else if (P.round === 'h100k10') { iryo = f100(iryo); kodomo = f10(kodomo); }
     return { iryo: iryo, kodomo: kodomo, total: iryo + kodomo, kin: kin, kinK: kinK, sw: sw, swK: swK, wI: wI, wK: wK, base: base, sou: s.sou, tg: tg, fuyou: fuyou };
   });
   return { kei: kei, S: S, n: n, k: k, persons: out };
@@ -65,30 +68,45 @@ for (const p of D.prefs) {
   if (!ok && p.pref !== '宮崎県') die(`${p.pref} の均等割（${p.kin}）が厚労省の84万円モデル（月${p.model84}円）と合いません（写し間違い？）`)
 }
 let nCase = 0, nPerson = 0
+const CASE_N = {} // 都道府県ごとの、円まで合った公式の計算例の数（面の検算の表に出す）
 for (const c of CASES) {
   const P = PREF[c.pref]
   if (!P || P.verified !== '例') die(`計算例の ${c.pref} が「例で照合済み」になっていません`)
   const r = koukiCalc(P, D, c.p, c.head || null)
-  const got = r.persons.map((x) => x.total)
-  if (c.want) { if (got.join() !== c.want.join()) die(`${c.pref} の計算例（年金${c.p.map((x) => x.nenkin / 10000).join('・')}万円…）が合いません：公式 ${c.want.join('・')}／計算 ${got.join('・')}`) }
-  else if (got.reduce((a, b) => a + b, 0) !== c.wantSum) die(`${c.pref} の夫婦の計算例（夫の年金${c.p[0].nenkin / 10000}万円）が合いません：公式 ${c.wantSum}／計算 ${got.join('+')}`)
+  const got = r.persons.map((x) => x.total), gI = r.persons.map((x) => x.iryo), gK = r.persons.map((x) => x.kodomo)
+  const who = `${c.pref} の計算例（年金${c.p.map((x) => x.nenkin / 10000).join('・')}万円…）が合いません`
+  if (c.want) { if (got.join() !== c.want.join()) die(`${who}：公式 ${c.want.join('・')}／計算 ${got.join('・')}`) }
+  else if (c.wantSum != null) { if (got.reduce((a, b) => a + b, 0) !== c.wantSum) die(`${who}：公式 ${c.wantSum}／計算 ${got.join('+')}`) }
+  else if (c.wantIryo) { // 医療分（と子ども分）だけが出ている例
+    if (gI.join() !== c.wantIryo.join()) die(`${who}（医療分）：公式 ${c.wantIryo.join('・')}／計算 ${gI.join('・')}`)
+    if (c.wantKodomo && gK.join() !== c.wantKodomo.join()) die(`${who}（子ども分）：公式 ${c.wantKodomo.join('・')}／計算 ${gK.join('・')}`)
+  } else die(`${c.pref} の計算例に答えがありません`)
   nCase++; nPerson += c.p.length
+  CASE_N[c.pref] = (CASE_N[c.pref] || 0) + 1
 }
 const verifiedPrefs = D.prefs.filter((p) => p.verified === '例').map((p) => p.pref)
-console.log(`確かめ：料率47行・厚労省の84万円モデルと均等割が合う（宮崎県を除く）／公式の計算例 ${nCase}例（${nPerson}人分）が円まで一致（${verifiedPrefs.join('・')}）`)
+// 検算の表（KENZAN）と照合の状態がずれていないか（例のある県＝計算例が1つ以上・資料名あり、決まりの県＝資料名あり、未確認の県＝資料名なし）
+for (const p of D.prefs) {
+  const k = KENZAN[p.pref]
+  if (p.verified === '例' && !(CASE_N[p.pref] > 0 && k && (k.kind === '例' || k.kind === '試算'))) die(`${p.pref} は「例」なのに計算例か資料名がありません`)
+  if (p.verified === '決まり' && !(k && k.kind === '決まり' && p.round)) die(`${p.pref} は「決まり」なのに資料名か端数の決まりがありません`)
+  if (!p.verified && (k || p.round)) die(`${p.pref} は未確認なのに資料名か端数の決まりがあります`)
+}
+const NV = { rei: verifiedPrefs.length, kimari: D.prefs.filter((p) => p.verified === '決まり').length, nashi: D.prefs.filter((p) => !p.verified).length }
+console.log(`確かめ：料率47行・厚労省の84万円モデルと均等割が合う（宮崎県を除く）／公式の計算例 ${nCase}例（${nPerson}人分）が円まで一致（${NV.rei}都道府県：${verifiedPrefs.join('・')}）／端数の決まりだけ ${NV.kimari}・未確認 ${NV.nashi}`)
 
 // ── 面 ─────────────────────────────────────────────────────────────────────
 const zen = D.prefs.find((p) => p.pref === '東京都') // 例の文で使う
 const SAMPLE = [80, 100, 125, 150, 168, 180, 200, 220, 250, 300, 400]
 const JS = `${CORE}
 (function(){var D=${JSON.stringify({ keigen: D.keigen, kyuyoSha: D.kyuyoSha, nenkinTokurei: D.nenkinTokurei, tokyo: D.tokyo, fuyou: D.fuyou, gendo: D.gendo })};
-var PR=${JSON.stringify(D.prefs.map((p) => ({ pref: p.pref, kin: p.kin, rateBp: p.rateBp, kodomoKin: p.kodomoKin, kodomoBp: p.kodomoBp, round: p.round, verified: p.verified })))};
+var PR=${JSON.stringify(D.prefs.map((p) => ({ pref: p.pref, kin: p.kin, rateBp: p.rateBp, kodomoKin: p.kodomoKin, kodomoBp: p.kodomoBp, round: p.round, verified: p.verified, tool: (KENZAN[p.pref] || {}).kind === '試算', chosei: !!(KENZAN[p.pref] || {}).chosei })))};
 var SAMPLE=${JSON.stringify(SAMPLE)};
 var $=function(i){return document.getElementById(i)};function yen(n){return n.toLocaleString('ja-JP')+'円'}
 function v(i){var s=($(i).value||'').replace(/[,，円\\s]/g,'');if(s==='')return 0;var x=parseFloat(s);return isFinite(x)&&x>0?Math.round(x*10000):0}
 function pref(){var p=$('q-pref').value;for(var i=0;i<PR.length;i++)if(PR[i].pref===p)return PR[i];return PR[12]}
 var KEI={7:'7割（医療分は7.2割）',5:'5割',2:'2割',0:'なし'};
-function note(P){if(P.verified==='例')return '<p class="check-mark">'+P.pref+'は、公式の計算例と1円まで合うことを確かめた式で計算しています。</p>';
+function note(P){if(P.verified==='例')return '<p class="check-mark">'+P.pref+'は、'+(P.tool?'公式の試算ツールの結果':'公式の計算例')+'と1円まで合うことを確かめた式で計算しています（<a href="#kenzan">都道府県ごとの検算</a>）。</p>'+(P.chosei?'<p class="bd">給与と年金の両方がある人の例は、'+P.pref+'の公式の計算例が所得金額調整控除（最大10万円）を引かずに計算していて、控除を引くこの計算機と差が出ます。実際の額は決定通知書で確かめてください。</p>':'');
  if(P.verified==='決まり')return '<p class="bd">'+P.pref+'は、端数の扱いを公式の案内で確かめましたが、公式の計算例と1円までは照らせていません。</p>';
  return '<p class="bd"><strong>'+P.pref+'は、公式の計算例と1円まで照らせていません。</strong>端数（100円未満を切り捨てるかなど）の決まりも確かめられていないため、ここでは1円単位で出しています。実際の額は、医療分と子ども分それぞれで最大99円ほど少ないことがあります。</p>'}
 function line(x,P){return yen(x.total)+'<span class="bd">（医療分 '+yen(x.iryo)+'＋子ども・子育て支援金分 '+yen(x.kodomo)+'）</span>'}
@@ -113,12 +131,21 @@ const rateRows = D.prefs.map((p) => `<tr><th>${esc(p.pref)}</th><td class="num">
 const prefOpts = D.prefs.map((p) => `<option${p.pref === '東京都' ? ' selected' : ''}>${esc(p.pref)}</option>`).join('')
 const T = (n) => num(n / 10000) + '万円'
 const K = D.keigen
+const ROUND_LABEL = { h100: '医療分・子ども分ごとに100円未満切捨て', y10: '10円未満切捨て', y1: '1円未満切捨て（1円単位）', miyazaki: '軽減後の均等割と、医療分・子ども分ごとに100円未満切捨て', h100k10: '医療分は100円未満・子ども分は10円未満切捨て' }
+const kenzanRows = D.prefs.map((p) => {
+  const k = KENZAN[p.pref]
+  const res = p.verified === '例' ? `<strong>✓</strong> ${k.kind === '試算' ? '公式の試算ツール' : '公式の計算例'} ${CASE_N[p.pref]}${k.kind === '試算' ? '件' : '例'}と一致${k.miss ? `<br><span class="bd">${esc(k.miss)}</span>` : ''}`
+    : p.verified === '決まり' ? '端数の決まりだけ確認' : '未確認'
+  return `<tr><th>${esc(p.pref)}</th><td>${res}</td><td>${p.round ? ROUND_LABEL[p.round] || die(`${p.pref} の端数の決まり ${p.round} に名前がありません`) : '未確認（1円単位で表示）'}</td><td>${k ? esc(k.doc) : '—'}</td></tr>`
+}).join('\n')
+const kenzanSum = `47都道府県のうち<strong>${NV.rei}</strong>は、広域連合や市が公表している令和8年度の計算例・早見表と公式の試算ツールの結果（計${nCase}例）に通して、1円まで合うことを確かめています。端数の決まりだけを確かめたのが${NV.kimari}、どちらもまだ確かめられていないのが${NV.nashi}です`
 const FAQ = [
   ['後期高齢者医療保険料はいくらですか？', `令和8年度の保険料は、都道府県ごとの「均等割」（1人あたりの定額）と「所得割」（所得に応じた額）の合計です。全国平均の料率は均等割${num(avg.kin)}円・所得割率${avg.rate}%で、令和8年度からは子ども・子育て支援金分（全国平均で均等割${num(avg.kk)}円・所得割率${avg.kr}%）が加わりました。所得が低い世帯は均等割が7割・5割・2割軽減されます。年金収入と都道府県を入れると、このページの計算機で年額が分かります。`],
   ['年金だけの人の保険料はいくらですか？', `所得が低いと均等割が軽くなり、所得割もかからないか小さくなります。たとえば${zen.pref}で単身・年金収入80万円の人は、年額${yen(koukiCalc(zen, D, [{ nenkin: 800000 }], null).persons[0].total)}です（令和8年度・7割軽減）。年金収入200万円なら${yen(koukiCalc(zen, D, [{ nenkin: 2000000 }], null).persons[0].total)}です。ほかの都道府県と年金額は、このページの早見表と計算機で確かめられます。`],
   ['保険料の軽減（7割・5割・2割）の基準は？', `世帯主と世帯の後期高齢者医療の被保険者全員の所得の合計で判定します。令和8年度は、${T(K.kiso)}（＋給与や年金の収入がある人が2人以上なら1人につき${T(K.perKyuyo)}）以下で7割、それに被保険者の数×${T(K.go)}を足した額以下で5割、被保険者の数×${T(K.ni)}を足した額以下で2割です。65歳以上の人の年金所得は、判定のときだけさらに最大${T(D.nenkinTokurei)}を引きます。令和8・9年度は、医療分の7割軽減が7.2割になります。`],
   ['保険料の上限（賦課限度額）はいくらですか？', `令和8年度は、医療分が${T(D.gendo.iryo)}、子ども・子育て支援金分が${T(D.gendo.kodomo)}で、合わせて年${num((D.gendo.iryo + D.gendo.kodomo) / 10000)}万円が上限です（全国共通）。`],
   ['会社の健康保険の扶養に入っていた人の保険料は？', '75歳になるまで会社の健康保険などの被扶養者だった人は、所得割がかからず、加入から2年を経過する月までは均等割が5割軽減されます（7割軽減に当たる人は7割〈令和8・9年度の医療分は7.2割〉が優先）。国民健康保険から移った人は対象外です。'],
+  ['この計算機の額は公式の額と合いますか？', `${kenzanSum.replace(/<\/?strong>/g, '')}。合わない例は、このページの「都道府県ごとの検算」に理由を書いています。正式な額は、市区町村から届く保険料額の決定通知書で確かめてください。`],
 ]
 
 const body = `  <p class="lead"><strong>後期高齢者医療制度</strong>（75歳以上の人が入る医療保険）の保険料は、<strong>住んでいる都道府県の料率</strong>と<strong>前の年の所得</strong>で決まります。令和8年度（2026年度）は保険料率が改定され、新しく<strong>子ども・子育て支援金分</strong>も加わりました。年金収入などを入れると、${esc(D.nendo)}の年額を、均等割の軽減（7割・5割・2割）込みで計算します。</p>
@@ -150,6 +177,7 @@ const body = `  <p class="lead"><strong>後期高齢者医療制度</strong>（7
     <div class="out" id="q-out" aria-live="polite"></div>
   </div>
   <p class="mini-note">世帯主が後期高齢者医療に入っていない人（同居の子など）でも、世帯主の所得は均等割の軽減の判定に入ります。保険料は4月1日の世帯の状況で判定し、年度の途中で加入した人は月割りになります。正式な額は、7月ごろに届く保険料額の決定通知書で確かめてください。</p>
+  <p class="mini-note">${kenzanSum}（<a href="#kenzan">都道府県ごとの検算</a>）。</p>
 
   <h2 id="hayami">年金収入別の早見表（単身・年金だけ）</h2>
   <div class="table-wrap"><table class="fit">
@@ -179,6 +207,17 @@ ${rateRows}
     </tbody>
   </table></div>
   <p class="mini-note">子ども・子育て支援金分の令和9年度の率は、令和8年度末までに各広域連合の議会が決めます。出典：厚生労働省「後期高齢者医療制度の令和８・９年度の保険料率について」（<a href="${D.sources[0].url}" rel="nofollow">${D.sources[0].url}</a>）を加工して作成。</p>
+
+  <h2 id="kenzan">都道府県ごとの検算（公式の計算例と1円まで合うか）</h2>
+  <p>${kenzanSum}。資料の数字は、転載を断っている広域連合が多いので載せず、合った件数と資料の名前だけを書いています。</p>
+  <div class="table-wrap"><table class="fit">
+    <caption>${esc(D.nendo)}の保険料。確かめた日：${esc(D.checkedAt.replace(/^(\d+)-0?(\d+)-0?(\d+)$/, '$1年$2月$3日'))}</caption>
+    <thead><tr><th>都道府県</th><th>照合の結果</th><th>端数の扱い</th><th>照らした資料</th></tr></thead>
+    <tbody>
+${kenzanRows}
+    </tbody>
+  </table></div>
+  <p class="mini-note">「端数の決まりだけ確認」の県は、公式の案内で確かめた端数の扱いで計算しています。「未確認」の県は1円単位で出しているため、実際の額は医療分と子ども分それぞれで最大99円ほど少ないことがあります。公式の計算例や決定通知書の額と合わないときは、都道府県と収入の条件を contact@fukushiru.com までお知らせください。確かめて直します。</p>
 `
 
 const html = toolPage({

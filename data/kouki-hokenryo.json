@@ -1,6 +1,6 @@
 {
- "_note": "後期高齢者医療保険料（令和8年度）の計算機 /kouki/ の数字。料率は厚生労働省「後期高齢者医療制度の令和８・９年度の保険料率について」（令和8年4月10日・PDF 001689077）の47行を写したもの（医療分は令和8・9年度、子ども・子育て支援金分は令和8年度）。rateBp・kodomoBp は所得割率を1万分の1で（11.61%＝1161）。model84＝厚労省の表の「基礎年金受給者（年金収入84万円）の医療分の月額」で、kouki-page.mjs が均等割の写し間違いを確かめるのに使う。round＝その広域連合の端数の決まり（h100＝医療分・子ども分それぞれ100円未満切捨て／miyazaki＝軽減後の均等割を100円未満切捨てしてから所得割を足し、合計を100円未満切捨て／y10＝10円未満切捨て／y1＝1円単位／null＝未確認）。verified＝例＝公式の計算例と円まで合った、決まり＝端数の決まりは公式で確かめたが計算例は無い、null＝未照合。2026-10-20 に写した。",
- "checkedAt": "2026-10-20",
+ "_note": "後期高齢者医療保険料（令和8年度）の計算機 /kouki/ の数字。料率は厚生労働省「後期高齢者医療制度の令和８・９年度の保険料率について」（令和8年4月10日・PDF 001689077）の47行を写したもの（医療分は令和8・9年度、子ども・子育て支援金分は令和8年度）。rateBp・kodomoBp は所得割率を1万分の1で（11.61%＝1161）。model84＝厚労省の表の「基礎年金受給者（年金収入84万円）の医療分の月額」で、kouki-page.mjs が均等割の写し間違いを確かめるのに使う。round＝その広域連合の端数の決まり（h100＝医療分・子ども分それぞれ100円未満切捨て／miyazaki＝軽減後の均等割を100円未満切捨てしてから所得割を足し、合計を100円未満切捨て／y10＝10円未満切捨て／h100k10＝医療分は100円未満・子ども分は10円未満を切捨て／y1＝1円単位／null＝未確認）。verified＝例＝公式の計算例と円まで合った、決まり＝端数の決まりは公式で確かめたが計算例は無い、null＝未照合。2026-10-20 に写し、2026-10-29 に41県の公式の計算例・端数の決まりを足した。",
+ "checkedAt": "2026-10-29",
  "nendo": "令和8年度",
  "shotokuNen": "令和7年",
  "gendo": {
@@ -53,8 +53,8 @@
    "kodomoBp": 20,
    "kodomoRate": "0.20",
    "model84": 1175,
-   "round": null,
-   "verified": null
+   "round": "h100",
+   "verified": "例"
   },
   {
    "pref": "岩手県",
@@ -65,8 +65,8 @@
    "kodomoBp": 26,
    "kodomoRate": "0.26",
    "model84": 1133,
-   "round": null,
-   "verified": null
+   "round": "h100",
+   "verified": "例"
   },
   {
    "pref": "宮城県",
@@ -77,8 +77,8 @@
    "kodomoBp": 25,
    "kodomoRate": "0.25",
    "model84": 1216,
-   "round": null,
-   "verified": null
+   "round": "h100",
+   "verified": "例"
   },
   {
    "pref": "秋田県",
@@ -101,8 +101,8 @@
    "kodomoBp": 25,
    "kodomoRate": "0.25",
    "model84": 1225,
-   "round": null,
-   "verified": null
+   "round": "h100",
+   "verified": "決まり"
   },
   {
    "pref": "福島県",
@@ -125,8 +125,8 @@
    "kodomoBp": 28,
    "kodomoRate": "0.28",
    "model84": 1155,
-   "round": null,
-   "verified": null
+   "round": "h100",
+   "verified": "決まり"
   },
   {
    "pref": "栃木県",
@@ -137,8 +137,8 @@
    "kodomoBp": 25,
    "kodomoRate": "0.25",
    "model84": 1146,
-   "round": null,
-   "verified": null
+   "round": "h100",
+   "verified": "決まり"
   },
   {
    "pref": "群馬県",
@@ -149,8 +149,8 @@
    "kodomoBp": 25,
    "kodomoRate": "0.25",
    "model84": 1267,
-   "round": null,
-   "verified": null
+   "round": "h100",
+   "verified": "例"
   },
   {
    "pref": "埼玉県",
@@ -161,8 +161,8 @@
    "kodomoBp": 25,
    "kodomoRate": "0.25",
    "model84": 1217,
-   "round": null,
-   "verified": null
+   "round": "h100",
+   "verified": "例"
   },
   {
    "pref": "千葉県",
@@ -173,8 +173,8 @@
    "kodomoBp": 25,
    "kodomoRate": "0.25",
    "model84": 1183,
-   "round": null,
-   "verified": null
+   "round": "h100k10",
+   "verified": "決まり"
   },
   {
    "pref": "東京都",
@@ -198,7 +198,7 @@
    "kodomoRate": "0.25",
    "model84": 1225,
    "round": "y10",
-   "verified": "決まり"
+   "verified": "例"
   },
   {
    "pref": "新潟県",
@@ -209,8 +209,8 @@
    "kodomoBp": 26,
    "kodomoRate": "0.26",
    "model84": 1148,
-   "round": null,
-   "verified": null
+   "round": "h100",
+   "verified": "例"
   },
   {
    "pref": "富山県",
@@ -221,8 +221,8 @@
    "kodomoBp": 26,
    "kodomoRate": "0.26",
    "model84": 1302,
-   "round": null,
-   "verified": null
+   "round": "h100",
+   "verified": "例"
   },
   {
    "pref": "石川県",
@@ -233,8 +233,8 @@
    "kodomoBp": 24,
    "kodomoRate": "0.24",
    "model84": 1337,
-   "round": null,
-   "verified": null
+   "round": "y1",
+   "verified": "例"
   },
   {
    "pref": "福井県",
@@ -245,8 +245,8 @@
    "kodomoBp": 26,
    "kodomoRate": "0.26",
    "model84": 1263,
-   "round": null,
-   "verified": null
+   "round": "h100",
+   "verified": "例"
   },
   {
    "pref": "山梨県",
@@ -257,8 +257,8 @@
    "kodomoBp": 25,
    "kodomoRate": "0.25",
    "model84": 1228,
-   "round": null,
-   "verified": null
+   "round": "y10",
+   "verified": "決まり"
   },
   {
    "pref": "長野県",
@@ -269,8 +269,8 @@
    "kodomoBp": 25,
    "kodomoRate": "0.25",
    "model84": 1139,
-   "round": null,
-   "verified": null
+   "round": "h100",
+   "verified": "例"
   },
   {
    "pref": "岐阜県",
@@ -281,8 +281,8 @@
    "kodomoBp": 25,
    "kodomoRate": "0.25",
    "model84": 1292,
-   "round": null,
-   "verified": null
+   "round": "h100",
+   "verified": "決まり"
   },
   {
    "pref": "静岡県",
@@ -293,8 +293,8 @@
    "kodomoBp": 25,
    "kodomoRate": "0.25",
    "model84": 1192,
-   "round": null,
-   "verified": null
+   "round": "h100",
+   "verified": "例"
   },
   {
    "pref": "愛知県",
@@ -317,8 +317,8 @@
    "kodomoBp": 25,
    "kodomoRate": "0.25",
    "model84": 1280,
-   "round": null,
-   "verified": null
+   "round": "y1",
+   "verified": "例"
   },
   {
    "pref": "滋賀県",
@@ -329,8 +329,8 @@
    "kodomoBp": 25,
    "kodomoRate": "0.25",
    "model84": 1292,
-   "round": null,
-   "verified": null
+   "round": "y1",
+   "verified": "例"
   },
   {
    "pref": "京都府",
@@ -341,8 +341,8 @@
    "kodomoBp": 25,
    "kodomoRate": "0.25",
    "model84": 1390,
-   "round": null,
-   "verified": null
+   "round": "y1",
+   "verified": "例"
   },
   {
    "pref": "大阪府",
@@ -365,8 +365,8 @@
    "kodomoBp": 24,
    "kodomoRate": "0.24",
    "model84": 1363,
-   "round": null,
-   "verified": null
+   "round": "y1",
+   "verified": "例"
   },
   {
    "pref": "奈良県",
@@ -377,8 +377,8 @@
    "kodomoBp": 25,
    "kodomoRate": "0.25",
    "model84": 1325,
-   "round": null,
-   "verified": null
+   "round": "h100",
+   "verified": "例"
   },
   {
    "pref": "和歌山県",
@@ -389,8 +389,8 @@
    "kodomoBp": 25,
    "kodomoRate": "0.25",
    "model84": 1371,
-   "round": null,
-   "verified": null
+   "round": "h100",
+   "verified": "例"
   },
   {
    "pref": "鳥取県",
@@ -401,8 +401,8 @@
    "kodomoBp": 25,
    "kodomoRate": "0.25",
    "model84": 1217,
-   "round": null,
-   "verified": null
+   "round": "h100",
+   "verified": "例"
   },
   {
    "pref": "島根県",
@@ -413,8 +413,8 @@
    "kodomoBp": 26,
    "kodomoRate": "0.26",
    "model84": 1334,
-   "round": null,
-   "verified": null
+   "round": "y10",
+   "verified": "例"
   },
   {
    "pref": "岡山県",
@@ -425,8 +425,8 @@
    "kodomoBp": 25,
    "kodomoRate": "0.25",
    "model84": 1400,
-   "round": null,
-   "verified": null
+   "round": "h100",
+   "verified": "例"
   },
   {
    "pref": "広島県",
@@ -437,8 +437,8 @@
    "kodomoBp": 25,
    "kodomoRate": "0.25",
    "model84": 1285,
-   "round": null,
-   "verified": null
+   "round": "y1",
+   "verified": "例"
   },
   {
    "pref": "山口県",
@@ -449,8 +449,8 @@
    "kodomoBp": 24,
    "kodomoRate": "0.24",
    "model84": 1482,
-   "round": null,
-   "verified": null
+   "round": "y1",
+   "verified": "例"
   },
   {
    "pref": "徳島県",
@@ -461,8 +461,8 @@
    "kodomoBp": 25,
    "kodomoRate": "0.25",
    "model84": 1423,
-   "round": null,
-   "verified": null
+   "round": "h100k10",
+   "verified": "決まり"
   },
   {
    "pref": "香川県",
@@ -473,8 +473,8 @@
    "kodomoBp": 25,
    "kodomoRate": "0.25",
    "model84": 1353,
-   "round": null,
-   "verified": null
+   "round": "h100",
+   "verified": "決まり"
   },
   {
    "pref": "愛媛県",
@@ -485,8 +485,8 @@
    "kodomoBp": 25,
    "kodomoRate": "0.25",
    "model84": 1298,
-   "round": null,
-   "verified": null
+   "round": "y10",
+   "verified": "例"
   },
   {
    "pref": "高知県",
@@ -497,8 +497,8 @@
    "kodomoBp": 24,
    "kodomoRate": "0.24",
    "model84": 1409,
-   "round": null,
-   "verified": null
+   "round": "h100k10",
+   "verified": "例"
   },
   {
    "pref": "福岡県",
@@ -509,8 +509,8 @@
    "kodomoBp": 25,
    "kodomoRate": "0.25",
    "model84": 1548,
-   "round": null,
-   "verified": null
+   "round": "y10",
+   "verified": "決まり"
   },
   {
    "pref": "佐賀県",
@@ -545,8 +545,8 @@
    "kodomoBp": 25,
    "kodomoRate": "0.25",
    "model84": 1470,
-   "round": null,
-   "verified": null
+   "round": "h100",
+   "verified": "例"
   },
   {
    "pref": "大分県",
@@ -557,8 +557,8 @@
    "kodomoBp": 24,
    "kodomoRate": "0.24",
    "model84": 1492,
-   "round": null,
-   "verified": null
+   "round": "h100",
+   "verified": "例"
   },
   {
    "pref": "宮崎県",
@@ -581,8 +581,8 @@
    "kodomoBp": 25,
    "kodomoRate": "0.25",
    "model84": 1625,
-   "round": null,
-   "verified": null
+   "round": "miyazaki",
+   "verified": "例"
   },
   {
    "pref": "沖縄県",
@@ -593,8 +593,8 @@
    "kodomoBp": 26,
    "kodomoRate": "0.26",
    "model84": 1423,
-   "round": null,
-   "verified": null
+   "round": "y1",
+   "verified": "例"
   }
  ],
  "sources": [
