@@ -358,7 +358,7 @@ ${annualRows(rs, hh)}
   </tbody></table></div>`).join('\n  ')}
   <p>線を1円でも超えると軽減が1段下がり、保険料が段差で上がります。給与だけの単身（40〜64歳）なら、${man(L1[7])}を超えると年${yen(cliff(L1[7]))}、${man(L1[5])}を超えると年${yen(cliff(L1[5]))}、${man(L1[2])}を超えると年${yen(cliff(L1[2]))}上がります。</p>
   ${shienkinCity(r, rs, kw)}
-  <p class="mini-note">39歳以下の人は介護分がかかりません（収入0円の単身で年${yen(kaigo0)}安い）。65〜74歳の人も国保の介護分はかからず、そのかわり介護保険料を別に納めます（この表に入っていません）。<strong>所得を申告していないと軽減されず、収入0円の単身（40〜64歳）でも年${yen(zeroFull.total)}</strong>になります。表は${esc(KG.incomeYear)}がこの収入だけで、ほかの世帯の人は収入なし（夫婦のもう1人は年金110万円以下）、後期高齢者医療に移った人はいない、減免なしとして計算した目安です。端数は${esc(rs.rounding)}。実際の額は${esc(r.city)}から届く決定通知書で確かめてください。</p>
+  <p class="mini-note">39歳以下の人は介護分がかかりません（収入0円の単身で年${yen(kaigo0)}安い）。65〜74歳の人も国保の介護分はかからず、そのかわり介護保険料を別に納めます（この表に入っていません。<a href="../../kaigo/hokenryo/">介護保険料の計算</a>）。<strong>所得を申告していないと軽減されず、収入0円の単身（40〜64歳）でも年${yen(zeroFull.total)}</strong>になります。表は${esc(KG.incomeYear)}がこの収入だけで、ほかの世帯の人は収入なし（夫婦のもう1人は年金110万円以下）、後期高齢者医療に移った人はいない、減免なしとして計算した目安です。端数は${esc(rs.rounding)}。実際の額は${esc(r.city)}から届く決定通知書で確かめてください。</p>
   <p class="mini-note">使った料率（${esc(rs.nendo)}・${esc(rs.name)}）：</p>
   <ul class="mini-note">
   ${rateList(rs)}
@@ -421,6 +421,7 @@ const muniPage = (r) => {
   if (exists(`shogai-kojo/${r.code6}.html`)) life.push(`<li><strong>障害者控除の認定</strong>：<a href="${up}shogai-kojo/${r.code6}.html">${esc(r.city)}の障害者控除対象者認定</a>（要介護の人が障害者控除を受けると、非課税の線の内側に入ることがあります）。</li>`)
   if (exists(`houkatsu/${r.code6}.html`)) life.push(`<li><strong>地域包括支援センター</strong>：<a href="${up}houkatsu/${r.code6}.html">${esc(r.city)}の担当センターを住所から引く</a>。</li>`)
   life.push(`<li><strong>非課税世帯になると変わること</strong>：医療費の月の上限が「住民税非課税」の区分になります（<a href="${up}mitoshi/kogaku/">高額療養費の上限額の記録</a>）。給付金の対象になることもあります（<a href="${up}articles/juminzei-hikazei-check.html#merit">非課税世帯のおもな得</a>）。</li>`)
+  life.push(`<li><strong>65歳以上の人</strong>：世帯全員が非課税だと、介護保険料が低い段階になり（<a href="${up}kaigo/hokenryo/">介護保険料の計算</a>）、介護サービスの月の上限も下がります（<a href="${up}kaigo/kogaku/">高額介護サービス費の計算</a>）。年金が少なければ年金生活者支援給付金が上乗せされます（<a href="${up}shien-kyufukin/">年金生活者支援給付金の計算</a>）。</li>`)
   // 水道・下水道の福祉減免（2026-09-29・v280 #173）。原文で確かめた市区町村だけ。東京23区は「非課税だけでは対象外」を先に言う
   // （非課税なら水道代も安くなると思われやすく、実際にそう書いている民間の記事もある）。
   const sgLinks = (ss) => ss.map((s) => `<a href="${esc(s.url)}" rel="nofollow">${esc(s.label)}</a>`).join('・')
@@ -600,6 +601,7 @@ ${prefLinks}
   <li><a href="${up}hikazei/nenkin-ranking/">年金だけで暮らす人の住民税非課税ライン（全国の市区町村の一覧）</a></li>
   <li><a href="${up}articles/juminzei-hikazei-check.html">住民税非課税の判定</a>（年収・扶養・級地を入れて判定）</li>
   <li><a href="${up}mitoshi/kogaku/">高額療養費の上限額の記録</a>（非課税世帯の区分の額）</li>
+  <li><a href="${up}kaigo/hokenryo/">65歳以上の介護保険料の計算</a>・<a href="${up}kaigo/kogaku/">高額介護サービス費の計算</a>・<a href="${up}shien-kyufukin/">年金生活者支援給付金の計算</a>（65歳以上の人）</li>
   </ul>
   ${sourcesList(null, null)}
 `
@@ -683,7 +685,7 @@ ${t2}
   <h2 id="notes">この表の決まりごと</h2>
   <ul>
   <li><strong>所得の申告が要ります</strong>。世帯の誰かが所得を申告していないと、7割・5割・2割の軽減は付きません。収入が0円の人も、住民税の申告（または確定申告）をしておく必要があります。</li>
-  <li>65〜74歳の人は国保の介護分がかからず、そのかわり<strong>介護保険料を別に納めます</strong>。介護保険料も区市町村ごとに違いますが、この表には入っていません。</li>
+  <li>65〜74歳の人は国保の介護分がかからず、そのかわり<strong>介護保険料を別に納めます</strong>。介護保険料も区市町村ごとに違いますが、この表には入っていません（<a href="${up}kaigo/hokenryo/">介護保険料の計算</a>）。</li>
   <li>大人だけの世帯で比べています。子どもがいる世帯は、未就学児の軽減や区市独自の軽減があるので、この表では比べていません。</li>
   <li>「保険税」の市は、年税額の100円未満の切り捨てなど端数の決まりが「保険料」の区と違います。それぞれの区市の計算例に合わせて計算しています。</li>
   <li>国保に入った月からの月割り、減免、後期高齢者医療に移った人がいる世帯は計算に入れていません。実際の額は区市町村から届く決定通知書で確かめてください。</li>
