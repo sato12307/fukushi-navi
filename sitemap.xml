@@ -2601,7 +2601,7 @@
   <url><loc>https://fukushiru.com/tsuika/47/</loc><lastmod>2026-10-09</lastmod><priority>0.6</priority></url>
   <url><loc>https://fukushiru.com/hikazei/kodomo-shienkin/</loc><lastmod>2026-10-10</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
   <url><loc>https://fukushiru.com/gakko/kyufukin/</loc><lastmod>2026-10-10</lastmod><priority>0.8</priority></url>
-  <url><loc>https://fukushiru.com/articles/</loc><lastmod>2026-10-20</lastmod><priority>0.7</priority></url>
+  <url><loc>https://fukushiru.com/articles/</loc><lastmod>2026-10-28</lastmod><priority>0.7</priority></url>
   <url><loc>https://fukushiru.com/seiho/</loc><lastmod>2026-10-12</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
   <url><loc>https://fukushiru.com/seiho/ken/01/</loc><lastmod>2026-10-12</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://fukushiru.com/seiho/ken/02/</loc><lastmod>2026-10-12</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
@@ -4391,9 +4391,12 @@
   <url><loc>https://fukushiru.com/seiho/47375/</loc><lastmod>2026-10-12</lastmod><changefreq>monthly</changefreq><priority>0.4</priority></url>
   <url><loc>https://fukushiru.com/seiho/47381/</loc><lastmod>2026-10-12</lastmod><changefreq>monthly</changefreq><priority>0.4</priority></url>
   <url><loc>https://fukushiru.com/seiho/47382/</loc><lastmod>2026-10-12</lastmod><changefreq>monthly</changefreq><priority>0.4</priority></url>
-  <url><loc>https://fukushiru.com/kouki/</loc><lastmod>2026-10-20</lastmod><priority>0.8</priority></url>
+  <url><loc>https://fukushiru.com/kouki/</loc><lastmod>2026-10-28</lastmod><priority>0.8</priority></url>
   <url><loc>https://fukushiru.com/sashiosae/</loc><lastmod>2026-10-20</lastmod><priority>0.8</priority></url>
   <url><loc>https://fukushiru.com/teate/jido-fuyo/</loc><lastmod>2026-10-20</lastmod><priority>0.8</priority></url>
   <url><loc>https://fukushiru.com/teate/shogai/</loc><lastmod>2026-10-20</lastmod><priority>0.8</priority></url>
   <url><loc>https://fukushiru.com/judo-iryo/</loc><lastmod>2026-10-20</lastmod><priority>0.8</priority></url>
+  <url><loc>https://fukushiru.com/shien-kyufukin/</loc><lastmod>2026-10-28</lastmod><priority>0.8</priority></url>
+  <url><loc>https://fukushiru.com/kaigo/kogaku/</loc><lastmod>2026-10-28</lastmod><priority>0.8</priority></url>
+  <url><loc>https://fukushiru.com/kaigo/hokenryo/</loc><lastmod>2026-10-28</lastmod><priority>0.8</priority></url>
 </urlset>

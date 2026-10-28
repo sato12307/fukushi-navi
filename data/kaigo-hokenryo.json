@@ -1,0 +1,3320 @@
+{
+ "_note": "65歳以上の介護保険料（第1号被保険者・令和8年度）の計算機 /kaigo/hokenryo/ の数字。koku＝国の標準13段階（介護保険法施行令 第38条第1項の標準割合＝bairitsuMae、第11〜13項の公費による軽減の上限 keigenMax を引いた倍率＝bairitsu）。lines.x1・x2＝本人非課税の段階の線（課税年金収入＋年金以外の合計所得、以下）。令和8年度は令和7年政令第394号で80万9千円→82万6千5百円（附則2項：令和8年度以後の年度分から）。lines.g＝本人課税の段階の線（合計所得金額、未満）＝施行規則 第143条〜第143条の3（令和6〜8年度は120・210・320万円）と施行令 第38条第9項（第8号の額＋100・200・300・400万円）。cities＝各市の公式ページから写した段階表。bairitsu＝市の公表の倍率（令和8年度・軽減後）。stages の honnin＝本人の住民税（hi 非課税／ka 課税）、setai＝世帯（hi 全員非課税／ka 課税者あり）、xMax＝課税年金収入＋年金以外の合計所得の上限（以下）、gMax＝合計所得金額の上限（未満。gLe=true なら以下）、seiho＝生活保護受給者・老齢福祉年金受給者がこの段階。round＝基準額×倍率の端数（y1＝1円未満切捨て／y10＝10円未満切捨て／h100＝100円未満切捨て／r1＝四捨五入）。verified＝表＝市の公表の段階ごとの年額と全段階で円まで一致（scripts/kaigo-hokenryo-cases.mjs）、例＝公式の計算例とも一致、null＝照らせていない（選択肢に入れない。why に理由）。mhlwGetsu＝厚労省「第9期 保険者別の保険料基準額（月額）」の値（写し間違いの見張り）。",
+ "checkedAt": "2026-10-28",
+ "nendo": "令和8年度",
+ "ki": "第9期（令和6〜8年度）",
+ "shotokuNen": "令和7年",
+ "lines": {
+  "x1": 826500,
+  "x2": 1200000,
+  "g": [
+   1200000,
+   2100000,
+   3200000,
+   4200000,
+   5200000,
+   6200000,
+   7200000
+  ]
+ },
+ "kokuAverage": {
+  "getsu": 6225,
+  "prev": 6014,
+  "src": "https://www.mhlw.go.jp/stf/newpage_40211.html"
+ },
+ "koku": {
+  "keigenMax": [
+   "0.17",
+   "0.2",
+   "0.005"
+  ],
+  "stages": [
+   {
+    "no": "第1段階",
+    "bairitsuMae": "0.455",
+    "bairitsu": "0.285",
+    "text": "生活保護を受けている人、老齢福祉年金を受けていて世帯全員が住民税非課税の人、世帯全員が住民税非課税で「年金収入＋その他の所得」が82万6,500円以下の人",
+    "seiho": true,
+    "honnin": "hi",
+    "setai": "hi",
+    "xMax": 826500
+   },
+   {
+    "no": "第2段階",
+    "bairitsuMae": "0.685",
+    "bairitsu": "0.485",
+    "text": "世帯全員が住民税非課税で「年金収入＋その他の所得」が82万6,500円超120万円以下",
+    "honnin": "hi",
+    "setai": "hi",
+    "xMax": 1200000
+   },
+   {
+    "no": "第3段階",
+    "bairitsuMae": "0.69",
+    "bairitsu": "0.685",
+    "text": "世帯全員が住民税非課税で「年金収入＋その他の所得」が120万円超",
+    "honnin": "hi",
+    "setai": "hi",
+    "xMax": null
+   },
+   {
+    "no": "第4段階",
+    "bairitsuMae": "0.9",
+    "bairitsu": "0.9",
+    "text": "本人は住民税非課税・世帯に課税の人がいて「年金収入＋その他の所得」が82万6,500円以下",
+    "honnin": "hi",
+    "setai": "ka",
+    "xMax": 826500
+   },
+   {
+    "no": "第5段階",
+    "bairitsuMae": "1",
+    "bairitsu": "1",
+    "text": "本人は住民税非課税・世帯に課税の人がいて「年金収入＋その他の所得」が82万6,500円超（基準額）",
+    "honnin": "hi",
+    "setai": "ka",
+    "xMax": null
+   },
+   {
+    "no": "第6段階",
+    "bairitsuMae": "1.2",
+    "bairitsu": "1.2",
+    "text": "本人が住民税課税で合計所得金額が120万円未満",
+    "honnin": "ka",
+    "gMax": 1200000
+   },
+   {
+    "no": "第7段階",
+    "bairitsuMae": "1.3",
+    "bairitsu": "1.3",
+    "text": "本人が住民税課税で合計所得金額が120万円以上210万円未満",
+    "honnin": "ka",
+    "gMax": 2100000
+   },
+   {
+    "no": "第8段階",
+    "bairitsuMae": "1.5",
+    "bairitsu": "1.5",
+    "text": "本人が住民税課税で合計所得金額が210万円以上320万円未満",
+    "honnin": "ka",
+    "gMax": 3200000
+   },
+   {
+    "no": "第9段階",
+    "bairitsuMae": "1.7",
+    "bairitsu": "1.7",
+    "text": "本人が住民税課税で合計所得金額が320万円以上420万円未満",
+    "honnin": "ka",
+    "gMax": 4200000
+   },
+   {
+    "no": "第10段階",
+    "bairitsuMae": "1.9",
+    "bairitsu": "1.9",
+    "text": "本人が住民税課税で合計所得金額が420万円以上520万円未満",
+    "honnin": "ka",
+    "gMax": 5200000
+   },
+   {
+    "no": "第11段階",
+    "bairitsuMae": "2.1",
+    "bairitsu": "2.1",
+    "text": "本人が住民税課税で合計所得金額が520万円以上620万円未満",
+    "honnin": "ka",
+    "gMax": 6200000
+   },
+   {
+    "no": "第12段階",
+    "bairitsuMae": "2.3",
+    "bairitsu": "2.3",
+    "text": "本人が住民税課税で合計所得金額が620万円以上720万円未満",
+    "honnin": "ka",
+    "gMax": 7200000
+   },
+   {
+    "no": "第13段階",
+    "bairitsuMae": "2.4",
+    "bairitsu": "2.4",
+    "text": "本人が住民税課税で合計所得金額が720万円以上",
+    "honnin": "ka",
+    "gMax": null
+   }
+  ]
+ },
+ "next": {
+  "note": "令和9年度以降の基準所得金額（施行規則 第143条）は、2026年10月28日時点の e-Gov では令和8年度までしか定められておらず、第10期の国の標準段階はまだ決まっていません。"
+ },
+ "cities": [
+  {
+   "city": "札幌市",
+   "pref": "北海道",
+   "kijunNen": 69270,
+   "mhlwGetsu": 5773,
+   "round": "r1",
+   "verified": "表",
+   "pageNote": "札幌市の表の年額（円未満を四捨五入した形）に合わせています。札幌市は「実際に納める保険料は10円未満切り捨て」としています。",
+   "stages": [
+    {
+     "no": "第1段階",
+     "bairitsu": "0.285",
+     "honnin": "hi",
+     "setai": "hi",
+     "xMax": 826500,
+     "seiho": true
+    },
+    {
+     "no": "第2段階",
+     "bairitsu": "0.485",
+     "honnin": "hi",
+     "setai": "hi",
+     "xMax": 1200000
+    },
+    {
+     "no": "第3段階",
+     "bairitsu": "0.685",
+     "honnin": "hi",
+     "setai": "hi",
+     "xMax": null
+    },
+    {
+     "no": "第4段階",
+     "bairitsu": "0.90",
+     "honnin": "hi",
+     "setai": "ka",
+     "xMax": 826500
+    },
+    {
+     "no": "第5段階",
+     "bairitsu": "1",
+     "honnin": "hi",
+     "setai": "ka",
+     "xMax": null
+    },
+    {
+     "no": "第6段階",
+     "bairitsu": "1.15",
+     "honnin": "ka",
+     "gMax": 1350000
+    },
+    {
+     "no": "第7段階",
+     "bairitsu": "1.25",
+     "honnin": "ka",
+     "gMax": 2100000
+    },
+    {
+     "no": "第8段階",
+     "bairitsu": "1.50",
+     "honnin": "ka",
+     "gMax": 3600000
+    },
+    {
+     "no": "第9段階",
+     "bairitsu": "1.75",
+     "honnin": "ka",
+     "gMax": 5100000
+    },
+    {
+     "no": "第10段階",
+     "bairitsu": "2.00",
+     "honnin": "ka",
+     "gMax": 6100000
+    },
+    {
+     "no": "第11段階",
+     "bairitsu": "2.10",
+     "honnin": "ka",
+     "gMax": 7100000
+    },
+    {
+     "no": "第12段階",
+     "bairitsu": "2.20",
+     "honnin": "ka",
+     "gMax": 8100000
+    },
+    {
+     "no": "第13段階",
+     "bairitsu": "2.30",
+     "honnin": "ka",
+     "gMax": null
+    }
+   ],
+   "sources": [
+    {
+     "name": "65歳以上の方（第1号被保険者）の介護保険料",
+     "url": "https://www.city.sapporo.jp/kaigo/k100citizen/k121over65.html"
+    },
+    {
+     "name": "介護保険料 通知書の見方（令和8年度）",
+     "url": "https://www.city.sapporo.jp/kaigo/k100citizen/documents/tuutisyonomikata_r8.pdf"
+    }
+   ],
+   "roundNote": "市の明記は「実際の納付額は10円未満切捨て」。表の年額は基準額×倍率の四捨五入と全段階で一致",
+   "checkedAt": "2026-10-28"
+  },
+  {
+   "city": "仙台市",
+   "pref": "宮城県",
+   "kijunNen": 72948,
+   "kijunLabel": "年72,900円（月6,079円）",
+   "mhlwGetsu": 6079,
+   "round": "h100",
+   "verified": "表",
+   "stages": [
+    {
+     "no": "第1段階",
+     "bairitsu": "0.285",
+     "honnin": "hi",
+     "setai": "hi",
+     "xMax": null,
+     "seiho": true,
+     "seihoOnly": true
+    },
+    {
+     "no": "第2段階",
+     "bairitsu": "0.285",
+     "honnin": "hi",
+     "setai": "hi",
+     "xMax": 826500
+    },
+    {
+     "no": "第3段階",
+     "bairitsu": "0.395",
+     "honnin": "hi",
+     "setai": "hi",
+     "xMax": 1200000
+    },
+    {
+     "no": "第4段階",
+     "bairitsu": "0.685",
+     "honnin": "hi",
+     "setai": "hi",
+     "xMax": null
+    },
+    {
+     "no": "第5段階",
+     "bairitsu": "0.850",
+     "honnin": "hi",
+     "setai": "ka",
+     "xMax": 826500
+    },
+    {
+     "no": "第6段階",
+     "bairitsu": "1",
+     "honnin": "hi",
+     "setai": "ka",
+     "xMax": null
+    },
+    {
+     "no": "第7段階",
+     "bairitsu": "1.100",
+     "honnin": "ka",
+     "gMax": 1250000
+    },
+    {
+     "no": "第8段階",
+     "bairitsu": "1.250",
+     "honnin": "ka",
+     "gMax": 2000000
+    },
+    {
+     "no": "第9段階",
+     "bairitsu": "1.500",
+     "honnin": "ka",
+     "gMax": 3000000
+    },
+    {
+     "no": "第10段階",
+     "bairitsu": "1.700",
+     "honnin": "ka",
+     "gMax": 4000000
+    },
+    {
+     "no": "第11段階",
+     "bairitsu": "1.800",
+     "honnin": "ka",
+     "gMax": 5000000
+    },
+    {
+     "no": "第12段階",
+     "bairitsu": "2.000",
+     "honnin": "ka",
+     "gMax": 6000000
+    },
+    {
+     "no": "第13段階",
+     "bairitsu": "2.100",
+     "honnin": "ka",
+     "gMax": 7000000
+    },
+    {
+     "no": "第14段階",
+     "bairitsu": "2.300",
+     "honnin": "ka",
+     "gMax": 10000000
+    },
+    {
+     "no": "第15段階",
+     "bairitsu": "2.500",
+     "honnin": "ka",
+     "gMax": 15000000
+    },
+    {
+     "no": "第16段階",
+     "bairitsu": "2.600",
+     "honnin": "ka",
+     "gMax": null
+    }
+   ],
+   "sources": [
+    {
+     "name": "第1号被保険者（65歳以上の方）の保険料",
+     "url": "https://www.city.sendai.jp/kaigohoken/kurashi/kenkotofukushi/korenokata/kaigohoken/kisojoho/hokenryo/1gou-hokenryo.html"
+    },
+    {
+     "name": "介護保険パンフレット 保険料（令和8年度版）",
+     "url": "https://www.city.sendai.jp/kaigohoken-kanri/kurashi/kenkotofukushi/korenokata/kaigohoken/kisojoho/documents/02_hokenryou_r8.pdf"
+    }
+   ],
+   "roundNote": "市の明記なし。公表の年額は「月額6,079円×12＝72,948円×倍率の100円未満切捨て」と全段階で一致（基準の年額72,900円もその切捨て）",
+   "checkedAt": "2026-10-28"
+  },
+  {
+   "city": "さいたま市",
+   "pref": "埼玉県",
+   "kijunNen": 76872,
+   "kijunLabel": "年76,800円",
+   "mhlwGetsu": 6406,
+   "round": "h100",
+   "verified": "表",
+   "stages": [
+    {
+     "no": "第1段階",
+     "bairitsu": "0.285",
+     "honnin": "hi",
+     "setai": "hi",
+     "xMax": 826500,
+     "seiho": true
+    },
+    {
+     "no": "第2段階",
+     "bairitsu": "0.400",
+     "honnin": "hi",
+     "setai": "hi",
+     "xMax": 1200000
+    },
+    {
+     "no": "第3段階",
+     "bairitsu": "0.685",
+     "honnin": "hi",
+     "setai": "hi",
+     "xMax": null
+    },
+    {
+     "no": "第4段階",
+     "bairitsu": "0.900",
+     "honnin": "hi",
+     "setai": "ka",
+     "xMax": 826500
+    },
+    {
+     "no": "第5段階",
+     "bairitsu": "1",
+     "honnin": "hi",
+     "setai": "ka",
+     "xMax": null
+    },
+    {
+     "no": "第6段階",
+     "bairitsu": "1.100",
+     "honnin": "ka",
+     "gMax": 1200000
+    },
+    {
+     "no": "第7段階",
+     "bairitsu": "1.300",
+     "honnin": "ka",
+     "gMax": 2100000
+    },
+    {
+     "no": "第8段階",
+     "bairitsu": "1.500",
+     "honnin": "ka",
+     "gMax": 3200000
+    },
+    {
+     "no": "第9段階",
+     "bairitsu": "1.700",
+     "honnin": "ka",
+     "gMax": 4200000
+    },
+    {
+     "no": "第10段階",
+     "bairitsu": "1.900",
+     "honnin": "ka",
+     "gMax": 5200000
+    },
+    {
+     "no": "第11段階",
+     "bairitsu": "2.100",
+     "honnin": "ka",
+     "gMax": 6200000
+    },
+    {
+     "no": "第12段階",
+     "bairitsu": "2.300",
+     "honnin": "ka",
+     "gMax": 7200000
+    },
+    {
+     "no": "第13段階",
+     "bairitsu": "2.400",
+     "honnin": "ka",
+     "gMax": 10000000
+    },
+    {
+     "no": "第14段階",
+     "bairitsu": "2.800",
+     "honnin": "ka",
+     "gMax": 15000000
+    },
+    {
+     "no": "第15段階",
+     "bairitsu": "3.000",
+     "honnin": "ka",
+     "gMax": null
+    }
+   ],
+   "sources": [
+    {
+     "name": "保険料の決め方と納め方",
+     "url": "https://www.city.saitama.lg.jp/002/003/003/001/001/p002553.html"
+    },
+    {
+     "name": "令和８年度 高齢者福祉ガイドブック",
+     "url": "https://www.city.saitama.lg.jp/002/003/003/002/005/p006643_d/fil/korei.pdf"
+    }
+   ],
+   "roundNote": "市は「基準額(76,872円)」と端数前の額を併記。公表の年額は76,872円×倍率の100円未満切捨てと全段階で一致（切捨ての明記なし）",
+   "checkedAt": "2026-10-28"
+  },
+  {
+   "city": "千葉市",
+   "pref": "千葉県",
+   "kijunNen": 75600,
+   "mhlwGetsu": 6300,
+   "round": "y1",
+   "verified": "表",
+   "stages": [
+    {
+     "no": "第1段階",
+     "bairitsu": "0.285",
+     "honnin": "hi",
+     "setai": "hi",
+     "xMax": 826500,
+     "seiho": true
+    },
+    {
+     "no": "第2段階",
+     "bairitsu": "0.385",
+     "honnin": "hi",
+     "setai": "hi",
+     "xMax": 1200000
+    },
+    {
+     "no": "第3段階",
+     "bairitsu": "0.685",
+     "honnin": "hi",
+     "setai": "hi",
+     "xMax": null
+    },
+    {
+     "no": "第4段階",
+     "bairitsu": "0.9",
+     "honnin": "hi",
+     "setai": "ka",
+     "xMax": 826500
+    },
+    {
+     "no": "第5段階",
+     "bairitsu": "1",
+     "honnin": "hi",
+     "setai": "ka",
+     "xMax": null
+    },
+    {
+     "no": "第6段階",
+     "bairitsu": "1.1",
+     "honnin": "ka",
+     "gMax": 800000
+    },
+    {
+     "no": "第7段階",
+     "bairitsu": "1.15",
+     "honnin": "ka",
+     "gMax": 1250000
+    },
+    {
+     "no": "第8段階",
+     "bairitsu": "1.3",
+     "honnin": "ka",
+     "gMax": 1900000
+    },
+    {
+     "no": "第9段階",
+     "bairitsu": "1.55",
+     "honnin": "ka",
+     "gMax": 3000000
+    },
+    {
+     "no": "第10段階",
+     "bairitsu": "1.8",
+     "honnin": "ka",
+     "gMax": 5000000
+    },
+    {
+     "no": "第11段階",
+     "bairitsu": "2.1",
+     "honnin": "ka",
+     "gMax": 7000000
+    },
+    {
+     "no": "第12段階",
+     "bairitsu": "2.4",
+     "honnin": "ka",
+     "gMax": 9000000
+    },
+    {
+     "no": "第13段階",
+     "bairitsu": "2.7",
+     "honnin": "ka",
+     "gMax": null
+    }
+   ],
+   "sources": [
+    {
+     "name": "ちば市政だより 2026年6月号 6面（2026年度の介護保険料）",
+     "url": "https://www.city.chiba.jp/sogoseisaku/shichokoshitsu/kohokocho/dayori26/0601-06.html"
+    },
+    {
+     "name": "第９期計画期間における介護保険料（保険料率）",
+     "url": "https://www.city.chiba.jp/hokenfukushi/koreishogai/kaigohokenkanri/documents/kaigohokenryou.pdf"
+    }
+   ],
+   "roundNote": "基準額×倍率がすべて円で割り切れる。82.65万円は市政だより2026年6月号による（市のFAQと第9期PDFは80万円のまま）",
+   "checkedAt": "2026-10-28"
+  },
+  {
+   "city": "横浜市",
+   "pref": "神奈川県",
+   "kijunNen": 79440,
+   "mhlwGetsu": 6620,
+   "round": "y10",
+   "verified": "表",
+   "stages": [
+    {
+     "no": "第1段階",
+     "bairitsu": "0.20",
+     "honnin": "hi",
+     "setai": "hi",
+     "xMax": null,
+     "seiho": true,
+     "seihoOnly": true
+    },
+    {
+     "no": "第2段階",
+     "bairitsu": "0.20",
+     "honnin": "hi",
+     "setai": "hi",
+     "xMax": 826500
+    },
+    {
+     "no": "第3段階",
+     "bairitsu": "0.34",
+     "honnin": "hi",
+     "setai": "hi",
+     "xMax": 1200000
+    },
+    {
+     "no": "第4段階",
+     "bairitsu": "0.585",
+     "honnin": "hi",
+     "setai": "hi",
+     "xMax": null
+    },
+    {
+     "no": "第5段階",
+     "bairitsu": "0.90",
+     "honnin": "hi",
+     "setai": "ka",
+     "xMax": 826500
+    },
+    {
+     "no": "第6段階",
+     "bairitsu": "1",
+     "honnin": "hi",
+     "setai": "ka",
+     "xMax": null
+    },
+    {
+     "no": "第7段階",
+     "bairitsu": "1.07",
+     "honnin": "ka",
+     "gMax": 1200000
+    },
+    {
+     "no": "第8段階",
+     "bairitsu": "1.10",
+     "honnin": "ka",
+     "gMax": 1600000
+    },
+    {
+     "no": "第9段階",
+     "bairitsu": "1.27",
+     "honnin": "ka",
+     "gMax": 2100000
+    },
+    {
+     "no": "第10段階",
+     "bairitsu": "1.30",
+     "honnin": "ka",
+     "gMax": 2500000
+    },
+    {
+     "no": "第11段階",
+     "bairitsu": "1.55",
+     "honnin": "ka",
+     "gMax": 3200000
+    },
+    {
+     "no": "第12段階",
+     "bairitsu": "1.75",
+     "honnin": "ka",
+     "gMax": 4200000
+    },
+    {
+     "no": "第13段階",
+     "bairitsu": "1.95",
+     "honnin": "ka",
+     "gMax": 5200000
+    },
+    {
+     "no": "第14段階",
+     "bairitsu": "2.15",
+     "honnin": "ka",
+     "gMax": 6200000
+    },
+    {
+     "no": "第15段階",
+     "bairitsu": "2.35",
+     "honnin": "ka",
+     "gMax": 7200000
+    },
+    {
+     "no": "第16段階",
+     "bairitsu": "2.50",
+     "honnin": "ka",
+     "gMax": 10000000
+    },
+    {
+     "no": "第17段階",
+     "bairitsu": "3.00",
+     "honnin": "ka",
+     "gMax": 20000000
+    },
+    {
+     "no": "第18段階",
+     "bairitsu": "3.25",
+     "honnin": "ka",
+     "gMax": 30000000
+    },
+    {
+     "no": "第19段階",
+     "bairitsu": "3.50",
+     "honnin": "ka",
+     "gMax": null
+    }
+   ],
+   "sources": [
+    {
+     "name": "保険料について（介護保険料）",
+     "url": "https://www.city.yokohama.lg.jp/kenko-iryo-fukushi/fukushi-kaigo/koreisha-kaigo/kaigo-hoken/kaigo-hoken-hiyo/kaigohokenryo.html"
+    },
+    {
+     "name": "令和8年６月版 横浜市の介護保険料のしくみ",
+     "url": "https://www.city.yokohama.lg.jp/kenko-iryo-fukushi/fukushi-kaigo/koreisha-kaigo/kaigo-hoken/kaigo-hoken-hiyo/kaigohokenryo.files/0021_20260615.pdf"
+    }
+   ],
+   "roundNote": "市の明記なし。公表の年額は基準額×倍率の10円未満切捨てと全段階で一致",
+   "checkedAt": "2026-10-28"
+  },
+  {
+   "city": "川崎市",
+   "pref": "神奈川県",
+   "kijunNen": 79097,
+   "kijunLabel": "年79,090円",
+   "mhlwGetsu": 6591,
+   "round": "c1y10",
+   "verified": "表",
+   "stages": [
+    {
+     "no": "第1段階",
+     "bairitsu": "0.285",
+     "honnin": "hi",
+     "setai": "hi",
+     "xMax": null,
+     "seiho": true,
+     "seihoOnly": true
+    },
+    {
+     "no": "第2段階",
+     "bairitsu": "0.285",
+     "honnin": "hi",
+     "setai": "hi",
+     "xMax": 826500
+    },
+    {
+     "no": "第3段階",
+     "bairitsu": "0.382",
+     "honnin": "hi",
+     "setai": "hi",
+     "xMax": 1200000
+    },
+    {
+     "no": "第4段階",
+     "bairitsu": "0.67",
+     "honnin": "hi",
+     "setai": "hi",
+     "xMax": null
+    },
+    {
+     "no": "第5段階",
+     "bairitsu": "0.9",
+     "honnin": "hi",
+     "setai": "ka",
+     "xMax": 826500
+    },
+    {
+     "no": "第6段階",
+     "bairitsu": "1",
+     "honnin": "hi",
+     "setai": "ka",
+     "xMax": null
+    },
+    {
+     "no": "第7段階",
+     "bairitsu": "1.15",
+     "honnin": "ka",
+     "gMax": 1250000
+    },
+    {
+     "no": "第8段階",
+     "bairitsu": "1.25",
+     "honnin": "ka",
+     "gMax": 2000000
+    },
+    {
+     "no": "第9段階",
+     "bairitsu": "1.5",
+     "honnin": "ka",
+     "gMax": 3000000
+    },
+    {
+     "no": "第10段階",
+     "bairitsu": "1.7",
+     "honnin": "ka",
+     "gMax": 3500000
+    },
+    {
+     "no": "第11段階",
+     "bairitsu": "1.8",
+     "honnin": "ka",
+     "gMax": 4000000
+    },
+    {
+     "no": "第12段階",
+     "bairitsu": "1.9",
+     "honnin": "ka",
+     "gMax": 5000000
+    },
+    {
+     "no": "第13段階",
+     "bairitsu": "2.1",
+     "honnin": "ka",
+     "gMax": 6000000
+    },
+    {
+     "no": "第14段階",
+     "bairitsu": "2.3",
+     "honnin": "ka",
+     "gMax": 7000000
+    },
+    {
+     "no": "第15段階",
+     "bairitsu": "2.5",
+     "honnin": "ka",
+     "gMax": 10000000
+    },
+    {
+     "no": "第16段階",
+     "bairitsu": "2.7",
+     "honnin": "ka",
+     "gMax": 15000000
+    },
+    {
+     "no": "第17段階",
+     "bairitsu": "2.9",
+     "honnin": "ka",
+     "gMax": 20000000
+    },
+    {
+     "no": "第18段階",
+     "bairitsu": "3.1",
+     "honnin": "ka",
+     "gMax": 30000000
+    },
+    {
+     "no": "第19段階",
+     "bairitsu": "3.3",
+     "honnin": "ka",
+     "gMax": null
+    }
+   ],
+   "sources": [
+    {
+     "name": "介護保険料について",
+     "url": "https://www.city.kawasaki.jp/350/page/0000125684.html"
+    },
+    {
+     "name": "令和6年度から令和8年度までの保険料段階表",
+     "url": "https://www.city.kawasaki.jp/350/cmsfiles/contents/0000125/125684/hokenryoudankai202608.pdf"
+    }
+   ],
+   "roundNote": "市の明記：「保険料率（円）」の10円未満切捨て＝年額。保険料率（円）は79,097円×倍率の円未満切上げと全段階で一致（79,097円は市の表の基準の保険料率）",
+   "checkedAt": "2026-10-28"
+  },
+  {
+   "city": "相模原市",
+   "pref": "神奈川県",
+   "kijunNen": 79800,
+   "mhlwGetsu": 6650,
+   "round": "r100",
+   "verified": "表",
+   "stages": [
+    {
+     "no": "第1段階",
+     "bairitsu": "0.285",
+     "honnin": "hi",
+     "setai": "hi",
+     "xMax": 826500,
+     "seiho": true
+    },
+    {
+     "no": "第2段階",
+     "bairitsu": "0.485",
+     "honnin": "hi",
+     "setai": "hi",
+     "xMax": 1200000
+    },
+    {
+     "no": "第3段階",
+     "bairitsu": "0.685",
+     "honnin": "hi",
+     "setai": "hi",
+     "xMax": null
+    },
+    {
+     "no": "第4段階",
+     "bairitsu": "0.8",
+     "honnin": "hi",
+     "setai": "ka",
+     "xMax": 826500
+    },
+    {
+     "no": "第5段階",
+     "bairitsu": "1",
+     "honnin": "hi",
+     "setai": "ka",
+     "xMax": null
+    },
+    {
+     "no": "第6段階",
+     "bairitsu": "1.1",
+     "honnin": "ka",
+     "gMax": 1200000
+    },
+    {
+     "no": "第7段階",
+     "bairitsu": "1.25",
+     "honnin": "ka",
+     "gMax": 2100000
+    },
+    {
+     "no": "第8段階",
+     "bairitsu": "1.5",
+     "honnin": "ka",
+     "gMax": 3200000
+    },
+    {
+     "no": "第9段階",
+     "bairitsu": "1.7",
+     "honnin": "ka",
+     "gMax": 4200000
+    },
+    {
+     "no": "第10段階",
+     "bairitsu": "1.9",
+     "honnin": "ka",
+     "gMax": 5200000
+    },
+    {
+     "no": "第11段階",
+     "bairitsu": "2.1",
+     "honnin": "ka",
+     "gMax": 6200000
+    },
+    {
+     "no": "第12段階",
+     "bairitsu": "2.3",
+     "honnin": "ka",
+     "gMax": 7200000
+    },
+    {
+     "no": "第13段階",
+     "bairitsu": "2.4",
+     "honnin": "ka",
+     "gMax": 10000000
+    },
+    {
+     "no": "第14段階",
+     "bairitsu": "2.5",
+     "honnin": "ka",
+     "gMax": null
+    }
+   ],
+   "sources": [
+    {
+     "name": "介護保険料｜相模原市",
+     "url": "https://www.city.sagamihara.kanagawa.jp/kosodate/1026646/kaigo/1006995.html"
+    }
+   ],
+   "roundNote": "市の明記なし。公表の年額は基準額×倍率の100円未満四捨五入と全段階で一致。表に年度の明記なし（82.65万円・令和8年6月5日更新から令和8年度と判断）",
+   "checkedAt": "2026-10-28"
+  },
+  {
+   "city": "新潟市",
+   "pref": "新潟県",
+   "kijunNen": 82500,
+   "mhlwGetsu": null,
+   "round": "c100",
+   "verified": "表",
+   "stages": [
+    {
+     "no": "第1段階",
+     "bairitsu": "0.20",
+     "honnin": "hi",
+     "setai": "hi",
+     "xMax": 826500,
+     "seiho": true
+    },
+    {
+     "no": "第2段階",
+     "bairitsu": "0.40",
+     "honnin": "hi",
+     "setai": "hi",
+     "xMax": 1200000
+    },
+    {
+     "no": "第3段階",
+     "bairitsu": "0.65",
+     "honnin": "hi",
+     "setai": "hi",
+     "xMax": null
+    },
+    {
+     "no": "第4段階",
+     "bairitsu": "0.90",
+     "honnin": "hi",
+     "setai": "ka",
+     "xMax": 826500
+    },
+    {
+     "no": "第5段階",
+     "bairitsu": "1",
+     "honnin": "hi",
+     "setai": "ka",
+     "xMax": null
+    },
+    {
+     "no": "第6段階",
+     "bairitsu": "1.10",
+     "honnin": "ka",
+     "gMax": 900000
+    },
+    {
+     "no": "第7段階",
+     "bairitsu": "1.20",
+     "honnin": "ka",
+     "gMax": 1200000
+    },
+    {
+     "no": "第8段階",
+     "bairitsu": "1.30",
+     "honnin": "ka",
+     "gMax": 2100000
+    },
+    {
+     "no": "第9段階",
+     "bairitsu": "1.50",
+     "honnin": "ka",
+     "gMax": 3200000
+    },
+    {
+     "no": "第10段階",
+     "bairitsu": "1.70",
+     "honnin": "ka",
+     "gMax": 4200000
+    },
+    {
+     "no": "第11段階",
+     "bairitsu": "1.90",
+     "honnin": "ka",
+     "gMax": 5200000
+    },
+    {
+     "no": "第12段階",
+     "bairitsu": "2.00",
+     "honnin": "ka",
+     "gMax": 6200000
+    },
+    {
+     "no": "第13段階",
+     "bairitsu": "2.10",
+     "honnin": "ka",
+     "gMax": 7200000
+    },
+    {
+     "no": "第14段階",
+     "bairitsu": "2.20",
+     "honnin": "ka",
+     "gMax": 10000000
+    },
+    {
+     "no": "第15段階",
+     "bairitsu": "2.40",
+     "honnin": "ka",
+     "gMax": null
+    }
+   ],
+   "sources": [
+    {
+     "name": "介護保険料について - 新潟市",
+     "url": "https://www.city.niigata.lg.jp/iryo/kaigo/kaigoindex/hokenryou.html"
+    },
+    {
+     "name": "令和8年度介護保険料の算定方法（特例措置）",
+     "url": "https://www.city.niigata.lg.jp/iryo/kaigo/kaigoindex/R8kaigohokenryo.html"
+    }
+   ],
+   "roundNote": "市の明記なし。公表の年額は基準額×倍率の100円未満切上げと全段階で一致。厚労省の一覧は月6,880円（×12＝82,560円）で市の年額82,500円と合わないため mhlwGetsu は照合から外した。表に令和8年度の明記なし（82.65万円から判断）",
+   "checkedAt": "2026-10-28"
+  },
+  {
+   "city": "静岡市",
+   "pref": "静岡県",
+   "kijunNen": 76200,
+   "mhlwGetsu": 6350,
+   "round": "h100",
+   "verified": "表",
+   "stages": [
+    {
+     "no": "第1段階",
+     "bairitsu": "0.285",
+     "honnin": "hi",
+     "setai": "hi",
+     "xMax": 826500,
+     "seiho": true
+    },
+    {
+     "no": "第2段階",
+     "bairitsu": "0.485",
+     "honnin": "hi",
+     "setai": "hi",
+     "xMax": 1200000
+    },
+    {
+     "no": "第3段階",
+     "bairitsu": "0.685",
+     "honnin": "hi",
+     "setai": "hi",
+     "xMax": null
+    },
+    {
+     "no": "第4段階",
+     "bairitsu": "0.90",
+     "honnin": "hi",
+     "setai": "ka",
+     "xMax": 826500
+    },
+    {
+     "no": "第5段階",
+     "bairitsu": "1",
+     "honnin": "hi",
+     "setai": "ka",
+     "xMax": null
+    },
+    {
+     "no": "第6段階",
+     "bairitsu": "1.20",
+     "honnin": "ka",
+     "gMax": 1200000
+    },
+    {
+     "no": "第7段階",
+     "bairitsu": "1.30",
+     "honnin": "ka",
+     "gMax": 2100000
+    },
+    {
+     "no": "第8段階",
+     "bairitsu": "1.50",
+     "honnin": "ka",
+     "gMax": 3200000
+    },
+    {
+     "no": "第9段階",
+     "bairitsu": "1.70",
+     "honnin": "ka",
+     "gMax": 4000000
+    },
+    {
+     "no": "第10段階",
+     "bairitsu": "1.80",
+     "honnin": "ka",
+     "gMax": 5000000
+    },
+    {
+     "no": "第11段階",
+     "bairitsu": "2.00",
+     "honnin": "ka",
+     "gMax": 6000000
+    },
+    {
+     "no": "第12段階",
+     "bairitsu": "2.10",
+     "honnin": "ka",
+     "gMax": 7000000
+    },
+    {
+     "no": "第13段階",
+     "bairitsu": "2.25",
+     "honnin": "ka",
+     "gMax": 8500000
+    },
+    {
+     "no": "第14段階",
+     "bairitsu": "2.35",
+     "honnin": "ka",
+     "gMax": 10000000
+    },
+    {
+     "no": "第15段階",
+     "bairitsu": "2.50",
+     "honnin": "ka",
+     "gMax": null
+    }
+   ],
+   "sources": [
+    {
+     "name": "介護保険の加入者と保険料",
+     "url": "https://www.city.shizuoka.lg.jp/s2984/s002938.html"
+    },
+    {
+     "name": "令和８年度（2026年度）の保険料（PDF）",
+     "url": "https://www.city.shizuoka.lg.jp/documents/2918/documents2918documents2918documents2918000126222_4.pdf"
+    }
+   ],
+   "roundNote": "市の明記なし。公表の年額は基準額×倍率の100円未満切捨てと全段階で一致",
+   "checkedAt": "2026-10-28"
+  },
+  {
+   "city": "浜松市",
+   "pref": "静岡県",
+   "kijunNen": 70802,
+   "mhlwGetsu": 5900,
+   "round": "y1",
+   "verified": "表",
+   "stages": [
+    {
+     "no": "第1段階",
+     "bairitsu": "0.285",
+     "honnin": "hi",
+     "setai": "hi",
+     "xMax": null,
+     "seiho": true,
+     "seihoOnly": true
+    },
+    {
+     "no": "第2段階",
+     "bairitsu": "0.285",
+     "honnin": "hi",
+     "setai": "hi",
+     "xMax": 826500
+    },
+    {
+     "no": "第3段階",
+     "bairitsu": "0.40",
+     "honnin": "hi",
+     "setai": "hi",
+     "xMax": 1200000
+    },
+    {
+     "no": "第4段階",
+     "bairitsu": "0.65",
+     "honnin": "hi",
+     "setai": "hi",
+     "xMax": null
+    },
+    {
+     "no": "第5段階",
+     "bairitsu": "0.90",
+     "honnin": "hi",
+     "setai": "ka",
+     "xMax": 826500
+    },
+    {
+     "no": "第6段階",
+     "bairitsu": "1",
+     "honnin": "hi",
+     "setai": "ka",
+     "xMax": null
+    },
+    {
+     "no": "第7段階",
+     "bairitsu": "1.20",
+     "honnin": "ka",
+     "gMax": 1200000
+    },
+    {
+     "no": "第8段階",
+     "bairitsu": "1.30",
+     "honnin": "ka",
+     "gMax": 2100000
+    },
+    {
+     "no": "第9段階",
+     "bairitsu": "1.50",
+     "honnin": "ka",
+     "gMax": 3200000
+    },
+    {
+     "no": "第10段階",
+     "bairitsu": "1.70",
+     "honnin": "ka",
+     "gMax": 4200000
+    },
+    {
+     "no": "第11段階",
+     "bairitsu": "1.90",
+     "honnin": "ka",
+     "gMax": 5200000
+    },
+    {
+     "no": "第12段階",
+     "bairitsu": "2.10",
+     "honnin": "ka",
+     "gMax": 6200000
+    },
+    {
+     "no": "第13段階",
+     "bairitsu": "2.30",
+     "honnin": "ka",
+     "gMax": 7200000
+    },
+    {
+     "no": "第14段階",
+     "bairitsu": "2.40",
+     "honnin": "ka",
+     "gMax": 10000000
+    },
+    {
+     "no": "第15段階",
+     "bairitsu": "2.60",
+     "honnin": "ka",
+     "gMax": 15000000
+    },
+    {
+     "no": "第16段階",
+     "bairitsu": "2.80",
+     "honnin": "ka",
+     "gMax": null
+    }
+   ],
+   "sources": [
+    {
+     "name": "令和6年度から令和8年度までの介護保険料について",
+     "url": "https://www.city.hamamatsu.shizuoka.jp/kaigo/20210401hokenryo.html"
+    }
+   ],
+   "roundNote": "市の明記なし。公表の年額は基準額×倍率の1円未満切捨てと全段階で一致",
+   "checkedAt": "2026-10-28"
+  },
+  {
+   "city": "名古屋市",
+   "pref": "愛知県",
+   "kijunNen": 83403,
+   "mhlwGetsu": 6950,
+   "round": "c1",
+   "verified": "表",
+   "pageNote": "名古屋市の表の年額（円未満を切り上げた形）に合わせています。名古屋市は「実際に納付する保険料は10円未満切り捨て」としています。",
+   "stages": [
+    {
+     "no": "第1段階",
+     "bairitsu": "0.25",
+     "honnin": "hi",
+     "setai": "hi",
+     "xMax": null,
+     "seiho": true,
+     "seihoOnly": true
+    },
+    {
+     "no": "第2段階",
+     "bairitsu": "0.25",
+     "honnin": "hi",
+     "setai": "hi",
+     "xMax": 826500
+    },
+    {
+     "no": "第3段階",
+     "bairitsu": "0.4",
+     "honnin": "hi",
+     "setai": "hi",
+     "xMax": 1200000
+    },
+    {
+     "no": "第4段階",
+     "bairitsu": "0.685",
+     "honnin": "hi",
+     "setai": "hi",
+     "xMax": null
+    },
+    {
+     "no": "第5段階",
+     "bairitsu": "0.85",
+     "honnin": "hi",
+     "setai": "ka",
+     "xMax": 826500
+    },
+    {
+     "no": "第6段階",
+     "bairitsu": "1",
+     "honnin": "hi",
+     "setai": "ka",
+     "xMax": null
+    },
+    {
+     "no": "第7段階",
+     "bairitsu": "1.05",
+     "honnin": "ka",
+     "gMax": 800000
+    },
+    {
+     "no": "第8段階",
+     "bairitsu": "1.1",
+     "honnin": "ka",
+     "gMax": 1250000
+    },
+    {
+     "no": "第9段階",
+     "bairitsu": "1.25",
+     "honnin": "ka",
+     "gMax": 2000000
+    },
+    {
+     "no": "第10段階",
+     "bairitsu": "1.5",
+     "honnin": "ka",
+     "gMax": 2900000
+    },
+    {
+     "no": "第11段階",
+     "bairitsu": "1.7",
+     "honnin": "ka",
+     "gMax": 4000000
+    },
+    {
+     "no": "第12段階",
+     "bairitsu": "1.9",
+     "honnin": "ka",
+     "gMax": 5200000
+    },
+    {
+     "no": "第13段階",
+     "bairitsu": "2.1",
+     "honnin": "ka",
+     "gMax": 6200000
+    },
+    {
+     "no": "第14段階",
+     "bairitsu": "2.3",
+     "honnin": "ka",
+     "gMax": 7200000
+    },
+    {
+     "no": "第15段階",
+     "bairitsu": "2.5",
+     "honnin": "ka",
+     "gMax": 8200000
+    },
+    {
+     "no": "第16段階",
+     "bairitsu": "2.7",
+     "honnin": "ka",
+     "gMax": 10000000
+    },
+    {
+     "no": "第17段階",
+     "bairitsu": "2.9",
+     "honnin": "ka",
+     "gMax": 15000000
+    },
+    {
+     "no": "第18段階",
+     "bairitsu": "3.1",
+     "honnin": "ka",
+     "gMax": null
+    }
+   ],
+   "sources": [
+    {
+     "name": "第1号被保険者の保険料（名古屋市 介護・障害情報提供システム）",
+     "url": "https://www.kaigo-wel.city.nagoya.jp/view/kaigo/seido/hokenryou/"
+    }
+   ],
+   "roundNote": "市の明記は「実際の納付額は10円未満切捨て」。表の年額は基準額×倍率の1円未満切上げと全段階で一致",
+   "checkedAt": "2026-10-28"
+  },
+  {
+   "city": "京都市",
+   "pref": "京都府",
+   "kijunNen": 85920,
+   "mhlwGetsu": 7160,
+   "round": "y1",
+   "verified": "表",
+   "pageNote": "京都市は「実際に納める保険料の年額は10円未満切り捨て」としています。",
+   "stages": [
+    {
+     "no": "第1段階",
+     "bairitsu": "0.285",
+     "honnin": "hi",
+     "setai": "hi",
+     "xMax": 826500,
+     "seiho": true
+    },
+    {
+     "no": "第2段階",
+     "bairitsu": "0.43",
+     "honnin": "hi",
+     "setai": "hi",
+     "xMax": 1200000
+    },
+    {
+     "no": "第3段階",
+     "bairitsu": "0.685",
+     "honnin": "hi",
+     "setai": "hi",
+     "xMax": null
+    },
+    {
+     "no": "第4段階",
+     "bairitsu": "0.9",
+     "honnin": "hi",
+     "setai": "ka",
+     "xMax": 826500
+    },
+    {
+     "no": "第5段階",
+     "bairitsu": "1",
+     "honnin": "hi",
+     "setai": "ka",
+     "xMax": null
+    },
+    {
+     "no": "第6段階",
+     "bairitsu": "1.1",
+     "honnin": "ka",
+     "gMax": 1250000,
+     "gLe": true
+    },
+    {
+     "no": "第7段階",
+     "bairitsu": "1.35",
+     "honnin": "ka",
+     "gMax": 1900000
+    },
+    {
+     "no": "第8段階",
+     "bairitsu": "1.6",
+     "honnin": "ka",
+     "gMax": 4000000
+    },
+    {
+     "no": "第9段階",
+     "bairitsu": "1.85",
+     "honnin": "ka",
+     "gMax": 5500000
+    },
+    {
+     "no": "第10段階",
+     "bairitsu": "2.1",
+     "honnin": "ka",
+     "gMax": 7000000
+    },
+    {
+     "no": "第11段階",
+     "bairitsu": "2.35",
+     "honnin": "ka",
+     "gMax": 8500000
+    },
+    {
+     "no": "第12段階",
+     "bairitsu": "2.6",
+     "honnin": "ka",
+     "gMax": 10000000
+    },
+    {
+     "no": "第13段階",
+     "bairitsu": "2.85",
+     "honnin": "ka",
+     "gMax": 11500000
+    },
+    {
+     "no": "第14段階",
+     "bairitsu": "3.1",
+     "honnin": "ka",
+     "gMax": null
+    }
+   ],
+   "sources": [
+    {
+     "name": "第1号被保険者（65歳以上）の介護保険料 - 京都市",
+     "url": "https://www.city.kyoto.lg.jp/hokenfukushi/page/0000216940.html"
+    }
+   ],
+   "roundNote": "市の明記は「実際の納付額は10円未満切捨て」。表の年額は基準額×倍率の1円未満切捨てと全段階で一致",
+   "checkedAt": "2026-10-28"
+  },
+  {
+   "city": "大阪市",
+   "pref": "大阪府",
+   "kijunNen": 110988,
+   "mhlwGetsu": 9249,
+   "round": "c1",
+   "verified": "表",
+   "stages": [
+    {
+     "no": "第1段階",
+     "bairitsu": "0.335",
+     "honnin": "hi",
+     "setai": "hi",
+     "xMax": null,
+     "seiho": true,
+     "seihoOnly": true
+    },
+    {
+     "no": "第2段階",
+     "bairitsu": "0.335",
+     "honnin": "hi",
+     "setai": "hi",
+     "xMax": 826500
+    },
+    {
+     "no": "第3段階",
+     "bairitsu": "0.485",
+     "honnin": "hi",
+     "setai": "hi",
+     "xMax": 1200000
+    },
+    {
+     "no": "第4段階",
+     "bairitsu": "0.685",
+     "honnin": "hi",
+     "setai": "hi",
+     "xMax": null
+    },
+    {
+     "no": "第5段階",
+     "bairitsu": "0.85",
+     "honnin": "hi",
+     "setai": "ka",
+     "xMax": 826500
+    },
+    {
+     "no": "第6段階",
+     "bairitsu": "1",
+     "honnin": "hi",
+     "setai": "ka",
+     "xMax": null
+    },
+    {
+     "no": "第7段階",
+     "bairitsu": "1.10",
+     "honnin": "ka",
+     "gMax": 1250000,
+     "gLe": true
+    },
+    {
+     "no": "第8段階",
+     "bairitsu": "1.25",
+     "honnin": "ka",
+     "gMax": 2000000
+    },
+    {
+     "no": "第9段階",
+     "bairitsu": "1.50",
+     "honnin": "ka",
+     "gMax": 3000000
+    },
+    {
+     "no": "第10段階",
+     "bairitsu": "1.75",
+     "honnin": "ka",
+     "gMax": 4000000
+    },
+    {
+     "no": "第11段階",
+     "bairitsu": "2.00",
+     "honnin": "ka",
+     "gMax": 5000000
+    },
+    {
+     "no": "第12段階",
+     "bairitsu": "2.20",
+     "honnin": "ka",
+     "gMax": 6000000
+    },
+    {
+     "no": "第13段階",
+     "bairitsu": "2.40",
+     "honnin": "ka",
+     "gMax": 7000000
+    },
+    {
+     "no": "第14段階",
+     "bairitsu": "2.60",
+     "honnin": "ka",
+     "gMax": 10000000
+    },
+    {
+     "no": "第15段階",
+     "bairitsu": "3.00",
+     "honnin": "ka",
+     "gMax": null
+    }
+   ],
+   "sources": [
+    {
+     "name": "介護保険料について",
+     "url": "https://www.city.osaka.lg.jp/fukushi/page/0000667192.html"
+    },
+    {
+     "name": "介護保険制度のご案内 2026（令和8）年4月版 p.31",
+     "url": "https://www.city.osaka.lg.jp/fukushi/cmsfiles/contents/0000596/596293/R8_P31.pdf"
+    }
+   ],
+   "roundNote": "市の明記なし。公表の年額は基準額×倍率の1円未満切上げと全段階で一致",
+   "checkedAt": "2026-10-28"
+  },
+  {
+   "city": "堺市",
+   "pref": "大阪府",
+   "kijunNen": 89010,
+   "mhlwGetsu": 7417,
+   "round": "c10",
+   "verified": "表",
+   "stages": [
+    {
+     "no": "第1段階",
+     "bairitsu": "0.285",
+     "honnin": "hi",
+     "setai": "hi",
+     "xMax": 826500,
+     "seiho": true
+    },
+    {
+     "no": "第2段階",
+     "bairitsu": "0.47",
+     "honnin": "hi",
+     "setai": "hi",
+     "xMax": 1200000
+    },
+    {
+     "no": "第3段階",
+     "bairitsu": "0.685",
+     "honnin": "hi",
+     "setai": "hi",
+     "xMax": null
+    },
+    {
+     "no": "第4段階",
+     "bairitsu": "0.9",
+     "honnin": "hi",
+     "setai": "ka",
+     "xMax": 826500
+    },
+    {
+     "no": "第5段階",
+     "bairitsu": "1",
+     "honnin": "hi",
+     "setai": "ka",
+     "xMax": null
+    },
+    {
+     "no": "第6段階",
+     "bairitsu": "1.18",
+     "honnin": "ka",
+     "gMax": 1250000,
+     "gLe": true
+    },
+    {
+     "no": "第7段階",
+     "bairitsu": "1.3",
+     "honnin": "ka",
+     "gMax": 2000000
+    },
+    {
+     "no": "第8段階",
+     "bairitsu": "1.5",
+     "honnin": "ka",
+     "gMax": 3000000
+    },
+    {
+     "no": "第9段階",
+     "bairitsu": "1.7",
+     "honnin": "ka",
+     "gMax": 4000000
+    },
+    {
+     "no": "第10段階",
+     "bairitsu": "1.9",
+     "honnin": "ka",
+     "gMax": 5000000
+    },
+    {
+     "no": "第11段階",
+     "bairitsu": "2.1",
+     "honnin": "ka",
+     "gMax": 6000000
+    },
+    {
+     "no": "第12段階",
+     "bairitsu": "2.3",
+     "honnin": "ka",
+     "gMax": 7000000
+    },
+    {
+     "no": "第13段階",
+     "bairitsu": "2.4",
+     "honnin": "ka",
+     "gMax": 8000000
+    },
+    {
+     "no": "第14段階",
+     "bairitsu": "2.5",
+     "honnin": "ka",
+     "gMax": 9000000
+    },
+    {
+     "no": "第15段階",
+     "bairitsu": "2.6",
+     "honnin": "ka",
+     "gMax": 10000000
+    },
+    {
+     "no": "第16段階",
+     "bairitsu": "2.7",
+     "honnin": "ka",
+     "gMax": 15000000
+    },
+    {
+     "no": "第17段階",
+     "bairitsu": "2.8",
+     "honnin": "ka",
+     "gMax": 20000000
+    },
+    {
+     "no": "第18段階",
+     "bairitsu": "3",
+     "honnin": "ka",
+     "gMax": null
+    }
+   ],
+   "sources": [
+    {
+     "name": "令和8年度版 介護保険パンフレット 介護保険料（27-30ページ）",
+     "url": "https://www.city.sakai.lg.jp/kenko/fukushikaigo/kaigo/kaigo-system/R6_kaihopanhu.files/R8_A4_027-030.pdf"
+    },
+    {
+     "name": "介護保険料について - 堺市",
+     "url": "https://www.city.sakai.lg.jp/kenko/fukushikaigo/kaigo/kaigo-system/kaigohokenryo.html"
+    }
+   ],
+   "roundNote": "市の明記なし。公表の年額は基準額×倍率の10円未満切上げと全段階で一致。82.65万円は令和8年度版パンフ（HTMLページは80万9千円のまま）",
+   "checkedAt": "2026-10-28"
+  },
+  {
+   "city": "神戸市",
+   "pref": "兵庫県",
+   "kijunNen": 78960,
+   "mhlwGetsu": 6580,
+   "round": "c1",
+   "verified": "例",
+   "pageNote": "神戸市の案内の表の年額（円未満を切り上げた形）に合わせています。神戸市は「実際に納める保険料は10円未満切り捨て」としています。",
+   "stages": [
+    {
+     "no": "第1段階",
+     "bairitsu": "0.235",
+     "honnin": "hi",
+     "setai": "hi",
+     "xMax": 826500,
+     "seiho": true
+    },
+    {
+     "no": "第2段階",
+     "bairitsu": "0.435",
+     "honnin": "hi",
+     "setai": "hi",
+     "xMax": 1200000
+    },
+    {
+     "no": "第3段階",
+     "bairitsu": "0.68",
+     "honnin": "hi",
+     "setai": "hi",
+     "xMax": null
+    },
+    {
+     "no": "第4段階",
+     "bairitsu": "0.9",
+     "honnin": "hi",
+     "setai": "ka",
+     "xMax": 826500
+    },
+    {
+     "no": "第5段階",
+     "bairitsu": "1",
+     "honnin": "hi",
+     "setai": "ka",
+     "xMax": null
+    },
+    {
+     "no": "第6段階",
+     "bairitsu": "1.15",
+     "honnin": "ka",
+     "gMax": 1200000
+    },
+    {
+     "no": "第7段階",
+     "bairitsu": "1.24",
+     "honnin": "ka",
+     "gMax": 1900000
+    },
+    {
+     "no": "第8段階",
+     "bairitsu": "1.47",
+     "honnin": "ka",
+     "gMax": 2900000
+    },
+    {
+     "no": "第9段階",
+     "bairitsu": "1.675",
+     "honnin": "ka",
+     "gMax": 4000000
+    },
+    {
+     "no": "第10段階",
+     "bairitsu": "1.8",
+     "honnin": "ka",
+     "gMax": 5000000
+    },
+    {
+     "no": "第11段階",
+     "bairitsu": "1.9",
+     "honnin": "ka",
+     "gMax": 6000000
+    },
+    {
+     "no": "第12段階",
+     "bairitsu": "2.2",
+     "honnin": "ka",
+     "gMax": 7000000
+    },
+    {
+     "no": "第13段階",
+     "bairitsu": "2.35",
+     "honnin": "ka",
+     "gMax": 8000000
+    },
+    {
+     "no": "第14段階",
+     "bairitsu": "2.6",
+     "honnin": "ka",
+     "gMax": 10000000
+    },
+    {
+     "no": "第15段階",
+     "bairitsu": "2.85",
+     "honnin": "ka",
+     "gMax": null
+    }
+   ],
+   "sources": [
+    {
+     "name": "介護保険のあらまし 2026（令和８）年度（p.8 令和８年度の保険料）",
+     "url": "https://www.city.kobe.lg.jp/documents/4542/20260325120059.pdf"
+    }
+   ],
+   "roundNote": "市の明記なし。公表の年額は基準額×倍率の円未満切り上げと全段階で一致",
+   "checkedAt": "2026-10-28"
+  },
+  {
+   "city": "岡山市",
+   "pref": "岡山県",
+   "kijunNen": 79680,
+   "mhlwGetsu": 6640,
+   "round": "m1",
+   "verified": "表",
+   "stages": [
+    {
+     "no": "第1段階",
+     "bairitsu": "0.285",
+     "honnin": "hi",
+     "setai": "hi",
+     "xMax": 826500,
+     "seiho": true
+    },
+    {
+     "no": "第2段階",
+     "bairitsu": "0.44",
+     "honnin": "hi",
+     "setai": "hi",
+     "xMax": 1200000
+    },
+    {
+     "no": "第3段階",
+     "bairitsu": "0.685",
+     "honnin": "hi",
+     "setai": "hi",
+     "xMax": null
+    },
+    {
+     "no": "第4段階",
+     "bairitsu": "0.85",
+     "honnin": "hi",
+     "setai": "ka",
+     "xMax": 826500
+    },
+    {
+     "no": "第5段階",
+     "bairitsu": "1",
+     "honnin": "hi",
+     "setai": "ka",
+     "xMax": null
+    },
+    {
+     "no": "第6段階",
+     "bairitsu": "1.1",
+     "honnin": "ka",
+     "gMax": 800000
+    },
+    {
+     "no": "第7段階",
+     "bairitsu": "1.15",
+     "honnin": "ka",
+     "gMax": 1250000
+    },
+    {
+     "no": "第8段階",
+     "bairitsu": "1.25",
+     "honnin": "ka",
+     "gMax": 2000000
+    },
+    {
+     "no": "第9段階",
+     "bairitsu": "1.5",
+     "honnin": "ka",
+     "gMax": 4000000
+    },
+    {
+     "no": "第10段階",
+     "bairitsu": "1.75",
+     "honnin": "ka",
+     "gMax": 6000000
+    },
+    {
+     "no": "第11段階",
+     "bairitsu": "2.0",
+     "honnin": "ka",
+     "gMax": 8000000
+    },
+    {
+     "no": "第12段階",
+     "bairitsu": "2.25",
+     "honnin": "ka",
+     "gMax": 10000000
+    },
+    {
+     "no": "第13段階",
+     "bairitsu": "2.5",
+     "honnin": "ka",
+     "gMax": 12000000
+    },
+    {
+     "no": "第14段階",
+     "bairitsu": "2.75",
+     "honnin": "ka",
+     "gMax": null
+    }
+   ],
+   "sources": [
+    {
+     "name": "介護保険料ガイド",
+     "url": "https://www.city.okayama.jp/kurashi/0000057353.html"
+    },
+    {
+     "name": "介護保険料ガイド（令和8年7月版）PDF",
+     "url": "https://www.city.okayama.jp/kurashi/cmsfiles/contents/0000057/57353/20260713.pdf"
+    }
+   ],
+   "roundNote": "市の明記なし。公表の年額は「月額6,640円×倍率の円未満切捨て×12」と全段階で一致",
+   "checkedAt": "2026-10-28"
+  },
+  {
+   "city": "広島市",
+   "pref": "広島県",
+   "kijunNen": 76800,
+   "mhlwGetsu": 6400,
+   "round": "y1",
+   "verified": "表",
+   "stages": [
+    {
+     "no": "第1段階",
+     "bairitsu": "0.285",
+     "honnin": "hi",
+     "setai": "hi",
+     "xMax": 826500,
+     "seiho": true
+    },
+    {
+     "no": "第2段階",
+     "bairitsu": "0.485",
+     "honnin": "hi",
+     "setai": "hi",
+     "xMax": 1200000
+    },
+    {
+     "no": "第3段階",
+     "bairitsu": "0.685",
+     "honnin": "hi",
+     "setai": "hi",
+     "xMax": null
+    },
+    {
+     "no": "第4段階",
+     "bairitsu": "0.85",
+     "honnin": "hi",
+     "setai": "ka",
+     "xMax": 826500
+    },
+    {
+     "no": "第5段階",
+     "bairitsu": "1",
+     "honnin": "hi",
+     "setai": "ka",
+     "xMax": null
+    },
+    {
+     "no": "第6段階",
+     "bairitsu": "1.1",
+     "honnin": "ka",
+     "gMax": 1250000,
+     "gLe": true
+    },
+    {
+     "no": "第7段階",
+     "bairitsu": "1.25",
+     "honnin": "ka",
+     "gMax": 2000000
+    },
+    {
+     "no": "第8段階",
+     "bairitsu": "1.5",
+     "honnin": "ka",
+     "gMax": 3000000
+    },
+    {
+     "no": "第9段階",
+     "bairitsu": "1.7",
+     "honnin": "ka",
+     "gMax": 4000000
+    },
+    {
+     "no": "第10段階",
+     "bairitsu": "1.9",
+     "honnin": "ka",
+     "gMax": 5000000
+    },
+    {
+     "no": "第11段階",
+     "bairitsu": "2.1",
+     "honnin": "ka",
+     "gMax": 6000000
+    },
+    {
+     "no": "第12段階",
+     "bairitsu": "2.3",
+     "honnin": "ka",
+     "gMax": 7000000
+    },
+    {
+     "no": "第13段階",
+     "bairitsu": "2.4",
+     "honnin": "ka",
+     "gMax": 8000000
+    },
+    {
+     "no": "第14段階",
+     "bairitsu": "2.5",
+     "honnin": "ka",
+     "gMax": 10000000
+    },
+    {
+     "no": "第15段階",
+     "bairitsu": "2.6",
+     "honnin": "ka",
+     "gMax": 15000000
+    },
+    {
+     "no": "第16段階",
+     "bairitsu": "2.7",
+     "honnin": "ka",
+     "gMax": 20000000
+    },
+    {
+     "no": "第17段階",
+     "bairitsu": "2.8",
+     "honnin": "ka",
+     "gMax": null
+    }
+   ],
+   "sources": [
+    {
+     "name": "介護保険料｜広島市公式ウェブサイト",
+     "url": "https://www.city.hiroshima.lg.jp/living/fukushi-kaigo/1014902/1006001/1025722/1011401.html"
+    }
+   ],
+   "roundNote": "基準額×倍率がすべて円で割り切れる。表に年度の明記なし（判定日 令和8年4月1日・82万6,500円の記載から令和8年度と判断）",
+   "checkedAt": "2026-10-28"
+  },
+  {
+   "city": "北九州市",
+   "pref": "福岡県",
+   "kijunNen": 79070,
+   "mhlwGetsu": 6590,
+   "round": "y10",
+   "verified": "表",
+   "stages": [
+    {
+     "no": "第1段階",
+     "bairitsu": "0.285",
+     "honnin": "hi",
+     "setai": "hi",
+     "xMax": 826500,
+     "seiho": true
+    },
+    {
+     "no": "第2段階",
+     "bairitsu": "0.435",
+     "honnin": "hi",
+     "setai": "hi",
+     "xMax": 1200000
+    },
+    {
+     "no": "第3段階",
+     "bairitsu": "0.685",
+     "honnin": "hi",
+     "setai": "hi",
+     "xMax": null
+    },
+    {
+     "no": "第4段階",
+     "bairitsu": "0.9",
+     "honnin": "hi",
+     "setai": "ka",
+     "xMax": 826500
+    },
+    {
+     "no": "第5段階",
+     "bairitsu": "1",
+     "honnin": "hi",
+     "setai": "ka",
+     "xMax": null
+    },
+    {
+     "no": "第6段階",
+     "bairitsu": "1.1",
+     "honnin": "ka",
+     "gMax": 800000
+    },
+    {
+     "no": "第7段階",
+     "bairitsu": "1.15",
+     "honnin": "ka",
+     "gMax": 1200000
+    },
+    {
+     "no": "第8段階",
+     "bairitsu": "1.2",
+     "honnin": "ka",
+     "gMax": 1600000
+    },
+    {
+     "no": "第9段階",
+     "bairitsu": "1.25",
+     "honnin": "ka",
+     "gMax": 2100000
+    },
+    {
+     "no": "第10段階",
+     "bairitsu": "1.5",
+     "honnin": "ka",
+     "gMax": 3200000
+    },
+    {
+     "no": "第11段階",
+     "bairitsu": "1.7",
+     "honnin": "ka",
+     "gMax": 4200000
+    },
+    {
+     "no": "第12段階",
+     "bairitsu": "1.9",
+     "honnin": "ka",
+     "gMax": 5200000
+    },
+    {
+     "no": "第13段階",
+     "bairitsu": "2.1",
+     "honnin": "ka",
+     "gMax": 6200000
+    },
+    {
+     "no": "第14段階",
+     "bairitsu": "2.3",
+     "honnin": "ka",
+     "gMax": 7200000
+    },
+    {
+     "no": "第15段階",
+     "bairitsu": "2.4",
+     "honnin": "ka",
+     "gMax": null
+    }
+   ],
+   "sources": [
+    {
+     "name": "65歳以上の人（第1号被保険者）の保険料 - 北九州市",
+     "url": "https://www.city.kitakyushu.lg.jp/contents/924_11152.html"
+    }
+   ],
+   "roundNote": "市の明記なし。公表の年額は基準額×倍率の10円未満切捨てと全段階で一致",
+   "checkedAt": "2026-10-28"
+  },
+  {
+   "city": "熊本市",
+   "pref": "熊本県",
+   "kijunNen": 76800,
+   "mhlwGetsu": 6400,
+   "round": "y1",
+   "verified": "表",
+   "stages": [
+    {
+     "no": "第1段階",
+     "bairitsu": "0.285",
+     "honnin": "hi",
+     "setai": "hi",
+     "xMax": 826500,
+     "seiho": true
+    },
+    {
+     "no": "第2段階",
+     "bairitsu": "0.37",
+     "honnin": "hi",
+     "setai": "hi",
+     "xMax": 1200000
+    },
+    {
+     "no": "第3段階",
+     "bairitsu": "0.645",
+     "honnin": "hi",
+     "setai": "hi",
+     "xMax": null
+    },
+    {
+     "no": "第4段階",
+     "bairitsu": "0.875",
+     "honnin": "hi",
+     "setai": "ka",
+     "xMax": 826500
+    },
+    {
+     "no": "第5段階",
+     "bairitsu": "1",
+     "honnin": "hi",
+     "setai": "ka",
+     "xMax": null
+    },
+    {
+     "no": "第6段階",
+     "bairitsu": "1.1",
+     "honnin": "ka",
+     "gMax": 1200000
+    },
+    {
+     "no": "第7段階",
+     "bairitsu": "1.3",
+     "honnin": "ka",
+     "gMax": 2100000
+    },
+    {
+     "no": "第8段階",
+     "bairitsu": "1.5",
+     "honnin": "ka",
+     "gMax": 3200000
+    },
+    {
+     "no": "第9段階",
+     "bairitsu": "1.7",
+     "honnin": "ka",
+     "gMax": 4200000
+    },
+    {
+     "no": "第10段階",
+     "bairitsu": "1.9",
+     "honnin": "ka",
+     "gMax": 5200000
+    },
+    {
+     "no": "第11段階",
+     "bairitsu": "2.1",
+     "honnin": "ka",
+     "gMax": 6200000
+    },
+    {
+     "no": "第12段階",
+     "bairitsu": "2.3",
+     "honnin": "ka",
+     "gMax": 7200000
+    },
+    {
+     "no": "第13段階",
+     "bairitsu": "2.5",
+     "honnin": "ka",
+     "gMax": 8200000
+    },
+    {
+     "no": "第14段階",
+     "bairitsu": "2.7",
+     "honnin": "ka",
+     "gMax": 9200000
+    },
+    {
+     "no": "第15段階",
+     "bairitsu": "2.9",
+     "honnin": "ka",
+     "gMax": null
+    }
+   ],
+   "sources": [
+    {
+     "name": "65歳以上の方の介護保険料 / 熊本市公式サイト",
+     "url": "https://www.city.kumamoto.jp/kiji0039042/index.html"
+    }
+   ],
+   "roundNote": "基準額×倍率がすべて円で割り切れる（月額×12とも一致）",
+   "checkedAt": "2026-10-28"
+  },
+  {
+   "city": "福岡市",
+   "pref": "福岡県",
+   "kijunNen": 82784,
+   "mhlwGetsu": 6899,
+   "round": null,
+   "verified": null,
+   "stages": [],
+   "why": "公表の年額の円未満が、切捨て・切上げ・四捨五入のどれでも全段階を説明できない（第1・3段階は切捨て、第2・4段階以上は切上げと一致）。市は端数の決まりを書いていない",
+   "sources": [
+    {
+     "name": "65歳以上の人の保険料 - 福岡市",
+     "url": "https://www.city.fukuoka.lg.jp/fukushi/kaigohoken/health/00/03/3-010203.html"
+    }
+   ],
+   "checkedAt": "2026-10-28"
+  },
+  {
+   "city": "世田谷区",
+   "pref": "東京都",
+   "kijunNen": 75360,
+   "mhlwGetsu": 6280,
+   "round": "r1",
+   "verified": "表",
+   "stages": [
+    {
+     "no": "第1段階",
+     "bairitsu": "0.285",
+     "honnin": "hi",
+     "setai": "hi",
+     "xMax": 826500,
+     "seiho": true
+    },
+    {
+     "no": "第2段階",
+     "bairitsu": "0.485",
+     "honnin": "hi",
+     "setai": "hi",
+     "xMax": 1200000
+    },
+    {
+     "no": "第3段階",
+     "bairitsu": "0.65",
+     "honnin": "hi",
+     "setai": "hi",
+     "xMax": null
+    },
+    {
+     "no": "第4段階",
+     "bairitsu": "0.85",
+     "honnin": "hi",
+     "setai": "ka",
+     "xMax": 826500
+    },
+    {
+     "no": "第5段階",
+     "bairitsu": "1",
+     "honnin": "hi",
+     "setai": "ka",
+     "xMax": null
+    },
+    {
+     "no": "第6段階",
+     "bairitsu": "1.15",
+     "honnin": "ka",
+     "gMax": 1200000
+    },
+    {
+     "no": "第7段階",
+     "bairitsu": "1.25",
+     "honnin": "ka",
+     "gMax": 2100000
+    },
+    {
+     "no": "第8段階",
+     "bairitsu": "1.4",
+     "honnin": "ka",
+     "gMax": 3200000
+    },
+    {
+     "no": "第9段階",
+     "bairitsu": "1.6",
+     "honnin": "ka",
+     "gMax": 4200000
+    },
+    {
+     "no": "第10段階",
+     "bairitsu": "1.9",
+     "honnin": "ka",
+     "gMax": 5200000
+    },
+    {
+     "no": "第11段階",
+     "bairitsu": "2.1",
+     "honnin": "ka",
+     "gMax": 6200000
+    },
+    {
+     "no": "第12段階",
+     "bairitsu": "2.3",
+     "honnin": "ka",
+     "gMax": 7200000
+    },
+    {
+     "no": "第13段階",
+     "bairitsu": "2.5",
+     "honnin": "ka",
+     "gMax": 10000000
+    },
+    {
+     "no": "第14段階",
+     "bairitsu": "2.9",
+     "honnin": "ka",
+     "gMax": 15000000
+    },
+    {
+     "no": "第15段階",
+     "bairitsu": "3.4",
+     "honnin": "ka",
+     "gMax": 25000000
+    },
+    {
+     "no": "第16段階",
+     "bairitsu": "3.9",
+     "honnin": "ka",
+     "gMax": 35000000
+    },
+    {
+     "no": "第17段階",
+     "bairitsu": "4.4",
+     "honnin": "ka",
+     "gMax": 50000000
+    },
+    {
+     "no": "第18段階",
+     "bairitsu": "4.9",
+     "honnin": "ka",
+     "gMax": null
+    }
+   ],
+   "sources": [
+    {
+     "name": "世田谷区の介護保険料額",
+     "url": "https://www.city.setagaya.lg.jp/02061/2285.html"
+    }
+   ],
+   "roundNote": "区の明記なし。公表の年額は基準額×倍率の四捨五入と全段階で一致",
+   "checkedAt": "2026-10-28"
+  },
+  {
+   "city": "大田区",
+   "pref": "東京都",
+   "kijunNen": 79200,
+   "mhlwGetsu": 6600,
+   "round": "y1",
+   "verified": "表",
+   "stages": [
+    {
+     "no": "第1段階",
+     "bairitsu": "0.25",
+     "honnin": "hi",
+     "setai": "hi",
+     "xMax": 826500,
+     "seiho": true
+    },
+    {
+     "no": "第2段階",
+     "bairitsu": "0.40",
+     "honnin": "hi",
+     "setai": "hi",
+     "xMax": 1200000
+    },
+    {
+     "no": "第3段階",
+     "bairitsu": "0.65",
+     "honnin": "hi",
+     "setai": "hi",
+     "xMax": null
+    },
+    {
+     "no": "第4段階",
+     "bairitsu": "0.80",
+     "honnin": "hi",
+     "setai": "ka",
+     "xMax": 826500
+    },
+    {
+     "no": "第5段階",
+     "bairitsu": "1",
+     "honnin": "hi",
+     "setai": "ka",
+     "xMax": null
+    },
+    {
+     "no": "第6段階",
+     "bairitsu": "1.10",
+     "honnin": "ka",
+     "gMax": 1200000
+    },
+    {
+     "no": "第7段階",
+     "bairitsu": "1.25",
+     "honnin": "ka",
+     "gMax": 2100000
+    },
+    {
+     "no": "第8段階",
+     "bairitsu": "1.50",
+     "honnin": "ka",
+     "gMax": 2600000
+    },
+    {
+     "no": "第9段階",
+     "bairitsu": "1.60",
+     "honnin": "ka",
+     "gMax": 3200000
+    },
+    {
+     "no": "第10段階",
+     "bairitsu": "1.80",
+     "honnin": "ka",
+     "gMax": 3700000
+    },
+    {
+     "no": "第11段階",
+     "bairitsu": "1.90",
+     "honnin": "ka",
+     "gMax": 4200000
+    },
+    {
+     "no": "第12段階",
+     "bairitsu": "2.00",
+     "honnin": "ka",
+     "gMax": 5200000
+    },
+    {
+     "no": "第13段階",
+     "bairitsu": "2.35",
+     "honnin": "ka",
+     "gMax": 7000000
+    },
+    {
+     "no": "第14段階",
+     "bairitsu": "2.75",
+     "honnin": "ka",
+     "gMax": 10000000
+    },
+    {
+     "no": "第15段階",
+     "bairitsu": "3.05",
+     "honnin": "ka",
+     "gMax": 15000000
+    },
+    {
+     "no": "第16段階",
+     "bairitsu": "3.35",
+     "honnin": "ka",
+     "gMax": 25000000
+    },
+    {
+     "no": "第17段階",
+     "bairitsu": "3.65",
+     "honnin": "ka",
+     "gMax": 35000000
+    },
+    {
+     "no": "第18段階",
+     "bairitsu": "3.95",
+     "honnin": "ka",
+     "gMax": null
+    }
+   ],
+   "sources": [
+    {
+     "name": "介護保険料",
+     "url": "https://www.city.ota.tokyo.jp/seikatsu/fukushi/kaigo/kaigohoken.html"
+    },
+    {
+     "name": "令和8年度介護保険料算定の特例措置について",
+     "url": "https://www.city.ota.tokyo.jp/seikatsu/fukushi/kaigo/r8kaigohokenryotokurei.html"
+    }
+   ],
+   "roundNote": "基準額×倍率がすべて円で割り切れる",
+   "checkedAt": "2026-10-28"
+  },
+  {
+   "city": "江戸川区",
+   "pref": "東京都",
+   "kijunNen": 73200,
+   "mhlwGetsu": 6100,
+   "round": "m10c",
+   "verified": "表",
+   "stages": [
+    {
+     "no": "第1段階",
+     "bairitsu": "0.285",
+     "honnin": "hi",
+     "setai": "hi",
+     "xMax": 826500,
+     "seiho": true
+    },
+    {
+     "no": "第2段階",
+     "bairitsu": "0.485",
+     "honnin": "hi",
+     "setai": "hi",
+     "xMax": 1200000
+    },
+    {
+     "no": "第3段階",
+     "bairitsu": "0.685",
+     "honnin": "hi",
+     "setai": "hi",
+     "xMax": null
+    },
+    {
+     "no": "第4段階",
+     "bairitsu": "0.90",
+     "honnin": "hi",
+     "setai": "ka",
+     "xMax": 826500
+    },
+    {
+     "no": "第5段階",
+     "bairitsu": "1",
+     "honnin": "hi",
+     "setai": "ka",
+     "xMax": null
+    },
+    {
+     "no": "第6段階",
+     "bairitsu": "1.20",
+     "honnin": "ka",
+     "gMax": 1200000
+    },
+    {
+     "no": "第7段階",
+     "bairitsu": "1.30",
+     "honnin": "ka",
+     "gMax": 2100000
+    },
+    {
+     "no": "第8段階",
+     "bairitsu": "1.50",
+     "honnin": "ka",
+     "gMax": 3200000
+    },
+    {
+     "no": "第9段階",
+     "bairitsu": "1.70",
+     "honnin": "ka",
+     "gMax": 4200000
+    },
+    {
+     "no": "第10段階",
+     "bairitsu": "1.90",
+     "honnin": "ka",
+     "gMax": 5200000
+    },
+    {
+     "no": "第11段階",
+     "bairitsu": "2.10",
+     "honnin": "ka",
+     "gMax": 6200000
+    },
+    {
+     "no": "第12段階",
+     "bairitsu": "2.30",
+     "honnin": "ka",
+     "gMax": 7200000
+    },
+    {
+     "no": "第13段階",
+     "bairitsu": "2.40",
+     "honnin": "ka",
+     "gMax": 8100000
+    },
+    {
+     "no": "第14段階",
+     "bairitsu": "2.70",
+     "honnin": "ka",
+     "gMax": 9000000
+    },
+    {
+     "no": "第15段階",
+     "bairitsu": "2.90",
+     "honnin": "ka",
+     "gMax": 10000000
+    },
+    {
+     "no": "第16段階",
+     "bairitsu": "3.20",
+     "honnin": "ka",
+     "gMax": 20000000
+    },
+    {
+     "no": "第17段階",
+     "bairitsu": "3.60",
+     "honnin": "ka",
+     "gMax": 30000000
+    },
+    {
+     "no": "第18段階",
+     "bairitsu": "4.00",
+     "honnin": "ka",
+     "gMax": 50000000
+    },
+    {
+     "no": "第19段階",
+     "bairitsu": "4.40",
+     "honnin": "ka",
+     "gMax": null
+    }
+   ],
+   "sources": [
+    {
+     "name": "保険料｜江戸川区 介護保険のページ",
+     "url": "https://www.kaigo.city.edogawa.tokyo.jp/what/insurance-fee/"
+    }
+   ],
+   "roundNote": "区の明記なし。公表の年額は「月額6,100円×倍率の10円未満切上げ×12」と全段階で一致",
+   "checkedAt": "2026-10-28"
+  },
+  {
+   "city": "杉並区",
+   "pref": "東京都",
+   "kijunNen": 76800,
+   "mhlwGetsu": 6400,
+   "round": "m10c",
+   "verified": "表",
+   "stages": [
+    {
+     "no": "第1段階",
+     "bairitsu": "0.285",
+     "honnin": "hi",
+     "setai": "hi",
+     "xMax": 826500,
+     "seiho": true
+    },
+    {
+     "no": "第2段階",
+     "bairitsu": "0.4",
+     "honnin": "hi",
+     "setai": "hi",
+     "xMax": 1200000
+    },
+    {
+     "no": "第3段階",
+     "bairitsu": "0.685",
+     "honnin": "hi",
+     "setai": "hi",
+     "xMax": null
+    },
+    {
+     "no": "第4段階",
+     "bairitsu": "0.85",
+     "honnin": "hi",
+     "setai": "ka",
+     "xMax": 826500
+    },
+    {
+     "no": "第5段階",
+     "bairitsu": "1",
+     "honnin": "hi",
+     "setai": "ka",
+     "xMax": null
+    },
+    {
+     "no": "第6段階",
+     "bairitsu": "1.06",
+     "honnin": "ka",
+     "gMax": 1250000
+    },
+    {
+     "no": "第7段階",
+     "bairitsu": "1.19",
+     "honnin": "ka",
+     "gMax": 2100000
+    },
+    {
+     "no": "第8段階",
+     "bairitsu": "1.4",
+     "honnin": "ka",
+     "gMax": 3200000
+    },
+    {
+     "no": "第9段階",
+     "bairitsu": "1.61",
+     "honnin": "ka",
+     "gMax": 5000000
+    },
+    {
+     "no": "第10段階",
+     "bairitsu": "1.89",
+     "honnin": "ka",
+     "gMax": 7000000
+    },
+    {
+     "no": "第11段階",
+     "bairitsu": "2.2",
+     "honnin": "ka",
+     "gMax": 10000000
+    },
+    {
+     "no": "第12段階",
+     "bairitsu": "2.5",
+     "honnin": "ka",
+     "gMax": 15000000
+    },
+    {
+     "no": "第13段階",
+     "bairitsu": "2.7",
+     "honnin": "ka",
+     "gMax": 25000000
+    },
+    {
+     "no": "第14段階",
+     "bairitsu": "3",
+     "honnin": "ka",
+     "gMax": 35000000
+    },
+    {
+     "no": "第15段階",
+     "bairitsu": "3.2",
+     "honnin": "ka",
+     "gMax": 45000000
+    },
+    {
+     "no": "第16段階",
+     "bairitsu": "3.4",
+     "honnin": "ka",
+     "gMax": 55000000
+    },
+    {
+     "no": "第17段階",
+     "bairitsu": "3.6",
+     "honnin": "ka",
+     "gMax": null
+    }
+   ],
+   "sources": [
+    {
+     "name": "介護保険料について｜杉並区公式ホームページ",
+     "url": "https://www.city.suginami.tokyo.jp/s040/1938.html"
+    }
+   ],
+   "roundNote": "区の明記どおり：基準月額×倍率の10円未満切上げ×12",
+   "checkedAt": "2026-10-28"
+  },
+  {
+   "city": "板橋区",
+   "pref": "東京都",
+   "kijunNen": 78240,
+   "kijunLabel": "月6,520円",
+   "mhlwGetsu": null,
+   "round": "h100",
+   "verified": "表",
+   "stages": [
+    {
+     "no": "第1段階",
+     "bairitsu": "0.285",
+     "honnin": "hi",
+     "setai": "hi",
+     "xMax": 826500,
+     "seiho": true
+    },
+    {
+     "no": "第2段階",
+     "bairitsu": "0.435",
+     "honnin": "hi",
+     "setai": "hi",
+     "xMax": 1200000
+    },
+    {
+     "no": "第3段階",
+     "bairitsu": "0.685",
+     "honnin": "hi",
+     "setai": "hi",
+     "xMax": null
+    },
+    {
+     "no": "第4段階",
+     "bairitsu": "0.9",
+     "honnin": "hi",
+     "setai": "ka",
+     "xMax": 826500
+    },
+    {
+     "no": "第5段階",
+     "bairitsu": "1",
+     "honnin": "hi",
+     "setai": "ka",
+     "xMax": null
+    },
+    {
+     "no": "第6段階",
+     "bairitsu": "1.15",
+     "honnin": "ka",
+     "gMax": 1250000
+    },
+    {
+     "no": "第7段階",
+     "bairitsu": "1.25",
+     "honnin": "ka",
+     "gMax": 2100000
+    },
+    {
+     "no": "第8段階",
+     "bairitsu": "1.45",
+     "honnin": "ka",
+     "gMax": 3200000
+    },
+    {
+     "no": "第9段階",
+     "bairitsu": "1.65",
+     "honnin": "ka",
+     "gMax": 4200000
+    },
+    {
+     "no": "第10段階",
+     "bairitsu": "1.9",
+     "honnin": "ka",
+     "gMax": 5200000
+    },
+    {
+     "no": "第11段階",
+     "bairitsu": "2.1",
+     "honnin": "ka",
+     "gMax": 6200000
+    },
+    {
+     "no": "第12段階",
+     "bairitsu": "2.3",
+     "honnin": "ka",
+     "gMax": 7200000
+    },
+    {
+     "no": "第13段階",
+     "bairitsu": "2.4",
+     "honnin": "ka",
+     "gMax": 8200000
+    },
+    {
+     "no": "第14段階",
+     "bairitsu": "2.5",
+     "honnin": "ka",
+     "gMax": 10000000
+    },
+    {
+     "no": "第15段階",
+     "bairitsu": "2.9",
+     "honnin": "ka",
+     "gMax": 15000000
+    },
+    {
+     "no": "第16段階",
+     "bairitsu": "3.4",
+     "honnin": "ka",
+     "gMax": 20000000
+    },
+    {
+     "no": "第17段階",
+     "bairitsu": "3.9",
+     "honnin": "ka",
+     "gMax": null
+    }
+   ],
+   "sources": [
+    {
+     "name": "介護保険料の額（65歳以上の方）｜板橋区公式ホームページ",
+     "url": "https://www.city.itabashi.tokyo.jp/kenko/kaigo/1003680/1003681.html"
+    }
+   ],
+   "roundNote": "区の明記どおり：基準額（月額）6,520円×倍率×12の100円未満切捨て。kijunNen 78,240＝6,520×12（区は年額の基準額を書いていない）。厚労省の一覧は月6,517円で、区の6,520円と3円違うため mhlwGetsu は照合から外した",
+   "checkedAt": "2026-10-28"
+  },
+  {
+   "city": "江東区",
+   "pref": "東京都",
+   "kijunNen": 74400,
+   "mhlwGetsu": 6200,
+   "round": "m10f",
+   "verified": "表",
+   "stages": [
+    {
+     "no": "第1段階",
+     "bairitsu": "0.285",
+     "honnin": "hi",
+     "setai": "hi",
+     "xMax": 826500,
+     "seiho": true
+    },
+    {
+     "no": "第2段階",
+     "bairitsu": "0.40",
+     "honnin": "hi",
+     "setai": "hi",
+     "xMax": 1200000
+    },
+    {
+     "no": "第3段階",
+     "bairitsu": "0.65",
+     "honnin": "hi",
+     "setai": "hi",
+     "xMax": null
+    },
+    {
+     "no": "第4段階",
+     "bairitsu": "0.85",
+     "honnin": "hi",
+     "setai": "ka",
+     "xMax": 826500
+    },
+    {
+     "no": "第5段階",
+     "bairitsu": "1",
+     "honnin": "hi",
+     "setai": "ka",
+     "xMax": null
+    },
+    {
+     "no": "第6段階",
+     "bairitsu": "1.15",
+     "honnin": "ka",
+     "gMax": 1250000
+    },
+    {
+     "no": "第7段階",
+     "bairitsu": "1.30",
+     "honnin": "ka",
+     "gMax": 2000000
+    },
+    {
+     "no": "第8段階",
+     "bairitsu": "1.60",
+     "honnin": "ka",
+     "gMax": 3000000
+    },
+    {
+     "no": "第9段階",
+     "bairitsu": "1.80",
+     "honnin": "ka",
+     "gMax": 4000000
+    },
+    {
+     "no": "第10段階",
+     "bairitsu": "2.00",
+     "honnin": "ka",
+     "gMax": 5000000
+    },
+    {
+     "no": "第11段階",
+     "bairitsu": "2.20",
+     "honnin": "ka",
+     "gMax": 6000000
+    },
+    {
+     "no": "第12段階",
+     "bairitsu": "2.50",
+     "honnin": "ka",
+     "gMax": 8000000
+    },
+    {
+     "no": "第13段階",
+     "bairitsu": "2.80",
+     "honnin": "ka",
+     "gMax": 10000000
+    },
+    {
+     "no": "第14段階",
+     "bairitsu": "3.00",
+     "honnin": "ka",
+     "gMax": 15000000
+    },
+    {
+     "no": "第15段階",
+     "bairitsu": "3.20",
+     "honnin": "ka",
+     "gMax": 20000000
+    },
+    {
+     "no": "第16段階",
+     "bairitsu": "3.40",
+     "honnin": "ka",
+     "gMax": 25000000
+    },
+    {
+     "no": "第17段階",
+     "bairitsu": "3.50",
+     "honnin": "ka",
+     "gMax": 30000000
+    },
+    {
+     "no": "第18段階",
+     "bairitsu": "3.60",
+     "honnin": "ka",
+     "gMax": null
+    }
+   ],
+   "sources": [
+    {
+     "name": "65歳以上の方（介護保険第1号被保険者）の介護保険料｜江東区",
+     "url": "https://www.city.koto.lg.jp/212102/fukushi/kaigohoken/hokenryo/6529.html"
+    },
+    {
+     "name": "令和8年度の介護保険料一覧表（PDF）",
+     "url": "https://www.city.koto.lg.jp/212102/fukushi/kaigohoken/hokenryo/documents/r8hokenryo.pdf"
+    }
+   ],
+   "roundNote": "区は「端数処理のため一致しない場合がある」とだけ書く。公表の年額は「月額6,200円×倍率の10円未満切捨て×12」と全段階で一致。第7〜17段階の所得の線はPDFの段組みが崩れた抽出から順に対応づけた（要目視）",
+   "checkedAt": "2026-10-28"
+  },
+  {
+   "city": "練馬区",
+   "pref": "東京都",
+   "kijunNen": 80040,
+   "mhlwGetsu": 6670,
+   "round": null,
+   "verified": null,
+   "stages": [],
+   "why": "段階ごとの年額は公表されているが倍率が公表されていない（基準額×倍率の式で照らせない）",
+   "sources": [
+    {
+     "name": "65歳以上の方の介護保険料の決め方",
+     "url": "https://www.city.nerima.tokyo.jp/hokenfukushi/kaigohoken/hokenryo/65hokenryo.html"
+    }
+   ],
+   "checkedAt": "2026-10-28"
+  },
+  {
+   "city": "足立区",
+   "pref": "東京都",
+   "kijunNen": 81000,
+   "mhlwGetsu": 6750,
+   "round": null,
+   "verified": null,
+   "stages": [],
+   "why": "段階ごとの年額・月額は公表されているが倍率が公表されていない（基準額×倍率の式で照らせない）",
+   "sources": [
+    {
+     "name": "令和８年度の介護保険料｜足立区",
+     "url": "https://www.city.adachi.tokyo.jp/kaigo/kurashi/hoken/2026kaigohokennryou.html"
+    }
+   ],
+   "checkedAt": "2026-10-28"
+  }
+ ],
+ "sources": [
+  {
+   "name": "介護保険法施行令（第38条＝標準の段階と倍率・公費による軽減の上限、第22条の2＝合計所得金額の定め、附則第24条・第25条＝令和8年度の給与所得の特例）e-Gov 法令検索（令和8年10月1日施行の版で確認）",
+   "url": "https://laws.e-gov.go.jp/law/410CO0000000412"
+  },
+  {
+   "name": "介護保険法施行令の一部を改正する政令（令和7年政令第394号・令和8年4月1日施行＝第1・第4段階の線を82万6,500円に。附則：令和8年度以後の年度分の保険料から）e-Gov 法令検索の改正履歴",
+   "url": "https://laws.e-gov.go.jp/law/410CO0000000412"
+  },
+  {
+   "name": "介護保険法施行規則 第143条〜第143条の3（令和6〜8年度の基準所得金額 120万円・210万円・320万円）e-Gov 法令検索",
+   "url": "https://laws.e-gov.go.jp/law/411M50000100036"
+  },
+  {
+   "name": "厚生労働省「第９期介護保険事業計画期間における介護保険の第１号保険料及びサービス見込み量等について」（令和6年5月14日・全国平均 月6,225円）",
+   "url": "https://www.mhlw.go.jp/stf/newpage_40211.html"
+  },
+  {
+   "name": "同 資料「第9期 第一号保険料（保険者別）」",
+   "url": "https://www.mhlw.go.jp/content/12303500/001253800.xlsx"
+  },
+  {
+   "name": "国税庁 タックスアンサー No.1600 公的年金等の課税関係（公的年金等控除）",
+   "url": "https://www.nta.go.jp/taxes/shiraberu/taxanswer/shotoku/1600.htm"
+  }
+ ]
+}

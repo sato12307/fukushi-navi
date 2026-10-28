@@ -1,0 +1,110 @@
+{
+ "_note": "年金生活者支援給付金（令和8年度＝令和8年10月分〜令和9年9月分の判定）の計算機 /shien-kyufukin/ の数字。日本年金機構・厚生労働省のページと、e-Gov の法律（平成24年法律第102号）・施行令（平成30年政令第364号、令和8年10月1日施行の版）から写したもの。各値の出典は *_src に sources の id で書く。給付基準額は令和8年4月分から（施行令第4条の2）、所得の基準額は令和8年10月分から（施行令第1条・第6条・第8条、令和8年10月1日施行の改正）。scripts/shien-kyufukin-page.mjs が読み、scripts/shien-kyufukin-cases.mjs の公式の計算例と円まで照らす。2026-10-28 に写した。",
+ "checkedAt": "2026-10-28",
+ "nendo": "令和8年度",
+ "kikan": "令和8年10月分から令和9年9月分まで",
+ "shotokuNen": "令和7年",
+ "kazeiNendo": "令和8年度",
+
+ "kijun": 5620,
+ "kijun_src": ["egov-rei", "nenkin-0401", "nenkin-rourei"],
+ "_kijun": "給付基準額（月額）。法第4条の5,000円を物価で改定したもの。令和8年度は令和7年度（5,450円）から3.2%増。",
+
+ "rourei": {
+  "age": 65,
+  "kyuBorn": "1956-04-01",
+  "_kyuBorn": "この日以前に生まれた人（昭和31年4月1日以前生まれ）は kyu の額、以後は shin の額を使う。",
+  "kijunGaku": { "shin": 826500, "kyu": 824100 },
+  "kijunGaku_src": ["egov-rei", "nenkin-rourei", "mhlw-system"],
+  "_kijunGaku": "前年の公的年金等の収入金額とその他の所得の合計がこの額以下なら老齢年金生活者支援給付金（施行令第1条）。",
+  "jogen": { "shin": 926500, "kyu": 924100 },
+  "jogen_src": ["egov-rei", "nenkin-rourei", "mhlw-system"],
+  "_jogen": "kijunGaku を超えこの額以下なら補足的老齢年金生活者支援給付金（施行令第6条＝補足的所得基準額）。",
+  "menjo": { "shin": { "zen": 11768, "q": 5884 }, "kyu": { "zen": 11734, "q": 5867 } },
+  "menjo_src": ["nenkin-rourei", "nenkin-faq-gaku", "nenkin-faq-keisan"],
+  "_menjo": "保険料免除期間1月あたりに掛ける額（月額）。zen＝全額免除・4分の3免除・半額免除の期間（老齢基礎年金満額の月額の6分の1）、q＝4分の1免除の期間（同12分の1）。年金機構の案内の値（満額÷12÷6 を円未満切り捨てた額）を使う。",
+  "manGaku": { "shin": 847300, "kyu": 844900 },
+  "manGaku_src": ["nenkin-faq-keisan", "nenkin-0401"],
+  "_manGaku": "令和8年度の老齢基礎年金の満額（年額）。menjo の写し間違いの確かめにだけ使う（満額÷12÷6 の切り捨て＝zen）。",
+  "tsukisu": 480,
+  "tsukisuShuku": [
+   ["1917-04-01", 180], ["1918-04-01", 192], ["1919-04-01", 204], ["1920-04-01", 216], ["1921-04-01", 228],
+   ["1922-04-01", 240], ["1923-04-01", 252], ["1924-04-01", 264], ["1925-04-01", 276], ["1926-04-01", 288],
+   ["1927-04-01", 300], ["1928-04-01", 312], ["1929-04-01", 324], ["1930-04-01", 336], ["1931-04-01", 348],
+   ["1932-04-01", 360], ["1933-04-01", 372], ["1934-04-01", 384], ["1935-04-01", 396], ["1936-04-01", 408],
+   ["1937-04-01", 420], ["1938-04-01", 432], ["1939-04-01", 444], ["1940-04-01", 456], ["1941-04-01", 468]
+  ],
+  "tsukisuShuku_src": ["nenkin-faq-gaku", "egov-rei"],
+  "_tsukisuShuku": "昭和16年4月1日以前に生まれた人の被保険者月数（480月の代わり）。[この日以前に生まれた, 月数]。大正6年4月1日以前は180月。施行令第29条・第33条の表と年金機構のQ&Aの表が同じ。"
+ },
+
+ "shogai": {
+  "kyu1": 7025,
+  "kyu2": 5620,
+  "kyu1Pct": 125,
+  "gaku_src": ["nenkin-syougai", "nenkin-0401", "egov-ho"],
+  "_gaku": "月額。1級は給付基準額の100分の125（法第16条、50銭以上切り上げ）。CORE は kijun×125% を計算して kyu1 と合うか確かめる。"
+ },
+
+ "izoku": {
+  "_gaku": "月額は給付基準額。2人以上の子が遺族基礎年金を受けているときは、給付基準額を子の数で割った額（50銭以上切り上げ）を1人ずつ（法第21条）。",
+  "gaku_src": ["nenkin-izoku", "egov-ho"]
+ },
+
+ "shotokuSeigen": {
+  "kiso": 4918000,
+  "ippan": 380000,
+  "rojin": 480000,
+  "tokutei": 630000,
+  "src": ["egov-rei", "nenkin-syougai", "nenkin-izoku"],
+  "_note": "障害・遺族の所得の上限（施行令第8条、令和8年10月分から）。扶養親族等がいなければ4,918,000円、いれば1人につき38万円（70歳以上の同一生計配偶者・老人扶養親族は48万円、特定扶養親族・19歳未満の控除対象扶養親族は63万円）を足す。"
+ },
+
+ "kojo": {
+  "shogaisha": 270000,
+  "tokubetsuShogaisha": 400000,
+  "kafu": 270000,
+  "hitorioya": 350000,
+  "kinroGakusei": 270000,
+  "src": ["egov-rei"],
+  "_note": "障害・遺族の所得から引くもの（施行令第10条第2項）。住民税で受けた雑損・医療費・社会保険料・小規模企業共済等掛金・配偶者特別・特定親族特別の各控除はその額、障害者控除は1人27万円（特別障害者40万円。障害基礎年金の受給権者を除く）、寡婦27万円・ひとり親35万円・勤労学生27万円。計算機では寡婦・ひとり親と、社会保険料など（利用者が合計して入れる）だけを扱う。"
+ },
+
+ "nenkin65Born": "1961-01-01",
+ "nenkin65Born_src": ["nta-1600"],
+ "_nenkin65Born": "令和7年分の公的年金等控除で65歳以上の表を使う人（その年の12月31日の現況で65歳以上＝この日以前に生まれた人。年齢を12月31日で見る決まりは所得税法第85条。No.1600 の速算表は画像で、本文の文字では確かめていない）。",
+
+ "shiharai": "原則、偶数月の中旬に前月・前々月の2か月分を、年金と同じ口座に年金とは別に振り込む（例：10月分と11月分は12月中旬）。請求した月の翌月分から。",
+ "shiharai_src": ["nenkin-top", "mhlw-faq"],
+
+ "verifyOnly": {
+  "_note": "面には出さない。年金機構の「昨年度と金額が違う」Q&Aにある令和7年度の額で、同じ式が前の年度でも合うかを確かめるためだけの値。",
+  "r7": { "kijun": 5450, "menjoShinZen": 11551, "manGakuShin": 831700 },
+  "src": ["nenkin-faq-keisan"]
+ },
+
+ "kakuninchu": [
+  "補足的老齢年金生活者支援給付金：公式の数字入りの計算例が見つからない（厚労省の図は旧い額のまま）。式は施行令第7条（調整支給率は小数点以下3位未満四捨五入、額は50銭以上切り上げ）どおりに組んだが、公式の例で円まで照らせていない。",
+  "保険料免除期間の額：年金機構は「11,768円×免除月数÷480」と案内しているが、法第3条第2号の文言どおり（満額847,300円×月数の6分の1÷480÷12）に計算すると、1円ずれる組み合わせがある（全額免除1〜480月で、昭和31年4月2日以後生まれ10通り・昭和31年4月1日以前生まれ169通り。後者の11,734円は満額844,900円÷72＝11,734.7円の切り捨てのため）。計算機は年金機構の案内の式を使う。",
+  "納付猶予の期間：法第3条第2号は学生納付特例（国民年金法第90条の3）の期間を除くと書いているが、50歳未満の納付猶予の期間の扱いは条文で確かめきれていない。計算機では「入れない」と案内する。",
+  "障害・遺族の所得：施行令第10条第2項の控除のうち、障害者控除（扶養している障害者の分）・勤労学生・雑損・小規模企業共済等掛金・配偶者特別・特定親族特別は個別の欄を作らず、「社会保険料など」の欄に合計して入れてもらう形にした。",
+  "扶養親族の加算：30歳以上70歳未満の扶養親族は控除対象扶養親族に限る（施行令第8条）。計算機は人数を入れてもらうだけで、この区別はしない。"
+ ],
+
+ "sources": [
+  { "id": "nenkin-rourei", "name": "日本年金機構「老齢（補足的老齢）年金生活者支援給付金の概要」（2026年10月1日更新）", "url": "https://www.nenkin.go.jp/service/jukyu/seido/sonota-kyufu/shienkyufukin/rourei.html", "checked": "2026-10-28" },
+  { "id": "nenkin-syougai", "name": "日本年金機構「障害年金生活者支援給付金の概要」（2026年10月1日更新）", "url": "https://www.nenkin.go.jp/service/jukyu/seido/sonota-kyufu/shienkyufukin/syougai.html", "checked": "2026-10-28" },
+  { "id": "nenkin-izoku", "name": "日本年金機構「遺族年金生活者支援給付金の概要」（2026年10月1日更新）", "url": "https://www.nenkin.go.jp/service/jukyu/seido/sonota-kyufu/shienkyufukin/izoku.html", "checked": "2026-10-28" },
+  { "id": "nenkin-top", "name": "日本年金機構「年金生活者支援給付金」（2026年10月1日更新）", "url": "https://www.nenkin.go.jp/service/jukyu/seido/sonota-kyufu/shienkyufukin/20190805.html", "checked": "2026-10-28" },
+  { "id": "nenkin-0401", "name": "日本年金機構「令和8年4月分からの年金額等について」（2026年4月1日）", "url": "https://www.nenkin.go.jp/oshirase/taisetu/kojin/2026/202604/0401.html", "checked": "2026-10-28" },
+  { "id": "nenkin-faq-gaku", "name": "日本年金機構 年金Q&A「年金生活者支援給付金の金額はいくらですか。」（2026年10月1日更新）", "url": "https://www.nenkin.go.jp/section/faq/jukyu/seido/sonota-kyufu/shienkyufukin/shikyuyouken/shikyuyouken03.html", "checked": "2026-10-28" },
+  { "id": "nenkin-faq-keisan", "name": "日本年金機構 年金Q&A「年金生活者支援給付金を受け取っています。昨年度と金額が違うのですが、どのように計算されていますか。」（2026年4月1日更新）", "url": "https://www.nenkin.go.jp/section/faq/jukyu/seido/sonota-kyufu/shienkyufukin/kaiteitsuchi/keisan.html", "checked": "2026-10-28" },
+  { "id": "nenkin-faq-taisho", "name": "日本年金機構 年金Q&A「年金生活者支援給付金の対象となるのはどんな人ですか。」（2026年10月1日更新）", "url": "https://www.nenkin.go.jp/section/faq/jukyu/seido/sonota-kyufu/shienkyufukin/shikyuyouken/shikyuyouken01.html", "checked": "2026-10-28" },
+  { "id": "nenkin-faq-fufu", "name": "日本年金機構 年金Q&A「夫婦2人で暮らしています。2人とも…受け取れるのですか。」", "url": "https://www.nenkin.go.jp/section/faq/jukyu/seido/sonota-kyufu/shienkyufukin/shikyuyouken/shikyuyouken04.html", "checked": "2026-10-28" },
+  { "id": "mhlw-system", "name": "厚生労働省「年金生活者支援給付金制度について」", "url": "https://www.mhlw.go.jp/nenkinkyuufukin/system.html", "checked": "2026-10-28" },
+  { "id": "mhlw-faq", "name": "厚生労働省「年金生活者支援給付金制度 よくあるご質問」", "url": "https://www.mhlw.go.jp/nenkinkyuufukin/faq.html", "checked": "2026-10-28" },
+  { "id": "egov-ho", "name": "年金生活者支援給付金の支給に関する法律（平成24年法律第102号）e-Gov法令検索", "url": "https://laws.e-gov.go.jp/law/424AC0000000102", "checked": "2026-10-28" },
+  { "id": "egov-rei", "name": "年金生活者支援給付金の支給に関する法律施行令（平成30年政令第364号・令和8年10月1日施行の版）e-Gov法令検索", "url": "https://laws.e-gov.go.jp/law/430CO0000000364", "checked": "2026-10-28" },
+  { "id": "nta-1600", "name": "国税庁 タックスアンサー No.1600 公的年金等の課税関係", "url": "https://www.nta.go.jp/taxes/shiraberu/taxanswer/shotoku/1600.htm", "checked": "2026-10-28" }
+ ]
+}

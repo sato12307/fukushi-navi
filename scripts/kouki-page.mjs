@@ -193,7 +193,7 @@ const html = toolPage({
   updatedNote: `${D.nendo}の保険料率（厚生労働省の発表）で計算`,
   body,
   faq: FAQ,
-  related: '75歳以上の医療費の上限と窓口の負担（1割・2割・3割）は<a href="{{UP}}articles/kougaku-ryouyouhi-2026.html#75ijo">高額療養費の計算機</a>で、住民税が非課税になる年収は<a href="{{UP}}articles/juminzei-hikazei-check.html">住民税非課税の判定</a>で確かめられます。',
+  related: '75歳以上の医療費の上限と窓口の負担（1割・2割・3割）は<a href="{{UP}}articles/kougaku-ryouyouhi-2026.html#75ijo">高額療養費の計算機</a>で、住民税が非課税になる年収は<a href="{{UP}}articles/juminzei-hikazei-check.html">住民税非課税の判定</a>で、65〜74歳の人の介護保険料は<a href="{{UP}}kaigo/hokenryo/">介護保険料の計算</a>で、介護サービスの月の上限は<a href="{{UP}}kaigo/kogaku/">高額介護サービス費の計算</a>で、年金が少ない人の上乗せは<a href="{{UP}}shien-kyufukin/">年金生活者支援給付金の計算</a>で確かめられます。',
   sources: D.sources,
   disclaimer: `このページの計算は、厚生労働省が公表した${D.nendo}の保険料率と、法令（高齢者の医療の確保に関する法律施行令）・国税庁の控除の表にもとづく<strong>目安</strong>です。実際の保険料は、お住まいの都道府県の後期高齢者医療広域連合が決め、市区町村から届く保険料額の決定通知書で確かめてください。所得の計算は、年金と給与と事業などの所得だけを扱い、医療費控除などの各種控除・譲渡所得の特別控除・年度途中の加入や転入（月割り）・合計所得が2,400万円を超える人の基礎控除の減り方は入れていません。`,
   js: JS,
