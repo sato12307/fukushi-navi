@@ -23,9 +23,9 @@ const URL = `${SITE}/articles/`
 
 // 分野ごとの並び。items＝1行ずつ（題＋説明）、groups＝地名だけを1行に並べる束（同じ型の都市別・区別の面）
 const CATS = [
-  { id: 'seikatsuhogo', name: '生活保護', items: ['articles/seikatsuhogo-keisanki.html', 'seiho/', 'articles/seikatsuhogo-tsuika-kyufu.html', 'tsuika/', 'articles/seikatsuhogo-shinsei-jichitai.html', 'articles/seikatsuhogo-jisshitsu.html', 'articles/muryou-teigaku-shukuhakusho.html'] },
+  { id: 'seikatsuhogo', name: '生活保護', items: ['articles/seikatsuhogo-keisanki.html', 'seiho/', 'articles/seikatsuhogo-tsuika-kyufu.html', 'tsuika/', 'articles/seikatsuhogo-shinsei-jichitai.html', 'articles/seikatsuhogo-jisshitsu.html', 'articles/muryou-teigaku-shukuhakusho.html', 'articles/jutaku-fujo-jogen.html'] },
   { id: 'zei', name: '税と保険料（住民税非課税・国保・控除）', items: ['articles/juminzei-hikazei-check.html', 'hikazei/', 'mitoshi/hikazei/', 'hikazei/kokuho-tokyo/', 'hikazei/kodomo-shienkin/', 'hikazei/nenkin-ranking/', 'shien-kyufukin/', 'articles/shogaisha-kojo-tax.html', 'shogai-kojo/'] },
-  { id: 'iryo', name: '医療費と医療の保険料', items: ['articles/kougaku-ryouyouhi-2026.html', 'mitoshi/kogaku/', 'kouki/', 'jiritsu/', 'judo-iryo/'] },
+  { id: 'iryo', name: '医療費と医療の保険料', items: ['articles/kougaku-ryouyouhi-2026.html', 'mitoshi/kogaku/', 'kouki/', 'jiritsu/', 'articles/jiritsu-ichiran-kawaru.html', 'judo-iryo/'] },
   { id: 'teate', name: '手当（児童扶養手当・障害のある子と家族の手当）', items: ['teate/jido-fuyo/', 'teate/shogai/'] },
   { id: 'shogai', name: '障害年金・障害福祉サービス・就労', items: ['articles/shogai-nenkin-keisanki.html', 'articles/shogai-nenkin-basics.html', 'articles/shogai-nenkin-toukei.html', 'articles/shogai-service-futan.html', 'articles/shurou-ikou-koyou.html'] },
   { id: 'sumai', name: '住まい（公営住宅）', items: ['articles/koei-jutaku-bairitsu.html', 'articles/koei-hairiyasui.html', 'articles/koei-shunyu-kijun.html', 'articles/koei-yachin-keisan.html', 'articles/koei-danchi-ranking.html', 'koei/bairitsu-suii/', 'toei/', 'articles/toei-waku.html'],
@@ -37,7 +37,7 @@ const CATS = [
     ] },
   { id: 'kotsu', name: '障害者手帳の割引と自治体の助成', items: ['articles/shinkansen-airplane-discount.html', 'articles/jichitai-transport-medical.html'] },
   { id: 'okane', name: 'お金の相談（借金・差し押さえ・破産）', items: ['sashiosae/', 'articles/shakkin-kakei-soudan.html', 'articles/jiko-hasan-chizu.html'] },
-  { id: 'kaigo', name: '介護', items: ['kaigo/hokenryo/', 'kaigo/kogaku/', 'houkatsu/', 'articles/kaigo-jigyosho-genshou.html'] },
+  { id: 'kaigo', name: '介護', items: ['kaigo/hokenryo/', 'kaigo/kogaku/', 'houkatsu/', 'articles/houkatsu-tantou.html', 'articles/kaigo-jigyosho-genshou.html'] },
   { id: 'kodomo', name: '学校・子ども', items: ['gakko/kyufukin/'] },
   { id: 'yotei', name: '制度が変わる日', items: ['calendar/'] },
 ]
