@@ -51,6 +51,9 @@ jobs:
       # 全ページの上部メニューとロゴの添え書きを1つにそろえる（2026-10-11・生成器ごとに13通りに割れていた）
       - name: Unify the site menu
         run: node scripts/stamp-site-nav.mjs
+      # 公営住宅の面に「募集のお知らせメール（無料）」の1行を入れる（2026-11-19・送るのは Worker fukushiru-mail）
+      - name: Stamp the notify-mail line on public housing pages
+        run: node scripts/stamp-oshirase.mjs
       # 公開するファイルだけを _site に集める（2026-10-11）。それまではリポジトリの根をそのまま公開しており、
       #   README.md（立ち上げ時の作業メモ）・scripts/・tools/・indexnow.env まで誰でも開けた。
       #   data/ は記事からダウンロードのリンクを張っている（CSV・JSON）ので公開のまま。IndexNow の鍵のファイル（<鍵>.txt）も残す。

@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex,follow">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<title>公営住宅の募集のお知らせメール（無料）｜フクシル</title>
+<meta name="description" content="都営・県営・市営住宅の公式の募集ページに、新しい募集・受付・抽選の案内が載った日にメールでお知らせします（無料）。">
+<link rel="canonical" href="https://fukushiru.com/oshirase/">
+<link rel="stylesheet" href="../assets/style.css?v=20260908a">
+<style>
+.nt-areas label{display:inline-block;margin:4px 14px 4px 0;white-space:nowrap}
+.nt-input{width:100%;max-width:520px;padding:9px;font-size:16px;border:1px solid #c9d2dc;border-radius:6px}
+.nt-btn{font-size:16px;padding:11px 20px;border-radius:8px;border:0;background:#2563eb;color:#fff;cursor:pointer;font-weight:600}
+.nt-btn[disabled]{opacity:.6}
+#nt-msg{font-weight:600;min-height:1.5em}
+</style>
+</head>
+<body>
+<!-- 2026-11-19 公営住宅の募集のお知らせ。送るのは Worker fukushiru-mail（fleet リポジトリの fukushiru-mail/）。
+     ★地域の key は fukushiru-mail/src/areas.js と同じにする（違う key は API が「選べない項目」で断る）。
+     ★同意の文面を変えたら fukushiru-mail の CONSENT_V を上げ、/privacy/ の「お知らせメール」もそろえる。 -->
+<a class="skip" href="#main">本文へスキップ</a>
+<header class="site-header">
+  <div class="inner">
+    <a class="brand" href="../index.html">フクシル <small>知らないと損する、街ごとの福祉</small></a>
+    <nav class="site-nav" aria-label="主要">
+      <a href="../index.html">トップ</a>
+      <a href="../articles/koei-jutaku-bairitsu.html">公営住宅</a>
+      <a href="../articles/shogai-nenkin-basics.html">障害年金</a>
+      <a href="../articles/shinkansen-airplane-discount.html">交通割引</a>
+      <a href="../articles/shogaisha-kojo-tax.html">障害者控除</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+  <div class="inner">
+  <p class="breadcrumb"><a href="../index.html">トップ</a> ＞ 公営住宅の募集のお知らせメール</p>
+  <h1>公営住宅の募集のお知らせメール（無料）</h1>
+  <p class="lead">選んだ公営住宅の公式の募集ページに、<strong>新しい募集・受付・抽選の案内が載った日だけ</strong>メールでお知らせします。募集は年に数回しかなく、受付の期間も短いので、見落とさないためのお知らせです。</p>
+
+  <form id="nt" autocomplete="on">
+  <p id="nt-cur" class="note" hidden></p>
+  <h2>1. 知りたい公営住宅（いくつでも）</h2>
+  <div class="nt-areas">
+    <label><input type="checkbox" name="area" value="toei"> 都営住宅（東京都）</label>
+    <label><input type="checkbox" name="area" value="saitama-ken"> 埼玉県営住宅</label>
+    <label><input type="checkbox" name="area" value="aichi-ken"> 愛知県営住宅</label>
+    <label><input type="checkbox" name="area" value="shizuoka"> 静岡市営住宅</label>
+    <label><input type="checkbox" name="area" value="kawasaki"> 川崎市営住宅</label>
+    <label><input type="checkbox" name="area" value="sagamihara"> 相模原市営住宅</label>
+    <label><input type="checkbox" name="area" value="kobe"> 神戸市営住宅</label>
+    <label><input type="checkbox" name="area" value="osaka-fu"> 大阪府営住宅</label>
+    <label><input type="checkbox" name="area" value="shiga-ken"> 滋賀県営住宅</label>
+    <label><input type="checkbox" name="area" value="miyagi-ken"> 宮城県営住宅</label>
+    <label><input type="checkbox" name="area" value="kochi-ken"> 高知県営住宅</label>
+  </div>
+  <div id="nt-mail">
+  <h2>2. メールアドレス</h2>
+  <p><input class="nt-input" name="email" type="email" maxlength="254" placeholder="you@example.com"></p>
+  <p>どなたの申込みですか（任意・今後の改善の参考にします）：
+  <select name="use" style="font-size:15px;padding:4px"><option value="">選ばない</option><option value="jibun">自分が申し込む</option><option value="kazoku">家族の申込みを手伝う</option><option value="shien">支援の仕事で</option><option value="sonota">その他</option></select></p>
+  <p><label><input type="checkbox" name="consent"> フクシルから、選んだ公営住宅の募集のお知らせメールを受け取ることに同意します。お知らせには、フクシルの有料の資料（申込先えらび）のご案内が入ることがあります。</label></p>
+  </div>
+  <p><button class="nt-btn" type="submit">確認のメールを送る</button></p>
+  <p id="nt-msg" role="status"></p>
+  </form>
+
+  <h2>しくみ</h2>
+  <ul>
+  <li>登録すると確認のメールが届きます。メールのリンクを開いて「お知らせを始める」を押すまで、お知らせは始まりません。</li>
+  <li>毎日夕方に、各公社・自治体の公式の募集ページを読み、<strong>募集・受付・抽選と日付を含む行が新しく載った日</strong>にお知らせします。何も無い日は届きません。</li>
+  <li>お知らせの中身は、公式のページから<strong>自動で読み取った抜粋</strong>です。日程・申込みの資格・書類は、必ず公式のページでお確かめください。</li>
+  <li>毎回のメールの末尾に、選び直すリンクと、配信を止めるリンク（止めると登録も消えます）があります。</li>
+  <li>メールアドレスは、お知らせを送るためだけに使います。くわしくは<a href="../privacy/#notify">プライバシーポリシー</a>をご覧ください。</li>
+  <li>フクシルは公社・自治体とは関係のない個人運営のサイトです。</li>
+  </ul>
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="inner">
+    <p>フクシル ／ 出典は各ページ末尾に明記しています。制度の適用可否は必ず各自治体の窓口でご確認ください。</p>
+    <p><a href="../about.html">このサイトについて</a> ／ <a href="../tokushoho/">特定商取引法に基づく表記</a> ／ <a href="../kiyaku/">利用規約</a> ／ <a href="../privacy/">プライバシーポリシー</a></p>
+  </div>
+</footer>
+<script>
+(function () {
+  var f = document.getElementById('nt'); if (!f) return
+  var ID = (/[?&]id=([0-9a-f]{32})/.exec(location.search) || [])[1] || null
+  var msg = document.getElementById('nt-msg'), btn = f.querySelector('button[type=submit]')
+  var areas = function () { return Array.prototype.map.call(f.querySelectorAll('[name=area]:checked'), function (x) { return x.value }) }
+  // ?area=toei のように来たら、その地域に最初からチェックを入れる（各地域のページの案内から）
+  var pre = (/[?&]area=([a-z-]+)/.exec(location.search) || [])[1]
+  if (pre && !ID) Array.prototype.forEach.call(f.querySelectorAll('[name=area]'), function (x) { if (x.value === pre) x.checked = true })
+  var post = function (url, body) {
+    btn.disabled = true; msg.textContent = '送っています…'
+    fetch(url, { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify(body) })
+      .then(function (r) { return r.json() })
+      .then(function (j) { msg.textContent = j.ok ? j.message : (j.error || '受け付けられませんでした。'); btn.disabled = false })
+      .catch(function () { msg.textContent = '通信できませんでした。時間をおいてお試しください。'; btn.disabled = false })
+  }
+  f.addEventListener('submit', function (e) {
+    e.preventDefault()
+    var body = { areas: areas() }
+    if (!body.areas.length) { msg.textContent = '公営住宅を1つ以上選んでください。'; return }
+    if (ID) { body.id = ID; post('/api/notify?a=set', body); return }
+    if (!f.querySelector('[name=consent]').checked) { msg.textContent = 'お知らせを受け取ることへの同意にチェックを入れてください。'; return }
+    body.email = f.querySelector('[name=email]').value.trim(); body.use = f.querySelector('[name=use]').value; body.consent = true
+    post('/api/notify', body)
+  })
+  if (ID) {
+    fetch('/api/notify?a=get&id=' + ID).then(function (r) { return r.json() }).then(function (j) {
+      if (!j.ok) { msg.textContent = j.error || '登録が見つかりませんでした。'; return }
+      Array.prototype.forEach.call(f.querySelectorAll('[name=area]'), function (x) { x.checked = (j.areas || []).indexOf(x.value) >= 0 })
+      document.getElementById('nt-mail').hidden = true
+      btn.textContent = 'この選び方に変える'
+      var cur = document.getElementById('nt-cur'); cur.hidden = false
+      cur.textContent = j.email + ' のお知らせを選び直します（' + (j.status === 'active' ? '配信中' : '確認のボタンがまだ押されていません') + '）。'
+    })
+  }
+})()
+</script>
+</body>
+</html>
